@@ -23,6 +23,15 @@ function Dashboard() {
     },
   ];
 
+  const handleMenu = (e) => {
+    switch (e.key) {
+      case e.key === "1":
+        return;
+      case e.key === "2":
+        localStorage.removeItem("s")
+    }
+  };
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -71,7 +80,7 @@ function Dashboard() {
             <Dropdown
               menu={{
                 items,
-                onClick: (e) => console.log(e),
+                onClick: (e) => console.log(typeof e.key),
               }}
               placement="bottomLeft"
             >

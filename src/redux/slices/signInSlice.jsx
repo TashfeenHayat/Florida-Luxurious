@@ -21,6 +21,7 @@ const signInSlice = createSlice({
       state.isLoading = false;
       state.isError = false;
       state.success = true;
+      console.log(action.payload);
       notification.success({
         message: "Login Successful",
         description: "User logged",
@@ -32,13 +33,12 @@ const signInSlice = createSlice({
       state.isLoading = false;
       state.isError = true;
       state.success = false;
-      
+
       notification.error({
         message: "Login Failure",
         description: action.payload,
         duration: 2,
       });
-
     });
   },
 });

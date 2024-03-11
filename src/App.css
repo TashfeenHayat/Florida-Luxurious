@@ -2,10 +2,76 @@ body {
   height: 100vh;
   margin: 0px;
 }
+* {
+  font-family: "News Gothic MT", "Arial Narrow", Arial, sans-serif;
+  box-sizing: border-box;
+}
 
 .flex-between {
   display: flex;
   width: 98%;
   justify-content: space-between;
   align-items: center;
+}
+
+.hero-bg-img {
+  background-image: url("./assets/background-img.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 750px;
+  position: relative;
+}
+.hero-bg-img-shadow {
+  background: rgba(0, 0, 0, 0.6);
+  height: 750px;
+  position: relative;
+}
+
+#navbar_main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 20px;
+  z-index: 99;
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+
+#navbar_main.sticky {
+  padding: 10px 20px;
+  background-color: #000;
+}
+
+#navbar_main a {
+  color: #fff;
+  font-size: 14px;
+  padding: 4px 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.text-paragraph {
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2.4px;
+  line-height: 21.6px;
+}
+#navbar_main a:not(:last-child) {
+  border-right: 1px solid #fff;
+}
+.title-home-page {
+  color: #fff !important;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 50px !important;
+  text-align: center;
+  margin-top: 0.9rem !important;
+}
+.bg-img-logo {
+  background-image: url("./assets/bg2.png");
+  height: 1200px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: sticky;
 }
