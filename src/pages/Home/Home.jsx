@@ -6,7 +6,7 @@ import OurStory from "./OurStory";
 const { Title, Text } = Typography;
 function Home() {
   return (
-    <>
+    <div>
       <div className="hero-bg-img ">
         <div className="hero-bg-img-shadow ">
           <Flex
@@ -118,7 +118,7 @@ function Home() {
       {/* <FloridaProperties /> */}
       <RecognitionSlide />
       <OurStory />
-    </>
+    </div>
   );
 }
 

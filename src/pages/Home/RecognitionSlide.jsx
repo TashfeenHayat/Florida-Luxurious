@@ -15,7 +15,11 @@ function RecognitionSlide() {
   };
 
   return (
-    <Flex justify={"center"} align={"center"} style={{ height: "250px" }}>
+    <Flex
+      justify={"center"}
+      align={"center"}
+      style={{ height: "250px", width: "98%" }}
+    >
       <Slider {...settings}>
         <div>
           <img src={Business} />

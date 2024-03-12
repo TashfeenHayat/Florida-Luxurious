@@ -110,6 +110,7 @@ body {
   right: 20px; /* Adjust the value based on your design */
   top: 50%;
   transform: translateY(-50%);
+  z-index: 1;
 }
 
 .line-between::before {
@@ -135,4 +136,45 @@ body {
 }
 .nav-ho:hover {
   border-bottom: 1px solid #fff;
+}
+
+.our-story-bg {
+  background-color: black;
+  width: 650px;
+  margin-right: -100px;
+  z-index: 1;
+  padding: 30px;
+}
+.slick-slider {
+  width: 98% !important;
+}
+
+.our-story-title {
+  color: white !important;
+  line-height: 39px;
+  letter-spacing: 1px;
+}
+.our-story-text {
+  color: #d4cfc9;
+  font-size: 16px;
+  letter-spacing: 1px;
+  line-height: 23.5px;
+  width: 85%;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.contact-us-btn {
+  background-color: white;
+  border-radius: 0px;
+  text-transform: uppercase;
+}
+
+.contact-us-btn:hover {
+  background-color: transparent !important;
+  border-radius: 0px;
+  text-transform: uppercase;
+  color: white !important;
+  border: 1.5px solid white !important;
+  transition: background-color 0.5 ease-in-out;
 }
