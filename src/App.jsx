@@ -1,16 +1,17 @@
 import React from "react";
-import Login from "./pages/LoginAdmin";
-import LoginAdmin from "./pages/LoginAdmin";
-import Home from "./pages/Home";
+import LoginAdmin from "./pages/Admin/LoginAdmin";
+import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/Admin/Dashboard";
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 function App() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
   return (
     <>
-      <Header />
+      {!isAdminRoute && <Header />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={<LoginAdmin />} />

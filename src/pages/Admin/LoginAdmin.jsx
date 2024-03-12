@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 import { Button, Checkbox, Form, Grid, Input, theme, Typography } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signInAdmin } from "../api/Auth";
+import { signInAdmin } from "../../api/Auth";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 
 const { useToken } = theme;

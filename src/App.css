@@ -74,4 +74,65 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   position: sticky;
+  z-index: -1;
+}
+.circle-bg-white {
+  background: rgb(255, 255, 255);
+  width: 40px;
+  border-radius: 30px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.circle-bg-white:hover {
+  background: transparent;
+  border: 1px solid white;
+  width: 40px;
+  border-radius: 30px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  transition: background 0.5s;
+}
+.fill-change {
+  fill: #1c1c1c;
+}
+.fill-change:hover {
+  fill: white !important;
+}
+
+.circles-container {
+  position: fixed;
+  right: 20px; /* Adjust the value based on your design */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.line-between::before {
+  content: "";
+  position: absolute;
+  width: 2px; /* Adjust the width of the line */
+  height: 40%;
+  background-color: #fff; /* Adjust the color of the line */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+.slick-slider {
+  width: 100%;
+}
+.hamburger-icon {
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out; /* Add transition effect */
+}
+
+.hamburger-icon:hover {
+  transform: scale(0.7); /* Add hover animation */
+}
+.nav-ho:hover {
+  border-bottom: 1px solid #fff;
 }

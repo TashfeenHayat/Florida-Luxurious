@@ -6,6 +6,7 @@ import {
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
+  PropertySafetyOutlined,
 } from "@ant-design/icons";
 const { Header, Sider, Content } = Layout;
 
@@ -28,7 +29,7 @@ function Dashboard() {
       case e.key === "1":
         return;
       case e.key === "2":
-        localStorage.removeItem("s")
+        localStorage.removeItem("s");
     }
   };
 
@@ -44,6 +45,7 @@ function Dashboard() {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["1"]}
+          onClick={(e) => console.log(e)}
           items={[
             {
               key: "1",
@@ -52,7 +54,7 @@ function Dashboard() {
             },
             {
               key: "2",
-              icon: <VideoCameraOutlined />,
+              icon: <PropertySafetyOutlined />,
               label: "Property",
             },
             {
@@ -97,9 +99,7 @@ function Dashboard() {
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
           }}
-        >
-          Content
-        </Content>
+        ></Content>
       </Layout>
     </Layout>
   );

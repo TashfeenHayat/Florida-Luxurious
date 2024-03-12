@@ -1,8 +1,8 @@
 import React from "react";
 import Logo from "../assets/Logo.svg";
+import { Link } from "react-router-dom";
 import { Flex, Image } from "antd";
-import { useEffect } from "react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 function Header() {
   const navbar = useRef(null);
@@ -19,7 +19,9 @@ function Header() {
   return (
     <nav ref={navbar} id="navbar_main">
       <Flex justify={"space-between"} align="center" gap={0}>
-        <Image src={Logo} width={150} preview={false} />
+        <Link to="/" style={{ borderRight: "none" }}>
+          <Image src={Logo} width={150} preview={false} />
+        </Link>
         <Flex>
           <a href="#">Our offerings</a>
           <a href="#">Search by location</a>
@@ -29,7 +31,7 @@ function Header() {
         </Flex>
 
         <Flex>
-          <span>
+          <span className="hamburger-icon">
             <svg
               width="26"
               height="21"
