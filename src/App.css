@@ -101,7 +101,7 @@ body {
 .fill-change {
   fill: #1c1c1c;
 }
-.fill-change:hover {
+.circle-bg-white:hover .fill-change {
   fill: white !important;
 }
 
@@ -140,8 +140,8 @@ body {
 
 .our-story-bg {
   background-color: black;
-  width: 650px;
-  margin-right: -100px;
+  width: 600px;
+  margin-right: -150px;
   z-index: 1;
   padding: 30px;
 }
@@ -159,7 +159,6 @@ body {
   font-size: 16px;
   letter-spacing: 1px;
   line-height: 23.5px;
-  width: 85%;
   margin-top: 20px;
   text-align: left;
 }
@@ -178,3 +177,39 @@ body {
   border: 1.5px solid white !important;
   transition: background-color 0.5 ease-in-out;
 }
+.meet-slider-width {
+  display: flex;
+  width: 85%;
+}
+.displayy-teamimg-center {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.slick-prev:before {
+  content: "" !important;
+}
+.slick-next:before {
+  content: "" !important;
+}
+
+.meet-team-heading {
+  color: white !important;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.let-talk {
+  background-image: url("./assets/lettalk.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 550px;
+  position: relative;
+}
+
+.hero-bg-img-shadow-talk {
+  background: rgba(0, 0, 0, 0.6);
+  height: 550px;
+  position: relative;
+}
+

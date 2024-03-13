@@ -8,11 +8,15 @@ import {
   VideoCameraOutlined,
   PropertySafetyOutlined,
 } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import Agents from "./Agents";
+import Property from "./Property";
 const { Header, Sider, Content } = Layout;
 
 function Dashboard() {
+  const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-
+  const [page, setPage] = useState("");
   const items = [
     {
       key: "1",
@@ -33,6 +37,16 @@ function Dashboard() {
     }
   };
 
+  const handleSideMenu = ({ key }) => {
+    switch (key) {
+      case "/admin/agent":
+        setPage(<Agents />);
+        break;
+      case "/property":
+        setPage(<Property />);
+    }
+  };
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -45,22 +59,17 @@ function Dashboard() {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["1"]}
-          onClick={(e) => console.log(e)}
+          onClick={handleSideMenu}
           items={[
             {
-              key: "1",
+              key: "/admin/agent",
               icon: <UserOutlined />,
               label: "Agent",
             },
             {
-              key: "2",
+              key: "/property",
               icon: <PropertySafetyOutlined />,
               label: "Property",
-            },
-            {
-              key: "3",
-              icon: <UploadOutlined />,
-              label: "City",
             },
           ]}
         />
@@ -99,7 +108,9 @@ function Dashboard() {
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
           }}
-        ></Content>
+        >
+          {page}
+        </Content>
       </Layout>
     </Layout>
   );

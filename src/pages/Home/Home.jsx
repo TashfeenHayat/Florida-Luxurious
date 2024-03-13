@@ -3,6 +3,7 @@ import FloridaProperties from "./FloridaProperties";
 import { Typography, Flex } from "antd";
 import RecognitionSlide from "./RecognitionSlide";
 import OurStory from "./OurStory";
+import Team from "./MeetTeam";
 const { Title, Text } = Typography;
 function Home() {
   return (
@@ -118,6 +119,7 @@ function Home() {
       {/* <FloridaProperties /> */}
       <RecognitionSlide />
       <OurStory />
+      <Team />
     </div>
   );
 }

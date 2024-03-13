@@ -5,7 +5,7 @@ import Logoicon from "../../assets/logoicon.png";
 const { Title, Text } = Typography;
 function OurStory() {
   return (
-    <div style={{ boxShadow: "10px 10px 10px 5px" }}>
+    <div style={{ boxShadow: "0px 0px 15px 0px #00000050" }}>
       <Row>
         <Col span={12}>
           <Flex justify={"end"} align={"center"} style={{ height: "100%" }}>
@@ -43,7 +43,7 @@ function OurStory() {
                   Russian, Spanish, Japanese, Arabic and Romanian.
                 </Text>
                 <Button
-                  style={{ width: "30%", marginTop: 20 }}
+                  style={{ width: "30%", marginTop: 20, marginBottom: 20 }}
                   className="contact-us-btn"
                 >
                   Contact Us
