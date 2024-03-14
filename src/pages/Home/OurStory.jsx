@@ -5,7 +5,7 @@ import Logoicon from "../../assets/logoicon.png";
 const { Title, Text } = Typography;
 function OurStory() {
   return (
-    <div style={{ boxShadow: "0px 0px 15px 0px #00000050" }}>
+    <div className="boxshadow-section">
       <Row>
         <Col span={12}>
           <Flex justify={"end"} align={"center"} style={{ height: "100%" }}>

@@ -7,6 +7,7 @@ import Agents from "./pages/Admin/Agents";
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 function App() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
@@ -20,6 +21,7 @@ function App() {
         <Route path="/admin/agent" element={<Agents />} />
         <Route path="/sign-up" element={<Signup />} />
       </Routes>
+      <Footer />
     </>
   );
 }

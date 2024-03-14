@@ -182,9 +182,7 @@ body {
   width: 85%;
 }
 .displayy-teamimg-center {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 }
 .slick-prev:before {
   content: "" !important;
@@ -213,3 +211,21 @@ body {
   position: relative;
 }
 
+.boxshadow-section {
+  box-shadow: 0px 0px 15px 0px #00000050;
+}
+
+.features_section_slider .slick-track {
+  display: flex;
+  gap: 5rem;
+}
+.img-op {
+  -webkit-filter: grayscale(1);
+  filter: gray;
+  -webkit-transition: all 0.8s ease-in-out;
+}
+.img-op:hover {
+  filter: none;
+  -webkit-filter: grayscale(0);
+  -webkit-transform: scale(1.01);
+}

@@ -4,6 +4,7 @@ import { Typography, Flex } from "antd";
 import RecognitionSlide from "./RecognitionSlide";
 import OurStory from "./OurStory";
 import Team from "./MeetTeam";
+import FeatureListing from "./FeatureListing";
 const { Title, Text } = Typography;
 function Home() {
   return (
@@ -118,6 +119,8 @@ function Home() {
       </div>
       {/* <FloridaProperties /> */}
       <RecognitionSlide />
+      <FeatureListing />
+
       <OurStory />
       <Team />
     </div>
