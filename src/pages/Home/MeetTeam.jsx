@@ -52,24 +52,24 @@ function MeetTeam() {
             justify={"center"}
             align={"center"}
             style={{
-              height: "250px",
               marginTop: 60,
               marginBottom: 60,
             }}
+            className="features_section_slider"
           >
             <div className="meet-slider-width">
               <Slider {...settings}>
                 <div className="displayy-teamimg-center">
-                  <img src={Team} width="80%" />
+                  <img src={Team} width="100%" />
                 </div>
                 <div className="displayy-teamimg-center">
-                  <img src={Team} width="80%" />
+                  <img src={Team} width="100%" />
                 </div>
                 <div className="displayy-teamimg-center">
-                  <img src={Team} width="80%" />
+                  <img src={Team} width="100%" />
                 </div>
                 <div className="displayy-teamimg-center">
-                  <img src={Team} width="80%" />
+                  <img src={Team} width="100%" />
                 </div>
               </Slider>
             </div>

@@ -183,6 +183,7 @@ body {
 }
 .displayy-teamimg-center {
   position: relative;
+  display: flex !important;
 }
 .slick-prev:before {
   content: "" !important;
@@ -222,10 +223,31 @@ body {
 .img-op {
   -webkit-filter: grayscale(1);
   filter: gray;
-  -webkit-transition: all 0.8s ease-in-out;
+  -webkit-transition: all 0.8s linear;
 }
 .img-op:hover {
   filter: none;
   -webkit-filter: grayscale(0);
   -webkit-transform: scale(1.01);
+}
+
+.button-view {
+  background-color: #000; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 52px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 14px;
+  letter-spacing: 1.5px;
+}
+
+.displayy-teamimg-center:hover .button-view {
+  border: 1px solid white;
+  background-color: transparent !important;
+  transition: all 0.8 ease-in-out;
 }

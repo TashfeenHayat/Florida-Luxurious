@@ -84,6 +84,40 @@ function FeatureListing() {
           <Slider {...settings}>
             <div className="displayy-teamimg-center">
               <img src={Property} width="100%" className="img-op" />
+              <div style={{ position: "absolute", right: 0 }}>
+                <div
+                  style={{
+                    height: "45px",
+                    width: "150px",
+                    background: "black",
+                  }}
+                >
+                  <Flex
+                    justify={"center"}
+                    align="center"
+                    style={{ height: "inherit" }}
+                  >
+                    <Text
+                      style={{
+                        color: "white",
+                        textTransform: "uppercase",
+                        lineHeight: "23.8px",
+                        letterSpacing: "1px",
+                        fontWeight: "bold",
+                        fontSize: "14px",
+                      }}
+                    >
+                      For Sale
+                    </Text>
+                  </Flex>
+                </div>
+              </div>
+              <div style={{ position: "absolute", bottom: 20, left: 20 }}>
+                <button className="button-view">View All</button>
+              </div>
+              <div style={{ position: "absolute", bottom: 0, right: 0 }}>
+                <h1>Heading</h1>
+              </div>
             </div>
             <div className="displayy-teamimg-center">
               <img src={Property} width="100%" />
