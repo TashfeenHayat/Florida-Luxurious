@@ -5,10 +5,11 @@ import RecognitionSlide from "./RecognitionSlide";
 import OurStory from "./OurStory";
 import Team from "./MeetTeam";
 import FeatureListing from "./FeatureListing";
+import Neighborhoods from "./Neighborhoods";
 const { Title, Text } = Typography;
 function Home() {
   return (
-    <div>
+    <>
       <div className="hero-bg-img ">
         <div className="hero-bg-img-shadow ">
           <Flex
@@ -117,13 +118,13 @@ function Home() {
           </Flex>
         </div>
       </div>
-      {/* <FloridaProperties /> */}
+      <FloridaProperties />
       <RecognitionSlide />
       <FeatureListing />
-
+      <Neighborhoods />
       <OurStory />
       <Team />
-    </div>
+    </>
   );
 }
 

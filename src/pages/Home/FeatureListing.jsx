@@ -4,6 +4,7 @@ import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
 import Slider from "react-slick";
 import Property from "../../assets/property.png";
+import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 
 const { Title, Text, Paragraph } = Typography;
 function FeatureListing() {
@@ -41,31 +42,32 @@ function FeatureListing() {
     slidesToScroll: 2,
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      // Add more breakpoints as needed
+    ],
   };
 
   return (
-    <div className="boxshadow-section">
-      <Paragraph
-        style={{
-          textAlign: "center",
-          textTransform: "uppercase",
-          fontSize: "40px",
-          lineHeight: "150%",
-          letterSpacing: "-1%",
-          fontWeight: 200,
-          paddingTop: 85,
-        }}
-      >
+    <div className="boxshadow-section" style={{ paddingBottom: "85px" }}>
+      <Paragraph className="heading-florida-lux-listing">
         Featured{" "}
         <Text
-          style={{
-            textAlign: "center",
-            textTransform: "uppercase",
-            fontSize: "40px",
-            lineHeight: "150%",
-            fontWeight: "bold",
-            letterSpacing: "-1%",
-          }}
+          className="heading-florida-lux-listing"
+          style={{ fontWeight: "bold" }}
         >
           luxurious
         </Text>{" "}
@@ -112,11 +114,36 @@ function FeatureListing() {
                   </Flex>
                 </div>
               </div>
-              <div style={{ position: "absolute", bottom: 20, left: 20 }}>
-                <button className="button-view">View All</button>
-              </div>
-              <div style={{ position: "absolute", bottom: 0, right: 0 }}>
-                <h1>Heading</h1>
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 20,
+                  left: 20,
+                  width: "100%",
+                }}
+              >
+                <Flex
+                  justify={"space-between"}
+                  align={"center"}
+                  style={{ width: "95%" }}
+                >
+                  <button className="button-view">View All</button>
+                  <Flex>
+                    <IoLocationOutline color="white" size={20} />
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: 14,
+                        lineHeight: "22px",
+                        letterSpacing: "0%",
+                        color: "white",
+                      }}
+                    >
+                      2572 Mercedes Drive <br />
+                      <IoPricetagOutline size={20} /> $15,000,0000
+                    </Text>
+                  </Flex>
+                </Flex>
               </div>
             </div>
             <div className="displayy-teamimg-center">
@@ -130,6 +157,9 @@ function FeatureListing() {
             </div>
           </Slider>
         </div>
+      </Flex>
+      <Flex justify="center" align="center">
+        <button className="button-view1">View All</button>
       </Flex>
     </div>
   );
