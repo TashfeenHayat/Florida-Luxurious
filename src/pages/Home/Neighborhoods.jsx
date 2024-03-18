@@ -18,17 +18,7 @@ function Neighborhoods() {
   };
   return (
     <div style={{ paddingTop: 85, paddingBottom: 85 }}>
-      <Title
-        style={{
-          textAlign: "center",
-          textTransform: "uppercase",
-          fontWeight: 100,
-          fontSize: 40,
-          lineHeight: "39px",
-          letterSpacing: "1px",
-        }}
-        level={1}
-      >
+      <Title className="florida-heading-feature-negibour" level={1}>
         Feature Neighborhoods
       </Title>
       <Flex
@@ -37,7 +27,6 @@ function Neighborhoods() {
         style={{
           marginTop: 65,
           marginBottom: 65,
-          gap: "2rem",
         }}
         className="negborihood-list"
       >
@@ -58,7 +47,16 @@ function Neighborhoods() {
                   align={"center"}
                   style={{ width: "95%" }}
                 >
-                  <Title>View All</Title>
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 28,
+                      lineHeight: "36.4px",
+                      fontWeight: 100,
+                    }}
+                  >
+                    Florida
+                  </Text>
                 </Flex>
               </div>
             </div>

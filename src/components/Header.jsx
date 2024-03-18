@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../assets/Logo.svg";
 import { Link } from "react-router-dom";
 import { Flex, Image } from "antd";
 import { useEffect, useRef } from "react";
+import Drawer from "../components/Drawer";
 
 function Header() {
   const navbar = useRef(null);
+
+  const [openDrawer, setOpenDrawer] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollYOffset = window.scrollY > 100;
@@ -16,6 +20,10 @@ function Header() {
       document.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  const handleDrawer = () => {
+    setOpenDrawer(!openDrawer);
+  };
+
   return (
     <nav ref={navbar} id="navbar_main">
       <Flex justify={"space-between"} align="center" gap={0}>
@@ -30,7 +38,7 @@ function Header() {
           <a href="#">Contact Us</a>
         </Flex>
 
-        <Flex>
+        <Flex onClick={handleDrawer}>
           <span className="hamburger-icon">
             <svg
               width="26"
@@ -44,6 +52,7 @@ function Header() {
               <rect x="8" y="18.0195" width="18" height="2" fill="white" />
             </svg>
           </span>
+          <Drawer setOpenDrawer={setOpenDrawer} openDrawer={openDrawer} />
         </Flex>
 
         {/* -- -- */}
