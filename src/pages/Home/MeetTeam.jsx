@@ -60,7 +60,16 @@ function MeetTeam() {
             <div className="meet-slider-width">
               <Slider {...settings}>
                 <div className="displayy-teamimg-center">
-                  <img src={Team} width="100%" />
+                  <div class="flip-container">
+                    <div class="flipper">
+                      <div class="front">
+                        <img src={Team} width="100%" />
+                      </div>
+                      <div class="back">
+                        <img src={Team} width="100%" className="img-op1" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="displayy-teamimg-center">
                   <img src={Team} width="100%" />
