@@ -39,16 +39,47 @@ function Drawers({ setOpenDrawer, openDrawer }) {
               <Title className="text-white text-upper" style={{ fontSize: 24 }}>
                 our offerings
               </Title>
+              <Flex vertical gap="10px">
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+              </Flex>
             </Col>
             <Col span={8}>
               <Title className="text-white text-upper" style={{ fontSize: 24 }}>
                 Search by location
               </Title>
+              <Flex vertical gap="10px">
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+              </Flex>
             </Col>
             <Col span={8}>
               <Title className="text-white text-upper" style={{ fontSize: 24 }}>
                 Communities
               </Title>
+              <Flex vertical gap="10px">
+                <Text className="text-white text-upper">Bay Colony</Text>
+                <Text className="text-white text-upper">fort Lauderdale</Text>
+                <Text className="text-white text-upper">
+                  fort Lauderdale Beach
+                </Text>
+                <Text className="text-white text-upper">
+                  fort Lauderdale condos
+                </Text>
+                <Text className="text-white text-upper">Harbor beach</Text>
+                <Text className="text-white text-upper">Hillsboro mile</Text>
+                <Text className="text-white text-upper">Hillsboro shores</Text>
+                <Text className="text-white text-upper">las olla's isles</Text>
+                <Text className="text-white text-upper">rio vista</Text>
+              </Flex>
             </Col>
           </Row>
         </div>
@@ -65,11 +96,23 @@ function Drawers({ setOpenDrawer, openDrawer }) {
               <Title className="text-white text-upper" style={{ fontSize: 24 }}>
                 about
               </Title>
+              <Flex vertical gap="10px">
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+              </Flex>
             </Col>
             <Col span={8}>
               <Title className="text-white text-upper" style={{ fontSize: 24 }}>
                 For Boat Owners
               </Title>
+              <Flex vertical gap="10px">
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+                <Text className="text-white text-upper">Other Properites</Text>
+              </Flex>
             </Col>{" "}
             <Col span={8}></Col>
           </Row>

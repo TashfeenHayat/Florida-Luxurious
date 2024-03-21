@@ -38,10 +38,17 @@ body:focus-visible {
   font-size: 55px !important;
 }
 .f-24 {
-  font-size: 24px;
+  font-size: 24px !important;
 }
 .f-16 {
   font-size: 16px !important;
+}
+.f-14 {
+  font-size: 14px !important;
+}
+
+.f-bold {
+  font-weight: bold;
 }
 .mt-150 {
   margin-top: 150px;
@@ -54,7 +61,33 @@ body:focus-visible {
 .mt-16 {
   margin-top: 16px;
 }
-.hero-bg-img {
+
+.p-absoulte {
+  position: absolute;
+}
+
+.right-0 {
+  right: 0;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.p-b-30-left-0 {
+  bottom: 30px;
+  left: 0;
+}
+
+.bottom-20 {
+  bottom: 20px;
+}
+
+.left-20 {
+  left: 20px;
+}
+
+.p-a-right-0 .hero-bg-img {
   background-image: url("./assets/background-img.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -311,6 +344,7 @@ body:focus-visible {
   font-weight: bold;
   line-height: 14px;
   letter-spacing: 1.5px;
+  cursor: pointer;
 }
 
 .displayy-teamimg-center:hover .button-view {
@@ -434,6 +468,7 @@ body:focus-visible {
   transform: scaleX(-1);
   -webkit-transition: all 0.8s linear;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  opacity: 0.5;
 }
 
 .back2 {
@@ -448,4 +483,20 @@ body:focus-visible {
   height: 100%;
   inset: 0px;
   position: absolute;
+}
+
+/* Footer Styling*/
+
+.bg-footer {
+  background-image: url("./assets/footer.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 550px;
+  -webkit-filter: grayscale(1);
+  opacity: 0.9;
+}
+.footer-bg-img-shadow {
+  position: relative;
+  height: 550px;
+  padding: 100px 30px 0px 30px;
 }

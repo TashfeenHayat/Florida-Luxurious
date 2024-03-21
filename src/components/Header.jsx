@@ -27,7 +27,7 @@ function Header() {
   return (
     <nav ref={navbar} id="navbar_main">
       <Flex justify={"space-between"} align="center" gap={0}>
-        <Link to="/" style={{ borderRight: "none" }}>
+        <Link to="/" style={{ borderRight: "none", padding: "0px" }}>
           <Image src={Logo} width={150} preview={false} />
         </Link>
         <Flex>

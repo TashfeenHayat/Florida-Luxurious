@@ -86,7 +86,7 @@ function FeatureListing() {
           <Slider {...settings}>
             <div className="displayy-teamimg-center">
               <img src={Property} width="100%" className="img-op" />
-              <div style={{ position: "absolute", right: 0 }}>
+              <div className="p-absoulte right-0">
                 <div
                   style={{
                     height: "45px",
@@ -114,14 +114,7 @@ function FeatureListing() {
                   </Flex>
                 </div>
               </div>
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 20,
-                  left: 20,
-                  width: "100%",
-                }}
-              >
+              <div className="p-absoulte w-100 bottom-20 left-20">
                 <Flex
                   justify={"space-between"}
                   align={"center"}
@@ -132,12 +125,10 @@ function FeatureListing() {
                     <IoLocationOutline color="white" size={20} />
                     <Text
                       style={{
-                        fontWeight: "bold",
-                        fontSize: 14,
                         lineHeight: "22px",
                         letterSpacing: "0%",
-                        color: "white",
                       }}
+                      className="f-14 f-bold text-white"
                     >
                       2572 Mercedes Drive <br />
                       <IoPricetagOutline size={20} /> $15,000,0000

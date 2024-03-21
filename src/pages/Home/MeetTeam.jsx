@@ -67,6 +67,11 @@ function MeetTeam() {
                       </div>
                       <div class="back">
                         <img src={Team} width="100%" className="img-op1" />
+                        <div className="p-absoulte p-b-30-left-0 w-100">
+                          <Flex justify="center" align="center">
+                            <button className="button-view1">View More </button>
+                          </Flex>
+                        </div>
                       </div>
                     </div>
                   </div>
