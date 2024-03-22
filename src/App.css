@@ -87,7 +87,7 @@ body:focus-visible {
   left: 20px;
 }
 
-.p-a-right-0 .hero-bg-img {
+.hero-bg-img {
   background-image: url("./assets/background-img.png");
   background-size: cover;
   background-repeat: no-repeat;

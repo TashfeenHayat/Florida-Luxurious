@@ -10,7 +10,7 @@ const { Title, Text } = Typography;
 function Home() {
   return (
     <>
-      <div className="hero-bg-img ">
+      <div className="hero-bg-img">
         <div className="hero-bg-img-shadow ">
           <Flex
             align={"center"}
