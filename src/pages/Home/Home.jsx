@@ -6,11 +6,17 @@ import OurStory from "./OurStory";
 import Team from "./MeetTeam";
 import FeatureListing from "./FeatureListing";
 import Neighborhoods from "./Neighborhoods";
+import Herovideo from "../../assets/video/herovideo.mp4";
 const { Title, Text } = Typography;
 function Home() {
   return (
     <>
-      <div className="hero-bg-img">
+      <div className="background-video-container">
+        <video autoPlay muted loop className="background-video">
+          <source src={Herovideo} type="video/mp4" />
+        </video>
+      </div>
+      <div className="content-hero w-100">
         <div className="hero-bg-img-shadow ">
           <Flex
             align={"center"}
