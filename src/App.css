@@ -25,12 +25,17 @@ body:focus-visible {
 .text-upper {
   text-transform: uppercase;
 }
+
+.text-center {
+  text-align: center;
+}
 .pt-90 {
   padding-top: 90px;
 }
 .pb-90 {
   padding-bottom: 190px;
 }
+
 .f-18 {
   font-size: 16px;
 }
@@ -76,7 +81,9 @@ body:focus-visible {
 .w-100 {
   width: 100%;
 }
-
+.w-75 {
+  width: 75%;
+}
 .p-b-30-left-0 {
   bottom: 30px;
   left: 0;
@@ -516,9 +523,51 @@ body:focus-visible {
   border-radius: 0px;
   border: none;
   font-weight: bold;
+  letter-spacing: 0%;
+  line-height: 18px;
 }
 .btn-sub-footer:hover {
   background-color: transparent !important;
   color: black !important;
   border: 1px solid black !important;
+}
+.ant-dropdown-menu-item {
+  padding: 0px !important;
+}
+.overlay-item {
+  border-bottom: 1px solid white;
+}
+.ant-dropdown-menu-title-content {
+  padding: 10px;
+  color: #fff;
+  border-radius: 0px;
+}
+.ant-dropdown-menu-item-only-child {
+  border-radius: 0px !important;
+  border-bottom: 1px solid white !important;
+  text-align: center;
+  text-transform: uppercase;
+}
+.ant-dropdown-menu-item-only-child:last-child {
+  border-radius: 0px !important;
+  border-bottom: none !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .flex-hidden {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .title-home-page {
+    font-size: 34px !important;
+  }
+  .text-paragraph {
+    font-size: 14px !important;
+  }
+  .our-story-bg {
+    width: 100%;
+    z-index: -1;
+  }
 }

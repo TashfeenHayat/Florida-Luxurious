@@ -2,8 +2,23 @@ import React, { useState } from "react";
 import Logo from "../assets/Logo.svg";
 import { Link } from "react-router-dom";
 import { Flex, Image } from "antd";
+import { DownOutlined, SmileOutlined } from "@ant-design/icons";
+import { Dropdown, Divider } from "antd";
 import { useEffect, useRef } from "react";
 import Drawer from "../components/Drawer";
+
+const contentStyle = {
+  padding: 0,
+  backgroundColor: "#000",
+  borderRadius: 0,
+};
+
+const menuStyle = {
+  padding: 0,
+  backgroundColor: "#000",
+  borderRadius: 0,
+  boxShadow: "none",
+};
 
 function Header() {
   const navbar = useRef(null);
@@ -30,11 +45,55 @@ function Header() {
         <Link to="/" style={{ borderRight: "none", padding: "0px" }}>
           <Image src={Logo} width={150} preview={false} />
         </Link>
-        <Flex>
-          <a href="#">Our offerings</a>
-          <a href="#">Search by location</a>
-          <a href="#">About</a>
-          <a href="#">For Boat Owners</a>
+        <Flex className="flex-hidden">
+          <Dropdown
+            menu={{ items }}
+            dropdownRender={(menu) => (
+              <div style={contentStyle}>
+                {React.cloneElement(menu, { style: menuStyle })}
+              </div>
+            )}
+          >
+            <a onClick={(e) => e.preventDefault()}>
+              <a href="#">Our offerings</a>
+            </a>
+          </Dropdown>
+          <Dropdown
+            menu={{ items }}
+            dropdownRender={(menu) => (
+              <div style={contentStyle}>
+                {React.cloneElement(menu, { style: menuStyle })}
+              </div>
+            )}
+          >
+            <a onClick={(e) => e.preventDefault()}>
+              <a href="#">Search by location</a>
+            </a>
+          </Dropdown>
+          <Dropdown
+            menu={{ items }}
+            dropdownRender={(menu) => (
+              <div style={contentStyle}>
+                {React.cloneElement(menu, { style: menuStyle })}
+              </div>
+            )}
+          >
+            <a onClick={(e) => e.preventDefault()}>
+              <a href="#">About</a>
+            </a>
+          </Dropdown>
+          <Dropdown
+            menu={{ items }}
+            dropdownRender={(menu) => (
+              <div style={contentStyle}>
+                {React.cloneElement(menu, { style: menuStyle })}
+              </div>
+            )}
+          >
+            <a onClick={(e) => e.preventDefault()}>
+              <a href="#">For Boat Owners</a>
+            </a>
+          </Dropdown>
           <a href="#">Contact Us</a>
         </Flex>
 
@@ -62,3 +121,30 @@ function Header() {
 }
 
 export default Header;
+
+const items = [
+  {
+    key: "1",
+    label: (
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.antgroup.com"
+      >
+        Other Offering
+      </a>
+    ),
+  },
+  {
+    key: "2",
+    label: (
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.aliyun.com"
+      >
+        Other Offering
+      </a>
+    ),
+  },
+];

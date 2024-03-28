@@ -34,7 +34,10 @@ function Home() {
                   unlock exclusive living <br />
                   explore florida’s finest properties
                 </Title>
-                <Text style={{ color: "#D4CFC9" }} className="text-paragraph">
+                <Text
+                  style={{ color: "#D4CFC9" }}
+                  className="text-paragraph text-center"
+                >
                   Discover Your Dream Home in the Heart of Florida with Florida
                   Luxurious Properties
                 </Text>

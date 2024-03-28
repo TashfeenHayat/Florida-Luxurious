@@ -7,7 +7,7 @@ function OurStory() {
   return (
     <div className="boxshadow-section">
       <Row>
-        <Col span={8}>
+        <Col lg={8} md={24}>
           <Flex justify={"end"} align={"center"} style={{ height: "100%" }}>
             <div className="our-story-bg">
               <Flex justify={"space-between"}>
@@ -52,7 +52,7 @@ function OurStory() {
             </div>
           </Flex>
         </Col>
-        <Col span={16}>
+        <Col lg={16} md={0}>
           <div style={{ marginTop: 20, marginBottom: 20 }}>
             <img src={Story} width="100%" />
           </div>
