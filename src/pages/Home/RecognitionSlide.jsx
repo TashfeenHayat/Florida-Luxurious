@@ -61,40 +61,40 @@ function RecognitionSlide() {
     >
       <Slider {...settings}>
         <div>
-          <img src={Business} className="w-75" />
+          <img src={Business} />
         </div>
         <div>
-          <img src={Business} className="w-75" />
+          <img src={Business} />
         </div>
         <div>
-          <img src={Business} className="w-75" />
+          <img src={Business} />
         </div>
         <div>
-          <img src={Business} className="w-75" />
+          <img src={Business} />
         </div>
         <div>
-          <img src={Business} className="w-75" />
+          <img src={Business} />
         </div>
         <div>
-          <img src={Business} className="w-75" />
+          <img src={Business} />
         </div>
         <div>
-          <img src={Business} className="w-75" />
+          <img src={Business} />
         </div>
         <div>
-          <img src={Business} className="w-75" />
+          <img src={Business} />
         </div>
         <div>
-          <img src={Business} className="w-75" />
+          <img src={Business} />
         </div>{" "}
         <div>
-          <img src={Business} className="w-75" />
+          <img src={Business} />
         </div>{" "}
         <div>
-          <img src={Business} className="w-75" />
+          <img src={Business} />
         </div>{" "}
         <div>
-          <img src={Business} className="w-75" />
+          <img src={Business} />
         </div>
       </Slider>
     </Flex>

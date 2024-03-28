@@ -60,29 +60,173 @@ function Neighborhoods() {
                 </Flex>
               </div>
             </div>
-            <div>
-              <img src={Florida} width="100%" />
+            <div className="displayy-teamimg-center">
+              <img src={Florida} width="100%" className="img-op" />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 20,
+                  left: 20,
+                  width: "100%",
+                }}
+              >
+                <Flex
+                  justify={"space-between"}
+                  align={"center"}
+                  style={{ width: "95%" }}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 28,
+                      lineHeight: "36.4px",
+                      fontWeight: 100,
+                    }}
+                  >
+                    Florida
+                  </Text>
+                </Flex>
+              </div>
             </div>
-            <div>
-              <img src={Florida} width="100%" />
+            <div className="displayy-teamimg-center">
+              <img src={Florida} width="100%" className="img-op" />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 20,
+                  left: 20,
+                  width: "100%",
+                }}
+              >
+                <Flex
+                  justify={"space-between"}
+                  align={"center"}
+                  style={{ width: "95%" }}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 28,
+                      lineHeight: "36.4px",
+                      fontWeight: 100,
+                    }}
+                  >
+                    Florida
+                  </Text>
+                </Flex>
+              </div>
             </div>
-            <div>
-              <img src={Florida} width="100%" />
+            <div className="displayy-teamimg-center">
+              <img src={Florida} width="100%" className="img-op" />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 20,
+                  left: 20,
+                  width: "100%",
+                }}
+              >
+                <Flex
+                  justify={"space-between"}
+                  align={"center"}
+                  style={{ width: "95%" }}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 28,
+                      lineHeight: "36.4px",
+                      fontWeight: 100,
+                    }}
+                  >
+                    Florida
+                  </Text>
+                </Flex>
+              </div>
             </div>
-            <div>
-              <img src={Florida} width="100%" />
+            <div className="displayy-teamimg-center">
+              <img src={Florida} width="100%" className="img-op" />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 20,
+                  left: 20,
+                  width: "100%",
+                }}
+              >
+                <Flex
+                  justify={"space-between"}
+                  align={"center"}
+                  style={{ width: "95%" }}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 28,
+                      lineHeight: "36.4px",
+                      fontWeight: 100,
+                    }}
+                  >
+                    Florida
+                  </Text>
+                </Flex>
+              </div>
             </div>
-            <div>
-              <img src={Florida} width="100%" />
+            <div className="displayy-teamimg-center">
+              <img src={Florida} width="100%" className="img-op" />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 20,
+                  left: 20,
+                  width: "100%",
+                }}
+              >
+                <Flex
+                  justify={"space-between"}
+                  align={"center"}
+                  style={{ width: "95%" }}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 28,
+                      lineHeight: "36.4px",
+                      fontWeight: 100,
+                    }}
+                  >
+                    Florida
+                  </Text>
+                </Flex>
+              </div>
             </div>
-            <div>
-              <img src={Florida} width="100%" />
-            </div>
-            <div>
-              <img src={Florida} width="100%" />
-            </div>
-            <div>
-              <img src={Florida} width="100%" />
+            <div className="displayy-teamimg-center">
+              <img src={Florida} width="100%" className="img-op" />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 20,
+                  left: 20,
+                  width: "100%",
+                }}
+              >
+                <Flex
+                  justify={"space-between"}
+                  align={"center"}
+                  style={{ width: "95%" }}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 28,
+                      lineHeight: "36.4px",
+                      fontWeight: 100,
+                    }}
+                  >
+                    Florida
+                  </Text>
+                </Flex>
+              </div>
             </div>
           </Slider>
         </div>

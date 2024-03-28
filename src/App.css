@@ -106,7 +106,7 @@ body:focus-visible {
 }
 .hero-bg-img-shadow {
   background: rgba(0, 0, 0, 0.6);
-  height: 750px;
+  height: 100%;
   position: relative;
 }
 
@@ -345,6 +345,7 @@ body:focus-visible {
   cursor: pointer;
 }
 .button-view1 {
+  position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
   background-color: #000; /* Green */
   border: none;
   color: white;
@@ -358,6 +359,26 @@ body:focus-visible {
   line-height: 14px;
   letter-spacing: 1.5px;
   cursor: pointer;
+}
+
+.button-view1::before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.button-view1::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0; /* Adjusted left position */
+  width: 100%; /* Adjusted width to fill the container */
+  height: 1px !important;
+  transform: scaleY(1.1);
+  background: gray;
+  pointer-events: none;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 .displayy-teamimg-center:hover .button-view {
@@ -595,13 +616,14 @@ body:focus-visible {
   transform: translate(-50%, -50%);
   color: white;
   text-align: center;
+  height: 100%;
 }
 
 .slick-next {
   right: 0 !important;
 }
 .slider-image {
-    width: 100%; /* Ensures the image takes the full width of its container */
-    height: auto; /* Maintains the aspect ratio of the image */
-    max-height: 300px; /* Set the maximum height as per your requirement */
+  width: 100%; /* Ensures the image takes the full width of its container */
+  height: auto; /* Maintains the aspect ratio of the image */
+  max-height: 300px; /* Set the maximum height as per your requirement */
 }

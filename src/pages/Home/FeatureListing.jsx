@@ -138,13 +138,163 @@ function FeatureListing() {
               </div>
             </div>
             <div className="displayy-teamimg-center">
-              <img src={Property} width="100%" />
+              <img src={Property} width="100%" className="img-op" />
+              <div className="p-absoulte right-0">
+                <div
+                  style={{
+                    height: "45px",
+                    width: "150px",
+                    background: "black",
+                  }}
+                >
+                  <Flex
+                    justify={"center"}
+                    align="center"
+                    style={{ height: "inherit" }}
+                  >
+                    <Text
+                      style={{
+                        color: "white",
+                        textTransform: "uppercase",
+                        lineHeight: "23.8px",
+                        letterSpacing: "1px",
+                        fontWeight: "bold",
+                        fontSize: "14px",
+                      }}
+                    >
+                      For Sale
+                    </Text>
+                  </Flex>
+                </div>
+              </div>
+              <div className="p-absoulte w-100 bottom-20 left-20">
+                <Flex
+                  justify={"space-between"}
+                  align={"center"}
+                  style={{ width: "95%" }}
+                >
+                  <button className="button-view">View All</button>
+                  <Flex>
+                    <IoLocationOutline color="white" size={20} />
+                    <Text
+                      style={{
+                        lineHeight: "22px",
+                        letterSpacing: "0%",
+                      }}
+                      className="f-14 f-bold text-white"
+                    >
+                      2572 Mercedes Drive <br />
+                      <IoPricetagOutline size={20} /> $15,000,0000
+                    </Text>
+                  </Flex>
+                </Flex>
+              </div>
             </div>
             <div className="displayy-teamimg-center">
-              <img src={Property} width="100%" />
+              <img src={Property} width="100%" className="img-op" />
+              <div className="p-absoulte right-0">
+                <div
+                  style={{
+                    height: "45px",
+                    width: "150px",
+                    background: "black",
+                  }}
+                >
+                  <Flex
+                    justify={"center"}
+                    align="center"
+                    style={{ height: "inherit" }}
+                  >
+                    <Text
+                      style={{
+                        color: "white",
+                        textTransform: "uppercase",
+                        lineHeight: "23.8px",
+                        letterSpacing: "1px",
+                        fontWeight: "bold",
+                        fontSize: "14px",
+                      }}
+                    >
+                      For Sale
+                    </Text>
+                  </Flex>
+                </div>
+              </div>
+              <div className="p-absoulte w-100 bottom-20 left-20">
+                <Flex
+                  justify={"space-between"}
+                  align={"center"}
+                  style={{ width: "95%" }}
+                >
+                  <button className="button-view">View All</button>
+                  <Flex>
+                    <IoLocationOutline color="white" size={20} />
+                    <Text
+                      style={{
+                        lineHeight: "22px",
+                        letterSpacing: "0%",
+                      }}
+                      className="f-14 f-bold text-white"
+                    >
+                      2572 Mercedes Drive <br />
+                      <IoPricetagOutline size={20} /> $15,000,0000
+                    </Text>
+                  </Flex>
+                </Flex>
+              </div>
             </div>
             <div className="displayy-teamimg-center">
-              <img src={Property} width="100%" />
+              <img src={Property} width="100%" className="img-op" />
+              <div className="p-absoulte right-0">
+                <div
+                  style={{
+                    height: "45px",
+                    width: "150px",
+                    background: "black",
+                  }}
+                >
+                  <Flex
+                    justify={"center"}
+                    align="center"
+                    style={{ height: "inherit" }}
+                  >
+                    <Text
+                      style={{
+                        color: "white",
+                        textTransform: "uppercase",
+                        lineHeight: "23.8px",
+                        letterSpacing: "1px",
+                        fontWeight: "bold",
+                        fontSize: "14px",
+                      }}
+                    >
+                      For Sale
+                    </Text>
+                  </Flex>
+                </div>
+              </div>
+              <div className="p-absoulte w-100 bottom-20 left-20">
+                <Flex
+                  justify={"space-between"}
+                  align={"center"}
+                  style={{ width: "95%" }}
+                >
+                  <button className="button-view">View All</button>
+                  <Flex>
+                    <IoLocationOutline color="white" size={20} />
+                    <Text
+                      style={{
+                        lineHeight: "22px",
+                        letterSpacing: "0%",
+                      }}
+                      className="f-14 f-bold text-white"
+                    >
+                      2572 Mercedes Drive <br />
+                      <IoPricetagOutline size={20} /> $15,000,0000
+                    </Text>
+                  </Flex>
+                </Flex>
+              </div>
             </div>
           </Slider>
         </div>
