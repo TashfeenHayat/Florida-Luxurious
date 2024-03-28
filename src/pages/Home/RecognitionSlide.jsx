@@ -1,18 +1,18 @@
 import React from "react";
 import Slider from "react-slick";
 import Business from "../../assets/business.svg";
-import One from "../../assets/Ads/1.png";
-import Two from "../../assets/Ads/2.png";
-import Three from "../../assets/Ads/3.png";
-import Four from "../../assets/Ads/4.png";
-import Five from "../../assets/Ads/5.png";
-import Six from "../../assets/Ads/6.png";
-import Seven from "../../assets/Ads/7.png";
-import Eight from "../../assets/Ads/8.png";
-import Nine from "../../assets/Ads/9.png";
-import Ten from "../../assets/Ads/10.png";
-import Eleven from "../../assets/Ads/11.png";
-import Twelve from "../../assets/Ads/12.png";
+// import One from "../../assets/Ads/1.png";
+// import Two from "../../assets/Ads/2.png";
+// import Three from "../../assets/Ads/3.png";
+// import Four from "../../assets/Ads/4.png";
+// import Five from "../../assets/Ads/5.png";
+// import Six from "../../assets/Ads/6.png";
+// import Seven from "../../assets/Ads/7.png";
+// import Eight from "../../assets/Ads/8.png";
+// import Nine from "../../assets/Ads/9.png";
+// import Ten from "../../assets/Ads/10.png";
+// import Eleven from "../../assets/Ads/11.png";
+// import Twelve from "../../assets/Ads/12.png";
 
 import { Flex } from "antd";
 function RecognitionSlide() {
@@ -61,40 +61,40 @@ function RecognitionSlide() {
     >
       <Slider {...settings}>
         <div>
-          <img src={One} className="w-75" />
+          <img src={Business} className="w-75" />
         </div>
         <div>
-          <img src={Two} className="w-75" />
+          <img src={Business} className="w-75" />
         </div>
         <div>
-          <img src={Three} className="w-75" />
+          <img src={Business} className="w-75" />
         </div>
         <div>
-          <img src={Four} className="w-75" />
+          <img src={Business} className="w-75" />
         </div>
         <div>
-          <img src={Five} className="w-75" />
+          <img src={Business} className="w-75" />
         </div>
         <div>
-          <img src={Six} className="w-75" />
+          <img src={Business} className="w-75" />
         </div>
         <div>
-          <img src={Seven} className="w-75" />
+          <img src={Business} className="w-75" />
         </div>
         <div>
-          <img src={Eight} className="w-75" />
+          <img src={Business} className="w-75" />
         </div>
         <div>
-          <img src={Nine} className="w-75" />
+          <img src={Business} className="w-75" />
         </div>{" "}
         <div>
-          <img src={Ten} className="w-75" />
+          <img src={Business} className="w-75" />
         </div>{" "}
         <div>
-          <img src={Eleven} className="w-75" />
+          <img src={Business} className="w-75" />
         </div>{" "}
         <div>
-          <img src={Twelve} className="w-75" />
+          <img src={Business} className="w-75" />
         </div>
       </Slider>
     </Flex>
