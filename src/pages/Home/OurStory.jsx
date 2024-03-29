@@ -42,12 +42,12 @@ function OurStory() {
                   Agents fluent in French, German, Italian, Polish, Portuguese,
                   Russian, Spanish, Japanese, Arabic and Romanian.
                 </Text>
-                <Button
-                  style={{ width: "30%", marginTop: 20, marginBottom: 20 }}
-                  className="contact-us-btn"
+                <button
+                  className="button-secondary text-upper mt-16"
+                  style={{ width: "40%" }}
                 >
-                  Contact Us
-                </Button>
+                  Contact us
+                </button>
               </Flex>
             </div>
           </Flex>

@@ -352,7 +352,7 @@ body:focus-visible {
   padding: 15px 52px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  display: flex;
   font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
@@ -361,18 +361,51 @@ body:focus-visible {
   cursor: pointer;
 }
 
-.button-view1::before {
-  content: "";
-  display: inline-block;
-  vertical-align: middle;
+.button-secondary {
+  position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
+  background-color: white; /* Green */
+  border: none;
+  color: black;
+  padding: 15px 52px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 14px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+.button-secondary:hover {
+  position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
+  background-color: transparent; /* Green */
+  border: none;
+  padding: 15px 52px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 14px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: background-color 1s ease; /* added 's' after 0.8 for seconds */
+  color: white;
+  border: 1px solid white;
+}
+
+.button-secondary:hover {
+  padding: 14px 52px;
 }
 
 .button-view1::after {
   content: "";
   position: absolute;
   top: 50%;
-  left: 0; /* Adjusted left position */
-  width: 100%; /* Adjusted width to fill the container */
+  left: -65px; /* Adjusted left position */
+  width: 100px; /* Adjusted width to fill the container */
   height: 1px !important;
   transform: scaleY(1.1);
   background: gray;
@@ -444,7 +477,8 @@ body:focus-visible {
 }
 
 .flip-container {
-  perspective: 1000px;
+  /* perspective: 1000px; */
+  min-height: 150px;
 }
 
 .flip-container:hover .flipper,
@@ -619,11 +653,24 @@ body:focus-visible {
   height: 100%;
 }
 
-.slick-next {
-  right: 0 !important;
-}
 .slider-image {
   width: 100%; /* Ensures the image takes the full width of its container */
   height: auto; /* Maintains the aspect ratio of the image */
   max-height: 300px; /* Set the maximum height as per your requirement */
+}
+.team-view-btn {
+  position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
+  background-color: #000; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 52px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 14px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
 }
