@@ -103,15 +103,15 @@ function MeetTeam() {
               dreams into reality
             </Text>
             <div>
-              <Button
+              <button
                 style={{
                   marginTop: "24px",
                   height: "40px",
                 }}
-                className="contact-us-btn"
+                className="let-talk-btn"
               >
                 Contact Us
-              </Button>
+              </button>
             </div>
           </Flex>
         </div>

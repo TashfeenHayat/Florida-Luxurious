@@ -413,6 +413,19 @@ body:focus-visible {
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
 }
+.button-secondary::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -65px; /* Adjusted left position */
+  width: 100px; /* Adjusted width to fill the container */
+  height: 1px !important;
+  transform: scaleY(1.1);
+  background: gray;
+  pointer-events: none;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
 
 .displayy-teamimg-center:hover .button-view {
   border: 1px solid white;
@@ -673,4 +686,33 @@ body:focus-visible {
   line-height: 14px;
   letter-spacing: 1.5px;
   cursor: pointer;
+}
+.let-talk-btn {
+  position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
+  background-color: white; /* Green */
+  border: none;
+  color: black;
+  padding: 15px 52px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 14px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+.let-talk-btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -65px; /* Adjusted left position */
+  width: 100px; /* Adjusted width to fill the container */
+  height: 1px !important;
+  transform: scaleY(1.1);
+  background: gray;
+  pointer-events: none;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
