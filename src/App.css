@@ -478,7 +478,7 @@ body:focus-visible {
 
 .flip-container {
   /* perspective: 1000px; */
-  min-height: 150px;
+  min-height: 300px;
 }
 
 .flip-container:hover .flipper,

@@ -2,6 +2,7 @@ import React from "react";
 import { Flex, Typography, Button } from "antd";
 import Slider from "react-slick";
 import Team from "../../assets/team.png";
+import Filp from "../../components/Flip";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
 const { Title, Text } = Typography;
@@ -59,32 +60,11 @@ function MeetTeam() {
           >
             <div className="meet-slider-width">
               <Slider {...settings}>
-                <div className="displayy-teamimg-center">
-                  <div class="flip-container">
-                    <div class="flipper">
-                      <div class="front">
-                        <img src={Team} width="100%" />
-                      </div>
-                      <div class="back">
-                        <img src={Team} width="100%" className="img-op1" />
-                        <div className="p-absoulte p-b-30-left-0 w-100">
-                          <Flex justify="center" align="center">
-                            <button className="button-view1">View More </button>
-                          </Flex>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="displayy-teamimg-center">
-                  <img src={Team} width="100%" />
-                </div>
-                <div className="displayy-teamimg-center">
-                  <img src={Team} width="100%" />
-                </div>
-                <div className="displayy-teamimg-center">
-                  <img src={Team} width="100%" />
-                </div>
+                <Filp />
+                <Filp />
+                <Filp />
+                <Filp />
+                <Filp />
               </Slider>
             </div>
           </Flex>
