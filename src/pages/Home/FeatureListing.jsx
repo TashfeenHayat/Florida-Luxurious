@@ -57,6 +57,15 @@ function FeatureListing() {
           slidesToScroll: 1,
         },
       },
+      {
+        breakpoint: 425,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          prevArrow: false,
+          nextArrow: false,
+        },
+      },
       // Add more breakpoints as needed
     ],
   };

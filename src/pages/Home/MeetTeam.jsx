@@ -40,6 +40,32 @@ function MeetTeam() {
     slidesToScroll: 4,
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 425,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          prevArrow: false,
+          nextArrow: false,
+        },
+      },
+      // Add more breakpoints as needed
+    ],
   };
 
   return (

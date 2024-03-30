@@ -1,12 +1,17 @@
 import React from "react";
 import { Col, Flex, Row, Typography } from "antd";
 import DownArrow from "../../assets/downarrow.svg";
+import Bagde from "../../assets/Bagde1.svg";
+import Bagde2 from "../../assets/Bagde2.svg";
+import Bagde3 from "../../assets/Bagde3.svg";
+import Bagde4 from "../../assets/Bagde4.svg";
+
 const { Title, Text } = Typography;
 function FloridaProperties() {
   return (
     <div className="bg-img-logo" style={{ color: "#fff", padding: "0px 20px" }}>
       <Row>
-        <Col span={12} className="relative cover_rectagle">
+        <Col lg={12} className="relative cover_rectagle">
           <Flex
             className="pt-90 pb-10"
             style={{ position: "sticky", top: "0" }}
@@ -15,23 +20,17 @@ function FloridaProperties() {
               <Title level={1} className="text-white">
                 Florida Luxurious Properties
               </Title>
-              <Text className="text-white f-18" style={{ lineheight: "29px" }}>
-                Performance metrics are quantifiable measures used to assess the
-                efficiency, effectiveness, and success of an organization, team,
-                process, or individual. These metrics are used to track progress
-                toward goals, evaluate performance, and identify areas for
-                improvement. In the context of a business or website,
-                performance metrics can include a wide range of indicators such
-                as revenue, sales, customer satisfaction, website traffic,
-                conversion rates, user engagement, and more. By analyzing
-                performance metrics, organizations can make data-driven
-                decisions to optimize operations and achieve their objectives.
-              </Text>
+              <Flex gap={20} justify="center">
+                <img src={Bagde} />
+                <img src={Bagde2} />
+                <img src={Bagde3} />
+                <img src={Bagde4} />
+              </Flex>
             </div>
           </Flex>
         </Col>
-        <Col span={12}>
-          <Col span={19} offset={1}>
+        <Col lg={12}>
+          <Col lg={19} offset={1}>
             <Flex justify="center" align={"center"}>
               <img src={DownArrow} height="250px" />
             </Flex>
