@@ -9,6 +9,33 @@ function Neighborhoods() {
     infinite: true,
     centerPadding: "60px",
     slidesToShow: 4,
+    responsive: [
+      {
+        breakpoint: 1024, // Adjust as per your requirement
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 2,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 768, // Adjust as per your requirement
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 425, // Adjust as per your requirement
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      // Add more responsive configurations as needed
+    ],
     swipeToSlide: true,
     afterChange: function (index) {
       console.log(

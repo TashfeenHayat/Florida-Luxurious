@@ -7,8 +7,8 @@ function OurStory() {
   return (
     <div className="boxshadow-section">
       <Row>
-        <Col lg={8} md={24}>
-          <Flex justify={"end"} align={"center"} style={{ height: "100%" }}>
+        <Col lg={8} md={24} className="d-flex-story">
+          <Row className="d-flex-story-center ">
             <div className="our-story-bg">
               <Flex justify={"space-between"}>
                 <Flex vertical>
@@ -50,7 +50,7 @@ function OurStory() {
                 </button>
               </Flex>
             </div>
-          </Flex>
+          </Row>
         </Col>
         <Col lg={16} md={0}>
           <div style={{ marginTop: 20, marginBottom: 20 }}>
