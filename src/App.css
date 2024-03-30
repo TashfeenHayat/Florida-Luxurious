@@ -692,7 +692,7 @@ body:focus-visible {
   background-color: white; /* Green */
   border: none;
   color: black;
-  padding: 15px 52px;
+  padding: 12px 52px;
   text-align: center;
   text-decoration: none;
   display: flex;
@@ -702,6 +702,15 @@ body:focus-visible {
   line-height: 14px;
   letter-spacing: 1.5px;
   cursor: pointer;
+}
+.let-talk-btn:hover {
+  background-color: transparent !important;
+  border-radius: 0px;
+  text-transform: uppercase;
+  color: white !important;
+  border: 1.5px solid white !important;
+  transition: background-color 1s ease;
+  padding: 12px 52px;
 }
 .let-talk-btn::after {
   content: "";
