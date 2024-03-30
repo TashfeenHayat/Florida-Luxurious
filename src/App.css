@@ -726,6 +726,12 @@ body:focus-visible {
 }
 
 @media screen and (max-width: 768px) {
+  .bg-img-logo {
+    background-size: cover !important;
+  }
+  .cover_rectagle::before {
+    content: none;
+  }
   .title-home-page {
     font-size: 34px !important;
   }
