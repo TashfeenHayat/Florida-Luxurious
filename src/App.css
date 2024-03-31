@@ -717,6 +717,10 @@ body:focus-visible {
   transition: all 0.4s ease-in-out;
 }
 
+.ant-card-body {
+  padding: 0px !important;
+}
+
 /* Media Queries */
 
 @media screen and (max-width: 1024px) {
