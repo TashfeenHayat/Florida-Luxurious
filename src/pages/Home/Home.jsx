@@ -13,10 +13,6 @@ function Home() {
     <>
       <div className="background-video-container">
         <video autoPlay muted loop className="background-video">
-          <source
-            src="https://firebasestorage.googleapis.com/v0/b/yahyanbilal.appspot.com/o/herovideo.mp4?alt=media&token=dc257c02-dbfd-43fd-a5d0-49adf87f95b1"
-            type="video/mp4"
-          />
           <source src="https://firebasestorage.googleapis.com/v0/b/yahyanbilal.appspot.com/o/herovideo.mp4?alt=media&token=dc257c02-dbfd-43fd-a5d0-49adf87f95b1" type="video/mp4" />
         </video>
       </div>
