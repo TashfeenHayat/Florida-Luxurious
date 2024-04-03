@@ -27,7 +27,10 @@ export default function DetailProperty() {
         ></div>
         <div
           className="properties-single-slideshow-info"
-          style={{ right: details ? "0px" : "-345px" }}
+          style={{
+            right: details ? "0px" : "-345px",
+            transition: "right 0.3s ease",
+          }}
         >
           <span
             class="show-hide-btn show"
