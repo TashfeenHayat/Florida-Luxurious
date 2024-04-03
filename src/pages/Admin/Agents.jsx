@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { Space, Card, Button, Flex, Table, Input, Popconfirm } from "antd";
-import { PlusOutlined } from '@ant-design/icons';
+import { Space, Card, Button, Table, Input, Popconfirm } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getAgents } from "../../api/Agents";
+import { getAgents, deleteAgent } from "../../api/Agents";
 
 const { Search } = Input;
 
@@ -12,37 +12,47 @@ function Agents() {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text) => <a>{text}</a>,
+      render: (_, { firstName, lastName }) => `${firstName} ${lastName}`,
     },
-
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
     {
       title: "Phone No",
       dataIndex: "phoneNumber",
       key: "phone",
     },
     {
+      title: "Code",
+      dataIndex: "code",
+      key: "code",
+    },
+    {
       title: "Address",
       dataIndex: "address",
       key: "address",
-      render: (_, { address }) => { 
-        if(address) return `${address.addressLine1} ${address.addressLine2} ${address.city} ${address.state} ${address.zipCode} ${address.country}`
-      }
+      render: (_, { address }) => {
+        // if (!address.addressLine2) address.addressLine2 = "";
+        if (address)
+          return `${address.addressLine1} 
+        ${address.addressLine2 ? address.addressLine2 : ""} 
+        ${address.city} ${address.state} 
+        ${address.zipCode} ${address.country}`;
+      },
     },
-    {
-      title: "Description",
-      dataIndex: "description",
-      key: "address",
-    },
-
     {
       title: "Action",
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button type="link" href={`/agent/edit/${record._id}`}>Edit</Button>
+          <Button type="link" href={`/agent/edit/${record._id}`}>
+            Edit
+          </Button>
           <Popconfirm
             title="Delete this task"
-            description="Are you sure to delete this agent?"
+            description="Are you sure to delete this agent ?"
             okText="Yes"
             cancelText="No"
             onConfirm={() => onDelete(record._id)}
@@ -53,7 +63,7 @@ function Agents() {
       ),
     },
   ];
-  const { isLoading, isError, data } = useSelector((s) => s.agentreducer);
+  const { isLoading, isError, data } = useSelector((s) => s.getAgentsReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -62,25 +72,38 @@ function Agents() {
 
   const onSearch = (text) => {
     dispatch(getAgents(text));
-  }
+  };
 
   const onDelete = (id) => {
     console.log(id);
-    // dispatch(getAgents(text));
-  }
+    dispatch(deleteAgent(id));
+  };
 
   return (
-    <Card 
-      title="Agents" 
+    <Card
+      title="Agents"
       extra={
         <Space>
-          <Search placeholder="input search text" onSearch={onSearch} enterButton allowClear />
-          <Button type="primary" href="/agents/add"><PlusOutlined />Add</Button>
+          <Search
+            placeholder="input search text"
+            onSearch={onSearch}
+            enterButton
+            allowClear
+          />
+          <Button type="primary" href="/admin/agent/add">
+            <PlusOutlined />
+            Add
+          </Button>
         </Space>
       }
       style={{ padding: 0 }}
     >
-      <Table columns={columns} loading={isLoading} isError={isError} dataSource={data} />
+      <Table
+        columns={columns}
+        loading={isLoading}
+        isError={isError}
+        dataSource={data}
+      />
     </Card>
   );
 }

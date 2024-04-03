@@ -8,6 +8,7 @@ export const signInAdmin = createAsyncThunk(
       const res = await axios.post(`${api_base_URL}user/login`, data);
       console.log(res.data.user);
       localStorage.setItem("user", res.data.user);
+      localStorage.setItem("token", res.data.token);
       return res.data;
     } catch (e) {
       // console.log(e.response.data.message);
