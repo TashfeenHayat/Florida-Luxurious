@@ -95,7 +95,7 @@ function FeatureListing() {
           <Slider {...settings}>
             <div className="displayy-teamimg-center">
               <img src={Property} width="100%" className="img-op" />
-              <div className="p-absoulte right-0">
+              {/* <div className="p-absoulte right-0">
                 <div
                   style={{
                     height: "45px",
@@ -122,7 +122,7 @@ function FeatureListing() {
                     </Text>
                   </Flex>
                 </div>
-              </div>
+              </div> */}
               <div className="p-absoulte w-100 bottom-20 left-20">
                 <Flex
                   justify={"space-between"}
@@ -148,7 +148,7 @@ function FeatureListing() {
             </div>
             <div className="displayy-teamimg-center">
               <img src={Property} width="100%" className="img-op" />
-              <div className="p-absoulte right-0">
+              {/* <div className="p-absoulte right-0">
                 <div
                   style={{
                     height: "45px",
@@ -175,7 +175,7 @@ function FeatureListing() {
                     </Text>
                   </Flex>
                 </div>
-              </div>
+              </div> */}
               <div className="p-absoulte w-100 bottom-20 left-20">
                 <Flex
                   justify={"space-between"}
@@ -201,7 +201,7 @@ function FeatureListing() {
             </div>
             <div className="displayy-teamimg-center">
               <img src={Property} width="100%" className="img-op" />
-              <div className="p-absoulte right-0">
+              {/* <div className="p-absoulte right-0">
                 <div
                   style={{
                     height: "45px",
@@ -228,7 +228,7 @@ function FeatureListing() {
                     </Text>
                   </Flex>
                 </div>
-              </div>
+              </div> */}
               <div className="p-absoulte w-100 bottom-20 left-20">
                 <Flex
                   justify={"space-between"}
@@ -254,7 +254,7 @@ function FeatureListing() {
             </div>
             <div className="displayy-teamimg-center">
               <img src={Property} width="100%" className="img-op" />
-              <div className="p-absoulte right-0">
+              {/* <div className="p-absoulte right-0">
                 <div
                   style={{
                     height: "45px",
@@ -281,7 +281,7 @@ function FeatureListing() {
                     </Text>
                   </Flex>
                 </div>
-              </div>
+              </div> */}
               <div className="p-absoulte w-100 bottom-20 left-20">
                 <Flex
                   justify={"space-between"}

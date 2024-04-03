@@ -16,7 +16,6 @@ function App() {
   return (
     <>
       {!isAdminRoute && <Header />}
-      {!isAdminRoute && <Icons />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contactus" element={" "} />
@@ -26,7 +25,7 @@ function App() {
         <Route path="/admin/agent" element={<Agents />} />
         <Route path="/sign-up" element={<Signup />} />
       </Routes>
-      <Footer />
+      {!isAdminRoute && <Footer />}
     </>
   );
 }

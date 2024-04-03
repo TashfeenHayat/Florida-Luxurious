@@ -410,11 +410,11 @@ body:focus-visible {
   padding: 14px 52px;
 }
 
-.button-view1::after {
+.button-secondary::after {
   content: "";
   position: absolute;
   top: 50%;
-  left: -65px; /* Adjusted left position */
+  right: -65px; /* Adjusted left position */
   width: 100px; /* Adjusted width to fill the container */
   height: 1px !important;
   transform: scaleY(1.1);
@@ -423,11 +423,11 @@ body:focus-visible {
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
 }
-.button-secondary::after {
+.button-view1::after {
   content: "";
   position: absolute;
   top: 50%;
-  right: -65px; /* Adjusted left position */
+  left: -65px; /* Adjusted left position */
   width: 100px; /* Adjusted width to fill the container */
   height: 1px !important;
   transform: scaleY(1.1);
@@ -443,6 +443,42 @@ body:focus-visible {
   transition: all 0.5s ease-in-out;
 }
 .button-view1:hover {
+  border: 1px solid black;
+  background-color: transparent !important;
+  transition: background-color 1s ease; /* added 's' after 0.8 for seconds */
+  color: black;
+}
+
+.button-view-line-right {
+  position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
+  background-color: #000; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 52px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 14px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+.button-view-line-right::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -65px; /* Adjusted left position */
+  width: 100px; /* Adjusted width to fill the container */
+  height: 1px !important;
+  transform: scaleY(1.1);
+  background: gray;
+  pointer-events: none;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+.button-view-line-right:hover {
   border: 1px solid black;
   background-color: transparent !important;
   transition: background-color 1s ease; /* added 's' after 0.8 for seconds */
@@ -763,4 +799,97 @@ body:focus-visible {
   .text-paragraph {
     font-size: 12px !important;
   }
+}
+.detail-property .ant-input::placeholder {
+  color: #f0f0f0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.detail-property .ant-input {
+  border-top: 0px;
+  border-left: 0px;
+  border-radius: 0px;
+  border-right: 0px;
+  padding: 4px 4px;
+  background-color: transparent;
+  color: white;
+}
+.detail-property .ant-input:hover {
+  border-color: white !important;
+  border-bottom: 1px solid white;
+  background-color: transparent;
+}
+
+.ant-checkbox-inner {
+  border-radius: 0 !important; /* Remove border radius */
+  border: 1px solid #ffffff !important; /* White border */
+  background-color: transparent !important;
+}
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #ffffff; /* White background when checked */
+  border-color: #ffffff; /* White border when checked */
+}
+
+.ant-checkbox-checked .ant-checkbox-inner::after {
+  border-color: #ffffff; /* White tick color when checked */
+}
+
+.button-secondary-line-left {
+  position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
+  background-color: white; /* Green */
+  border: none;
+  color: black;
+  padding: 15px 52px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 14px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+.button-secondary-line-left:hover {
+  position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
+  background-color: transparent; /* Green */
+  border: none;
+  padding: 15px 52px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 14px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: background-color 1s ease; /* added 's' after 0.8 for seconds */
+  color: white;
+  border: 1px solid white;
+}
+
+.button-secondary-line-left:hover {
+  padding: 14px 52px;
+}
+
+.button-secondary-line-left::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -65px; /* Adjusted left position */
+  width: 100px; /* Adjusted width to fill the container */
+  height: 1px !important;
+  transform: scaleY(1.1);
+  background: gray;
+  pointer-events: none;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+.bg-gif-block {
+  background-image: url("./assets/blocks.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
 }

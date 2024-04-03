@@ -7,6 +7,7 @@ import Team from "./MeetTeam";
 import FeatureListing from "./FeatureListing";
 import Neighborhoods from "./Neighborhoods";
 import Herovideo from "../../assets/video/herovideo.mp4";
+import SocialIcon from "../../components/Icons";
 const { Title, Text } = Typography;
 function Home() {
   return (
@@ -55,6 +56,8 @@ function Home() {
           </Flex>
         </div>
       </div>
+      <SocialIcon />
+
       <FloridaProperties />
       <RecognitionSlide />
       <FeatureListing />
