@@ -1,11 +1,11 @@
 import React from "react";
 import Team from "../assets/team.png";
 import { Flex, Typography, Button } from "antd";
-function Flip({ fImg, bImg }) {
+function Flip({ fImg, bImg, minHeight }) {
   console.log(fImg, "che");
   return (
     <div className="displayy-teamimg-center">
-      <div class="flip-container">
+      <div class="flip-container" style={{ minHeight: minHeight }}>
         <div class="flipper">
           <div class="front">
             <img src={Team} width="100%" />

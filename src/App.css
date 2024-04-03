@@ -893,3 +893,166 @@ body:focus-visible {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.properties-single-slideshow-info {
+  position: absolute;
+  z-index: 4;
+  bottom: 144px;
+  right: -100%;
+  background: #fff;
+  width: 390px;
+  padding: 0 15px 0 65px;
+  overflow-y: hidden;
+}
+
+.show {
+  display: block;
+  position: absolute;
+  width: 100%;
+  transform: translateY(-50%) rotate(-90deg);
+  left: -44%;
+  top: 50%;
+  right: 0;
+  padding: 10px;
+  font-size: 24px;
+  transform-origin: center;
+  text-align: center;
+  cursor: pointer;
+  background-color: transparent;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  border-bottom: 1px solid rgba(27, 27, 27, 1);
+}
+.show:hover {
+  color: white !important;
+  background-color: black;
+}
+
+.single-listing .properties-single-slideshow-info span.show-hide-btn:hover {
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(27, 27, 27, 1);
+}
+
+.properties-single-slideshow-info-address {
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-size: 41px;
+  font-weight: 600;
+  line-height: 39px;
+  letter-spacing: -1.025px;
+  text-transform: uppercase;
+  color: #1b1b1b;
+  margin-top: 1px;
+  margin-left: -1px;
+}
+
+.properties-single-slideshow-info-address span {
+  display: block;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 23px;
+  letter-spacing: 0;
+  color: #666666;
+  margin-top: 3px;
+  margin-left: 1px;
+}
+
+.properties-single-slideshow-info-price {
+  display: block;
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-size: 43px;
+  font-weight: 600;
+  line-height: 44px;
+  letter-spacing: 2.2px;
+  text-transform: lowercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #e51937;
+  margin-top: 12px;
+}
+
+.properties-single-slideshow-info-price.dual {
+  display: block;
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 44px;
+  letter-spacing: -0.8px;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #e51937;
+  margin-top: 12px;
+}
+
+.properties-single-slideshow-info-extras {
+  display: block;
+  margin: 24px 0 40px !important;
+}
+
+.properties-single-slideshow-info-extras li {
+  display: block;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 18px;
+  color: #292929;
+  margin-bottom: 11px;
+}
+
+.properties-single-slideshow-info-extras li:nth-last-child(1) {
+  margin-bottom: 0;
+}
+
+.properties-single-slideshow-info-extras li [class^="icon-"] {
+  display: inline-block;
+  vertical-align: baseline;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center center;
+  margin: 0 2px 0 4px;
+}
+
+.properties-single-slideshow-info-extras li .icon-beds {
+  width: 19px;
+  height: 13px;
+  background-image: url("images/properties-single-beds.png");
+}
+
+.properties-single-slideshow-info-extras li .icon-baths {
+  width: 16px;
+  height: 16px;
+  background-image: url("images/properties-single-baths.png");
+}
+
+.properties-single-slideshow-info-extras li .icon-sqft {
+  width: 15px;
+  height: 15px;
+  background-image: url("images/properties-single-sqft.png");
+}
+
+.properties-single-slideshow-info-extras li .icon-lots {
+  width: 16px;
+  height: 16px;
+  background-image: url("images/properties-single-lots.png");
+}
+
+.properties-single-slideshow-info-extras li .icon-mls {
+  width: 16px;
+  height: 16px;
+  background-image: url("images/properties-single-mls.png");
+}
+
+.properties-single-slideshow-info-extras li em {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: #666666;
+  line-height: 12px;
+}

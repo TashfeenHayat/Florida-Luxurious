@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, Flex, Col, Row, Button } from "antd";
+import { useNavigate } from "react-router-dom";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
 import Slider from "react-slick";
@@ -8,6 +9,7 @@ import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 
 const { Title, Text, Paragraph } = Typography;
 function FeatureListing() {
+  const navigate = useNavigate();
   const CustomPrevArrow = (props) => {
     const { className, style, onClick } = props;
     return (
@@ -93,7 +95,10 @@ function FeatureListing() {
       >
         <div className="meet-slider-width">
           <Slider {...settings}>
-            <div className="displayy-teamimg-center">
+            <div
+              className="displayy-teamimg-center"
+              onClick={() => navigate("/features")}
+            >
               <img src={Property} width="100%" className="img-op" />
               {/* <div className="p-absoulte right-0">
                 <div
@@ -146,7 +151,10 @@ function FeatureListing() {
                 </Flex>
               </div>
             </div>
-            <div className="displayy-teamimg-center">
+            <div
+              onClick={() => navigate("/features")}
+              className="displayy-teamimg-center"
+            >
               <img src={Property} width="100%" className="img-op" />
               {/* <div className="p-absoulte right-0">
                 <div
@@ -199,7 +207,10 @@ function FeatureListing() {
                 </Flex>
               </div>
             </div>
-            <div className="displayy-teamimg-center">
+            <div
+              onClick={() => navigate("/features")}
+              className="displayy-teamimg-center"
+            >
               <img src={Property} width="100%" className="img-op" />
               {/* <div className="p-absoulte right-0">
                 <div
@@ -252,7 +263,10 @@ function FeatureListing() {
                 </Flex>
               </div>
             </div>
-            <div className="displayy-teamimg-center">
+            <div
+              onClick={() => navigate("/features")}
+              className="displayy-teamimg-center"
+            >
               <img src={Property} width="100%" className="img-op" />
               {/* <div className="p-absoulte right-0">
                 <div

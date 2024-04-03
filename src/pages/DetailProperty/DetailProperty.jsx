@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, Row, Col, Card, Typography, Flex, Input, Checkbox } from "antd";
 import { Container } from "react-bootstrap";
 import FeatureImg from "../../assets/feature.png";
@@ -6,11 +6,62 @@ import Featurecol from "../../assets/feature1.png";
 import Demomap from "../../assets/demomap.png";
 import Flip from "../../components/Flip";
 import Button from "../../components/Buttons";
+import Team from "../../assets/team.png";
+
 const { Title, Paragraph, Text } = Typography;
 export default function DetailProperty() {
+  const [details, setDetails] = useState(false);
   return (
-    <div>
-      <Image preview={false} src={FeatureImg} width="100%" />
+    <>
+      <div style={{ position: "relative" }}>
+        <Image preview={false} src={FeatureImg} width="100%" />
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          }}
+        ></div>
+        <div
+          className="properties-single-slideshow-info"
+          style={{ right: details ? "0px" : "-345px" }}
+        >
+          <span
+            class="show-hide-btn show"
+            style={{ width: "327px", left: "-141px", color: "black" }}
+            onClick={() => setDetails(!details)}
+          >
+            {details ? "Hide Details" : "Details"}
+          </span>
+
+          <div class="properties-single-slideshow-info-address">
+            24844 Malibu Rd.
+            <span>Malibu, CA 90265</span>
+          </div>
+
+          <div class="properties-single-slideshow-info-price notranslate">
+            $53,000,000
+          </div>
+
+          <ul class="properties-single-slideshow-info-extras">
+            <li>
+              4 <span class="icon-beds"></span> <em>Beds</em>{" "}
+            </li>
+            <li>
+              5 <span class="icon-baths"></span> <em>Baths</em>{" "}
+            </li>
+            <li>
+              4,021 <span class="icon-sqft"></span> <em>SQ. FT.</em>
+            </li>{" "}
+            <li>
+              5,674 <span class="icon-lots"></span> <em>Lot Size</em>
+            </li>
+          </ul>
+        </div>
+      </div>
       <Container>
         <Row>
           <Col lg={12} xs={24} sm={24} className="p-5">
@@ -237,11 +288,38 @@ export default function DetailProperty() {
       <div style={{ backgroundColor: "#000" }}>
         <Container>
           <Row>
-            <Col lg={18} className="p-5"></Col>
+            <Col lg={18} className="p-5">
+              <Flex gap={30}>
+                <Image src={Team} preview={false} />
+                <div>
+                  <Title
+                    level={2}
+                    className="text-white"
+                    style={{ textDecoration: "underline" }}
+                  >
+                    Contact
+                  </Title>
+                  <Text className="text-white">Greg Jaxtheimer</Text>
+                  <Text className="text-white">954-349-6300</Text>
+                  <Text className="text-white">Greg@floridaluxurious.com</Text>
+                </div>
+              </Flex>
+            </Col>
             <Col lg={6}>
-              <div className="pt-5">
-                <Image src={Demomap} preview={false} width="100%" />
-              </div>
+              <Flex
+                vertical
+                justify={"center"}
+                align="center"
+                style={{ height: "100%" }}
+                gap={10}
+              >
+                <Button classNam="button-secondary-line-left" width="300px">
+                  Sold Properties{" "}
+                </Button>
+                <Button classNam="button-secondary-line-left" width="300px">
+                  View my listing{" "}
+                </Button>
+              </Flex>
             </Col>
           </Row>
         </Container>
@@ -292,6 +370,6 @@ export default function DetailProperty() {
           </Flex>
         </div>
       </div>
-    </div>
+    </>
   );
 }
