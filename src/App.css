@@ -58,6 +58,13 @@ body:focus-visible {
 .f-bold {
   font-weight: bold;
 }
+
+.f-100 {
+  font-weight: 100 !important;
+}
+.f-200 {
+  font-weight: 200 !important;
+}
 .mt-150 {
   margin-top: 150px;
 }
@@ -897,10 +904,9 @@ body:focus-visible {
 .properties-single-slideshow-info {
   position: absolute;
   z-index: 4;
-  bottom: 144px;
-  right: -100%;
-  background: #fff;
-  width: 390px;
+  top: 30%;
+  background: black;
+  max-width: 550px;
   padding: 0 15px 0 65px;
   overflow-y: hidden;
 }
@@ -925,6 +931,7 @@ body:focus-visible {
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
   border-bottom: 1px solid rgba(27, 27, 27, 1);
+  background-color: white;
 }
 .show:hover {
   color: white !important;
@@ -937,13 +944,12 @@ body:focus-visible {
 }
 
 .properties-single-slideshow-info-address {
-  font-family: "Barlow Semi Condensed", sans-serif;
   font-size: 41px;
   font-weight: 600;
   line-height: 39px;
   letter-spacing: -1.025px;
   text-transform: uppercase;
-  color: #1b1b1b;
+  color: white;
   margin-top: 1px;
   margin-left: -1px;
 }

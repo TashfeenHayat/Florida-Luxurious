@@ -4,16 +4,21 @@ import { Container } from "react-bootstrap";
 import FeatureImg from "../../assets/feature.png";
 import Featurecol from "../../assets/feature1.png";
 import Demomap from "../../assets/demomap.png";
-import Flip from "../../components/Flip";
 import Button from "../../components/Buttons";
 import Team from "../../assets/team.png";
+import { IoBedOutline } from "react-icons/io5";
+import { FaWater } from "react-icons/fa6";
+import { LuBath, LuSofa } from "react-icons/lu";
+
+import { FaVectorSquare } from "react-icons/fa6";
+import { TbCarGarage } from "react-icons/tb";
 
 const { Title, Paragraph, Text } = Typography;
 export default function DetailProperty() {
   const [details, setDetails] = useState(false);
   return (
     <>
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative", overflowX: "hidden" }}>
         <Image preview={false} src={FeatureImg} width="100%" />
         <div
           style={{
@@ -28,41 +33,143 @@ export default function DetailProperty() {
         <div
           className="properties-single-slideshow-info"
           style={{
-            right: details ? "0px" : "-345px",
+            right: details ? "0px" : "-500px",
             transition: "right 0.3s ease",
           }}
         >
           <span
             class="show-hide-btn show"
-            style={{ width: "327px", left: "-141px", color: "black" }}
+            style={{ width: "100%", left: "-250px", color: "black" }}
             onClick={() => setDetails(!details)}
           >
             {details ? "Hide Details" : "Details"}
           </span>
 
-          <div class="properties-single-slideshow-info-address">
-            24844 Malibu Rd.
-            <span>Malibu, CA 90265</span>
-          </div>
-
-          <div class="properties-single-slideshow-info-price notranslate">
-            $53,000,000
-          </div>
-
-          <ul class="properties-single-slideshow-info-extras">
-            <li>
-              4 <span class="icon-beds"></span> <em>Beds</em>{" "}
-            </li>
-            <li>
-              5 <span class="icon-baths"></span> <em>Baths</em>{" "}
-            </li>
-            <li>
-              4,021 <span class="icon-sqft"></span> <em>SQ. FT.</em>
-            </li>{" "}
-            <li>
-              5,674 <span class="icon-lots"></span> <em>Lot Size</em>
-            </li>
-          </ul>
+          <Flex className="pt-5" vertical>
+            <Text
+              className="f-20 f-100"
+              style={{ lineHeight: "14px", color: "#D4CFC9" }}
+            >
+              MLS® #: F10423862
+            </Text>
+            <Title className="text-upper" style={{ color: "white" }} level={3}>
+              2549 Mercedes Drive
+            </Title>
+            <Paragraph
+              className="text-upper f-20 f-100"
+              style={{ lineHeight: "10px", color: "#D4CFC9" }}
+            >
+              Fort Lauderdale, FL, 33316
+            </Paragraph>
+            <Title
+              className="text-upper"
+              style={{ color: "white", marginTop: ".2em" }}
+              level={2}
+            >
+              $35,000,000
+            </Title>
+          </Flex>
+          <Row gutter={[8, 16]}>
+            <Col lg={8}>
+              <Flex justify={"flex-start"} align={"center"} gap={5}>
+                <Flex>
+                  <div
+                    className="circle-bg-white"
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      marginBottom: "0px",
+                    }}
+                  >
+                    <IoBedOutline size={15} />
+                  </div>
+                </Flex>
+                <Text className="text-white f-16 f-100">7 Bedrooms</Text>
+              </Flex>
+            </Col>
+            <Col lg={8}>
+              <Flex justify={"flex-start"} align={"center"} gap={5}>
+                <div
+                  className="circle-bg-white"
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    marginBottom: "0px",
+                  }}
+                >
+                  <FaWater size={15} />
+                </div>
+                <Text className="text-white f-16 f-100">100± Waterfront</Text>
+              </Flex>
+            </Col>
+            <Col lg={8}>
+              <Flex justify={"flex-start"} align={"center"} gap={5}>
+                <div
+                  className="circle-bg-white"
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    marginBottom: "0px",
+                  }}
+                >
+                  <LuBath size={15} />
+                </div>
+                <Text className="text-white f-16">7.1 Baths</Text>
+              </Flex>
+            </Col>
+            <Col lg={8}>
+              <Flex justify={"flex-start"} align={"center"} gap={5}>
+                <Flex>
+                  <div
+                    className="circle-bg-white"
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      marginBottom: "0px",
+                    }}
+                  >
+                    <FaVectorSquare size={15} />
+                  </div>
+                </Flex>
+                <Text className="text-white f-16 f-100">13,000 ± SF Lot</Text>
+              </Flex>
+            </Col>
+            <Col lg={8}>
+              <Flex justify={"flex-start"} align={"center"} gap={5}>
+                <div
+                  className="circle-bg-white"
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    marginBottom: "0px",
+                  }}
+                >
+                  <TbCarGarage size={15} />
+                </div>
+                <Text className="text-white f-16 f-100">Car garage</Text>
+              </Flex>
+            </Col>
+            <Col lg={8}>
+              <Flex justify={"flex-start"} align={"center"} gap={5}>
+                <div
+                  className="circle-bg-white"
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    marginBottom: "0px",
+                  }}
+                >
+                  <LuSofa size={15} />
+                </div>
+                <Text className="text-white f-16">SF Living</Text>
+              </Flex>
+            </Col>
+          </Row>
+          <Flex justify={"center"} align="center">
+            <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
+              New construction- single family residence
+            </Text>
+          </Flex>
         </div>
       </div>
       <Container>
@@ -75,10 +182,7 @@ export default function DetailProperty() {
               >
                 2549 Mercedes Drive
               </Title>
-              <Paragraph
-                className="f-16"
-                style={{ fontWeight: 200, lineHeight: 2.8 }}
-              >
+              <Paragraph className="f-16 f-200" style={{ lineHeight: 2.8 }}>
                 Construction has started! New Coastal Modern Harbor Beach
                 Deepwater Estate sited on 100 ft of premier waterfrontage.
                 Dramatic open and free flowing interiors capture waterway views
@@ -225,7 +329,7 @@ export default function DetailProperty() {
                   <Title className="" level={2}>
                     Interior Features
                   </Title>
-                  <Paragraph className="f-24" style={{ fontWeight: 100 }}>
+                  <Paragraph className="f-24 f-100">
                     First floor entry, kitchen island, elevator, pantry, volume
                     cellings, walk-in closets, wet bar
                   </Paragraph>
@@ -234,7 +338,7 @@ export default function DetailProperty() {
                   <Title className="" level={2}>
                     Exterior Features{" "}
                   </Title>
-                  <Paragraph className="f-24" style={{ fontWeight: 100 }}>
+                  <Paragraph className="f-24 f-100">
                     built-in grill, exterior lightening, open balcony, outdoor
                     shower, patio
                   </Paragraph>
@@ -243,7 +347,7 @@ export default function DetailProperty() {
                   <Title className="" level={2}>
                     Construction{" "}
                   </Title>
-                  <Paragraph className="f-24" style={{ fontWeight: 100 }}>
+                  <Paragraph className="f-24 f-100">
                     CBS Construction, High Impact Windows & Doors
                   </Paragraph>
                 </Col>
@@ -251,7 +355,7 @@ export default function DetailProperty() {
                   <Title className="" level={2}>
                     Appliances
                   </Title>
-                  <Paragraph className="f-24" style={{ fontWeight: 100 }}>
+                  <Paragraph className="f-24 f-100">
                     automatic garage door, dishwasher, disposal, dryer, gas
                     range, microwave, icemaker, microwave refrigerator, separate
                     freezer, washer, partial hme generator
@@ -261,7 +365,7 @@ export default function DetailProperty() {
                   <Title className="" level={2}>
                     Water Features
                   </Title>
-                  <Paragraph className="f-24" style={{ fontWeight: 100 }}>
+                  <Paragraph className="f-24 f-100">
                     123’ Waterfront, Private Dock, No Fixed Bridges, Ocean
                     Access
                   </Paragraph>
@@ -270,7 +374,7 @@ export default function DetailProperty() {
                   <Title className="" level={2}>
                     Heating & Cooling{" "}
                   </Title>
-                  <Paragraph className="f-24" style={{ fontWeight: 100 }}>
+                  <Paragraph className="f-24 f-100">
                     Ceiling Fans, Central Cooling
                   </Paragraph>
                 </Col>
@@ -278,7 +382,7 @@ export default function DetailProperty() {
                   <Title className="" level={2}>
                     Amenities{" "}
                   </Title>
-                  <Paragraph className="f-24" style={{ fontWeight: 100 }}>
+                  <Paragraph className="f-24 f-100">
                     private surf club & marina
                   </Paragraph>
                 </Col>
