@@ -247,7 +247,7 @@ export default function DetailProperty() {
       <div style={{ backgroundColor: "#000" }}>
         <Container>
           <Row>
-            <Col lg={14} className="p-5">
+            <Col lg={14} sm={24} md={24} className="p-5">
               <Title
                 level={2}
                 style={{
@@ -262,23 +262,23 @@ export default function DetailProperty() {
               <form>
                 {" "}
                 <Row gutter={[8, 40]} className="detail-property">
-                  <Col lg={12}>
+                  <Col lg={12} md={12} sm={24}>
                     <Input
                       placeholder="First Name"
                       type="text"
                       className="child1"
                     />
                   </Col>
-                  <Col lg={12}>
+                  <Col lg={12} md={12} sm={24}>
                     <Input placeholder="Last Name" type="text" />
                   </Col>
-                  <Col lg={12}>
+                  <Col lg={12} md={12} sm={24}>
                     <Input placeholder="Email" type="email" />
                   </Col>
-                  <Col lg={12}>
+                  <Col lg={12} md={12} sm={24}>
                     <Input placeholder="Phone" type="text" />
                   </Col>
-                  <Col lg={24}>
+                  <Col lg={24} md={24}>
                     <Flex gap={10}>
                       <Checkbox />
                       <Text style={{ lineHeight: 2, color: "white" }}>
@@ -286,10 +286,10 @@ export default function DetailProperty() {
                       </Text>
                     </Flex>
                   </Col>
-                  <Col lg={24}>
+                  <Col lg={24} md={24}>
                     <Input placeholder="Message" type="text" />
                   </Col>
-                  <Col lg={24} align="middle">
+                  <Col lg={24} md={24} align="middle">
                     <Button classNam="button-secondary-line-left">
                       Submit info
                     </Button>
@@ -297,7 +297,7 @@ export default function DetailProperty() {
                 </Row>
               </form>
             </Col>
-            <Col lg={10}>
+            <Col lg={10} md={24} sm={24}>
               <div className="pt-5">
                 <Image src={Demomap} preview={false} width="100%" />
               </div>
@@ -325,9 +325,9 @@ export default function DetailProperty() {
             Features
           </Title>
           <Row gutter={[8, 40]}>
-            <Col lg={24}>
+            <Col lg={24} md={24} sm={24}>
               <Row gutter={[40, 24]}>
-                <Col lg={8}>
+                <Col lg={8} md={12} sm={24}>
                   <Title className="" level={2}>
                     Interior Features
                   </Title>
@@ -336,7 +336,7 @@ export default function DetailProperty() {
                     cellings, walk-in closets, wet bar
                   </Paragraph>
                 </Col>
-                <Col lg={8}>
+                <Col lg={8} md={12} sm={24}>
                   <Title className="" level={2}>
                     Exterior Features{" "}
                   </Title>
@@ -345,7 +345,7 @@ export default function DetailProperty() {
                     Shower, Patio
                   </Paragraph>
                 </Col>
-                <Col lg={8}>
+                <Col lg={8} md={12} sm={24}>
                   <Title className="" level={2}>
                     Construction{" "}
                   </Title>
@@ -353,7 +353,7 @@ export default function DetailProperty() {
                     CBS Construction, High Impact Windows & Doors
                   </Paragraph>
                 </Col>
-                <Col lg={8}>
+                <Col lg={8} md={12} sm={24}>
                   <Title className="" level={2}>
                     Appliances
                   </Title>
@@ -366,7 +366,7 @@ export default function DetailProperty() {
                     freezer, washer, partial hme generator
                   </Paragraph>
                 </Col>
-                <Col lg={8}>
+                <Col lg={8} md={12} sm={24}>
                   <Title className="" level={2}>
                     Water Features
                   </Title>
@@ -375,7 +375,7 @@ export default function DetailProperty() {
                     Access
                   </Paragraph>
                 </Col>
-                <Col lg={8}>
+                <Col lg={8} md={12} sm={24}>
                   <Title className="" level={2}>
                     Heating & Cooling{" "}
                   </Title>
@@ -383,7 +383,7 @@ export default function DetailProperty() {
                     Ceiling Fans, Central Cooling
                   </Paragraph>
                 </Col>
-                <Col lg={8}>
+                <Col lg={8} md={12} sm={24}>
                   <Title className="" level={2}>
                     Amenities{" "}
                   </Title>
@@ -394,7 +394,7 @@ export default function DetailProperty() {
                     private surf club & marina
                   </Paragraph>
                 </Col>
-                <Col lg={8} className="bg-gif-block"></Col>
+                <Col lg={8} md={0} sm={0} className="bg-gif-block"></Col>
               </Row>
             </Col>
           </Row>
@@ -403,12 +403,12 @@ export default function DetailProperty() {
       <div style={{ backgroundColor: "#000" }}>
         <Container>
           <Row>
-            <Col lg={18} className="p-5">
+            <Col lg={18} md={24} sm={24} className="p-5">
               <Row align={"middle"}>
-                <Col lg={10}>
+                <Col lg={10} md={6} sm={24}>
                   <Image src={Team} preview={false} />
                 </Col>
-                <Col lg={14}>
+                <Col lg={14} md={18} sm={24}>
                   <Flex vertical justify={"flex-start"} align={""}>
                     <Title className="text-white">Contact</Title>
                     <Flex justify={"flex-start"} align="center" gap={10}>
@@ -432,7 +432,7 @@ export default function DetailProperty() {
                 </Col>
               </Row>
             </Col>
-            <Col lg={6}>
+            <Col lg={6} md={24} sm={24}>
               <Flex
                 vertical
                 justify={"center"}
