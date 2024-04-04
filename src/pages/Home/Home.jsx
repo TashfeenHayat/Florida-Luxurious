@@ -23,40 +23,28 @@ function Home() {
       <div className="content-hero w-100">
         <div className="hero-bg-img-shadow ">
           <Flex
-            align={"center"}
             justify={"center"}
-            hidden
-            style={{ height: "inherit" }}
-            wrap={"wrap"}
+            align={"center"}
             vertical
+            style={{ height: "100%" }}
           >
-            <Flex style={{ width: "98%" }} justify={"space-between"}>
-              <Flex
-                vertical
-                justify={"center"}
-                align={"center"}
-                style={{ width: "100%" }}
-              >
-                <Text style={{ color: "#D4CFC9" }} className="text-paragraph">
-                  Luxury. Innovation. Excellence.
-                </Text>
-                <Title className="title-home-page">
-                  unlock exclusive living <br />
-                  explore florida’s finest properties
-                </Title>
-                <Text
-                  style={{ color: "#D4CFC9" }}
-                  className="text-paragraph text-center"
-                >
-                  Discover Your Dream Home in the Heart of Florida with Florida
-                  Luxurious Properties
-                </Text>
-              </Flex>
-            </Flex>
+            <Text style={{ color: "#D4CFC9" }} className="text-paragraph">
+              Luxury. Innovation. Excellence.
+            </Text>
+            <Title className="title-home-page">
+              unlock exclusive living <br />
+              explore florida’s finest properties
+            </Title>
+            <Text
+              style={{ color: "#D4CFC9" }}
+              className="text-paragraph text-center"
+            >
+              Discover Your Dream Home in the Heart of Florida with Florida
+              Luxurious Properties
+            </Text>
           </Flex>
         </div>
       </div>
-      <SocialIcon />
 
       <FloridaProperties />
       <RecognitionSlide />
