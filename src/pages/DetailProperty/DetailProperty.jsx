@@ -9,6 +9,8 @@ import Team from "../../assets/team.png";
 import { IoBedOutline } from "react-icons/io5";
 import { FaWater } from "react-icons/fa6";
 import { LuBath, LuSofa } from "react-icons/lu";
+import { FaRegUser } from "react-icons/fa";
+import { CiPhone, CiMail } from "react-icons/ci";
 
 import { FaVectorSquare } from "react-icons/fa6";
 import { TbCarGarage } from "react-icons/tb";
@@ -339,8 +341,8 @@ export default function DetailProperty() {
                     Exterior Features{" "}
                   </Title>
                   <Paragraph className="f-24 f-100">
-                    built-in grill, exterior lightening, open balcony, outdoor
-                    shower, patio
+                    Built-in grill, Exterior Lightening, Open Balcony, Outdoor
+                    Shower, Patio
                   </Paragraph>
                 </Col>
                 <Col lg={8}>
@@ -355,7 +357,10 @@ export default function DetailProperty() {
                   <Title className="" level={2}>
                     Appliances
                   </Title>
-                  <Paragraph className="f-24 f-100">
+                  <Paragraph
+                    className="f-24 f-100"
+                    style={{ textTransform: "capitalize" }}
+                  >
                     automatic garage door, dishwasher, disposal, dryer, gas
                     range, microwave, icemaker, microwave refrigerator, separate
                     freezer, washer, partial hme generator
@@ -382,7 +387,10 @@ export default function DetailProperty() {
                   <Title className="" level={2}>
                     Amenities{" "}
                   </Title>
-                  <Paragraph className="f-24 f-100">
+                  <Paragraph
+                    className="f-24 f-100"
+                    style={{ textTransform: "capitalize" }}
+                  >
                     private surf club & marina
                   </Paragraph>
                 </Col>
@@ -396,21 +404,33 @@ export default function DetailProperty() {
         <Container>
           <Row>
             <Col lg={18} className="p-5">
-              <Flex gap={30}>
-                <Image src={Team} preview={false} />
-                <div>
-                  <Title
-                    level={2}
-                    className="text-white"
-                    style={{ textDecoration: "underline" }}
-                  >
-                    Contact
-                  </Title>
-                  <Text className="text-white">Greg Jaxtheimer</Text>
-                  <Text className="text-white">954-349-6300</Text>
-                  <Text className="text-white">Greg@floridaluxurious.com</Text>
-                </div>
-              </Flex>
+              <Row align={"middle"}>
+                <Col lg={10}>
+                  <Image src={Team} preview={false} />
+                </Col>
+                <Col lg={14}>
+                  <Flex vertical justify={"flex-start"} align={""}>
+                    <Title className="text-white">Contact</Title>
+                    <Flex justify={"flex-start"} align="center" gap={10}>
+                      <FaRegUser size={20} color="white" />
+                      <Text className="text-white f-24 f-100">Rida Asif</Text>
+                    </Flex>
+                    <Flex justify={"flex-start"} align="center" gap={10}>
+                      <CiPhone size={20} color="white" />
+                      <Text className="text-white f-24 f-100">
+                        954-349-6300
+                      </Text>
+                    </Flex>
+                    <Flex justify={"flex-start"} align="center" gap={10}>
+                      <CiMail size={20} color="white" />
+
+                      <Text className="text-white f-24 f-100">
+                        rida.asif@floridaluxurious.com
+                      </Text>
+                    </Flex>
+                  </Flex>
+                </Col>
+              </Row>
             </Col>
             <Col lg={6}>
               <Flex
