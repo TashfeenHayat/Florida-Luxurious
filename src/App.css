@@ -55,7 +55,9 @@ body:focus-visible {
 .f-14 {
   font-size: 14px !important;
 }
-
+.f-40 {
+  font-size: 40px !important;
+}
 .f-bold {
   font-weight: bold;
 }
@@ -1125,6 +1127,5 @@ body:focus-visible {
 .flip-card .flip-card-inner .flip-card-back {
   color: white;
   transform: rotateY(180deg);
-  
 }
 /* END */
