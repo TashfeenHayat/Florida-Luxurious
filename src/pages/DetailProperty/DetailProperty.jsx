@@ -22,7 +22,7 @@ import { LuBath, LuSofa } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
 import { CiPhone, CiMail } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
-
+import LetTalk from "../../components/LetTalk";
 import { FaVectorSquare, FaPlus } from "react-icons/fa6";
 import { TbCarGarage } from "react-icons/tb";
 
@@ -586,52 +586,7 @@ export default function DetailProperty() {
           </Row>
         </Container>
       </div>
-      <div className="let-talk">
-        <div className="hero-bg-img-shadow-talk">
-          <Flex
-            justify={"center"}
-            align={"center"}
-            style={{ height: "inherit" }}
-            vertical
-          >
-            <Title level={3} className="meet-team-heading">
-              LET’S TALK
-            </Title>
-            <div
-              style={{
-                marginBottom: "10px",
-                marginTop: "20px",
-                width: "6%",
-                borderBottom: "1px solid white",
-              }}
-            ></div>
-            <Text
-              style={{
-                color: "white",
-                lineHeight: "25.6px",
-                letterSpacing: "1px",
-                fontSize: "20px",
-                textAlign: "center",
-                width: "45%",
-              }}
-            >
-              Reach out to us today and let's start turning your real estate
-              dreams into reality
-            </Text>
-            <div>
-              <button
-                style={{
-                  marginTop: "24px",
-                  height: "40px",
-                }}
-                className="let-talk-btn"
-              >
-                Contact Us
-              </button>
-            </div>
-          </Flex>
-        </div>
-      </div>
+      <LetTalk />
     </>
   );
 }

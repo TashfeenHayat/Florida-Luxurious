@@ -5,6 +5,8 @@ import Team from "../../assets/team.png";
 import Filp from "../../components/Flip";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
+import LetTalk from "../../components/LetTalk";
+
 const { Title, Text } = Typography;
 function MeetTeam() {
   const CustomPrevArrow = (props) => {
@@ -96,52 +98,7 @@ function MeetTeam() {
           </Flex>
         </div>
       </div>
-      <div className="let-talk">
-        <div className="hero-bg-img-shadow-talk">
-          <Flex
-            justify={"center"}
-            align={"center"}
-            style={{ height: "inherit" }}
-            vertical
-          >
-            <Title level={3} className="meet-team-heading">
-              LET’S TALK
-            </Title>
-            <div
-              style={{
-                marginBottom: "10px",
-                marginTop: "20px",
-                width: "6%",
-                borderBottom: "1px solid white",
-              }}
-            ></div>
-            <Text
-              style={{
-                color: "white",
-                lineHeight: "25.6px",
-                letterSpacing: "1px",
-                fontSize: "20px",
-                textAlign: "center",
-                width: "45%",
-              }}
-            >
-              Reach out to us today and let's start turning your real estate
-              dreams into reality
-            </Text>
-            <div>
-              <button
-                style={{
-                  marginTop: "24px",
-                  height: "40px",
-                }}
-                className="let-talk-btn"
-              >
-                Contact Us
-              </button>
-            </div>
-          </Flex>
-        </div>
-      </div>
+      <LetTalk />
     </>
   );
 }
