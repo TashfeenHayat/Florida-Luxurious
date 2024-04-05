@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { Image, Row, Col, Card, Typography, Flex, Input, Checkbox } from "antd";
+import {
+  Image,
+  Row,
+  Col,
+  Card,
+  Typography,
+  Flex,
+  Input,
+  Checkbox,
+  Modal,
+} from "antd";
 import { Container } from "react-bootstrap";
 import FeatureImg from "../../assets/feature.png";
 import Featurecol from "../../assets/feature1.png";
@@ -11,13 +21,24 @@ import { FaWater } from "react-icons/fa6";
 import { LuBath, LuSofa } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
 import { CiPhone, CiMail } from "react-icons/ci";
+import { IoMdClose } from "react-icons/io";
 
-import { FaVectorSquare } from "react-icons/fa6";
+import { FaVectorSquare, FaPlus } from "react-icons/fa6";
 import { TbCarGarage } from "react-icons/tb";
 
 const { Title, Paragraph, Text } = Typography;
 export default function DetailProperty() {
   const [details, setDetails] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const showModal = () => {
+    setOpenModal(!openModal);
+  };
+  const hideModal = () => {
+    setOpenModal(!openModal);
+    console.log("wokring");
+  };
+
   return (
     <>
       <div style={{ position: "relative", overflowX: "hidden" }}>
@@ -176,7 +197,7 @@ export default function DetailProperty() {
       </div>
       <Container>
         <Row>
-          <Col lg={12} xs={24} sm={24} className="p-5">
+          <Col lg={12} xs={24} sm={24} className="p-3">
             <Card className="card-feature">
               <Title
                 style={{ textAlign: "center", lineHeight: 2 }}
@@ -210,7 +231,121 @@ export default function DetailProperty() {
                   <Image preview={false} src={Featurecol} width="100%" />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
-                  <Image preview={false} src={Featurecol} width="100%" />
+                  <div
+                    style={{ background: "#1C1C1C", height: "100%" }}
+                    onClick={showModal}
+                  >
+                    <Flex
+                      style={{ height: "100%", cursor: "pointer" }}
+                      justify="center"
+                      align="center"
+                    >
+                      <FaPlus size={60} color="#D4CFC9" />
+                    </Flex>
+
+                    <Modal
+                      open={openModal}
+                      footer={null}
+                      styles={{
+                        content: {
+                          backgroundColor: "black",
+                          borderRadius: "0px",
+                          height: "400px",
+                          overflowY: "auto",
+                          padding: "3rem",
+                        },
+                      }}
+                      width={"700px"}
+                      closeIcon={<IoMdClose size={20} color={"#FFFFFF"} />}
+                    >
+                      <Row gutter={[8, 16]}>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                      </Row>
+                    </Modal>
+                  </div>
                 </Col>
               </Row>
             </div>
@@ -331,7 +466,7 @@ export default function DetailProperty() {
                   <Title className="" level={2}>
                     Interior Features
                   </Title>
-                  <Paragraph className="f-24 f-100">
+                  <Paragraph className="f-16 f-100">
                     First floor entry, kitchen island, elevator, pantry, volume
                     cellings, walk-in closets, wet bar
                   </Paragraph>
@@ -340,7 +475,7 @@ export default function DetailProperty() {
                   <Title className="" level={2}>
                     Exterior Features{" "}
                   </Title>
-                  <Paragraph className="f-24 f-100">
+                  <Paragraph className="f-16 f-100">
                     Built-in grill, Exterior Lightening, Open Balcony, Outdoor
                     Shower, Patio
                   </Paragraph>
@@ -349,7 +484,7 @@ export default function DetailProperty() {
                   <Title className="" level={2}>
                     Construction{" "}
                   </Title>
-                  <Paragraph className="f-24 f-100">
+                  <Paragraph className="f-16 f-100">
                     CBS Construction, High Impact Windows & Doors
                   </Paragraph>
                 </Col>
@@ -358,7 +493,7 @@ export default function DetailProperty() {
                     Appliances
                   </Title>
                   <Paragraph
-                    className="f-24 f-100"
+                    className="f-16 f-100"
                     style={{ textTransform: "capitalize" }}
                   >
                     automatic garage door, dishwasher, disposal, dryer, gas
@@ -370,7 +505,7 @@ export default function DetailProperty() {
                   <Title className="" level={2}>
                     Water Features
                   </Title>
-                  <Paragraph className="f-24 f-100">
+                  <Paragraph className="f-16 f-100">
                     123’ Waterfront, Private Dock, No Fixed Bridges, Ocean
                     Access
                   </Paragraph>
@@ -379,7 +514,7 @@ export default function DetailProperty() {
                   <Title className="" level={2}>
                     Heating & Cooling{" "}
                   </Title>
-                  <Paragraph className="f-24 f-100">
+                  <Paragraph className="f-16 f-100">
                     Ceiling Fans, Central Cooling
                   </Paragraph>
                 </Col>
@@ -388,7 +523,7 @@ export default function DetailProperty() {
                     Amenities{" "}
                   </Title>
                   <Paragraph
-                    className="f-24 f-100"
+                    className="f-16 f-100"
                     style={{ textTransform: "capitalize" }}
                   >
                     private surf club & marina
