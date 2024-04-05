@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { Image, Row, Col, Card, Typography, Flex, Input, Checkbox } from "antd";
+import {
+  Image,
+  Row,
+  Col,
+  Card,
+  Typography,
+  Flex,
+  Input,
+  Checkbox,
+  Modal,
+} from "antd";
 import { Container } from "react-bootstrap";
 import FeatureImg from "../../assets/feature.png";
 import Featurecol from "../../assets/feature1.png";
@@ -11,13 +21,24 @@ import { FaWater } from "react-icons/fa6";
 import { LuBath, LuSofa } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
 import { CiPhone, CiMail } from "react-icons/ci";
-
-import { FaVectorSquare } from "react-icons/fa6";
+import { IoMdClose } from "react-icons/io";
+import LetTalk from "../../components/LetTalk";
+import { FaVectorSquare, FaPlus } from "react-icons/fa6";
 import { TbCarGarage } from "react-icons/tb";
 
 const { Title, Paragraph, Text } = Typography;
 export default function DetailProperty() {
   const [details, setDetails] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const showModal = () => {
+    setOpenModal(!openModal);
+  };
+  const hideModal = () => {
+    setOpenModal(!openModal);
+    console.log("wokring");
+  };
+
   return (
     <>
       <div style={{ position: "relative", overflowX: "hidden" }}>
@@ -176,7 +197,7 @@ export default function DetailProperty() {
       </div>
       <Container>
         <Row>
-          <Col lg={12} xs={24} sm={24} className="p-5">
+          <Col lg={12} xs={24} sm={24} className="p-3">
             <Card className="card-feature">
               <Title
                 style={{ textAlign: "center", lineHeight: 2 }}
@@ -210,7 +231,121 @@ export default function DetailProperty() {
                   <Image preview={false} src={Featurecol} width="100%" />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
-                  <Image preview={false} src={Featurecol} width="100%" />
+                  <div
+                    style={{ background: "#1C1C1C", height: "100%" }}
+                    onClick={showModal}
+                  >
+                    <Flex
+                      style={{ height: "100%", cursor: "pointer" }}
+                      justify="center"
+                      align="center"
+                    >
+                      <FaPlus size={60} color="#D4CFC9" />
+                    </Flex>
+
+                    <Modal
+                      open={openModal}
+                      footer={null}
+                      styles={{
+                        content: {
+                          backgroundColor: "black",
+                          borderRadius: "0px",
+                          height: "400px",
+                          overflowY: "auto",
+                          padding: "3rem",
+                        },
+                      }}
+                      width={"700px"}
+                      closeIcon={<IoMdClose size={20} color={"#FFFFFF"} />}
+                    >
+                      <Row gutter={[8, 16]}>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                        <Col lg={8} md={12} sm={24}>
+                          <Image
+                            preview={false}
+                            src={Featurecol}
+                            width="100%"
+                          />
+                        </Col>
+                      </Row>
+                    </Modal>
+                  </div>
                 </Col>
               </Row>
             </div>
@@ -247,7 +382,7 @@ export default function DetailProperty() {
       <div style={{ backgroundColor: "#000" }}>
         <Container>
           <Row>
-            <Col lg={14} className="p-5">
+            <Col lg={14} sm={24} md={24} className="p-5">
               <Title
                 level={2}
                 style={{
@@ -262,23 +397,23 @@ export default function DetailProperty() {
               <form>
                 {" "}
                 <Row gutter={[8, 40]} className="detail-property">
-                  <Col lg={12}>
+                  <Col lg={12} md={12} sm={24}>
                     <Input
                       placeholder="First Name"
                       type="text"
                       className="child1"
                     />
                   </Col>
-                  <Col lg={12}>
+                  <Col lg={12} md={12} sm={24}>
                     <Input placeholder="Last Name" type="text" />
                   </Col>
-                  <Col lg={12}>
+                  <Col lg={12} md={12} sm={24}>
                     <Input placeholder="Email" type="email" />
                   </Col>
-                  <Col lg={12}>
+                  <Col lg={12} md={12} sm={24}>
                     <Input placeholder="Phone" type="text" />
                   </Col>
-                  <Col lg={24}>
+                  <Col lg={24} md={24}>
                     <Flex gap={10}>
                       <Checkbox />
                       <Text style={{ lineHeight: 2, color: "white" }}>
@@ -286,10 +421,10 @@ export default function DetailProperty() {
                       </Text>
                     </Flex>
                   </Col>
-                  <Col lg={24}>
+                  <Col lg={24} md={24}>
                     <Input placeholder="Message" type="text" />
                   </Col>
-                  <Col lg={24} align="middle">
+                  <Col lg={24} md={24} align="middle">
                     <Button classNam="button-secondary-line-left">
                       Submit info
                     </Button>
@@ -297,7 +432,7 @@ export default function DetailProperty() {
                 </Row>
               </form>
             </Col>
-            <Col lg={10}>
+            <Col lg={10} md={24} sm={24}>
               <div className="pt-5">
                 <Image src={Demomap} preview={false} width="100%" />
               </div>
@@ -325,40 +460,40 @@ export default function DetailProperty() {
             Features
           </Title>
           <Row gutter={[8, 40]}>
-            <Col lg={24}>
+            <Col lg={24} md={24} sm={24}>
               <Row gutter={[40, 24]}>
-                <Col lg={8}>
+                <Col lg={8} md={12} sm={24}>
                   <Title className="" level={2}>
                     Interior Features
                   </Title>
-                  <Paragraph className="f-24 f-100">
+                  <Paragraph className="f-16 f-100">
                     First floor entry, kitchen island, elevator, pantry, volume
                     cellings, walk-in closets, wet bar
                   </Paragraph>
                 </Col>
-                <Col lg={8}>
+                <Col lg={8} md={12} sm={24}>
                   <Title className="" level={2}>
                     Exterior Features{" "}
                   </Title>
-                  <Paragraph className="f-24 f-100">
+                  <Paragraph className="f-16 f-100">
                     Built-in grill, Exterior Lightening, Open Balcony, Outdoor
                     Shower, Patio
                   </Paragraph>
                 </Col>
-                <Col lg={8}>
+                <Col lg={8} md={12} sm={24}>
                   <Title className="" level={2}>
                     Construction{" "}
                   </Title>
-                  <Paragraph className="f-24 f-100">
+                  <Paragraph className="f-16 f-100">
                     CBS Construction, High Impact Windows & Doors
                   </Paragraph>
                 </Col>
-                <Col lg={8}>
+                <Col lg={8} md={12} sm={24}>
                   <Title className="" level={2}>
                     Appliances
                   </Title>
                   <Paragraph
-                    className="f-24 f-100"
+                    className="f-16 f-100"
                     style={{ textTransform: "capitalize" }}
                   >
                     automatic garage door, dishwasher, disposal, dryer, gas
@@ -366,35 +501,35 @@ export default function DetailProperty() {
                     freezer, washer, partial hme generator
                   </Paragraph>
                 </Col>
-                <Col lg={8}>
+                <Col lg={8} md={12} sm={24}>
                   <Title className="" level={2}>
                     Water Features
                   </Title>
-                  <Paragraph className="f-24 f-100">
+                  <Paragraph className="f-16 f-100">
                     123’ Waterfront, Private Dock, No Fixed Bridges, Ocean
                     Access
                   </Paragraph>
                 </Col>
-                <Col lg={8}>
+                <Col lg={8} md={12} sm={24}>
                   <Title className="" level={2}>
                     Heating & Cooling{" "}
                   </Title>
-                  <Paragraph className="f-24 f-100">
+                  <Paragraph className="f-16 f-100">
                     Ceiling Fans, Central Cooling
                   </Paragraph>
                 </Col>
-                <Col lg={8}>
+                <Col lg={8} md={12} sm={24}>
                   <Title className="" level={2}>
                     Amenities{" "}
                   </Title>
                   <Paragraph
-                    className="f-24 f-100"
+                    className="f-16 f-100"
                     style={{ textTransform: "capitalize" }}
                   >
                     private surf club & marina
                   </Paragraph>
                 </Col>
-                <Col lg={8} className="bg-gif-block"></Col>
+                <Col lg={8} md={0} sm={0} className="bg-gif-block"></Col>
               </Row>
             </Col>
           </Row>
@@ -403,12 +538,12 @@ export default function DetailProperty() {
       <div style={{ backgroundColor: "#000" }}>
         <Container>
           <Row>
-            <Col lg={18} className="p-5">
+            <Col lg={18} md={24} sm={24} className="p-5">
               <Row align={"middle"}>
-                <Col lg={10}>
+                <Col lg={10} md={6} sm={24}>
                   <Image src={Team} preview={false} />
                 </Col>
-                <Col lg={14}>
+                <Col lg={14} md={18} sm={24}>
                   <Flex vertical justify={"flex-start"} align={""}>
                     <Title className="text-white">Contact</Title>
                     <Flex justify={"flex-start"} align="center" gap={10}>
@@ -432,7 +567,7 @@ export default function DetailProperty() {
                 </Col>
               </Row>
             </Col>
-            <Col lg={6}>
+            <Col lg={6} md={24} sm={24}>
               <Flex
                 vertical
                 justify={"center"}
@@ -451,52 +586,7 @@ export default function DetailProperty() {
           </Row>
         </Container>
       </div>
-      <div className="let-talk">
-        <div className="hero-bg-img-shadow-talk">
-          <Flex
-            justify={"center"}
-            align={"center"}
-            style={{ height: "inherit" }}
-            vertical
-          >
-            <Title level={3} className="meet-team-heading">
-              LET’S TALK
-            </Title>
-            <div
-              style={{
-                marginBottom: "10px",
-                marginTop: "20px",
-                width: "6%",
-                borderBottom: "1px solid white",
-              }}
-            ></div>
-            <Text
-              style={{
-                color: "white",
-                lineHeight: "25.6px",
-                letterSpacing: "1px",
-                fontSize: "20px",
-                textAlign: "center",
-                width: "45%",
-              }}
-            >
-              Reach out to us today and let's start turning your real estate
-              dreams into reality
-            </Text>
-            <div>
-              <button
-                style={{
-                  marginTop: "24px",
-                  height: "40px",
-                }}
-                className="let-talk-btn"
-              >
-                Contact Us
-              </button>
-            </div>
-          </Flex>
-        </div>
-      </div>
+      <LetTalk />
     </>
   );
 }
