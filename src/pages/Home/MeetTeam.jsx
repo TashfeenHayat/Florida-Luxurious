@@ -1,7 +1,6 @@
 import React from "react";
 import { Flex, Typography, Button } from "antd";
 import Slider from "react-slick";
-import Team from "../../assets/team.png";
 import Filp from "../../components/Flip";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
