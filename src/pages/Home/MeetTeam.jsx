@@ -1,14 +1,15 @@
 import React from "react";
 import { Flex, Typography, Button } from "antd";
 import Slider from "react-slick";
-import Team from "../../assets/team.png";
 import Filp from "../../components/Flip";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
 import LetTalk from "../../components/LetTalk";
-
+import { useNavigate } from "react-router-dom";
 const { Title, Text } = Typography;
 function MeetTeam() {
+  const navigate = useNavigate();
+
   const CustomPrevArrow = (props) => {
     const { className, style, onClick } = props;
     return (
@@ -83,10 +84,14 @@ function MeetTeam() {
             style={{
               marginTop: 60,
               marginBottom: 60,
+              cursor: "pointer",
             }}
             className="features_section_slider"
           >
-            <div className="meet-slider-width">
+            <div
+              className="meet-slider-width"
+              onClick={() => navigate("/teams")}
+            >
               <Slider {...settings}>
                 <Filp />
                 <Filp />
