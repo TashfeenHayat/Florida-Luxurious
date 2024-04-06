@@ -1188,3 +1188,7 @@ body:focus-visible {
   border-bottom: 1px solid #838383;
   border-radius: 0px;
 }
+
+.contact-us-card-margin {
+  margin-left: -50px;
+}
