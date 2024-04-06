@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, Flex, Col, Row, Button } from "antd";
+import { useNavigate } from "react-router-dom";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
 import Slider from "react-slick";
@@ -8,6 +9,7 @@ import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 
 const { Title, Text, Paragraph } = Typography;
 function FeatureListing() {
+  const navigate = useNavigate();
   const CustomPrevArrow = (props) => {
     const { className, style, onClick } = props;
     return (
@@ -57,6 +59,15 @@ function FeatureListing() {
           slidesToScroll: 1,
         },
       },
+      {
+        breakpoint: 425,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          prevArrow: false,
+          nextArrow: false,
+        },
+      },
       // Add more breakpoints as needed
     ],
   };
@@ -84,9 +95,12 @@ function FeatureListing() {
       >
         <div className="meet-slider-width">
           <Slider {...settings}>
-            <div className="displayy-teamimg-center">
+            <div
+              className="displayy-teamimg-center"
+              onClick={() => navigate("/features")}
+            >
               <img src={Property} width="100%" className="img-op" />
-              <div className="p-absoulte right-0">
+              {/* <div className="p-absoulte right-0">
                 <div
                   style={{
                     height: "45px",
@@ -113,7 +127,7 @@ function FeatureListing() {
                     </Text>
                   </Flex>
                 </div>
-              </div>
+              </div> */}
               <div className="p-absoulte w-100 bottom-20 left-20">
                 <Flex
                   justify={"space-between"}
@@ -137,9 +151,12 @@ function FeatureListing() {
                 </Flex>
               </div>
             </div>
-            <div className="displayy-teamimg-center">
+            <div
+              onClick={() => navigate("/features")}
+              className="displayy-teamimg-center"
+            >
               <img src={Property} width="100%" className="img-op" />
-              <div className="p-absoulte right-0">
+              {/* <div className="p-absoulte right-0">
                 <div
                   style={{
                     height: "45px",
@@ -166,7 +183,7 @@ function FeatureListing() {
                     </Text>
                   </Flex>
                 </div>
-              </div>
+              </div> */}
               <div className="p-absoulte w-100 bottom-20 left-20">
                 <Flex
                   justify={"space-between"}
@@ -190,9 +207,12 @@ function FeatureListing() {
                 </Flex>
               </div>
             </div>
-            <div className="displayy-teamimg-center">
+            <div
+              onClick={() => navigate("/features")}
+              className="displayy-teamimg-center"
+            >
               <img src={Property} width="100%" className="img-op" />
-              <div className="p-absoulte right-0">
+              {/* <div className="p-absoulte right-0">
                 <div
                   style={{
                     height: "45px",
@@ -219,7 +239,7 @@ function FeatureListing() {
                     </Text>
                   </Flex>
                 </div>
-              </div>
+              </div> */}
               <div className="p-absoulte w-100 bottom-20 left-20">
                 <Flex
                   justify={"space-between"}
@@ -243,9 +263,12 @@ function FeatureListing() {
                 </Flex>
               </div>
             </div>
-            <div className="displayy-teamimg-center">
+            <div
+              onClick={() => navigate("/features")}
+              className="displayy-teamimg-center"
+            >
               <img src={Property} width="100%" className="img-op" />
-              <div className="p-absoulte right-0">
+              {/* <div className="p-absoulte right-0">
                 <div
                   style={{
                     height: "45px",
@@ -272,7 +295,7 @@ function FeatureListing() {
                     </Text>
                   </Flex>
                 </div>
-              </div>
+              </div> */}
               <div className="p-absoulte w-100 bottom-20 left-20">
                 <Flex
                   justify={"space-between"}

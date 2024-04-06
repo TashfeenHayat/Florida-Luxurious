@@ -1,12 +1,15 @@
 import React from "react";
 import { Flex, Typography, Button } from "antd";
 import Slider from "react-slick";
-import Team from "../../assets/team.png";
 import Filp from "../../components/Flip";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
+import LetTalk from "../../components/LetTalk";
+import { useNavigate } from "react-router-dom";
 const { Title, Text } = Typography;
 function MeetTeam() {
+  const navigate = useNavigate();
+
   const CustomPrevArrow = (props) => {
     const { className, style, onClick } = props;
     return (
@@ -40,6 +43,32 @@ function MeetTeam() {
     slidesToScroll: 4,
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 425,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          prevArrow: false,
+          nextArrow: false,
+        },
+      },
+      // Add more breakpoints as needed
+    ],
   };
 
   return (
@@ -55,10 +84,14 @@ function MeetTeam() {
             style={{
               marginTop: 60,
               marginBottom: 60,
+              cursor: "pointer",
             }}
             className="features_section_slider"
           >
-            <div className="meet-slider-width">
+            <div
+              className="meet-slider-width"
+              onClick={() => navigate("/teams")}
+            >
               <Slider {...settings}>
                 <Filp />
                 <Filp />
@@ -70,52 +103,7 @@ function MeetTeam() {
           </Flex>
         </div>
       </div>
-      <div className="let-talk">
-        <div className="hero-bg-img-shadow-talk">
-          <Flex
-            justify={"center"}
-            align={"center"}
-            style={{ height: "inherit" }}
-            vertical
-          >
-            <Title level={3} className="meet-team-heading">
-              LET’S TALK
-            </Title>
-            <div
-              style={{
-                marginBottom: "10px",
-                marginTop: "20px",
-                width: "6%",
-                borderBottom: "1px solid white",
-              }}
-            ></div>
-            <Text
-              style={{
-                color: "white",
-                lineHeight: "25.6px",
-                letterSpacing: "1px",
-                fontSize: "20px",
-                textAlign: "center",
-                width: "45%",
-              }}
-            >
-              Reach out to us today and let's start turning your real estate
-              dreams into reality
-            </Text>
-            <div>
-              <button
-                style={{
-                  marginTop: "24px",
-                  height: "40px",
-                }}
-                className="let-talk-btn"
-              >
-                Contact Us
-              </button>
-            </div>
-          </Flex>
-        </div>
-      </div>
+      <LetTalk />
     </>
   );
 }
