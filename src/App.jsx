@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import DetailProperty from "./pages/DetailProperty";
 import AllTeam from "./pages/AllTeam";
 import TopToScroll from "./ScrollToTop";
+import ContactUs from "./pages/ContactUs";
 function App() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
@@ -20,7 +21,7 @@ function App() {
       <TopToScroll>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/contactus" element={" "} />
+          <Route path="/contactus" element={<ContactUs />} />
           <Route path="/features" element={<DetailProperty />} />
           <Route path="/teams" element={<AllTeam />} />
           <Route path="/admin" element={<LoginAdmin />} />
