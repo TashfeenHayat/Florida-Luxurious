@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import { Layout, Menu, Button, theme, Avatar, Dropdown } from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
   PropertySafetyOutlined,
+  BarChartOutlined,
+  FunnelPlotOutlined,
+  UsergroupAddOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import Agents from "./Agents";
-import Property from "./Property";
 const { Header, Sider, Content } = Layout;
 
 function Dashboard({ children }) {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
-  const [page, setPage] = useState("");
   const items = [
     {
       key: "1",
@@ -37,8 +39,28 @@ function Dashboard({ children }) {
   };
 
   const handleSideMenu = ({ key }) => {
-    navigate(key)
+    navigate(key);
   };
+
+  useEffect(() => {
+    let accessToken = localStorage.token;
+    console.log(accessToken);
+    if (accessToken) {
+      axios.interceptors.request.use(
+        (config) => {
+          // Modify the request configuration or add headers
+          config.headers.Authorization = `Bearer ${accessToken}`;
+          return config;
+        },
+        (error) => {
+          // Handle request errors
+          return Promise.reject(error);
+        }
+      );
+    } else {
+      navigate("/admin/login");
+    }
+  }, []);
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -55,13 +77,18 @@ function Dashboard({ children }) {
           onClick={handleSideMenu}
           items={[
             {
+              key: "/admin/dashboard",
+              icon: <BarChartOutlined />,
+              label: "Dashboard",
+            },
+            {
               key: "/admin/filter",
-              icon: <UserOutlined />,
+              icon: <FunnelPlotOutlined />,
               label: "Filter",
             },
             {
               key: "/admin/agent",
-              icon: <UserOutlined />,
+              icon: <UsergroupAddOutlined />,
               label: "Agent",
             },
             {

@@ -47,7 +47,7 @@ function Agents() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button type="link" href={`/agent/edit/${record._id}`}>
+          <Button type="link" href={`/admin/agent/edit/${record._id}`}>
             Edit
           </Button>
           <Popconfirm
@@ -70,7 +70,6 @@ function Agents() {
     dispatch(getAgents());
     if (isError) {
       console.log(isError);
-      
     }
   }, []);
 

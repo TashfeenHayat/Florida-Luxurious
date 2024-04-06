@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
 import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup";
@@ -17,21 +16,9 @@ import TopToScroll from "./ScrollToTop";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
-  let accessToken = localStorage.token;
 
   useEffect(() => {
     isAdminRoute = location.pathname.startsWith("/admin");
-    axios.interceptors.request.use(
-      (config) => {
-        // Modify the request configuration or add headers
-        config.headers.Authorization = `Bearer ${accessToken}`;
-        return config;
-      },
-      (error) => {
-        // Handle request errors
-        return Promise.reject(error);
-      }
-    );
   }, []);
 
   return (
@@ -43,16 +30,17 @@ function App() {
           <Route path="/contactus" element={" "} />
           <Route path="/features" element={<DetailProperty />} />
           <Route path="/teams" element={<AllTeam />} />
-          <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/login" element={<LoginAdmin />} />
           <Route path="/admin/signup" element={<Signup />} />
         </Routes>
-        {isAdminRoute && accessToken && (
+        {isAdminRoute && (
           <Dashboard>
             <Routes>
+              <Route path="/admin/dashboard" element={<Dashboard />} />
               <Route path="/admin/filter" element={<Agent />} />
               <Route path="/admin/agent" element={<Agent />} />
               <Route path="/admin/agent/add" element={<AddAgent />} />
+              <Route path="/admin/agent/edit/:id" element={<AddAgent />} />
               <Route path="/admin/property" element={<Property />} />
             </Routes>
           </Dashboard>
