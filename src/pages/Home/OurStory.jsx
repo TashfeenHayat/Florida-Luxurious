@@ -2,8 +2,11 @@ import React from "react";
 import { Col, Row, Flex, Typography, Button, Image } from "antd";
 import Story from "../../assets/story.png";
 import Logoicon from "../../assets/logoicon.png";
+import { useNavigate } from "react-router-dom";
+
 const { Title, Text } = Typography;
 function OurStory() {
+  const navigate = useNavigate();
   return (
     <div className="boxshadow-section">
       <Row align="middle">
@@ -46,6 +49,7 @@ function OurStory() {
                   <button
                     className="button-secondary text-upper mt-16"
                     style={{ width: "40%" }}
+                    onClick={() => navigate("/contactus")}
                   >
                     Contact us
                   </button>
