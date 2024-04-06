@@ -1,12 +1,12 @@
 import { signInAdmin } from "../../api/Auth";
 import { createSlice } from "@reduxjs/toolkit";
-import { Navigate } from "react-router-dom";
 import { notification } from "antd";
 let initialState = {
   isLoading: false,
   success: false,
   isError: false,
 };
+
 
 const signInSlice = createSlice({
   name: "signInReducer",

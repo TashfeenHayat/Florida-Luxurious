@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
 import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Admin/Dashboard";
-import Agents from "./pages/Admin/Agents";
+import Agent from "./pages/Admin/Agents";
+import AddAgent from "./pages/Admin/AddAgent";
+import Property from "./pages/Admin/Property";
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
@@ -14,7 +17,24 @@ import TopToScroll from "./ScrollToTop";
 import ContactUs from "./pages/ContactUs";
 function App() {
   const location = useLocation();
-  const isAdminRoute = location.pathname.startsWith("/admin");
+  let isAdminRoute = location.pathname.startsWith("/admin");
+  let accessToken = localStorage.token;
+
+  useEffect(() => {
+    isAdminRoute = location.pathname.startsWith("/admin");
+    axios.interceptors.request.use(
+      (config) => {
+        // Modify the request configuration or add headers
+        config.headers.Authorization = `Bearer ${accessToken}`;
+        return config;
+      },
+      (error) => {
+        // Handle request errors
+        return Promise.reject(error);
+      }
+    );
+  }, []);
+
   return (
     <>
       {!isAdminRoute && <Header />}
@@ -24,11 +44,20 @@ function App() {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/features" element={<DetailProperty />} />
           <Route path="/teams" element={<AllTeam />} />
-          <Route path="/admin" element={<LoginAdmin />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/agent" element={<Agents />} />
-          <Route path="/sign-up" element={<Signup />} />
+          <Route path="/admin/login" element={<LoginAdmin />} />
+          <Route path="/admin/signup" element={<Signup />} />
         </Routes>
+        {isAdminRoute && accessToken && (
+          <Dashboard>
+            <Routes>
+              <Route path="/admin/filter" element={<Agent />} />
+              <Route path="/admin/agent" element={<Agent />} />
+              <Route path="/admin/agent/add" element={<AddAgent />} />
+              <Route path="/admin/property" element={<Property />} />
+            </Routes>
+          </Dashboard>
+        )}
       </TopToScroll>
       {!isAdminRoute && <Footer />}
     </>

@@ -751,6 +751,9 @@ body:focus-visible {
   transition: all 0.4s ease-in-out;
 }
 
+.gutter-row {
+  padding-right: 20px;
+}
 /* Cards style*/
 
 .card-feature {

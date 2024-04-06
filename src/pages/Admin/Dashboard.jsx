@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Layout, Menu, Button, theme, Avatar, Dropdown, Space } from "antd";
+import { Layout, Menu, Button, theme, Avatar, Dropdown } from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
   UserOutlined,
-  VideoCameraOutlined,
   PropertySafetyOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +11,7 @@ import Agents from "./Agents";
 import Property from "./Property";
 const { Header, Sider, Content } = Layout;
 
-function Dashboard() {
+function Dashboard({ children }) {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [page, setPage] = useState("");
@@ -30,21 +28,16 @@ function Dashboard() {
 
   const handleMenu = (e) => {
     switch (e.key) {
-      case e.key === "1":
+      case "1":
         return;
-      case e.key === "2":
-        localStorage.removeItem("s");
+      case "2":
+        localStorage.removeItem("token");
+        navigate("/admin/login");
     }
   };
 
   const handleSideMenu = ({ key }) => {
-    switch (key) {
-      case "/admin/agent":
-        setPage(<Agents />);
-        break;
-      case "/property":
-        setPage(<Property />);
-    }
+    navigate(key)
   };
 
   const {
@@ -62,12 +55,17 @@ function Dashboard() {
           onClick={handleSideMenu}
           items={[
             {
+              key: "/admin/filter",
+              icon: <UserOutlined />,
+              label: "Filter",
+            },
+            {
               key: "/admin/agent",
               icon: <UserOutlined />,
               label: "Agent",
             },
             {
-              key: "/property",
+              key: "/admin/property",
               icon: <PropertySafetyOutlined />,
               label: "Property",
             },
@@ -91,7 +89,7 @@ function Dashboard() {
             <Dropdown
               menu={{
                 items,
-                onClick: (e) => console.log(typeof e.key),
+                onClick: (e) => handleMenu(e),
               }}
               placement="bottomLeft"
             >
@@ -109,7 +107,7 @@ function Dashboard() {
             borderRadius: borderRadiusLG,
           }}
         >
-          {page}
+          {children}
         </Content>
       </Layout>
     </Layout>

@@ -13,20 +13,16 @@ const { Text, Title } = Typography;
 export default function Login() {
   const { token } = useToken();
   const screens = useBreakpoint();
-  const { isLoading, isError, success } = useSelector((s) => s.signInreducer);
+  const { isLoading } = useSelector((s) => s.signInreducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     console.log("Received values of form: ", values);
-    dispatch(signInAdmin(values));
-  };
-
-  useEffect(() => {
-    console.log(success);
-    if (success) {
+    const res = await dispatch(signInAdmin(values)).unwrap();
+    if (res.token) {
       navigate("/admin/dashboard");
     }
-  }, [success]);
+  }
 
   const styles = {
     container: {
