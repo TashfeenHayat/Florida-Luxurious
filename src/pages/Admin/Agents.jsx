@@ -68,6 +68,10 @@ function Agents() {
 
   useEffect(() => {
     dispatch(getAgents());
+    if (isError) {
+      console.log(isError);
+      
+    }
   }, []);
 
   const onSearch = (text) => {
