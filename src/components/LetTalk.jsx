@@ -1,9 +1,11 @@
 import React from "react";
 import { Flex, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const { Title, Text, Paragraph } = Typography;
 
 function LetTalk() {
+  const navigate = useNavigate();
   return (
     <div className="background-video-container" style={{ height: "70vh" }}>
       <video autoPlay muted loop className="background-video">
@@ -44,7 +46,7 @@ function LetTalk() {
               Reach out to us today and let's start turning your real estate
               dreams into reality
             </Text>
-            <div>
+            <div onClick={() => navigate("/contactus")}>
               <button
                 style={{
                   marginTop: "24px",

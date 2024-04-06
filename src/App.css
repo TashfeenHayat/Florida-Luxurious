@@ -42,7 +42,6 @@ body:focus-visible {
 .f-50 {
   font-size: 50px !important;
 }
-
 .f-24 {
   font-size: 24px !important;
 }
@@ -61,7 +60,6 @@ body:focus-visible {
 .f-bold {
   font-weight: bold;
 }
-
 .f-100 {
   font-weight: 100 !important;
 }
@@ -71,42 +69,31 @@ body:focus-visible {
 .mt-150 {
   margin-top: 150px;
 }
-
 .pb-10 {
   padding-bottom: 40px;
 }
-
 .mt-16 {
   margin-top: 16px;
 }
-
 .p-absoulte {
   position: absolute;
 }
-
 .right-0 {
   right: 0;
 }
-
 .w-100 {
   width: 100%;
-}
-.w-75 {
-  width: 75%;
 }
 .p-b-30-left-0 {
   bottom: 30px;
   left: 0;
 }
-
 .bottom-20 {
   bottom: 20px;
 }
-
 .left-20 {
   left: 20px;
 }
-
 .d-flex-story {
   display: flex;
   padding-left: 20px;
@@ -813,7 +800,9 @@ body:focus-visible {
     width: 100%;
     z-index: -1;
   }
-
+  .contact-us-card-margin {
+    margin-left: 0px !important;
+  }
   .d-flex-story {
     display: block;
     padding-left: 0px !important;
@@ -920,6 +909,8 @@ body:focus-visible {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+/* Property Deatil */
 
 .properties-single-slideshow-info {
   position: absolute;
@@ -1082,6 +1073,9 @@ body:focus-visible {
   color: #666666;
   line-height: 12px;
 }
+
+/*End*/
+
 /*Team Banner*/
 
 .team-banner {
@@ -1143,3 +1137,71 @@ body:focus-visible {
   transform: rotateY(180deg);
 }
 /* END */
+
+/* Contact us */
+
+.contact-us-banner {
+  background-image: url("./assets/lettalk.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 500px;
+  opacity: 0.8;
+}
+
+.contact-us-form-bg {
+  background-image: url("./assets/Backgrouncontact.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.contact-us-shadow-gray {
+  background-color: rgb(129, 135, 137, 0.6);
+}
+.contact-us-content {
+  background-color: #fff;
+  padding: 3rem 8rem;
+}
+
+.contact-us-title {
+  font-size: 90px !important;
+  line-height: 110px !important;
+  font-weight: 600 !important;
+  letter-spacing: -2.75px !important;
+  color: #1b1b1b !important;
+  margin: 0 !important;
+  text-align: right;
+}
+.contact-us-sub {
+  color: #838383;
+  font-size: 100px;
+  margin-top: -20px;
+}
+.site-section-title {
+  text-transform: uppercase;
+  display: block;
+}
+.site-section-title span {
+  position: relative;
+  display: inline-block;
+  text-align: right;
+}
+.title-line {
+  width: 195%;
+  left: -185% !important;
+  height: 4px;
+  bottom: auto;
+  top: 13%;
+  background: #b0b0b0 !important;
+  position: absolute;
+}
+.contact-us-form .ant-input-outlined {
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: 1px solid #838383;
+  border-radius: 0px;
+}
+
+.contact-us-card-margin {
+  margin-left: -50px;
+}
