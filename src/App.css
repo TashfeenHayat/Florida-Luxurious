@@ -343,6 +343,7 @@ body:focus-visible {
 .img-op:focus-visible {
   outline: none !important;
 }
+
 .displayy-teamimg-center:hover .img-op {
   filter: none;
   -webkit-filter: grayscale(0);
@@ -350,15 +351,60 @@ body:focus-visible {
   cursor: pointer;
 }
 
+.ant-card-head-title {
+  font-size: 22px;
+  letter-spacing: 1.25px;
+}
+
+.ant-input-outlined,
+.ant-select-selector .ant-select-outlined .ant-select-selection-search {
+  border-start-start-radius: 0px !important;
+  border-end-start-radius: 0px !important;
+  border-radius: 0px;
+  min-height: 42px;
+  border-color: #000;
+}
+
+.ant-select-selector {
+}
+
+.ant-menu-item {
+  background-color: transparent;
+  color: white !important;
+  height: 42px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
 .button-view,
-.ant-btn-primary {
+.ant-btn-primary,
+.ant-input-search-button,
+.ant-menu-item-selected,
+.ant-select-selector {
+  background-color: #000; /* Green */
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  height: 42px;
+  border-radius: 0px;
+  border-start-end-radius: 0px !important;
+  border-end-end-radius: 0px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px !important;
+}
+.button-view1 {
+  position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
   background-color: #000; /* Green */
   border: none;
   color: white;
   padding: 15px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  display: flex;
   font-size: 14px;
   text-transform: uppercase;
   font-weight: bold;
@@ -366,26 +412,11 @@ body:focus-visible {
   letter-spacing: 1.5px;
   cursor: pointer;
   height: 42px;
-  border-radius: 1px;
+  border-radius: 0px;
   display: flex;
   align-items: center;
   min-width: 92px;
-}
-.button-view1 {
-  position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
-  background-color: #000; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 52px;
-  text-align: center;
-  text-decoration: none;
-  display: flex;
-  font-size: 14px;
-  text-transform: uppercase;
-  font-weight: bold;
-  line-height: 14px;
-  letter-spacing: 1.5px;
-  cursor: pointer;
+  min-height: 42px;
 }
 
 .button-secondary {

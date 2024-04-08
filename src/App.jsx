@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import axios from "axios";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
 import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup";
@@ -19,6 +20,21 @@ function App() {
 
   useEffect(() => {
     isAdminRoute = location.pathname.startsWith("/admin");
+    let accessToken = localStorage.token;
+    if (accessToken) {
+      console.log(accessToken);
+      axios.interceptors.request.use(
+        (config) => {
+          // Modify the request configuration or add headers
+          config.headers.Authorization = `Bearer ${accessToken}`;
+          return config;
+        },
+        (error) => {
+          // Handle request errors
+          return Promise.reject(error);
+        }
+      );
+    }
   }, []);
 
   return (

@@ -83,7 +83,6 @@ export const getAgentSlice = createSlice({
       state.isLoading = false;
       state.isError = false;
       state.data = action.payload;
-      console.log(action.payload);
     });
 
     builder.addCase(getAgent.rejected, (state, action) => {

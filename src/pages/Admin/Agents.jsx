@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Space, Card, Button, Table, Input, Popconfirm } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,9 +48,7 @@ function Agents() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button type="link" href={`/admin/agent/edit/${record._id}`}>
-            Edit
-          </Button>
+          <Link to={`/admin/agent/edit/${record._id}`}>Edit</Link>
           <Popconfirm
             title="Delete this task"
             description="Are you sure to delete this agent ?"
@@ -78,7 +77,6 @@ function Agents() {
   };
 
   const onDelete = (id) => {
-    console.log(id);
     dispatch(deleteAgent(id));
   };
 
