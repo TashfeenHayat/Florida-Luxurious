@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   Row,
   Col,
@@ -7,8 +7,10 @@ import {
   Button,
   Input,
   Select,
+  Upload,
   notification,
 } from "antd";
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { useParams } from "react-router";
 import countryList from "react-select-country-list";
 import PhoneInput from "antd-phone-input";
@@ -21,6 +23,10 @@ const { TextArea } = Input;
 function AddAgent() {
   const addAgentReducer = useSelector((s) => s.addAgentReducer);
   const getAgentReducer = useSelector((s) => s.getAgentReducer);
+
+  const [imageUrl, setImageUrl] = useState();
+  const [loading, setLoading] = useState(false);
+
   const options = useMemo(() => countryList().getData(), []);
   const params = useParams();
   const { id } = params;
@@ -45,6 +51,7 @@ function AddAgent() {
         updateAgent({
           id,
           ...values,
+          photo: imageUrl,
           phoneNumber:
             values.phoneNumber.countryCode +
             values.phoneNumber.areaCode +
@@ -57,6 +64,7 @@ function AddAgent() {
       const res = await dispatch(
         addAgent({
           ...values,
+          photo: imageUrl,
           phoneNumber:
             values.phoneNumber.countryCode +
             values.phoneNumber.areaCode +
@@ -73,6 +81,24 @@ function AddAgent() {
     return Promise.reject("Invalid phone number");
   };
 
+  const beforeUpload = (e) => {
+    console.log(e);
+  }
+
+  const handleChange = (info) => {
+    if (info.file.status === 'done') {
+      console.log(info.file.response.url);
+      setImageUrl(info.file.response.url)
+    }
+  }
+
+   const uploadButton = (
+    <div>
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
   return (
     <Card title="Add Agent">
       {contextHolder}
@@ -81,6 +107,25 @@ function AddAgent() {
         name="add_agent"
         onFinish={onFinish}
       >
+          <Row justify="center">
+            <Col span={4} className="gutter-row">
+              <Upload
+                name="file"
+                listType="picture-card"
+                className="avatar-uploader"
+                showUploadList={false}
+                headers={{
+                  Authorization: `Bearer ${localStorage.token}`
+                }}
+                action="http://localhost:3100/v1/upload"
+                beforeUpload={beforeUpload}
+                onChange={handleChange}
+              >
+                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+
+              </Upload>
+            </Col>
+          </Row>
         <Row>
           <Col span={12} className="gutter-row">
             <Form.Item
