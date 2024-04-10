@@ -10,7 +10,8 @@ import {
   Upload,
   notification,
 } from "antd";
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { api_base_URL } from "../../const/Const";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { useParams } from "react-router";
 import countryList from "react-select-country-list";
 import PhoneInput from "antd-phone-input";
@@ -24,7 +25,8 @@ function AddAgent() {
   const addAgentReducer = useSelector((s) => s.addAgentReducer);
   const getAgentReducer = useSelector((s) => s.getAgentReducer);
 
-  const [imageUrl, setImageUrl] = useState();
+  const [initialVlues, setInitialValue] = useState({});
+  const [photo, setPhoto] = useState();
   const [loading, setLoading] = useState(false);
 
   const options = useMemo(() => countryList().getData(), []);
@@ -41,36 +43,41 @@ function AddAgent() {
 
   useEffect(() => {
     if (id) dispatch(getAgent(params.id));
+    if (id) {
+      setPhoto(getAgentReducer.data.photo);
+      setInitialValue(getAgentReducer.data);
+    }
   }, []);
 
   const onFinish = async (values) => {
     console.log("Received values of form: ", values);
     if (id) {
-      console.log(values);
       const res = await dispatch(
         updateAgent({
           id,
           ...values,
-          photo: imageUrl,
+          photo,
           phoneNumber:
             values.phoneNumber.countryCode +
             values.phoneNumber.areaCode +
             values.phoneNumber.phoneNumber,
         })
       ).unwrap();
+      setInitialValue({});
       openNotification("success", res);
       setTimeout(navigate("/admin/agent"), 1000);
     } else {
       const res = await dispatch(
         addAgent({
           ...values,
-          photo: imageUrl,
+          photo,
           phoneNumber:
             values.phoneNumber.countryCode +
             values.phoneNumber.areaCode +
             values.phoneNumber.phoneNumber,
         })
       ).unwrap();
+      setInitialValue({});
       openNotification("success", res);
       setTimeout(navigate("/admin/agent"), 1000);
     }
@@ -83,49 +90,55 @@ function AddAgent() {
 
   const beforeUpload = (e) => {
     console.log(e);
-  }
+    setLoading(true);
+  };
 
   const handleChange = (info) => {
-    if (info.file.status === 'done') {
+    if (info.file.status === "done") {
       console.log(info.file.response.url);
-      setImageUrl(info.file.response.url)
+      setLoading(false);
+      setPhoto(info.file.response.url);
     }
-  }
+  };
 
-   const uploadButton = (
+  const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
-
+  console.log(getAgentReducer);
   return (
-    <Card title="Add Agent">
+    <Card title="Add Agent" loading={getAgentReducer.isLoading}>
       {contextHolder}
-      <Form
-        initialValues={getAgentReducer.data}
-        name="add_agent"
-        onFinish={onFinish}
-      >
-          <Row justify="center">
-            <Col span={4} className="gutter-row">
+      <Form initialValues={initialVlues} name="add_agent" onFinish={onFinish}>
+        <Row justify="center">
+          <Col span={4} className="gutter-row">
+            <Form.Item name="photo">
               <Upload
                 name="file"
                 listType="picture-card"
                 className="avatar-uploader"
+                loading={loading}
                 showUploadList={false}
                 headers={{
-                  Authorization: `Bearer ${localStorage.token}`
+                  Authorization: `Bearer ${localStorage.token}`,
                 }}
-                action="http://localhost:3100/v1/upload"
+                action={`${api_base_URL}upload`}
                 beforeUpload={beforeUpload}
                 onChange={handleChange}
               >
-                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-
+                {photo ? (
+                  <img src={photo} alt="avatar" style={{ width: "100%" }} />
+                ) : loading ? (
+                  <LoadingOutlined />
+                ) : (
+                  uploadButton
+                )}
               </Upload>
-            </Col>
-          </Row>
+            </Form.Item>
+          </Col>
+        </Row>
         <Row>
           <Col span={12} className="gutter-row">
             <Form.Item
@@ -270,7 +283,11 @@ function AddAgent() {
               block="true"
               type="primary"
               htmlType="submit"
-              loading={addAgentReducer.isLoading || getAgentReducer.isLoading}
+              loading={
+                addAgentReducer.isLoading ||
+                getAgentReducer.isLoading ||
+                loading
+              }
             >
               Save
             </Button>

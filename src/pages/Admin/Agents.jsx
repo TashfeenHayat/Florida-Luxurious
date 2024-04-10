@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Space, Card, Button, Table, Input, Popconfirm } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { Avatar, Space, Card, Button, Table, Input, Popconfirm } from "antd";
+import { PlusOutlined, UserOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getAgents, deleteAgent } from "../../api/Agents";
 
@@ -13,7 +13,12 @@ function Agents() {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (_, { firstName, lastName }) => `${firstName} ${lastName}`,
+      render: (_, { firstName, lastName, photo }) => (
+        <Space>
+          <Avatar src={photo} size="small" icon={<UserOutlined />} />
+          {firstName} {lastName}
+        </Space>
+      ),
     },
     {
       title: "Email",
@@ -62,6 +67,12 @@ function Agents() {
       ),
     },
   ];
+  const [tableParams, setTableParams] = useState({
+    pagination: {
+      current: 1,
+      pageSize: 2,
+    },
+  });
   const { isLoading, isError, data } = useSelector((s) => s.getAgentsReducer);
   const dispatch = useDispatch();
 
@@ -80,6 +91,15 @@ function Agents() {
     dispatch(deleteAgent(id));
   };
 
+  const handleTableChange = (pagination) => {
+    setTableParams(pagination);
+
+    // `dataSource` is useless since `pageSize` changed
+    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
+      // setData([]);
+    }
+  };
+
   return (
     <Card
       title="Agents"
@@ -91,9 +111,11 @@ function Agents() {
             enterButton
             allowClear
           />
-          <Button type="primary" href="/admin/agent/add">
-            <PlusOutlined />
-            Add
+          <Button type="primary">
+            <Link to="/admin/agent/add">
+              <PlusOutlined />
+              Add
+            </Link>
           </Button>
         </Space>
       }
@@ -103,7 +125,9 @@ function Agents() {
         columns={columns}
         loading={isLoading}
         isError={isError}
-        dataSource={data}
+        pagination={tableParams}
+        dataSource={data.agents}
+        onChange={handleTableChange}
       />
     </Card>
   );

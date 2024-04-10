@@ -366,6 +366,7 @@ body:focus-visible {
 }
 
 .ant-select-selector {
+  border-radius: 0px !important;
 }
 
 .ant-menu-item {
@@ -1172,5 +1173,9 @@ body:focus-visible {
 .flip-card .flip-card-inner .flip-card-back {
   color: white;
   transform: rotateY(180deg);
+}
+
+.text-c {
+  text-align: center;
 }
 /* END */
