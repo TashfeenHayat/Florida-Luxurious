@@ -7,7 +7,6 @@ let initialState = {
   isError: false,
 };
 
-
 const signInSlice = createSlice({
   name: "signInReducer",
   initialState,

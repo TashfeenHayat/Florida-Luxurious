@@ -8,6 +8,7 @@ import FlipCard from "../../components/Flipcard";
 import Logo from "../../assets/logoicon.png";
 import { CiMap, CiPhone, CiMail } from "react-icons/ci";
 import Buttons from "../../components/Buttons";
+
 const { Title, Text, Paragraph } = Typography;
 function AllTeam() {
   return (
