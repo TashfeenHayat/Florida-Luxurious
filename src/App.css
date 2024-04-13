@@ -8,6 +8,7 @@ body:focus-visible {
 * {
   font-family: "News Gothic MT", "Arial Narrow", Arial, sans-serif;
   box-sizing: border-box;
+  letter-spacing: 0.25px !important;
 }
 
 .flex-between {
@@ -351,6 +352,10 @@ body:focus-visible {
   cursor: pointer;
 }
 
+.ant-layout-content {
+  padding: 0px !important;
+}
+
 .ant-card-head-title {
   font-size: 22px;
   letter-spacing: 1.25px;
@@ -360,13 +365,21 @@ body:focus-visible {
 .ant-select-selector .ant-select-outlined .ant-select-selection-search {
   border-start-start-radius: 0px !important;
   border-end-start-radius: 0px !important;
-  border-radius: 0px;
+  border-radius: 0px !important;
   min-height: 42px;
   border-color: #000;
 }
 
-.ant-select-selector {
+.ant-input-group-addon {
   border-radius: 0px !important;
+  border-color: #000 !important;
+}
+
+.ant-select-selector,
+.ant-menu-item {
+  border-radius: 0px !important;
+  border-color: #000 !important;
+  text-transform: capitalize !important;
 }
 
 .ant-menu-item {

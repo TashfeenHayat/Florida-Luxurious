@@ -74,3 +74,5 @@ export const deleteAgent = createAsyncThunk(
     }
   }
 );
+
+export const resetAgent = createAsyncThunk("resetAgentReducer", () => {});

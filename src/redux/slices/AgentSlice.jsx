@@ -9,7 +9,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { notification } from "antd";
 let initialState = {
   isLoading: false,
-  data: [],
+  data: null,
   isError: false,
 };
 
@@ -75,6 +75,7 @@ export const getAgentSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(getAgent.pending, (state, action) => {
+      state.data = {};
       state.isLoading = true;
       state.isError = false;
     });
@@ -86,6 +87,7 @@ export const getAgentSlice = createSlice({
     });
 
     builder.addCase(getAgent.rejected, (state, action) => {
+      state.data = {};
       state.isLoading = false;
       state.isError = true;
 
@@ -153,5 +155,16 @@ export const deleteAgentSlice = createSlice({
         duration: 2,
       });
     });
+  },
+}).reducer;
+
+export const resetAgentSlice = createSlice({
+  name: "resetAgentSlice",
+  initialState,
+  reducers: {
+    reset: () => {
+      console.log("here");
+      return initialState;
+    },
   },
 }).reducer;

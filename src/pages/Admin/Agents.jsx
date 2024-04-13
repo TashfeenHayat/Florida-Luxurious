@@ -126,7 +126,7 @@ function Agents() {
         loading={isLoading}
         isError={isError}
         pagination={tableParams}
-        dataSource={data.agents}
+        dataSource={data?.agents}
         onChange={handleTableChange}
       />
     </Card>

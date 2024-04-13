@@ -1,6 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import signInSlice from "./slices/signInSlice";
-import { getAgentsSlice, addAgentSlice, getAgentSlice, updateAgentSlice, deleteAgentSlice } from "./slices/AgentSlice";
+import {
+  getAgentsSlice,
+  addAgentSlice,
+  getAgentSlice,
+  updateAgentSlice,
+  deleteAgentSlice,
+  resetAgentSlice,
+} from "./slices/AgentSlice";
 export const store = configureStore({
   reducer: {
     signInreducer: signInSlice,
@@ -9,5 +16,6 @@ export const store = configureStore({
     getAgentReducer: getAgentSlice,
     updateAgentReducer: updateAgentSlice,
     deleteAgentReducer: deleteAgentSlice,
+    resetAgentReducer: resetAgentSlice
   },
 });

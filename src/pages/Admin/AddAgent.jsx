@@ -17,7 +17,7 @@ import countryList from "react-select-country-list";
 import PhoneInput from "antd-phone-input";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addAgent, getAgent, updateAgent } from "../../api/Agents";
+import { addAgent, getAgent, updateAgent, resetAgent } from "../../api/Agents";
 
 const { TextArea } = Input;
 
@@ -27,6 +27,7 @@ function AddAgent() {
 
   const [initialVlues, setInitialValue] = useState({});
   const [photo, setPhoto] = useState();
+  const [photoUplaoding, setPhotoUplaoding] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const options = useMemo(() => countryList().getData(), []);
@@ -42,11 +43,17 @@ function AddAgent() {
   };
 
   useEffect(() => {
-    if (id) dispatch(getAgent(params.id));
     if (id) {
-      setPhoto(getAgentReducer.data.photo);
-      setInitialValue(getAgentReducer.data);
+      setLoading(true);
+      dispatch(getAgent(params.id)).then((agent) => {
+        console.log(agent);
+        setLoading(false);
+        setPhoto(agent.payload?.photo);
+        setInitialValue(agent.payload);
+      });
     }
+
+    return () => dispatch(resetAgent());
   }, []);
 
   const onFinish = async (values) => {
@@ -83,33 +90,33 @@ function AddAgent() {
     }
   };
 
-  const validator = (_, { valid }) => {
+  function validator(_, { valid }) {
     if (valid()) return Promise.resolve(); // non-strict validation
     return Promise.reject("Invalid phone number");
-  };
+  }
 
   const beforeUpload = (e) => {
     console.log(e);
-    setLoading(true);
+    photoUplaoding(true);
   };
 
   const handleChange = (info) => {
     if (info.file.status === "done") {
       console.log(info.file.response.url);
-      setLoading(false);
+      photoUplaoding(false);
       setPhoto(info.file.response.url);
     }
   };
 
   const uploadButton = (
     <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      {photoUplaoding ? <LoadingOutlined /> : <PlusOutlined />}
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
-  console.log(getAgentReducer);
+
   return (
-    <Card title="Add Agent" loading={getAgentReducer.isLoading}>
+    <Card title={id ? "Edit Agent" : "Add Agent"} loading={loading}>
       {contextHolder}
       <Form initialValues={initialVlues} name="add_agent" onFinish={onFinish}>
         <Row justify="center">
@@ -119,7 +126,7 @@ function AddAgent() {
                 name="file"
                 listType="picture-card"
                 className="avatar-uploader"
-                loading={loading}
+                loading={photoUplaoding}
                 showUploadList={false}
                 headers={{
                   Authorization: `Bearer ${localStorage.token}`,
@@ -130,7 +137,7 @@ function AddAgent() {
               >
                 {photo ? (
                   <img src={photo} alt="avatar" style={{ width: "100%" }} />
-                ) : loading ? (
+                ) : photoUplaoding ? (
                   <LoadingOutlined />
                 ) : (
                   uploadButton
@@ -286,6 +293,7 @@ function AddAgent() {
               loading={
                 addAgentReducer.isLoading ||
                 getAgentReducer.isLoading ||
+                photoUplaoding ||
                 loading
               }
             >
