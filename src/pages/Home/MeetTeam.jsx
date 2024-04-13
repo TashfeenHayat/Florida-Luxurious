@@ -1,74 +1,28 @@
-import React from "react";
-import { Flex, Typography, Button } from "antd";
-import Slider from "react-slick";
-import Filp from "../../components/Flip";
+import React, { useRef } from "react";
+import { Typography, Carousel, Row, Col, Image, Flex } from "antd";
+import { Container } from "react-bootstrap";
+import LetTalk from "../../components/LetTalk";
+import Team from "../../assets/team.png";
+import FlipCard from "../../components/Flipcard";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
-import LetTalk from "../../components/LetTalk";
-import { useNavigate } from "react-router-dom";
-const { Title, Text } = Typography;
+
+const { Title } = Typography;
+
 function MeetTeam() {
-  const navigate = useNavigate();
+  const ref = useRef();
+  // Your image array
+  const images = [Team, Team, Team, Team, Team, Team, Team, Team];
 
-  const CustomPrevArrow = (props) => {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", zIndex: 10 }}
-        onClick={onClick}
-      >
-        <img src={BackArrow} alt="Previous" width="45px" />
-      </div>
-    );
-  };
+  // Divide images into chunks of four
+  const chunks = [];
+  for (let i = 0; i < images.length; i += 4) {
+    chunks.push(images.slice(i, i + 4));
+  }
 
-  const CustomNextArrow = (props) => {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block", zIndex: 10 }}
-        onClick={onClick}
-      >
-        <img src={NextArrow} alt="Next" width="45px" />
-      </div>
-    );
-  };
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    prevArrow: <CustomPrevArrow />,
-    nextArrow: <CustomNextArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 425,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          prevArrow: false,
-          nextArrow: false,
-        },
-      },
-      // Add more breakpoints as needed
-    ],
+  const customArrows = {
+    prevArrow: <BackArrow />,
+    nextArrow: <NextArrow />,
   };
 
   return (
@@ -78,29 +32,70 @@ function MeetTeam() {
           <Title level={1} className="meet-team-heading">
             Meet The Team
           </Title>
-          <Flex
-            justify={"center"}
-            align={"center"}
-            style={{
-              marginTop: 60,
-              marginBottom: 60,
-              cursor: "pointer",
-            }}
-            className="features_section_slider"
-          >
-            <div
-              className="meet-slider-width"
-              onClick={() => navigate("/teams")}
-            >
-              <Slider {...settings}>
-                <Filp />
-                <Filp />
-                <Filp />
-                <Filp />
-                <Filp />
-              </Slider>
-            </div>
-          </Flex>
+          <Container>
+            <Row align={"middle"}>
+              <Col span={2}>
+                <Image
+                  src={BackArrow}
+                  preview={false}
+                  width={"50%"}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => ref.current.prev()}
+                />
+              </Col>
+              <Col lg={20}>
+                <Carousel dots={false} ref={ref}>
+                  {chunks.map((chunk, index) => (
+                    <div key={index}>
+                      <Row gutter={[20, 20]} align="middle">
+                        {chunk.map((image, idx) => (
+                          <Col lg={6} md={12} sm={24}>
+                            <FlipCard
+                              fImg={
+                                <img
+                                  key={idx}
+                                  src={image}
+                                  alt={`Team ${idx}`}
+                                  style={{ width: "100%" }}
+                                />
+                              }
+                              bImg={
+                                <img
+                                  key={idx}
+                                  src={image}
+                                  alt={`Team ${idx}`}
+                                  style={{ width: "100%" }}
+                                  className="img-op1"
+                                />
+                              }
+                            >
+                              <div className="p-absoulte p-b-30-left-0 w-100">
+                                <Flex justify="center" align="center">
+                                  <button className="team-view-btn">
+                                    View More{" "}
+                                  </button>
+                                </Flex>
+                              </div>
+                            </FlipCard>
+                          </Col>
+                        ))}
+                      </Row>
+                    </div>
+                  ))}
+                </Carousel>
+              </Col>
+
+              <Col span={2}>
+                <Image
+                  src={NextArrow}
+                  preview={false}
+                  width={"50%"}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => ref.current.next()}
+                />
+              </Col>
+            </Row>
+          </Container>
         </div>
       </div>
       <LetTalk />
