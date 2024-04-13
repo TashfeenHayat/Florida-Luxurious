@@ -33,12 +33,24 @@ function AllTeam() {
             {data.map((item, index) => (
               <Col lg={6} md={12} sm={24} xs={24} key={index}>
                 <FlipCard
-                  fImg={<Image src={item.photo} className="" preview={false} />}
+                  fImg={
+                    <Image
+                      src={
+                        item.photo ? item.photo : "https://placehold.co/300x388"
+                      }
+                      className=""
+                      preview={false}
+                      fallback="https://placehold.co/300x388"
+                    />
+                  }
                   bImg={
                     <Image
-                      src={item.photo}
+                      src={
+                        item.photo ? item.photo : "https://placehold.co/300x388"
+                      }
                       className="img-op1"
                       preview={false}
+                      fallback="https://placehold.co/300x388"
                     />
                   }
                 >
