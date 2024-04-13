@@ -8,9 +8,10 @@ import FlipCard from "../../components/Flipcard";
 import Logo from "../../assets/logoicon.png";
 import { CiMap, CiPhone, CiMail } from "react-icons/ci";
 import Buttons from "../../components/Buttons";
-
+import useTeamMembers from "../../hooks/useTeamMembers";
 const { Title, Text, Paragraph } = Typography;
 function AllTeam() {
+  const { isLoading, data } = useTeamMembers();
   return (
     <>
       <div className="team-banner">
@@ -29,14 +30,14 @@ function AllTeam() {
             <Col lg={24} md={24} sm={24} xs={24}>
               <Title className="text-center f-100 text-upper">Our Agents</Title>
             </Col>
-            {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-              <Col lg={6} md={12} sm={24} xs={24} key={i}>
+            {data.map((item, index) => (
+              <Col lg={6} md={12} sm={24} xs={24} key={index}>
                 <FlipCard
-                  fImg={<Image src={Team} className="w-100" preview={false} />}
+                  fImg={<Image src={item.photo} className="" preview={false} />}
                   bImg={
                     <Image
-                      src={Team}
-                      className="w-100 img-op1"
+                      src={item.photo}
+                      className="img-op1"
                       preview={false}
                     />
                   }
@@ -48,7 +49,10 @@ function AllTeam() {
                   </div>
                 </FlipCard>
                 <Flex justify={"center"} align="center">
-                  <Text className="text-center f-24 f-100">Rida Asif</Text>
+                  <Text className="text-center f-24 f-100">
+                    {item.firstName}
+                    &nbsp;{item.lastName}
+                  </Text>
                 </Flex>
                 <Flex justify={"center"} align="center">
                   <Text className="text-center text-upper f-bold">

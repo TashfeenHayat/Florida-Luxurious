@@ -10,6 +10,7 @@ import { notification } from "antd";
 let initialState = {
   isLoading: false,
   data: [],
+  allMember: [],
   isError: false,
 };
 
@@ -26,7 +27,6 @@ export const getAgentsSlice = createSlice({
       state.isLoading = false;
       state.isError = null;
       state.data = action.payload;
-      console.log(action.payload);
     });
 
     builder.addCase(getAgents.rejected, (state, { payload }) => {
