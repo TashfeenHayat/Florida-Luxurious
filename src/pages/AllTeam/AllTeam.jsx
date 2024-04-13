@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Typography, Col, Row, Image, Card } from "antd";
+import { Flex, Typography, Col, Row, Image, Card, Spin } from "antd";
 import { Container } from "react-bootstrap";
 import OurStory from "../Home/OurStory";
 import Team from "../../assets/team.png";
@@ -12,6 +12,7 @@ import useTeamMembers from "../../hooks/useTeamMembers";
 const { Title, Text, Paragraph } = Typography;
 function AllTeam() {
   const { isLoading, data } = useTeamMembers();
+  console.log(isLoading);
   return (
     <>
       <div className="team-banner">
@@ -30,49 +31,61 @@ function AllTeam() {
             <Col lg={24} md={24} sm={24} xs={24}>
               <Title className="text-center f-100 text-upper">Our Agents</Title>
             </Col>
-            {data.map((item, index) => (
-              <Col lg={6} md={12} sm={24} xs={24} key={index}>
-                <FlipCard
-                  fImg={
-                    <Image
-                      src={
-                        item.photo ? item.photo : "https://placehold.co/300x388"
+            {isLoading ? (
+              <Flex justify={"center"} align="center" className="w-100">
+                <Spin size="large" />
+              </Flex>
+            ) : (
+              <>
+                {data.map((item, index) => (
+                  <Col lg={6} md={12} sm={24} xs={24} key={index}>
+                    <FlipCard
+                      fImg={
+                        <Image
+                          src={
+                            item.photo
+                              ? item.photo
+                              : "https://placehold.co/300x388"
+                          }
+                          className=""
+                          preview={false}
+                          fallback="https://placehold.co/300x388"
+                        />
                       }
-                      className=""
-                      preview={false}
-                      fallback="https://placehold.co/300x388"
-                    />
-                  }
-                  bImg={
-                    <Image
-                      src={
-                        item.photo ? item.photo : "https://placehold.co/300x388"
+                      bImg={
+                        <Image
+                          src={
+                            item.photo
+                              ? item.photo
+                              : "https://placehold.co/300x388"
+                          }
+                          className="img-op1"
+                          preview={false}
+                          fallback="https://placehold.co/300x388"
+                        />
                       }
-                      className="img-op1"
-                      preview={false}
-                      fallback="https://placehold.co/300x388"
-                    />
-                  }
-                >
-                  <div className="p-absoulte p-b-30-left-0 w-100">
-                    <Flex justify="center" align="center">
-                      <button className="team-view-btn">View More </button>
+                    >
+                      <div className="p-absoulte p-b-30-left-0 w-100">
+                        <Flex justify="center" align="center">
+                          <button className="team-view-btn">View More </button>
+                        </Flex>
+                      </div>
+                    </FlipCard>
+                    <Flex justify={"center"} align="center">
+                      <Text className="text-center f-24 f-100">
+                        {item.firstName}
+                        &nbsp;{item.lastName}
+                      </Text>
                     </Flex>
-                  </div>
-                </FlipCard>
-                <Flex justify={"center"} align="center">
-                  <Text className="text-center f-24 f-100">
-                    {item.firstName}
-                    &nbsp;{item.lastName}
-                  </Text>
-                </Flex>
-                <Flex justify={"center"} align="center">
-                  <Text className="text-center text-upper f-bold">
-                    florida retailer
-                  </Text>
-                </Flex>
-              </Col>
-            ))}
+                    <Flex justify={"center"} align="center">
+                      <Text className="text-center text-upper f-bold">
+                        florida retailer
+                      </Text>
+                    </Flex>
+                  </Col>
+                ))}
+              </>
+            )}
           </Row>
         </Container>
       </div>

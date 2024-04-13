@@ -1205,3 +1205,6 @@ body:focus-visible {
   height: 100%;
   padding: 5rem;
 }
+.ant-spin-dot-item {
+  color: black;
+}
