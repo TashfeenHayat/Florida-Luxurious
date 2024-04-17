@@ -10,7 +10,7 @@ function OurStory() {
   return (
     <div className="boxshadow-section">
       <Row align="middle">
-        <Col lg={10} md={24} sm={0}>
+        <Col lg={8} md={24} sm={0}>
           <div>
             <div className="d-flex-story-center">
               <div className="our-story-bg p-5">
@@ -58,7 +58,7 @@ function OurStory() {
             </div>
           </div>
         </Col>
-        <Col lg={14} md={0} xs={0} sm={0} className="py-4">
+        <Col lg={16} md={0} xs={0} sm={0} className="py-4">
           <Image src={Story} preview={false} width="100%" />
         </Col>
       </Row>

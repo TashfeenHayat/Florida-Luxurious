@@ -1,25 +1,29 @@
 import React, { useRef } from "react";
-import { Typography, Carousel, Row, Col, Image, Flex } from "antd";
+import { Typography, Carousel, Row, Col, Image, Flex, Grid } from "antd";
 import { Container } from "react-bootstrap";
 import LetTalk from "../../components/LetTalk";
-import Team from "../../assets/team.png";
 import FlipCard from "../../components/Flipcard";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
-
+import { useNavigate } from "react-router-dom";
+import useTeamMembers from "../../hooks/useTeamMembers";
 const { Title } = Typography;
+const { useBreakpoint } = Grid;
 
 function MeetTeam() {
+  const { isLoading, data } = useTeamMembers();
+
   const ref = useRef();
+  const navigate = useNavigate();
+  const screens = useBreakpoint();
+  const elementsPerChunk = screens.lg ? 4 : screens.md ? 2 : 1;
   // Your image array
-  const images = [Team, Team, Team, Team, Team, Team, Team, Team];
 
-  // Divide images into chunks of four
+  // Divide data into chunks of four
   const chunks = [];
-  for (let i = 0; i < images.length; i += 4) {
-    chunks.push(images.slice(i, i + 4));
+  for (let i = 0; i < data.length; i += elementsPerChunk) {
+    chunks.push(data.slice(i, i + elementsPerChunk));
   }
-
   const customArrows = {
     prevArrow: <BackArrow />,
     nextArrow: <NextArrow />,
@@ -32,9 +36,9 @@ function MeetTeam() {
           <Title level={1} className="meet-team-heading">
             Meet The Team
           </Title>
-          <Container>
-            <Row align={"middle"}>
-              <Col span={2}>
+          <Container className="pt-4">
+            <Row align={"middle"} justify={"center"}>
+              <Col lg={2} md={4} pull={0} sm={6}>
                 <Image
                   src={BackArrow}
                   preview={false}
@@ -43,29 +47,49 @@ function MeetTeam() {
                   onClick={() => ref.current.prev()}
                 />
               </Col>
-              <Col lg={20}>
+              <Col lg={20} md={16} sm={12} align={"middle"}>
                 <Carousel dots={false} ref={ref}>
                   {chunks.map((chunk, index) => (
-                    <div key={index}>
-                      <Row gutter={[20, 20]} align="middle">
+                    <div
+                      key={index}
+                      onClick={() => navigate("/teams")}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <Row gutter={[20, 40]} align="middle" justify={"center"}>
                         {chunk.map((image, idx) => (
-                          <Col lg={6} md={12} sm={24}>
+                          <Col lg={6} md={12} sm={24} align="middle">
                             <FlipCard
                               fImg={
                                 <img
                                   key={idx}
-                                  src={image}
-                                  alt={`Team ${idx}`}
+                                  src={
+                                    image.photo
+                                      ? image.photo
+                                      : "https://placehold.co/300x388"
+                                  }
+                                  alt={"https://placehold.co/300x388"}
                                   style={{ width: "100%" }}
+                                  onError={({ currentTarget }) =>
+                                    (currentTarget.src =
+                                      "https://placehold.co/300x388")
+                                  }
                                 />
                               }
                               bImg={
                                 <img
                                   key={idx}
-                                  src={image}
+                                  src={
+                                    image.photo
+                                      ? image.photo
+                                      : "https://placehold.co/300x388"
+                                  }
                                   alt={`Team ${idx}`}
                                   style={{ width: "100%" }}
                                   className="img-op1"
+                                  onError={({ currentTarget }) =>
+                                    (currentTarget.src =
+                                      "https://placehold.co/300x388")
+                                  }
                                 />
                               }
                             >
@@ -85,7 +109,7 @@ function MeetTeam() {
                 </Carousel>
               </Col>
 
-              <Col span={2}>
+              <Col lg={2} md={4} push={1} sm={6}>
                 <Image
                   src={NextArrow}
                   preview={false}
