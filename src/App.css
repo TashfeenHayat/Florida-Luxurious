@@ -345,12 +345,11 @@ body:focus-visible {
   cursor: pointer;
 }
 
-.button-view,
-.ant-btn-primary {
+.button-view {
   background-color: #000; /* Green */
   border: none;
   color: white;
-  padding: 15px;
+  padding: 15px 52px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -360,11 +359,6 @@ body:focus-visible {
   line-height: 14px;
   letter-spacing: 1.5px;
   cursor: pointer;
-  height: 42px;
-  border-radius: 1px;
-  display: flex;
-  align-items: center;
-  min-width: 92px;
 }
 .button-view1 {
   position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
@@ -458,12 +452,36 @@ body:focus-visible {
   opacity: 1;
   visibility: visible;
 }
-.button-view1:hover,
-.ant-btn-primary:hover {
+.displayy-teamimg-center .show-info {
+  position: absolute;
+  bottom: 20px;
+  left: 0px;
+  width: 100%;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  opacity: 1;
+  visibility: visible;
+}
+
+.displayy-teamimg-center .show-info {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.displayy-teamimg-center:hover .info {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.displayy-teamimg-center:hover .show-info {
+  opacity: 1;
+  visibility: visible;
+}
+
+.button-view1:hover {
   border: 1px solid black;
   background-color: transparent !important;
   transition: background-color 1s ease; /* added 's' after 0.8 for seconds */
-  color: black !important;
+  color: black;
 }
 
 .button-view-line-right {
@@ -768,10 +786,6 @@ body:focus-visible {
   pointer-events: none;
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
-}
-
-.demo-logo-vertical {
-  height: 64px;
 }
 
 .gutter-row {
