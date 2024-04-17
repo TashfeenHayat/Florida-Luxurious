@@ -175,6 +175,14 @@ body:focus-visible {
   display: flex;
   margin-bottom: 10px;
 }
+.prop-info {
+  background: black;
+  height: inherit;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .circle-bg-white:hover {
   background: transparent;
@@ -333,7 +341,7 @@ body:focus-visible {
 .displayy-teamimg-center:hover .img-op {
   filter: none;
   -webkit-filter: grayscale(0);
-  -webkit-transform: scale(1.01);
+  -webkit-transform: scale(1);
   cursor: pointer;
 }
 
@@ -441,10 +449,14 @@ body:focus-visible {
   transition: all 0.4s ease-in-out;
 }
 
-.displayy-teamimg-center:hover .button-view {
-  border: 1px solid white;
-  background-color: transparent !important;
-  transition: all 0.5s ease-in-out;
+.displayy-teamimg-center .info {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 95%;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  opacity: 1;
+  visibility: visible;
 }
 .button-view1:hover,
 .ant-btn-primary:hover {
@@ -796,10 +808,7 @@ body:focus-visible {
   .text-paragraph {
     font-size: 14px !important;
   }
-  .our-story-bg {
-    width: 100%;
-    z-index: -1;
-  }
+
   .contact-us-card-margin {
     margin-left: 0px !important;
   }
@@ -1204,4 +1213,18 @@ body:focus-visible {
 
 .contact-us-card-margin {
   margin-left: -50px;
+}
+
+/* Drawer css */
+
+.drawer-option {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 5rem;
+}
+.ant-spin-dot-item {
+  color: black;
 }

@@ -1,14 +1,23 @@
 import React from "react";
 import { Flex, Col, Row, Typography, Form, Input, Card } from "antd";
 import { Container } from "react-bootstrap";
-import LetTalk from "../../components/LetTalk";
-import Button from "../../components/Buttons";
 import Icons from "../../components/Icons";
 import Logo from "../../assets/logoicon.png";
 import { CiMap, CiPhone, CiMail } from "react-icons/ci";
-
+import { useDispatch, useSelector } from "react-redux";
+import { contactUs } from "../../api/Inquiry";
 const { Title, Text } = Typography;
+
 function ContactUs() {
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
+  const { loading } = useSelector((s) => s.contactUsReducer);
+  // Form validation rules
+  const onFinish = (values) => {
+    dispatch(contactUs(values));
+    form.resetFields(); // This resets the form fields
+  };
+
   return (
     <>
       <div className="contact-us-banner"></div>
@@ -35,18 +44,26 @@ function ContactUs() {
                       </Text>
                     </Flex>
                   </Flex>
-                  <Form layout="vertical">
+                  <Form layout="vertical" onFinish={onFinish}>
                     <Row gutter={[8, 16]} className="py-4">
                       <Col lg={12} md={12} sm={24}>
                         <Form.Item
+                          name="firstName"
                           label="First Name"
                           className="contact-us-form"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Please input your first name!",
+                            },
+                          ]}
                         >
                           <Input />
                         </Form.Item>
                       </Col>
                       <Col lg={12} md={12} sm={24}>
                         <Form.Item
+                          name="lastName"
                           label="Last Name"
                           className="contact-us-form"
                         >
@@ -55,24 +72,55 @@ function ContactUs() {
                       </Col>
                       <Col lg={24} md={24} sm={24}>
                         <Form.Item
+                          name="email"
                           label="Email Address"
+                          className="contact-us-form"
+                          rules={[
+                            {
+                              type: "email",
+                              message: "The input is not a valid email!",
+                            },
+                            {
+                              required: true,
+                              message: "Please input your email!",
+                            },
+                          ]}
+                        >
+                          <Input />
+                        </Form.Item>
+                      </Col>
+                      <Col lg={24} md={24} sm={24}>
+                        <Form.Item
+                          name="phoneNumber"
+                          label="Phone"
                           className="contact-us-form"
                         >
                           <Input />
                         </Form.Item>
                       </Col>
                       <Col lg={24} md={24} sm={24}>
-                        <Form.Item label="Phone" className="contact-us-form">
-                          <Input />
-                        </Form.Item>
-                      </Col>
-                      <Col lg={24} md={24} sm={24}>
-                        <Form.Item label="Message" className="contact-us-form">
-                          <Input />
+                        <Form.Item
+                          name="message"
+                          label="Message"
+                          className="contact-us-form"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Please input your message!",
+                            },
+                          ]}
+                        >
+                          <Input.TextArea />
                         </Form.Item>
                       </Col>
                     </Row>
-                    <Button classNam="button-view1">Send</Button>
+                    <button
+                      className="button-view1"
+                      type="submit"
+                      disabled={loading}
+                    >
+                      {loading ? "Sending" : "Send"}
+                    </button>
                   </Form>
                 </div>
               </Col>

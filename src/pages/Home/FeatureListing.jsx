@@ -100,57 +100,38 @@ function FeatureListing() {
               onClick={() => navigate("/features")}
             >
               <img src={Property} width="100%" className="img-op" />
-              {/* <div className="p-absoulte right-0">
-                <div
-                  style={{
-                    height: "45px",
-                    width: "150px",
-                    background: "black",
-                  }}
-                >
-                  <Flex
-                    justify={"center"}
-                    align="center"
-                    style={{ height: "inherit" }}
-                  >
-                    <Text
-                      style={{
-                        color: "white",
-                        textTransform: "uppercase",
-                        lineHeight: "23.8px",
-                        letterSpacing: "1px",
-                        fontWeight: "bold",
-                        fontSize: "14px",
-                      }}
-                    >
-                      For Sale
-                    </Text>
-                  </Flex>
-                </div>
-              </div> */}
-              <div className="p-absoulte w-100 bottom-20 left-20">
-                <Flex
-                  justify={"space-between"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                >
+
+              <div className="info">
+                <Flex justify={"space-between"} align={"center"}>
                   <button className="button-view">View All</button>
                   <Flex>
                     <IoLocationOutline color="white" size={20} />
-                    <Text
-                      style={{
-                        lineHeight: "22px",
-                        letterSpacing: "0%",
-                      }}
-                      className="f-14 f-bold text-white"
-                    >
+                    <Text className="f-14 f-bold text-white">
                       2572 Mercedes Drive <br />
                       <IoPricetagOutline size={20} /> $15,000,0000
                     </Text>
                   </Flex>
                 </Flex>
               </div>
+
+              <div className="show-info">
+                <div style={{ background: "#fff", height: "50px" }}>
+                  <Flex
+                    justify={"space-between"}
+                    align={"center"}
+                    style={{ height: "100%" }}
+                  >
+                    <Text className="mx-4 f-16 f-bold">
+                      2572 Mercedes Drive
+                    </Text>
+                    <div className="prop-info">
+                      <Text style={{ color: "white" }}> View More +</Text>
+                    </div>
+                  </Flex>
+                </div>
+              </div>
             </div>
+
             <div
               onClick={() => navigate("/features")}
               className="displayy-teamimg-center"
