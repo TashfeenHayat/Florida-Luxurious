@@ -6,12 +6,12 @@ import FlipCard from "../../components/Flipcard";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
 import { useNavigate } from "react-router-dom";
-import useTeamMembers from "../../hooks/useTeamMembers";
+import useAgents from "../../hooks/useAgents";
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
 function MeetTeam() {
-  const { isLoading, data } = useTeamMembers();
+  const { isLoading, data } = useAgents();
 
   const ref = useRef();
   const navigate = useNavigate();

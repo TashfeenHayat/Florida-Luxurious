@@ -35,6 +35,7 @@ export const addAgent = createAsyncThunk(
 export const getAgent = createAsyncThunk(
   "getAgentReducer",
   async function (id, { rejectWithValue }) {
+    console.log(id);
     try {
       const res = await axios.get(`${api_base_URL}agent/${id}`);
 

@@ -6,11 +6,11 @@ body:focus-visible {
   outline: none !important;
 }
 * {
-  font-family: "News Gothic MT", "Arial Narrow", Arial, sans-serif;
+  font-family: "New Gothic Style", sans-serif;
   box-sizing: border-box;
 }
 .ant-typography {
-  font-family: "News Gothic MT", "Arial Narrow", Arial, sans-serif !important;
+  font-family: "New Gothic Style", sans-serif !important;
 }
 
 .flex-between {
@@ -1295,4 +1295,55 @@ body:focus-visible {
   background-image: url("./assets/ourstory.png");
   background-size: cover;
   background-repeat: no-repeat;
+}
+/* our Story End*/
+
+/* Agent Profile */
+
+.title-line-agent {
+  width: 195%;
+  right: -200% !important;
+  height: 5px;
+  bottom: auto;
+  top: 12%;
+  background: #b0b0b0 !important;
+  position: absolute;
+}
+.about-agent {
+  color: #838383;
+  font-weight: 100;
+  font-size: 50px;
+  letter-spacing: -5%;
+  line-height: 42px;
+}
+.agent-first-name {
+  color: black;
+  font-weight: bold;
+  font-size: 108px;
+  letter-spacing: -4%;
+  line-height: 1.2;
+  margin-left: 30px;
+}
+.agent-last-name {
+  color: black;
+  font-weight: 100;
+  font-size: 108px;
+  letter-spacing: -4%;
+  line-height: 0.8;
+  margin-left: 180px;
+}
+.agent-estate {
+  color: #838383;
+  font-weight: 100;
+  font-size: 20px;
+  letter-spacing: -5%;
+  line-height: 2.5;
+  margin-left: 380px;
+}
+.agent-description {
+  color: black;
+  font-weight: 100;
+  font-size: 24px;
+  letter-spacing: -5%;
+  line-height: 1.4;
 }

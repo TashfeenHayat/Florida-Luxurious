@@ -12,10 +12,11 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import DetailProperty from "./pages/DetailProperty";
-import AllTeam from "./pages/AllTeam";
+import Agents from "./pages/Agents";
 import TopToScroll from "./ScrollToTop";
 import ContactUs from "./pages/ContactUs";
 import OurStory from "./pages/About";
+import AgentProfile from "./pages/AgentProfile";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
@@ -44,11 +45,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/features" element={<DetailProperty />} />
-          <Route path="/teams" element={<AllTeam />} />
+          <Route path="/agents" element={<Agents />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/login" element={<LoginAdmin />} />
           <Route path="/admin/signup" element={<Signup />} />
           <Route path="/about-us" element={<OurStory />} />
+          <Route path="/agent/:id" element={<AgentProfile />} />
         </Routes>
         {isAdminRoute && accessToken && (
           <Dashboard>

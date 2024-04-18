@@ -2,16 +2,18 @@ import React from "react";
 import { Flex, Typography, Col, Row, Image, Card, Spin } from "antd";
 import { Container } from "react-bootstrap";
 import OurStory from "../Home/OurStory";
-import Team from "../../assets/team.png";
 import LetsTalk from "../../components/LetTalk";
 import FlipCard from "../../components/Flipcard";
 import Logo from "../../assets/logoicon.png";
 import { CiMap, CiPhone, CiMail } from "react-icons/ci";
 import Buttons from "../../components/Buttons";
-import useTeamMembers from "../../hooks/useTeamMembers";
+import useAgents from "../../hooks/useAgents";
+import { useNavigate } from "react-router-dom";
 const { Title, Text, Paragraph } = Typography;
-function AllTeam() {
-  const { isLoading, data } = useTeamMembers();
+function Agents() {
+  const { isLoading, data } = useAgents();
+  console.log(data, "checking");
+  const navigate = useNavigate();
   console.log(isLoading);
   return (
     <>
@@ -38,7 +40,15 @@ function AllTeam() {
             ) : (
               <>
                 {data.map((item, index) => (
-                  <Col lg={6} md={12} sm={24} xs={24} key={index}>
+                  <Col
+                    lg={6}
+                    md={12}
+                    sm={24}
+                    xs={24}
+                    key={index}
+                    onClick={() => navigate(`/agent/${item._id}`)}
+                    style={{ cursor: "pointer" }}
+                  >
                     <FlipCard
                       fImg={
                         <Image
@@ -190,4 +200,4 @@ function AllTeam() {
   );
 }
 
-export default AllTeam;
+export default Agents;
