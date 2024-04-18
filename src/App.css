@@ -9,6 +9,9 @@ body:focus-visible {
   font-family: "News Gothic MT", "Arial Narrow", Arial, sans-serif;
   box-sizing: border-box;
 }
+.ant-typography {
+  font-family: "News Gothic MT", "Arial Narrow", Arial, sans-serif !important;
+}
 
 .flex-between {
   display: flex;
@@ -20,7 +23,7 @@ body:focus-visible {
   color: white !important;
 }
 .text-gray {
-  color: #d4cfc9 !important;
+  color: #838383 !important;
 }
 .text-upper {
   text-transform: uppercase;
@@ -150,6 +153,9 @@ body:focus-visible {
 }
 #navbar_main a:not(:last-child) {
   border-right: 1px solid #fff;
+}
+#story-rank :not(:last-child) {
+  border-left: 3px solid #fff;
 }
 .title-home-page {
   color: #fff !important;
@@ -1117,6 +1123,22 @@ body:focus-visible {
   align-items: center;
 }
 
+/* background Component */
+
+.bg-img {
+  position: relative;
+  height: 550px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.bg-img-shadow {
+  background: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* Card style*/
 
 .flip-card {
@@ -1211,7 +1233,7 @@ body:focus-visible {
 .title-line {
   width: 195%;
   left: -185% !important;
-  height: 4px;
+  height: 5px;
   bottom: auto;
   top: 13%;
   background: #b0b0b0 !important;
@@ -1241,4 +1263,36 @@ body:focus-visible {
 }
 .ant-spin-dot-item {
   color: black;
+}
+
+/* our Story */
+
+.our-title {
+  color: #838383;
+  font-weight: 100;
+  font-size: 50px;
+  letter-spacing: 2px;
+  line-height: 22.5px;
+}
+.story-title {
+  color: #000;
+  font-weight: bold;
+  font-size: 80px;
+  letter-spacing: 2px;
+  line-height: 0.9;
+}
+.title-line-story {
+  width: 195%;
+  left: -182% !important;
+  height: 5px;
+  bottom: auto;
+  top: 12%;
+  background: #b0b0b0 !important;
+  position: absolute;
+}
+
+.story-bg {
+  background-image: url("./assets/ourstory.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }

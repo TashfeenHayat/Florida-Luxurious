@@ -15,6 +15,7 @@ import DetailProperty from "./pages/DetailProperty";
 import AllTeam from "./pages/AllTeam";
 import TopToScroll from "./ScrollToTop";
 import ContactUs from "./pages/ContactUs";
+import OurStory from "./pages/About";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
@@ -47,6 +48,7 @@ function App() {
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/login" element={<LoginAdmin />} />
           <Route path="/admin/signup" element={<Signup />} />
+          <Route path="/about-us" element={<OurStory />} />
         </Routes>
         {isAdminRoute && accessToken && (
           <Dashboard>

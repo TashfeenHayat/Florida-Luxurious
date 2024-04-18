@@ -125,7 +125,10 @@ function FeatureListing() {
                       2572 Mercedes Drive
                     </Text>
                     <div className="prop-info">
-                      <Text style={{ color: "white" }}> View More +</Text>
+                      <Text style={{ color: "white" }} className="text-upper">
+                        {" "}
+                        View More +
+                      </Text>
                     </div>
                   </Flex>
                 </div>
