@@ -1312,7 +1312,7 @@ body:focus-visible {
 .about-agent {
   color: #838383;
   font-weight: 100;
-  font-size: 50px;
+  font-size: 30px;
   letter-spacing: -5%;
   line-height: 42px;
 }
@@ -1322,7 +1322,6 @@ body:focus-visible {
   font-size: 108px;
   letter-spacing: -4%;
   line-height: 1.2;
-  margin-left: 30px;
 }
 .agent-last-name {
   color: black;
@@ -1330,15 +1329,16 @@ body:focus-visible {
   font-size: 108px;
   letter-spacing: -4%;
   line-height: 0.8;
-  margin-left: 180px;
 }
 .agent-estate {
   color: #838383;
   font-weight: 100;
   font-size: 20px;
   letter-spacing: -5%;
-  line-height: 2.5;
-  margin-left: 380px;
+  line-height: 1.2;
+  display: flex;
+  width: 100%;
+  justify-content: end;
 }
 .agent-description {
   color: black;

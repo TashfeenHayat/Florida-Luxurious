@@ -33,8 +33,8 @@ function AgentProfile() {
                 <span className="about-agent">About</span>
                 <i className="title-line-agent"></i>
                 <br />
-                <span className="agent-first-name">{data?.firstName}</span>
-                <br />
+                <span className="agent-first-name">{data?.firstName}</span>{" "}
+                &nbsp;
                 <span className="agent-last-name">{data?.lastName}</span>
                 <br />
                 <span className="agent-estate">Estate Agent</span>
