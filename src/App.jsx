@@ -17,6 +17,8 @@ import TopToScroll from "./ScrollToTop";
 import ContactUs from "./pages/ContactUs";
 import OurStory from "./pages/About";
 import AgentProfile from "./pages/AgentProfile";
+import Properties from "./pages/Properties";
+import SoldProperties from "./pages/SoldProperties";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
@@ -54,6 +56,8 @@ function App() {
           <Route path="/admin/signup" element={<Signup />} />
           <Route path="/about-us" element={<OurStory />} />
           <Route path="/agent/:id" element={<AgentProfile />} />
+          <Route path="/properties" element={<Properties />} />
+          <Route path="/sold-properties" element={<SoldProperties />} />
         </Routes>
         {isAdminRoute && (
           <Dashboard>

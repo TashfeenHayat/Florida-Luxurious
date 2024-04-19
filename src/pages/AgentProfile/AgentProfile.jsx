@@ -5,12 +5,16 @@ import { Typography, Row, Col, Image, Flex } from "antd";
 import { MdOutlinePhone, MdOutlineMailOutline } from "react-icons/md";
 import { Container } from "react-bootstrap";
 import LetTalk from "../../components/LetTalk";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useAgent from "../../hooks/useAgent";
 const { Title, Paragraph } = Typography;
 function AgentProfile() {
   const { id } = useParams();
-  const { isLoading, data } = useAgent(id);
+  const navigate = useNavigate();
+  const { isLoading, data, isError } = useAgent(id);
+  if (isError) {
+    navigate("/404");
+  }
   return (
     <>
       <BackgroundImage Image={Agent}>

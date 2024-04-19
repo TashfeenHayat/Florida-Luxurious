@@ -5,13 +5,13 @@ import { getAgent, resetAgent } from "../api/Agents";
 function useAgent(id) {
   console.log(id);
   const dispatch = useDispatch();
-  const { isLoading, data } = useSelector((s) => s.getAgentReducer);
-  console.log(data);
+  const { isLoading, data, isError } = useSelector((s) => s.getAgentReducer);
+  console.log(data, isError);
   useEffect(() => {
     dispatch(getAgent(id));
     return () => dispatch(resetAgent());
   }, [dispatch]);
-  return { isLoading, data };
+  return { isLoading, data, isError };
 }
 
 export default useAgent;
