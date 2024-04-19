@@ -55,9 +55,14 @@ function MeetTeam() {
                       onClick={() => navigate("/agents")}
                       style={{ cursor: "pointer" }}
                     >
-                      <Row gutter={[20, 40]} align="middle" justify={"center"}>
+                      <Row
+                        gutter={[20, 40]}
+                        align="middle"
+                        justify={"center"}
+                        key={index}
+                      >
                         {chunk.map((image, idx) => (
-                          <Col lg={6} md={12} sm={24} align="middle">
+                          <Col lg={6} md={12} sm={24} align="middle" key={idx}>
                             <FlipCard
                               fImg={
                                 <img
