@@ -6,8 +6,10 @@ import {
   getAgentSlice,
   updateAgentSlice,
   deleteAgentSlice,
+  resetAgentSlice,
 } from "./slices/AgentSlice";
 import { contactUsSlice } from "./slices/ContactusSlice";
+
 export const store = configureStore({
   reducer: {
     signInreducer: signInSlice,
@@ -17,5 +19,6 @@ export const store = configureStore({
     updateAgentReducer: updateAgentSlice,
     deleteAgentReducer: deleteAgentSlice,
     contactUsReducer: contactUsSlice,
+    resetAgentReducer: resetAgentSlice,
   },
 });

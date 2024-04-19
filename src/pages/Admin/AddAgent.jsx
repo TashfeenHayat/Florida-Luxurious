@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   Row,
   Col,
@@ -7,19 +7,33 @@ import {
   Button,
   Input,
   Select,
+  Upload,
   notification,
 } from "antd";
+import { api_base_URL } from "../../const/Const";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { useParams } from "react-router";
 import countryList from "react-select-country-list";
 import PhoneInput from "antd-phone-input";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addAgent, getAgent, updateAgent } from "../../api/Agents";
+import { addAgent, getAgent, updateAgent, resetAgent } from "../../api/Agents";
 
 const { TextArea } = Input;
 
 function AddAgent() {
-  const { isLoading, isError, data } = useSelector((s) => s.addAgentReducer);
+  const addAgentReducer = useSelector((s) => s.addAgentReducer);
+  const getAgentReducer = useSelector((s) => s.getAgentReducer);
+
+  const [initialVlues, setInitialValue] = useState({});
+  const [photo, setPhoto] = useState();
+  const [photoUplaoding, setPhotoUplaoding] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const options = useMemo(() => countryList().getData(), []);
+  const params = useParams();
+  const { id } = params;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
@@ -29,47 +43,109 @@ function AddAgent() {
   };
 
   useEffect(() => {
-    // dispatch(getAgent());
+    if (id) {
+      setLoading(true);
+      dispatch(getAgent(params.id)).then((agent) => {
+        console.log(agent);
+        setLoading(false);
+        setPhoto(agent.payload?.photo);
+        setInitialValue(agent.payload);
+      });
+    }
+
+    return () => dispatch(resetAgent());
   }, []);
 
   const onFinish = async (values) => {
     console.log("Received values of form: ", values);
-    const res = await dispatch(
-      addAgent({
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        phoneNumber:
-          values.phoneNumber.countryCode +
-          values.phoneNumber.areaCode +
-          values.phoneNumber.phoneNumber,
-        code: values.code,
-        reference: values.reference,
-        description: values.description,
-        address: {
-          addressLine1: values.addressLine1,
-          addressLine2: values.addressLine2,
-          city: values.city,
-          state: values.state,
-          zipCode: values.zipCode,
-          country: values.country,
-        },
-      })
-    ).unwrap();
-    console.log(res);
-    openNotification("success", res);
-    navigate("/admin/agents");
+    if (id) {
+      const res = await dispatch(
+        updateAgent({
+          id,
+          ...values,
+          photo,
+          phoneNumber:
+            values.phoneNumber.countryCode +
+            values.phoneNumber.areaCode +
+            values.phoneNumber.phoneNumber,
+        })
+      ).unwrap();
+      setInitialValue({});
+      openNotification("success", res);
+      setTimeout(navigate("/admin/agent"), 1000);
+    } else {
+      const res = await dispatch(
+        addAgent({
+          ...values,
+          photo,
+          phoneNumber:
+            values.phoneNumber.countryCode +
+            values.phoneNumber.areaCode +
+            values.phoneNumber.phoneNumber,
+        })
+      ).unwrap();
+      setInitialValue({});
+      openNotification("success", res);
+      setTimeout(navigate("/admin/agent"), 1000);
+    }
   };
 
-  const validator = (_, { valid }) => {
+  function validator(_, { valid }) {
     if (valid()) return Promise.resolve(); // non-strict validation
     return Promise.reject("Invalid phone number");
+  }
+
+  const beforeUpload = (e) => {
+    console.log(e);
+    photoUplaoding(true);
   };
 
+  const handleChange = (info) => {
+    if (info.file.status === "done") {
+      console.log(info.file.response.url);
+      photoUplaoding(false);
+      setPhoto(info.file.response.url);
+    }
+  };
+
+  const uploadButton = (
+    <div>
+      {photoUplaoding ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
   return (
-    <Card title="Add Agent">
+    <Card title={id ? "Edit Agent" : "Add Agent"} loading={loading}>
       {contextHolder}
-      <Form name="add_agent" onFinish={onFinish}>
+      <Form initialValues={initialVlues} name="add_agent" onFinish={onFinish}>
+        <Row justify="center">
+          <Col span={4} className="gutter-row">
+            <Form.Item name="photo">
+              <Upload
+                name="file"
+                listType="picture-card"
+                className="avatar-uploader"
+                loading={photoUplaoding}
+                showUploadList={false}
+                headers={{
+                  Authorization: `Bearer ${localStorage.token}`,
+                }}
+                action={`${api_base_URL}upload`}
+                beforeUpload={beforeUpload}
+                onChange={handleChange}
+              >
+                {photo ? (
+                  <img src={photo} alt="avatar" style={{ width: "100%" }} />
+                ) : photoUplaoding ? (
+                  <LoadingOutlined />
+                ) : (
+                  uploadButton
+                )}
+              </Upload>
+            </Form.Item>
+          </Col>
+        </Row>
         <Row>
           <Col span={12} className="gutter-row">
             <Form.Item
@@ -133,7 +209,7 @@ function AddAgent() {
 
           <Col span={12} className="gutter-row">
             <Form.Item
-              name="addressLine1"
+              name={["address", "addressLine1"]}
               rules={[
                 {
                   required: true,
@@ -145,13 +221,13 @@ function AddAgent() {
             </Form.Item>
           </Col>
           <Col span={12} className="gutter-row">
-            <Form.Item name="addressLine2">
+            <Form.Item name={["address", "addressLine2"]}>
               <Input size="large" placeholder="Address Line 2" />
             </Form.Item>
           </Col>
           <Col span={12} className="gutter-row">
             <Form.Item
-              name="state"
+              name={["address", "state"]}
               rules={[
                 {
                   required: true,
@@ -164,7 +240,7 @@ function AddAgent() {
           </Col>
           <Col span={12} className="gutter-row">
             <Form.Item
-              name="city"
+              name={["address", "city"]}
               rules={[
                 {
                   required: true,
@@ -177,7 +253,7 @@ function AddAgent() {
           </Col>
           <Col span={12} className="gutter-row">
             <Form.Item
-              name="country"
+              name={["address", "country"]}
               rules={[
                 {
                   required: true,
@@ -195,7 +271,7 @@ function AddAgent() {
           </Col>
           <Col span={12} className="gutter-row">
             <Form.Item
-              name="zipCode"
+              name={["address", "zipCode"]}
               rules={[
                 {
                   required: true,
@@ -214,7 +290,12 @@ function AddAgent() {
               block="true"
               type="primary"
               htmlType="submit"
-              loading={isLoading}
+              loading={
+                addAgentReducer.isLoading ||
+                getAgentReducer.isLoading ||
+                photoUplaoding ||
+                loading
+              }
             >
               Save
             </Button>

@@ -20,21 +20,24 @@ import AgentProfile from "./pages/AgentProfile";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
-  let accessToken = localStorage.token;
 
   useEffect(() => {
     isAdminRoute = location.pathname.startsWith("/admin");
-    axios.interceptors.request.use(
-      (config) => {
-        // Modify the request configuration or add headers
-        config.headers.Authorization = `Bearer ${accessToken}`;
-        return config;
-      },
-      (error) => {
-        // Handle request errors
-        return Promise.reject(error);
-      }
-    );
+    let accessToken = localStorage.token;
+    if (accessToken) {
+      console.log(accessToken);
+      axios.interceptors.request.use(
+        (config) => {
+          // Modify the request configuration or add headers
+          config.headers.Authorization = `Bearer ${accessToken}`;
+          return config;
+        },
+        (error) => {
+          // Handle request errors
+          return Promise.reject(error);
+        }
+      );
+    }
   }, []);
 
   return (
@@ -52,12 +55,14 @@ function App() {
           <Route path="/about-us" element={<OurStory />} />
           <Route path="/agent/:id" element={<AgentProfile />} />
         </Routes>
-        {isAdminRoute && accessToken && (
+        {isAdminRoute && (
           <Dashboard>
             <Routes>
+              <Route path="/admin/dashboard" element={<Dashboard />} />
               <Route path="/admin/filter" element={<Agent />} />
               <Route path="/admin/agent" element={<Agent />} />
               <Route path="/admin/agent/add" element={<AddAgent />} />
+              <Route path="/admin/agent/edit/:id" element={<AddAgent />} />
               <Route path="/admin/property" element={<Property />} />
             </Routes>
           </Dashboard>

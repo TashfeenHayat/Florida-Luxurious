@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
-import { Space, Card, Button, Table, Input, Popconfirm } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Avatar, Space, Card, Button, Table, Input, Popconfirm } from "antd";
+import { PlusOutlined, UserOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getAgents, deleteAgent } from "../../api/Agents";
 
@@ -12,7 +13,12 @@ function Agents() {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (_, { firstName, lastName }) => `${firstName} ${lastName}`,
+      render: (_, { firstName, lastName, photo }) => (
+        <Space>
+          <Avatar src={photo} size="small" icon={<UserOutlined />} />
+          {firstName} {lastName}
+        </Space>
+      ),
     },
     {
       title: "Email",
@@ -47,9 +53,7 @@ function Agents() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button type="link" href={`/agent/edit/${record._id}`}>
-            Edit
-          </Button>
+          <Link to={`/admin/agent/edit/${record._id}`}>Edit</Link>
           <Popconfirm
             title="Delete this task"
             description="Are you sure to delete this agent ?"
@@ -63,6 +67,12 @@ function Agents() {
       ),
     },
   ];
+  const [tableParams, setTableParams] = useState({
+    pagination: {
+      current: 1,
+      pageSize: 2,
+    },
+  });
   const { isLoading, isError, data } = useSelector((s) => s.getAgentsReducer);
   const dispatch = useDispatch();
 
@@ -70,7 +80,6 @@ function Agents() {
     dispatch(getAgents());
     if (isError) {
       console.log(isError);
-      
     }
   }, []);
 
@@ -79,8 +88,16 @@ function Agents() {
   };
 
   const onDelete = (id) => {
-    console.log(id);
     dispatch(deleteAgent(id));
+  };
+
+  const handleTableChange = (pagination) => {
+    setTableParams(pagination);
+
+    // `dataSource` is useless since `pageSize` changed
+    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
+      // setData([]);
+    }
   };
 
   return (
@@ -94,9 +111,11 @@ function Agents() {
             enterButton
             allowClear
           />
-          <Button type="primary" href="/admin/agent/add">
-            <PlusOutlined />
-            Add
+          <Button type="primary">
+            <Link to="/admin/agent/add">
+              <PlusOutlined />
+              Add
+            </Link>
           </Button>
         </Space>
       }
@@ -106,7 +125,9 @@ function Agents() {
         columns={columns}
         loading={isLoading}
         isError={isError}
-        dataSource={data}
+        pagination={tableParams}
+        dataSource={data?.agents}
+        onChange={handleTableChange}
       />
     </Card>
   );

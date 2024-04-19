@@ -41,9 +41,8 @@ export const getAgent = createAsyncThunk(
 
       return res.data;
     } catch ({ response }) {
-      // console.log(e.response.data.message);
-      const { status, message } = response.data;
-      return rejectWithValue({ status, message });
+      console.log(response.data);
+      return rejectWithValue(response.data);
     }
   }
 );
@@ -52,7 +51,7 @@ export const updateAgent = createAsyncThunk(
   "updateAgentReducer",
   async function (data, { rejectWithValue }) {
     try {
-      const res = await axios.patch(`${api_base_URL}agent`, data);
+      const res = await axios.patch(`${api_base_URL}agent/${data.id}`, data);
       return res.data;
     } catch ({ response }) {
       // console.log(e.response.data.message);
@@ -76,3 +75,5 @@ export const deleteAgent = createAsyncThunk(
     }
   }
 );
+
+export const resetAgent = createAsyncThunk("resetAgentReducer", () => {});
