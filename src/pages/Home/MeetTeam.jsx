@@ -52,7 +52,7 @@ function MeetTeam() {
                   {chunks.map((chunk, index) => (
                     <div
                       key={index}
-                      onClick={() => navigate("/teams")}
+                      onClick={() => navigate("/agents")}
                       style={{ cursor: "pointer" }}
                     >
                       <Row gutter={[20, 40]} align="middle" justify={"center"}>

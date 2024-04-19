@@ -1302,7 +1302,7 @@ body:focus-visible {
 
 .title-line-agent {
   width: 195%;
-  right: -200% !important;
+  right: -185% !important ;
   height: 5px;
   bottom: auto;
   top: 12%;

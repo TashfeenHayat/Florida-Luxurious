@@ -21,9 +21,10 @@ function AgentProfile() {
           <Col lg={8}>
             <Image
               preview={false}
-              src={Team}
+              src={data.photo}
               style={{ marginTop: "-50px" }}
               width="100%"
+              fallback="https://placehold.co/300x388"
             />
           </Col>
           <Col lg={16} className="py-5">
@@ -32,25 +33,15 @@ function AgentProfile() {
                 <span className="about-agent">About</span>
                 <i className="title-line-agent"></i>
                 <br />
-                <span className="agent-first-name">Erika</span>
+                <span className="agent-first-name">{data.firstName}</span>
                 <br />
-                <span className="agent-last-name">Axani</span>
+                <span className="agent-last-name">{data.lastName}</span>
                 <br />
                 <span className="agent-estate">Estate Agent</span>
               </Paragraph>
             </Flex>
             <Paragraph className="agent-description">
-              Erika focuses upon the unique and appealing South Florida
-              lifestyle and her area of expertise is Fort Lauderdale, known as
-              the “Venice of America”. She has a constantly changing listing
-              inventory which varies from luxury oceanfront townhomes, high-rise
-              condominiums, waterfront estate homes and new development. As an
-              analyst with considerable experience in both residential and
-              commercial real estate, she has developed a marketing strategy
-              that has proven successful in identifying the best opportunities
-              for her clients. Erika is passionate about giving back to her
-              community and is deeply involved with a multitude of local
-              charitable organizations in Broward County.
+              {data.description}
             </Paragraph>
           </Col>
         </Row>
