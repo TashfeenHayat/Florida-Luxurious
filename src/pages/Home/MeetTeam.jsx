@@ -21,7 +21,7 @@ function MeetTeam() {
 
   // Divide data into chunks of four
   const chunks = [];
-  for (let i = 0; i < data.length; i += elementsPerChunk) {
+  for (let i = 0; i < data?.length; i += elementsPerChunk) {
     chunks.push(data.slice(i, i + elementsPerChunk));
   }
   const customArrows = {
