@@ -21,7 +21,7 @@ function AgentProfile() {
           <Col lg={8}>
             <Image
               preview={false}
-              src={data.photo}
+              src={data?.photo}
               style={{ marginTop: "-50px" }}
               width="100%"
               fallback="https://placehold.co/300x388"
@@ -33,15 +33,15 @@ function AgentProfile() {
                 <span className="about-agent">About</span>
                 <i className="title-line-agent"></i>
                 <br />
-                <span className="agent-first-name">{data.firstName}</span>
+                <span className="agent-first-name">{data?.firstName}</span>
                 <br />
-                <span className="agent-last-name">{data.lastName}</span>
+                <span className="agent-last-name">{data?.lastName}</span>
                 <br />
                 <span className="agent-estate">Estate Agent</span>
               </Paragraph>
             </Flex>
             <Paragraph className="agent-description">
-              {data.description}
+              {data?.description}
             </Paragraph>
           </Col>
         </Row>
