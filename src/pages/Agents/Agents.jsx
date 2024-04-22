@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 const { Title, Text, Paragraph } = Typography;
 function Agents() {
   const { isLoading, data } = useAgents();
-  console.log(data, "checking");
   const navigate = useNavigate();
   console.log(isLoading);
   return (
