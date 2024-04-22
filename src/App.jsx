@@ -19,6 +19,7 @@ import OurStory from "./pages/About";
 import AgentProfile from "./pages/AgentProfile";
 import Properties from "./pages/Properties";
 import SoldProperties from "./pages/SoldProperties";
+import NotFound from "./pages/NotFound/Error404";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
@@ -58,6 +59,9 @@ function App() {
           <Route path="/agent/:id" element={<AgentProfile />} />
           <Route path="/properties" element={<Properties />} />
           <Route path="/sold-properties" element={<SoldProperties />} />
+          <Route path="/404" element={<NotFound />} />
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
         {isAdminRoute && (
           <Dashboard>

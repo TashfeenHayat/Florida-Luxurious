@@ -282,11 +282,10 @@ body:focus-visible {
 }
 .meet-slider-width {
   display: flex;
-  width: 85%;
+  width: 100%;
 }
 .displayy-teamimg-center {
   position: relative;
-  display: flex !important;
 }
 .slick-prev:before {
   content: "" !important;
@@ -1365,3 +1364,25 @@ body:focus-visible {
   position: relative;
 }
 /* Agent Profile End*/
+.displayy-teamimg-center:hover .more-info-property {
+  height: 100% !important;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: block !important;
+}
+.more-info-property {
+  display: none;
+}
+.displayy-teamimg-center:hover .for-sale-more {
+  display: none;
+}
+.for-sale-properites {
+  height: 50px;
+  width: 45%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -48,7 +48,7 @@ function OurStory() {
                   </Text>
                   <button
                     className="button-secondary text-upper mt-16"
-                    style={{ width: "40%" }}
+                    style={{ width: "45%" }}
                     onClick={() => navigate("/contactus")}
                   >
                     Contact us
