@@ -11,6 +11,7 @@ let initialState = {
   isLoading: false,
   data: null,
   isError: false,
+  errorCode: "",
 };
 
 export const getAgentsSlice = createSlice({
@@ -59,7 +60,7 @@ export const addAgentSlice = createSlice({
     builder.addCase(addAgent.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
-
+      console.log(action.payload);
       notification.error({
         message: "Something went wrong",
         description: action.payload,
@@ -89,10 +90,10 @@ export const getAgentSlice = createSlice({
       state.data = {};
       state.isLoading = false;
       state.isError = true;
-
+      state.errorCode = action.payload.code;
       notification.error({
         message: "Something went wrong",
-        description: action.payload,
+        description: action.payload.message,
         duration: 2,
       });
     });

@@ -39,7 +39,7 @@ function Agents() {
               </Flex>
             ) : (
               <>
-                {data.map((item, index) => (
+                {data?.agents?.map((item, index) => (
                   <Col
                     lg={6}
                     md={12}

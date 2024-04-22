@@ -6,7 +6,7 @@ import NextArrow from "../../assets/nextArrow.svg";
 import Slider from "react-slick";
 import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
-
+import { Container } from "react-bootstrap";
 const { Title, Text, Paragraph } = Typography;
 function FeatureListing() {
   const navigate = useNavigate();
@@ -84,229 +84,145 @@ function FeatureListing() {
         </Text>{" "}
         Listing
       </Paragraph>
-      <Flex
-        justify={"center"}
-        align={"center"}
-        style={{
-          marginTop: 65,
-          marginBottom: 65,
-        }}
-        className="features_section_slider"
-      >
-        <div className="meet-slider-width">
-          <Slider {...settings}>
-            <div
-              className="displayy-teamimg-center"
-              onClick={() => navigate("/features")}
-            >
-              <img src={Property} width="100%" className="img-op" />
+      <Container>
+        <Flex
+          justify={"center"}
+          align={"center"}
+          style={{
+            marginTop: 65,
+            marginBottom: 65,
+          }}
+          className="features_section_slider"
+        >
+          <div className="meet-slider-width">
+            <Slider {...settings}>
+              <div
+                className="displayy-teamimg-center"
+                onClick={() => navigate("/features")}
+              >
+                <img src={Property} width="100%" className="img-op" />
 
-              <div className="info">
-                <Flex justify={"space-between"} align={"center"}>
-                  <button className="button-view">View All</button>
-                  <Flex>
-                    <IoLocationOutline color="white" size={20} />
-                    <Text className="f-14 f-bold text-white">
-                      2572 Mercedes Drive <br />
-                      <IoPricetagOutline size={20} /> $15,000,0000
-                    </Text>
-                  </Flex>
-                </Flex>
-              </div>
-
-              <div className="show-info">
-                <div style={{ background: "#fff", height: "50px" }}>
-                  <Flex
-                    justify={"space-between"}
-                    align={"center"}
-                    style={{ height: "100%" }}
-                  >
-                    <Text className="mx-4 f-16 f-bold">
-                      2572 Mercedes Drive
-                    </Text>
-                    <div className="prop-info">
-                      <Text style={{ color: "white" }} className="text-upper">
-                        {" "}
-                        View More +
+                <div className="info">
+                  <Flex justify={"space-between"} align={"center"}>
+                    <button className="button-view">View All</button>
+                    <Flex>
+                      <IoLocationOutline color="white" size={20} />
+                      <Text className="f-14 f-bold text-white">
+                        2572 Mercedes Drive <br />
+                        <IoPricetagOutline size={20} /> $15,000,0000
                       </Text>
-                    </div>
+                    </Flex>
                   </Flex>
                 </div>
-              </div>
-            </div>
 
-            <div
-              onClick={() => navigate("/features")}
-              className="displayy-teamimg-center"
-            >
-              <img src={Property} width="100%" className="img-op" />
-              {/* <div className="p-absoulte right-0">
-                <div
-                  style={{
-                    height: "45px",
-                    width: "150px",
-                    background: "black",
-                  }}
-                >
-                  <Flex
-                    justify={"center"}
-                    align="center"
-                    style={{ height: "inherit" }}
-                  >
-                    <Text
-                      style={{
-                        color: "white",
-                        textTransform: "uppercase",
-                        lineHeight: "23.8px",
-                        letterSpacing: "1px",
-                        fontWeight: "bold",
-                        fontSize: "14px",
-                      }}
+                <div className="show-info">
+                  <div style={{ background: "#fff", height: "50px" }}>
+                    <Flex
+                      justify={"space-between"}
+                      align={"center"}
+                      style={{ height: "100%" }}
                     >
-                      For Sale
-                    </Text>
+                      <Text className="mx-4 f-16 f-bold">
+                        2572 Mercedes Drive
+                      </Text>
+                      <div className="prop-info">
+                        <Text style={{ color: "white" }} className="text-upper">
+                          {" "}
+                          View More +
+                        </Text>
+                      </div>
+                    </Flex>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                className="displayy-teamimg-center"
+                onClick={() => navigate("/features")}
+              >
+                <img src={Property} width="100%" className="img-op" />
+
+                <div className="info">
+                  <Flex justify={"space-between"} align={"center"}>
+                    <button className="button-view">View All</button>
+                    <Flex>
+                      <IoLocationOutline color="white" size={20} />
+                      <Text className="f-14 f-bold text-white">
+                        2572 Mercedes Drive <br />
+                        <IoPricetagOutline size={20} /> $15,000,0000
+                      </Text>
+                    </Flex>
                   </Flex>
                 </div>
-              </div> */}
-              <div className="p-absoulte w-100 bottom-20 left-20">
-                <Flex
-                  justify={"space-between"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                >
-                  <button className="button-view">View All</button>
-                  <Flex>
-                    <IoLocationOutline color="white" size={20} />
-                    <Text
-                      style={{
-                        lineHeight: "22px",
-                        letterSpacing: "0%",
-                      }}
-                      className="f-14 f-bold text-white"
+
+                <div className="show-info">
+                  <div style={{ background: "#fff", height: "50px" }}>
+                    <Flex
+                      justify={"space-between"}
+                      align={"center"}
+                      style={{ height: "100%" }}
                     >
-                      2572 Mercedes Drive <br />
-                      <IoPricetagOutline size={20} /> $15,000,0000
-                    </Text>
-                  </Flex>
-                </Flex>
+                      <Text className="mx-4 f-16 f-bold">
+                        2572 Mercedes Drive
+                      </Text>
+                      <div className="prop-info">
+                        <Text style={{ color: "white" }} className="text-upper">
+                          {" "}
+                          View More +
+                        </Text>
+                      </div>
+                    </Flex>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div
-              onClick={() => navigate("/features")}
-              className="displayy-teamimg-center"
-            >
-              <img src={Property} width="100%" className="img-op" />
-              {/* <div className="p-absoulte right-0">
-                <div
-                  style={{
-                    height: "45px",
-                    width: "150px",
-                    background: "black",
-                  }}
-                >
-                  <Flex
-                    justify={"center"}
-                    align="center"
-                    style={{ height: "inherit" }}
-                  >
-                    <Text
-                      style={{
-                        color: "white",
-                        textTransform: "uppercase",
-                        lineHeight: "23.8px",
-                        letterSpacing: "1px",
-                        fontWeight: "bold",
-                        fontSize: "14px",
-                      }}
-                    >
-                      For Sale
-                    </Text>
+
+              <div
+                onClick={() => navigate("/features")}
+                className="displayy-teamimg-center"
+              >
+                <img src={Property} width="100%" className="img-op" />
+                <div className="info">
+                  <Flex justify={"space-between"} align={"center"}>
+                    <button className="button-view">View All</button>
+                    <Flex>
+                      <IoLocationOutline color="white" size={20} />
+                      <Text className="f-14 f-bold text-white">
+                        2572 Mercedes Drive <br />
+                        <IoPricetagOutline size={20} /> $15,000,0000
+                      </Text>
+                    </Flex>
                   </Flex>
                 </div>
-              </div> */}
-              <div className="p-absoulte w-100 bottom-20 left-20">
-                <Flex
-                  justify={"space-between"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                >
-                  <button className="button-view">View All</button>
-                  <Flex>
-                    <IoLocationOutline color="white" size={20} />
-                    <Text
-                      style={{
-                        lineHeight: "22px",
-                        letterSpacing: "0%",
-                      }}
-                      className="f-14 f-bold text-white"
+
+                <div className="show-info">
+                  <div style={{ background: "#fff", height: "50px" }}>
+                    <Flex
+                      justify={"space-between"}
+                      align={"center"}
+                      style={{ height: "100%" }}
                     >
-                      2572 Mercedes Drive <br />
-                      <IoPricetagOutline size={20} /> $15,000,0000
-                    </Text>
-                  </Flex>
-                </Flex>
-              </div>
-            </div>
-            <div
-              onClick={() => navigate("/features")}
-              className="displayy-teamimg-center"
-            >
-              <img src={Property} width="100%" className="img-op" />
-              {/* <div className="p-absoulte right-0">
-                <div
-                  style={{
-                    height: "45px",
-                    width: "150px",
-                    background: "black",
-                  }}
-                >
-                  <Flex
-                    justify={"center"}
-                    align="center"
-                    style={{ height: "inherit" }}
-                  >
-                    <Text
-                      style={{
-                        color: "white",
-                        textTransform: "uppercase",
-                        lineHeight: "23.8px",
-                        letterSpacing: "1px",
-                        fontWeight: "bold",
-                        fontSize: "14px",
-                      }}
-                    >
-                      For Sale
-                    </Text>
-                  </Flex>
+                      <Text className="mx-4 f-16 f-bold">
+                        2572 Mercedes Drive
+                      </Text>
+                      <div className="prop-info">
+                        <Text style={{ color: "white" }} className="text-upper">
+                          {" "}
+                          View More +
+                        </Text>
+                      </div>
+                    </Flex>
+                  </div>
                 </div>
-              </div> */}
-              <div className="p-absoulte w-100 bottom-20 left-20">
-                <Flex
-                  justify={"space-between"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                >
-                  <button className="button-view">View All</button>
-                  <Flex>
-                    <IoLocationOutline color="white" size={20} />
-                    <Text
-                      style={{
-                        lineHeight: "22px",
-                        letterSpacing: "0%",
-                      }}
-                      className="f-14 f-bold text-white"
-                    >
-                      2572 Mercedes Drive <br />
-                      <IoPricetagOutline size={20} /> $15,000,0000
-                    </Text>
-                  </Flex>
-                </Flex>
               </div>
-            </div>
-          </Slider>
-        </div>
-      </Flex>
-      <Flex justify="center" align="center">
+            </Slider>
+          </div>
+        </Flex>
+      </Container>
+      <Flex
+        justify="center"
+        align="center"
+        onClick={() => navigate("/properties")}
+      >
         <button className="button-view1">View All</button>
       </Flex>
     </div>

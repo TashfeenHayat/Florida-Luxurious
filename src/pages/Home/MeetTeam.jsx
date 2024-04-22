@@ -2,33 +2,80 @@ import React, { useRef } from "react";
 import { Typography, Carousel, Row, Col, Image, Flex, Grid } from "antd";
 import { Container } from "react-bootstrap";
 import LetTalk from "../../components/LetTalk";
-import FlipCard from "../../components/Flipcard";
+import Slider from "react-slick";
+import Flip from "../../components/Flipcard";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
 import { useNavigate } from "react-router-dom";
 import useAgents from "../../hooks/useAgents";
-const { Title } = Typography;
-const { useBreakpoint } = Grid;
+
+const { Title, Text, Paragraph } = Typography;
 
 function MeetTeam() {
-  const { isLoading, data } = useAgents();
-
-  const ref = useRef();
   const navigate = useNavigate();
-  const screens = useBreakpoint();
-  const elementsPerChunk = screens.lg ? 4 : screens.md ? 2 : 1;
-  // Your image array
-
-  // Divide data into chunks of four
-  const chunks = [];
-  for (let i = 0; i < data?.length; i += elementsPerChunk) {
-    chunks.push(data.slice(i, i + elementsPerChunk));
-  }
-  const customArrows = {
-    prevArrow: <BackArrow />,
-    nextArrow: <NextArrow />,
+  const { data, isLoading } = useAgents();
+  const CustomPrevArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", zIndex: 10 }}
+        onClick={onClick}
+      >
+        <img src={BackArrow} alt="Previous" width="45px" />
+      </div>
+    );
   };
 
+  const CustomNextArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block", zIndex: 10 }}
+        onClick={onClick}
+      >
+        <img src={NextArrow} alt="Next" width="45px" />
+      </div>
+    );
+  };
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: data?.agents?.length >= 2 ? 2 : 3,
+    slidesToScroll: data?.agents?.length >= 2 ? 2 : 3,
+    prevArrow: <CustomPrevArrow />,
+    nextArrow: <CustomNextArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 425,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          prevArrow: false,
+          nextArrow: false,
+        },
+      },
+
+      // Add more breakpoints as needed
+    ],
+  };
   return (
     <>
       <div style={{ background: "black" }}>
@@ -37,94 +84,65 @@ function MeetTeam() {
             Meet The Team
           </Title>
           <Container className="pt-4">
-            <Row align={"middle"} justify={"center"}>
-              <Col lg={2} md={4} pull={0} sm={6}>
-                <Image
-                  src={BackArrow}
-                  preview={false}
-                  width={"50%"}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => ref.current.prev()}
-                />
-              </Col>
-              <Col lg={20} md={16} sm={12} align={"middle"}>
-                <Carousel dots={false} ref={ref}>
-                  {chunks.map((chunk, index) => (
-                    <div
-                      key={index}
-                      onClick={() => navigate("/agents")}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <Row
-                        gutter={[20, 40]}
-                        align="middle"
-                        justify={"center"}
+            <Flex className="features_section_slider">
+              <Row>
+                <Col span={24}>
+                  <Slider {...settings}>
+                    {data?.agents.map((agent, index) => (
+                      <div
                         key={index}
+                        className="displayy-teamimg-center"
+                        onClick={() => navigate(`/agent/${agent._id}`)}
                       >
-                        {chunk.map((image, idx) => (
-                          <Col lg={6} md={12} sm={24} align="middle" key={idx}>
-                            <FlipCard
-                              fImg={
-                                <img
-                                  key={idx}
-                                  src={
-                                    image.photo
-                                      ? image.photo
-                                      : "https://placehold.co/300x388"
-                                  }
-                                  alt={"https://placehold.co/300x388"}
-                                  style={{ width: "100%" }}
-                                  onError={({ currentTarget }) =>
-                                    (currentTarget.src =
-                                      "https://placehold.co/300x388")
-                                  }
-                                />
+                        <Flip
+                          fImg={
+                            <Image
+                              src={
+                                agent.photo
+                                  ? agent.photo
+                                  : "https://placehold.co/300x388"
                               }
-                              bImg={
-                                <img
-                                  key={idx}
-                                  src={
-                                    image.photo
-                                      ? image.photo
-                                      : "https://placehold.co/300x388"
-                                  }
-                                  alt={`Team ${idx}`}
-                                  style={{ width: "100%" }}
-                                  className="img-op1"
-                                  onError={({ currentTarget }) =>
-                                    (currentTarget.src =
-                                      "https://placehold.co/300x388")
-                                  }
-                                />
+                              className=""
+                              preview={false}
+                              fallback="https://placehold.co/300x388"
+                            />
+                          }
+                          bImg={
+                            <Image
+                              src={
+                                agent.photo
+                                  ? agent.photo
+                                  : "https://placehold.co/300x388"
                               }
-                            >
-                              <div className="p-absoulte p-b-30-left-0 w-100">
-                                <Flex justify="center" align="center">
-                                  <button className="team-view-btn">
-                                    View More{" "}
-                                  </button>
-                                </Flex>
-                              </div>
-                            </FlipCard>
-                          </Col>
-                        ))}
-                      </Row>
-                    </div>
-                  ))}
-                </Carousel>
-              </Col>
-
-              <Col lg={2} md={4} push={1} sm={6}>
-                <Image
-                  src={NextArrow}
-                  preview={false}
-                  width={"50%"}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => ref.current.next()}
-                />
-              </Col>
-            </Row>
+                              preview={false}
+                              fallback="https://placehold.co/300x388"
+                              className="img-op1"
+                            />
+                          }
+                        >
+                          <div className="p-absoulte p-b-30-left-0 w-100">
+                            <Flex justify="center" align="center">
+                              <button className="team-view-btn">
+                                View More{" "}
+                              </button>
+                            </Flex>
+                          </div>
+                        </Flip>
+                      </div>
+                    ))}
+                  </Slider>
+                </Col>
+              </Row>
+            </Flex>
           </Container>
+          <Flex
+            justify="center"
+            align="center"
+            onClick={() => navigate("/agents")}
+            className="mt-5"
+          >
+            <button className="let-talk-btn">View All</button>
+          </Flex>
         </div>
       </div>
       <LetTalk />
