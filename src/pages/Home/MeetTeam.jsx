@@ -6,12 +6,12 @@ import FlipCard from "../../components/Flipcard";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
 import { useNavigate } from "react-router-dom";
-import useTeamMembers from "../../hooks/useTeamMembers";
+import useAgents from "../../hooks/useAgents";
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
 function MeetTeam() {
-  const { isLoading, data } = useTeamMembers();
+  const { isLoading, data } = useAgents();
 
   const ref = useRef();
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ function MeetTeam() {
 
   // Divide data into chunks of four
   const chunks = [];
-  for (let i = 0; i < data.length; i += elementsPerChunk) {
+  for (let i = 0; i < data?.length; i += elementsPerChunk) {
     chunks.push(data.slice(i, i + elementsPerChunk));
   }
   const customArrows = {
@@ -52,12 +52,17 @@ function MeetTeam() {
                   {chunks.map((chunk, index) => (
                     <div
                       key={index}
-                      onClick={() => navigate("/teams")}
+                      onClick={() => navigate("/agents")}
                       style={{ cursor: "pointer" }}
                     >
-                      <Row gutter={[20, 40]} align="middle" justify={"center"}>
+                      <Row
+                        gutter={[20, 40]}
+                        align="middle"
+                        justify={"center"}
+                        key={index}
+                      >
                         {chunk.map((image, idx) => (
-                          <Col lg={6} md={12} sm={24} align="middle">
+                          <Col lg={6} md={12} sm={24} align="middle" key={idx}>
                             <FlipCard
                               fImg={
                                 <img

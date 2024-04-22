@@ -43,23 +43,23 @@ function Dashboard({ children }) {
   };
 
   useEffect(() => {
-    let accessToken = localStorage.token;
-    console.log(accessToken);
-    if (accessToken) {
-      axios.interceptors.request.use(
-        (config) => {
-          // Modify the request configuration or add headers
-          config.headers.Authorization = `Bearer ${accessToken}`;
-          return config;
-        },
-        (error) => {
-          // Handle request errors
-          return Promise.reject(error);
-        }
-      );
-    } else {
-      navigate("/admin/login");
-    }
+    // let accessToken = localStorage.token;
+    // if (accessToken) {
+    //   console.log(accessToken);
+    //   axios.interceptors.request.use(
+    //     (config) => {
+    //       // Modify the request configuration or add headers
+    //       config.headers.Authorization = `Bearer ${accessToken}`;
+    //       return config;
+    //     },
+    //     (error) => {
+    //       // Handle request errors
+    //       return Promise.reject(error);
+    //     }
+    //   );
+    // } else {
+    //   navigate("/admin/login");
+    // }
   }, []);
 
   const {
@@ -84,17 +84,17 @@ function Dashboard({ children }) {
             {
               key: "/admin/filter",
               icon: <FunnelPlotOutlined />,
-              label: "Filter",
+              label: "Filters",
             },
             {
               key: "/admin/agent",
               icon: <UsergroupAddOutlined />,
-              label: "Agent",
+              label: "Agents",
             },
             {
               key: "/admin/property",
               icon: <PropertySafetyOutlined />,
-              label: "Property",
+              label: "Properties",
             },
           ]}
         />
