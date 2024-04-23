@@ -49,13 +49,13 @@ function App() {
       <TopToScroll>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/features" element={<DetailProperty />} />
-          <Route path="/agents" element={<Agents />} />
+          <Route path="/meet-the-team" element={<Agents />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/login" element={<LoginAdmin />} />
           <Route path="/admin/signup" element={<Signup />} />
-          <Route path="/about-us" element={<OurStory />} />
+          <Route path="/our-story" element={<OurStory />} />
           <Route path="/agent/:id" element={<AgentProfile />} />
           <Route path="/properties" element={<Properties />} />
           <Route path="/sold-properties" element={<SoldProperties />} />

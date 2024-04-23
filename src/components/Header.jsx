@@ -49,22 +49,34 @@ function Header() {
             overlay={
               <Menu style={menuStyle}>
                 <Menu.Item style={contentStyle}>
-                  <a
+                  <Link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-upper"
+                    onClick={() => navigate("/properties")}
+                  >
+                    Featured properties
+                  </Link>
+                </Menu.Item>
+                <Menu.Item>
+                  <Link
                     href="https://www.antgroup.com"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="text-upper"
                   >
-                    Other Offering 1
-                  </a>
+                    Featured neighborhood
+                  </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <a
-                    href="https://www.aliyun.com"
+                  <Link
+                    onClick={() => navigate("/sold-properties")}
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="text-upper"
                   >
-                    Other Offering 2
-                  </a>
+                    Sold Properties
+                  </Link>
                 </Menu.Item>
               </Menu>
             }
@@ -107,17 +119,38 @@ function Header() {
               Search by Location
             </a>
           </Dropdown>
-          <Link to="/about-us" style={{ textDecoration: "underline" }}>
-            <a>About</a>
-          </Link>
           <Dropdown
             overlay={
-              <Menu>
-                <Menu.Item>
-                  <a href="#">Option A</a>
+              <Menu style={menuStyle}>
+                <Menu.Item style={contentStyle}>
+                  <Link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-upper"
+                    onClick={() => navigate("/our-story")}
+                  >
+                    Our story
+                  </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <a href="#">Option B</a>
+                  <Link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-upper"
+                    onClick={() => navigate("/meet-the-team")}
+                  >
+                    Meet the team
+                  </Link>
+                </Menu.Item>
+                <Menu.Item>
+                  <Link
+                    onClick={() => navigate("/sold-properties")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-upper"
+                  >
+                    Property press
+                  </Link>
                 </Menu.Item>
               </Menu>
             }
@@ -126,10 +159,20 @@ function Header() {
               className="ant-dropdown-link"
               onClick={(e) => e.preventDefault()}
             >
-              For Boat Owners
+              About
             </a>
           </Dropdown>
-          <a href="#">Contact Us</a>
+
+          <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+            For Boat Owners
+          </a>
+          <Link
+            href="#"
+            target="_blank"
+            onClick={() => navigate("/contact-us")}
+          >
+            Contact Us
+          </Link>
         </Flex>
 
         <Flex onClick={handleDrawer}>
