@@ -8,6 +8,13 @@ import {
   deleteAgentSlice,
   resetAgentSlice,
 } from "./slices/AgentSlice";
+import {
+  getFiltersSlice,
+  addFilterSlice,
+  getFilterSlice,
+  updateFilterSlice,
+  deleteFilterSlice,
+} from "./slices/FilterSlice";
 import { contactUsSlice } from "./slices/ContactusSlice";
 
 export const store = configureStore({
@@ -20,5 +27,10 @@ export const store = configureStore({
     deleteAgentReducer: deleteAgentSlice,
     contactUsReducer: contactUsSlice,
     resetAgentReducer: resetAgentSlice,
+    getFiltersReducer: getFiltersSlice,
+    addFilterReducer: addFilterSlice,
+    getFilterReducer: getFilterSlice,
+    updateFilterReducer: updateFilterSlice,
+    deleteFilterReducer: deleteFilterSlice,
   },
 });

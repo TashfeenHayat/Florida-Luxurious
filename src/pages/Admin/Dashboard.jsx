@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-
+import { Outlet } from "react-router-dom";
 import { Layout, Menu, Button, theme, Avatar, Dropdown } from "antd";
 import {
   MenuFoldOutlined,
@@ -14,7 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 const { Header, Sider, Content } = Layout;
 
-function Dashboard({ children }) {
+function Dashboard() {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const items = [
@@ -67,77 +66,79 @@ function Dashboard({ children }) {
   } = theme.useToken();
 
   return (
-    <Layout style={{ height: "100vh" }}>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical" />
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          onClick={handleSideMenu}
-          items={[
-            {
-              key: "/admin/dashboard",
-              icon: <BarChartOutlined />,
-              label: "Dashboard",
-            },
-            {
-              key: "/admin/filter",
-              icon: <FunnelPlotOutlined />,
-              label: "Filters",
-            },
-            {
-              key: "/admin/agent",
-              icon: <UsergroupAddOutlined />,
-              label: "Agents",
-            },
-            {
-              key: "/admin/property",
-              icon: <PropertySafetyOutlined />,
-              label: "Properties",
-            },
-          ]}
-        />
-      </Sider>
+    <>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
-          <div className="flex-between">
-            <Button
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-              style={{
-                fontSize: "16px",
-                width: 64,
-                height: 64,
-              }}
-            />
+        <Sider trigger={null} collapsible collapsed={collapsed}>
+          <div className="demo-logo-vertical" />
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={["1"]}
+            onClick={handleSideMenu}
+            items={[
+              {
+                key: "/admin/dashboard",
+                icon: <BarChartOutlined />,
+                label: "Dashboard",
+              },
+              {
+                key: "/admin/filter",
+                icon: <FunnelPlotOutlined />,
+                label: "Filters",
+              },
+              {
+                key: "/admin/agent",
+                icon: <UsergroupAddOutlined />,
+                label: "Agents",
+              },
+              {
+                key: "/admin/property",
+                icon: <PropertySafetyOutlined />,
+                label: "Properties",
+              },
+            ]}
+          />
+        </Sider>
+        <Layout>
+          <Header style={{ padding: 0, background: colorBgContainer }}>
+            <div className="flex-between">
+              <Button
+                type="text"
+                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                onClick={() => setCollapsed(!collapsed)}
+                style={{
+                  fontSize: "16px",
+                  width: 64,
+                  height: 64,
+                }}
+              />
 
-            <Dropdown
-              menu={{
-                items,
-                onClick: (e) => handleMenu(e),
-              }}
-              placement="bottomLeft"
-            >
-              <Avatar size="large" icon={<UserOutlined />} />
-            </Dropdown>
-          </div>
-        </Header>
+              <Dropdown
+                menu={{
+                  items,
+                  onClick: (e) => handleMenu(e),
+                }}
+                placement="bottomLeft"
+              >
+                <Avatar size="large" icon={<UserOutlined />} />
+              </Dropdown>
+            </div>
+          </Header>
 
-        <Content
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-          }}
-        >
-          {children}
-        </Content>
+          <Content
+            style={{
+              margin: "24px 16px",
+              padding: 24,
+              minHeight: 280,
+              background: colorBgContainer,
+              borderRadius: borderRadiusLG,
+            }}
+          >
+            <Outlet />
+          </Content>
+        </Layout>
       </Layout>
-    </Layout>
+    </>
   );
 }
 

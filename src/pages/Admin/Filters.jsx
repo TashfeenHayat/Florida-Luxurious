@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Avatar, Space, Card, Button, Table, Input, Popconfirm } from "antd";
 import { PlusOutlined, UserOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getAgents, deleteAgent } from "../../api/Agents";
+import { getFilters, deleteFilter } from "../../api/Filters";
 
 const { Search } = Input;
 
@@ -13,22 +13,6 @@ function Filters() {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (_, { firstName, lastName, photo }) => (
-        <Space>
-          <Avatar src={photo} size="small" icon={<UserOutlined />} />
-          {firstName} {lastName}
-        </Space>
-      ),
-    },
-    {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-    },
-    {
-      title: "Phone No",
-      dataIndex: "phoneNumber",
-      key: "phone",
     },
     {
       title: "Code",
@@ -36,27 +20,19 @@ function Filters() {
       key: "code",
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      render: (_, { address }) => {
-        // if (!address.addressLine2) address.addressLine2 = "";
-        if (address)
-          return `${address.addressLine1} 
-        ${address.addressLine2 ? address.addressLine2 : ""} 
-        ${address.city} ${address.state} 
-        ${address.zipCode} ${address.country}`;
-      },
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
     },
     {
       title: "Action",
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Link to={`/admin/agent/edit/${record._id}`}>Edit</Link>
+          <Link to={`/admin/filter/edit/${record._id}`}>Edit</Link>
           <Popconfirm
             title="Delete this task"
-            description="Are you sure to delete this agent ?"
+            description="Are you sure to delete this filter ?"
             okText="Yes"
             cancelText="No"
             onConfirm={() => onDelete(record._id)}
@@ -73,22 +49,22 @@ function Filters() {
       pageSize: 2,
     },
   });
-  const { isLoading, isError, data } = useSelector((s) => s.getAgentsReducer);
+  const { isLoading, isError, data } = useSelector((s) => s.getFiltersReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAgents());
+    dispatch(getFilters());
     if (isError) {
       console.log(isError);
     }
   }, []);
 
   const onSearch = (text) => {
-    dispatch(getAgents(text));
+    dispatch(getFilters(text));
   };
 
   const onDelete = (id) => {
-    dispatch(deleteAgent(id));
+    dispatch(deleteFilter(id));
   };
 
   const handleTableChange = (pagination) => {
@@ -102,7 +78,7 @@ function Filters() {
 
   return (
     <Card
-      title="Agents"
+      title="Filters"
       extra={
         <Space>
           <Search
@@ -112,7 +88,7 @@ function Filters() {
             allowClear
           />
           <Button type="primary">
-            <Link to="/admin/agent/add">
+            <Link to="/admin/filter/add">
               <PlusOutlined />
               Add
             </Link>
@@ -126,7 +102,7 @@ function Filters() {
         loading={isLoading}
         isError={isError}
         pagination={tableParams}
-        dataSource={data?.agents}
+        dataSource={data}
         onChange={handleTableChange}
       />
     </Card>

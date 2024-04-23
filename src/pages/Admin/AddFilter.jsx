@@ -116,7 +116,7 @@ function AddFilter() {
   );
 
   return (
-    <Card title={id ? "Edit Agent" : "Add Agent"} loading={loading}>
+    <Card title={id ? "Edit Filter" : "Add Filter"} loading={loading}>
       {contextHolder}
       <Form initialValues={initialVlues} name="add_agent" onFinish={onFinish}>
         <Row justify="center">

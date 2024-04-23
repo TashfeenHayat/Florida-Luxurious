@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
 import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Admin/Dashboard";
 import Agent from "./pages/Admin/Agents";
 import AddAgent from "./pages/Admin/AddAgent";
+import Filter from "./pages/Admin/Filters";
+import AddFilter from "./pages/Admin/AddFilter";
 import Property from "./pages/Admin/Property";
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -29,11 +30,10 @@ function App() {
       {!isAdminRoute && <Header />}
       <TopToScroll>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} exact />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/features" element={<DetailProperty />} />
           <Route path="/meet-the-team" element={<Agents />} />
-          <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/login" element={<LoginAdmin />} />
           <Route path="/admin/signup" element={<Signup />} />
           <Route path="/our-story" element={<OurStory />} />
@@ -41,21 +41,17 @@ function App() {
           <Route path="/properties" element={<Properties />} />
           <Route path="/sold-properties" element={<SoldProperties />} />
           <Route path="/404" element={<NotFound />} />
-
-          <Route path="*" element={<NotFound />} />
+          <Route element={<Dashboard />}>
+            <Route path="/admin/dashboard" element={<p>Dashboard</p>} />
+            <Route path="/admin/filter" element={<Filter />} />
+            <Route path="/admin/filter/add" element={<AddFilter />} />
+            <Route path="/admin/filter/edit/:id" element={<AddFilter />} />
+            <Route path="/admin/agent" element={<Agent />} />
+            <Route path="/admin/agent/add" element={<AddAgent />} />
+            <Route path="/admin/agent/edit/:id" element={<AddAgent />} />
+            <Route path="/admin/property" element={<Property />} />
+          </Route>
         </Routes>
-        {isAdminRoute && (
-          <Dashboard>
-            <Routes>
-              <Route path="/admin/dashboard" element={<Dashboard />} />
-              <Route path="/admin/filter" element={<Agent />} />
-              <Route path="/admin/agent" element={<Agent />} />
-              <Route path="/admin/agent/add" element={<AddAgent />} />
-              <Route path="/admin/agent/edit/:id" element={<AddAgent />} />
-              <Route path="/admin/property" element={<Property />} />
-            </Routes>
-          </Dashboard>
-        )}
       </TopToScroll>
       {!isAdminRoute && <Footer />}
     </>
