@@ -138,6 +138,8 @@ function Properties() {
             total={properties.length}
             pageSize={itemsPerPage}
             onChange={handlePageChange}
+            responsive
+            
           />
         </Flex>
       </Container>

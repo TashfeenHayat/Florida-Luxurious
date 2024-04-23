@@ -564,6 +564,10 @@ body:focus-visible {
 .ant-drawer-wrapper-open {
   outline: none !important; /* Remove outline */
 }
+:where(.css-dev-only-do-not-override-1kuana8).ant-pagination
+  .ant-pagination-item-active {
+  border-color: black !important;
+}
 
 .ant-drawer-mask:focus,
 .ant-drawer-mask:active {
