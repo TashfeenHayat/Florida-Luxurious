@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Logo from "../assets/Logo.svg";
-import { Link } from "react-router-dom";
-import { Flex, Image } from "antd";
-import { DownOutlined, SmileOutlined } from "@ant-design/icons";
-import { Dropdown, Divider } from "antd";
-import { useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Flex, Image, Dropdown, Menu } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 import Drawer from "../components/Drawer";
 
 const contentStyle = {
@@ -22,7 +20,7 @@ const menuStyle = {
 
 function Header() {
   const navbar = useRef(null);
-
+  const navigate = useNavigate();
   const [openDrawer, setOpenDrawer] = useState(false);
 
   useEffect(() => {
@@ -35,6 +33,7 @@ function Header() {
       document.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   const handleDrawer = () => {
     setOpenDrawer(!openDrawer);
   };
@@ -47,54 +46,133 @@ function Header() {
         </Link>
         <Flex className="flex-hidden">
           <Dropdown
-            menu={{ items }}
-            dropdownRender={(menu) => (
-              <div style={contentStyle}>
-                {React.cloneElement(menu, { style: menuStyle })}
-              </div>
-            )}
+            overlay={
+              <Menu style={menuStyle}>
+                <Menu.Item style={contentStyle}>
+                  <Link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-upper"
+                    onClick={() => navigate("/properties")}
+                  >
+                    Featured properties
+                  </Link>
+                </Menu.Item>
+                <Menu.Item>
+                  <Link
+                    href="https://www.antgroup.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-upper"
+                  >
+                    Featured neighborhood
+                  </Link>
+                </Menu.Item>
+                <Menu.Item>
+                  <Link
+                    onClick={() => navigate("/sold-properties")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-upper"
+                  >
+                    Sold Properties
+                  </Link>
+                </Menu.Item>
+              </Menu>
+            }
           >
-            <a onClick={(e) => e.preventDefault()}>
-              <a href="#">Our offerings</a>
+            <a
+              className="ant-dropdown-link"
+              onClick={(e) => e.preventDefault()}
+            >
+              Our Offerings
             </a>
           </Dropdown>
           <Dropdown
-            menu={{ items }}
-            dropdownRender={(menu) => (
-              <div style={contentStyle}>
-                {React.cloneElement(menu, { style: menuStyle })}
-              </div>
-            )}
+            overlay={
+              <Menu style={menuStyle}>
+                <Menu.Item style={contentStyle}>
+                  <a
+                    href="https://www.antgroup.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Other Offering 1
+                  </a>
+                </Menu.Item>
+                <Menu.Item>
+                  <a
+                    href="https://www.aliyun.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Other Offering 2
+                  </a>
+                </Menu.Item>
+              </Menu>
+            }
           >
-            <a onClick={(e) => e.preventDefault()}>
-              <a href="#">Search by location</a>
+            <a
+              className="ant-dropdown-link"
+              onClick={(e) => e.preventDefault()}
+            >
+              Search by Location
             </a>
           </Dropdown>
           <Dropdown
-            menu={{ items }}
-            dropdownRender={(menu) => (
-              <div style={contentStyle}>
-                {React.cloneElement(menu, { style: menuStyle })}
-              </div>
-            )}
+            overlay={
+              <Menu style={menuStyle}>
+                <Menu.Item style={contentStyle}>
+                  <Link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-upper"
+                    onClick={() => navigate("/our-story")}
+                  >
+                    Our story
+                  </Link>
+                </Menu.Item>
+                <Menu.Item>
+                  <Link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-upper"
+                    onClick={() => navigate("/meet-the-team")}
+                  >
+                    Meet the team
+                  </Link>
+                </Menu.Item>
+                <Menu.Item>
+                  <Link
+                    onClick={() => navigate("/sold-properties")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-upper"
+                  >
+                    Property press
+                  </Link>
+                </Menu.Item>
+              </Menu>
+            }
           >
-            <a onClick={(e) => e.preventDefault()}>
-              <a href="#">About</a>
+            <a
+              className="ant-dropdown-link"
+              onClick={(e) => e.preventDefault()}
+            >
+              About
             </a>
           </Dropdown>
-          <Dropdown
-            menu={{ items }}
-            dropdownRender={(menu) => (
-              <div style={contentStyle}>
-                {React.cloneElement(menu, { style: menuStyle })}
-              </div>
-            )}
+
+          <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+            For Boat Owners
+          </a>
+          <Link
+            href="#"
+            target="_blank"
+            onClick={() => navigate("/contact-us")}
           >
-            <a onClick={(e) => e.preventDefault()}>
-              <a href="#">For Boat Owners</a>
-            </a>
-          </Dropdown>
-          <a href="#">Contact Us</a>
+            Contact Us
+          </Link>
         </Flex>
 
         <Flex onClick={handleDrawer}>
@@ -113,38 +191,9 @@ function Header() {
           </span>
           <Drawer setOpenDrawer={setOpenDrawer} openDrawer={openDrawer} />
         </Flex>
-
-        {/* -- -- */}
       </Flex>
     </nav>
   );
 }
 
 export default Header;
-
-const items = [
-  {
-    key: "1",
-    label: (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.antgroup.com"
-      >
-        Other Offering
-      </a>
-    ),
-  },
-  {
-    key: "2",
-    label: (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://www.aliyun.com"
-      >
-        Other Offering
-      </a>
-    ),
-  },
-];

@@ -1,12 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api_base_URL } from "../const/Const";
 import axios from "axios";
+import customAxios from './Axios';
+
 
 export const getAgents = createAsyncThunk(
   "getAgentsReducer",
   async function (key, { rejectWithValue }) {
     try {
-      const res = await axios.get(`${api_base_URL}agent`, {
+      const res = await customAxios.get(`agent`, {
         params: { key },
       });
 
@@ -22,7 +24,7 @@ export const addAgent = createAsyncThunk(
   "addAgentReducer",
   async function (data, { rejectWithValue }) {
     try {
-      const res = await axios.post(`${api_base_URL}agent`, data);
+      const res = await customAxios.post(`agent`, data);
       return res.data;
     } catch ({ response }) {
       // console.log(e.response.data.message);
@@ -37,7 +39,7 @@ export const getAgent = createAsyncThunk(
   async function (id, { rejectWithValue }) {
     console.log(id);
     try {
-      const res = await axios.get(`${api_base_URL}agent/${id}`);
+      const res = await customAxios.get(`agent/${id}`);
 
       return res.data;
     } catch ({ response }) {
@@ -51,7 +53,7 @@ export const updateAgent = createAsyncThunk(
   "updateAgentReducer",
   async function (data, { rejectWithValue }) {
     try {
-      const res = await axios.patch(`${api_base_URL}agent/${data.id}`, data);
+      const res = await customAxios.patch(`agent/${data.id}`, data);
       return res.data;
     } catch ({ response }) {
       // console.log(e.response.data.message);
@@ -65,7 +67,7 @@ export const deleteAgent = createAsyncThunk(
   "deleteAgentReducer",
   async function (id, { rejectWithValue, dispatch }) {
     try {
-      const res = await axios.delete(`${api_base_URL}agent/${id}`);
+      const res = await customAxios.delete(`agent/${id}`);
       dispatch(getAgents());
       return res.data;
     } catch ({ response }) {
