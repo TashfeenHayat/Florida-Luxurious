@@ -1,4 +1,4 @@
-import { getProperties } from "../../api/Property";
+import { getProperties, getProperty } from "../../api/Property";
 import { createSlice } from "@reduxjs/toolkit";
 import { notification } from "antd";
 
@@ -30,26 +30,27 @@ export const getPropertiesSlice = createSlice({
     });
   },
 }).reducer;
+
 export const getPropertySlice = createSlice({
   name: "getPropertyReducer",
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(getProperties.pending, (state, action) => {
+    builder.addCase(getProperty.pending, (state, action) => {
       state.isLoading = true;
       state.isError = false;
     });
-    builder.addCase(getProperties.fulfilled, (state, action) => {
+    builder.addCase(getProperty.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
       state.isError = null;
     });
-    builder.addCase(getProperties.rejected, (state, action) => {
+    builder.addCase(getProperty.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.error = action.payload;
     });
   },
-});
+}).reducer;
 
 export const resetPropertySlice = createSlice({
   name: "resetAgentSlice",

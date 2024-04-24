@@ -102,7 +102,7 @@ function FeatureListing() {
               {data?.map((properties, index) => (
                 <div
                   className="displayy-teamimg-center"
-                  onClick={() => navigate("/features")}
+                  onClick={() => navigate(`/features/${properties?._id}`)}
                 >
                   <img src={Property} width="100%" className="img-op" />
 

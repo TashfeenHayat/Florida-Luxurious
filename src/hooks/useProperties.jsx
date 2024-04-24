@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProperties } from "../api/Property";
-function useAgents() {
+function useProperties() {
   const dispatch = useDispatch();
   const { isLoading, data } = useSelector((s) => s.getPropertiesReducer);
   useEffect(() => {
@@ -10,4 +10,4 @@ function useAgents() {
   return { data, isLoading };
 }
 
-export default useAgents;
+export default useProperties;

@@ -29,4 +29,4 @@ export const getProperty = createAsyncThunk(
   }
 );
 
-export const resetAgent = createAsyncThunk("resetAgentReducer", () => {});
+export const resetProperty = createAsyncThunk("resetPropertyReducer", () => {});

@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProperty, resetAgent } from "../api/Property";
+import { getProperty, resetProperty } from "../api/Property";
 
-function useAgent(id) {
+function useProperty(id) {
   const dispatch = useDispatch();
-  const { isLoading, data } = useSelector((s) => s.getAgentReducer);
+  const { isLoading, data } = useSelector((s) => s.getPropertyReducer);
   useEffect(() => {
     dispatch(getProperty(id));
-    return () => dispatch(resetAgent());
+    return () => dispatch(resetProperty());
   }, [dispatch]);
-  return { isLoading, data, isError };
+  return { isLoading, data };
 }
 
-export default useAgent;
+export default useProperty;
