@@ -15,6 +15,7 @@ import {
   updateFilterSlice,
   deleteFilterSlice,
 } from "./slices/FilterSlice";
+import { getPropertiesSlice } from "./slices/PropertySlice";
 import { contactUsSlice } from "./slices/ContactusSlice";
 
 export const store = configureStore({
@@ -32,5 +33,6 @@ export const store = configureStore({
     getFilterReducer: getFilterSlice,
     updateFilterReducer: updateFilterSlice,
     deleteFilterReducer: deleteFilterSlice,
+    getPropertiesReducer: getPropertiesSlice,
   },
 });

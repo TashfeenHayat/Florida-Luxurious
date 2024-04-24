@@ -7,7 +7,7 @@ export const getProperties = createAsyncThunk(
   "getPropertiesReducer",
   async function (data, { rejectWithValue }) {
     try {
-      const res = await customAxios.post(`property`);
+      const res = await customAxios.get(`property`);
       return res.data;
     } catch (e) {
       console.log(e, "error");
@@ -16,3 +16,17 @@ export const getProperties = createAsyncThunk(
     }
   }
 );
+
+export const getProperty = createAsyncThunk(
+  "getPropertyReducer",
+  async function (id, { rejectWithValue }) {
+    try {
+      const res = await customAxios.get(`property/${id}`);
+      return res.data;
+    } catch (e) {
+      return rejectWithValue(e.response.data.message);
+    }
+  }
+);
+
+export const resetAgent = createAsyncThunk("resetAgentReducer", () => {});
