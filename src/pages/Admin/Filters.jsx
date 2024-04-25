@@ -44,23 +44,35 @@ function Filters() {
     },
   ];
   const [tableParams, setTableParams] = useState({
-    pagination: {
       current: 1,
-      pageSize: 2,
-    },
+      pageSize: 10,
   });
+  const [key, setKey] = useState();
+
   const { isLoading, isError, data } = useSelector((s) => s.getFiltersReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getFilters());
+    dispatch(
+      getFilters({
+        page: tableParams.current,
+        limit: tableParams.pageSize,
+      })
+    );
     if (isError) {
       console.log(isError);
     }
   }, []);
 
-  const onSearch = (text) => {
-    dispatch(getFilters(text));
+  const onSearch = (key) => {
+    setKey(key);
+    setTableParams({
+      pagination: {
+        ...tableParams,
+        current: 1,
+      },
+    });
+    dispatch(getFilters({ key }));
   };
 
   const onDelete = (id) => {
@@ -69,11 +81,12 @@ function Filters() {
 
   const handleTableChange = (pagination) => {
     setTableParams(pagination);
-
-    // `dataSource` is useless since `pageSize` changed
-    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
-      // setData([]);
-    }
+    dispatch(
+      getFilters({
+        key,
+        page: pagination.current,
+      })
+    );
   };
 
   return (
@@ -101,7 +114,7 @@ function Filters() {
         columns={columns}
         loading={isLoading}
         isError={isError}
-        pagination={tableParams}
+        pagination={{ ...tableParams, total: data?.totalCount }}
         dataSource={data}
         onChange={handleTableChange}
       />
