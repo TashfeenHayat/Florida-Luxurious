@@ -1,6 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { api_base_URL } from "../const/Const";
-import axios from "axios";
 import customAxios from "./Axios";
 
 export const getAgents = createAsyncThunk(
