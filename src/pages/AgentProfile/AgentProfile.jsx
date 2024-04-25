@@ -11,15 +11,8 @@ const { Title, Paragraph } = Typography;
 function AgentProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { isLoading, data, errorCode, isError } = useAgent(id);
-  if (isError) {
-    if (errorCode === "400") {
-      navigate("*");
-    }
-    if (errorCode === "500") {
-      navigate("*");
-    }
-  }
+  const { isLoading, data, isError } = useAgent(id);
+
   return (
     <>
       <BackgroundImage Image={Agent}>

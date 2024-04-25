@@ -6,6 +6,7 @@ import OurStory from "./OurStory";
 import Team from "./MeetTeam";
 import FeatureListing from "./FeatureListing";
 import Neighborhoods from "./Neighborhoods";
+import Icons from "../../components/Icons";
 const { Title, Text } = Typography;
 function Home() {
   return (
@@ -43,7 +44,7 @@ function Home() {
           </Flex>
         </div>
       </div>
-
+      <Icons />
       <FloridaProperties />
       <RecognitionSlide />
       <FeatureListing />

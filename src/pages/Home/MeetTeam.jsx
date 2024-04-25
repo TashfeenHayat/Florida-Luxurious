@@ -138,7 +138,7 @@ function MeetTeam() {
           <Flex
             justify="center"
             align="center"
-            onClick={() => navigate("/agents")}
+            onClick={() => navigate("/meet-the-team")}
             className="mt-5"
           >
             <button className="let-talk-btn">View All</button>
