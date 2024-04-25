@@ -68,23 +68,36 @@ function Agents() {
     },
   ];
   const [tableParams, setTableParams] = useState({
-    pagination: {
-      current: 1,
-      pageSize: 2,
-    },
+    current: 1,
+    pageSize: 10,
   });
+
+  const [key, setKey] = useState();
+
   const { isLoading, isError, data } = useSelector((s) => s.getAgentsReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAgents());
+    dispatch(
+      getAgents({
+        page: tableParams.current,
+        limit: tableParams.pageSize,
+      })
+    );
     if (isError) {
       console.log(isError);
     }
   }, []);
 
-  const onSearch = (text) => {
-    dispatch(getAgents(text));
+  const onSearch = (key) => {
+    setKey(key);
+    setTableParams({
+      pagination: {
+        ...tableParams,
+        current: 1,
+      },
+    });
+    dispatch(getAgents({ key }));
   };
 
   const onDelete = (id) => {
@@ -92,12 +105,14 @@ function Agents() {
   };
 
   const handleTableChange = (pagination) => {
+    console.log(pagination);
     setTableParams(pagination);
-
-    // `dataSource` is useless since `pageSize` changed
-    if (pagination.pageSize !== tableParams.pagination?.pageSize) {
-      // setData([]);
-    }
+    dispatch(
+      getAgents({
+        key,
+        page: pagination.current,
+      })
+    );
   };
 
   return (
@@ -125,7 +140,7 @@ function Agents() {
         columns={columns}
         loading={isLoading}
         isError={isError}
-        pagination={tableParams}
+        pagination={{ ...tableParams, total: data?.totalCount }}
         dataSource={data?.agents}
         onChange={handleTableChange}
       />

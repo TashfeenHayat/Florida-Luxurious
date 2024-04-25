@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import customAxios from './Axios';
+import customAxios from "./Axios";
 
 export const getFilters = createAsyncThunk(
   "getFiltersReducer",
-  async function (key, { rejectWithValue }) {
+  async function ({ key, page = 1, limit = 10 }, { rejectWithValue }) {
     try {
       const res = await customAxios.get(`filter`, {
-        params: { key },
+        params: { key, page, limit },
       });
 
       return res.data;
@@ -73,4 +73,3 @@ export const deleteFilter = createAsyncThunk(
     }
   }
 );
-

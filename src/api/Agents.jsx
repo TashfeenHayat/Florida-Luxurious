@@ -1,15 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { api_base_URL } from "../const/Const";
-import axios from "axios";
-import customAxios from './Axios';
-
+import customAxios from "./Axios";
 
 export const getAgents = createAsyncThunk(
   "getAgentsReducer",
-  async function (key, { rejectWithValue }) {
+  async function ({ key, limit, page }, { rejectWithValue }) {
     try {
       const res = await customAxios.get(`agent`, {
-        params: { key },
+        params: { key, limit: limit, page: page },
       });
 
       return res.data;
