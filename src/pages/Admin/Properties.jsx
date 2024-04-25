@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Avatar, Space, Card, Button, Table, Input, Popconfirm } from "antd";
-import { PlusOutlined, UserOutlined } from "@ant-design/icons";
+import { Space, Card, Button, Table, Input, Popconfirm } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getAgents, deleteAgent } from "../../api/Agents";
+import { getProperties, deleteProperty } from "../../api/Properties";
 
 const { Search } = Input;
 
-function Agents() {
+function Properties() {
   const columns = [
     {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (_, { firstName, lastName, photo }) => (
-        <Space>
-          <Avatar src={photo} size="small" icon={<UserOutlined />} />
-          {firstName} {lastName}
-        </Space>
-      ),
     },
     {
       title: "Email",
@@ -53,10 +47,10 @@ function Agents() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Link to={`/admin/agent/edit/${record._id}`}>Edit</Link>
+          <Link to={`/admin/property/edit/${record._id}`}>Edit</Link>
           <Popconfirm
             title="Delete this task"
-            description="Are you sure to delete this agent ?"
+            description="Are you sure to delete this property?"
             okText="Yes"
             cancelText="No"
             onConfirm={() => onDelete(record._id)}
@@ -74,12 +68,14 @@ function Agents() {
 
   const [key, setKey] = useState();
 
-  const { isLoading, isError, data } = useSelector((s) => s.getAgentsReducer);
+  const { isLoading, isError, data } = useSelector(
+    (s) => s.getPropertiesReducer
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(
-      getAgents({
+      getProperties({
         page: tableParams.current,
         limit: tableParams.pageSize,
       })
@@ -97,18 +93,18 @@ function Agents() {
         current: 1,
       },
     });
-    dispatch(getAgents({ key }));
+    dispatch(getProperties({ key }));
   };
 
   const onDelete = (id) => {
-    dispatch(deleteAgent(id));
+    dispatch(deleteProperty(id));
   };
 
   const handleTableChange = (pagination) => {
     console.log(pagination);
     setTableParams(pagination);
     dispatch(
-      getAgents({
+      getProperties({
         key,
         page: pagination.current,
       })
@@ -117,7 +113,7 @@ function Agents() {
 
   return (
     <Card
-      title="Agents"
+      title="Properties"
       extra={
         <Space>
           <Search
@@ -127,7 +123,7 @@ function Agents() {
             allowClear
           />
           <Button type="primary">
-            <Link to="/admin/agent/add">
+            <Link to="/admin/property/add">
               <PlusOutlined />
               Add
             </Link>
@@ -141,11 +137,11 @@ function Agents() {
         loading={isLoading}
         isError={isError}
         pagination={{ ...tableParams, total: data?.totalCount }}
-        dataSource={data?.agents}
+        dataSource={data?.properties}
         onChange={handleTableChange}
       />
     </Card>
   );
 }
 
-export default Agents;
+export default Properties;
