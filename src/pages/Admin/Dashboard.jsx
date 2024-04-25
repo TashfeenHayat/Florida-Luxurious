@@ -41,104 +41,80 @@ function Dashboard() {
     navigate(key);
   };
 
-  useEffect(() => {
-    // let accessToken = localStorage.token;
-    // if (accessToken) {
-    //   console.log(accessToken);
-    //   axios.interceptors.request.use(
-    //     (config) => {
-    //       // Modify the request configuration or add headers
-    //       config.headers.Authorization = `Bearer ${accessToken}`;
-    //       return config;
-    //     },
-    //     (error) => {
-    //       // Handle request errors
-    //       return Promise.reject(error);
-    //     }
-    //   );
-    // } else {
-    //   navigate("/admin/login");
-    // }
-  }, []);
-
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
   return (
-    <>
+    <Layout style={{ minHeight: "100vh" }}>
+      <Sider trigger={null} collapsible collapsed={collapsed}>
+        <div className="demo-logo-vertical" />
+        <Menu
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={["1"]}
+          onClick={handleSideMenu}
+          items={[
+            {
+              key: "/admin/dashboard",
+              icon: <BarChartOutlined />,
+              label: "Dashboard",
+            },
+            {
+              key: "/admin/filter",
+              icon: <FunnelPlotOutlined />,
+              label: "Filters",
+            },
+            {
+              key: "/admin/agent",
+              icon: <UsergroupAddOutlined />,
+              label: "Agents",
+            },
+            {
+              key: "/admin/property",
+              icon: <PropertySafetyOutlined />,
+              label: "Properties",
+            },
+          ]}
+        />
+      </Sider>
       <Layout>
-        <Sider trigger={null} collapsible collapsed={collapsed}>
-          <div className="demo-logo-vertical" />
-          <Menu
-            theme="dark"
-            mode="inline"
-            defaultSelectedKeys={["1"]}
-            onClick={handleSideMenu}
-            items={[
-              {
-                key: "/admin/dashboard",
-                icon: <BarChartOutlined />,
-                label: "Dashboard",
-              },
-              {
-                key: "/admin/filter",
-                icon: <FunnelPlotOutlined />,
-                label: "Filters",
-              },
-              {
-                key: "/admin/agent",
-                icon: <UsergroupAddOutlined />,
-                label: "Agents",
-              },
-              {
-                key: "/admin/property",
-                icon: <PropertySafetyOutlined />,
-                label: "Properties",
-              },
-            ]}
-          />
-        </Sider>
-        <Layout>
-          <Header style={{ padding: 0, background: colorBgContainer }}>
-            <div className="flex-between">
-              <Button
-                type="text"
-                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                onClick={() => setCollapsed(!collapsed)}
-                style={{
-                  fontSize: "16px",
-                  width: 64,
-                  height: 64,
-                }}
-              />
+        <Header style={{ padding: 0, background: colorBgContainer }}>
+          <div className="flex-between">
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+              }}
+            />
 
-              <Dropdown
-                menu={{
-                  items,
-                  onClick: (e) => handleMenu(e),
-                }}
-                placement="bottomLeft"
-              >
-                <Avatar size="large" icon={<UserOutlined />} />
-              </Dropdown>
-            </div>
-          </Header>
+            <Dropdown
+              menu={{
+                items,
+                onClick: (e) => handleMenu(e),
+              }}
+              placement="bottomLeft"
+            >
+              <Avatar size="large" icon={<UserOutlined />} />
+            </Dropdown>
+          </div>
+        </Header>
 
-          <Content
-            style={{
-              margin: "24px 16px",
-              padding: 24,
-              minHeight: 280,
-              background: colorBgContainer,
-              borderRadius: borderRadiusLG,
-            }}
-          >
-            <Outlet />
-          </Content>
-        </Layout>
+        <Content
+          style={{
+            margin: "24px 16px",
+            background: colorBgContainer,
+            borderRadius: borderRadiusLG,
+          }}
+        >
+          <Outlet />
+        </Content>
       </Layout>
-    </>
+    </Layout>
   );
 }
 

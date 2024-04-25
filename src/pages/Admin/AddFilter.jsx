@@ -6,18 +6,15 @@ import {
   Card,
   Button,
   Input,
-  Select,
   Upload,
   notification,
 } from "antd";
 import { api_base_URL } from "../../const/Const";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { useParams } from "react-router";
-import countryList from "react-select-country-list";
-import PhoneInput from "antd-phone-input";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addAgent, getAgent, updateAgent, resetAgent } from "../../api/Agents";
+import { getFilter, updateFilter, addFilter } from "../../api/Filters";
 
 const { TextArea } = Input;
 
@@ -30,7 +27,6 @@ function AddFilter() {
   const [photoUplaoding, setPhotoUplaoding] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const options = useMemo(() => countryList().getData(), []);
   const params = useParams();
   const { id } = params;
 
@@ -45,65 +41,50 @@ function AddFilter() {
   useEffect(() => {
     if (id) {
       setLoading(true);
-      dispatch(getAgent(params.id)).then((agent) => {
+      dispatch(getFilter(params.id)).then((agent) => {
         console.log(agent);
         setLoading(false);
         setPhoto(agent.payload?.photo);
         setInitialValue(agent.payload);
       });
     }
-
-    return () => dispatch(resetAgent());
   }, []);
 
   const onFinish = async (values) => {
     console.log("Received values of form: ", values);
     if (id) {
       const res = await dispatch(
-        updateAgent({
+        updateFilter({
           id,
           ...values,
           photo,
-          phoneNumber:
-            values.phoneNumber.countryCode +
-            values.phoneNumber.areaCode +
-            values.phoneNumber.phoneNumber,
         })
       ).unwrap();
       setInitialValue({});
       openNotification("success", res);
-      setTimeout(navigate("/admin/agent"), 1000);
+      setTimeout(navigate("/admin/filter"), 1000);
     } else {
       const res = await dispatch(
-        addAgent({
+        addFilter({
           ...values,
           photo,
-          phoneNumber:
-            values.phoneNumber.countryCode +
-            values.phoneNumber.areaCode +
-            values.phoneNumber.phoneNumber,
         })
       ).unwrap();
       setInitialValue({});
       openNotification("success", res);
-      setTimeout(navigate("/admin/agent"), 1000);
+      setTimeout(navigate("/admin/filter"), 1000);
     }
   };
 
-  function validator(_, { valid }) {
-    if (valid()) return Promise.resolve(); // non-strict validation
-    return Promise.reject("Invalid phone number");
-  }
-
   const beforeUpload = (e) => {
     console.log(e);
-    photoUplaoding(true);
+    setPhotoUplaoding(true);
   };
 
   const handleChange = (info) => {
     if (info.file.status === "done") {
       console.log(info.file.response.url);
-      photoUplaoding(false);
+      setPhotoUplaoding(false);
       setPhoto(info.file.response.url);
     }
   };
@@ -149,158 +130,24 @@ function AddFilter() {
         <Row>
           <Col span={12} className="gutter-row">
             <Form.Item
-              name="firstName"
+              name="name"
               rules={[
                 {
                   required: true,
-                  message: "First Name is required",
+                  message: "Name is required",
                 },
               ]}
             >
-              <Input size="large" placeholder="First Name" />
+              <Input size="large" placeholder="Name" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
-            <Form.Item
-              name="lastName"
-              rules={[
-                {
-                  required: true,
-                  message: "Last Name is required",
-                },
-              ]}
-            >
-              <Input size="large" placeholder="Last Name" />
-            </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
-            <Form.Item
-              name="email"
-              rules={[
-                {
-                  type: "email",
-                  required: true,
-                  message: "Email is required",
-                },
-              ]}
-            >
-              <Input size="large" placeholder="Email" />
-            </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
-            <Form.Item name="phoneNumber" rules={[{ validator }]}>
-              <PhoneInput size="large" enableSearch />
-            </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item name="code">
               <Input size="large" placeholder="Code" />
-            </Form.Item>
-            <Form.Item name="reference">
-              <Input size="large" placeholder="Reference" />
             </Form.Item>
           </Col>
 
           <Col span={12} className="gutter-row">
             <Form.Item name="description">
               <TextArea size="large" rows={4} placeholder="Description" />
-            </Form.Item>
-          </Col>
-
-          <Col span={12} className="gutter-row">
-            <Form.Item
-              name={["address", "addressLine1"]}
-              rules={[
-                {
-                  required: true,
-                  message: "Address Line 1 is required",
-                },
-              ]}
-            >
-              <Input size="large" placeholder="Address Line 1" />
-            </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
-            <Form.Item name={["address", "addressLine2"]}>
-              <Input size="large" placeholder="Address Line 2" />
-            </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
-            <Form.Item
-              name={["address", "state"]}
-              rules={[
-                {
-                  required: true,
-                  message: "State is required",
-                },
-              ]}
-            >
-              <Input size="large" placeholder="State" />
-            </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
-            <Form.Item
-              name={["address", "city"]}
-              rules={[
-                {
-                  required: true,
-                  message: "City is required",
-                },
-              ]}
-            >
-              <Input size="large" placeholder="City" />
-            </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
-            <Form.Item
-              name={["address", "country"]}
-              rules={[
-                {
-                  required: true,
-                  message: "Country is required",
-                },
-              ]}
-            >
-              <Select
-                showSearch
-                size="large"
-                options={options}
-                placeholder="Search country"
-              />
-            </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
-            <Form.Item
-              name={["address", "zipCode"]}
-              rules={[
-                {
-                  required: true,
-                  message: "Zip Code is required",
-                },
-              ]}
-            >
-              <Input size="large" placeholder="Zip Code" />
-            </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
-            <Form.Item name={["social", "facebook"]}>
-              <Input size="large" placeholder="Facebook" />
-            </Form.Item>
-          </Col>
-
-          <Col span={12} className="gutter-row">
-            <Form.Item name={["social", "twitter"]}>
-              <Input size="large" placeholder="Twitter" />
-            </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
-            <Form.Item name={["social", "linkedin"]}>
-              <Input size="large" placeholder="Linkedin" />
-            </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
-            <Form.Item name={["social", "other"]}>
-              <Input size="large" placeholder="Other" />
             </Form.Item>
           </Col>
         </Row>
