@@ -10,7 +10,7 @@ import {
   Upload,
   notification,
 } from "antd";
-import { api_base_URL } from "../../const/Const";
+import { api_base_URL } from "../../api/Axios";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { useParams } from "react-router";
 import countryList from "react-select-country-list";
@@ -97,13 +97,13 @@ function AddAgent() {
 
   const beforeUpload = (e) => {
     console.log(e);
-    photoUplaoding(true);
+    setPhotoUplaoding(true);
   };
 
   const handleChange = (info) => {
     if (info.file.status === "done") {
       console.log(info.file.response.url);
-      photoUplaoding(false);
+      setPhotoUplaoding(false);
       setPhoto(info.file.response.url);
     }
   };
