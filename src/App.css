@@ -248,9 +248,6 @@ body:focus-visible {
   z-index: 1;
   padding: 30px;
 }
-.slick-slider {
-  width: 98% !important;
-}
 
 .our-story-title {
   color: white !important;
@@ -322,6 +319,12 @@ body:focus-visible {
   display: flex;
   gap: 5rem;
 }
+
+.team-section .slick-track {
+  display: flex;
+  gap: 2rem;
+}
+
 .negborihood-list .slick-track {
   display: flex;
   gap: 1rem;

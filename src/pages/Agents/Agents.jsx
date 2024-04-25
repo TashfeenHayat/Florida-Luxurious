@@ -11,7 +11,7 @@ import useAgents from "../../hooks/useAgents";
 import { useNavigate } from "react-router-dom";
 const { Title, Text, Paragraph } = Typography;
 function Agents() {
-  const { isLoading, data } = useAgents();
+  const { isLoading, data } = useAgents(10, 1);
   const navigate = useNavigate();
   console.log(isLoading);
   return (
@@ -59,6 +59,7 @@ function Agents() {
                           className=""
                           preview={false}
                           fallback="https://placehold.co/300x388"
+                          style={{ aspectRatio: "5/6", objectFit: "cover" }}
                         />
                       }
                       bImg={
@@ -71,6 +72,7 @@ function Agents() {
                           className="img-op1"
                           preview={false}
                           fallback="https://placehold.co/300x388"
+                          style={{ aspectRatio: "5/6", objectFit: "cover" }}
                         />
                       }
                     >

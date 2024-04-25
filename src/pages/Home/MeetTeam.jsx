@@ -13,7 +13,8 @@ const { Title, Text, Paragraph } = Typography;
 
 function MeetTeam() {
   const navigate = useNavigate();
-  const { data, isLoading } = useAgents();
+  const { data, isLoading } = useAgents(15, 1);
+  console.log(data.agents);
   const CustomPrevArrow = (props) => {
     const { className, style, onClick } = props;
     return (
@@ -40,41 +41,41 @@ function MeetTeam() {
     );
   };
 
-  const settings = {
+  let settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
-    slidesToShow: data?.agents?.length >= 2 ? 2 : 3,
-    slidesToScroll: data?.agents?.length >= 2 ? 2 : 3,
-    prevArrow: <CustomPrevArrow />,
-    nextArrow: <CustomNextArrow />,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
+          initialSlide: 2,
         },
       },
       {
-        breakpoint: 768,
+        breakpoint: 480,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
-      {
-        breakpoint: 425,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          prevArrow: false,
-          nextArrow: false,
-        },
-      },
-
-      // Add more breakpoints as needed
     ],
+    nextArrow: <CustomNextArrow />,
+    prevArrow: <CustomPrevArrow />,
   };
   return (
     <>
@@ -83,57 +84,49 @@ function MeetTeam() {
           <Title level={1} className="meet-team-heading">
             Meet The Team
           </Title>
-          <Container className="pt-4">
-            <Flex className="features_section_slider">
-              <Row>
-                <Col span={24}>
-                  <Slider {...settings}>
-                    {data?.agents.map((agent, index) => (
-                      <div
-                        key={index}
-                        className="displayy-teamimg-center"
-                        onClick={() => navigate(`/agent/${agent._id}`)}
-                      >
-                        <Flip
-                          fImg={
-                            <Image
-                              src={
-                                agent.photo
-                                  ? agent.photo
-                                  : "https://placehold.co/300x388"
-                              }
-                              className=""
-                              preview={false}
-                              fallback="https://placehold.co/300x388"
-                            />
+          <Container>
+            <div className="slider-container team-section mt-5">
+              <Slider {...settings}>
+                {data?.agents?.map((agent, index) => (
+                  <div onClick={() => navigate(`/agent/${agent._id}`)}>
+                    <Flip
+                      fImg={
+                        <Image
+                          src={
+                            agent?.photo
+                              ? agent?.photo
+                              : "https://placehold.co/300x388"
                           }
-                          bImg={
-                            <Image
-                              src={
-                                agent.photo
-                                  ? agent.photo
-                                  : "https://placehold.co/300x388"
-                              }
-                              preview={false}
-                              fallback="https://placehold.co/300x388"
-                              className="img-op1"
-                            />
+                          className=""
+                          preview={false}
+                          fallback="https://placehold.co/300x388"
+                          style={{ aspectRatio: "5/6", objectFit: "cover" }}
+                        />
+                      }
+                      bImg={
+                        <Image
+                          src={
+                            agent?.photo
+                              ? agent?.photo
+                              : "https://placehold.co/300x388"
                           }
-                        >
-                          <div className="p-absoulte p-b-30-left-0 w-100">
-                            <Flex justify="center" align="center">
-                              <button className="team-view-btn">
-                                View More{" "}
-                              </button>
-                            </Flex>
-                          </div>
-                        </Flip>
+                          className="img-op1"
+                          preview={false}
+                          fallback="https://placehold.co/300x388"
+                          style={{ aspectRatio: "5/6", objectFit: "cover" }}
+                        />
+                      }
+                    >
+                      <div className="p-absoulte p-b-30-left-0 w-100">
+                        <Flex justify="center" align="center">
+                          <button className="team-view-btn">View More </button>
+                        </Flex>
                       </div>
-                    ))}
-                  </Slider>
-                </Col>
-              </Row>
-            </Flex>
+                    </Flip>
+                  </div>
+                ))}
+              </Slider>
+            </div>
           </Container>
           <Flex
             justify="center"
