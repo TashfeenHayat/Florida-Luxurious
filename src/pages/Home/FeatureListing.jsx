@@ -11,7 +11,7 @@ import useProperties from "../../hooks/useProperties";
 const { Title, Text, Paragraph } = Typography;
 function FeatureListing() {
   const { data, isLoading } = useProperties();
-  console.log(data, "property");
+  console.log(data?.properties, "property");
   const navigate = useNavigate();
   const CustomPrevArrow = (props) => {
     const { className, style, onClick } = props;
@@ -99,7 +99,7 @@ function FeatureListing() {
         >
           <div className="meet-slider-width">
             <Slider {...settings}>
-              {data?.map((properties, index) => (
+              {data?.properties?.map((properties, index) => (
                 <div
                   className="displayy-teamimg-center"
                   onClick={() => navigate(`/features/${properties?._id}`)}

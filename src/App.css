@@ -25,6 +25,9 @@ body:focus-visible {
 .text-gray {
   color: #838383 !important;
 }
+.text-black {
+  color: #000 !important;
+}
 .text-upper {
   text-transform: uppercase;
 }
