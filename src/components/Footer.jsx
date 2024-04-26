@@ -1,9 +1,11 @@
 import React from "react";
 import FooterLogo from "../assets/footerlogo.png";
 import { Row, Col, Flex, Typography, Input, Button, Image } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const { Text, Title, Paragraph } = Typography;
 function Footer() {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-footer">
       <div className="footer-bg-img-shadow">
@@ -23,21 +25,20 @@ function Footer() {
                       <Link
                         className="text-upper f-16 text-black"
                         style={{ textDecoration: "none" }}
-                        target="_blank"
+                        to="/properties"
                       >
                         Featured properties
                       </Link>
                       <Link
                         className="text-upper f-16 text-black"
                         style={{ textDecoration: "none" }}
-                        target="_blank"
                       >
                         Featured NEIGHBORHOODS
                       </Link>
                       <Link
                         className="text-upper f-16 text-black"
                         style={{ textDecoration: "none" }}
-                        target="_blank"
+                        to="sold-properties"
                       >
                         sold properties
                       </Link>
@@ -51,21 +52,18 @@ function Footer() {
                       <Link
                         className="text-upper f-16 text-black"
                         style={{ textDecoration: "none" }}
-                        target="_blank"
                       >
                         Other offering
                       </Link>
                       <Link
                         className="text-upper f-16 text-black"
                         style={{ textDecoration: "none" }}
-                        target="_blank"
                       >
                         Other offering
                       </Link>
                       <Link
                         className="text-upper f-16 text-black"
                         style={{ textDecoration: "none" }}
-                        target="_blank"
                       >
                         Other offering
                       </Link>
@@ -77,21 +75,20 @@ function Footer() {
                       <Link
                         className="text-upper f-16 text-black"
                         style={{ textDecoration: "none" }}
-                        target="_blank"
+                        to="/our-story"
                       >
                         our story
                       </Link>
                       <Link
                         className="text-upper f-16 text-black"
                         style={{ textDecoration: "none" }}
-                        target="_blank"
+                        to="/meet-the-team"
                       >
                         meet the team
                       </Link>
                       <Link
                         className="text-upper f-16 text-black"
                         style={{ textDecoration: "none" }}
-                        target="_blank"
                       >
                         property press
                       </Link>
@@ -127,10 +124,7 @@ function Footer() {
           <Col lg={12} sm={24}>
             <Flex gap="25px">
               <Text className="f-bold f-24">Follow us</Text>
-              <a
-                href="https://www.facebook.com/FloridaLuxuriousProperties/"
-                target="_blank"
-              >
+              <a href="https://www.facebook.com/FloridaLuxuriousProperties/">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="35"
@@ -145,10 +139,7 @@ function Footer() {
                   />
                 </svg>
               </a>
-              <a
-                href="https://www.instagram.com/florida_luxurious/?hl=en"
-                target="_blank"
-              >
+              <a href="https://www.instagram.com/florida_luxurious/?hl=en">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="35"
@@ -175,10 +166,7 @@ function Footer() {
                   </defs>
                 </svg>
               </a>
-              <a
-                href="https://www.linkedin.com/in/florida-luxurious-properties-585146a2"
-                target="_blank"
-              >
+              <a href="https://www.linkedin.com/in/florida-luxurious-properties-585146a2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="35"

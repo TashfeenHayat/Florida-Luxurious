@@ -217,6 +217,7 @@ body:focus-visible {
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;
+  mix-blend-mode: difference;
 }
 
 .line-between::before {
