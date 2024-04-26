@@ -1,16 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import FooterLogo from "../assets/footerlogo.png";
 import { Row, Col, Flex, Typography, Input, Button, Image } from "antd";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { contactUs } from "../api/Inquiry";
+
 const { Text, Title, Paragraph } = Typography;
 function Footer() {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading } = useSelector((s) => s.contactUsReducer);
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = () => {
+    dispatch(contactUs(formData));
+    setFormData({});
+  };
 
   return (
     <div className="bg-footer">
       <div className="footer-bg-img-shadow">
-        <Row>
-          <Col span={6}>
+        <Row align={"middle"}>
+          <Col span={6} align="">
             <Image src={FooterLogo} width="60%" preview={false} />
           </Col>
           <Col span={18}>
@@ -206,20 +229,32 @@ function Footer() {
                 <form className="footer-form-display">
                   <Flex gap={10}>
                     <Input
+                      name="firstName"
                       placeholder="Your First Name"
                       style={{ borderRadius: "0px" }}
+                      onChange={handleChange}
                     />
                     <Input
+                      name="lastName"
                       placeholder="Your Last Name"
                       style={{ borderRadius: "0px" }}
+                      onChange={handleChange}
                     />
                   </Flex>
                   <Flex gap={10} style={{ marginTop: 10 }}>
                     <Input
+                      name="email"
                       placeholder="Your Email Address"
                       style={{ borderRadius: "0px" }}
+                      onChange={handleChange}
                     />
-                    <Button className="btn-sub-footer">Submit my info</Button>
+                    <Button
+                      className="btn-sub-footer"
+                      onClick={handleSubmit}
+                      disabled={loading}
+                    >
+                      {loading ? "Submitting" : "Submit my info"}
+                    </Button>
                   </Flex>
                 </form>
               </Flex>

@@ -19,7 +19,7 @@ function MeetTeam() {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", zIndex: 10 }}
+        style={{ ...style, display: "block", zIndex: 10, left: "-45px" }} // Adjusted left position
         onClick={onClick}
       >
         <img src={BackArrow} alt="Previous" width="45px" />
@@ -32,7 +32,7 @@ function MeetTeam() {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", zIndex: 10 }}
+        style={{ ...style, display: "block", zIndex: 10, right: "-45px" }} // Adjusted right position
         onClick={onClick}
       >
         <img src={NextArrow} alt="Next" width="45px" />

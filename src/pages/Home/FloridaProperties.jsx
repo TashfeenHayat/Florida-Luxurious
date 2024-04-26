@@ -58,16 +58,14 @@ function FloridaProperties() {
 
               <Title className="text-white f-50 text-center" level={1}>
                 $1.8 BILLION <br />
-                <Text className="text-gray text-upper f-16 mt-16">
+                <Text className="text-gray text-upper f-16 ">
                   Has exceeded the mark
                 </Text>
               </Title>
 
               <Title className="text-white f-50 text-center" level={1}>
                 $1,831,197,188 <br />{" "}
-                <Text className="text-gray text-upper f-16 mt-16">
-                  Total Sales
-                </Text>
+                <Text className="text-gray text-upper f-16 ">Total Sales</Text>
               </Title>
             </Flex>
           </Col>
