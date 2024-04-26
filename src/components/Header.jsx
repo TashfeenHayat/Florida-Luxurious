@@ -152,7 +152,7 @@ function Header() {
           <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
             For Boat Owners
           </a>
-          <Link onClick={() => navigate("/contact-us")}>Contact Us</Link>
+          <Link to="/contact-us">Contact Us</Link>
         </Flex>
 
         <Flex onClick={handleDrawer}>
