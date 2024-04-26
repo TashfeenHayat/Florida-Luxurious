@@ -14,7 +14,6 @@ const { Title, Text, Paragraph } = Typography;
 function MeetTeam() {
   const navigate = useNavigate();
   const { data, isLoading } = useAgents(15, 1);
-  console.log(data.agents);
   const CustomPrevArrow = (props) => {
     const { className, style, onClick } = props;
     return (
