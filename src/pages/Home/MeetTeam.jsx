@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Typography, Carousel, Row, Col, Image, Flex, Grid } from "antd";
+import { Typography, Carousel, Row, Col, Image, Flex, Grid, Spin } from "antd";
 import { Container } from "react-bootstrap";
 import LetTalk from "../../components/LetTalk";
 import Slider from "react-slick";
@@ -83,58 +83,68 @@ function MeetTeam() {
           <Title level={1} className="meet-team-heading">
             Meet The Team
           </Title>
-          <Container>
-            <div className="slider-container team-section mt-5">
-              <Slider {...settings}>
-                {data?.agents?.map((agent, index) => (
-                  <div onClick={() => navigate(`/agent/${agent._id}`)}>
-                    <Flip
-                      fImg={
-                        <Image
-                          src={
-                            agent?.photo
-                              ? agent?.photo
-                              : "https://placehold.co/300x388"
+          {isLoading ? (
+            <Flex justify={"center"}>
+              <Spin size="large" />
+            </Flex>
+          ) : (
+            <>
+              <Container>
+                <div className="slider-container team-section mt-5">
+                  <Slider {...settings}>
+                    {data?.agents?.map((agent, index) => (
+                      <div onClick={() => navigate(`/agent/${agent._id}`)}>
+                        <Flip
+                          fImg={
+                            <Image
+                              src={
+                                agent?.photo
+                                  ? agent?.photo
+                                  : "https://placehold.co/300x388"
+                              }
+                              className=""
+                              preview={false}
+                              fallback="https://placehold.co/300x388"
+                              style={{ aspectRatio: "5/6", objectFit: "cover" }}
+                            />
                           }
-                          className=""
-                          preview={false}
-                          fallback="https://placehold.co/300x388"
-                          style={{ aspectRatio: "5/6", objectFit: "cover" }}
-                        />
-                      }
-                      bImg={
-                        <Image
-                          src={
-                            agent?.photo
-                              ? agent?.photo
-                              : "https://placehold.co/300x388"
+                          bImg={
+                            <Image
+                              src={
+                                agent?.photo
+                                  ? agent?.photo
+                                  : "https://placehold.co/300x388"
+                              }
+                              className="img-op1"
+                              preview={false}
+                              fallback="https://placehold.co/300x388"
+                              style={{ aspectRatio: "5/6", objectFit: "cover" }}
+                            />
                           }
-                          className="img-op1"
-                          preview={false}
-                          fallback="https://placehold.co/300x388"
-                          style={{ aspectRatio: "5/6", objectFit: "cover" }}
-                        />
-                      }
-                    >
-                      <div className="p-absoulte p-b-30-left-0 w-100">
-                        <Flex justify="center" align="center">
-                          <button className="team-view-btn">View More </button>
-                        </Flex>
+                        >
+                          <div className="p-absoulte p-b-30-left-0 w-100">
+                            <Flex justify="center" align="center">
+                              <button className="team-view-btn">
+                                View More{" "}
+                              </button>
+                            </Flex>
+                          </div>
+                        </Flip>
                       </div>
-                    </Flip>
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          </Container>
-          <Flex
-            justify="center"
-            align="center"
-            onClick={() => navigate("/meet-the-team")}
-            className="mt-5"
-          >
-            <button className="let-talk-btn">View All</button>
-          </Flex>
+                    ))}
+                  </Slider>
+                </div>
+              </Container>
+              <Flex
+                justify="center"
+                align="center"
+                onClick={() => navigate("/meet-the-team")}
+                className="mt-5"
+              >
+                <button className="let-talk-btn">View All</button>
+              </Flex>
+            </>
+          )}
         </div>
       </div>
       <LetTalk />

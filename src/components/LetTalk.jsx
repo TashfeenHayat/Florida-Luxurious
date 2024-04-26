@@ -46,7 +46,7 @@ function LetTalk() {
               Reach out to us today and let's start turning your real estate
               dreams into reality
             </Text>
-            <div onClick={() => navigate("/contactus")}>
+            <div onClick={() => navigate("/contact-us")}>
               <button
                 style={{
                   marginTop: "24px",

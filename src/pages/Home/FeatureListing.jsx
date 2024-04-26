@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Flex, Col, Row, Button } from "antd";
+import { Typography, Flex, Col, Row, Button, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
@@ -11,7 +11,6 @@ import useProperties from "../../hooks/useProperties";
 const { Title, Text, Paragraph } = Typography;
 function FeatureListing() {
   const { data, isLoading } = useProperties();
-  console.log(data?.properties, "property");
   const navigate = useNavigate();
   const CustomPrevArrow = (props) => {
     const { className, style, onClick } = props;
@@ -87,74 +86,82 @@ function FeatureListing() {
         </Text>{" "}
         Listing
       </Paragraph>
-      <Container>
-        <Flex
-          justify={"center"}
-          align={"center"}
-          style={{
-            marginTop: 65,
-            marginBottom: 65,
-          }}
-          className="features_section_slider"
-        >
-          <div className="meet-slider-width">
-            <Slider {...settings}>
-              {data?.properties?.map((properties, index) => (
-                <div
-                  className="displayy-teamimg-center"
-                  onClick={() => navigate(`/features/${properties?._id}`)}
-                >
-                  <img src={Property} width="100%" className="img-op" />
-
-                  <div className="info">
-                    <Flex justify={"space-between"} align={"center"}>
-                      <button className="button-view">View All</button>
-                      <Flex>
-                        <IoLocationOutline color="white" size={20} />
-                        <Text className="f-14 f-bold text-white">
-                          {properties?.addressLine1} <br />
-                          <IoPricetagOutline size={20} /> $
-                          {Number(properties?.salePrice).toLocaleString()}
-                        </Text>
-                      </Flex>
-                    </Flex>
-                  </div>
-
-                  <div className="show-info">
-                    <div style={{ background: "#fff", height: "50px" }}>
-                      <Flex
-                        justify={"space-between"}
-                        align={"center"}
-                        style={{ height: "100%" }}
-                      >
-                        <Text className="mx-4 f-16 f-bold">
-                          {properties?.addressLine1}
-                        </Text>
-                        <div className="prop-info">
-                          <Text
-                            style={{ color: "white" }}
-                            className="text-upper"
-                          >
-                            {" "}
-                            View More +
-                          </Text>
-                        </div>
-                      </Flex>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </div>
+      {isLoading ? (
+        <Flex justify={"center"}>
+          <Spin size="large" />
         </Flex>
-      </Container>
-      <Flex
-        justify="center"
-        align="center"
-        onClick={() => navigate("/properties")}
-      >
-        <button className="button-view1">View All</button>
-      </Flex>
+      ) : (
+        <>
+          <Container>
+            <Flex
+              justify={"center"}
+              align={"center"}
+              style={{
+                marginTop: 65,
+                marginBottom: 65,
+              }}
+              className="features_section_slider"
+            >
+              <div className="meet-slider-width">
+                <Slider {...settings}>
+                  {data?.properties?.map((properties, index) => (
+                    <div
+                      className="displayy-teamimg-center"
+                      onClick={() => navigate(`/features/${properties?._id}`)}
+                    >
+                      <img src={Property} width="100%" className="img-op" />
+
+                      <div className="info">
+                        <Flex justify={"space-between"} align={"center"}>
+                          <button className="button-view">View All</button>
+                          <Flex>
+                            <IoLocationOutline color="white" size={20} />
+                            <Text className="f-14 f-bold text-white">
+                              {properties?.addressLine1} <br />
+                              <IoPricetagOutline size={20} /> $
+                              {Number(properties?.salePrice).toLocaleString()}
+                            </Text>
+                          </Flex>
+                        </Flex>
+                      </div>
+
+                      <div className="show-info">
+                        <div style={{ background: "#fff", height: "50px" }}>
+                          <Flex
+                            justify={"space-between"}
+                            align={"center"}
+                            style={{ height: "100%" }}
+                          >
+                            <Text className="mx-4 f-16 f-bold">
+                              {properties?.addressLine1}
+                            </Text>
+                            <div className="prop-info">
+                              <Text
+                                style={{ color: "white" }}
+                                className="text-upper"
+                              >
+                                {" "}
+                                View More +
+                              </Text>
+                            </div>
+                          </Flex>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            </Flex>
+          </Container>
+          <Flex
+            justify="center"
+            align="center"
+            onClick={() => navigate("/properties")}
+          >
+            <button className="button-view1">View All</button>
+          </Flex>
+        </>
+      )}
     </div>
   );
 }
