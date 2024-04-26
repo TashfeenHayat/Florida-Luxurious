@@ -9,7 +9,10 @@ import Bagde4 from "../../assets/Bagde4.svg";
 const { Title, Text } = Typography;
 function FloridaProperties() {
   return (
-    <div className="bg-img-logo" style={{ color: "#fff", padding: "0px 20px" }}>
+    <div
+      className="bg-img-logo"
+      style={{ color: "#fff", padding: "0px 20px", backgroundColor: "#1c1c1c" }}
+    >
       <Row>
         <Col lg={12} md={24} className="relative cover_rectagle">
           <Flex
@@ -34,29 +37,38 @@ function FloridaProperties() {
             <Flex justify="center" align={"center"}>
               <img src={DownArrow} height="250px" />
             </Flex>
-            <Flex vertical justify="center" align={"center"} className="pb-90">
+            <Flex
+              vertical
+              justify="center"
+              align={"center"}
+              className="pb-90"
+              gap={"3rem"}
+            >
               <Title
-                className="text-white f-50 mt-150"
+                className="text-white f-50 mt-150 text-center"
                 level={1}
                 style={{ marginBottom: "0px" }}
               >
                 #1
+                <br />{" "}
+                <Text className="text-gray text-upper f-16 mt-16">
+                  Ranked Private Brokerage
+                </Text>
               </Title>
-              <Text className="text-gray text-upper f-16 mt-16">
-                Ranked Private Brokerage
-              </Text>
-              <Title className="text-white f-50" level={1}>
-                $1.8 BILLION
+
+              <Title className="text-white f-50 text-center" level={1}>
+                $1.8 BILLION <br />
+                <Text className="text-gray text-upper f-16 mt-16">
+                  Has exceeded the mark
+                </Text>
               </Title>
-              <Text className="text-gray text-upper f-16 mt-16">
-                Has exceeded the mark
-              </Text>
-              <Title className="text-white f-50" level={1}>
-                $1,831,197,188
+
+              <Title className="text-white f-50 text-center" level={1}>
+                $1,831,197,188 <br />{" "}
+                <Text className="text-gray text-upper f-16 mt-16">
+                  Total Sales
+                </Text>
               </Title>
-              <Text className="text-gray text-upper f-16 mt-16">
-                Total Sales
-              </Text>
             </Flex>
           </Col>
         </Col>
