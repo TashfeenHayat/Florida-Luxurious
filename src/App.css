@@ -22,6 +22,12 @@ body:focus-visible {
 .text-white {
   color: white !important;
 }
+.pt-98 {
+  padding-top: 98px;
+}
+.pb-98 {
+  padding-bottom: 98px;
+}
 .text-gray {
   color: #838383 !important;
 }
@@ -854,7 +860,7 @@ body:focus-visible {
   position: absolute;
   top: 50%;
   left: -65px; /* Adjusted left position */
-  width: 122px; /* Adjusted width to fill the container */
+  width: 100px; /* Adjusted width to fill the container */
   height: 1px !important;
   transform: scaleY(1.1);
   background: gray;
@@ -1196,7 +1202,7 @@ body:focus-visible {
 
 .bg-img {
   position: relative;
-  height: 550px;
+  height: 537px;
   background-repeat: no-repeat;
   background-size: cover;
 }
