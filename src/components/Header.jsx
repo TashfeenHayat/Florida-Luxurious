@@ -51,7 +51,7 @@ function Header() {
                 <Menu.Item style={contentStyle}>
                   <Link
                     rel="noopener noreferrer"
-                    className="text-upper"
+                    className="text-upper f-10"
                     to="/properties"
                   >
                     Featured properties
@@ -61,7 +61,7 @@ function Header() {
                   <Link
                     href="https://www.antgroup.com"
                     rel="noopener noreferrer"
-                    className="text-upper"
+                    className="text-upper  f-10"
                   >
                     Featured neighborhood
                   </Link>
@@ -69,7 +69,7 @@ function Header() {
                 <Menu.Item>
                   <Link
                     rel="noopener noreferrer"
-                    className="text-upper"
+                    className="text-upper f-10"
                     to="/sold-properties"
                   >
                     Sold Properties
@@ -92,7 +92,8 @@ function Header() {
                   <a
                     href="https://www.antgroup.com"
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener noreferrer "
+                    className="f-10"
                   >
                     Other Offering 1
                   </a>
@@ -102,6 +103,7 @@ function Header() {
                     href="https://www.aliyun.com"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="f-10"
                   >
                     Other Offering 2
                   </a>
@@ -122,19 +124,19 @@ function Header() {
                 <Menu.Item style={contentStyle}>
                   <Link
                     rel="noopener noreferrer"
-                    className="text-upper"
+                    className="text-upper f-10"
                     to="/our-story"
                   >
                     Our story
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <Link className="text-upper" to="/meet-the-team">
+                  <Link className="text-upper f-10" to="/meet-the-team">
                     Meet the team
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <Link rel="noopener noreferrer" className="text-upper">
+                  <Link rel="noopener noreferrer" className="text-upper f-10">
                     Property press
                   </Link>
                 </Menu.Item>

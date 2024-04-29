@@ -42,10 +42,10 @@ function FloridaProperties() {
               justify="center"
               align={"center"}
               className="pb-90"
-              gap={"3rem"}
+              gap={"4rem"}
             >
               <Title
-                className="text-white f-50 mt-150 text-center"
+                className="text-white f-64 mt-150 text-center"
                 level={1}
                 style={{ marginBottom: "0px" }}
               >
@@ -56,14 +56,14 @@ function FloridaProperties() {
                 </Text>
               </Title>
 
-              <Title className="text-white f-50 text-center" level={1}>
+              <Title className="text-white f-64 text-center" level={1}>
                 $1.8 BILLION <br />
                 <Text className="text-gray text-upper f-16 ">
                   Has exceeded the mark
                 </Text>
               </Title>
 
-              <Title className="text-white f-50 text-center" level={1}>
+              <Title className="text-white f-64 text-center" level={1}>
                 $1,831,197,188 <br />{" "}
                 <Text className="text-gray text-upper f-16 ">Total Sales</Text>
               </Title>

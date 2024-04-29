@@ -31,10 +31,10 @@ function OurStory() {
                       Broward’s Leading Private Brokerage!
                     </Text>
                   </Flex>
-                  <img src={Logoicon} width="20%" />
+                  <img src={Logoicon} width="15%" />
                 </Flex>
                 <Flex vertical>
-                  <Text className="our-story-text f-100 f-16">
+                  <Text className="our-story-text f-100 f-16 text-white">
                     In alignment with private banking, wealth and other highly
                     individualized services which provide a greater level of
                     attention and customer satisfaction, we offer the same
@@ -47,7 +47,7 @@ function OurStory() {
                     Portuguese, Russian, Spanish, Japanese, Arabic and Romanian.
                   </Text>
                   <button
-                    className="button-secondary text-upper mt-16"
+                    className="button-secondary text-upper mt-32"
                     style={{ width: "45%" }}
                     onClick={() => navigate("/contactus")}
                   >

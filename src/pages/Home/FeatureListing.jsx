@@ -75,7 +75,7 @@ function FeatureListing() {
   };
 
   return (
-    <div className="boxshadow-section" style={{ paddingBottom: "85px" }}>
+    <div className="boxshadow-section" style={{ paddingBottom: "98px" }}>
       <Paragraph className="heading-florida-lux-listing">
         Featured{" "}
         <Text
@@ -104,7 +104,7 @@ function FeatureListing() {
             >
               <div className="meet-slider-width">
                 <Slider {...settings}>
-                  {data?.properties?.map((properties, index) => (
+                  {[1, 2, 3].map((properties, index) => (
                     <div
                       className="displayy-teamimg-center"
                       onClick={() => navigate(`/features/${properties?._id}`)}
@@ -116,10 +116,13 @@ function FeatureListing() {
                           <button className="button-view">View All</button>
                           <Flex>
                             <IoLocationOutline color="white" size={20} />
-                            <Text className="f-14 f-bold text-white">
-                              {properties?.addressLine1} <br />
-                              <IoPricetagOutline size={20} /> $
-                              {Number(properties?.salePrice).toLocaleString()}
+                            <Text
+                              className="f-14 f-bold text-white"
+                              style={{ textAlign: "right" }}
+                            >
+                              123 Miller Road South <br />
+                              <IoPricetagOutline size={20} /> $ 100,000
+                              {/* {Number(properties?.salePrice).toLocaleString()} */}
                             </Text>
                           </Flex>
                         </Flex>

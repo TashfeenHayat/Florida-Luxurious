@@ -30,7 +30,7 @@ function Home() {
             <Text style={{ color: "#D4CFC9" }} className="text-paragraph">
               Luxury. Innovation. Excellence.
             </Text>
-            <Title className="title-home-page">
+            <Title className="title-home-page f-64">
               unlock exclusive living <br />
               explore florida’s finest properties
             </Title>
@@ -41,6 +41,11 @@ function Home() {
               Discover Your Dream Home in the Heart of Florida with Florida
               Luxurious Properties
             </Text>
+            <div>
+              <button className="button-secondary text-upper mt-5">
+                Watch Video
+              </button>
+            </div>
           </Flex>
         </div>
       </div>

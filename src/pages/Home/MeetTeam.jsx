@@ -79,8 +79,8 @@ function MeetTeam() {
   return (
     <>
       <div style={{ background: "black" }}>
-        <div style={{ paddingTop: "20px", paddingBottom: "20px" }}>
-          <Title level={1} className="meet-team-heading">
+        <div style={{ paddingTop: "98px", paddingBottom: "98px" }}>
+          <Title level={1} className="meet-team-heading f-40">
             Meet The Team
           </Title>
           {isLoading ? (
@@ -90,18 +90,20 @@ function MeetTeam() {
           ) : (
             <>
               <Container>
-                <div className="slider-container team-section mt-5">
+                <div
+                  className="slider-container team-section"
+                  style={{ marginTop: "65px", marginBottom: "65px" }}
+                >
                   <Slider {...settings}>
                     {data?.agents?.map((agent, index) => (
-                      <div onClick={() => navigate(`/agent/${agent._id}`)}>
+                      <div
+                        onClick={() => navigate(`/agent/${agent._id}`)}
+                        key={index}
+                      >
                         <Flip
                           fImg={
                             <Image
-                              src={
-                                agent?.photo
-                                  ? agent?.photo
-                                  : "https://placehold.co/300x388"
-                              }
+                              src={"https://placehold.co/300x388"}
                               className=""
                               preview={false}
                               fallback="https://placehold.co/300x388"
@@ -110,11 +112,7 @@ function MeetTeam() {
                           }
                           bImg={
                             <Image
-                              src={
-                                agent?.photo
-                                  ? agent?.photo
-                                  : "https://placehold.co/300x388"
-                              }
+                              src={"https://placehold.co/300x388"}
                               className="img-op1"
                               preview={false}
                               fallback="https://placehold.co/300x388"

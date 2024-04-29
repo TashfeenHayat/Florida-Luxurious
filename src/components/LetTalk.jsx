@@ -28,7 +28,7 @@ function LetTalk() {
             <div
               style={{
                 marginBottom: "10px",
-                marginTop: "20px",
+                marginTop: "10px",
                 width: "6%",
                 borderBottom: "1px solid white",
               }}
@@ -38,7 +38,7 @@ function LetTalk() {
                 color: "white",
                 lineHeight: "25.6px",
                 letterSpacing: "1px",
-                fontSize: "20px",
+                fontSize: "24px",
                 textAlign: "center",
                 width: "45%",
               }}
@@ -50,7 +50,7 @@ function LetTalk() {
               <button
                 style={{
                   marginTop: "24px",
-                  height: "40px",
+                  marginBottom: "24px",
                 }}
                 className="let-talk-btn"
               >

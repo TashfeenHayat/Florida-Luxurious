@@ -44,7 +44,7 @@ function Neighborhoods() {
     },
   };
   return (
-    <div style={{ paddingTop: 85, paddingBottom: 85 }}>
+    <div style={{ paddingTop: 98, paddingBottom: 98 }}>
       <Title className="florida-heading-feature-negibour" level={1}>
         Feature Neighborhoods
       </Title>
@@ -259,7 +259,7 @@ function Neighborhoods() {
         </div>
       </Flex>
       <Flex justify="center" align="center">
-        <button className="button-view1">See All Neighborhoods </button>
+        <button className="button-neighborhood">See All Neighborhoods </button>
       </Flex>
     </div>
   );

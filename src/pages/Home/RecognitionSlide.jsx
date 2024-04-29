@@ -22,8 +22,8 @@ function RecognitionSlide() {
     slidesToShow: 6, // Default number of slides to show
     slidesToScroll: 1,
     autoplay: true,
-    speed: 2000,
-    autoplaySpeed: 2000,
+    speed: 6000,
+    autoplaySpeed: 6000,
     cssEase: "linear", // Enable autoplay
     responsive: [
       {
