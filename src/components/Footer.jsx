@@ -32,7 +32,7 @@ function Footer() {
   return (
     <div className="bg-footer">
       <div className="footer-bg-img-shadow">
-        <Row align={"middle"}>
+        <Row align={""}>
           <Col span={6} align="">
             <Image src={FooterLogo} width="60%" preview={false} />
           </Col>
@@ -46,20 +46,20 @@ function Footer() {
                     </Text>
                     <Flex className="pt-2" vertical gap={10}>
                       <Link
-                        className="text-upper f-16 text-black"
+                        className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                         to="/properties"
                       >
                         Featured properties
                       </Link>
                       <Link
-                        className="text-upper f-16 text-black"
+                        className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >
                         Featured NEIGHBORHOODS
                       </Link>
                       <Link
-                        className="text-upper f-16 text-black"
+                        className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                         to="sold-properties"
                       >
@@ -73,19 +73,19 @@ function Footer() {
                     </Text>
                     <Flex className="pt-2" vertical gap={10}>
                       <Link
-                        className="text-upper f-16 text-black"
+                        className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >
                         Other offering
                       </Link>
                       <Link
-                        className="text-upper f-16 text-black"
+                        className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >
                         Other offering
                       </Link>
                       <Link
-                        className="text-upper f-16 text-black"
+                        className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >
                         Other offering
@@ -96,21 +96,21 @@ function Footer() {
                     <Text className="text-upper f-24 f-bold">about</Text>
                     <Flex className="pt-2" vertical gap={10}>
                       <Link
-                        className="text-upper f-16 text-black"
+                        className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                         to="/our-story"
                       >
                         our story
                       </Link>
                       <Link
-                        className="text-upper f-16 text-black"
+                        className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                         to="/meet-the-team"
                       >
                         meet the team
                       </Link>
                       <Link
-                        className="text-upper f-16 text-black"
+                        className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >
                         property press
@@ -127,13 +127,83 @@ function Footer() {
               <Col lg={8}>
                 <Col lg={12}>
                   <Text className="text-upper f-24 f-bold">Communities</Text>
+                  <Flex className="pt-2" vertical gap={10}>
+                    <Link
+                      className="text-upper f-14 text-black"
+                      style={{ textDecoration: "none" }}
+                      to="/our-story"
+                    >
+                      Bay Colony
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-black"
+                      style={{ textDecoration: "none" }}
+                      to="/meet-the-team"
+                    >
+                      Fort Lauderdale
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-black"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Fort Lauderdale Beach
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-black"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Fort Lauderdale Condos
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-black"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Harbor Beach
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-black"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Hills Boro mile
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-black"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Hills Boro Shores
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-black"
+                      style={{ textDecoration: "none" }}
+                    >
+                      Lasolla's isles
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-black"
+                      style={{ textDecoration: "none" }}
+                    >
+                      rio vista
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-black"
+                      style={{ textDecoration: "none" }}
+                    >
+                      sun rise interacoastal
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-black"
+                      style={{ textDecoration: "none" }}
+                    >
+                      the landings
+                    </Link>
+                  </Flex>
                 </Col>
               </Col>
             </Row>
           </Col>
         </Row>
-        <Row className="pt-5">
-          <Col span={24}>
+        <Row align={"bottom"}>
+          <Col span={24} align={"bottom"}>
             <Paragraph className="f-24" style={{ fontWeight: 100 }}>
               BROWARD COUNTY'S <br />
               <Text className="f-bold f-24">#1 RANKED PRIVATE</Text>
@@ -143,7 +213,7 @@ function Footer() {
           </Col>
         </Row>
 
-        <Row align={"middle"}>
+        <Row align={"bottom"}>
           <Col lg={12} sm={24}>
             <Flex gap="25px">
               <Text className="f-bold f-24">Follow us</Text>
@@ -220,9 +290,9 @@ function Footer() {
           </Col>
           <Col lg={12} sm={24}>
             <div>
-              <Paragraph className="f-16 text-center">
+              <Paragraph className="f-20 text-center">
                 Yes, I am interested in receiving updates on{" "}
-                <Text className="f-bold f-16"> Fort Lauderdale Luxury</Text>
+                <Text className="f-bold f-20"> Fort Lauderdale Luxury</Text>
                 &nbsp;Properties for Sale
               </Paragraph>
               <Flex gap={5} align="center" justify={"center"} vertical>
