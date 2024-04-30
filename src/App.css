@@ -87,6 +87,9 @@ body:focus-visible {
 .f-200 {
   font-weight: 200 !important;
 }
+.f-32 {
+  font-size: 32px;
+}
 .mt-150 {
   margin-top: 150px;
 }
@@ -570,6 +573,8 @@ body:focus-visible {
   background-color: #000; /* Green */
   border: none;
   color: white;
+  justify-content: center;
+  align-items: center;
   padding: 15px 52px;
   text-align: center;
   text-decoration: none;
@@ -580,6 +585,8 @@ body:focus-visible {
   line-height: 14px;
   letter-spacing: 1.5px;
   cursor: pointer;
+  width: 250px;
+  height: 75px;
 }
 .button-view-line-right::after {
   content: "";
@@ -1391,6 +1398,16 @@ body:focus-visible {
   top: 12%;
   background: #b0b0b0 !important;
   position: absolute;
+}
+
+.bg-social-media {
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
 }
 .about-agent {
   color: #838383;

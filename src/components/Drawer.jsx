@@ -1,5 +1,6 @@
 import React from "react";
 import { Drawer, Flex, Row, Col, Typography, Image } from "antd";
+import { Link } from "react-router-dom";
 import Close from "../assets/closeicon.svg";
 import LogoMenu from "../assets/logomenu.svg";
 import BG from "../assets/bg.svg";
@@ -30,197 +31,85 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                   <Title className="text-white text-upper" level={3}>
                     our offerings
                   </Title>
-                  <Flex vertical>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
+                  <Flex className="pt-2" vertical gap={10}>
+                    <Link
+                      className="text-upper f-14 text-white"
+                      style={{ textDecoration: "none" }}
+                      to="/properties"
                     >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
+                      Featured properties
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-white"
+                      style={{ textDecoration: "none" }}
                     >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
+                      Featured NEIGHBORHOODS
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-white"
+                      style={{ textDecoration: "none" }}
+                      to="sold-properties"
                     >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
+                      sold properties
+                    </Link>
                   </Flex>
                 </Col>
                 <Col lg={12} md={12} sm={24}>
                   <Title className="text-white text-upper" level={3}>
                     Search by location
                   </Title>
-                  <Flex vertical>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
+                  <Flex className="pt-2" vertical gap={10}>
+                    <Link
+                      className="text-upper f-14 text-white"
+                      style={{ textDecoration: "none" }}
                     >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
+                      Other offering
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-white"
+                      style={{ textDecoration: "none" }}
                     >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
+                      Other offering
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-white"
+                      style={{ textDecoration: "none" }}
                     >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
+                      Other offering
+                    </Link>
                   </Flex>
                 </Col>
                 <Col lg={12} md={12} sm={24}>
                   <Title className="text-white text-upper" level={3}>
                     about
                   </Title>
-                  <Flex vertical>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
+                  <Flex className="pt-2" vertical gap={10}>
+                    <Link
+                      className="text-upper f-14 text-white"
+                      style={{ textDecoration: "none" }}
+                      to="/our-story"
                     >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
+                      our story
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-white"
+                      style={{ textDecoration: "none" }}
+                      to="/meet-the-team"
                     >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
+                      meet the team
+                    </Link>
+                    <Link
+                      className="text-upper f-14 text-white"
+                      style={{ textDecoration: "none" }}
                     >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
+                      property press
+                    </Link>
                   </Flex>
                 </Col>
                 <Col lg={12} md={12} sm={24}>
                   <Title className="text-white text-upper" level={3}>
                     for boat owners
                   </Title>
-                  <Flex vertical>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                    <Text
-                      style={{ color: "#D4CFC9" }}
-                      className="text-upper f-14"
-                    >
-                      Other properties
-                    </Text>
-                  </Flex>
                 </Col>
               </Row>
             </Col>
@@ -229,43 +118,75 @@ function Drawers({ setOpenDrawer, openDrawer }) {
               <Title className="text-white text-upper" level={3}>
                 Communities
               </Title>
-              <Flex vertical>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
-                  Other properties
-                </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
-                  Other properties
-                </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
-                  Other properties
-                </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
-                  Other properties
-                </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
-                  Other properties
-                </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
-                  Other properties
-                </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
-                  Other properties
-                </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
-                  Other properties
-                </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
-                  Other properties
-                </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
-                  Other properties
-                </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
-                  Other properties
-                </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
-                  Other properties
-                </Text>
+              <Flex className="pt-2" vertical gap={10}>
+                <Link
+                  className="text-upper f-14 text-white"
+                  style={{ textDecoration: "none" }}
+                  to="/our-story"
+                >
+                  Bay Colony
+                </Link>
+                <Link
+                  className="text-upper f-14 text-white"
+                  style={{ textDecoration: "none" }}
+                  to="/meet-the-team"
+                >
+                  Fort Lauderdale
+                </Link>
+                <Link
+                  className="text-upper f-14 text-white"
+                  style={{ textDecoration: "none" }}
+                >
+                  Fort Lauderdale Beach
+                </Link>
+                <Link
+                  className="text-upper f-14 text-white"
+                  style={{ textDecoration: "none" }}
+                >
+                  Fort Lauderdale Condos
+                </Link>
+                <Link
+                  className="text-upper f-14 text-white"
+                  style={{ textDecoration: "none" }}
+                >
+                  Harbor Beach
+                </Link>
+                <Link
+                  className="text-upper f-14 text-white"
+                  style={{ textDecoration: "none" }}
+                >
+                  Hills Boro mile
+                </Link>
+                <Link
+                  className="text-upper f-14 text-white"
+                  style={{ textDecoration: "none" }}
+                >
+                  Hills Boro Shores
+                </Link>
+                <Link
+                  className="text-upper f-14 text-white"
+                  style={{ textDecoration: "none" }}
+                >
+                  Lasolla's isles
+                </Link>
+                <Link
+                  className="text-upper f-14 text-white"
+                  style={{ textDecoration: "none" }}
+                >
+                  rio vista
+                </Link>
+                <Link
+                  className="text-upper f-14 text-white"
+                  style={{ textDecoration: "none" }}
+                >
+                  sun rise interacoastal
+                </Link>
+                <Link
+                  className="text-upper f-14 text-white"
+                  style={{ textDecoration: "none" }}
+                >
+                  the landings
+                </Link>
               </Flex>
             </Col>
           </Row>

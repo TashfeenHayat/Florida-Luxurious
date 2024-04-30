@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Image,
   Row,
@@ -31,6 +31,7 @@ import useProperty from "../../hooks/useProperty";
 const { Title, Paragraph, Text } = Typography;
 
 export default function DetailProperty() {
+  const requestRef = useRef(null);
   const [details, setDetails] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
@@ -38,6 +39,7 @@ export default function DetailProperty() {
 
   const { data, isLoading } = useProperty(id);
 
+  console.log(data);
   const navigate = useNavigate();
 
   const showModal = () => {
@@ -49,6 +51,13 @@ export default function DetailProperty() {
     console.log("wokring");
   };
 
+  const scrollToRequest = () => {
+    console.log("working");
+
+    if (requestRef.current) {
+      requestRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <>
       <div style={{ position: "relative", overflowX: "hidden" }}>
@@ -86,7 +95,7 @@ export default function DetailProperty() {
               MLS® #: F10423862
             </Text>
             <Title className="text-upper" style={{ color: "white" }} level={3}>
-              2549 Mercedes Drive
+              {data?.addressLine1}
             </Title>
             <Paragraph
               className="text-upper f-20 f-100"
@@ -99,7 +108,7 @@ export default function DetailProperty() {
               style={{ color: "white", marginTop: ".2em" }}
               level={2}
             >
-              $35,000,000
+              ${data?.salePrice}
             </Title>
           </Flex>
           <Row gutter={[8, 16]}>
@@ -366,13 +375,17 @@ export default function DetailProperty() {
                   Watch Videos
                 </Button>
               </div>
-              <div style={{ marginBottom: 40 }}>
+              {/* <div style={{ marginBottom: 40 }}>
                 <Button classNam="button-view1" width="300px">
                   Request details
                 </Button>
-              </div>
+              </div> */}
               <div style={{ marginBottom: 40 }}>
-                <Button classNam="button-view1" width="300px">
+                <Button
+                  classNam="button-view1"
+                  width="300px"
+                  Click={scrollToRequest}
+                >
                   Schedule a showing
                 </Button>
               </div>
@@ -389,7 +402,7 @@ export default function DetailProperty() {
           </Col>
         </Row>
       </Container>
-      <div style={{ backgroundColor: "#000" }}>
+      <div style={{ backgroundColor: "#000" }} ref={requestRef}>
         <Container>
           <Row>
             <Col lg={14} sm={24} md={24} className="p-5">
