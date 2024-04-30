@@ -34,7 +34,7 @@ function OurStory() {
                   <img src={Logoicon} width="15%" />
                 </Flex>
                 <Flex vertical>
-                  <Text className="our-story-text f-100 f-16 text-white">
+                  <Text className="our-story-text f-100 f-16 text-white text-justify">
                     In alignment with private banking, wealth and other highly
                     individualized services which provide a greater level of
                     attention and customer satisfaction, we offer the same

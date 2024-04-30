@@ -12,6 +12,9 @@ body:focus-visible {
 .ant-typography {
   font-family: "New Gothic Style", sans-serif !important;
 }
+.text-justify {
+  text-align: justify !important;
+}
 
 .flex-between {
   display: flex;
@@ -1366,7 +1369,7 @@ body:focus-visible {
   left: -182% !important;
   height: 5px;
   bottom: auto;
-  top: 12%;
+  top: 9.5%;
   background: #b0b0b0 !important;
   position: absolute;
 }
@@ -1399,14 +1402,14 @@ body:focus-visible {
 .agent-first-name {
   color: black;
   font-weight: bold;
-  font-size: 108px;
+  font-size: 90px;
   letter-spacing: -4%;
   line-height: 1.2;
 }
 .agent-last-name {
   color: black;
   font-weight: 100;
-  font-size: 108px;
+  font-size: 90px;
   letter-spacing: -4%;
   line-height: 0.8;
 }
@@ -1426,6 +1429,7 @@ body:focus-visible {
   font-size: 24px;
   letter-spacing: -5%;
   line-height: 1.4;
+  text-align: justify;
 }
 .agent-info-bg {
   background-image: url("./assets/agentdetail.png");

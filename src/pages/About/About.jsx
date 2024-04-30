@@ -33,7 +33,10 @@ function OurStory() {
             </Title>
           </Flex>
 
-          <Paragraph className="f-24 text-left f-100">
+          <Paragraph
+            className="f-24 text-left f-100"
+            style={{ textAlign: "justify" }}
+          >
             In alignment with private banking, wealth and other highly
             individualized services which provide a greater level of attention
             and customer satisfaction, we offer the same discreet approach to
@@ -60,7 +63,7 @@ function OurStory() {
             <Image preview={false} src={Bagde4} />
             <Image preview={false} src={Bagde4} />
           </Flex>
-          <Flex justify={"space-around"} className="my-124" wrap="wrap">
+          <Flex justify={"space-around"} className="my-124 px-3" wrap="wrap">
             <div style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}>
               <Text className="text-gray f-16 text-upper">
                 Ranked Private Brokerage
