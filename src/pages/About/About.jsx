@@ -8,7 +8,7 @@ import Bagde from "../../assets/Bagde1.svg";
 import Bagde2 from "../../assets/Bagde2.svg";
 import Bagde3 from "../../assets/Bagde3.svg";
 import Bagde4 from "../../assets/Bagde4.svg";
-const { Title, Text } = Typography;
+const { Title, Text, Paragraph } = Typography;
 function OurStory() {
   return (
     <>
@@ -32,7 +32,8 @@ function OurStory() {
               </span>
             </Title>
           </Flex>
-          <Text className="f-24">
+
+          <Paragraph className="f-24 text-left f-100">
             In alignment with private banking, wealth and other highly
             individualized services which provide a greater level of attention
             and customer satisfaction, we offer the same discreet approach to
@@ -42,7 +43,7 @@ function OurStory() {
             Broward’s luxury market. To better facilitate the needs of our
             clients, we have Agents fluent in French, German, Italian, Polish,
             Portuguese, Russian, Spanish, Japanese, Arabic and Romanian.
-          </Text>
+          </Paragraph>
         </Col>
         <Col lg={14} sm={24} md={24} style={{ background: "#000" }}>
           <div className="p-5">
@@ -59,25 +60,25 @@ function OurStory() {
             <Image preview={false} src={Bagde4} />
             <Image preview={false} src={Bagde4} />
           </Flex>
-          <Flex justify={"space-around"} className="my-5" wrap="wrap">
+          <Flex justify={"space-around"} className="my-124" wrap="wrap">
             <div style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}>
               <Text className="text-gray f-16 text-upper">
                 Ranked Private Brokerage
               </Text>
               <br />
-              <Text className="text-white text-upper f-50">#1</Text>
+              <Text className="text-white text-upper f-40">#1</Text>
             </div>
             <div style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}>
               <Text className="text-gray f-16 text-upper">
                 Has exceeded the mark
               </Text>
               <br />
-              <Text className="text-white text-upper f-50">$1.8 BILLION</Text>
+              <Text className="text-white text-upper f-40">$1.8 BILLION</Text>
             </div>
             <div style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}>
               <Text className="text-gray f-16 text-upper">Total Sales</Text>
               <br />
-              <Text className="text-white text-upper f-50">$1,831,197,188</Text>
+              <Text className="text-white text-upper f-40">$1,831,197,188</Text>
             </div>
           </Flex>
         </Col>

@@ -11,6 +11,7 @@ import useProperties from "../../hooks/useProperties";
 const { Title, Text, Paragraph } = Typography;
 function FeatureListing() {
   const { data, isLoading } = useProperties();
+  console.log(data?.properties);
   const navigate = useNavigate();
   const CustomPrevArrow = (props) => {
     const { className, style, onClick } = props;
@@ -104,10 +105,10 @@ function FeatureListing() {
             >
               <div className="meet-slider-width">
                 <Slider {...settings}>
-                  {[1, 2, 3].map((properties, index) => (
+                  {data?.properties.map((properties, index) => (
                     <div
                       className="displayy-teamimg-center"
-                      onClick={() => navigate(`/features/${properties?._id}`)}
+                      onClick={() => navigate(`/features/${properties._id}`)}
                     >
                       <img src={Property} width="100%" className="img-op" />
 
@@ -120,8 +121,10 @@ function FeatureListing() {
                               className="f-14 f-bold text-white"
                               style={{ textAlign: "right" }}
                             >
-                              123 Miller Road South <br />
-                              <IoPricetagOutline size={20} /> $ 100,000
+                              {properties.addressLine1}
+                              <br />
+                              <IoPricetagOutline size={20} /> ${" "}
+                              {properties.salePrice}
                               {/* {Number(properties?.salePrice).toLocaleString()} */}
                             </Text>
                           </Flex>

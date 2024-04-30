@@ -93,6 +93,11 @@ body:focus-visible {
 .mt-16 {
   margin-top: 16px;
 }
+.my-124 {
+  margin-top: 124px;
+  margin-bottom: 124px;
+}
+
 .p-absoulte {
   position: absolute;
 }
@@ -507,7 +512,7 @@ body:focus-visible {
   position: absolute;
   top: 50%;
   left: -65px; /* Adjusted left position */
-  width: 122px; /* Adjusted width to fill the container */
+  width: 110px; /* Adjusted width to fill the container */
   height: 1px !important;
   transform: scaleY(1.1);
   background: gray;

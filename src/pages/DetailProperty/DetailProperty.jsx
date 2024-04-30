@@ -25,7 +25,7 @@ import { IoMdClose } from "react-icons/io";
 import LetTalk from "../../components/LetTalk";
 import { FaVectorSquare, FaPlus } from "react-icons/fa6";
 import { TbCarGarage } from "react-icons/tb";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useProperty from "../../hooks/useProperty";
 
 const { Title, Paragraph, Text } = Typography;
@@ -38,7 +38,7 @@ export default function DetailProperty() {
 
   const { data, isLoading } = useProperty(id);
 
-  console.log(data, "properites");
+  const navigate = useNavigate();
 
   const showModal = () => {
     setOpenModal(!openModal);
@@ -377,7 +377,11 @@ export default function DetailProperty() {
                 </Button>
               </div>
               <div style={{ marginBottom: 40 }}>
-                <Button classNam="button-view1" width="300px">
+                <Button
+                  classNam="button-view1"
+                  width="300px"
+                  Click={() => navigate("/properties")}
+                >
                   View more listing
                 </Button>
               </div>

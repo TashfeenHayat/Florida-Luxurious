@@ -5,10 +5,10 @@ import FeaturedPropertiesImage from "../../assets/Agent.png";
 import { Container } from "react-bootstrap";
 import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
+import Lettalk from "../../components/LetTalk";
 const { Title, Text } = Typography;
 
 function SoldProperties() {
-  
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4; // Number of items to display per page
 
@@ -41,8 +41,8 @@ function SoldProperties() {
       <BackgroundImage Image={FeaturedPropertiesImage}>
         <Title className="text-white text-upper f-50">Sold properties</Title>
       </BackgroundImage>
-      <Container className="py-5">
-        <Row gutter={[20, 40]}>
+      <Container className="pt-98 pb-98">
+        <Row gutter={[60, 60]}>
           {currentItems.map((property, index) => (
             <Col lg={12} key={index}>
               <div className="displayy-teamimg-center">
@@ -53,7 +53,7 @@ function SoldProperties() {
                     align={"center"}
                     justify="center"
                     style={{ height: "100%" }}
-                    gap={40}
+                    gap={30}
                   >
                     <div className="for-sale-properites">
                       <Text className="text-center text-upper f-24 f-bold">
@@ -89,7 +89,7 @@ function SoldProperties() {
                     </Flex>
                   </Flex>
                 </div>
-                <div className="p-absoulte right-0 top-0 for-sale-more">
+                {/* <div className="p-absoulte right-0 top-0 for-sale-more">
                   <div
                     style={{
                       height: "45px",
@@ -116,7 +116,7 @@ function SoldProperties() {
                       </Text>
                     </Flex>
                   </div>
-                </div>
+                </div> */}
                 <div className="info">
                   <Flex justify={"end"} align={"center"}>
                     <Flex>
@@ -141,6 +141,7 @@ function SoldProperties() {
           />
         </Flex>
       </Container>
+      <Lettalk />
     </>
   );
 }

@@ -91,34 +91,7 @@ function Properties() {
                     </Flex>
                   </Flex>
                 </div>
-                <div className="p-absoulte right-0 top-0 for-sale-more">
-                  <div
-                    style={{
-                      height: "45px",
-                      width: "150px",
-                      background: "black",
-                    }}
-                  >
-                    <Flex
-                      justify={"center"}
-                      align="center"
-                      style={{ height: "inherit" }}
-                    >
-                      <Text
-                        style={{
-                          color: "white",
-                          textTransform: "uppercase",
-                          lineHeight: "23.8px",
-                          letterSpacing: "1px",
-                          fontWeight: "bold",
-                          fontSize: "14px",
-                        }}
-                      >
-                        for sale
-                      </Text>
-                    </Flex>
-                  </div>
-                </div>
+
                 <div className="info">
                   <Flex justify={"end"} align={"center"}>
                     <Flex>

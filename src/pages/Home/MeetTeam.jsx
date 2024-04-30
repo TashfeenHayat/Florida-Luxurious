@@ -92,7 +92,11 @@ function MeetTeam() {
               <Container>
                 <div
                   className="slider-container team-section"
-                  style={{ marginTop: "65px", marginBottom: "65px" }}
+                  style={{
+                    marginTop: "65px",
+                    marginBottom: "65px",
+                    cursor: "pointer",
+                  }}
                 >
                   <Slider {...settings}>
                     {data?.agents?.map((agent, index) => (
@@ -103,7 +107,11 @@ function MeetTeam() {
                         <Flip
                           fImg={
                             <Image
-                              src={"https://placehold.co/300x388"}
+                              src={
+                                agent.photo
+                                  ? agent.photo
+                                  : "https://placehold.co/300x388"
+                              }
                               className=""
                               preview={false}
                               fallback="https://placehold.co/300x388"
@@ -112,7 +120,11 @@ function MeetTeam() {
                           }
                           bImg={
                             <Image
-                              src={"https://placehold.co/300x388"}
+                              src={
+                                agent.photo
+                                  ? agent.photo
+                                  : "https://placehold.co/300x388"
+                              }
                               className="img-op1"
                               preview={false}
                               fallback="https://placehold.co/300x388"

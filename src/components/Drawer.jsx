@@ -33,43 +33,43 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                   <Flex vertical>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
@@ -82,43 +82,43 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                   <Flex vertical>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
@@ -131,43 +131,43 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                   <Flex vertical>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
@@ -180,43 +180,43 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                   <Flex vertical>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
                     <Text
                       style={{ color: "#D4CFC9" }}
-                      className="text-upper f-16"
+                      className="text-upper f-14"
                     >
                       Other properties
                     </Text>
@@ -230,40 +230,40 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                 Communities
               </Title>
               <Flex vertical>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-16">
+                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
                   Other properties
                 </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-16">
+                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
                   Other properties
                 </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-16">
+                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
                   Other properties
                 </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-16">
+                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
                   Other properties
                 </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-16">
+                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
                   Other properties
                 </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-16">
+                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
                   Other properties
                 </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-16">
+                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
                   Other properties
                 </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-16">
+                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
                   Other properties
                 </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-16">
+                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
                   Other properties
                 </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-16">
+                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
                   Other properties
                 </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-16">
+                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
                   Other properties
                 </Text>
-                <Text style={{ color: "#D4CFC9" }} className="text-upper f-16">
+                <Text style={{ color: "#D4CFC9" }} className="text-upper f-14">
                   Other properties
                 </Text>
               </Flex>
@@ -286,7 +286,7 @@ function Drawers({ setOpenDrawer, openDrawer }) {
             </Title>
             <Flex justify={"space-around"} align="center" gap={30}>
               <Flex vertical>
-                <Text style={{ color: "#838383" }} className="f-16">
+                <Text style={{ color: "#838383" }} className="f-14">
                   Address
                 </Text>
                 <Text className="text-white f-bold">
@@ -296,7 +296,7 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                 </Text>
               </Flex>
               <Flex vertical>
-                <Text style={{ color: "#838383" }} className="f-16">
+                <Text style={{ color: "#838383" }} className="f-14">
                   Schedule an appointment
                 </Text>
                 <Text className="text-white f-bold">954.870.080</Text>

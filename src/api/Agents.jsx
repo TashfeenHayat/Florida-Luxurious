@@ -11,6 +11,7 @@ export const getAgents = createAsyncThunk(
 
       return res.data;
     } catch ({ response }) {
+      console.log(response);
       const { status, message } = response;
       return rejectWithValue({ status, message });
     }

@@ -1,6 +1,14 @@
 import React from "react";
 import { Button } from "antd";
-function Buttons({ children, classNam, width, bgColor, textColor, type }) {
+function Buttons({
+  children,
+  classNam,
+  width,
+  bgColor,
+  textColor,
+  type,
+  Click,
+}) {
   return (
     <div>
       <button
@@ -12,6 +20,7 @@ function Buttons({ children, classNam, width, bgColor, textColor, type }) {
           color: textColor,
         }}
         type={type}
+        onClick={Click}
       >
         {children}
       </button>
