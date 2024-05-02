@@ -46,7 +46,11 @@ function Properties() {
       <Container className="pt-98 pb-98">
         <Row gutter={[60, 60]}>
           {currentItems.map((property, index) => (
-            <Col lg={12} key={index} onClick={() => navigate(`/features`)}>
+            <Col
+              lg={12}
+              key={index}
+              onClick={() => navigate(`features/660719a7b27711bbbdc092b6`)}
+            >
               <div className="displayy-teamimg-center">
                 <img src={Property} width="100%" className="" />
                 <div className="more-info-property">
