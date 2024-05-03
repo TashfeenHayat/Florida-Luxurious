@@ -49,7 +49,7 @@ function SoldProperties() {
               key={index}
               onClick={() => navigate(`features/660719a7b27711bbbdc092b6`)}
             >
-              <div className="displayy-teamimg-center">
+                <div className="displayy-teamimg-center">
                 <img src={Property} width="100%" className="" />
                 <div className="more-info-property">
                   <Flex
