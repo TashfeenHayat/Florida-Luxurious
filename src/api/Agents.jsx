@@ -3,10 +3,10 @@ import customAxios from "./Axios";
 
 export const getAgents = createAsyncThunk(
   "getAgentsReducer",
-  async function ({ key, page = 1, limit = 10 }, { rejectWithValue }) {
+  async function ({ key, limit, page }, { rejectWithValue }) {
     try {
       const res = await customAxios.get(`agent`, {
-        params: { key, page, limit },
+        params: { key, limit: limit, page: page },
       });
 
       return res.data;

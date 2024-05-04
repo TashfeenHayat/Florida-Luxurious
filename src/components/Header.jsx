@@ -50,10 +50,9 @@ function Header() {
               <Menu style={menuStyle}>
                 <Menu.Item style={contentStyle}>
                   <Link
-                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-upper"
-                    onClick={() => navigate("/properties")}
+                    to="/properties"
                   >
                     Featured properties
                   </Link>
@@ -61,7 +60,6 @@ function Header() {
                 <Menu.Item>
                   <Link
                     href="https://www.antgroup.com"
-                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-upper"
                   >
@@ -70,10 +68,9 @@ function Header() {
                 </Menu.Item>
                 <Menu.Item>
                   <Link
-                    onClick={() => navigate("/sold-properties")}
-                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-upper"
+                    to="/sold-properties"
                   >
                     Sold Properties
                   </Link>
@@ -124,31 +121,20 @@ function Header() {
               <Menu style={menuStyle}>
                 <Menu.Item style={contentStyle}>
                   <Link
-                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-upper"
-                    onClick={() => navigate("/our-story")}
+                    to="/our-story"
                   >
                     Our story
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <Link
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-upper"
-                    onClick={() => navigate("/meet-the-team")}
-                  >
+                  <Link className="text-upper" to="/meet-the-team">
                     Meet the team
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <Link
-                    onClick={() => navigate("/sold-properties")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-upper"
-                  >
+                  <Link rel="noopener noreferrer" className="text-upper">
                     Property press
                   </Link>
                 </Menu.Item>
@@ -166,13 +152,7 @@ function Header() {
           <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
             For Boat Owners
           </a>
-          <Link
-            href="#"
-            target="_blank"
-            onClick={() => navigate("/contact-us")}
-          >
-            Contact Us
-          </Link>
+          <Link onClick={() => navigate("/contact-us")}>Contact Us</Link>
         </Flex>
 
         <Flex onClick={handleDrawer}>

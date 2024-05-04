@@ -25,6 +25,9 @@ body:focus-visible {
 .text-gray {
   color: #838383 !important;
 }
+.text-black {
+  color: #000 !important;
+}
 .text-upper {
   text-transform: uppercase;
 }
@@ -214,6 +217,7 @@ body:focus-visible {
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;
+  mix-blend-mode: difference;
 }
 
 .line-between::before {
@@ -247,9 +251,6 @@ body:focus-visible {
   margin-right: -200px;
   z-index: 1;
   padding: 30px;
-}
-.slick-slider {
-  width: 98% !important;
 }
 
 .our-story-title {
@@ -322,6 +323,12 @@ body:focus-visible {
   display: flex;
   gap: 5rem;
 }
+
+.team-section .slick-track {
+  display: flex;
+  gap: 2rem;
+}
+
 .negborihood-list .slick-track {
   display: flex;
   gap: 1rem;

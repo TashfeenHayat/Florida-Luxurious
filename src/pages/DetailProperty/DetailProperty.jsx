@@ -25,15 +25,25 @@ import { IoMdClose } from "react-icons/io";
 import LetTalk from "../../components/LetTalk";
 import { FaVectorSquare, FaPlus } from "react-icons/fa6";
 import { TbCarGarage } from "react-icons/tb";
+import { useParams } from "react-router-dom";
+import useProperty from "../../hooks/useProperty";
 
 const { Title, Paragraph, Text } = Typography;
+
 export default function DetailProperty() {
   const [details, setDetails] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
+  const { id } = useParams();
+
+  const { data, isLoading } = useProperty(id);
+
+  console.log(data, "properites");
+
   const showModal = () => {
     setOpenModal(!openModal);
   };
+
   const hideModal = () => {
     setOpenModal(!openModal);
     console.log("wokring");
@@ -107,7 +117,9 @@ export default function DetailProperty() {
                     <IoBedOutline size={15} />
                   </div>
                 </Flex>
-                <Text className="text-white f-16 f-100">7 Bedrooms</Text>
+                <Text className="text-white f-16 f-100">
+                  {data?.bedroomCount} Bedrooms
+                </Text>
               </Flex>
             </Col>
             <Col lg={8}>
@@ -137,7 +149,7 @@ export default function DetailProperty() {
                 >
                   <LuBath size={15} />
                 </div>
-                <Text className="text-white f-16">7.1 Baths</Text>
+                <Text className="text-white f-16">{data?.bathCount} Baths</Text>
               </Flex>
             </Col>
             <Col lg={8}>
@@ -154,7 +166,9 @@ export default function DetailProperty() {
                     <FaVectorSquare size={15} />
                   </div>
                 </Flex>
-                <Text className="text-white f-16 f-100">13,000 ± SF Lot</Text>
+                <Text className="text-white f-16 f-100">
+                  {data?.area} {data?.areaUnit}
+                </Text>
               </Flex>
             </Col>
             <Col lg={8}>
@@ -203,18 +217,10 @@ export default function DetailProperty() {
                 style={{ textAlign: "center", lineHeight: 2 }}
                 className="text-upper"
               >
-                2549 Mercedes Drive
+                {data?.addressLine1}
               </Title>
               <Paragraph className="f-16 f-200" style={{ lineHeight: 2.8 }}>
-                Construction has started! New Coastal Modern Harbor Beach
-                Deepwater Estate sited on 100 ft of premier waterfrontage.
-                Dramatic open and free flowing interiors capture waterway views
-                from all major rooms. Resort retreat patio featuring a
-                sun-splashed pool with spa. Harbor Beach is Fort Lauderdale
-                premier neighborhood with quick access to the Ocean by boat.
-                Members also have a Private Marina and ability to join the
-                Private beach Club. Home designed by award winning Tuthill
-                Architecture.
+                {data?.description}
               </Paragraph>
             </Card>
           </Col>
@@ -392,7 +398,7 @@ export default function DetailProperty() {
                 }}
                 className="text-upper"
               >
-                Interested in 2549 Mercedes Drive?
+                Interested in {data?.addressLine1}?
               </Title>
               <form>
                 {" "}

@@ -11,6 +11,7 @@ import { notification } from "antd";
 let initialState = {
   isLoading: false,
   success: "",
+  error: "",
   isError: false,
 };
 

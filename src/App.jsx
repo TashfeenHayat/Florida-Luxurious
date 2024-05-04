@@ -34,7 +34,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} exact />
           <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="/features" element={<DetailProperty />} />
+          <Route path="/features/:id" element={<DetailProperty />} />
           <Route path="/meet-the-team" element={<Agents />} />
           <Route path="/admin/login" element={<LoginAdmin />} />
           <Route path="/admin/signup" element={<Signup />} />

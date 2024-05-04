@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Flex, Col, Row, Button } from "antd";
+import { Typography, Flex, Col, Row, Button, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
@@ -7,8 +7,10 @@ import Slider from "react-slick";
 import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 import { Container } from "react-bootstrap";
+import useProperties from "../../hooks/useProperties";
 const { Title, Text, Paragraph } = Typography;
 function FeatureListing() {
+  const { data, isLoading } = useProperties();
   const navigate = useNavigate();
   const CustomPrevArrow = (props) => {
     const { className, style, onClick } = props;
@@ -41,7 +43,7 @@ function FeatureListing() {
     infinite: true,
     speed: 500,
     slidesToShow: 2,
-    slidesToScroll: 2,
+    slidesToScroll: 1,
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
     responsive: [
@@ -84,147 +86,82 @@ function FeatureListing() {
         </Text>{" "}
         Listing
       </Paragraph>
-      <Container>
-        <Flex
-          justify={"center"}
-          align={"center"}
-          style={{
-            marginTop: 65,
-            marginBottom: 65,
-          }}
-          className="features_section_slider"
-        >
-          <div className="meet-slider-width">
-            <Slider {...settings}>
-              <div
-                className="displayy-teamimg-center"
-                onClick={() => navigate("/features")}
-              >
-                <img src={Property} width="100%" className="img-op" />
-
-                <div className="info">
-                  <Flex justify={"space-between"} align={"center"}>
-                    <button className="button-view">View All</button>
-                    <Flex>
-                      <IoLocationOutline color="white" size={20} />
-                      <Text className="f-14 f-bold text-white">
-                        2572 Mercedes Drive <br />
-                        <IoPricetagOutline size={20} /> $15,000,0000
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </div>
-
-                <div className="show-info">
-                  <div style={{ background: "#fff", height: "50px" }}>
-                    <Flex
-                      justify={"space-between"}
-                      align={"center"}
-                      style={{ height: "100%" }}
-                    >
-                      <Text className="mx-4 f-16 f-bold">
-                        2572 Mercedes Drive
-                      </Text>
-                      <div className="prop-info">
-                        <Text style={{ color: "white" }} className="text-upper">
-                          {" "}
-                          View More +
-                        </Text>
-                      </div>
-                    </Flex>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className="displayy-teamimg-center"
-                onClick={() => navigate("/features")}
-              >
-                <img src={Property} width="100%" className="img-op" />
-
-                <div className="info">
-                  <Flex justify={"space-between"} align={"center"}>
-                    <button className="button-view">View All</button>
-                    <Flex>
-                      <IoLocationOutline color="white" size={20} />
-                      <Text className="f-14 f-bold text-white">
-                        2572 Mercedes Drive <br />
-                        <IoPricetagOutline size={20} /> $15,000,0000
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </div>
-
-                <div className="show-info">
-                  <div style={{ background: "#fff", height: "50px" }}>
-                    <Flex
-                      justify={"space-between"}
-                      align={"center"}
-                      style={{ height: "100%" }}
-                    >
-                      <Text className="mx-4 f-16 f-bold">
-                        2572 Mercedes Drive
-                      </Text>
-                      <div className="prop-info">
-                        <Text style={{ color: "white" }} className="text-upper">
-                          {" "}
-                          View More +
-                        </Text>
-                      </div>
-                    </Flex>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                onClick={() => navigate("/features")}
-                className="displayy-teamimg-center"
-              >
-                <img src={Property} width="100%" className="img-op" />
-                <div className="info">
-                  <Flex justify={"space-between"} align={"center"}>
-                    <button className="button-view">View All</button>
-                    <Flex>
-                      <IoLocationOutline color="white" size={20} />
-                      <Text className="f-14 f-bold text-white">
-                        2572 Mercedes Drive <br />
-                        <IoPricetagOutline size={20} /> $15,000,0000
-                      </Text>
-                    </Flex>
-                  </Flex>
-                </div>
-
-                <div className="show-info">
-                  <div style={{ background: "#fff", height: "50px" }}>
-                    <Flex
-                      justify={"space-between"}
-                      align={"center"}
-                      style={{ height: "100%" }}
-                    >
-                      <Text className="mx-4 f-16 f-bold">
-                        2572 Mercedes Drive
-                      </Text>
-                      <div className="prop-info">
-                        <Text style={{ color: "white" }} className="text-upper">
-                          {" "}
-                          View More +
-                        </Text>
-                      </div>
-                    </Flex>
-                  </div>
-                </div>
-              </div>
-            </Slider>
-          </div>
+      {isLoading ? (
+        <Flex justify={"center"}>
+          <Spin size="large" />
         </Flex>
-      </Container>
-      <Flex
-        justify="center"
-        align="center"
-        onClick={() => navigate("/properties")}
-      >
-        <button className="button-view1">View All</button>
-      </Flex>
+      ) : (
+        <>
+          <Container>
+            <Flex
+              justify={"center"}
+              align={"center"}
+              style={{
+                marginTop: 65,
+                marginBottom: 65,
+              }}
+              className="features_section_slider"
+            >
+              <div className="meet-slider-width">
+                <Slider {...settings}>
+                  {data?.properties?.map((properties, index) => (
+                    <div
+                      className="displayy-teamimg-center"
+                      onClick={() => navigate(`/features/${properties?._id}`)}
+                    >
+                      <img src={Property} width="100%" className="img-op" />
+
+                      <div className="info">
+                        <Flex justify={"space-between"} align={"center"}>
+                          <button className="button-view">View All</button>
+                          <Flex>
+                            <IoLocationOutline color="white" size={20} />
+                            <Text className="f-14 f-bold text-white">
+                              {properties?.addressLine1} <br />
+                              <IoPricetagOutline size={20} /> $
+                              {Number(properties?.salePrice).toLocaleString()}
+                            </Text>
+                          </Flex>
+                        </Flex>
+                      </div>
+
+                      <div className="show-info">
+                        <div style={{ background: "#fff", height: "50px" }}>
+                          <Flex
+                            justify={"space-between"}
+                            align={"center"}
+                            style={{ height: "100%" }}
+                          >
+                            <Text className="mx-4 f-16 f-bold">
+                              {properties?.addressLine1}
+                            </Text>
+                            <div className="prop-info">
+                              <Text
+                                style={{ color: "white" }}
+                                className="text-upper"
+                              >
+                                {" "}
+                                View More +
+                              </Text>
+                            </div>
+                          </Flex>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            </Flex>
+          </Container>
+          <Flex
+            justify="center"
+            align="center"
+            onClick={() => navigate("/properties")}
+          >
+            <button className="button-view1">View All</button>
+          </Flex>
+        </>
+      )}
     </div>
   );
 }

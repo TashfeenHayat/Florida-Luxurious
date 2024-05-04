@@ -44,7 +44,7 @@ function Properties() {
       <Container className="py-5">
         <Row gutter={[20, 40]}>
           {currentItems.map((property, index) => (
-            <Col lg={12} key={index} onClick={() => navigate("/features")}>
+            <Col lg={12} key={index} onClick={() => navigate(`/features`)}>
               <div className="displayy-teamimg-center">
                 <img src={Property} width="100%" className="" />
                 <div className="more-info-property">
@@ -139,7 +139,6 @@ function Properties() {
             pageSize={itemsPerPage}
             onChange={handlePageChange}
             responsive
-            
           />
         </Flex>
       </Container>

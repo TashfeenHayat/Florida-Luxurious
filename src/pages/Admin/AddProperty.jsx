@@ -5,6 +5,7 @@ import {
   Form,
   Card,
   Button,
+  Image,
   Input,
   Select,
   Upload,
@@ -17,18 +18,62 @@ import countryList from "react-select-country-list";
 import PhoneInput from "antd-phone-input";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addAgent, getAgent, updateAgent, resetAgent } from "../../api/Agents";
+import {
+  getProperties,
+  addProperty,
+  getProperty,
+  updateProperty,
+} from "../../api/Properties";
+import { getAgents } from "../../api/Agents";
+import { getFilters } from "../../api/Filters";
 
 const { TextArea } = Input;
 
-function AddProperty() {
-  const addAgentReducer = useSelector((s) => s.addAgentReducer);
-  const getAgentReducer = useSelector((s) => s.getAgentReducer);
+const statusList = [
+  { value: "for_sale", label: "For Sale" },
+  { value: "for_rent", label: "For Rent" },
+  { value: "unavailable", label: "Unavailable" },
+  { value: "sold", label: "Sold" },
+  { value: "upcoming", label: "Upcoming" },
+];
 
+function AddProperty() {
+  const getAgentsReducer = useSelector((s) => s.getAgentsReducer);
+  const getPropertiesReducer = useSelector((s) => s.getPropertiesReducer);
+  const getFiltersReducer = useSelector((s) => s.getFiltersReducer);
+
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
   const [initialVlues, setInitialValue] = useState({});
   const [photo, setPhoto] = useState();
-  const [photoUplaoding, setPhotoUplaoding] = useState(false);
+  const [fileList, setFileList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const handlePreview = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
+    }
+    setPreviewImage(file.url || file.preview);
+    setPreviewOpen(true);
+  };
+  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+  const uploadButton = (
+    <button
+      style={{
+        border: 0,
+        background: "none",
+      }}
+      type="button"
+    >
+      <PlusOutlined />
+      <div
+        style={{
+          marginTop: 8,
+        }}
+      >
+        Upload
+      </div>
+    </button>
+  );
 
   const options = useMemo(() => countryList().getData(), []);
   const params = useParams();
@@ -43,24 +88,25 @@ function AddProperty() {
   };
 
   useEffect(() => {
+    dispatch(getAgents({ page: 1, limit: 50 }));
+    dispatch(getFilters({ page: 1, limit: 50 }));
+    dispatch(getProperties({ mlsOnly: true }));
     if (id) {
       setLoading(true);
-      dispatch(getAgent(params.id)).then((agent) => {
+      dispatch(getProperty(params.id)).then((agent) => {
         console.log(agent);
         setLoading(false);
         setPhoto(agent.payload?.photo);
         setInitialValue(agent.payload);
       });
     }
-
-    return () => dispatch(resetAgent());
   }, []);
 
   const onFinish = async (values) => {
     console.log("Received values of form: ", values);
     if (id) {
       const res = await dispatch(
-        updateAgent({
+        updateProperty({
           id,
           ...values,
           photo,
@@ -72,10 +118,10 @@ function AddProperty() {
       ).unwrap();
       setInitialValue({});
       openNotification("success", res);
-      setTimeout(navigate("/admin/agent"), 1000);
+      setTimeout(navigate("/admin/property"), 1000);
     } else {
       const res = await dispatch(
-        addAgent({
+        addProperty({
           ...values,
           photo,
           phoneNumber:
@@ -86,118 +132,137 @@ function AddProperty() {
       ).unwrap();
       setInitialValue({});
       openNotification("success", res);
-      setTimeout(navigate("/admin/agent"), 1000);
+      setTimeout(navigate("/admin/property"), 1000);
     }
   };
+
+  const filterOption = (input, option) =>
+    (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
   function validator(_, { valid }) {
     if (valid()) return Promise.resolve(); // non-strict validation
     return Promise.reject("Invalid phone number");
   }
 
-  const beforeUpload = (e) => {
-    console.log(e);
-    setPhotoUplaoding(true);
-  };
-
-  const handleChange = (info) => {
-    if (info.file.status === "done") {
-      console.log(info.file.response.url);
-      setPhotoUplaoding(false);
-      setPhoto(info.file.response.url);
-    }
-  };
-
-  const uploadButton = (
-    <div>
-      {photoUplaoding ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
-
   return (
     <Card title={id ? "Edit Property" : "Add Property"} loading={loading}>
       {contextHolder}
-      <Form initialValues={initialVlues} name="add_property" onFinish={onFinish}>
+      <Form
+        initialValues={initialVlues}
+        name="add_property"
+        onFinish={onFinish}
+      >
         <Row justify="center">
-          <Col span={4} className="gutter-row">
-            <Form.Item name="photo">
+          <Col span={24} className="gutter-row">
+            <Form.Item name="media">
               <Upload
-                name="file"
+                name="media"
                 listType="picture-card"
-                className="avatar-uploader"
-                loading={photoUplaoding}
-                showUploadList={false}
+                fileList={fileList}
+                onPreview={handlePreview}
+                onChange={handleChange}
                 headers={{
                   Authorization: `Bearer ${localStorage.token}`,
                 }}
                 action={`${api_base_URL}upload`}
-                beforeUpload={beforeUpload}
-                onChange={handleChange}
               >
-                {photo ? (
-                  <img src={photo} alt="avatar" style={{ width: "100%" }} />
-                ) : photoUplaoding ? (
-                  <LoadingOutlined />
-                ) : (
-                  uploadButton
-                )}
+                {fileList.length >= 8 ? null : uploadButton}
               </Upload>
+              {previewImage && (
+                <Image
+                  wrapperStyle={{
+                    display: "none",
+                  }}
+                  preview={{
+                    visible: previewOpen,
+                    onVisibleChange: (visible) => setPreviewOpen(visible),
+                    afterOpenChange: (visible) =>
+                      !visible && setPreviewImage(""),
+                  }}
+                  src={previewImage}
+                />
+              )}
             </Form.Item>
           </Col>
         </Row>
         <Row>
           <Col span={12} className="gutter-row">
             <Form.Item
-              name="firstName"
+              name="Name"
               rules={[
                 {
                   required: true,
-                  message: "First Name is required",
+                  message: "Name is required",
                 },
               ]}
             >
-              <Input size="large" placeholder="First Name" />
+              <Input size="large" placeholder="Name" />
             </Form.Item>
           </Col>
           <Col span={12} className="gutter-row">
             <Form.Item
-              name="lastName"
+              name="agentId"
               rules={[
                 {
                   required: true,
-                  message: "Last Name is required",
+                  message: "Agent is required",
                 },
               ]}
             >
-              <Input size="large" placeholder="Last Name" />
+              <Select
+                showSearch
+                size="large"
+                filterOption={filterOption}
+                loading={getAgentsReducer.isLoading}
+                options={getAgentsReducer.data?.agents.map((i) => ({
+                  value: i._id,
+                  label: i.firstName + " " + i.lastName,
+                }))}
+                placeholder="Search agent"
+              />
             </Form.Item>
           </Col>
           <Col span={12} className="gutter-row">
-            <Form.Item
-              name="email"
-              rules={[
-                {
-                  type: "email",
-                  required: true,
-                  message: "Email is required",
-                },
-              ]}
-            >
-              <Input size="large" placeholder="Email" />
+            <Form.Item name="status">
+              <Select
+                size="large"
+                options={statusList}
+                placeholder="Select status"
+              />
             </Form.Item>
           </Col>
           <Col span={12} className="gutter-row">
-            <Form.Item name="phoneNumber" rules={[{ validator }]}>
-              <PhoneInput size="large" enableSearch />
+            <Form.Item name="mlsId">
+              <Select
+                showSearch
+                size="large"
+                filterOption={filterOption}
+                loading={getPropertiesReducer.isLoading}
+                options={getPropertiesReducer.data?.properties.map((i) => ({
+                  value: i._id,
+                  label: i.listingId + " - " + i.address.full,
+                }))}
+                placeholder="Search MLS property"
+              />
             </Form.Item>
           </Col>
+
           <Col span={12} className="gutter-row">
-            <Form.Item name="code">
-              <Input size="large" placeholder="Code" />
+            <Form.Item name="filters">
+              <Select
+                showSearch
+                size="large"
+                filterOption={filterOption}
+                loading={getFiltersReducer.isLoading}
+                options={getFiltersReducer.data?.filters.map((i) => ({
+                  value: i._id,
+                  label: i.name + " - " + i.code,
+                }))}
+                placeholder="Search filters"
+              />
             </Form.Item>
-            <Form.Item name="reference">
-              <Input size="large" placeholder="Reference" />
+            <Form.Item name="neighbour">
+              <Input size="large" placeholder="Neighbour" />
             </Form.Item>
           </Col>
 
@@ -282,6 +347,11 @@ function AddProperty() {
               <Input size="large" placeholder="Zip Code" />
             </Form.Item>
           </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item name="phoneNumber" rules={[{ validator }]}>
+              <PhoneInput size="large" enableSearch />
+            </Form.Item>
+          </Col>
         </Row>
         <Col span={24} className="gutter-row">
           <Form.Item style={{ marginBottom: "0px" }}>
@@ -291,9 +361,8 @@ function AddProperty() {
               type="primary"
               htmlType="submit"
               loading={
-                addAgentReducer.isLoading ||
-                getAgentReducer.isLoading ||
-                photoUplaoding ||
+                getAgentsReducer.isLoading ||
+                getPropertiesReducer.isLoading ||
                 loading
               }
             >
@@ -307,3 +376,11 @@ function AddProperty() {
 }
 
 export default AddProperty;
+
+const getBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });

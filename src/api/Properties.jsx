@@ -6,7 +6,7 @@ export const getProperties = createAsyncThunk(
   async function ({ page = 1, limit = 10, ...other }, { rejectWithValue }) {
     try {
       const res = await customAxios.get(`property`, {
-        params: { other, page, limit },
+        params: { ...other, page, limit },
       });
 
       return res.data;

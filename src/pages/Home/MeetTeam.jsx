@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Typography, Carousel, Row, Col, Image, Flex, Grid } from "antd";
+import { Typography, Carousel, Row, Col, Image, Flex, Grid, Spin } from "antd";
 import { Container } from "react-bootstrap";
 import LetTalk from "../../components/LetTalk";
 import Slider from "react-slick";
@@ -13,13 +13,13 @@ const { Title, Text, Paragraph } = Typography;
 
 function MeetTeam() {
   const navigate = useNavigate();
-  const { data, isLoading } = useAgents();
+  const { data, isLoading } = useAgents(15, 1);
   const CustomPrevArrow = (props) => {
     const { className, style, onClick } = props;
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", zIndex: 10 }}
+        style={{ ...style, display: "block", zIndex: 10, left: "-45px" }} // Adjusted left position
         onClick={onClick}
       >
         <img src={BackArrow} alt="Previous" width="45px" />
@@ -32,7 +32,7 @@ function MeetTeam() {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", zIndex: 10 }}
+        style={{ ...style, display: "block", zIndex: 10, right: "-45px" }} // Adjusted right position
         onClick={onClick}
       >
         <img src={NextArrow} alt="Next" width="45px" />
@@ -40,41 +40,41 @@ function MeetTeam() {
     );
   };
 
-  const settings = {
+  let settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
-    slidesToShow: data?.agents?.length >= 2 ? 2 : 3,
-    slidesToScroll: data?.agents?.length >= 2 ? 2 : 3,
-    prevArrow: <CustomPrevArrow />,
-    nextArrow: <CustomNextArrow />,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
+          initialSlide: 2,
         },
       },
       {
-        breakpoint: 768,
+        breakpoint: 480,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
-      {
-        breakpoint: 425,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          prevArrow: false,
-          nextArrow: false,
-        },
-      },
-
-      // Add more breakpoints as needed
     ],
+    nextArrow: <CustomNextArrow />,
+    prevArrow: <CustomPrevArrow />,
   };
   return (
     <>
@@ -83,40 +83,42 @@ function MeetTeam() {
           <Title level={1} className="meet-team-heading">
             Meet The Team
           </Title>
-          <Container className="pt-4">
-            <Flex className="features_section_slider">
-              <Row>
-                <Col span={24}>
+          {isLoading ? (
+            <Flex justify={"center"}>
+              <Spin size="large" />
+            </Flex>
+          ) : (
+            <>
+              <Container>
+                <div className="slider-container team-section mt-5">
                   <Slider {...settings}>
-                    {data?.agents.map((agent, index) => (
-                      <div
-                        key={index}
-                        className="displayy-teamimg-center"
-                        onClick={() => navigate(`/agent/${agent._id}`)}
-                      >
+                    {data?.agents?.map((agent, index) => (
+                      <div onClick={() => navigate(`/agent/${agent._id}`)}>
                         <Flip
                           fImg={
                             <Image
                               src={
-                                agent.photo
-                                  ? agent.photo
+                                agent?.photo
+                                  ? agent?.photo
                                   : "https://placehold.co/300x388"
                               }
                               className=""
                               preview={false}
                               fallback="https://placehold.co/300x388"
+                              style={{ aspectRatio: "5/6", objectFit: "cover" }}
                             />
                           }
                           bImg={
                             <Image
                               src={
-                                agent.photo
-                                  ? agent.photo
+                                agent?.photo
+                                  ? agent?.photo
                                   : "https://placehold.co/300x388"
                               }
+                              className="img-op1"
                               preview={false}
                               fallback="https://placehold.co/300x388"
-                              className="img-op1"
+                              style={{ aspectRatio: "5/6", objectFit: "cover" }}
                             />
                           }
                         >
@@ -131,18 +133,18 @@ function MeetTeam() {
                       </div>
                     ))}
                   </Slider>
-                </Col>
-              </Row>
-            </Flex>
-          </Container>
-          <Flex
-            justify="center"
-            align="center"
-            onClick={() => navigate("/meet-the-team")}
-            className="mt-5"
-          >
-            <button className="let-talk-btn">View All</button>
-          </Flex>
+                </div>
+              </Container>
+              <Flex
+                justify="center"
+                align="center"
+                onClick={() => navigate("/meet-the-team")}
+                className="mt-5"
+              >
+                <button className="let-talk-btn">View All</button>
+              </Flex>
+            </>
+          )}
         </div>
       </div>
       <LetTalk />

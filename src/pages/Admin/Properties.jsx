@@ -15,26 +15,31 @@ function Properties() {
       key: "name",
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
+      title: "Price",
+      dataIndex: "salePrice",
+      key: "salePrice",
+      render: (_, data) => {
+        return `${data.currency} ${data.salePrice}`;
+      },
     },
     {
-      title: "Phone No",
-      dataIndex: "phoneNumber",
-      key: "phone",
+      title: "Area",
+      dataIndex: "area",
+      key: "area",
+      render: (_, data) => {
+        return `${data.areaUnit} ${data.area}`;
+      },
     },
     {
-      title: "Code",
-      dataIndex: "code",
-      key: "code",
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
     },
     {
       title: "Address",
       dataIndex: "address",
       key: "address",
-      render: (_, { address }) => {
-        // if (!address.addressLine2) address.addressLine2 = "";
+      render: (_, address) => {
         if (address)
           return `${address.addressLine1} 
         ${address.addressLine2 ? address.addressLine2 : ""} 
