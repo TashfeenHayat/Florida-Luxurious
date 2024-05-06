@@ -34,7 +34,6 @@ export const addProperty = createAsyncThunk(
 export const getProperty = createAsyncThunk(
   "getPropertyReducer",
   async function (id, { rejectWithValue }) {
-    console.log(id);
     try {
       const res = await customAxios.get(`property/${id}`);
 
@@ -48,9 +47,10 @@ export const getProperty = createAsyncThunk(
 
 export const updateProperty = createAsyncThunk(
   "updatePropertyReducer",
-  async function (data, { rejectWithValue }) {
+  async function ({ id, others }, { rejectWithValue }) {
+    console.log(others);
     try {
-      const res = await customAxios.patch(`property/${data.id}`, data);
+      const res = await customAxios.patch(`property/${id}`, { ...others });
       return res.data;
     } catch ({ response }) {
       // console.log(e.response.data.message);

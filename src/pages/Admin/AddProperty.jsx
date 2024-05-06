@@ -9,6 +9,7 @@ import {
   Input,
   Select,
   Upload,
+  DatePicker,
   notification,
 } from "antd";
 import { api_base_URL } from "../../api/Axios";
@@ -29,6 +30,8 @@ import { getFilters } from "../../api/Filters";
 
 const { TextArea } = Input;
 
+const { Option } = Select;
+
 const statusList = [
   { value: "for_sale", label: "For Sale" },
   { value: "for_rent", label: "For Rent" },
@@ -42,12 +45,13 @@ function AddProperty() {
   const getPropertiesReducer = useSelector((s) => s.getPropertiesReducer);
   const getFiltersReducer = useSelector((s) => s.getFiltersReducer);
 
+  const [form] = Form.useForm();
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [initialVlues, setInitialValue] = useState({});
-  const [photo, setPhoto] = useState();
   const [fileList, setFileList] = useState([]);
   const [loading, setLoading] = useState(false);
+
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -55,7 +59,10 @@ function AddProperty() {
     setPreviewImage(file.url || file.preview);
     setPreviewOpen(true);
   };
-  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+  const handleChange = ({ fileList: newFileList }) => {
+    console.log(newFileList);
+    setFileList(newFileList);
+  };
   const uploadButton = (
     <button
       style={{
@@ -93,11 +100,15 @@ function AddProperty() {
     dispatch(getProperties({ mlsOnly: true }));
     if (id) {
       setLoading(true);
-      dispatch(getProperty(params.id)).then((agent) => {
-        console.log(agent);
+      dispatch(getProperty(params.id)).then((prop) => {
+        console.log(prop);
         setLoading(false);
-        setPhoto(agent.payload?.photo);
-        setInitialValue(agent.payload);
+        setFileList(prop.payload?.media.map((media) => ({ url: media.mdUrl })));
+        setInitialValue({
+          agentId: prop.payload.agentId._id,
+          filters: prop.payload.filters.map((i) => i._id),
+          ...prop.payload,
+        });
       });
     }
   }, []);
@@ -108,46 +119,61 @@ function AddProperty() {
       const res = await dispatch(
         updateProperty({
           id,
+          media: fileList.map((media) => ({
+            mdUrl: media.response ? media.response.url : media.mdUrl,
+          })),
           ...values,
-          photo,
-          phoneNumber:
-            values.phoneNumber.countryCode +
-            values.phoneNumber.areaCode +
-            values.phoneNumber.phoneNumber,
         })
       ).unwrap();
       setInitialValue({});
       openNotification("success", res);
-      setTimeout(navigate("/admin/property"), 1000);
+      //   setTimeout(navigate("/admin/property"), 1000);
     } else {
       const res = await dispatch(
         addProperty({
+          media: fileList.map((media) => ({
+            mdUrl: media.response ? media.response.url : media.mdUrl,
+          })),
           ...values,
-          photo,
-          phoneNumber:
-            values.phoneNumber.countryCode +
-            values.phoneNumber.areaCode +
-            values.phoneNumber.phoneNumber,
         })
       ).unwrap();
       setInitialValue({});
       openNotification("success", res);
-      setTimeout(navigate("/admin/property"), 1000);
+      //   setTimeout(navigate("/admin/property"), 1000);
     }
   };
 
   const filterOption = (input, option) =>
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
-  function validator(_, { valid }) {
-    if (valid()) return Promise.resolve(); // non-strict validation
-    return Promise.reject("Invalid phone number");
-  }
+  const selectAfter = (
+    <Select
+      defaultValue="SqFt"
+      onChange={(e) => form.setFieldValue("areaUnit", e)}
+    >
+      <Option value="SqFt">SqFt</Option>
+      <Option value="Yard">Yard</Option>
+      <Option value="Mt">Mt</Option>
+      <Option value="Acre">Acre</Option>
+    </Select>
+  );
+
+  const curencyAfter = (
+    <Select
+      defaultValue="usd"
+      onChange={(e) => form.setFieldValue("currency", e)}
+    >
+      <Option value="usd">USD</Option>
+      <Option value="euro">Euro</Option>
+      <Option value="pound">Pound</Option>
+    </Select>
+  );
 
   return (
     <Card title={id ? "Edit Property" : "Add Property"} loading={loading}>
       {contextHolder}
       <Form
+        form={form}
         initialValues={initialVlues}
         name="add_property"
         onFinish={onFinish}
@@ -156,7 +182,7 @@ function AddProperty() {
           <Col span={24} className="gutter-row">
             <Form.Item name="media">
               <Upload
-                name="media"
+                name="file"
                 listType="picture-card"
                 fileList={fileList}
                 onPreview={handlePreview}
@@ -188,7 +214,7 @@ function AddProperty() {
         <Row>
           <Col span={12} className="gutter-row">
             <Form.Item
-              name="Name"
+              name="name"
               rules={[
                 {
                   required: true,
@@ -239,17 +265,17 @@ function AddProperty() {
                 filterOption={filterOption}
                 loading={getPropertiesReducer.isLoading}
                 options={getPropertiesReducer.data?.properties.map((i) => ({
-                  value: i._id,
-                  label: i.listingId + " - " + i.address.full,
+                  value: i.listingId,
+                  label: i.listingId + " - " + i.address?.full,
                 }))}
                 placeholder="Search MLS property"
               />
             </Form.Item>
           </Col>
-
           <Col span={12} className="gutter-row">
             <Form.Item name="filters">
               <Select
+                mode="multiple"
                 showSearch
                 size="large"
                 filterOption={filterOption}
@@ -261,20 +287,18 @@ function AddProperty() {
                 placeholder="Search filters"
               />
             </Form.Item>
-            <Form.Item name="neighbour">
-              <Input size="large" placeholder="Neighbour" />
+            <Form.Item name="neighborhood">
+              <Input size="large" placeholder="Neighborhood" />
             </Form.Item>
           </Col>
-
           <Col span={12} className="gutter-row">
             <Form.Item name="description">
               <TextArea size="large" rows={4} placeholder="Description" />
             </Form.Item>
           </Col>
-
           <Col span={12} className="gutter-row">
             <Form.Item
-              name={["address", "addressLine1"]}
+              name={["addressLine1"]}
               rules={[
                 {
                   required: true,
@@ -286,13 +310,13 @@ function AddProperty() {
             </Form.Item>
           </Col>
           <Col span={12} className="gutter-row">
-            <Form.Item name={["address", "addressLine2"]}>
+            <Form.Item name={["addressLine2"]}>
               <Input size="large" placeholder="Address Line 2" />
             </Form.Item>
           </Col>
           <Col span={12} className="gutter-row">
             <Form.Item
-              name={["address", "state"]}
+              name={["state"]}
               rules={[
                 {
                   required: true,
@@ -305,7 +329,7 @@ function AddProperty() {
           </Col>
           <Col span={12} className="gutter-row">
             <Form.Item
-              name={["address", "city"]}
+              name={["city"]}
               rules={[
                 {
                   required: true,
@@ -318,7 +342,7 @@ function AddProperty() {
           </Col>
           <Col span={12} className="gutter-row">
             <Form.Item
-              name={["address", "country"]}
+              name={["country"]}
               rules={[
                 {
                   required: true,
@@ -336,7 +360,7 @@ function AddProperty() {
           </Col>
           <Col span={12} className="gutter-row">
             <Form.Item
-              name={["address", "zipCode"]}
+              name={["zipCode"]}
               rules={[
                 {
                   required: true,
@@ -348,8 +372,232 @@ function AddProperty() {
             </Form.Item>
           </Col>
           <Col span={12} className="gutter-row">
-            <Form.Item name="phoneNumber" rules={[{ validator }]}>
-              <PhoneInput size="large" enableSearch />
+            <Form.Item
+              name="area"
+              rules={[
+                {
+                  required: true,
+                  message: "Area is required",
+                },
+              ]}
+            >
+              <Input size="large" addonAfter={selectAfter} placeholder="Area" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="salePrice"
+              rules={[
+                {
+                  required: true,
+                  message: "Price is required",
+                },
+              ]}
+            >
+              <Input
+                size="large"
+                addonAfter={curencyAfter}
+                placeholder="Sale Price"
+              />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="visitHours"
+              rules={[
+                {
+                  required: true,
+                  message: "Visiting Hours is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Visiting Hours" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="reducedPrice"
+              rules={[
+                {
+                  required: true,
+                  message: "Price is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Reduced Price" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="yearBuilt"
+              rules={[
+                {
+                  required: true,
+                  message: "Built Year is required",
+                },
+              ]}
+            >
+              <DatePicker
+                size="large"
+                picker="year"
+                style={{ width: "100%" }}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="foundation"
+              rules={[
+                {
+                  required: true,
+                  message: "Foundation is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Foundation" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="bedroomCount"
+              rules={[
+                {
+                  required: true,
+                  message: "Bedroom Count is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Bedroom Count" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="bathCount"
+              rules={[
+                {
+                  required: true,
+                  message: "Bathroom Count is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Bathroom Count" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="stories"
+              rules={[
+                {
+                  required: true,
+                  message: "Stories is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Stories" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="roof"
+              rules={[
+                {
+                  required: true,
+                  message: "Roof is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Roof" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="flooring"
+              rules={[
+                {
+                  required: true,
+                  message: "Flooring is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Flooring" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="cooling"
+              rules={[
+                {
+                  required: true,
+                  message: "Cooling is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Cooling" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="heating"
+              rules={[
+                {
+                  required: true,
+                  message: "Heating is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Heating" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="fireplace"
+              rules={[
+                {
+                  required: true,
+                  message: "Fire Place is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Fire Place" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="style"
+              rules={[
+                {
+                  required: true,
+                  message: "Style is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Style" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="pool"
+              rules={[
+                {
+                  required: true,
+                  message: "Pool is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Pool" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item
+              name="parking"
+              rules={[
+                {
+                  required: true,
+                  message: "Parking is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Parking" />
             </Form.Item>
           </Col>
         </Row>
