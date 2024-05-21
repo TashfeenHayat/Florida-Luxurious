@@ -16,6 +16,9 @@ body:focus-visible {
 .text-justify {
   text-align: justify !important;
 }
+.text-left {
+  text-align: left !important;
+}
 
 .flex-between {
   display: flex;

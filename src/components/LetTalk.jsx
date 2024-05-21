@@ -41,6 +41,7 @@ function LetTalk() {
                 fontSize: "24px",
                 textAlign: "center",
                 width: "45%",
+                fontWeight: 100,
               }}
             >
               Reach out to us today and let's start turning your real estate

@@ -23,9 +23,10 @@ function OurStory() {
                     <Text
                       style={{
                         color: "#D4CFC9",
-                        fontSize: "21px",
+                        fontSize: "18px",
                         letterSpacing: "1px",
                         lineHeight: "31.5px",
+                        fontWeight: 100,
                       }}
                     >
                       Broward’s Leading Private Brokerage!
@@ -34,7 +35,7 @@ function OurStory() {
                   <img src={Logoicon} width="15%" />
                 </Flex>
                 <Flex vertical>
-                  <Text className="our-story-text f-100 f-16 text-white text-justify">
+                  <Text className="our-story-text f-100 f-16 text-white text-left">
                     In alignment with private banking, wealth and other highly
                     individualized services which provide a greater level of
                     attention and customer satisfaction, we offer the same

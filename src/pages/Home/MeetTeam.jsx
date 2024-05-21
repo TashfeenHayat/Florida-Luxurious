@@ -134,9 +134,9 @@ function MeetTeam() {
                         >
                           <div className="p-absoulte p-b-30-left-0 w-100">
                             <Flex justify="center" align="center">
-                              <button className="team-view-btn">
-                                View More{" "}
-                              </button>
+                              <Text className="text-white text-upper f-24">
+                                {agent.firstName}{" "}
+                              </Text>
                             </Flex>
                           </div>
                         </Flip>
