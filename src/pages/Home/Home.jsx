@@ -10,7 +10,7 @@ import Icons from "../../components/Icons";
 const { Title, Text } = Typography;
 function Home() {
   return (
-    <div style={{ overflowY: "hidden" }}>
+    <div>
       <div className="background-video-container">
         <video autoPlay muted loop className="background-video">
           <source
@@ -20,7 +20,7 @@ function Home() {
         </video>
       </div>
       <div className="content-hero w-100">
-        <div className="hero-bg-img-shadow ">
+        <div className="hero-bg-img-shadow">
           <Flex
             justify={"center"}
             align={"center"}

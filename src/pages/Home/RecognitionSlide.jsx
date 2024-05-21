@@ -1,22 +1,37 @@
 import React from "react";
 import Slider from "react-slick";
 import Business from "../../assets/business.svg";
-// import One from "../../assets/Ads/1.png";
-// import Two from "../../assets/Ads/2.png";
-// import Three from "../../assets/Ads/3.png";
-// import Four from "../../assets/Ads/4.png";
-// import Five from "../../assets/Ads/5.png";
-// import Six from "../../assets/Ads/6.png";
-// import Seven from "../../assets/Ads/7.png";
-// import Eight from "../../assets/Ads/8.png";
-// import Nine from "../../assets/Ads/9.png";
-// import Ten from "../../assets/Ads/10.png";
-// import Eleven from "../../assets/Ads/11.png";
-// import Twelve from "../../assets/Ads/12.png";
+import Ad1 from "../../assets/ads/1.png";
+import Ad2 from "../../assets/ads/2.png";
+import Ad3 from "../../assets/ads/3.png";
+import Ad4 from "../../assets/ads/4.png";
+import Ad5 from "../../assets/ads/5.png";
+import Ad6 from "../../assets/ads/6.png";
+import Ad7 from "../../assets/ads/7.png";
+import Ad8 from "../../assets/ads/8.png";
+import Ad9 from "../../assets/ads/9.png";
+import Ad10 from "../../assets/ads/10.png";
+import Ad11 from "../../assets/ads/11.png";
+import Ad12 from "../../assets/ads/12.png";
 
 import { Flex } from "antd";
 function RecognitionSlide() {
+  const imgRecognition = [
+    Ad1,
+    Ad2,
+    Ad3,
+    Ad4,
+    Ad5,
+    Ad6,
+    Ad7,
+    Ad8,
+    Ad9,
+    Ad10,
+    Ad11,
+    Ad12,
+  ];
   const settings = {
+    loop: true,
     dots: false,
     infinite: true,
     slidesToShow: 6, // Default number of slides to show
@@ -60,42 +75,11 @@ function RecognitionSlide() {
       style={{ height: "250px", width: "98%" }}
     >
       <Slider {...settings}>
-        <div>
-          <img src={Business} />
-        </div>
-        <div>
-          <img src={Business} />
-        </div>
-        <div>
-          <img src={Business} />
-        </div>
-        <div>
-          <img src={Business} />
-        </div>
-        <div>
-          <img src={Business} />
-        </div>
-        <div>
-          <img src={Business} />
-        </div>
-        <div>
-          <img src={Business} />
-        </div>
-        <div>
-          <img src={Business} />
-        </div>
-        <div>
-          <img src={Business} />
-        </div>{" "}
-        <div>
-          <img src={Business} />
-        </div>{" "}
-        <div>
-          <img src={Business} />
-        </div>{" "}
-        <div>
-          <img src={Business} />
-        </div>
+        {imgRecognition.map((img, index) => (
+          <div>
+            <img src={img} width="60%" />
+          </div>
+        ))}
       </Slider>
     </Flex>
   );
