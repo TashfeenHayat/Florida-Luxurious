@@ -1,34 +1,34 @@
 import React from "react";
 import Slider from "react-slick";
-import Business from "../../assets/business.svg";
-import Ad1 from "../../assets/ads/1.png";
-import Ad2 from "../../assets/ads/2.png";
-import Ad3 from "../../assets/ads/3.png";
-import Ad4 from "../../assets/ads/4.png";
-import Ad5 from "../../assets/ads/5.png";
-import Ad6 from "../../assets/ads/6.png";
-import Ad7 from "../../assets/ads/7.png";
-import Ad8 from "../../assets/ads/8.png";
-import Ad9 from "../../assets/ads/9.png";
-import Ad10 from "../../assets/ads/10.png";
-import Ad11 from "../../assets/ads/11.png";
-import Ad12 from "../../assets/ads/12.png";
+// import Business from "../../assets/business.svg";
+import Zillow from "../../assets/ads/zillow.png";
+import Youtube from "../../assets/ads/youtube.png";
+import Washington from "../../assets/ads/washington.png";
+import Wall from "../../assets/ads/wall.png";
+import Robb from "../../assets/ads/robb.png";
+import Realtor from "../../assets/ads/realtor.png";
+import Point from "../../assets/ads/point.png";
+import Newyork from "../../assets/ads/newyork.png";
+import Man from "../../assets/ads/man.png";
+import Juwai from "../../assets/ads/juwai.png";
+import Homes from "../../assets/ads/homes.png";
+import Fort from "../../assets/ads/fort.png";
 
 import { Flex } from "antd";
 function RecognitionSlide() {
   const imgRecognition = [
-    Ad1,
-    Ad2,
-    Ad3,
-    Ad4,
-    Ad5,
-    Ad6,
-    Ad7,
-    Ad8,
-    Ad9,
-    Ad10,
-    Ad11,
-    Ad12,
+    Zillow,
+    Youtube,
+    Washington,
+    Wall,
+    Robb,
+    Realtor,
+    Point,
+    Newyork,
+    Man,
+    Juwai,
+    Homes,
+    Fort,
   ];
   const settings = {
     loop: true,
@@ -37,8 +37,8 @@ function RecognitionSlide() {
     slidesToShow: 6, // Default number of slides to show
     slidesToScroll: 1,
     autoplay: true,
-    speed: 6000,
-    autoplaySpeed: 6000,
+    speed: 4000,
+    autoplaySpeed: 1000,
     cssEase: "linear", // Enable autoplay
     responsive: [
       {
