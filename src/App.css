@@ -1492,3 +1492,40 @@ body:focus-visible {
   justify-content: center;
   align-items: center;
 }
+
+.custom-table .ant-table-thead > tr > th {
+  background-color: #d4cfc9; /* Change this to your desired color */
+  color: black; /* Change this to your desired text color */
+}
+
+.custom-table .ant-table {
+  border: none;
+}
+
+.custom-table .ant-table-container {
+  border: none;
+}
+
+.custom-table .ant-table-content {
+  border: none;
+}
+
+.custom-table .ant-table-thead > tr > th {
+  border-bottom: none;
+}
+
+.custom-table .ant-table-tbody > tr > td {
+  border-bottom: none;
+}
+
+.custom-table .ant-table-tbody > tr > td::before {
+  display: none;
+}
+.ant-table-cell::before {
+  content: none !important;
+}
+.ant-table-cell {
+}
+.box-shadow-table {
+  box-shadow: 0px 0px 15px 0px #00000012;
+}

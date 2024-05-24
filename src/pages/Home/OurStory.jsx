@@ -16,7 +16,7 @@ function OurStory() {
               <div className="our-story-bg p-5">
                 <Flex justify={"space-between"}>
                   <Flex vertical>
-                    <Title level={2} className="our-story-title ">
+                    <Title level={2} className="our-story-title">
                       {" "}
                       OUR STORY
                     </Title>

@@ -15,7 +15,7 @@ function OurStory() {
       <BackgroundImage Image={About}>
         <Title
           style={{ color: "white", lineHeight: "14px", letterSpacing: "2px" }}
-          className="text-upper f-50"
+          className="text-upper f-50 f-100"
         >
           Our Story
         </Title>

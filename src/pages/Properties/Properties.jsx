@@ -39,7 +39,7 @@ function Properties() {
   return (
     <>
       <BackgroundImage Image={FeaturedPropertiesImage}>
-        <Title className="text-white text-upper f-50">
+        <Title className="text-white text-upper f-50 f-100">
           Featured properties
         </Title>
       </BackgroundImage>
@@ -61,11 +61,6 @@ function Properties() {
                     style={{ height: "100%" }}
                     gap={30}
                   >
-                    <div className="for-sale-properites ">
-                      <Text className="text-center text-upper f-24 f-bold">
-                        for sale
-                      </Text>
-                    </div>
                     <Flex vertical>
                       <Text className="text-center text-upper f-24 f-bold text-white">
                         address
@@ -84,10 +79,10 @@ function Properties() {
                     </Flex>
                     <Flex vertical>
                       <Text className="text-center text-upper f-24 f-bold text-white">
-                        represented
+                        Agent Listing
                       </Text>
                       <Text className="text-center text-upper f-24 f-100 text-gray">
-                        seller
+                        Abraham
                       </Text>
                     </Flex>
                     <Flex vertical>

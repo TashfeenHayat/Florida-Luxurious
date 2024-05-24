@@ -20,7 +20,9 @@ function AgentProfile() {
   return (
     <>
       <BackgroundImage Image={Agent}>
-        <Title className="text-white text-upper f-50">Agent Profile</Title>
+        <Title className="text-white text-upper f-50 f-100">
+          Agent Profile
+        </Title>
       </BackgroundImage>
       {isLoading ? (
         <Flex justify={"center"} align="center" className="py-5">

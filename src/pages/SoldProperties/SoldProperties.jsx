@@ -39,7 +39,9 @@ function SoldProperties() {
   return (
     <>
       <BackgroundImage Image={FeaturedPropertiesImage}>
-        <Title className="text-white text-upper f-50">Sold properties</Title>
+        <Title className="text-white text-upper f-50 f-100">
+          Sold properties
+        </Title>
       </BackgroundImage>
       <Container className="pt-98 pb-98">
         <Row gutter={[60, 60]}>
@@ -49,7 +51,7 @@ function SoldProperties() {
               key={index}
               onClick={() => navigate(`features/660719a7b27711bbbdc092b6`)}
             >
-                <div className="displayy-teamimg-center">
+              <div className="displayy-teamimg-center">
                 <img src={Property} width="100%" className="" />
                 <div className="more-info-property">
                   <Flex
