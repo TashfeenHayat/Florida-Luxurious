@@ -17,7 +17,7 @@ customAxios.interceptors.response.use(
       localStorage.removeItem("token");
       window.location.href = "/admin/login";
     } else if (error.response.status === 400) {
-      window.location.href = "/404";
+      // window.location.href = "/404";
     }
   }
 );

@@ -1,4 +1,10 @@
-import { getProperties, getProperty } from "../../api/Property";
+import {
+  getProperties,
+  addProperty,
+  getProperty,
+  updateProperty,
+  deleteProperty,
+} from "../../api/Properties";
 import { createSlice } from "@reduxjs/toolkit";
 import { notification } from "antd";
 
@@ -7,26 +13,60 @@ let initialState = {
   success: "",
   error: "",
   isError: false,
-  data: null,
 };
 
 export const getPropertiesSlice = createSlice({
   name: "getPropertiesReducer",
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(getProperties.pending, (state, action) => {
+    builder.addCase(getProperties.pending, (state) => {
+      state.isLoading = true;
+      state.isError = null;
+    });
+
+    builder.addCase(getProperties.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = null;
+      state.data = action.payload;
+    });
+
+    builder.addCase(getProperties.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.isError = payload.message;
+      notification.error({
+        message: "Something went wrong",
+        description: payload.message,
+        duration: 2,
+      });
+    });
+  },
+}).reducer;
+
+export const addPropertySlice = createSlice({
+  name: "addPropertyReducer",
+  initialState,
+  extraReducers: (builder) => {
+    builder.addCase(addProperty.pending, (state) => {
       state.isLoading = true;
       state.isError = false;
     });
-    builder.addCase(getProperties.fulfilled, (state, action) => {
+
+    builder.addCase(addProperty.fulfilled, (state, action) => {
       state.isLoading = false;
+      state.isError = false;
       state.data = action.payload;
-      state.isError = null;
+      console.log(action.payload);
     });
-    builder.addCase(getProperties.rejected, (state, action) => {
+
+    builder.addCase(addProperty.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
-      state.error = action.payload;
+      console.log(action.payload);
+      notification.error({
+        message: "Something went wrong",
+        description: action.payload,
+        duration: 2,
+      });
     });
   },
 }).reducer;
@@ -35,30 +75,85 @@ export const getPropertySlice = createSlice({
   name: "getPropertyReducer",
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(getProperty.pending, (state, action) => {
+    builder.addCase(getProperty.pending, (state) => {
+      state.data = {};
       state.isLoading = true;
       state.isError = false;
     });
+
     builder.addCase(getProperty.fulfilled, (state, action) => {
       state.isLoading = false;
+      state.isError = false;
       state.data = action.payload;
-      state.isError = null;
     });
+
     builder.addCase(getProperty.rejected, (state, action) => {
+      state.data = {};
       state.isLoading = false;
       state.isError = true;
-      state.error = action.payload;
+      state.errorCode = action.payload.code;
+      notification.error({
+        message: "Something went wrong",
+        description: action.payload.message,
+        duration: 2,
+      });
     });
   },
 }).reducer;
 
-export const resetPropertySlice = createSlice({
-  name: "resetAgentSlice",
+export const updatePropertySlice = createSlice({
+  name: "updatePropertyReducer",
   initialState,
-  reducers: {
-    reset: () => {
-      console.log("here");
-      return initialState;
-    },
+  extraReducers: (builder) => {
+    builder.addCase(updateProperty.pending, (state) => {
+      state.isLoading = true;
+      state.isError = false;
+    });
+
+    builder.addCase(updateProperty.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.data = action.payload;
+    });
+
+    builder.addCase(updateProperty.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+
+      notification.error({
+        message: "Something went wrong",
+        description: action.payload,
+        duration: 2,
+      });
+    });
+  },
+}).reducer;
+
+export const deletePropertySlice = createSlice({
+  name: "deletePropertyReducer",
+  initialState,
+  extraReducers: (builder) => {
+    builder.addCase(deleteProperty.pending, (state) => {
+      state.isLoading = true;
+      state.isError = false;
+    });
+
+    builder.addCase(deleteProperty.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.data = action.payload;
+      console.log(action.payload);
+    });
+
+    builder.addCase(deleteProperty.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+
+      notification.error({
+        message: "Something went wrong",
+        description: action.payload,
+        duration: 2,
+      });
+    });
   },
 }).reducer;

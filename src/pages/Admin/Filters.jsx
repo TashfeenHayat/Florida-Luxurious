@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Avatar, Space, Card, Button, Table, Input, Popconfirm } from "antd";
-import { PlusOutlined, UserOutlined } from "@ant-design/icons";
+import { Space, Card, Button, Table, Input, Popconfirm } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getFilters, deleteFilter } from "../../api/Filters";
 
@@ -25,7 +25,7 @@ function Filters() {
       key: "description",
     },
     {
-      title: "Action",
+      title: "",
       key: "action",
       render: (_, record) => (
         <Space size="middle">
