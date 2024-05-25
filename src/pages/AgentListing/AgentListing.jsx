@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import BackgroundImage from "../../components/BackgroundImage";
 import BoatImage from "../../assets/boatowner.png";
 import { Container } from "react-bootstrap";
-import { Col, Row, Typography, Flex, Spin } from "antd";
+import { Col, Row, Typography, Flex, Spin, Pagination } from "antd";
 import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 import useProperties from "../../hooks/useProperties";
@@ -11,9 +11,15 @@ const { Title, Paragraph, Text } = Typography;
 
 function AgentListing() {
   const { id, name } = useParams();
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
-  const { data, isLoading } = useProperties(id);
-  console.log(data);
+  const itemsPerPage = 6;
+  const { data, isLoading } = useProperties(id, itemsPerPage, page);
+
+  const handlePageChange = (page) => {
+    setPage(page);
+  };
+
   return (
     <div>
       <BackgroundImage Image={BoatImage}>
@@ -88,6 +94,14 @@ function AgentListing() {
             ))}
           </Row>
         )}
+        <Flex justify={"center"} align="center" className="my-4">
+          <Pagination
+            defaultCurrent={1}
+            total={data?.totalCount}
+            pageSize={itemsPerPage}
+            onChange={handlePageChange}
+          />
+        </Flex>
       </Container>
     </div>
   );
