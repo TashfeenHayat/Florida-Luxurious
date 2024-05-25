@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
 import {
   Row,
   Col,
@@ -12,7 +18,10 @@ import {
   DatePicker,
   notification,
 } from "antd";
-import { api_base_URL } from "../../api/Axios";
+import { api_base_URL, google_api_key } from "../../api/Axios";
+import ReactGooglePlacesAutocomplete from "react-google-places-autocomplete";
+import { Loader } from "@googlemaps/js-api-loader";
+import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { useParams } from "react-router";
 import countryList from "react-select-country-list";
@@ -41,6 +50,16 @@ const statusList = [
 ];
 
 function AddProperty() {
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: google_api_key,
+  });
+  const inputRef = useRef(null);
+  const mapRef = useRef(null);
+  const [map, setMap] = useState(null);
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+  const [address, setAddress] = useState("");
+
   const getAgentsReducer = useSelector((s) => s.getAgentsReducer);
   const getPropertiesReducer = useSelector((s) => s.getPropertiesReducer);
   const getFiltersReducer = useSelector((s) => s.getFiltersReducer);
@@ -95,6 +114,40 @@ function AddProperty() {
   };
 
   useEffect(() => {
+    const loader = new Loader({
+      apiKey: google_api_key,
+      libraries: ["places"],
+    });
+
+    loader.load().then(() => {
+      if (inputRef.current && mapRef.current) {
+        const mapInstance = new window.google.maps.Map(mapRef.current, {
+          center: { lat: -34.397, lng: 150.644 },
+          zoom: 8,
+        });
+        setMap(mapInstance);
+
+        const autocomplete = new window.google.maps.places.Autocomplete(
+          inputRef.current
+        );
+        autocomplete.addListener("place_changed", () => {
+          const place = autocomplete.getPlace();
+          if (place.geometry) {
+            const location = place.geometry.location;
+            setCoordinates({
+              lat: location.lat(),
+              lng: location.lng(),
+            });
+            setAddress(place.formatted_address);
+            mapInstance.setCenter(location);
+            new window.google.maps.Marker({
+              position: location,
+              map: mapInstance,
+            });
+          }
+        });
+      }
+    });
     dispatch(getAgents({ page: 1, limit: 50 }));
     dispatch(getFilters({ page: 1, limit: 50 }));
     dispatch(getProperties({ mlsOnly: true }));
@@ -297,6 +350,13 @@ function AddProperty() {
             </Form.Item>
           </Col>
           <Col span={12} className="gutter-row">
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="Enter a location"
+              style={{ width: "300px", padding: "10px" }}
+            />
+            <div></div>
             <Form.Item
               name={["addressLine1"]}
               rules={[
@@ -308,26 +368,9 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Address Line 1" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item name={["addressLine2"]}>
               <Input size="large" placeholder="Address Line 2" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
-            <Form.Item
-              name={["state"]}
-              rules={[
-                {
-                  required: true,
-                  message: "State is required",
-                },
-              ]}
-            >
-              <Input size="large" placeholder="State" />
-            </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name={["city"]}
               rules={[
@@ -339,8 +382,17 @@ function AddProperty() {
             >
               <Input size="large" placeholder="City" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
+            <Form.Item
+              name={["state"]}
+              rules={[
+                {
+                  required: true,
+                  message: "State is required",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="State" />
+            </Form.Item>
             <Form.Item
               name={["country"]}
               rules={[
@@ -357,8 +409,6 @@ function AddProperty() {
                 placeholder="Search country"
               />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name={["zipCode"]}
               rules={[
@@ -371,6 +421,15 @@ function AddProperty() {
               <Input size="large" placeholder="Zip Code" />
             </Form.Item>
           </Col>
+          <Col span={12} className="gutter-row">
+            <div ref={mapRef} style={{ width: "100%", height: "500px" }} />
+          </Col>
+          <Col span={12} className="gutter-row"></Col>
+          <Col span={12} className="gutter-row"></Col>
+          <Col span={12} className="gutter-row"></Col>
+          <Col span={12} className="gutter-row"></Col>
+          <Col span={12} className="gutter-row"></Col>
+          <Col span={12} className="gutter-row"></Col>
           <Col span={12} className="gutter-row">
             <Form.Item
               name="area"

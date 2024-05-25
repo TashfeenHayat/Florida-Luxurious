@@ -22,4 +22,6 @@ customAxios.interceptors.response.use(
   }
 );
 
+export const google_api_key = "AIzaSyDOaYKraClwvK1D2MuvzRZZ2drrRWVTni0";
+
 export default customAxios;

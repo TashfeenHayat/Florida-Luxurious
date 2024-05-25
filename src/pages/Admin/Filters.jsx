@@ -115,7 +115,7 @@ function Filters() {
         loading={isLoading}
         isError={isError}
         pagination={{ ...tableParams, total: data?.totalCount }}
-        dataSource={data}
+        dataSource={data?.filters}
         onChange={handleTableChange}
       />
     </Card>
