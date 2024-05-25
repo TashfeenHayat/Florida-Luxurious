@@ -387,7 +387,738 @@ const data2 = [
     set: "5'",
   },
 ];
+const columns3 = [
+  {
+    title: <Text className="f-16 f-100 text-upper">harbor beach</Text>,
+    dataIndex: "bay",
+    key: "1",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+  {
+    title: <Text className="f-16 f-100 text-upper">CANAL WIDTH</Text>,
+    dataIndex: "canal",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
 
+  {
+    title: <Text className="f-16 f-100">SET BACKS</Text>,
+    key: "set",
+    dataIndex: "set",
+    render: (text) => (
+      <Text className="f-16 f-100" style={{ color: "#838383" }}>
+        {text}
+      </Text>
+    ),
+  },
+];
+const data3 = [
+  {
+    bay: "East Lake Drive",
+    canal: "N 220+",
+    set: "10’",
+  },
+  {
+    bay: "River Lane Drive",
+    canal: "W 85′",
+    set: "10’",
+  },
+  {
+    bay: "West Lake Drive",
+    canal: "E 220",
+    set: "10’",
+  },
+  {
+    bay: "Mercedes Drive",
+    canal: "S 130 N 150",
+    set: "10’",
+  },
+  {
+    bay: "Lucille Drive",
+    canal: "S 150 N 110",
+    set: "10’",
+  },
+  {
+    bay: "Laguna Drive",
+    canal: "S 110 N 120-Open",
+    set: "10’",
+  },
+  {
+    bay: "Laguna Terrace",
+    canal: "S 120-150-Open",
+    set: "10’",
+  },
+  {
+    bay: "Del Lago Drive",
+    canal: "S 150 N 120",
+    set: "10’",
+  },
+  {
+    bay: "Isla Bahia Drive",
+    canal: "S 120-open N 110-open",
+    set: "10’",
+  },
+  {
+    bay: "Harborage Isle Drive",
+    canal: "N 110-open",
+    set: "10’",
+  },
+  {
+    bay: "Isla Bahia Terrace",
+    canal: null,
+    set: "10’",
+  },
+];
+const columns4 = [
+  {
+    title: <Text className="f-16 f-100 text-upper">harbor MILE</Text>,
+    dataIndex: "bay",
+    key: "1",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+  {
+    title: <Text className="f-16 f-100 text-upper">CANAL WIDTH</Text>,
+    dataIndex: "canal",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+
+  {
+    title: <Text className="f-16 f-100">SET BACKS</Text>,
+    key: "set",
+    dataIndex: "set",
+    render: (text) => (
+      <Text className="f-16 f-100" style={{ color: "#838383" }}>
+        {text}
+      </Text>
+    ),
+  },
+];
+const data4 = [
+  {
+    bay: "Hillsboro Mile",
+    canal: "ICW Open",
+    set: "10’",
+  },
+];
+const columns5 = [
+  {
+    title: (
+      <Text className="f-16 f-100 text-upper">IDLEWYLD - RIVIERA ISLES</Text>
+    ),
+    dataIndex: "bay",
+    key: "1",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+  {
+    title: <Text className="f-16 f-100 text-upper">CANAL WIDTH</Text>,
+    dataIndex: "canal",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+
+  {
+    title: <Text className="f-16 f-100">SET BACKS</Text>,
+    key: "set",
+    dataIndex: "set",
+    render: (text) => (
+      <Text className="f-16 f-100" style={{ color: "#838383" }}>
+        {text}
+      </Text>
+    ),
+  },
+];
+const data5 = [
+  {
+    bay: "Solar Plaza Drive",
+    canal: "W 90-180 E 100",
+    set: "10’",
+  },
+  {
+    bay: "Flamingo Drive",
+    canal: "W 90-180 E 90",
+    set: "10’",
+  },
+  {
+    bay: "Solar Isle Drive",
+    canal: "W 100 E 85",
+    set: "10’",
+  },
+  {
+    bay: "Riviera Isles Drive",
+    canal: "W 85 E 100",
+    set: "10’",
+  },
+  {
+    bay: "Poinciana Drive",
+    canal: "W 110",
+    set: "10’",
+  },
+  {
+    bay: "Idlewyld Drive",
+    canal: "E Open",
+    set: "10’",
+  },
+];
+const columns6 = [
+  {
+    title: <Text className="f-16 f-100 text-upper">The Landings</Text>,
+    dataIndex: "bay",
+    key: "1",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+  {
+    title: <Text className="f-16 f-100 text-upper">CANAL WIDTH</Text>,
+    dataIndex: "canal",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+
+  {
+    title: <Text className="f-16 f-100">SET BACKS</Text>,
+    key: "set",
+    dataIndex: "set",
+    render: (text) => (
+      <Text className="f-16 f-100" style={{ color: "#838383" }}>
+        {text}
+      </Text>
+    ),
+  },
+];
+const data6 = [
+  {
+    bay: "Bayview Drive",
+    canal: "E 90",
+    set: "5’",
+  },
+  {
+    bay: "NE 31st Avenue",
+    canal: "W 90 E 90",
+    set: "5’",
+  },
+  {
+    bay: "NE 55th Court",
+    canal: "S 90 N Open",
+    set: "5’",
+  },
+  {
+    bay: "NE 32nd Avenue",
+    canal: "W 90 E 90",
+    set: "5’",
+  },
+  {
+    bay: "NE 33rd Avenue",
+    canal: "W 90 E Intracostal",
+    set: "5’",
+  },
+  {
+    bay: "NE 56th Court",
+    canal: "S 90 N 90",
+    set: "5’",
+  },
+  {
+    bay: "NE 57th Street",
+    canal: "S 90 N 90",
+    set: "5’",
+  },
+  {
+    bay: "NE 57th Court",
+    canal: "S 90 N 100",
+    set: "5’",
+  },
+  {
+    bay: "NE 58th Street",
+    canal: "S 100 N 100",
+    set: "5’",
+  },
+  {
+    bay: "NE 59th Street",
+    canal: "S 100 N 100",
+    set: "5’",
+  },
+];
+const columns7 = [
+  {
+    title: <Text className="f-16 f-100 text-upper">The Landings</Text>,
+    dataIndex: "bay",
+    key: "1",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+  {
+    title: <Text className="f-16 f-100 text-upper">CANAL WIDTH</Text>,
+    dataIndex: "canal",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+
+  {
+    title: <Text className="f-16 f-100">SET BACKS</Text>,
+    key: "set",
+    dataIndex: "set",
+    render: (text) => (
+      <Text className="f-16 f-100" style={{ color: "#838383" }}>
+        {text}
+      </Text>
+    ),
+  },
+];
+
+const data7 = [
+  {
+    bay: "Mola Avenue",
+    canal: null,
+    set: "5’",
+  },
+  {
+    bay: "Isle of Capri",
+    canal: "W 110 E 105",
+    set: "5’",
+  },
+  {
+    bay: "Bontana Avenue",
+    canal: "W 105 E 95",
+    set: "5’",
+  },
+  {
+    bay: "Coconut Isle",
+    canal: "W 95 E 90",
+    set: "5’",
+  },
+  {
+    bay: "Lido Drive",
+    canal: "W 90 E 86",
+    set: "10’",
+  },
+  {
+    bay: "San Marco Drive",
+    canal: "W 85 E 85",
+    set: "10’",
+  },
+  {
+    bay: "Coral Way",
+    canal: "W 85 E 90",
+    set: "10’",
+  },
+  {
+    bay: "Royal Plaza Drive",
+    canal: "W 85 E 90‐180",
+    set: "10’",
+  },
+  {
+    bay: "Isles of Palms",
+    canal: "W 90‐180 E 85",
+    set: "10’",
+  },
+  {
+    bay: "Gordon Road",
+    canal: "W 150 E 300",
+    set: "5’",
+  },
+  {
+    bay: "Hendricks Isle",
+    canal: "W 300 E 160",
+    set: "10’",
+  },
+  {
+    bay: "Isle of Venice",
+    canal: "W 160 E 110",
+    set: "10’",
+  },
+  {
+    bay: "Fiesta Way",
+    canal: "W 110 E 110",
+    set: "10’",
+  },
+  {
+    bay: "Nurmi Drive",
+    canal: "W 110 E 110",
+    set: "10’",
+  },
+  {
+    bay: "Royal Palm Drive",
+    canal: "W 110 E 110",
+    set: "10’",
+  },
+  {
+    bay: "Seven Isles",
+    canal: "W 100",
+    set: "10’",
+  },
+  {
+    bay: "Del Mar Place",
+    canal: "S 100 N 90",
+    set: "10’",
+  },
+  {
+    bay: "Castilla Place",
+    canal: "S 90 N 90",
+    set: "10’",
+  },
+  {
+    bay: "Pelican Drive",
+    canal: "S 90 N 100",
+    set: "10’",
+  },
+  {
+    bay: "Sea Island Drive",
+    canal: "S 100 N 100",
+    set: "10’",
+  },
+  {
+    bay: "Barcelona Drive",
+    canal: "S 100 N 95",
+    set: "10’",
+  },
+  {
+    bay: "Aqua Vista Boulevard",
+    canal: "S 95 N Open",
+    set: "10’",
+  },
+  {
+    bay: "Desota Drive",
+    canal: "N 100",
+    set: "10’",
+  },
+];
+const columns8 = [
+  {
+    title: <Text className="f-16 f-100 text-upper">LAUDERDALE-BY-THE-SEA</Text>,
+    dataIndex: "bay",
+    key: "1",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+  {
+    title: <Text className="f-16 f-100 text-upper">CANAL WIDTH</Text>,
+    dataIndex: "canal",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+
+  {
+    title: <Text className="f-16 f-100">SET BACKS</Text>,
+    key: "set",
+    dataIndex: "set",
+    render: (text) => (
+      <Text className="f-16 f-100" style={{ color: "#838383" }}>
+        {text}
+      </Text>
+    ),
+  },
+];
+const data8 = [
+  {
+    bay: "West Tradewinds",
+    canal: "Open",
+    set: "5’",
+  },
+  {
+    bay: "East Tradewinds",
+    canal: "90",
+    set: "5’",
+  },
+  {
+    bay: "South Tradewinds",
+    canal: "100",
+    set: "5’",
+  },
+  {
+    bay: "Tropic Drive",
+    canal: "100",
+    set: "5’",
+  },
+  {
+    bay: "Imperial Lane",
+    canal: "90",
+    set: "5’",
+  },
+  {
+    bay: "Codrington Drive",
+    canal: "90",
+    set: "5’",
+  },
+  {
+    bay: "NE 42nd Court",
+    canal: "110",
+    set: "5’",
+  },
+  {
+    bay: "NE 34th Avenue",
+    canal: "100",
+    set: "10’",
+  },
+  {
+    bay: "Castle Harbor Isles",
+    canal: "E 100 S 110",
+    set: "5’",
+  },
+  {
+    bay: "Fort Royal Isle",
+    canal: "E 100 S 110",
+    set: "5’",
+  },
+];
+const columns9 = [
+  {
+    title: (
+      <Text className="f-16 f-100 text-upper">
+        LAUDERDALE HARBOR - RIO VISTA
+      </Text>
+    ),
+    dataIndex: "bay",
+    key: "1",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+  {
+    title: <Text className="f-16 f-100 text-upper">CANAL WIDTH</Text>,
+    dataIndex: "canal",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+
+  {
+    title: <Text className="f-16 f-100">SET BACKS</Text>,
+    key: "set",
+    dataIndex: "set",
+    render: (text) => (
+      <Text className="f-16 f-100" style={{ color: "#838383" }}>
+        {text}
+      </Text>
+    ),
+  },
+];
+const data9 = [
+  {
+    bay: "SE 14th Street",
+    canal: "S 140 N 155",
+    set: "5’",
+  },
+  {
+    bay: "SE 13th Street",
+    canal: "S 155 N 140",
+    set: "5’",
+  },
+  {
+    bay: "SE 12th Court",
+    canal: "S 140 N 110",
+    set: "5’",
+  },
+  {
+    bay: "SE 12th Street",
+    canal: "S 110 N 110",
+    set: "North 10' / South 5'",
+  },
+  {
+    bay: "SE 11th Street",
+    canal: "S 110 N 105",
+    set: "10’",
+  },
+  {
+    bay: "SE 10th Street",
+    canal: "S 105 N 120",
+    set: "10’",
+  },
+  {
+    bay: "SE 9th Street",
+    canal: "S 120 N 120-300",
+    set: "10’",
+  },
+  {
+    bay: "SE 8th Street",
+    canal: "S 120-300 N 120",
+    set: "10’",
+  },
+  {
+    bay: "SE 7th Street",
+    canal: "S 125 N open",
+    set: "10’",
+  },
+  {
+    bay: "Cordova Road",
+    canal: "E 80-110",
+    set: "5’",
+  },
+  {
+    bay: "Ponce De Leon Drive",
+    canal: "70-120",
+    set: "5’",
+  },
+  {
+    bay: "Rio Vista Boulevard",
+    canal: "70-120",
+    set: "5’",
+  },
+];
+const columns10 = [
+  {
+    title: <Text className="f-16 f-100 text-upper">SUNRISE KEY</Text>,
+    dataIndex: "bay",
+    key: "1",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+  {
+    title: <Text className="f-16 f-100 text-upper">CANAL WIDTH</Text>,
+    dataIndex: "canal",
+    render: (text) => (
+      <Text
+        className="f-16 f-100"
+        style={{ color: "#838383", textTransform: "capitalize" }}
+      >
+        {text}
+      </Text>
+    ),
+  },
+
+  {
+    title: <Text className="f-16 f-100">SET BACKS</Text>,
+    key: "set",
+    dataIndex: "set",
+    render: (text) => (
+      <Text className="f-16 f-100" style={{ color: "#838383" }}>
+        {text}
+      </Text>
+    ),
+  },
+];
+const data10 = [
+  {
+    bay: "Sunrise Key Boulevard",
+    canal: "S 290 N 110",
+    set: "10’",
+  },
+  {
+    bay: "1st Key Drive",
+    canal: "N 120 E 120",
+    set: "10’",
+  },
+  {
+    bay: "2nd Key Drive",
+    canal: "W 100 E 94",
+    set: "10’",
+  },
+  {
+    bay: "3rd Key Drive",
+    canal: "W 94 E 100",
+    set: "10’",
+  },
+  {
+    bay: "4th Key Drive",
+    canal: "W 100 E 97",
+    set: "10’",
+  },
+  {
+    bay: "5th Key Drive",
+    canal: "W 97 E 300 Open",
+    set: "10’",
+  },
+  {
+    bay: "Karen Drive",
+    canal: "E 120",
+    set: "10’",
+  },
+  {
+    bay: "Middle River Drive",
+    canal: "S Open",
+    set: "10’",
+  },
+];
 function BoatOwner() {
   return (
     <>
@@ -494,6 +1225,7 @@ function BoatOwner() {
                 className="box-shadow-table custom-table"
                 pagination={false}
                 rowHoverable={false}
+                align="center"
               />
               <Table
                 columns={columns1}
@@ -509,11 +1241,197 @@ function BoatOwner() {
                 pagination={false}
                 rowHoverable={false}
               />
+              <Table
+                columns={columns3}
+                dataSource={data3}
+                className="boxshadow-section custom-table"
+                pagination={false}
+                rowHoverable={false}
+              />
+              <Table
+                columns={columns4}
+                dataSource={data4}
+                className="boxshadow-section custom-table"
+                pagination={false}
+                rowHoverable={false}
+              />
+              <Table
+                columns={columns4}
+                dataSource={data4}
+                className="boxshadow-section custom-table"
+                pagination={false}
+                rowHoverable={false}
+              />
+              <Table
+                columns={columns5}
+                dataSource={data5}
+                className="boxshadow-section custom-table"
+                pagination={false}
+                rowHoverable={false}
+              />
+              <Table
+                columns={columns6}
+                dataSource={data6}
+                className="boxshadow-section custom-table"
+                pagination={false}
+                rowHoverable={false}
+              />
+              <Table
+                columns={columns7}
+                dataSource={data7}
+                className="boxshadow-section custom-table"
+                pagination={false}
+                rowHoverable={false}
+              />
+              <Table
+                columns={columns8}
+                dataSource={data8}
+                className="boxshadow-section custom-table"
+                pagination={false}
+                rowHoverable={false}
+              />
+              <Table
+                columns={columns9}
+                dataSource={data9}
+                className="boxshadow-section custom-table"
+                pagination={false}
+                rowHoverable={false}
+              />
+              <Table
+                columns={columns10}
+                dataSource={data10}
+                className="boxshadow-section custom-table"
+                pagination={false}
+                rowHoverable={false}
+              />
             </Col>
             <Col lg={4}></Col>
           </Row>
         </div>
       </Container>
+      <div style={{ background: "black" }}>
+        <div style={{ paddingTop: 96, paddingBottom: 96 }}>
+          <Title className="text-white text-center text-upper">
+            Local Marinas
+          </Title>
+          <Row>
+            <Col lg={4}></Col>
+            <Col lg={16} className="pt-5">
+              <Row>
+                <Col lg={12} md={12} sm={24}>
+                  <Paragraph
+                    className="f-16 f-bold text-white"
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    <Text className="f-24 f-bold text-white">Marina</Text>
+                    <br />
+                    <Text className="f-24 f-bold text-white">
+                      Las Olas Marina
+                    </Text>
+                    <br />
+                    <Text className="f-24 f-bold text-white">
+                      Lauderdale Marina
+                    </Text>
+                    <br />
+                    <Text className="f-24 f-bold text-white">
+                      Bahia Mar Yachting Center
+                    </Text>
+                    <br />
+                    <Text className="f-24 f-bold text-white">Marina Bay</Text>
+                    <br />
+                    <Text className="f-24 f-bold text-white">
+                      Boathouse Yacht Facility
+                    </Text>
+                    <br />
+                    <Text className="f-24 f-bold text-white">
+                      Hall of Fame Marina
+                    </Text>
+                    <br />
+                    <Text className="f-24 f-bold text-white">
+                      Riverfront Marina
+                    </Text>
+                    <br />
+                    <Text className="f-24 f-bold text-white">
+                      Sunrise Harbor Marina
+                    </Text>
+                    <br />
+                    <Text className="f-24 f-bold text-white">
+                      Pier Sixty-Six Marina
+                    </Text>
+                    <br />
+                    <Text className="f-24 f-bold text-white">
+                      River Bend Marina
+                    </Text>
+                    <br />
+                    <Text className="f-24 f-bold text-white">
+                      The Port Marina
+                    </Text>
+                    <br />
+                    <Text className="f-24 f-bold text-white">
+                      City of Fort Lauderdale Marine Faciities
+                    </Text>
+                  </Paragraph>
+                </Col>
+                <Col lg={12} md={12} sm={24} align="end">
+                  <Paragraph
+                    className="f-16 f-100 text-white"
+                    style={{ textTransform: "capitalize" }}
+                  >
+                    <Text className="f-24 f-100 text-white">Website</Text>
+                    <br />
+                    <Text className="f-24 f-100 text-white">
+                      LasOlasMarina.com
+                    </Text>
+                    <br />
+                    <Text className="f-24 f-100 text-white">
+                      LauderdaleMarina.com
+                    </Text>{" "}
+                    <br />
+                    <Text className="f-24 f-100 text-white">
+                      BahiaMarYachtingCenter.com
+                    </Text>{" "}
+                    <br />
+                    <Text className="f-24 f-100 text-white">
+                      marinabay-fl.com
+                    </Text>{" "}
+                    <br />
+                    <Text className="f-24 f-100 text-white">
+                      BoathouseYachtFacility.com
+                    </Text>{" "}
+                    <br />
+                    <Text className="f-24 f-100 text-white">
+                      HallofFameMarina.net
+                    </Text>{" "}
+                    <br />
+                    <Text className="f-24 f-100 text-white">
+                      RiverfrontMarina.com
+                    </Text>{" "}
+                    <br />
+                    <Text className="f-24 f-100 text-white">
+                      SunriseHarborMarina.net
+                    </Text>{" "}
+                    <br />
+                    <Text className="f-24 f-100 text-white">
+                      66Marina.com
+                    </Text>{" "}
+                    <br />
+                    <Text className="f-24 f-100 text-white">
+                      LauderdaleMarineCenter.com
+                    </Text>{" "}
+                    <br />
+                    <Text className="f-24 f-100 text-white">
+                      ThePortMarina.com
+                    </Text>{" "}
+                    <br />
+                    <Text className="f-24 f-100 text-white">954-828-5423</Text>
+                  </Paragraph>
+                </Col>
+              </Row>
+            </Col>
+            <Col lg={4}></Col>
+          </Row>
+        </div>
+      </div>
     </>
   );
 }
