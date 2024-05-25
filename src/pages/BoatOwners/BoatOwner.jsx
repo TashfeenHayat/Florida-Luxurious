@@ -1372,7 +1372,10 @@ function BoatOwner() {
                     </Text>
                   </Paragraph>
                 </Col>
-                <Col lg={12} md={12} sm={24} align="end">
+                <Col lg={3} md={3} sm={0}></Col>
+                <Col lg={1} md={3} sm={0}></Col>
+
+                <Col lg={8} md={8} sm={24}>
                   <Paragraph
                     className="f-16 f-100 text-white"
                     style={{ textTransform: "capitalize" }}

@@ -609,7 +609,17 @@ export default function DetailProperty() {
                 <Button classNam="button-secondary-line-left" width="300px">
                   Sold Properties{" "}
                 </Button>
-                <Button classNam="button-secondary-line-left" width="300px">
+                <Button
+                  classNam="button-secondary-line-left"
+                  width="300px"
+                  Click={() =>
+                    navigate(
+                      `/my-listing/${
+                        data?.agentId?.firstName + " " + data?.agentId?.lastName
+                      }/${data?.agentId?._id}`
+                    )
+                  }
+                >
                   View my listing{" "}
                 </Button>
               </Flex>

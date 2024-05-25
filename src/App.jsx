@@ -22,6 +22,7 @@ import Properties from "./pages/Properties";
 import SoldProperties from "./pages/SoldProperties";
 import NotFound from "./pages/NotFound/Error404";
 import BoatOwners from "./pages/BoatOwners";
+import AgentListing from "./pages/AgentListing";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
@@ -42,7 +43,9 @@ function App() {
           <Route path="/properties" element={<Properties />} />
           <Route path="/sold-properties" element={<SoldProperties />} />
           <Route path="/boat-owner" element={<BoatOwners />} />
+          <Route path="/my-listing/:name/:id" element={<AgentListing />} />
           <Route path="/404" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
           <Route element={<Dashboard />}>
             <Route path="/admin/dashboard" element={<p>Dashboard</p>} />
             <Route path="/admin/filter" element={<Filter />} />

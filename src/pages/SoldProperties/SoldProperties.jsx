@@ -48,6 +48,8 @@ function SoldProperties() {
           {currentItems.map((property, index) => (
             <Col
               lg={12}
+              md={12}
+              sm={24}
               key={index}
               onClick={() => navigate(`features/660719a7b27711bbbdc092b6`)}
             >

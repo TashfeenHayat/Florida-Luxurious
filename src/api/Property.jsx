@@ -5,9 +5,13 @@ import customAxios from "./Axios";
 
 export const getProperties = createAsyncThunk(
   "getPropertiesReducer",
-  async function (data, { rejectWithValue }) {
+  async function ({ agentId }, { rejectWithValue }) {
     try {
-      const res = await customAxios.get(`property`);
+      const res = await customAxios.get(`property`, {
+        params: {
+          agentId,
+        },
+      });
       return res.data;
     } catch (e) {
       console.log(e, "error");
