@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import OurStory from "../Home/OurStory";
 import LetsTalk from "../../components/LetTalk";
 import FlipCard from "../../components/Flipcard";
-import Logo from "../../assets/logoicon.png";
+import Logo from "../../assets/logoicon1.png";
 import { CiMap, CiPhone, CiMail } from "react-icons/ci";
 import Buttons from "../../components/Buttons";
 import useAgents from "../../hooks/useAgents";
@@ -104,27 +104,27 @@ function Agents() {
         <Container className="py-5">
           <Row align={"middle"} gutter={[40, 16]}>
             <Col lg={16} md={24} sm={24}>
-              <Card bordered={false} style={{ backgroundColor: "black" }}>
+              <Card bordered={false} style={{ backgroundColor: "#D4CFC9" }}>
                 <Flex vertical>
                   <Flex justify={"center"} align="center" className="py-3">
                     <img src={Logo} width={"20%"} preview={false} />
                   </Flex>
-                  <Text className="text-upper text-white text-center f-40 f-200">
+                  <Text className="text-upper text-black text-center f-40 f-200">
                     {" "}
                     Florida
                   </Text>
-                  <Text className="text-upper text-white text-center f-50 f-bold">
+                  <Text className="text-upper text-black text-center f-50 f-bold">
                     {" "}
                     LUXURIOUS
                   </Text>
-                  <Text className="text-upper text-white text-center f-40 f-200">
+                  <Text className="text-upper text-black text-center f-40 f-200">
                     {" "}
                     properties
                   </Text>
                   <Flex className="mt-5" justify={"center"} align="center">
-                    <Text className="text-upper text-white text-center f-40 f-200">
+                    <Text className="text-upper text-black text-center f-40 f-200">
                       ANNUAL{" "}
-                      <Text className="text-upper text-white text-center f-40 f-bold">
+                      <Text className="text-upper text-black text-center f-40 f-bold">
                         LUXURY
                       </Text>{" "}
                       SALES REPORT
@@ -136,7 +136,7 @@ function Agents() {
                       style={{ color: "#838383" }}
                     >
                       Broward County's <br />
-                      <Text className="text-upper text-white f-24 f-bold">
+                      <Text className="text-upper text-black f-24 f-bold">
                         #1 Ranked{" "}
                       </Text>
                       <br />
@@ -148,19 +148,19 @@ function Agents() {
                   <Flex justify={"space-between"} align="center">
                     <Flex align={"center"} gap={5}>
                       <CiMap color="#838383" size={15} />
-                      <Text className="text-white text-upper">
+                      <Text className="text-black text-upper">
                         2438 East Las Olas Boulevard Fort Lauderdale, FL 33301
                       </Text>
                     </Flex>
                     <Flex align={"center"} gap={5}>
                       <CiMail color="#838383" size={15} />
-                      <Text className="text-white text-upper">
+                      <Text className="text-black text-upper">
                         floridainfo@gmail.com
                       </Text>
                     </Flex>
                     <Flex align={"center"} gap={5}>
                       <CiPhone color="#838383" size={15} />
-                      <Text className="text-white text-upper">
+                      <Text className="text-black text-upper">
                         2954.870.080
                       </Text>
                     </Flex>

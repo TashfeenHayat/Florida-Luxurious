@@ -39,7 +39,7 @@ export default function DetailProperty() {
 
   const { data, isLoading } = useProperty(id);
 
-  console.log(data);
+  console.log(data?.agentId);
   const navigate = useNavigate();
 
   const showModal = () => {
@@ -564,26 +564,34 @@ export default function DetailProperty() {
             <Col lg={18} md={24} sm={24} className="p-5">
               <Row align={"middle"}>
                 <Col lg={10} md={6} sm={24}>
-                  <Image src={Team} preview={false} />
+                  <Image
+                    src={data?.agentId?.photo}
+                    preview={false}
+                    width="80%"
+                  />
                 </Col>
                 <Col lg={14} md={18} sm={24}>
                   <Flex vertical justify={"flex-start"} align={""}>
                     <Title className="text-white">Contact</Title>
                     <Flex justify={"flex-start"} align="center" gap={10}>
                       <FaRegUser size={20} color="white" />
-                      <Text className="text-white f-24 f-100">Rida Asif</Text>
+                      <Text className="text-white f-24 f-100">
+                        {data?.agentId?.firstName +
+                          " " +
+                          data?.agentId?.lastName}
+                      </Text>
                     </Flex>
                     <Flex justify={"flex-start"} align="center" gap={10}>
                       <CiPhone size={20} color="white" />
                       <Text className="text-white f-24 f-100">
-                        954-349-6300
+                        {"+" + data?.agentId?.phoneNumber}
                       </Text>
                     </Flex>
                     <Flex justify={"flex-start"} align="center" gap={10}>
                       <CiMail size={20} color="white" />
 
                       <Text className="text-white f-24 f-100">
-                        rida.asif@floridaluxurious.com
+                        {data?.agentId?.email}
                       </Text>
                     </Flex>
                   </Flex>
@@ -601,7 +609,17 @@ export default function DetailProperty() {
                 <Button classNam="button-secondary-line-left" width="300px">
                   Sold Properties{" "}
                 </Button>
-                <Button classNam="button-secondary-line-left" width="300px">
+                <Button
+                  classNam="button-secondary-line-left"
+                  width="300px"
+                  Click={() =>
+                    navigate(
+                      `/my-listing/${
+                        data?.agentId?.firstName + " " + data?.agentId?.lastName
+                      }/${data?.agentId?._id}`
+                    )
+                  }
+                >
                   View my listing{" "}
                 </Button>
               </Flex>
