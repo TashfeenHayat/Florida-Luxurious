@@ -19,9 +19,7 @@ import {
   notification,
 } from "antd";
 import { api_base_URL, google_api_key } from "../../api/Axios";
-import ReactGooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { Loader } from "@googlemaps/js-api-loader";
-import { useJsApiLoader, GoogleMap } from "@react-google-maps/api";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { useParams } from "react-router";
 import countryList from "react-select-country-list";
@@ -50,15 +48,13 @@ const statusList = [
 ];
 
 function AddProperty() {
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: google_api_key,
-  });
   const inputRef = useRef(null);
   const mapRef = useRef(null);
   const [map, setMap] = useState(null);
-  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
-  const [address, setAddress] = useState("");
+  const [coordinates, setCoordinates] = useState({
+    lat: 47.7511,
+    lng: 120.7401,
+  });
 
   const getAgentsReducer = useSelector((s) => s.getAgentsReducer);
   const getPropertiesReducer = useSelector((s) => s.getPropertiesReducer);
@@ -67,7 +63,10 @@ function AddProperty() {
   const [form] = Form.useForm();
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
-  const [initialVlues, setInitialValue] = useState({});
+  const [initialVlues, setInitialValue] = useState({
+    currency: "usd",
+    areaUnit: "SqFt",
+  });
   const [fileList, setFileList] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -78,10 +77,12 @@ function AddProperty() {
     setPreviewImage(file.url || file.preview);
     setPreviewOpen(true);
   };
+
   const handleChange = ({ fileList: newFileList }) => {
     console.log(newFileList);
     setFileList(newFileList);
   };
+
   const uploadButton = (
     <button
       style={{
@@ -122,14 +123,25 @@ function AddProperty() {
     loader.load().then(() => {
       if (inputRef.current && mapRef.current) {
         const mapInstance = new window.google.maps.Map(mapRef.current, {
-          center: { lat: -34.397, lng: 150.644 },
-          zoom: 8,
+          center: coordinates,
+          zoom: 9,
         });
         setMap(mapInstance);
 
         const autocomplete = new window.google.maps.places.Autocomplete(
-          inputRef.current
+          inputRef.current,
+          {
+            componentRestrictions: { country: "us" },
+          }
         );
+        const addressComponets = {
+          street_number: "short_name",
+          route: "long_name",
+          locality: "long_name",
+          administrative_area_level_1: "short_name",
+          country: "long_name",
+          postal_code: "short_name",
+        };
         autocomplete.addListener("place_changed", () => {
           const place = autocomplete.getPlace();
           if (place.geometry) {
@@ -138,7 +150,48 @@ function AddProperty() {
               lat: location.lat(),
               lng: location.lng(),
             });
-            setAddress(place.formatted_address);
+            console.log(place);
+            for (var i = 0; i < place.address_components.length; i++) {
+              var addressType = place.address_components[i].types[0];
+              if (addressComponets[addressType]) {
+                var val =
+                  place.address_components[i][addressComponets[addressType]];
+
+                switch (addressType) {
+                  case "street_number":
+                    form.setFieldsValue({
+                      addressLine1: val,
+                    });
+                    break;
+                  case "administrative_area_level_1":
+                    form.setFieldsValue({
+                      state: val,
+                    });
+                    break;
+                  case "locality":
+                    form.setFieldsValue({
+                      city: val,
+                    });
+                    break;
+                  case "country":
+                    form.setFieldsValue({
+                      country: val,
+                    });
+                    break;
+                  case "postal_code":
+                    form.setFieldsValue({
+                      zipCode: val,
+                    });
+                    break;
+                  case "street_number":
+                  case "route":
+                    form.setFieldsValue({
+                      addressLine2: val,
+                    });
+                    break;
+                }
+              }
+            }
             mapInstance.setCenter(location);
             new window.google.maps.Marker({
               position: location,
@@ -157,8 +210,12 @@ function AddProperty() {
         console.log(prop);
         setLoading(false);
         setFileList(prop.payload?.media.map((media) => ({ url: media.mdUrl })));
+        setCoordinates({
+          lat: prop.payload.latitude,
+          lng: prop.payload.longitude,
+        });
         setInitialValue({
-          agentId: prop.payload.agentId._id,
+          agentId: prop.payload.agentId?._id,
           filters: prop.payload.filters.map((i) => i._id),
           ...prop.payload,
         });
@@ -175,6 +232,8 @@ function AddProperty() {
           media: fileList.map((media) => ({
             mdUrl: media.response ? media.response.url : media.mdUrl,
           })),
+          longitude: String(coordinates.lng),
+          latitude: String(coordinates.lat),
           ...values,
         })
       ).unwrap();
@@ -187,6 +246,8 @@ function AddProperty() {
           media: fileList.map((media) => ({
             mdUrl: media.response ? media.response.url : media.mdUrl,
           })),
+          longitude: String(coordinates.lng),
+          latitude: String(coordinates.lat),
           ...values,
         })
       ).unwrap();
@@ -202,7 +263,7 @@ function AddProperty() {
   const selectAfter = (
     <Select
       defaultValue="SqFt"
-      onChange={(e) => form.setFieldValue("areaUnit", e)}
+      onChange={(e) => form.setFieldsValue("areaUnit", e)}
     >
       <Option value="SqFt">SqFt</Option>
       <Option value="Yard">Yard</Option>
@@ -214,7 +275,7 @@ function AddProperty() {
   const curencyAfter = (
     <Select
       defaultValue="usd"
-      onChange={(e) => form.setFieldValue("currency", e)}
+      onChange={(e) => form.setFieldsValue("currency", e)}
     >
       <Option value="usd">USD</Option>
       <Option value="euro">Euro</Option>
@@ -350,13 +411,18 @@ function AddProperty() {
             </Form.Item>
           </Col>
           <Col span={12} className="gutter-row">
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder="Enter a location"
-              style={{ width: "300px", padding: "10px" }}
-            />
-            <div></div>
+            <Form.Item>
+              <div className="ant-form-item-control-input">
+                <div className="ant-form-item-control-input-content">
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    placeholder="Search a location"
+                    className="ant-input ant-input-lg ant-input-outlined css-dev-only-do-not-override-1kuana8"
+                  />
+                </div>
+              </div>
+            </Form.Item>
             <Form.Item
               name={["addressLine1"]}
               rules={[
@@ -422,7 +488,7 @@ function AddProperty() {
             </Form.Item>
           </Col>
           <Col span={12} className="gutter-row">
-            <div ref={mapRef} style={{ width: "100%", height: "500px" }} />
+            <div ref={mapRef} style={{ width: "100%", height: "90%" }} />
           </Col>
           <Col span={12} className="gutter-row"></Col>
           <Col span={12} className="gutter-row"></Col>
