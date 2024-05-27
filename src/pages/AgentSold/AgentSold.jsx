@@ -1,54 +1,41 @@
-import { Typography, Row, Col, Flex, Pagination, Spin } from "antd";
-import { useState } from "react";
+import React, { useState } from "react";
 import BackgroundImage from "../../components/BackgroundImage";
-import FeaturedPropertiesImage from "../../assets/Agent.png";
+import BoatImage from "../../assets/boatowner.png";
 import { Container } from "react-bootstrap";
+import { Col, Row, Typography, Flex, Spin, Pagination } from "antd";
 import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
-import Lettalk from "../../components/LetTalk";
 import useProperties from "../../hooks/useProperties";
-import { useNavigate } from "react-router-dom";
-const { Title, Text } = Typography;
+import { useParams, useNavigate } from "react-router";
 
-function SoldProperties() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4; // Number of items to display per page
-  const { data, isLoading } = useProperties(
-    null,
-    itemsPerPage,
-    currentPage,
-    "sold"
-  );
+const { Title, Text, Paragraph } = Typography;
+function AgentSold() {
+  const { id, name } = useParams();
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
-  // Dummy data for demonstration
-  // const soldProperties = [
-  //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
-  //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
-  //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
-  //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
-  //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
-  //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
-  //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
-  //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
-
-  //   // Add more properties as needed
-  // ];
-
-  // Calculate the index range for the current page
-
-  // Function to handle page change
+  const itemsPerPage = 6;
+  const status = "sold";
+  const { data, isLoading } = useProperties(id, itemsPerPage, page, status);
+  console.log(data?.properties, "sold");
   const handlePageChange = (page) => {
-    setCurrentPage(page);
+    setPage(page);
   };
 
   return (
-    <>
-      <BackgroundImage Image={FeaturedPropertiesImage}>
-        <Title className="text-white text-upper f-50 f-100">
-          Sold properties
+    <div>
+      {" "}
+      <BackgroundImage Image={BoatImage}>
+        <Title
+          style={{ color: "white", lineHeight: "14px", letterSpacing: "2px" }}
+          className="text-upper f-50 f-100"
+        >
+          My Sales
         </Title>
       </BackgroundImage>
-      <Container className="pt-98 pb-98">
+      <Container>
+        <div className="py-5 text-center">
+          <Text className="text-black text-upper f-40 f-100"> {name}</Text>
+        </div>
         {isLoading ? (
           <Spin
             size="large"
@@ -56,13 +43,12 @@ function SoldProperties() {
           />
         ) : (
           <Row gutter={[60, 60]}>
-            {data?.properties.map((property, index) => (
+            {data?.properties.map((properties, index) => (
               <Col
                 lg={12}
                 md={12}
                 sm={24}
-                key={index}
-                onClick={() => navigate(`/features/${property._id}`)}
+                onClick={() => navigate(`features/660719a7b27711bbbdc092b6`)}
               >
                 <div className="displayy-teamimg-center">
                   <img src={Property} width="100%" className="" />
@@ -84,7 +70,9 @@ function SoldProperties() {
                           address
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          {property.address}
+                          {properties?.addressLine1 +
+                            " " +
+                            properties?.addressLine2}
                         </Text>
                       </Flex>
                       <Flex vertical>
@@ -92,19 +80,26 @@ function SoldProperties() {
                           last list price
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          {property.price}
+                          $ {properties?.salePrice}
                         </Text>
                       </Flex>
                       <Flex vertical>
                         <Text className="text-center text-upper f-24 f-bold text-white">
-                          represented
+                          agent listing
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          seller
+                          {name}
                         </Text>
                       </Flex>
                       <Flex vertical>
-                        <button className="let-talk-btn">View Property</button>
+                        <button
+                          className="let-talk-btn"
+                          onClick={() =>
+                            navigate(`/features/${properties._id}`)
+                          }
+                        >
+                          View Property
+                        </button>
                       </Flex>
                     </Flex>
                   </div>
@@ -141,8 +136,12 @@ function SoldProperties() {
                       <Flex>
                         <IoLocationOutline color="white" size={20} />
                         <Text className="f-14 f-bold text-white">
-                          2572 Mercedes Drive <br />
-                          <IoPricetagOutline size={20} /> $15,000,0000
+                          {properties?.addressLine1 +
+                            " " +
+                            properties?.addressLine2}{" "}
+                          <br />
+                          <IoPricetagOutline size={20} /> ${" "}
+                          {properties?.salePrice}
                         </Text>
                       </Flex>
                     </Flex>
@@ -152,21 +151,22 @@ function SoldProperties() {
             ))}
           </Row>
         )}
-        <Flex justify={"center"} align="center" className="my-4">
-          <Pagination
-            defaultCurrent={1}
-            total={data?.properties?.length}
-            pageSize={itemsPerPage}
-            onChange={handlePageChange}
-          />
-        </Flex>
         {!isLoading && data?.properties.length === 0 && (
           <Title>No Sold Property Listed</Title>
         )}
+        {!isLoading && data?.properties.length === 0 ? null : (
+          <Flex justify={"center"} align="center" className="my-4">
+            <Pagination
+              defaultCurrent={1}
+              total={data?.totalCount}
+              pageSize={itemsPerPage}
+              onChange={handlePageChange}
+            />
+          </Flex>
+        )}
       </Container>
-      <Lettalk />
-    </>
+    </div>
   );
 }
 
-export default SoldProperties;
+export default AgentSold;

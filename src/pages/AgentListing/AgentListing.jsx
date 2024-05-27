@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import BackgroundImage from "../../components/BackgroundImage";
 import BoatImage from "../../assets/boatowner.png";
 import { Container } from "react-bootstrap";
-import { Col, Row, Typography, Flex, Spin } from "antd";
+import { Col, Row, Typography, Flex, Spin, Pagination } from "antd";
 import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 import useProperties from "../../hooks/useProperties";
@@ -11,9 +11,15 @@ const { Title, Paragraph, Text } = Typography;
 
 function AgentListing() {
   const { id, name } = useParams();
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
-  const { data, isLoading } = useProperties(id);
-  console.log(data);
+  const itemsPerPage = 6;
+  const { data, isLoading } = useProperties(id, itemsPerPage, page);
+
+  const handlePageChange = (page) => {
+    setPage(page);
+  };
+
   return (
     <div>
       <BackgroundImage Image={BoatImage}>
@@ -51,7 +57,7 @@ function AgentListing() {
                           className="f-14 f-bold text-white"
                           style={{ textAlign: "right" }}
                         >
-                          {item?.addressLine1}
+                          {item?.addressLine1 + " " + item?.addressLine2}
                           <br />
                           <IoPricetagOutline size={20} /> $ {item?.salePrice}
                           {/* {Number(properties?.salePrice).toLocaleString()} */}
@@ -69,7 +75,7 @@ function AgentListing() {
                       >
                         <Text className="mx-4 f-16 f-bold">
                           {" "}
-                          {item?.addressLine1}
+                          {item?.addressLine1 + " " + item?.addressLine2}
                         </Text>
                         <div className="prop-info">
                           <Text
@@ -87,6 +93,19 @@ function AgentListing() {
               </Col>
             ))}
           </Row>
+        )}
+        {!isLoading && data?.properties.length === 0 && (
+          <Title>No Property Listed</Title>
+        )}
+        {!isLoading && data?.properties.length === 0 ? null : (
+          <Flex justify={"center"} align="center" className="my-4">
+            <Pagination
+              defaultCurrent={1}
+              total={data?.totalCount}
+              pageSize={itemsPerPage}
+              onChange={handlePageChange}
+            />
+          </Flex>
         )}
       </Container>
     </div>
