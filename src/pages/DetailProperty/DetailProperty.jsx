@@ -86,7 +86,7 @@ export default function DetailProperty() {
         });
       }
     });
-  }, [google_api_key]);
+  }, [google_api_key, data?.latitude, data?.longitude]);
   return (
     <>
       <div style={{ position: "relative", overflowX: "hidden" }}>
