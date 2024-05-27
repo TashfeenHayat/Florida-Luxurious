@@ -17,8 +17,10 @@ import {
 } from "./slices/FilterSlice";
 import {
   getPropertiesSlice,
+  addPropertySlice,
   getPropertySlice,
-  resetPropertySlice,
+  updatePropertySlice,
+  deletePropertySlice,
 } from "./slices/PropertySlice";
 import { contactUsSlice } from "./slices/ContactusSlice";
 
@@ -38,7 +40,9 @@ export const store = configureStore({
     updateFilterReducer: updateFilterSlice,
     deleteFilterReducer: deleteFilterSlice,
     getPropertiesReducer: getPropertiesSlice,
+    addPropertyReducer: addPropertySlice,
     getPropertyReducer: getPropertySlice,
-    resetPropertyReducer: resetPropertySlice,
+    updatePropertyReducer: updatePropertySlice,
+    deletePropertyReducer: deletePropertySlice,
   },
 });

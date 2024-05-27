@@ -49,7 +49,7 @@ function Agents() {
       },
     },
     {
-      title: "Action",
+      title: "",
       key: "action",
       render: (_, record) => (
         <Space size="middle">

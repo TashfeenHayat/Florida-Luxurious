@@ -7,7 +7,9 @@ import Agent from "./pages/Admin/Agents";
 import AddAgent from "./pages/Admin/AddAgent";
 import Filter from "./pages/Admin/Filters";
 import AddFilter from "./pages/Admin/AddFilter";
-import Property from "./pages/Admin/Property";
+import PropertyList from "./pages/Admin/Properties";
+import AddProperty from "./pages/Admin/AddProperty";
+
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
@@ -54,7 +56,9 @@ function App() {
             <Route path="/admin/agent" element={<Agent />} />
             <Route path="/admin/agent/add" element={<AddAgent />} />
             <Route path="/admin/agent/edit/:id" element={<AddAgent />} />
-            <Route path="/admin/property" element={<Property />} />
+            <Route path="/admin/property" element={<PropertyList />} />
+            <Route path="/admin/property/add" element={<AddProperty />} />
+            <Route path="/admin/property/edit/:id" element={<AddProperty />} />
           </Route>
         </Routes>
       </TopToScroll>

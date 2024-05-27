@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { Space, Card, Button, Table, Input, Popconfirm } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getFilters, deleteFilter } from "../../api/Filters";
+import { getProperties, deleteProperty } from "../../api/Properties";
 
 const { Search } = Input;
 
-function Filters() {
+function Properties() {
   const columns = [
     {
       title: "Name",
@@ -15,24 +15,47 @@ function Filters() {
       key: "name",
     },
     {
-      title: "Code",
-      dataIndex: "code",
-      key: "code",
+      title: "Price",
+      dataIndex: "salePrice",
+      key: "salePrice",
+      render: (_, data) => {
+        return `${data.currency} ${data.salePrice}`;
+      },
     },
     {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
+      title: "Area",
+      dataIndex: "area",
+      key: "area",
+      render: (_, data) => {
+        return `${data.areaUnit} ${data.area}`;
+      },
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+      render: (_, address) => {
+        if (address)
+          return `${address.addressLine1} 
+        ${address.addressLine2 ? address.addressLine2 : ""} 
+        ${address.city} ${address.state} 
+        ${address.zipCode} ${address.country}`;
+      },
     },
     {
       title: "",
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Link to={`/admin/filter/edit/${record._id}`}>Edit</Link>
+          <Link to={`/admin/property/edit/${record._id}`}>Edit</Link>
           <Popconfirm
             title="Delete this task"
-            description="Are you sure to delete this filter ?"
+            description="Are you sure to delete this property?"
             okText="Yes"
             cancelText="No"
             onConfirm={() => onDelete(record._id)}
@@ -44,17 +67,20 @@ function Filters() {
     },
   ];
   const [tableParams, setTableParams] = useState({
-      current: 1,
-      pageSize: 10,
+    current: 1,
+    pageSize: 10,
   });
+
   const [key, setKey] = useState();
 
-  const { isLoading, isError, data } = useSelector((s) => s.getFiltersReducer);
+  const { isLoading, isError, data } = useSelector(
+    (s) => s.getPropertiesReducer
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(
-      getFilters({
+      getProperties({
         page: tableParams.current,
         limit: tableParams.pageSize,
       })
@@ -72,17 +98,18 @@ function Filters() {
         current: 1,
       },
     });
-    dispatch(getFilters({ key }));
+    dispatch(getProperties({ key }));
   };
 
   const onDelete = (id) => {
-    dispatch(deleteFilter(id));
+    dispatch(deleteProperty(id));
   };
 
   const handleTableChange = (pagination) => {
+    console.log(pagination);
     setTableParams(pagination);
     dispatch(
-      getFilters({
+      getProperties({
         key,
         page: pagination.current,
       })
@@ -91,7 +118,7 @@ function Filters() {
 
   return (
     <Card
-      title="Filters"
+      title="Properties"
       extra={
         <Space>
           <Search
@@ -101,7 +128,7 @@ function Filters() {
             allowClear
           />
           <Button type="primary">
-            <Link to="/admin/filter/add">
+            <Link to="/admin/property/add">
               <PlusOutlined />
               Add
             </Link>
@@ -115,11 +142,11 @@ function Filters() {
         loading={isLoading}
         isError={isError}
         pagination={{ ...tableParams, total: data?.totalCount }}
-        dataSource={data?.filters}
+        dataSource={data?.properties}
         onChange={handleTableChange}
       />
     </Card>
   );
 }
 
-export default Filters;
+export default Properties;

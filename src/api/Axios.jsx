@@ -17,9 +17,11 @@ customAxios.interceptors.response.use(
       localStorage.removeItem("token");
       window.location.href = "/admin/login";
     } else if (error.response.status === 400) {
-      window.location.href = "/404";
+      // window.location.href = "/404";
     }
   }
 );
+
+export const google_api_key = "AIzaSyDOaYKraClwvK1D2MuvzRZZ2drrRWVTni0";
 
 export default customAxios;
