@@ -1,10 +1,4 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import {
   Row,
   Col,
@@ -45,6 +39,7 @@ const statusList = [
   { value: "unavailable", label: "Unavailable" },
   { value: "sold", label: "Sold" },
   { value: "upcoming", label: "Upcoming" },
+  { value: "featured", label: "Featured" },
 ];
 
 function AddProperty() {
@@ -63,10 +58,9 @@ function AddProperty() {
   const [form] = Form.useForm();
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
-  const [initialVlues, setInitialValue] = useState({
-    currency: "usd",
-    areaUnit: "SqFt",
-  });
+  const [currency, setCurrency] = useState("usd");
+  const [areaUnit, setAreaUnit] = useState("SqFt");
+  const [initialVlues, setInitialValue] = useState({});
   const [fileList, setFileList] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -224,14 +218,16 @@ function AddProperty() {
   }, []);
 
   const onFinish = async (values) => {
+    values.media = fileList.map((media) => ({
+      mdUrl: media.response ? media.response.url : media.mdUrl,
+    }));
     console.log("Received values of form: ", values);
     if (id) {
       const res = await dispatch(
         updateProperty({
           id,
-          media: fileList.map((media) => ({
-            mdUrl: media.response ? media.response.url : media.mdUrl,
-          })),
+          currency,
+          areaUnit,
           longitude: String(coordinates.lng),
           latitude: String(coordinates.lat),
           ...values,
@@ -239,13 +235,12 @@ function AddProperty() {
       ).unwrap();
       setInitialValue({});
       openNotification("success", res);
-      //   setTimeout(navigate("/admin/property"), 1000);
+      // setTimeout(navigate("/admin/property"), 1000);
     } else {
       const res = await dispatch(
         addProperty({
-          media: fileList.map((media) => ({
-            mdUrl: media.response ? media.response.url : media.mdUrl,
-          })),
+          currency,
+          areaUnit,
           longitude: String(coordinates.lng),
           latitude: String(coordinates.lat),
           ...values,
@@ -253,7 +248,7 @@ function AddProperty() {
       ).unwrap();
       setInitialValue({});
       openNotification("success", res);
-      //   setTimeout(navigate("/admin/property"), 1000);
+      setTimeout(navigate("/admin/property"), 1000);
     }
   };
 
@@ -261,10 +256,7 @@ function AddProperty() {
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
   const selectAfter = (
-    <Select
-      defaultValue="SqFt"
-      onChange={(e) => form.setFieldsValue("areaUnit", e)}
-    >
+    <Select defaultValue="SqFt" onChange={(e) => setAreaUnit(e)}>
       <Option value="SqFt">SqFt</Option>
       <Option value="Yard">Yard</Option>
       <Option value="Mt">Mt</Option>
@@ -273,15 +265,14 @@ function AddProperty() {
   );
 
   const curencyAfter = (
-    <Select
-      defaultValue="usd"
-      onChange={(e) => form.setFieldsValue("currency", e)}
-    >
+    <Select defaultValue="usd" onChange={(e) => setCurrency(e)}>
       <Option value="usd">USD</Option>
       <Option value="euro">Euro</Option>
       <Option value="pound">Pound</Option>
     </Select>
   );
+
+  console.log(form.getFieldsValue());
 
   return (
     <Card title={id ? "Edit Property" : "Add Property"} loading={loading}>

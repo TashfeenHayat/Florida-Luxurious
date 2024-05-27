@@ -32,12 +32,12 @@ export const getPropertiesSlice = createSlice({
 
     builder.addCase(getProperties.rejected, (state, { payload }) => {
       state.isLoading = false;
-      state.isError = payload.message;
-      notification.error({
-        message: "Something went wrong",
-        description: payload.message,
-        duration: 2,
-      });
+      // state.isError = payload.message;
+      // notification.error({
+      //   message: "Something went wrong",
+      //   description: payload.message,
+      //   duration: 2,
+      // });
     });
   },
 }).reducer;
@@ -141,8 +141,12 @@ export const deletePropertySlice = createSlice({
     builder.addCase(deleteProperty.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isError = false;
-      state.data = action.payload;
-      console.log(action.payload);
+
+      notification.success({
+        message: "Success",
+        description: action.payload,
+        duration: 2,
+      });
     });
 
     builder.addCase(deleteProperty.rejected, (state, action) => {

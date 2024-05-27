@@ -65,10 +65,10 @@ export const deleteProperty = createAsyncThunk(
   async function (id, { rejectWithValue, dispatch }) {
     try {
       const res = await customAxios.delete(`property/${id}`);
-      dispatch(getProperties());
+      dispatch(getProperties({}));
       return res.data;
     } catch ({ response }) {
-      // console.log(e.response.data.message);
+      console.log(response.data.message);
       const { status, message } = response.data;
       return rejectWithValue({ status, message });
     }
