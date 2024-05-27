@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Image,
   Row,
@@ -27,6 +27,8 @@ import { FaVectorSquare, FaPlus } from "react-icons/fa6";
 import { TbCarGarage } from "react-icons/tb";
 import { useParams, useNavigate } from "react-router-dom";
 import useProperty from "../../hooks/useProperty";
+import { Loader } from "@googlemaps/js-api-loader";
+import { google_api_key } from "../../api/Axios";
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -34,12 +36,13 @@ export default function DetailProperty() {
   const requestRef = useRef(null);
   const [details, setDetails] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const mapRef = useRef(null);
 
   const { id } = useParams();
 
   const { data, isLoading } = useProperty(id);
 
-  console.log(data?.agentId);
+  console.log(data);
   const navigate = useNavigate();
 
   const showModal = () => {
@@ -58,6 +61,32 @@ export default function DetailProperty() {
       requestRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    const loader = new Loader({
+      apiKey: google_api_key,
+      libraries: ["places"],
+    });
+
+    loader.load().then(() => {
+      if (mapRef.current) {
+        const map = new window.google.maps.Map(mapRef.current, {
+          center: {
+            lat: parseFloat(data?.latitude),
+            lng: parseFloat(data?.longitude),
+          },
+          zoom: 20,
+        });
+        new window.google.maps.Marker({
+          position: {
+            lat: parseFloat(data?.latitude),
+            lng: parseFloat(data?.longitude),
+          },
+          map: map,
+        });
+      }
+    });
+  }, [google_api_key]);
   return (
     <>
       <div style={{ position: "relative", overflowX: "hidden" }}>
@@ -95,13 +124,13 @@ export default function DetailProperty() {
               MLS® #: F10423862
             </Text>
             <Title className="text-upper" style={{ color: "white" }} level={3}>
-              {data?.addressLine1}
+              {data?.addressLine1 + " " + data?.addressLine2}
             </Title>
             <Paragraph
               className="text-upper f-20 f-100"
               style={{ lineHeight: "10px", color: "#D4CFC9" }}
             >
-              Fort Lauderdale, FL, 33316
+              {data?.city}, {data?.state}, {data?.zipCode}
             </Paragraph>
             <Title
               className="text-upper"
@@ -226,7 +255,7 @@ export default function DetailProperty() {
                 style={{ textAlign: "center", lineHeight: 2 }}
                 className="text-upper"
               >
-                {data?.addressLine1}
+                {data?.addressLine1 + " " + data?.addressLine2}
               </Title>
               <Paragraph className="f-16 f-200" style={{ lineHeight: 2.8 }}>
                 {data?.description}
@@ -415,7 +444,7 @@ export default function DetailProperty() {
                 }}
                 className="text-upper"
               >
-                Interested in {data?.addressLine1}?
+                Interested in {data?.addressLine1 + " " + data?.addressLine2}?
               </Title>
               <form>
                 {" "}
@@ -457,7 +486,7 @@ export default function DetailProperty() {
             </Col>
             <Col lg={10} md={24} sm={24}>
               <div className="pt-5">
-                <Image src={Demomap} preview={false} width="100%" />
+                <div ref={mapRef} style={{ height: "500px", width: "100%" }} />;
               </div>
             </Col>
           </Row>
@@ -606,7 +635,17 @@ export default function DetailProperty() {
                 style={{ height: "100%" }}
                 gap={10}
               >
-                <Button classNam="button-secondary-line-left" width="300px">
+                <Button
+                  classNam="button-secondary-line-left"
+                  width="300px"
+                  Click={() =>
+                    navigate(
+                      `/my-sold/${
+                        data?.agentId?.firstName + " " + data?.agentId?.lastName
+                      }/${data?.agentId?._id}`
+                    )
+                  }
+                >
                   Sold Properties{" "}
                 </Button>
                 <Button
