@@ -1529,3 +1529,45 @@ body:focus-visible {
 .box-shadow-table {
   box-shadow: 0px 0px 15px 0px #00000012;
 }
+
+/*MLS Style*/
+
+.mls-body {
+  background-color: #000;
+}
+.custom-slider .ant-slider-track {
+  background-color: black !important;
+  top: 5px;
+  height: 8px;
+  left: 2px !important;
+  border-radius: 10px;
+}
+
+.custom-slider .ant-slider-handle {
+  border-color: #838383 !important;
+  background-color: #838383 !important;
+}
+
+.custom-slider .ant-slider-rail {
+  background-color: white !important;
+  height: 10px;
+  border-radius: 10px;
+}
+
+.custom-slider .ant-slider-handle {
+  top: 5px;
+  width: 24px !important; /* Adjust width */
+  height: 24px !important; /* Adjust height */
+  margin-top: -10px;
+  border-radius: 20px;
+}
+.custom-slider .ant-slider-handle::after {
+  background-color: #838383;
+  box-shadow: none;
+  content: none;
+}
+.custom-slider .ant-slider-handle::before {
+  background-color: #838383;
+  box-shadow: none;
+  content: none;
+}

@@ -7,7 +7,7 @@ import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 import useProperties from "../../hooks/useProperties";
 import { useParams, useNavigate } from "react-router";
-
+import Icons from "../../components/Icons";
 const { Title, Text, Paragraph } = Typography;
 function AgentSold() {
   const { id, name } = useParams();
@@ -165,6 +165,7 @@ function AgentSold() {
           </Flex>
         )}
       </Container>
+      <Icons />
     </div>
   );
 }

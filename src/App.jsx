@@ -27,6 +27,7 @@ import BoatOwners from "./pages/BoatOwners";
 import AgentListing from "./pages/AgentListing";
 import AgentSold from "./pages/AgentSold";
 import Communities from "./pages/Communities";
+import Mls from "./pages/Mls";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
@@ -51,6 +52,7 @@ function App() {
           <Route path="/my-sold/:name/:id" element={<AgentSold />} />
           <Route path="/community" element={<Communities />} />
           <Route path="/404" element={<NotFound />} />
+          <Route path="mls-listing" element={<Mls />} />
           <Route path="*" element={<NotFound />} />
           <Route element={<Dashboard />}>
             <Route path="/admin/dashboard" element={<p>Dashboard</p>} />

@@ -76,6 +76,7 @@ export default function DetailProperty() {
             lng: parseFloat(data?.longitude),
           },
           zoom: 20,
+          tilt: 45,
         });
         new window.google.maps.Marker({
           position: {
@@ -84,6 +85,25 @@ export default function DetailProperty() {
           },
           map: map,
         });
+        const buildingsLayer = new google.maps.ImageMapType({
+          getTileUrl: (coord, zoom) => {
+            return (
+              "https://mt1.google.com/vt/lyrs=y&x=" +
+              coord.x +
+              "&y=" +
+              coord.y +
+              "&z=" +
+              zoom +
+              "&style=3" // This style parameter enables 3D buildings
+            );
+          },
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 20,
+          minZoom: 0,
+          name: "3D Buildings",
+        });
+
+        map.overlayMapTypes.push(buildingsLayer);
       }
     });
   }, [google_api_key, data?.latitude, data?.longitude]);
