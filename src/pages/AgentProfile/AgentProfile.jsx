@@ -4,7 +4,7 @@ import Agent from "../../assets/Agent.png";
 import { Typography, Row, Col, Image, Flex, Spin } from "antd";
 import { MdOutlinePhone, MdOutlineMailOutline } from "react-icons/md";
 import { RiTwitterXLine } from "react-icons/ri";
-
+import Button from "../../components/Buttons";
 import { Container } from "react-bootstrap";
 import LetTalk from "../../components/LetTalk";
 import { useParams, useNavigate } from "react-router-dom";
@@ -64,52 +64,95 @@ function AgentProfile() {
           </Container>
           <div className="agent-info-bg">
             <div className="agent-info-bg-shadow">
-              <Flex
-                justify={"center"}
-                align="center"
-                style={{ height: "100%" }}
-                wrap="wrap"
-              >
-                <Flex vertical gap={10} wrap="nowrap">
-                  <div>
-                    <Title className="text-white text-upper">
-                      Contact {data?.firstName}
-                    </Title>
-                  </div>
+              <Row gutter={[8, 16]} align="middle" style={{ height: "100%" }}>
+                <Col lg={8}></Col>
+                <Col lg={8} align={"center"}>
+                  <Flex
+                    justify={"center"}
+                    align="center"
+                    style={{ height: "100%" }}
+                    wrap="wrap"
+                  >
+                    <Flex vertical gap={10} wrap="nowrap">
+                      <div>
+                        <Title className="text-white text-upper">
+                          Contact {data?.firstName}
+                        </Title>
+                      </div>
 
-                  <Flex gap={20}>
-                    <Flex
-                      vertical
-                      justify={"center"}
-                      align={"center"}
-                      style={{ marginLeft: "-50px" }}
-                      gap={10}
-                    >
-                      <div className="bg-social-media">
-                        <FaFacebookF color="black" size={24} />
-                      </div>
-                      <div className="bg-social-media">
-                        <FaLinkedinIn color="black" size={24} />
-                      </div>
-                      <div className="bg-social-media">
-                        <RiTwitterXLine color="black" size={24} />
-                      </div>
-                    </Flex>
-                    <Flex vertical justify="center" gap={10}>
-                      <Flex align={"center"} gap={10}>
-                        <MdOutlinePhone color="#838383" size={25} />{" "}
-                        <span className="text-white f-32">
-                          {data?.phoneNumber}
-                        </span>
-                      </Flex>
-                      <Flex align={"center"} gap={10}>
-                        <MdOutlineMailOutline color="#838383" size={25} />{" "}
-                        <span className="text-white f-32">{data?.email}</span>
+                      <Flex gap={20}>
+                        <Flex
+                          vertical
+                          justify={"center"}
+                          align={"center"}
+                          style={{ marginLeft: "-50px" }}
+                          gap={10}
+                        >
+                          <div className="bg-social-media">
+                            <FaFacebookF color="black" size={24} />
+                          </div>
+                          <div className="bg-social-media">
+                            <FaLinkedinIn color="black" size={24} />
+                          </div>
+                          <div className="bg-social-media">
+                            <RiTwitterXLine color="black" size={24} />
+                          </div>
+                        </Flex>
+                        <Flex vertical justify="center" gap={10}>
+                          <Flex align={"center"} gap={10}>
+                            <MdOutlinePhone color="#838383" size={25} />{" "}
+                            <span className="text-white f-32">
+                              {data?.phoneNumber}
+                            </span>
+                          </Flex>
+                          <Flex align={"center"} gap={10}>
+                            <MdOutlineMailOutline color="#838383" size={25} />{" "}
+                            <span className="text-white f-32">
+                              {data?.email}
+                            </span>
+                          </Flex>
+                        </Flex>
                       </Flex>
                     </Flex>
                   </Flex>
-                </Flex>
-              </Flex>
+                </Col>
+                <Col lg={8}>
+                  <Flex
+                    vertical
+                    justify={"center"}
+                    align="center"
+                    style={{ height: "100%" }}
+                    gap={10}
+                  >
+                    <Button
+                      classNam="button-secondary-line-left"
+                      width="300px"
+                      Click={() =>
+                        navigate(
+                          `/my-sold/${data?.firstName + " " + data?.lastName}/${
+                            data?._id
+                          }`
+                        )
+                      }
+                    >
+                      Sold Properties{" "}
+                    </Button>
+                    <Button
+                      classNam="button-secondary-line-left"
+                      width="300px"
+                      Click={() =>
+                        navigate(
+                          `/my-listing/${
+                            data?.firstName + " " + data?.lastName
+                          }/${data?._id}`
+                        )
+                      }
+                    >
+                      View my listing{" "}
+                    </Button>
+                  </Flex>
+                </Col>
+              </Row>
             </div>
           </div>
           <LetTalk />
