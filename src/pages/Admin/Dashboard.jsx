@@ -61,9 +61,9 @@ function Dashboard() {
               label: "Dashboard",
             },
             {
-              key: "/admin/filter",
+              key: "/admin/community",
               icon: <FunnelPlotOutlined />,
-              label: "Filters",
+              label: "Communities",
             },
             {
               key: "/admin/agent",

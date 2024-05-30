@@ -21,7 +21,9 @@ export const addFilter = createAsyncThunk(
   "addFilterReducer",
   async function (data, { rejectWithValue }) {
     try {
+      console.log(data);
       const res = await customAxios.post(`filter`, data);
+      console.log(res);
       return res.data;
     } catch ({ response }) {
       // console.log(e.response.data.message);
@@ -64,7 +66,7 @@ export const deleteFilter = createAsyncThunk(
   async function (id, { rejectWithValue, dispatch }) {
     try {
       const res = await customAxios.delete(`filter/${id}`);
-      dispatch(getFilters());
+      dispatch(getFilters({}));
       return res.data;
     } catch ({ response }) {
       // console.log(e.response.data.message);
