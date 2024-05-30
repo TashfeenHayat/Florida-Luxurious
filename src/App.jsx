@@ -64,9 +64,9 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route element={<Dashboard />}>
             <Route path="/admin/dashboard" element={<p>Dashboard</p>} />
-            <Route path="/admin/filter" element={<Filter />} />
-            <Route path="/admin/filter/add" element={<AddFilter />} />
-            <Route path="/admin/filter/edit/:id" element={<AddFilter />} />
+            <Route path="/admin/community" element={<Filter />} />
+            <Route path="/admin/community/add" element={<AddFilter />} />
+            <Route path="/admin/community/edit/:id" element={<AddFilter />} />
             <Route path="/admin/agent" element={<Agent />} />
             <Route path="/admin/agent/add" element={<AddAgent />} />
             <Route path="/admin/agent/edit/:id" element={<AddAgent />} />

@@ -272,8 +272,6 @@ function AddProperty() {
     </Select>
   );
 
-  console.log(form.getFieldsValue());
-
   return (
     <Card title={id ? "Edit Property" : "Add Property"} loading={loading}>
       {contextHolder}

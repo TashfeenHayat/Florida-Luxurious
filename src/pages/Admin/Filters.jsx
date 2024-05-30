@@ -29,10 +29,10 @@ function Filters() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Link to={`/admin/filter/edit/${record._id}`}>Edit</Link>
+          <Link to={`/admin/community/edit/${record._id}`}>Edit</Link>
           <Popconfirm
             title="Delete this task"
-            description="Are you sure to delete this filter ?"
+            description="Are you sure to delete this filter?"
             okText="Yes"
             cancelText="No"
             onConfirm={() => onDelete(record._id)}
@@ -44,8 +44,8 @@ function Filters() {
     },
   ];
   const [tableParams, setTableParams] = useState({
-      current: 1,
-      pageSize: 10,
+    current: 1,
+    pageSize: 10,
   });
   const [key, setKey] = useState();
 
@@ -91,7 +91,7 @@ function Filters() {
 
   return (
     <Card
-      title="Filters"
+      title="Communities"
       extra={
         <Space>
           <Search
@@ -101,7 +101,7 @@ function Filters() {
             allowClear
           />
           <Button type="primary">
-            <Link to="/admin/filter/add">
+            <Link to="/admin/community/add">
               <PlusOutlined />
               Add
             </Link>
