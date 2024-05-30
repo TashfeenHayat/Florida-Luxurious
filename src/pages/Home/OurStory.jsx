@@ -13,7 +13,11 @@ function OurStory() {
         <Col lg={8} md={24} sm={0}>
           <div>
             <div className="d-flex-story-center">
-              <div className="our-story-bg p-5">
+              <div
+                className="our-story-bg p-5"
+                data-aos="fade-down-right"
+                data-aos-duration="2000"
+              >
                 <Flex justify={"space-between"}>
                   <Flex vertical>
                     <Title level={2} className="our-story-title">
@@ -59,7 +63,15 @@ function OurStory() {
             </div>
           </div>
         </Col>
-        <Col lg={16} md={0} xs={0} sm={0} className="py-4">
+        <Col
+          lg={16}
+          md={0}
+          xs={0}
+          sm={0}
+          className="py-4"
+          data-aos="fade-down-left"
+          data-aos-duration="2000"
+        >
           <Image src={Story} preview={false} width="100%" />
         </Col>
       </Row>

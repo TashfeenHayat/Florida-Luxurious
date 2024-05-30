@@ -80,7 +80,12 @@ function MeetTeam() {
     <>
       <div style={{ background: "black" }}>
         <div style={{ paddingTop: "98px", paddingBottom: "98px" }}>
-          <Title level={1} className="meet-team-heading f-40">
+          <Title
+            level={1}
+            className="meet-team-heading f-40"
+            data-aos="fade-up"
+            data-aos-duration="2000"
+          >
             Meet The Team
           </Title>
           {isLoading ? (
@@ -97,6 +102,8 @@ function MeetTeam() {
                     marginBottom: "65px",
                     cursor: "pointer",
                   }}
+                  data-aos="fade-down"
+                  data-aos-duration="2000"
                 >
                   <Slider {...settings}>
                     {data?.agents?.map((agent, index) => (

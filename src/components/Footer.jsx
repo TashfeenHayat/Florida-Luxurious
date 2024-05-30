@@ -4,11 +4,13 @@ import { Row, Col, Flex, Typography, Input, Button, Image } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { contactUs } from "../api/Inquiry";
-
+import useCommunities from "../hooks/useCommunities";
 const { Text, Title, Paragraph } = Typography;
 function Footer() {
   const dispatch = useDispatch();
   const { loading } = useSelector((s) => s.contactUsReducer);
+
+  const { data, isLoading } = useCommunities();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -128,74 +130,15 @@ function Footer() {
                 <Col lg={12}>
                   <Text className="text-upper f-24 f-bold">Communities</Text>
                   <Flex className="pt-2" vertical gap={10}>
-                    <Link
-                      className="text-upper f-14 text-black"
-                      style={{ textDecoration: "none" }}
-                      to="/our-story"
-                    >
-                      Bay Colony
-                    </Link>
-                    <Link
-                      className="text-upper f-14 text-black"
-                      style={{ textDecoration: "none" }}
-                      to="/meet-the-team"
-                    >
-                      Fort Lauderdale
-                    </Link>
-                    <Link
-                      className="text-upper f-14 text-black"
-                      style={{ textDecoration: "none" }}
-                    >
-                      Fort Lauderdale Beach
-                    </Link>
-                    <Link
-                      className="text-upper f-14 text-black"
-                      style={{ textDecoration: "none" }}
-                    >
-                      Fort Lauderdale Condos
-                    </Link>
-                    <Link
-                      className="text-upper f-14 text-black"
-                      style={{ textDecoration: "none" }}
-                    >
-                      Harbor Beach
-                    </Link>
-                    <Link
-                      className="text-upper f-14 text-black"
-                      style={{ textDecoration: "none" }}
-                    >
-                      Hills Boro mile
-                    </Link>
-                    <Link
-                      className="text-upper f-14 text-black"
-                      style={{ textDecoration: "none" }}
-                    >
-                      Hills Boro Shores
-                    </Link>
-                    <Link
-                      className="text-upper f-14 text-black"
-                      style={{ textDecoration: "none" }}
-                    >
-                      Lasolla's isles
-                    </Link>
-                    <Link
-                      className="text-upper f-14 text-black"
-                      style={{ textDecoration: "none" }}
-                    >
-                      rio vista
-                    </Link>
-                    <Link
-                      className="text-upper f-14 text-black"
-                      style={{ textDecoration: "none" }}
-                    >
-                      sun rise interacoastal
-                    </Link>
-                    <Link
-                      className="text-upper f-14 text-black"
-                      style={{ textDecoration: "none" }}
-                    >
-                      the landings
-                    </Link>
+                    {data?.filters.map((item, index) => (
+                      <Link
+                        className="text-upper f-14 text-black"
+                        style={{ textDecoration: "none" }}
+                        to={`/community/${item?._id}`}
+                      >
+                        {item?.name}
+                      </Link>
+                    ))}
                   </Flex>
                 </Col>
               </Col>

@@ -7,7 +7,7 @@ function useProperties(agentId, limit, page, status) {
   useEffect(() => {
     if (isLoading === false)
       dispatch(getProperties({ agentId, limit, page, status }));
-  }, [dispatch]);
+  }, [dispatch, page]);
   return { data, isLoading };
 }
 

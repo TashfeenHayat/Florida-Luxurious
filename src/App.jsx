@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
 import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup";
@@ -27,9 +27,18 @@ import BoatOwners from "./pages/BoatOwners";
 import AgentListing from "./pages/AgentListing";
 import AgentSold from "./pages/AgentSold";
 import Communities from "./pages/Communities";
+import Mls from "./pages/Mls";
+import AOS from "aos";
+import "aos/dist/aos.css";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
+
+  useEffect(() => {
+    AOS.init({
+      once: false, // whether animation should happen only once
+    });
+  }, []);
 
   return (
     <>
@@ -49,8 +58,9 @@ function App() {
           <Route path="/boat-owner" element={<BoatOwners />} />
           <Route path="/my-listing/:name/:id" element={<AgentListing />} />
           <Route path="/my-sold/:name/:id" element={<AgentSold />} />
-          <Route path="/community" element={<Communities />} />
+          <Route path="/community/:id" element={<Communities />} />
           <Route path="/404" element={<NotFound />} />
+          <Route path="mls-listing" element={<Mls />} />
           <Route path="*" element={<NotFound />} />
           <Route element={<Dashboard />}>
             <Route path="/admin/dashboard" element={<p>Dashboard</p>} />

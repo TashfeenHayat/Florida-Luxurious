@@ -8,7 +8,7 @@ function useProperty(id) {
   useEffect(() => {
     dispatch(getProperty(id));
     return () => dispatch(resetProperty());
-  }, [dispatch]);
+  }, [dispatch, id]);
   return { isLoading, data };
 }
 
