@@ -12,6 +12,7 @@ import {
   DatePicker,
   notification,
 } from "antd";
+import dayJs from "dayjs";
 import { api_base_URL, google_api_key } from "../../api/Axios";
 import { Loader } from "@googlemaps/js-api-loader";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
@@ -113,7 +114,33 @@ function AddProperty() {
       apiKey: google_api_key,
       libraries: ["places"],
     });
+    loadMap(loader, coordinates);
+    dispatch(getAgents({ page: 1, limit: 50 }));
+    dispatch(getFilters({ page: 1, limit: 50 }));
+    dispatch(getProperties({ mlsOnly: true }));
+    if (id) {
+      setLoading(true);
+      dispatch(getProperty(params.id)).then((prop) => {
+        console.log(prop);
+        setLoading(false);
+        setFileList(prop.payload?.media.map((media) => ({ url: media.mdUrl })));
+        const coords = {
+          lat: parseFloat(prop.payload.latitude),
+          lng: parseFloat(prop.payload.longitude),
+        };
+        setCoordinates(coords);
+        loadMap(loader, coords);
+        setInitialValue({
+          ...prop.payload,
+          agentId: prop.payload.agentId?._id,
+          filters: prop.payload.filters.map((i) => i._id),
+          yearBuilt: dayJs(prop.payload.yearBuilt),
+        });
+      });
+    }
+  }, []);
 
+  const loadMap = (loader, coordinates) => {
     loader.load().then(() => {
       if (inputRef.current && mapRef.current) {
         const mapInstance = new window.google.maps.Map(mapRef.current, {
@@ -195,27 +222,7 @@ function AddProperty() {
         });
       }
     });
-    dispatch(getAgents({ page: 1, limit: 50 }));
-    dispatch(getFilters({ page: 1, limit: 50 }));
-    dispatch(getProperties({ mlsOnly: true }));
-    if (id) {
-      setLoading(true);
-      dispatch(getProperty(params.id)).then((prop) => {
-        console.log(prop);
-        setLoading(false);
-        setFileList(prop.payload?.media.map((media) => ({ url: media.mdUrl })));
-        setCoordinates({
-          lat: prop.payload.latitude,
-          lng: prop.payload.longitude,
-        });
-        setInitialValue({
-          agentId: prop.payload.agentId?._id,
-          filters: prop.payload.filters.map((i) => i._id),
-          ...prop.payload,
-        });
-      });
-    }
-  }, []);
+  };
 
   const onFinish = async (values) => {
     values.media = fileList.map((media) => ({
