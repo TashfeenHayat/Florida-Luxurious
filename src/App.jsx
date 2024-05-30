@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LoginAdmin from "./pages/Admin/LoginAdmin";
 import Home from "./pages/Home/Home";
 import Signup from "./pages/Signup";
@@ -28,9 +28,17 @@ import AgentListing from "./pages/AgentListing";
 import AgentSold from "./pages/AgentSold";
 import Communities from "./pages/Communities";
 import Mls from "./pages/Mls";
+import AOS from "aos";
+import "aos/dist/aos.css";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
+
+  useEffect(() => {
+    AOS.init({
+      once: false, // whether animation should happen only once
+    });
+  }, []);
 
   return (
     <>
