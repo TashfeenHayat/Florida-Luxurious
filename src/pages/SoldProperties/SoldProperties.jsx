@@ -153,12 +153,14 @@ function SoldProperties() {
           </Row>
         )}
         <Flex justify={"center"} align="center" className="my-4">
-          <Pagination
-            defaultCurrent={1}
-            total={data?.properties?.length}
-            pageSize={itemsPerPage}
-            onChange={handlePageChange}
-          />
+          {data?.properties?.length === 0 ? null : (
+            <Pagination
+              defaultCurrent={1}
+              total={data?.properties?.length}
+              pageSize={itemsPerPage}
+              onChange={handlePageChange}
+            />
+          )}
         </Flex>
         {!isLoading && data?.properties.length === 0 && (
           <Title>No Sold Property Listed</Title>
