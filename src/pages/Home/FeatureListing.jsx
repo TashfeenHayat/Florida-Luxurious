@@ -77,7 +77,11 @@ function FeatureListing() {
 
   return (
     <div className="boxshadow-section" style={{ paddingBottom: "98px" }}>
-      <Paragraph className="heading-florida-lux-listing">
+      <Paragraph
+        className="heading-florida-lux-listing"
+        data-aos="fade-down-left"
+        data-aos-duration="2000"
+      >
         Featured{" "}
         <Text
           className="heading-florida-lux-listing"
@@ -102,6 +106,8 @@ function FeatureListing() {
                 marginBottom: 65,
               }}
               className="features_section_slider"
+              data-aos="fade-down-left"
+              data-aos-duration="2000"
             >
               <div className="meet-slider-width">
                 <Slider {...settings}>
