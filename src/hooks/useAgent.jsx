@@ -9,7 +9,7 @@ function useAgent(id) {
   useEffect(() => {
     dispatch(getAgent(id));
     return () => dispatch(resetAgent());
-  }, [dispatch]);
+  }, [dispatch, id]);
   return { isLoading, data, isError };
 }
 

@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import Close from "../assets/closeicon.svg";
 import LogoMenu from "../assets/logomenu.svg";
 import BG from "../assets/bg.svg";
-
+import useCommunities from "../hooks/useCommunities";
 const { Title, Text, Paragraph } = Typography;
 function Drawers({ setOpenDrawer, openDrawer }) {
+  const { data, isLoading } = useCommunities();
   return (
     <Drawer
       placement="right"
@@ -119,74 +120,15 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                 Communities
               </Title>
               <Flex className="pt-2" vertical gap={10}>
-                <Link
-                  className="text-upper f-14 text-white"
-                  style={{ textDecoration: "none" }}
-                  to="/our-story"
-                >
-                  Bay Colony
-                </Link>
-                <Link
-                  className="text-upper f-14 text-white"
-                  style={{ textDecoration: "none" }}
-                  to="/meet-the-team"
-                >
-                  Fort Lauderdale
-                </Link>
-                <Link
-                  className="text-upper f-14 text-white"
-                  style={{ textDecoration: "none" }}
-                >
-                  Fort Lauderdale Beach
-                </Link>
-                <Link
-                  className="text-upper f-14 text-white"
-                  style={{ textDecoration: "none" }}
-                >
-                  Fort Lauderdale Condos
-                </Link>
-                <Link
-                  className="text-upper f-14 text-white"
-                  style={{ textDecoration: "none" }}
-                >
-                  Harbor Beach
-                </Link>
-                <Link
-                  className="text-upper f-14 text-white"
-                  style={{ textDecoration: "none" }}
-                >
-                  Hills Boro mile
-                </Link>
-                <Link
-                  className="text-upper f-14 text-white"
-                  style={{ textDecoration: "none" }}
-                >
-                  Hills Boro Shores
-                </Link>
-                <Link
-                  className="text-upper f-14 text-white"
-                  style={{ textDecoration: "none" }}
-                >
-                  Lasolla's isles
-                </Link>
-                <Link
-                  className="text-upper f-14 text-white"
-                  style={{ textDecoration: "none" }}
-                >
-                  rio vista
-                </Link>
-                <Link
-                  className="text-upper f-14 text-white"
-                  style={{ textDecoration: "none" }}
-                >
-                  sun rise interacoastal
-                </Link>
-                <Link
-                  className="text-upper f-14 text-white"
-                  style={{ textDecoration: "none" }}
-                >
-                  the landings
-                </Link>
+                {data?.filters.map((item, index) => (
+                  <Link
+                    className="text-upper f-14 text-white"
+                    style={{ textDecoration: "none" }}
+                    to={`/community/${item?._id}`}
+                  >
+                    {item?.name}
+                  </Link>
+                ))}
               </Flex>
             </Col>
           </Row>

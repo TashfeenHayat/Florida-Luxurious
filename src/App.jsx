@@ -58,7 +58,7 @@ function App() {
           <Route path="/boat-owner" element={<BoatOwners />} />
           <Route path="/my-listing/:name/:id" element={<AgentListing />} />
           <Route path="/my-sold/:name/:id" element={<AgentSold />} />
-          <Route path="/community" element={<Communities />} />
+          <Route path="/community/:id" element={<Communities />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="mls-listing" element={<Mls />} />
           <Route path="*" element={<NotFound />} />
