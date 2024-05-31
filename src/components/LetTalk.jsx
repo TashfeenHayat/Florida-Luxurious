@@ -22,7 +22,12 @@ function LetTalk() {
             vertical
             style={{ height: "100%" }}
           >
-            <Title level={3} className="meet-team-heading">
+            <Title
+              level={3}
+              className="meet-team-heading"
+              data-aos="fade-right"
+              data-aos-duration="1500"
+            >
               LET’S TALK
             </Title>
             <div
@@ -43,6 +48,8 @@ function LetTalk() {
                 width: "45%",
                 fontWeight: 100,
               }}
+              data-aos="fade-left"
+              data-aos-duration="1500"
             >
               Reach out to us today and let's start turning your real estate
               dreams into reality
@@ -54,6 +61,8 @@ function LetTalk() {
                   marginBottom: "24px",
                 }}
                 className="let-talk-btn"
+                data-aos="fade-left"
+                data-aos-duration="1500"
               >
                 Contact Us
               </button>
