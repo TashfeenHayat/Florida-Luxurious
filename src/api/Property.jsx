@@ -3,7 +3,10 @@ import customAxios from "./Axios";
 
 export const getProperties = createAsyncThunk(
   "getPropertiesReducer",
-  async function ({ agentId, limit, page, status }, { rejectWithValue }) {
+  async function (
+    { agentId, limit, page, status, filterId },
+    { rejectWithValue }
+  ) {
     try {
       const res = await customAxios.get(`property`, {
         params: {
@@ -11,6 +14,7 @@ export const getProperties = createAsyncThunk(
           limit,
           page,
           status,
+          filterId,
         },
       });
       return res.data;

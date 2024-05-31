@@ -42,7 +42,7 @@ export default function DetailProperty() {
 
   const { data, isLoading } = useProperty(id);
 
-  console.log(data);
+  console.log(data?._doc);
   const navigate = useNavigate();
 
   const showModal = () => {
@@ -72,16 +72,16 @@ export default function DetailProperty() {
       if (mapRef.current) {
         const map = new window.google.maps.Map(mapRef.current, {
           center: {
-            lat: parseFloat(data?.latitude),
-            lng: parseFloat(data?.longitude),
+            lat: parseFloat(data?._doc?.latitude),
+            lng: parseFloat(data?._doc?.longitude),
           },
           zoom: 20,
           tilt: 45,
         });
         new window.google.maps.Marker({
           position: {
-            lat: parseFloat(data?.latitude),
-            lng: parseFloat(data?.longitude),
+            lat: parseFloat(data?._doc?.latitude),
+            lng: parseFloat(data?._doc?.longitude),
           },
           map: map,
         });
@@ -106,11 +106,16 @@ export default function DetailProperty() {
         map.overlayMapTypes.push(buildingsLayer);
       }
     });
-  }, [google_api_key, data?.latitude, data?.longitude]);
+  }, [google_api_key, data?._doc?.latitude, data?._doc?.longitude]);
   return (
     <>
       <div style={{ position: "relative", overflowX: "hidden" }}>
-        <Image preview={false} src={FeatureImg} width="100%" />
+        <Image
+          preview={false}
+          src={data?._doc?.media[3]?.mdUrl}
+          width="100%"
+          fallback="https://placehold.co/1512x934"
+        />
         <div
           style={{
             position: "absolute",
@@ -144,20 +149,20 @@ export default function DetailProperty() {
               MLS® #: F10423862
             </Text>
             <Title className="text-upper" style={{ color: "white" }} level={3}>
-              {data?.addressLine1 + " " + data?.addressLine2}
+              {data?._doc?.addressLine1 + " " + data?._doc?.addressLine2}
             </Title>
             <Paragraph
               className="text-upper f-20 f-100"
               style={{ lineHeight: "10px", color: "#D4CFC9" }}
             >
-              {data?.city}, {data?.state}, {data?.zipCode}
+              {data?._doc?.city}, {data?._doc?.state}, {data?._doc?.zipCode}
             </Paragraph>
             <Title
               className="text-upper"
               style={{ color: "white", marginTop: ".2em" }}
               level={2}
             >
-              ${data?.salePrice}
+              ${data?._doc?.salePrice}
             </Title>
           </Flex>
           <Row gutter={[8, 16]}>
@@ -176,7 +181,7 @@ export default function DetailProperty() {
                   </div>
                 </Flex>
                 <Text className="text-white f-16 f-100">
-                  {data?.bedroomCount} Bedrooms
+                  {data?._doc?.bedroomCount} Bedrooms
                 </Text>
               </Flex>
             </Col>
@@ -207,7 +212,9 @@ export default function DetailProperty() {
                 >
                   <LuBath size={15} />
                 </div>
-                <Text className="text-white f-16">{data?.bathCount} Baths</Text>
+                <Text className="text-white f-16">
+                  {data?._doc?.bathCount} Baths
+                </Text>
               </Flex>
             </Col>
             <Col lg={8}>
@@ -225,7 +232,7 @@ export default function DetailProperty() {
                   </div>
                 </Flex>
                 <Text className="text-white f-16 f-100">
-                  {data?.area} {data?.areaUnit}
+                  {data?._doc?.area} {data?._doc?.areaUnit}
                 </Text>
               </Flex>
             </Col>
@@ -275,10 +282,10 @@ export default function DetailProperty() {
                 style={{ textAlign: "center", lineHeight: 2 }}
                 className="text-upper"
               >
-                {data?.addressLine1 + " " + data?.addressLine2}
+                {data?._doc?.addressLine1 + " " + data?._doc?.addressLine2}
               </Title>
               <Paragraph className="f-16 f-200" style={{ lineHeight: 2.8 }}>
-                {data?.description}
+                {data?._doc?.description}
               </Paragraph>
             </Card>
           </Col>
@@ -286,13 +293,25 @@ export default function DetailProperty() {
             <div>
               <Row gutter={[8, 16]}>
                 <Col lg={12} sm={24} md={24}>
-                  <Image preview={false} src={Featurecol} width="100%" />
+                  <Image
+                    src={data?._doc?.media[0]?.mdUrl}
+                    width="100%"
+                    fallback="https://placehold.co/272x215"
+                  />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
-                  <Image preview={false} src={Featurecol} width="100%" />
+                  <Image
+                    src={data?._doc?.media[1]?.mdUrl}
+                    width="100%"
+                    fallback="https://placehold.co/272x215"
+                  />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
-                  <Image preview={false} src={Featurecol} width="100%" />
+                  <Image
+                    src={data?._doc?.media[2]?.mdUrl}
+                    width="100%"
+                    fallback="https://placehold.co/272x215"
+                  />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
                   <div
@@ -323,90 +342,15 @@ export default function DetailProperty() {
                       closeIcon={<IoMdClose size={20} color={"#FFFFFF"} />}
                     >
                       <Row gutter={[8, 16]}>
-                        <Col lg={8} md={12} sm={24}>
-                          <Image
-                            preview={false}
-                            src={Featurecol}
-                            width="100%"
-                          />
-                        </Col>
-                        <Col lg={8} md={12} sm={24}>
-                          <Image
-                            preview={false}
-                            src={Featurecol}
-                            width="100%"
-                          />
-                        </Col>
-                        <Col lg={8} md={12} sm={24}>
-                          <Image
-                            preview={false}
-                            src={Featurecol}
-                            width="100%"
-                          />
-                        </Col>
-                        <Col lg={8} md={12} sm={24}>
-                          <Image
-                            preview={false}
-                            src={Featurecol}
-                            width="100%"
-                          />
-                        </Col>
-                        <Col lg={8} md={12} sm={24}>
-                          <Image
-                            preview={false}
-                            src={Featurecol}
-                            width="100%"
-                          />
-                        </Col>
-                        <Col lg={8} md={12} sm={24}>
-                          <Image
-                            preview={false}
-                            src={Featurecol}
-                            width="100%"
-                          />
-                        </Col>
-                        <Col lg={8} md={12} sm={24}>
-                          <Image
-                            preview={false}
-                            src={Featurecol}
-                            width="100%"
-                          />
-                        </Col>
-                        <Col lg={8} md={12} sm={24}>
-                          <Image
-                            preview={false}
-                            src={Featurecol}
-                            width="100%"
-                          />
-                        </Col>
-                        <Col lg={8} md={12} sm={24}>
-                          <Image
-                            preview={false}
-                            src={Featurecol}
-                            width="100%"
-                          />
-                        </Col>
-                        <Col lg={8} md={12} sm={24}>
-                          <Image
-                            preview={false}
-                            src={Featurecol}
-                            width="100%"
-                          />
-                        </Col>
-                        <Col lg={8} md={12} sm={24}>
-                          <Image
-                            preview={false}
-                            src={Featurecol}
-                            width="100%"
-                          />
-                        </Col>
-                        <Col lg={8} md={12} sm={24}>
-                          <Image
-                            preview={false}
-                            src={Featurecol}
-                            width="100%"
-                          />
-                        </Col>
+                        {data?._doc?.media?.map((item, index) => (
+                          <Col lg={8} md={12} sm={24}>
+                            <Image
+                              src={item?.mdUrl}
+                              width="100%"
+                              fallback="https://placehold.co/195x154"
+                            />
+                          </Col>
+                        ))}
                       </Row>
                     </Modal>
                   </div>
@@ -464,7 +408,8 @@ export default function DetailProperty() {
                 }}
                 className="text-upper"
               >
-                Interested in {data?.addressLine1 + " " + data?.addressLine2}?
+                Interested in{" "}
+                {data?._doc?.addressLine1 + " " + data?._doc?.addressLine2}?
               </Title>
               <form>
                 {" "}
@@ -614,7 +559,7 @@ export default function DetailProperty() {
               <Row align={"middle"}>
                 <Col lg={10} md={6} sm={24}>
                   <Image
-                    src={data?.agentId?.photo}
+                    src={data?._doc?.agentId?.photo}
                     preview={false}
                     width="80%"
                   />
@@ -625,22 +570,22 @@ export default function DetailProperty() {
                     <Flex justify={"flex-start"} align="center" gap={10}>
                       <FaRegUser size={20} color="white" />
                       <Text className="text-white f-24 f-100">
-                        {data?.agentId?.firstName +
+                        {data?._doc?.agentId?.firstName +
                           " " +
-                          data?.agentId?.lastName}
+                          data?._doc?.agentId?.lastName}
                       </Text>
                     </Flex>
                     <Flex justify={"flex-start"} align="center" gap={10}>
                       <CiPhone size={20} color="white" />
                       <Text className="text-white f-24 f-100">
-                        {"+" + data?.agentId?.phoneNumber}
+                        {"+" + data?._doc?.agentId?.phoneNumber}
                       </Text>
                     </Flex>
                     <Flex justify={"flex-start"} align="center" gap={10}>
                       <CiMail size={20} color="white" />
 
                       <Text className="text-white f-24 f-100">
-                        {data?.agentId?.email}
+                        {data?._doc?.agentId?.email}
                       </Text>
                     </Flex>
                   </Flex>
@@ -661,8 +606,10 @@ export default function DetailProperty() {
                   Click={() =>
                     navigate(
                       `/my-sold/${
-                        data?.agentId?.firstName + " " + data?.agentId?.lastName
-                      }/${data?.agentId?._id}`
+                        data?._doc?.agentId?.firstName +
+                        " " +
+                        data?._doc?.agentId?.lastName
+                      }/${data?._doc?.agentId?._id}`
                     )
                   }
                 >
@@ -674,8 +621,10 @@ export default function DetailProperty() {
                   Click={() =>
                     navigate(
                       `/my-listing/${
-                        data?.agentId?.firstName + " " + data?.agentId?.lastName
-                      }/${data?.agentId?._id}`
+                        data?._doc?.agentId?.firstName +
+                        " " +
+                        data?._doc?.agentId?.lastName
+                      }/${data?._doc?.agentId?._id}`
                     )
                   }
                 >

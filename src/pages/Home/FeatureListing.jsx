@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Flex, Col, Row, Button, Spin } from "antd";
+import { Typography, Flex, Col, Row, Button, Spin, Image } from "antd";
 import { useNavigate } from "react-router-dom";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
@@ -116,7 +116,13 @@ function FeatureListing() {
                       className="displayy-teamimg-center"
                       onClick={() => navigate(`/features/${properties._id}`)}
                     >
-                      <img src={Property} width="100%" className="img-op" />
+                      <Image
+                        src={properties?.media[0]?.mdUrl}
+                        width="100%"
+                        className="img-op"
+                        fallback="https://placehold.co/618x489"
+                        preview={false}
+                      />
 
                       <div className="info">
                         <Flex justify={"space-between"} align={"center"}>
