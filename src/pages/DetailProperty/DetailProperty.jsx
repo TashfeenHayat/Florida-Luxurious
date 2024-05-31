@@ -11,11 +11,7 @@ import {
   Modal,
 } from "antd";
 import { Container } from "react-bootstrap";
-import FeatureImg from "../../assets/feature.png";
-import Featurecol from "../../assets/feature1.png";
-import Demomap from "../../assets/demomap.png";
 import Button from "../../components/Buttons";
-import Team from "../../assets/team.png";
 import { IoBedOutline } from "react-icons/io5";
 import { FaWater } from "react-icons/fa6";
 import { LuBath, LuSofa } from "react-icons/lu";
