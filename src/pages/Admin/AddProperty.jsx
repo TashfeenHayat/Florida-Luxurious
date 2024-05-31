@@ -11,11 +11,12 @@ import {
   Upload,
   DatePicker,
   notification,
+  Space,
 } from "antd";
 import dayJs from "dayjs";
 import { api_base_URL, google_api_key } from "../../api/Axios";
 import { Loader } from "@googlemaps/js-api-loader";
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { useParams } from "react-router";
 import countryList from "react-select-country-list";
 import PhoneInput from "antd-phone-input";
@@ -120,21 +121,22 @@ function AddProperty() {
     dispatch(getProperties({ mlsOnly: true }));
     if (id) {
       setLoading(true);
-      dispatch(getProperty(params.id)).then((prop) => {
-        console.log(prop);
+      dispatch(getProperty(params.id)).then(({ payload }) => {
+        console.log(payload);
+        const { property } = payload;
         setLoading(false);
-        setFileList(prop.payload?.media.map((media) => ({ url: media.mdUrl })));
+        setFileList(property?.media?.map((media) => ({ url: media.mdUrl })));
         const coords = {
-          lat: parseFloat(prop.payload.latitude),
-          lng: parseFloat(prop.payload.longitude),
+          lat: parseFloat(property.latitude),
+          lng: parseFloat(property.longitude),
         };
         setCoordinates(coords);
         loadMap(loader, coords);
         setInitialValue({
-          ...prop.payload,
-          agentId: prop.payload.agentId?._id,
-          filters: prop.payload.filters.map((i) => i._id),
-          yearBuilt: dayJs(prop.payload.yearBuilt),
+          ...property,
+          agentId: property.agentId?._id,
+          filters: property.filters?.map((i) => i._id),
+          yearBuilt: dayJs(property.yearBuilt),
         });
       });
     }
@@ -242,7 +244,7 @@ function AddProperty() {
       ).unwrap();
       setInitialValue({});
       openNotification("success", res);
-      // setTimeout(navigate("/admin/property"), 1000);
+      setTimeout(navigate("/admin/property"), 1000);
     } else {
       const res = await dispatch(
         addProperty({
@@ -302,7 +304,7 @@ function AddProperty() {
                 }}
                 action={`${api_base_URL}upload`}
               >
-                {fileList.length >= 8 ? null : uploadButton}
+                {fileList?.length >= 8 ? null : uploadButton}
               </Upload>
               {previewImage && (
                 <Image
@@ -375,8 +377,8 @@ function AddProperty() {
                 filterOption={filterOption}
                 loading={getPropertiesReducer.isLoading}
                 options={getPropertiesReducer.data?.properties.map((i) => ({
-                  value: i.listingId,
-                  label: i.listingId + " - " + i.address?.full,
+                  value: i.mlsId,
+                  label: i.mlsId + " - " + i.address?.full,
                 }))}
                 placeholder="Search MLS property"
               />
@@ -407,18 +409,6 @@ function AddProperty() {
             </Form.Item>
           </Col>
           <Col span={12} className="gutter-row">
-            <Form.Item>
-              <div className="ant-form-item-control-input">
-                <div className="ant-form-item-control-input-content">
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    placeholder="Search a location"
-                    className="ant-input ant-input-lg ant-input-outlined css-dev-only-do-not-override-1kuana8"
-                  />
-                </div>
-              </div>
-            </Form.Item>
             <Form.Item
               name={["addressLine1"]}
               rules={[
@@ -482,17 +472,6 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Zip Code" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
-            <div ref={mapRef} style={{ width: "100%", height: "90%" }} />
-          </Col>
-          <Col span={12} className="gutter-row"></Col>
-          <Col span={12} className="gutter-row"></Col>
-          <Col span={12} className="gutter-row"></Col>
-          <Col span={12} className="gutter-row"></Col>
-          <Col span={12} className="gutter-row"></Col>
-          <Col span={12} className="gutter-row"></Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="area"
               rules={[
@@ -504,8 +483,6 @@ function AddProperty() {
             >
               <Input size="large" addonAfter={selectAfter} placeholder="Area" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="salePrice"
               rules={[
@@ -521,8 +498,6 @@ function AddProperty() {
                 placeholder="Sale Price"
               />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="visitHours"
               rules={[
@@ -534,8 +509,6 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Visiting Hours" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="reducedPrice"
               rules={[
@@ -547,8 +520,6 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Reduced Price" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="yearBuilt"
               rules={[
@@ -564,8 +535,6 @@ function AddProperty() {
                 style={{ width: "100%" }}
               />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="foundation"
               rules={[
@@ -577,8 +546,6 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Foundation" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="bedroomCount"
               rules={[
@@ -590,8 +557,6 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Bedroom Count" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="bathCount"
               rules={[
@@ -603,8 +568,6 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Bathroom Count" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="stories"
               rules={[
@@ -616,8 +579,6 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Stories" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="roof"
               rules={[
@@ -629,8 +590,6 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Roof" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="flooring"
               rules={[
@@ -642,8 +601,6 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Flooring" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="cooling"
               rules={[
@@ -655,8 +612,6 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Cooling" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="heating"
               rules={[
@@ -668,8 +623,6 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Heating" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="fireplace"
               rules={[
@@ -681,8 +634,6 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Fire Place" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="style"
               rules={[
@@ -694,8 +645,6 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Style" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="pool"
               rules={[
@@ -707,8 +656,6 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Pool" />
             </Form.Item>
-          </Col>
-          <Col span={12} className="gutter-row">
             <Form.Item
               name="parking"
               rules={[
@@ -720,6 +667,71 @@ function AddProperty() {
             >
               <Input size="large" placeholder="Parking" />
             </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item>
+              <div className="ant-form-item-control-input">
+                <div className="ant-form-item-control-input-content">
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    placeholder="Search a location"
+                    className="ant-input ant-input-lg ant-input-outlined css-dev-only-do-not-override-1kuana8"
+                  />
+                </div>
+              </div>
+            </Form.Item>
+            <Form.Item>
+              <div ref={mapRef} style={{ width: "100%", height: "400px" }} />
+            </Form.Item>
+            <Card title="Features">
+              <Form.List name="features">
+                {(fields, { add, remove }) => (
+                  <>
+                    {fields.map((field, i) => (
+                      <Space
+                        key={field.key}
+                        style={{ display: "flex", marginBottom: 8 }}
+                      >
+                        <Form.Item
+                          {...field}
+                          name={[field.name, "name"]}
+                          fieldKey={[field.fieldKey, "name"]}
+                          key={i + field.name}
+                        >
+                          <Input placeholder="Name" />
+                        </Form.Item>
+                        <Form.Item
+                          {...field}
+                          name={[field.name, "description"]}
+                          fieldKey={[field.fieldKey, "description"]}
+                          key={i + 1 + field.name}
+                        >
+                          <TextArea
+                            size="large"
+                            rows={2}
+                            placeholder="Description"
+                          />
+                        </Form.Item>
+                        <MinusCircleOutlined
+                          onClick={() => remove(field.name)}
+                        />
+                      </Space>
+                    ))}
+                    <Form.Item>
+                      <Button
+                        type="dashed"
+                        onClick={() => add()}
+                        block
+                        icon={<PlusOutlined />}
+                      >
+                        Add item
+                      </Button>
+                    </Form.Item>
+                  </>
+                )}
+              </Form.List>
+            </Card>
           </Col>
         </Row>
         <Col span={24} className="gutter-row">
