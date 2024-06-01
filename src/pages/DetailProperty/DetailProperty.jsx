@@ -11,11 +11,7 @@ import {
   Modal,
 } from "antd";
 import { Container } from "react-bootstrap";
-import FeatureImg from "../../assets/feature.png";
-import Featurecol from "../../assets/feature1.png";
-import Demomap from "../../assets/demomap.png";
 import Button from "../../components/Buttons";
-import Team from "../../assets/team.png";
 import { IoBedOutline } from "react-icons/io5";
 import { FaWater } from "react-icons/fa6";
 import { LuBath, LuSofa } from "react-icons/lu";
@@ -42,7 +38,7 @@ export default function DetailProperty() {
 
   const { data, isLoading } = useProperty(id);
 
-  console.log(data?._doc);
+  console.log(data);
   const navigate = useNavigate();
 
   const showModal = () => {
@@ -72,16 +68,16 @@ export default function DetailProperty() {
       if (mapRef.current) {
         const map = new window.google.maps.Map(mapRef.current, {
           center: {
-            lat: parseFloat(data?._doc?.latitude),
-            lng: parseFloat(data?._doc?.longitude),
+            lat: parseFloat(data?.property?.latitude),
+            lng: parseFloat(data?.property?.longitude),
           },
           zoom: 20,
           tilt: 45,
         });
         new window.google.maps.Marker({
           position: {
-            lat: parseFloat(data?._doc?.latitude),
-            lng: parseFloat(data?._doc?.longitude),
+            lat: parseFloat(data?.property?.latitude),
+            lng: parseFloat(data?.property?.longitude),
           },
           map: map,
         });
@@ -106,13 +102,13 @@ export default function DetailProperty() {
         map.overlayMapTypes.push(buildingsLayer);
       }
     });
-  }, [google_api_key, data?._doc?.latitude, data?._doc?.longitude]);
+  }, [google_api_key, data?.property?.latitude, data?.property?.longitude]);
   return (
     <>
       <div style={{ position: "relative", overflowX: "hidden" }}>
         <Image
           preview={false}
-          src={data?._doc?.media[3]?.mdUrl}
+          src={data?.property?.media[3]?.mdUrl}
           width="100%"
           fallback="https://placehold.co/1512x934"
         />
@@ -149,20 +145,23 @@ export default function DetailProperty() {
               MLS® #: F10423862
             </Text>
             <Title className="text-upper" style={{ color: "white" }} level={3}>
-              {data?._doc?.addressLine1 + " " + data?._doc?.addressLine2}
+              {data?.property?.addressLine1 +
+                " " +
+                data?.property?.addressLine2}
             </Title>
             <Paragraph
               className="text-upper f-20 f-100"
               style={{ lineHeight: "10px", color: "#D4CFC9" }}
             >
-              {data?._doc?.city}, {data?._doc?.state}, {data?._doc?.zipCode}
+              {data?.property?.city}, {data?.property?.state},{" "}
+              {data?.property?.zipCode}
             </Paragraph>
             <Title
               className="text-upper"
               style={{ color: "white", marginTop: ".2em" }}
               level={2}
             >
-              ${data?._doc?.salePrice}
+              ${data?.property?.salePrice}
             </Title>
           </Flex>
           <Row gutter={[8, 16]}>
@@ -181,7 +180,7 @@ export default function DetailProperty() {
                   </div>
                 </Flex>
                 <Text className="text-white f-16 f-100">
-                  {data?._doc?.bedroomCount} Bedrooms
+                  {data?.property?.bedroomCount} Bedrooms
                 </Text>
               </Flex>
             </Col>
@@ -213,7 +212,7 @@ export default function DetailProperty() {
                   <LuBath size={15} />
                 </div>
                 <Text className="text-white f-16">
-                  {data?._doc?.bathCount} Baths
+                  {data?.property?.bathCount} Baths
                 </Text>
               </Flex>
             </Col>
@@ -232,7 +231,7 @@ export default function DetailProperty() {
                   </div>
                 </Flex>
                 <Text className="text-white f-16 f-100">
-                  {data?._doc?.area} {data?._doc?.areaUnit}
+                  {data?.property?.area} {data?.property?.areaUnit}
                 </Text>
               </Flex>
             </Col>
@@ -282,10 +281,12 @@ export default function DetailProperty() {
                 style={{ textAlign: "center", lineHeight: 2 }}
                 className="text-upper"
               >
-                {data?._doc?.addressLine1 + " " + data?._doc?.addressLine2}
+                {data?.property?.addressLine1 +
+                  " " +
+                  data?.property?.addressLine2}
               </Title>
               <Paragraph className="f-16 f-200" style={{ lineHeight: 2.8 }}>
-                {data?._doc?.description}
+                {data?.property?.description}
               </Paragraph>
             </Card>
           </Col>
@@ -294,21 +295,21 @@ export default function DetailProperty() {
               <Row gutter={[8, 16]}>
                 <Col lg={12} sm={24} md={24}>
                   <Image
-                    src={data?._doc?.media[0]?.mdUrl}
+                    src={data?.property?.media[0]?.mdUrl}
                     width="100%"
                     fallback="https://placehold.co/272x215"
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
                   <Image
-                    src={data?._doc?.media[1]?.mdUrl}
+                    src={data?.property?.media[1]?.mdUrl}
                     width="100%"
                     fallback="https://placehold.co/272x215"
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
                   <Image
-                    src={data?._doc?.media[2]?.mdUrl}
+                    src={data?.property?.media[2]?.mdUrl}
                     width="100%"
                     fallback="https://placehold.co/272x215"
                   />
@@ -342,7 +343,7 @@ export default function DetailProperty() {
                       closeIcon={<IoMdClose size={20} color={"#FFFFFF"} />}
                     >
                       <Row gutter={[8, 16]}>
-                        {data?._doc?.media?.map((item, index) => (
+                        {data?.property?.media?.map((item, index) => (
                           <Col lg={8} md={12} sm={24}>
                             <Image
                               src={item?.mdUrl}
@@ -409,7 +410,10 @@ export default function DetailProperty() {
                 className="text-upper"
               >
                 Interested in{" "}
-                {data?._doc?.addressLine1 + " " + data?._doc?.addressLine2}?
+                {data?.property?.addressLine1 +
+                  " " +
+                  data?.property?.addressLine2}
+                ?
               </Title>
               <form>
                 {" "}
@@ -559,7 +563,7 @@ export default function DetailProperty() {
               <Row align={"middle"}>
                 <Col lg={10} md={6} sm={24}>
                   <Image
-                    src={data?._doc?.agentId?.photo}
+                    src={data?.property?.agentId?.photo}
                     preview={false}
                     width="80%"
                   />
@@ -570,22 +574,22 @@ export default function DetailProperty() {
                     <Flex justify={"flex-start"} align="center" gap={10}>
                       <FaRegUser size={20} color="white" />
                       <Text className="text-white f-24 f-100">
-                        {data?._doc?.agentId?.firstName +
+                        {data?.property?.agentId?.firstName +
                           " " +
-                          data?._doc?.agentId?.lastName}
+                          data?.property?.agentId?.lastName}
                       </Text>
                     </Flex>
                     <Flex justify={"flex-start"} align="center" gap={10}>
                       <CiPhone size={20} color="white" />
                       <Text className="text-white f-24 f-100">
-                        {"+" + data?._doc?.agentId?.phoneNumber}
+                        {"+" + data?.property?.agentId?.phoneNumber}
                       </Text>
                     </Flex>
                     <Flex justify={"flex-start"} align="center" gap={10}>
                       <CiMail size={20} color="white" />
 
                       <Text className="text-white f-24 f-100">
-                        {data?._doc?.agentId?.email}
+                        {data?.property?.agentId?.email}
                       </Text>
                     </Flex>
                   </Flex>
@@ -606,10 +610,10 @@ export default function DetailProperty() {
                   Click={() =>
                     navigate(
                       `/my-sold/${
-                        data?._doc?.agentId?.firstName +
+                        data?.property?.agentId?.firstName +
                         " " +
-                        data?._doc?.agentId?.lastName
-                      }/${data?._doc?.agentId?._id}`
+                        data?.property?.agentId?.lastName
+                      }/${data?.property?.agentId?._id}`
                     )
                   }
                 >
@@ -621,10 +625,10 @@ export default function DetailProperty() {
                   Click={() =>
                     navigate(
                       `/my-listing/${
-                        data?._doc?.agentId?.firstName +
+                        data?.property?.agentId?.firstName +
                         " " +
-                        data?._doc?.agentId?.lastName
-                      }/${data?._doc?.agentId?._id}`
+                        data?.property?.agentId?.lastName
+                      }/${data?.property?.agentId?._id}`
                     )
                   }
                 >

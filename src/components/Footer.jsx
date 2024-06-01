@@ -132,6 +132,7 @@ function Footer() {
                   <Flex className="pt-2" vertical gap={10}>
                     {data?.filters.map((item, index) => (
                       <Link
+                        key={index}
                         className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                         to={`/community/${item?._id}`}
