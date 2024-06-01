@@ -156,7 +156,7 @@ function SoldProperties() {
           {data?.properties?.length === 0 ? null : (
             <Pagination
               defaultCurrent={1}
-              total={data?.properties?.length}
+              total={data?.totalCount}
               pageSize={itemsPerPage}
               onChange={handlePageChange}
             />

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
 import Slider from "react-slick";
-import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 import { Container } from "react-bootstrap";
 import useProperties from "../../hooks/useProperties";

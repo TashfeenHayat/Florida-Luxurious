@@ -18,9 +18,9 @@ function Properties() {
     null,
     itemsPerPage,
     currentPage,
-    "for_sale"
+    null
   );
-
+  console.log(data);
   const navigate = useNavigate();
 
   // const properties = [
@@ -131,7 +131,7 @@ function Properties() {
             <Flex justify={"center"} align="center" className="my-4">
               <Pagination
                 defaultCurrent={1}
-                total={data?.properties.length}
+                total={data?.totalCount}
                 pageSize={itemsPerPage}
                 onChange={handlePageChange}
                 responsive

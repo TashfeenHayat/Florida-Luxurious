@@ -122,6 +122,7 @@ function Drawers({ setOpenDrawer, openDrawer }) {
               <Flex className="pt-2" vertical gap={10}>
                 {data?.filters.map((item, index) => (
                   <Link
+                    key={index}
                     className="text-upper f-14 text-white"
                     style={{ textDecoration: "none" }}
                     to={`/community/${item?._id}`}
