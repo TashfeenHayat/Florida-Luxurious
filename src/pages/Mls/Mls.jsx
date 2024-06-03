@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 import useMls from "../../hooks/useMls";
 import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 const { Title, Text } = Typography;
 
 const items = [
@@ -87,8 +88,9 @@ function Mls() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
 
+  const navigate = useNavigate();
+
   const { data: MLS, isLoading } = useMls(true, itemsPerPage, currentPage);
-  console.log(MLS, "check");
 
   const { data } = useSelector((s) => s.getFiltersReducer);
 
@@ -274,7 +276,7 @@ function Mls() {
                   lg={12}
                   md={12}
                   sm={24}
-                  onClick={() => navigate(`/features/${item._id}`)}
+                  onClick={() => navigate(`/mls-detail/${item?.mlsId}`)}
                 >
                   <div className="displayy-teamimg-center">
                     <Image

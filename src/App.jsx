@@ -31,6 +31,7 @@ import Mls from "./pages/Mls";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import InternalServerError from "./pages/InternalError/InternalServerError";
+import MlsPropertyDetail from "./pages/MlsPropertyDetail";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
@@ -64,6 +65,8 @@ function App() {
           <Route path="/500" element={<InternalServerError />} />
 
           <Route path="mls-listing" element={<Mls />} />
+          <Route path="mls-detail/:id" element={<MlsPropertyDetail />} />
+
           <Route path="*" element={<NotFound />} />
           <Route element={<Dashboard />}>
             <Route path="/admin/dashboard" element={<p>Dashboard</p>} />

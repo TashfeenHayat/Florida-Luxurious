@@ -29,9 +29,14 @@ export const getProperties = createAsyncThunk(
 
 export const getProperty = createAsyncThunk(
   "getPropertyReducer",
-  async function (id, { rejectWithValue }) {
+  async function ({ id, mlsOnly }, { rejectWithValue }) {
     try {
-      const res = await customAxios.get(`property/${id}`);
+      console.lo0g;
+      const res = await customAxios.get(`property/${id}`, {
+        params: {
+          mlsOnly,
+        },
+      });
       return res.data;
     } catch (e) {
       return rejectWithValue(e.response.data.message);
