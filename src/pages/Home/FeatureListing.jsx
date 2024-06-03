@@ -116,7 +116,10 @@ function FeatureListing() {
                       onClick={() => navigate(`/features/${properties._id}`)}
                     >
                       <Image
-                        src={properties?.media[0]?.mdUrl}
+                        src={
+                          properties?.media?.[0]?.mdUrl ||
+                          "https://placehold.co/618x489"
+                        }
                         width="100%"
                         className="img-op"
                         fallback="https://placehold.co/618x489"

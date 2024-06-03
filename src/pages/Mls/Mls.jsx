@@ -280,7 +280,11 @@ function Mls() {
                 >
                   <div className="displayy-teamimg-center">
                     <Image
-                      src={item.photos[2]}
+                      src={
+                        item?.photos?.[2] ||
+                        item?.photos?.[0] ||
+                        "https://placehold.co/618x489"
+                      }
                       width="100%"
                       className="img-op"
                       fallback="https://placehold.co/618x489"

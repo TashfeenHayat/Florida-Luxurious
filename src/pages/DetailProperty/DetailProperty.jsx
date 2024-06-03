@@ -468,10 +468,18 @@ export default function DetailProperty() {
         align="center"
         wrap="wrap"
       >
-        <Button classNam="button-view1" width="300px">
+        <Button
+          classNam="button-view1"
+          width="300px"
+          Click={() => navigate("/features")}
+        >
           Back to properties
         </Button>
-        <Button classNam="button-view-line-right" width="300px">
+        <Button
+          classNam="button-view-line-right"
+          width="300px"
+          Click={() => navigate("/mls-listing")}
+        >
           Search Mls
         </Button>
       </Flex>
