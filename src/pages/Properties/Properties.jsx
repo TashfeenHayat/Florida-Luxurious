@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Row, Col, Flex, Pagination } from "antd";
+import { Typography, Row, Col, Flex, Pagination, Spin } from "antd";
 import BackgroundImage from "../../components/BackgroundImage";
 import FeaturedPropertiesImage from "../../assets/Agent.png";
 import { Container } from "react-bootstrap";
@@ -18,10 +18,9 @@ function Properties() {
     null,
     itemsPerPage,
     currentPage,
-    "for_sale"
+    null
   );
-  console.log(data?.properties);
-
+  console.log(data);
   const navigate = useNavigate();
 
   // const properties = [
@@ -52,85 +51,99 @@ function Properties() {
           Featured properties
         </Title>
       </BackgroundImage>
-      <Container className="pt-98 pb-98">
-        <Row gutter={[60, 60]}>
-          {data?.properties.map((property, index) => (
-            <Col
-              lg={12}
-              md={12}
-              sm={24}
-              key={index}
-              onClick={() => navigate(`/features/${property?._id}`)}
-              style={{ cursor: "pointer" }}
-            >
-              <div className="displayy-teamimg-center">
-                <img src={Property} width="100%" className="" />
-                <div className="more-info-property">
-                  <Flex
-                    vertical
-                    align={"center"}
-                    justify="center"
-                    style={{ height: "100%" }}
-                    gap={30}
-                  >
-                    <Flex vertical>
-                      <Text className="text-center text-upper f-24 f-bold text-white">
-                        address
-                      </Text>
-                      <Text className="text-center text-upper f-24 f-100 text-gray">
-                        {property?.addressLine1} {property?.addressLine2}
-                      </Text>
+      {isLoading ? (
+        <Spin
+          size="large"
+          className="d-flex w-100 justify-content-center align-items-center py-5"
+        />
+      ) : (
+        <Container className="pt-98 pb-98">
+          <Row gutter={[60, 60]}>
+            {data?.properties.map((property, index) => (
+              <Col
+                lg={12}
+                md={12}
+                sm={24}
+                key={index}
+                onClick={() => navigate(`/features/${property?._id}`)}
+                style={{ cursor: "pointer" }}
+              >
+                <div className="displayy-teamimg-center">
+                  <img src={Property} width="100%" className="" />
+                  <div className="more-info-property">
+                    <Flex
+                      vertical
+                      align={"center"}
+                      justify="center"
+                      style={{ height: "100%" }}
+                      gap={30}
+                    >
+                      <Flex vertical>
+                        <Text className="text-center text-upper f-24 f-bold text-white">
+                          address
+                        </Text>
+                        <Text className="text-center text-upper f-24 f-100 text-gray">
+                          {property?.addressLine1} {property?.addressLine2}
+                        </Text>
+                      </Flex>
+                      <Flex vertical>
+                        <Text className="text-center text-upper f-24 f-bold text-white">
+                          last list price
+                        </Text>
+                        <Text className="text-center text-upper f-24 f-100 text-gray">
+                          ${property?.salePrice}
+                        </Text>
+                      </Flex>
+                      <Flex vertical>
+                        <Text className="text-center text-upper f-24 f-bold text-white">
+                          Agent Listing
+                        </Text>
+                        <Text className="text-center text-upper f-24 f-100 text-gray">
+                          Abraham
+                        </Text>
+                      </Flex>
+                      <Flex vertical>
+                        <button className="let-talk-btn">View Property</button>
+                      </Flex>
                     </Flex>
-                    <Flex vertical>
-                      <Text className="text-center text-upper f-24 f-bold text-white">
-                        last list price
-                      </Text>
-                      <Text className="text-center text-upper f-24 f-100 text-gray">
-                        ${property?.salePrice}
-                      </Text>
-                    </Flex>
-                    <Flex vertical>
-                      <Text className="text-center text-upper f-24 f-bold text-white">
-                        Agent Listing
-                      </Text>
-                      <Text className="text-center text-upper f-24 f-100 text-gray">
-                        Abraham
-                      </Text>
-                    </Flex>
-                    <Flex vertical>
-                      <button className="let-talk-btn">View Property</button>
-                    </Flex>
-                  </Flex>
-                </div>
+                  </div>
 
-                <div className="info">
-                  <Flex justify={"end"} align={"center"}>
-                    <Flex>
-                      <IoLocationOutline color="white" size={20} />
-                      <Text
-                        className="f-14 f-bold text-white"
-                        style={{ textAlign: "right" }}
-                      >
-                        {property?.addressLine1} {property?.addressLine2} <br />
-                        <IoPricetagOutline size={20} /> ${property?.salePrice}
-                      </Text>
+                  <div className="info">
+                    <Flex justify={"end"} align={"center"}>
+                      <Flex>
+                        <IoLocationOutline color="white" size={20} />
+                        <Text
+                          className="f-14 f-bold text-white"
+                          style={{ textAlign: "right" }}
+                        >
+                          {property?.addressLine1} {property?.addressLine2}{" "}
+                          <br />
+                          <IoPricetagOutline size={20} /> ${property?.salePrice}
+                        </Text>
+                      </Flex>
                     </Flex>
-                  </Flex>
+                  </div>
                 </div>
-              </div>
-            </Col>
-          ))}
-        </Row>
-        <Flex justify={"center"} align="center" className="my-4">
-          <Pagination
-            defaultCurrent={1}
-            total={data?.properties.length}
-            pageSize={itemsPerPage}
-            onChange={handlePageChange}
-            responsive
-          />
-        </Flex>
-      </Container>
+              </Col>
+            ))}
+          </Row>
+          {data?.properties.length === 0 ? null : (
+            <Flex justify={"center"} align="center" className="my-4">
+              <Pagination
+                defaultCurrent={1}
+                total={data?.totalCount}
+                pageSize={itemsPerPage}
+                onChange={handlePageChange}
+                responsive
+              />
+            </Flex>
+          )}
+          {!isLoading && data?.properties.length === 0 && (
+            <Title>No Property Listed</Title>
+          )}
+        </Container>
+      )}
+
       <LetTalk />
       <Icons />
     </>

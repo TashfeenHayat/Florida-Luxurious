@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
 import Slider from "react-slick";
-import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 import { Container } from "react-bootstrap";
 import useProperties from "../../hooks/useProperties";
@@ -117,7 +116,10 @@ function FeatureListing() {
                       onClick={() => navigate(`/features/${properties._id}`)}
                     >
                       <Image
-                        src={properties?.media[0]?.mdUrl}
+                        src={
+                          properties?.media?.[0]?.mdUrl ||
+                          "https://placehold.co/618x489"
+                        }
                         width="100%"
                         className="img-op"
                         fallback="https://placehold.co/618x489"

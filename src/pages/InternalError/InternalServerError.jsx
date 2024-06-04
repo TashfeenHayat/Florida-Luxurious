@@ -1,6 +1,6 @@
 import React from "react";
-import Error from "../../assets/404.png";
-function Error404() {
+import Error from "../../assets/500.png";
+function InternalServerError() {
   return (
     <div
       style={{
@@ -17,4 +17,4 @@ function Error404() {
   );
 }
 
-export default Error404;
+export default InternalServerError;

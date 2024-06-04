@@ -22,7 +22,8 @@ import LetTalk from "../../components/LetTalk";
 import { FaVectorSquare, FaPlus } from "react-icons/fa6";
 import { TbCarGarage } from "react-icons/tb";
 import { useParams, useNavigate } from "react-router-dom";
-import useProperty from "../../hooks/useProperty";
+// import useProperty from "../../hooks/useProperty";
+import MlsPropertyDetail from "../../hooks/useMlsDetail";
 import { Loader } from "@googlemaps/js-api-loader";
 import { google_api_key } from "../../api/Axios";
 
@@ -36,9 +37,9 @@ export default function DetailProperty() {
 
   const { id } = useParams();
 
-  const { data, isLoading } = useProperty(id);
+  const { data, isLoading } = MlsPropertyDetail(id, true);
 
-  console.log(data);
+  console.log(data?.mls);
   const navigate = useNavigate();
 
   const showModal = () => {
@@ -68,16 +69,16 @@ export default function DetailProperty() {
       if (mapRef.current) {
         const map = new window.google.maps.Map(mapRef.current, {
           center: {
-            lat: parseFloat(data?.property?.latitude),
-            lng: parseFloat(data?.property?.longitude),
+            lat: parseFloat(data?.mls?.geo?.lat),
+            lng: parseFloat(data?.mls?.geo?.lng),
           },
           zoom: 20,
           tilt: 45,
         });
         new window.google.maps.Marker({
           position: {
-            lat: parseFloat(data?.property?.latitude),
-            lng: parseFloat(data?.property?.longitude),
+            lat: parseFloat(data?.mls?.geo?.lat),
+            lng: parseFloat(data?.mls?.geo?.lng),
           },
           map: map,
         });
@@ -102,13 +103,13 @@ export default function DetailProperty() {
         map.overlayMapTypes.push(buildingsLayer);
       }
     });
-  }, [google_api_key, data?.property?.latitude, data?.property?.longitude]);
+  }, [google_api_key, data?.mls?.geo?.lat, data?.mls?.geo?.lng]);
   return (
     <>
       <div style={{ position: "relative", overflowX: "hidden" }}>
         <Image
           preview={false}
-          src={data?.property?.media[3]?.mdUrl}
+          src={data?.mls?.photos[0]}
           width="100%"
           fallback="https://placehold.co/1512x934"
         />
@@ -142,26 +143,26 @@ export default function DetailProperty() {
               className="f-20 f-100"
               style={{ lineHeight: "14px", color: "#D4CFC9" }}
             >
-              MLS® #: F10423862
+              MLS® #: {data?.mls?.listingId}
             </Text>
             <Title className="text-upper" style={{ color: "white" }} level={3}>
-              {data?.property?.addressLine1 +
+              {data?.mls?.address?.streetNumberText +
                 " " +
-                data?.property?.addressLine2}
+                data?.mls?.address?.streetName}
             </Title>
             <Paragraph
               className="text-upper f-20 f-100"
               style={{ lineHeight: "10px", color: "#D4CFC9" }}
             >
-              {data?.property?.city}, {data?.property?.state},{" "}
-              {data?.property?.zipCode}
+              {data?.mls?.address?.city}, {data?.mls?.address?.state},{" "}
+              {data?.mls?.address?.postalCode}
             </Paragraph>
             <Title
               className="text-upper"
               style={{ color: "white", marginTop: ".2em" }}
               level={2}
             >
-              ${data?.property?.salePrice}
+              ${data?.mls?.listPrice}
             </Title>
           </Flex>
           <Row gutter={[8, 16]}>
@@ -179,8 +180,8 @@ export default function DetailProperty() {
                     <IoBedOutline size={15} />
                   </div>
                 </Flex>
-                <Text className="text-white f-16 f-100">
-                  {data?.property?.bedroomCount} Bedrooms
+                <Text className="text-white f-14 f-100">
+                  {data?.mls?.property?.bedrooms} Bedrooms
                 </Text>
               </Flex>
             </Col>
@@ -196,7 +197,9 @@ export default function DetailProperty() {
                 >
                   <FaWater size={15} />
                 </div>
-                <Text className="text-white f-16 f-100">100± Waterfront</Text>
+                <Text className="text-white f-14 f-100">
+                  {data?.mls?.property?.water}
+                </Text>
               </Flex>
             </Col>
             <Col lg={8}>
@@ -211,8 +214,8 @@ export default function DetailProperty() {
                 >
                   <LuBath size={15} />
                 </div>
-                <Text className="text-white f-16">
-                  {data?.property?.bathCount} Baths
+                <Text className="text-white f-14">
+                  {data?.mls?.property?.bathsFull} Baths
                 </Text>
               </Flex>
             </Col>
@@ -230,8 +233,8 @@ export default function DetailProperty() {
                     <FaVectorSquare size={15} />
                   </div>
                 </Flex>
-                <Text className="text-white f-16 f-100">
-                  {data?.property?.area} {data?.property?.areaUnit}
+                <Text className="text-white f-14 f-100">
+                  {data?.mls?.property?.area}
                 </Text>
               </Flex>
             </Col>
@@ -247,7 +250,9 @@ export default function DetailProperty() {
                 >
                   <TbCarGarage size={15} />
                 </div>
-                <Text className="text-white f-16 f-100">Car garage</Text>
+                <Text className="text-white f-14 f-100">
+                  {data?.mls?.property?.garageSpaces} garage
+                </Text>
               </Flex>
             </Col>
             <Col lg={8}>
@@ -281,12 +286,12 @@ export default function DetailProperty() {
                 style={{ textAlign: "center", lineHeight: 2 }}
                 className="text-upper"
               >
-                {data?.property?.addressLine1 +
+                {data?.mls?.address?.streetNumberText +
                   " " +
-                  data?.property?.addressLine2}
+                  data?.mls?.address?.streetName}
               </Title>
               <Paragraph className="f-16 f-200" style={{ lineHeight: 2.8 }}>
-                {data?.property?.description}
+                {data?.mls?.remarks}
               </Paragraph>
             </Card>
           </Col>
@@ -295,21 +300,21 @@ export default function DetailProperty() {
               <Row gutter={[8, 16]}>
                 <Col lg={12} sm={24} md={24}>
                   <Image
-                    src={data?.property?.media[0]?.mdUrl}
+                    src={data?.mls?.photos[0]}
                     width="100%"
                     fallback="https://placehold.co/272x215"
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
                   <Image
-                    src={data?.property?.media[1]?.mdUrl}
+                    src={data?.mls?.photos[1]}
                     width="100%"
                     fallback="https://placehold.co/272x215"
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
                   <Image
-                    src={data?.property?.media[2]?.mdUrl}
+                    src={data?.mls?.photos[2]}
                     width="100%"
                     fallback="https://placehold.co/272x215"
                   />
@@ -343,10 +348,10 @@ export default function DetailProperty() {
                       closeIcon={<IoMdClose size={20} color={"#FFFFFF"} />}
                     >
                       <Row gutter={[8, 16]}>
-                        {data?.property?.media?.map((item, index) => (
+                        {data?.mls?.photos?.map((item, index) => (
                           <Col lg={8} md={12} sm={24}>
                             <Image
-                              src={item?.mdUrl}
+                              src={item}
                               width="100%"
                               fallback="https://placehold.co/195x154"
                             />
@@ -364,11 +369,11 @@ export default function DetailProperty() {
               align="center"
               style={{ marginTop: 40 }}
             >
-              <div style={{ marginBottom: 40 }}>
+              {/* <div style={{ marginBottom: 40 }}>
                 <Button classNam="button-view1" width="300px">
                   Watch Videos
                 </Button>
-              </div>
+              </div> */}
               {/* <div style={{ marginBottom: 40 }}>
                 <Button classNam="button-view1" width="300px">
                   Request details
@@ -410,9 +415,9 @@ export default function DetailProperty() {
                 className="text-upper"
               >
                 Interested in{" "}
-                {data?.property?.addressLine1 +
+                {data?.mls?.address?.streetNumberText +
                   " " +
-                  data?.property?.addressLine2}
+                  data?.mls?.address?.streetName}
                 ?
               </Title>
               <form>
@@ -471,7 +476,7 @@ export default function DetailProperty() {
         <Button
           classNam="button-view1"
           width="300px"
-          Click={() => navigate("/features")}
+          Click={() => navigate("/mls-listing")}
         >
           Back to properties
         </Button>
@@ -483,7 +488,7 @@ export default function DetailProperty() {
           Search Mls
         </Button>
       </Flex>
-      <div className="boxshadow-section p-5">
+      {/* <div className="boxshadow-section p-5">
         <Container className="p-5">
           <Title className="text-upper" style={{ letterSpacing: "1px" }}>
             Features
@@ -563,18 +568,18 @@ export default function DetailProperty() {
             </Col>
           </Row>
         </Container>
-      </div>
+      </div> */}
       <div style={{ backgroundColor: "#000" }}>
         <Container>
           <Row>
             <Col lg={18} md={24} sm={24} className="p-5">
               <Row align={"middle"}>
                 <Col lg={10} md={6} sm={24}>
-                  <Image
+                  {/* <Image
                     src={data?.property?.agentId?.photo}
                     preview={false}
                     width="80%"
-                  />
+                  /> */}
                 </Col>
                 <Col lg={14} md={18} sm={24}>
                   <Flex vertical justify={"flex-start"} align={""}>
@@ -582,22 +587,22 @@ export default function DetailProperty() {
                     <Flex justify={"flex-start"} align="center" gap={10}>
                       <FaRegUser size={20} color="white" />
                       <Text className="text-white f-24 f-100">
-                        {data?.property?.agentId?.firstName +
+                        {data?.mls?.agent?.firstName +
                           " " +
-                          data?.property?.agentId?.lastName}
+                          data?.mls?.agent?.lastName}
                       </Text>
                     </Flex>
                     <Flex justify={"flex-start"} align="center" gap={10}>
                       <CiPhone size={20} color="white" />
                       <Text className="text-white f-24 f-100">
-                        {"+" + data?.property?.agentId?.phoneNumber}
+                        {data?.mls?.agent?.contact?.cell}
                       </Text>
                     </Flex>
                     <Flex justify={"flex-start"} align="center" gap={10}>
                       <CiMail size={20} color="white" />
 
                       <Text className="text-white f-24 f-100">
-                        {data?.property?.agentId?.email}
+                        {data?.mls?.agent?.contact?.email}
                       </Text>
                     </Flex>
                   </Flex>
@@ -605,7 +610,7 @@ export default function DetailProperty() {
               </Row>
             </Col>
             <Col lg={6} md={24} sm={24}>
-              <Flex
+              {/* <Flex
                 vertical
                 justify={"center"}
                 align="center"
@@ -642,7 +647,7 @@ export default function DetailProperty() {
                 >
                   View my listing{" "}
                 </Button>
-              </Flex>
+              </Flex> */}
             </Col>
           </Row>
         </Container>
