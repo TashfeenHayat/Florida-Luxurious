@@ -498,6 +498,9 @@ function AddProperty() {
                 placeholder="Sale Price"
               />
             </Form.Item>
+            <Form.Item name="compensation">
+              <Input size="large" placeholder="Compensation" />
+            </Form.Item>
             <Form.Item
               name="visitHours"
               rules={[
