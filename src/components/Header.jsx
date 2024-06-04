@@ -89,14 +89,14 @@ function Header() {
             overlay={
               <Menu style={menuStyle}>
                 <Menu.Item style={contentStyle}>
-                  <a
-                    href="https://www.antgroup.com"
+                  <Link
+                    to="mls-listing"
                     target="_blank"
                     rel="noopener noreferrer "
                     className="f-10"
                   >
-                    Other Offering 1
-                  </a>
+                    MLS
+                  </Link>
                 </Menu.Item>
                 <Menu.Item>
                   <a
@@ -105,7 +105,7 @@ function Header() {
                     rel="noopener noreferrer"
                     className="f-10"
                   >
-                    Other Offering 2
+                    Global Partner
                   </a>
                 </Menu.Item>
               </Menu>
@@ -115,7 +115,7 @@ function Header() {
               className="ant-dropdown-link"
               onClick={(e) => e.preventDefault()}
             >
-              Search by Location
+              Other offerings
             </a>
           </Dropdown>
           <Dropdown
