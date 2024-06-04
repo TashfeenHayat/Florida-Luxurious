@@ -22,7 +22,7 @@ import {
   updatePropertySlice,
   deletePropertySlice,
 } from "./slices/PropertySlice";
-import { contactUsSlice } from "./slices/ContactusSlice";
+import { contactUsSlice, getInquirySlice } from "./slices/ContactusSlice";
 
 export const store = configureStore({
   reducer: {
@@ -44,5 +44,6 @@ export const store = configureStore({
     getPropertyReducer: getPropertySlice,
     updatePropertyReducer: updatePropertySlice,
     deletePropertyReducer: deletePropertySlice,
+    getInquiryReducer: getInquirySlice
   },
 });
