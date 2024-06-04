@@ -13,6 +13,7 @@ const { Title, Text } = Typography;
 function SoldProperties() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4; // Number of items to display per page
+
   const { data, isLoading } = useProperties(
     null,
     itemsPerPage,
