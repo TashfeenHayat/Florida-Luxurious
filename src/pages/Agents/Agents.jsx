@@ -28,7 +28,7 @@ function Agents() {
       <OurStory />
       <div className="boxshadow-section">
         <Container className="py-5">
-          <Row gutter={[20, 80]}>
+          <Row gutter={[20, 60]}>
             <Col lg={24} md={24} sm={24} xs={24}>
               <Title className="text-center f-100 text-upper">Our Agents</Title>
             </Col>

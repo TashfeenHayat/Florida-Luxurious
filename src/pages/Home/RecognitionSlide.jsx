@@ -73,6 +73,7 @@ function RecognitionSlide() {
       justify={"center"}
       align={"center"}
       style={{ height: "250px", width: "98%" }}
+      className="rec-slide"
     >
       <Slider {...settings}>
         {imgRecognition.map((img, index) => (

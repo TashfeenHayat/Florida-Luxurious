@@ -39,8 +39,6 @@ function Comunities() {
   const mapRef = useRef(null);
   const { data, isLoading, isError } = useCommunity(id);
 
-  console.log(data, "working");
-
   useEffect(() => {
     const loader = new Loader({
       apiKey: google_api_key,
@@ -78,7 +76,7 @@ function Comunities() {
 
   return (
     <div>
-      <BackgroundImage Image={Community}>
+      <BackgroundImage Image={data?.photo}>
         <Title
           style={{ color: "white", lineHeight: "14px", letterSpacing: "2px" }}
           className="text-upper f-50 f-100"

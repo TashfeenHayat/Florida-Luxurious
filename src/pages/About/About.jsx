@@ -63,7 +63,42 @@ function OurStory() {
             <Image preview={false} src={Bagde4} />
             <Image preview={false} src={Bagde4} />
           </Flex>
-          <Flex justify={"space-around"} className="my-124 px-3" wrap="wrap">
+          <Row gutter={[20, 20]} className="my-124 px-3">
+            <Col xl={8} lg={12} md={12} sm={12}>
+              <div
+                style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}
+              >
+                <Text className="text-gray f-16 text-upper">
+                  Ranked Private Brokerage
+                </Text>
+                <br />
+                <Text className="text-white text-upper f-40">#1</Text>
+              </div>
+            </Col>
+            <Col xl={8} lg={12} md={12} sm={12}>
+              <div
+                style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}
+              >
+                <Text className="text-gray f-16 text-upper">
+                  Has exceeded the mark
+                </Text>
+                <br />
+                <Text className="text-white text-upper f-40">$1.8 BILLION</Text>
+              </div>
+            </Col>
+            <Col xl={8} lg={12} md={12} sm={12}>
+              <div
+                style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}
+              >
+                <Text className="text-gray f-16 text-upper">Total Sales</Text>
+                <br />
+                <Text className="text-white text-upper f-40">
+                  $1,831,197,188
+                </Text>
+              </div>
+            </Col>
+          </Row>
+          {/* <Flex justify={"space-around"} className="my-124 px-3" wrap="wrap">
             <div style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}>
               <Text className="text-gray f-16 text-upper">
                 Ranked Private Brokerage
@@ -83,7 +118,7 @@ function OurStory() {
               <br />
               <Text className="text-white text-upper f-40">$1,831,197,188</Text>
             </div>
-          </Flex>
+          </Flex> */}
         </Col>
       </Row>
       <LetTalk />

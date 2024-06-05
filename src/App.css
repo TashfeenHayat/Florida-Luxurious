@@ -1226,7 +1226,7 @@ body:focus-visible {
   background-size: cover;
 }
 .bg-img-shadow {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.1);
   height: 100%;
   position: relative;
   display: flex;
@@ -1579,4 +1579,10 @@ body:focus-visible {
   text-transform: uppercase;
   font-size: 20px;
   border-bottom: 1px solid white;
+}
+
+.rec-slide .slick-track {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

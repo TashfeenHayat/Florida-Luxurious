@@ -4,6 +4,7 @@ import BackgroundImage from "../../components/BackgroundImage";
 import BoatImage from "../../assets/boatowner.png";
 import { Container } from "react-bootstrap";
 import Bdiagram from "../../assets/Bdiagram.png";
+import LetTalk from "../../components/LetTalk";
 const { Title, Paragraph, Text } = Typography;
 const columns = [
   {
@@ -1131,7 +1132,7 @@ function BoatOwner() {
         </Title>
       </BackgroundImage>
       <Container>
-        <Row gutter={[10, 20]} align="middle">
+        <Row gutter={[80, 80]} align="middle">
           <Col lg={12} md={12} sm={24} xs={24}>
             <Card className="card-feature boxshadow-section">
               <Title
@@ -1434,6 +1435,7 @@ function BoatOwner() {
             <Col lg={4}></Col>
           </Row>
         </div>
+        <LetTalk />
       </div>
     </>
   );
