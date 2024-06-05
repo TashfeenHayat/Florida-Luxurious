@@ -367,6 +367,8 @@ body:focus-visible {
   -webkit-filter: grayscale(1);
   filter: gray;
   -webkit-transition: all 0.8s ease-in;
+  aspect-ratio: 5/4;
+  object-fit: cover;
 }
 
 .img-op:hover {
@@ -1588,4 +1590,12 @@ body:focus-visible {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.show-btn-community-home .button-view1 {
+  display: none;
+}
+
+.show-btn-community-home:hover .button-view1 {
+  display: block !important;
 }
