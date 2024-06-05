@@ -904,6 +904,9 @@ body:focus-visible {
   .flex-hidden {
     display: none !important;
   }
+  .text-1024 {
+    font-size: 9px;
+  }
 }
 
 @media screen and (max-width: 768px) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Typography, Row, Col, Flex, Pagination, Spin } from "antd";
+import { Typography, Row, Col, Flex, Pagination, Spin, Image } from "antd";
 import BackgroundImage from "../../components/BackgroundImage";
 import FeaturedPropertiesImage from "../../assets/Agent.png";
 import { Container } from "react-bootstrap";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Icons from "../../components/Icons";
 import LetTalk from "../../components/LetTalk";
 import useProperties from "../../hooks/useProperties";
+import useAgent from "../../hooks/useAgent";
 
 const { Title, Text } = Typography;
 function Properties() {
@@ -20,7 +21,8 @@ function Properties() {
     currentPage,
     null
   );
-  console.log(data);
+
+  const check = data?.properties?.filter((item) => item.status !== "sold");
   const navigate = useNavigate();
 
   // const properties = [
@@ -59,7 +61,7 @@ function Properties() {
       ) : (
         <Container className="pt-98 pb-98">
           <Row gutter={[60, 60]}>
-            {data?.properties.map((property, index) => (
+            {check?.map((property, index) => (
               <Col
                 lg={12}
                 md={12}
@@ -69,7 +71,16 @@ function Properties() {
                 style={{ cursor: "pointer" }}
               >
                 <div className="displayy-teamimg-center">
-                  <img src={Property} width="100%" className="" />
+                  <Image
+                    src={
+                      property?.media?.[0]?.mdUrl ||
+                      "https://placehold.co/618x489"
+                    }
+                    width="100%"
+                    className="img-op"
+                    fallback="https://placehold.co/618x489"
+                    preview={false}
+                  />
                   <div className="more-info-property">
                     <Flex
                       vertical

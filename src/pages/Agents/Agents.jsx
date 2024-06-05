@@ -148,19 +148,19 @@ function Agents() {
                   <Flex justify={"space-between"} align="center">
                     <Flex align={"center"} gap={5}>
                       <CiMap color="#838383" size={15} />
-                      <Text className="text-black text-upper">
+                      <Text className="text-black text-upper text-1024">
                         2438 East Las Olas Boulevard Fort Lauderdale, FL 33301
                       </Text>
                     </Flex>
                     <Flex align={"center"} gap={5}>
                       <CiMail color="#838383" size={15} />
-                      <Text className="text-black text-upper">
+                      <Text className="text-black text-upper text-1024">
                         floridainfo@gmail.com
                       </Text>
                     </Flex>
                     <Flex align={"center"} gap={5}>
                       <CiPhone color="#838383" size={15} />
-                      <Text className="text-black text-upper">
+                      <Text className="text-black text-upper text-1024">
                         2954.870.080
                       </Text>
                     </Flex>

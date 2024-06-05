@@ -119,6 +119,10 @@ function Mls() {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
+    window.scrollTo({
+      top: 600,
+      behavior: "smooth",
+    });
   };
 
   // Calculate the properties for the current page
