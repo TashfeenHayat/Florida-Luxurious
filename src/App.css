@@ -943,9 +943,9 @@ body:focus-visible {
   }
 }
 .detail-property .ant-input::placeholder {
-  color: #f0f0f0;
+  color: #838383;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 100;
 }
 
 .detail-property .ant-input {

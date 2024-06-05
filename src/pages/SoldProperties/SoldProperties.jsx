@@ -108,10 +108,10 @@ function SoldProperties() {
                       </Flex>
                       <Flex vertical>
                         <Text className="text-center text-upper f-24 f-bold text-white">
-                          represented
+                          agent listing
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          seller
+                          Abraham
                         </Text>
                       </Flex>
                       <Flex vertical>

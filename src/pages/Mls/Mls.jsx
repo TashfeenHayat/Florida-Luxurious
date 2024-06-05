@@ -22,6 +22,7 @@ import useMls from "../../hooks/useMls";
 import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import LetTalk from "../../components/LetTalk";
 const { Title, Text } = Typography;
 
 const items = [
@@ -354,6 +355,7 @@ function Mls() {
         )}
       </Container>
       <Icons />
+      <LetTalk />
     </div>
   );
 }
