@@ -126,6 +126,10 @@ function Mls() {
     });
   };
 
+  const handleSearchButton = () => {
+    console.log("working");
+  };
+
   // Calculate the properties for the current page
 
   return (
@@ -259,6 +263,7 @@ function Mls() {
               <button
                 className="button-secondary text-upper mt-32"
                 style={{ width: "20%" }}
+                onClick={handleSearchButton}
               >
                 Search
               </button>

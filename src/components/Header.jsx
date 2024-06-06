@@ -99,14 +99,14 @@ function Header() {
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <a
-                    href="https://www.aliyun.com"
+                  <Link
+                    to="/global"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="f-10"
                   >
                     Global Partner
-                  </a>
+                  </Link>
                 </Menu.Item>
               </Menu>
             }
