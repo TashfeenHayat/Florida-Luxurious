@@ -85,6 +85,7 @@ function Mls() {
   const [minBathRooms, setMinBathRooms] = useState("min Bathrooms");
   const [maxBathRooms, setMaxBathRooms] = useState("Max Bathrooms");
   const [minBedRooms, setMinBedRooms] = useState("min BedRooms");
+  const [cities, setCities] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
@@ -129,7 +130,16 @@ function Mls() {
   const handleSearchButton = () => {
     console.log("working");
   };
-
+  const handleCities = (e) => {
+    const { checked, name } = e.target;
+    setCities((prevCities) => {
+      if (checked) {
+        return [...prevCities, name];
+      } else {
+        return prevCities.filter((city) => city !== name);
+      }
+    });
+  };
   // Calculate the properties for the current page
 
   return (
@@ -252,6 +262,8 @@ function Mls() {
                     <Checkbox
                       className="text-white f-16 text-upper"
                       key={index}
+                      onChange={handleCities}
+                      name={item.name}
                     >
                       {item.name}
                     </Checkbox>
