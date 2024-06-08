@@ -1,4 +1,10 @@
-import React, { useRef, useState, useEffect, useMemo } from "react";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
 import {
   Row,
   Col,
@@ -19,7 +25,11 @@ import { Loader } from "@googlemaps/js-api-loader";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { useParams } from "react-router";
 import countryList from "react-select-country-list";
-import PhoneInput from "antd-phone-input";
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw } from "draft-js";
+import draftToHtml from "draftjs-to-html"; // convert the editorState to plain html
+
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"; // style
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -52,6 +62,7 @@ function AddProperty() {
     lat: 47.7511,
     lng: 120.7401,
   });
+  const [value, setValue] = useState(EditorState.createEmpty());
 
   const getAgentsReducer = useSelector((s) => s.getAgentsReducer);
   const getPropertiesReducer = useSelector((s) => s.getPropertiesReducer);
@@ -263,6 +274,13 @@ function AddProperty() {
 
   const filterOption = (input, option) =>
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
+
+  // function for show the plain html and save editorState
+  const handleEditorChange = useCallback((editorState) => {
+    const raw = convertToRaw(editorState.getCurrentContent()); // get raw data from editor state
+    console.log(draftToHtml(raw)); // plain html from editor state
+    setValue(editorState);
+  }, []);
 
   const selectAfter = (
     <Select defaultValue="SqFt" onChange={(e) => setAreaUnit(e)}>
@@ -734,6 +752,13 @@ function AddProperty() {
                   </>
                 )}
               </Form.List>
+            </Card>
+            <Card>
+              <Editor
+                editorState={value}
+                editorClassName="editor"
+                onEditorStateChange={handleEditorChange}
+              />
             </Card>
           </Col>
         </Row>
