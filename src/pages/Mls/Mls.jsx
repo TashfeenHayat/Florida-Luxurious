@@ -80,19 +80,20 @@ const maxBedRoom = [
 ];
 
 function Mls() {
+  const itemsPerPage = 20;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { data: MLS, isLoading } = useMls(true, itemsPerPage, currentPage);
   const [price, setPrice] = useState(0);
   const [propertyType, setPropertyType] = useState("Select property type");
   const [minBathRooms, setMinBathRooms] = useState("min Bathrooms");
   const [maxBathRooms, setMaxBathRooms] = useState("Max Bathrooms");
   const [minBedRooms, setMinBedRooms] = useState("min BedRooms");
   const [cities, setCities] = useState([]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
+  const [mlsProperty, setMlsProperty] = useState(MLS?.properties);
+  console.log(MLS);
 
   const navigate = useNavigate();
-
-  const { data: MLS, isLoading } = useMls(true, itemsPerPage, currentPage);
 
   const { data } = useSelector((s) => s.getFiltersReducer);
 
@@ -128,7 +129,15 @@ function Mls() {
   };
 
   const handleSearchButton = () => {
-    console.log("working");
+    useMls(
+      true,
+      itemsPerPage,
+      currentPage,
+      minBedRooms,
+      null,
+      minBathRooms,
+      maxBathRooms
+    );
   };
   const handleCities = (e) => {
     const { checked, name } = e.target;

@@ -1599,3 +1599,9 @@ body:focus-visible {
 .show-btn-community-home:hover .button-view1 {
   display: block !important;
 }
+.communities-grid {
+  position: relative;
+  min-height: 240px;
+
+  height: 280px;
+}

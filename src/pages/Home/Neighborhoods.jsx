@@ -54,10 +54,39 @@ function Neighborhoods() {
         Feature Neighborhoods
       </Title>
       <Row className="px-4">
+        <Col lg={6}>
+          <div className="displayy-teamimg-center show-btn-community-home ">
+            <div style={{ background: "black" }} className="communities-grid">
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "0%",
+                  width: "100%",
+                }}
+              >
+                <Flex
+                  justify={"center"}
+                  align={"center"}
+                  style={{ width: "95%" }}
+                  vertical
+                >
+                  <Text className="text-upper text-white f-24 f-100">
+                    Communities
+                  </Text>
+                </Flex>
+              </div>
+            </div>
+          </div>
+        </Col>
         {data?.filters?.map((community, index) => (
-          <Col lg={6} md={12} sm={24} key={index}>
-            <div className="displayy-teamimg-center show-btn-community-home">
-              <img src={Florida} width="100%" className="img-op" />
+          <Col lg={6} md={12} sm={24} key={index} className="">
+            <div className="displayy-teamimg-center show-btn-community-home ">
+              <img
+                src={Florida}
+                width="100%"
+                className="img-op communities-grid "
+              />
               <div
                 style={{
                   position: "absolute",

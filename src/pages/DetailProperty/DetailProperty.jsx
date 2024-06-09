@@ -40,7 +40,6 @@ export default function DetailProperty() {
 
   const { data, isLoading } = useProperty(id);
 
-  console.log(data);
   const navigate = useNavigate();
 
   const showModal = () => {
@@ -49,12 +48,9 @@ export default function DetailProperty() {
 
   const hideModal = () => {
     setOpenModal(!openModal);
-    console.log("wokring");
   };
 
   const scrollToRequest = () => {
-    console.log("working");
-
     if (requestRef.current) {
       requestRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -318,6 +314,7 @@ export default function DetailProperty() {
                 <Col lg={12} sm={24} md={24}>
                   <Image
                     src={data?.property?.media[0]?.mdUrl}
+                    onClick={(e) => console.log(e)}
                     width="100%"
                     fallback="https://placehold.co/272x215"
                   />
