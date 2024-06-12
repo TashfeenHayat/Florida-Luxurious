@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import Logo from "../assets/Logo1.png";
+import Logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { Flex, Image, Dropdown, Menu } from "antd";
 import { DownOutlined } from "@ant-design/icons";
