@@ -83,7 +83,7 @@ function Neighborhoods() {
           <Col lg={6} md={12} sm={24} key={index} className="">
             <div className="displayy-teamimg-center show-btn-community-home ">
               <img
-                src={Florida}
+                src={community?.photo}
                 width="100%"
                 className="img-op communities-grid "
               />
@@ -101,7 +101,10 @@ function Neighborhoods() {
                   style={{ width: "95%" }}
                   vertical
                 >
-                  <Text className="text-upper text-white f-24 f-100">
+                  <Text
+                    className="text-upper text-white f-100"
+                    style={{ fontSize: "20px" }}
+                  >
                     {community?.name}
                   </Text>
 

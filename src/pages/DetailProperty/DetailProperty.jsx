@@ -39,6 +39,11 @@ export default function DetailProperty() {
   const { id } = useParams();
 
   const { data, isLoading } = useProperty(id);
+  const [backgroundImage, setBackGroundImage] = useState(null);
+
+  useEffect(() => {
+    return;
+  }, [backgroundImage]);
 
   const navigate = useNavigate();
 
@@ -106,7 +111,12 @@ export default function DetailProperty() {
       <div style={{ position: "relative", overflowX: "hidden" }}>
         <Image
           preview={false}
-          src={data?.property?.media[3]?.mdUrl}
+          src={
+            backgroundImage
+              ? backgroundImage
+              : data?.property?.media[3]?.mdUrl ||
+                "https://placehold.co/1512x934"
+          }
           width="100%"
           fallback="https://placehold.co/1512x934"
         />
@@ -314,7 +324,11 @@ export default function DetailProperty() {
                 <Col lg={12} sm={24} md={24}>
                   <Image
                     src={data?.property?.media[0]?.mdUrl}
-                    onClick={(e) => console.log(e)}
+                    onClick={(e) =>
+                      setBackGroundImage(e.target.getAttribute("src"))
+                    }
+                    style={{ cursor: "pointer" }}
+                    preview={false}
                     width="100%"
                     fallback="https://placehold.co/272x215"
                   />
@@ -324,6 +338,11 @@ export default function DetailProperty() {
                     src={data?.property?.media[1]?.mdUrl}
                     width="100%"
                     fallback="https://placehold.co/272x215"
+                    onClick={(e) =>
+                      setBackGroundImage(e.target.getAttribute("src"))
+                    }
+                    style={{ cursor: "pointer" }}
+                    preview={false}
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
@@ -331,6 +350,11 @@ export default function DetailProperty() {
                     src={data?.property?.media[2]?.mdUrl}
                     width="100%"
                     fallback="https://placehold.co/272x215"
+                    onClick={(e) =>
+                      setBackGroundImage(e.target.getAttribute("src"))
+                    }
+                    style={{ cursor: "pointer" }}
+                    preview={false}
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
@@ -368,6 +392,11 @@ export default function DetailProperty() {
                               src={item?.mdUrl}
                               width="100%"
                               fallback="https://placehold.co/195x154"
+                              onClick={(e) =>
+                                setBackGroundImage(e.target.getAttribute("src"))
+                              }
+                              preview={false}
+                              style={{ cursor: "pointer" }}
                             />
                           </Col>
                         ))}
