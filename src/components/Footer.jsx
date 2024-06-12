@@ -10,7 +10,7 @@ function Footer() {
   const dispatch = useDispatch();
   const { loading } = useSelector((s) => s.contactUsReducer);
 
-  const { data, isLoading } = useCommunities();
+  const { data, isLoading } = useCommunities(20, 1);
 
   const [formData, setFormData] = useState({
     firstName: "",

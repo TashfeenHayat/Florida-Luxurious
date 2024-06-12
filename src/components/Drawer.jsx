@@ -7,7 +7,7 @@ import BG from "../assets/bg.svg";
 import useCommunities from "../hooks/useCommunities";
 const { Title, Text, Paragraph } = Typography;
 function Drawers({ setOpenDrawer, openDrawer }) {
-  const { data, isLoading } = useCommunities();
+  const { data, isLoading } = useCommunities(20, 1);
   return (
     <Drawer
       placement="right"

@@ -3,7 +3,7 @@ import customAxios from "./Axios";
 
 export const getFilters = createAsyncThunk(
   "getFiltersReducer",
-  async function ({ key, page = 1, limit = 10 }, { rejectWithValue }) {
+  async function ({ key, page, limit }, { rejectWithValue }) {
     try {
       const res = await customAxios.get(`filter`, {
         params: { key, page, limit },
