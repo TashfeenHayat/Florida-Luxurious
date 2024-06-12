@@ -6,7 +6,7 @@ import useCommunities from "../../hooks/useCommunities";
 import { useNavigate } from "react-router-dom";
 const { Title, Text, Paragraph } = Typography;
 function Neighborhoods() {
-  const { data, isLoading } = useCommunities();
+  const { data, isLoading } = useCommunities(20, 1);
   const navigate = useNavigate();
 
   const settings = {
