@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import Logo from "../assets/Logo.svg";
+import Logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { Flex, Image, Dropdown, Menu } from "antd";
 import { DownOutlined } from "@ant-design/icons";
@@ -42,7 +42,7 @@ function Header() {
     <nav ref={navbar} id="navbar_main">
       <Flex justify={"space-between"} align="center" gap={0}>
         <Link to="/" style={{ borderRight: "none", padding: "0px" }}>
-          <Image src={Logo} width={150} preview={false} />
+          <Image src={Logo} width={"75%"} preview={false} />
         </Link>
         <Flex className="flex-hidden">
           <Dropdown
@@ -89,24 +89,24 @@ function Header() {
             overlay={
               <Menu style={menuStyle}>
                 <Menu.Item style={contentStyle}>
-                  <a
-                    href="https://www.antgroup.com"
+                  <Link
+                    to="mls-listing"
                     target="_blank"
                     rel="noopener noreferrer "
                     className="f-10"
                   >
-                    Other Offering 1
-                  </a>
+                    MLS
+                  </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <a
-                    href="https://www.aliyun.com"
+                  <Link
+                    to="/global"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="f-10"
                   >
-                    Other Offering 2
-                  </a>
+                    Global Partner
+                  </Link>
                 </Menu.Item>
               </Menu>
             }
@@ -115,7 +115,7 @@ function Header() {
               className="ant-dropdown-link"
               onClick={(e) => e.preventDefault()}
             >
-              Search by Location
+              Other offerings
             </a>
           </Dropdown>
           <Dropdown

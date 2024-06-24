@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row, Flex, Typography, Button, Image } from "antd";
 import Story from "../../assets/story.png";
-import Logoicon from "../../assets/logoicon.png";
+import Logoicon from "../../assets/Logoforourstory.png";
 import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
@@ -36,7 +36,7 @@ function OurStory() {
                       Broward’s Leading Private Brokerage!
                     </Text>
                   </Flex>
-                  <img src={Logoicon} width="15%" />
+                  <img src={Logoicon} />
                 </Flex>
                 <Flex vertical>
                   <Text className="our-story-text f-100 f-16 text-white text-left">

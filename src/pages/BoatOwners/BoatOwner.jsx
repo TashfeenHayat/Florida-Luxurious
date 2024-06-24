@@ -4,6 +4,7 @@ import BackgroundImage from "../../components/BackgroundImage";
 import BoatImage from "../../assets/boatowner.png";
 import { Container } from "react-bootstrap";
 import Bdiagram from "../../assets/Bdiagram.png";
+import LetTalk from "../../components/LetTalk";
 const { Title, Paragraph, Text } = Typography;
 const columns = [
   {
@@ -1131,9 +1132,13 @@ function BoatOwner() {
         </Title>
       </BackgroundImage>
       <Container>
-        <Row gutter={[10, 20]} align="middle">
+        <Row gutter={[80, 80]} align="middle">
           <Col lg={12} md={12} sm={24} xs={24}>
-            <Card className="card-feature boxshadow-section">
+            <Card
+              className="card-feature boxshadow-section"
+              data-aos="fade-right"
+              data-aos-duration="1500"
+            >
               <Title
                 style={{ textAlign: "center", lineHeight: 2 }}
                 className="text-upper"
@@ -1205,7 +1210,14 @@ function BoatOwner() {
               </Paragraph>
             </Card>
           </Col>
-          <Col lg={12} md={12} sm={24} xs={24}>
+          <Col
+            lg={12}
+            md={12}
+            sm={24}
+            xs={24}
+            data-aos="fade-left"
+            data-aos-duration="1500"
+          >
             <Image src={Bdiagram} preview={false} />
           </Col>
         </Row>
@@ -1226,6 +1238,8 @@ function BoatOwner() {
                 pagination={false}
                 rowHoverable={false}
                 align="center"
+                data-aos="fade-left"
+                data-aos-duration="1500"
               />
               <Table
                 columns={columns1}
@@ -1233,6 +1247,8 @@ function BoatOwner() {
                 className="boxshadow-section custom-table"
                 pagination={false}
                 rowHoverable={false}
+                data-aos="fade-left"
+                data-aos-duration="1500"
               />
               <Table
                 columns={columns2}
@@ -1240,6 +1256,8 @@ function BoatOwner() {
                 className="boxshadow-section custom-table"
                 pagination={false}
                 rowHoverable={false}
+                data-aos="fade-left"
+                data-aos-duration="1500"
               />
               <Table
                 columns={columns3}
@@ -1247,6 +1265,8 @@ function BoatOwner() {
                 className="boxshadow-section custom-table"
                 pagination={false}
                 rowHoverable={false}
+                data-aos="fade-left"
+                data-aos-duration="1500"
               />
               <Table
                 columns={columns4}
@@ -1254,6 +1274,8 @@ function BoatOwner() {
                 className="boxshadow-section custom-table"
                 pagination={false}
                 rowHoverable={false}
+                data-aos="fade-left"
+                data-aos-duration="1500"
               />
               <Table
                 columns={columns4}
@@ -1261,6 +1283,8 @@ function BoatOwner() {
                 className="boxshadow-section custom-table"
                 pagination={false}
                 rowHoverable={false}
+                data-aos="fade-left"
+                data-aos-duration="1500"
               />
               <Table
                 columns={columns5}
@@ -1268,6 +1292,8 @@ function BoatOwner() {
                 className="boxshadow-section custom-table"
                 pagination={false}
                 rowHoverable={false}
+                data-aos="fade-left"
+                data-aos-duration="1500"
               />
               <Table
                 columns={columns6}
@@ -1275,6 +1301,8 @@ function BoatOwner() {
                 className="boxshadow-section custom-table"
                 pagination={false}
                 rowHoverable={false}
+                data-aos="fade-left"
+                data-aos-duration="1500"
               />
               <Table
                 columns={columns7}
@@ -1282,6 +1310,8 @@ function BoatOwner() {
                 className="boxshadow-section custom-table"
                 pagination={false}
                 rowHoverable={false}
+                data-aos="fade-left"
+                data-aos-duration="1500"
               />
               <Table
                 columns={columns8}
@@ -1289,6 +1319,8 @@ function BoatOwner() {
                 className="boxshadow-section custom-table"
                 pagination={false}
                 rowHoverable={false}
+                data-aos="fade-left"
+                data-aos-duration="1500"
               />
               <Table
                 columns={columns9}
@@ -1296,6 +1328,8 @@ function BoatOwner() {
                 className="boxshadow-section custom-table"
                 pagination={false}
                 rowHoverable={false}
+                data-aos="fade-left"
+                data-aos-duration="1500"
               />
               <Table
                 columns={columns10}
@@ -1303,6 +1337,8 @@ function BoatOwner() {
                 className="boxshadow-section custom-table"
                 pagination={false}
                 rowHoverable={false}
+                data-aos="fade-left"
+                data-aos-duration="1500"
               />
             </Col>
             <Col lg={4}></Col>
@@ -1318,7 +1354,13 @@ function BoatOwner() {
             <Col lg={4}></Col>
             <Col lg={16} className="pt-5">
               <Row>
-                <Col lg={12} md={12} sm={24}>
+                <Col
+                  lg={12}
+                  md={12}
+                  sm={24}
+                  data-aos="fade-right"
+                  data-aos-duration="1500"
+                >
                   <Paragraph
                     className="f-16 f-bold text-white"
                     style={{ textTransform: "capitalize" }}
@@ -1375,7 +1417,13 @@ function BoatOwner() {
                 <Col lg={3} md={3} sm={0}></Col>
                 <Col lg={1} md={3} sm={0}></Col>
 
-                <Col lg={8} md={8} sm={24}>
+                <Col
+                  lg={8}
+                  md={8}
+                  sm={24}
+                  data-aos="fade-left"
+                  data-aos-duration="1500"
+                >
                   <Paragraph
                     className="f-16 f-100 text-white"
                     style={{ textTransform: "capitalize" }}
@@ -1434,6 +1482,7 @@ function BoatOwner() {
             <Col lg={4}></Col>
           </Row>
         </div>
+        <LetTalk />
       </div>
     </>
   );

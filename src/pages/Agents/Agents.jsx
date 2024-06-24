@@ -28,7 +28,7 @@ function Agents() {
       <OurStory />
       <div className="boxshadow-section">
         <Container className="py-5">
-          <Row gutter={[20, 80]}>
+          <Row gutter={[20, 60]}>
             <Col lg={24} md={24} sm={24} xs={24}>
               <Title className="text-center f-100 text-upper">Our Agents</Title>
             </Col>
@@ -148,19 +148,19 @@ function Agents() {
                   <Flex justify={"space-between"} align="center">
                     <Flex align={"center"} gap={5}>
                       <CiMap color="#838383" size={15} />
-                      <Text className="text-black text-upper">
+                      <Text className="text-black text-upper text-1024">
                         2438 East Las Olas Boulevard Fort Lauderdale, FL 33301
                       </Text>
                     </Flex>
                     <Flex align={"center"} gap={5}>
                       <CiMail color="#838383" size={15} />
-                      <Text className="text-black text-upper">
+                      <Text className="text-black text-upper text-1024">
                         floridainfo@gmail.com
                       </Text>
                     </Flex>
                     <Flex align={"center"} gap={5}>
                       <CiPhone color="#838383" size={15} />
-                      <Text className="text-black text-upper">
+                      <Text className="text-black text-upper text-1024">
                         2954.870.080
                       </Text>
                     </Flex>

@@ -1,4 +1,4 @@
-import { Typography, Row, Col, Flex, Pagination, Spin } from "antd";
+import { Typography, Row, Col, Flex, Pagination, Spin, Image } from "antd";
 import { useState } from "react";
 import BackgroundImage from "../../components/BackgroundImage";
 import FeaturedPropertiesImage from "../../assets/Agent.png";
@@ -13,12 +13,14 @@ const { Title, Text } = Typography;
 function SoldProperties() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4; // Number of items to display per page
+
   const { data, isLoading } = useProperties(
     null,
     itemsPerPage,
     currentPage,
     "sold"
   );
+  console.log(data);
   const navigate = useNavigate();
   // Dummy data for demonstration
   // const soldProperties = [
@@ -65,7 +67,16 @@ function SoldProperties() {
                 onClick={() => navigate(`/features/${property._id}`)}
               >
                 <div className="displayy-teamimg-center">
-                  <img src={Property} width="100%" className="" />
+                  <Image
+                    src={
+                      property?.media?.[0]?.mdUrl ||
+                      "https://placehold.co/618x489"
+                    }
+                    width="100%"
+                    className=""
+                    fallback="https://placehold.co/618x489"
+                    preview={false}
+                  />
                   <div className="more-info-property">
                     <Flex
                       vertical
@@ -84,7 +95,7 @@ function SoldProperties() {
                           address
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          {property.address}
+                          {property.addressLine1} {property.addressLine2}
                         </Text>
                       </Flex>
                       <Flex vertical>
@@ -92,15 +103,15 @@ function SoldProperties() {
                           last list price
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          {property.price}
+                          $ {property.salePrice}
                         </Text>
                       </Flex>
                       <Flex vertical>
                         <Text className="text-center text-upper f-24 f-bold text-white">
-                          represented
+                          agent listing
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          seller
+                          Abraham
                         </Text>
                       </Flex>
                       <Flex vertical>
@@ -141,8 +152,8 @@ function SoldProperties() {
                       <Flex>
                         <IoLocationOutline color="white" size={20} />
                         <Text className="f-14 f-bold text-white">
-                          2572 Mercedes Drive <br />
-                          <IoPricetagOutline size={20} /> $15,000,0000
+                          {property.addressLine1} {property.addressLine2} <br />
+                          <IoPricetagOutline size={20} /> ${property?.salePrice}
                         </Text>
                       </Flex>
                     </Flex>

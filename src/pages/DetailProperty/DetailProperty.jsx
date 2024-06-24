@@ -32,13 +32,19 @@ export default function DetailProperty() {
   const requestRef = useRef(null);
   const [details, setDetails] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [compensation, setCompensation] = useState(false);
+
   const mapRef = useRef(null);
 
   const { id } = useParams();
 
   const { data, isLoading } = useProperty(id);
+  const [backgroundImage, setBackGroundImage] = useState(null);
 
-  console.log(data);
+  useEffect(() => {
+    return;
+  }, [backgroundImage]);
+
   const navigate = useNavigate();
 
   const showModal = () => {
@@ -47,12 +53,9 @@ export default function DetailProperty() {
 
   const hideModal = () => {
     setOpenModal(!openModal);
-    console.log("wokring");
   };
 
   const scrollToRequest = () => {
-    console.log("working");
-
     if (requestRef.current) {
       requestRef.current.scrollIntoView({ behavior: "smooth" });
     }
@@ -108,7 +111,12 @@ export default function DetailProperty() {
       <div style={{ position: "relative", overflowX: "hidden" }}>
         <Image
           preview={false}
-          src={data?.property?.media[3]?.mdUrl}
+          src={
+            backgroundImage
+              ? backgroundImage
+              : data?.property?.media[3]?.mdUrl ||
+                "https://placehold.co/1512x934"
+          }
           width="100%"
           fallback="https://placehold.co/1512x934"
         />
@@ -266,9 +274,29 @@ export default function DetailProperty() {
               </Flex>
             </Col>
           </Row>
-          <Flex justify={"center"} align="center">
+          <Flex justify={"center"} align="center" vertical>
             <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
               New construction- single family residence
+            </Text>
+          </Flex>
+          <Flex justify={"center"} align="center" vertical>
+            <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
+              Compensation Offered?{" "}
+              <Text
+                style={{ color: "#D4CFC9", cursor: "pointer" }}
+                className="my-4 f-16 f-100"
+                onClick={() => setCompensation(true)}
+              >
+                Yes
+              </Text>
+              &nbsp; &nbsp;
+              <Text
+                style={{ color: "#D4CFC9", cursor: "pointer" }}
+                className="my-4 f-16 f-100"
+                onClick={() => setCompensation(false)}
+              >
+                No
+              </Text>
             </Text>
           </Flex>
         </div>
@@ -296,6 +324,11 @@ export default function DetailProperty() {
                 <Col lg={12} sm={24} md={24}>
                   <Image
                     src={data?.property?.media[0]?.mdUrl}
+                    onClick={(e) =>
+                      setBackGroundImage(e.target.getAttribute("src"))
+                    }
+                    style={{ cursor: "pointer" }}
+                    preview={false}
                     width="100%"
                     fallback="https://placehold.co/272x215"
                   />
@@ -305,6 +338,11 @@ export default function DetailProperty() {
                     src={data?.property?.media[1]?.mdUrl}
                     width="100%"
                     fallback="https://placehold.co/272x215"
+                    onClick={(e) =>
+                      setBackGroundImage(e.target.getAttribute("src"))
+                    }
+                    style={{ cursor: "pointer" }}
+                    preview={false}
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
@@ -312,6 +350,11 @@ export default function DetailProperty() {
                     src={data?.property?.media[2]?.mdUrl}
                     width="100%"
                     fallback="https://placehold.co/272x215"
+                    onClick={(e) =>
+                      setBackGroundImage(e.target.getAttribute("src"))
+                    }
+                    style={{ cursor: "pointer" }}
+                    preview={false}
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
@@ -349,6 +392,11 @@ export default function DetailProperty() {
                               src={item?.mdUrl}
                               width="100%"
                               fallback="https://placehold.co/195x154"
+                              onClick={(e) =>
+                                setBackGroundImage(e.target.getAttribute("src"))
+                              }
+                              preview={false}
+                              style={{ cursor: "pointer" }}
                             />
                           </Col>
                         ))}
@@ -429,10 +477,10 @@ export default function DetailProperty() {
                     <Input placeholder="Last Name" type="text" />
                   </Col>
                   <Col lg={12} md={12} sm={24}>
-                    <Input placeholder="Email" type="email" />
+                    <Input placeholder="Email:" type="email" />
                   </Col>
                   <Col lg={12} md={12} sm={24}>
-                    <Input placeholder="Phone" type="text" />
+                    <Input placeholder="Phone:" type="text" />
                   </Col>
                   <Col lg={24} md={24}>
                     <Flex gap={10}>
@@ -491,74 +539,24 @@ export default function DetailProperty() {
           <Row gutter={[8, 40]}>
             <Col lg={24} md={24} sm={24}>
               <Row gutter={[40, 24]}>
-                <Col lg={8} md={12} sm={24}>
-                  <Title className="" level={2}>
-                    Interior Features
-                  </Title>
-                  <Paragraph className="f-16 f-100">
-                    First floor entry, kitchen island, elevator, pantry, volume
-                    cellings, walk-in closets, wet bar
-                  </Paragraph>
-                </Col>
-                <Col lg={8} md={12} sm={24}>
-                  <Title className="" level={2}>
-                    Exterior Features{" "}
-                  </Title>
-                  <Paragraph className="f-16 f-100">
-                    Built-in grill, Exterior Lightening, Open Balcony, Outdoor
-                    Shower, Patio
-                  </Paragraph>
-                </Col>
-                <Col lg={8} md={12} sm={24}>
-                  <Title className="" level={2}>
-                    Construction{" "}
-                  </Title>
-                  <Paragraph className="f-16 f-100">
-                    CBS Construction, High Impact Windows & Doors
-                  </Paragraph>
-                </Col>
-                <Col lg={8} md={12} sm={24}>
-                  <Title className="" level={2}>
-                    Appliances
-                  </Title>
-                  <Paragraph
-                    className="f-16 f-100"
-                    style={{ textTransform: "capitalize" }}
-                  >
-                    automatic garage door, dishwasher, disposal, dryer, gas
-                    range, microwave, icemaker, microwave refrigerator, separate
-                    freezer, washer, partial hme generator
-                  </Paragraph>
-                </Col>
-                <Col lg={8} md={12} sm={24}>
-                  <Title className="" level={2}>
-                    Water Features
-                  </Title>
-                  <Paragraph className="f-16 f-100">
-                    123’ Waterfront, Private Dock, No Fixed Bridges, Ocean
-                    Access
-                  </Paragraph>
-                </Col>
-                <Col lg={8} md={12} sm={24}>
-                  <Title className="" level={2}>
-                    Heating & Cooling{" "}
-                  </Title>
-                  <Paragraph className="f-16 f-100">
-                    Ceiling Fans, Central Cooling
-                  </Paragraph>
-                </Col>
-                <Col lg={8} md={12} sm={24}>
-                  <Title className="" level={2}>
-                    Amenities{" "}
-                  </Title>
-                  <Paragraph
-                    className="f-16 f-100"
-                    style={{ textTransform: "capitalize" }}
-                  >
-                    private surf club & marina
-                  </Paragraph>
-                </Col>
-                <Col lg={8} md={0} sm={0} className="bg-gif-block"></Col>
+                {data?.property?.features.map((item, index) => (
+                  <Col lg={8} md={12} sm={24}>
+                    <Title className="" level={2}>
+                      {item.name}
+                    </Title>
+                    <Paragraph className="f-16 f-100">
+                      {item.description}
+                    </Paragraph>
+                  </Col>
+                ))}
+                {compensation && (
+                  <Col lg={8} md={12} sm={24}>
+                    <Title className="" level={2}>
+                      Compensation
+                    </Title>
+                    <Paragraph className="f-16 f-100">5%</Paragraph>
+                  </Col>
+                )}
               </Row>
             </Col>
           </Row>

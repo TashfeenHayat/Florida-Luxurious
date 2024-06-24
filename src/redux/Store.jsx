@@ -23,7 +23,7 @@ import {
   deletePropertySlice,
 } from "./slices/PropertySlice";
 import { contactUsSlice, getInquirySlice } from "./slices/ContactusSlice";
-
+import { getGlobalPropertiesSlice } from "./slices/GlobalPropertiesSlice";
 export const store = configureStore({
   reducer: {
     signInreducer: signInSlice,
@@ -44,6 +44,7 @@ export const store = configureStore({
     getPropertyReducer: getPropertySlice,
     updatePropertyReducer: updatePropertySlice,
     deletePropertyReducer: deletePropertySlice,
-    getInquiryReducer: getInquirySlice
+    getInquiryReducer: getInquirySlice,
+    getGlobalPropertiesReducer: getGlobalPropertiesSlice,
   },
 });

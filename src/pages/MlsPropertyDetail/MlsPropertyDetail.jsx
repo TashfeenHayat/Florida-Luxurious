@@ -33,13 +33,14 @@ export default function DetailProperty() {
   const requestRef = useRef(null);
   const [details, setDetails] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [backgroundImage, setBackGroundImage] = useState(null);
+
   const mapRef = useRef(null);
 
   const { id } = useParams();
 
   const { data, isLoading } = MlsPropertyDetail(id, true);
 
-  console.log(data?.mls);
   const navigate = useNavigate();
 
   const showModal = () => {
@@ -104,12 +105,21 @@ export default function DetailProperty() {
       }
     });
   }, [google_api_key, data?.mls?.geo?.lat, data?.mls?.geo?.lng]);
+
+  useEffect(() => {
+    return;
+  }, [backgroundImage]);
+
   return (
     <>
       <div style={{ position: "relative", overflowX: "hidden" }}>
         <Image
           preview={false}
-          src={data?.mls?.photos[0]}
+          src={
+            backgroundImage
+              ? backgroundImage
+              : data?.mls?.photos[0] || "https://placehold.co/1512x934"
+          }
           width="100%"
           fallback="https://placehold.co/1512x934"
         />
@@ -302,6 +312,11 @@ export default function DetailProperty() {
                   <Image
                     src={data?.mls?.photos[0]}
                     width="100%"
+                    onClick={(e) =>
+                      setBackGroundImage(e.target.getAttribute("src"))
+                    }
+                    style={{ cursor: "pointer" }}
+                    preview={false}
                     fallback="https://placehold.co/272x215"
                   />
                 </Col>
@@ -309,6 +324,11 @@ export default function DetailProperty() {
                   <Image
                     src={data?.mls?.photos[1]}
                     width="100%"
+                    onClick={(e) =>
+                      setBackGroundImage(e.target.getAttribute("src"))
+                    }
+                    style={{ cursor: "pointer" }}
+                    preview={false}
                     fallback="https://placehold.co/272x215"
                   />
                 </Col>
@@ -316,6 +336,11 @@ export default function DetailProperty() {
                   <Image
                     src={data?.mls?.photos[2]}
                     width="100%"
+                    onClick={(e) =>
+                      setBackGroundImage(e.target.getAttribute("src"))
+                    }
+                    style={{ cursor: "pointer" }}
+                    preview={false}
                     fallback="https://placehold.co/272x215"
                   />
                 </Col>
@@ -353,6 +378,11 @@ export default function DetailProperty() {
                             <Image
                               src={item}
                               width="100%"
+                              onClick={(e) =>
+                                setBackGroundImage(e.target.getAttribute("src"))
+                              }
+                              style={{ cursor: "pointer" }}
+                              preview={false}
                               fallback="https://placehold.co/195x154"
                             />
                           </Col>

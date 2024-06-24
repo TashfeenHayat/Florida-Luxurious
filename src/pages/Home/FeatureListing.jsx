@@ -128,7 +128,7 @@ function FeatureListing() {
 
                       <div className="info">
                         <Flex justify={"space-between"} align={"center"}>
-                          <button className="button-view">View All</button>
+                          <button className="button-view">View All </button>
                           <Flex>
                             <IoLocationOutline color="white" size={20} />
                             <Text

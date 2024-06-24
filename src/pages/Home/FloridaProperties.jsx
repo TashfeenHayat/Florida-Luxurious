@@ -1,10 +1,12 @@
 import React from "react";
 import { Col, Flex, Row, Typography } from "antd";
 import DownArrow from "../../assets/downarrow.svg";
-import Bagde from "../../assets/Bagde1.svg";
-import Bagde2 from "../../assets/Bagde2.svg";
+import Bagde from "../../assets/award19.svg";
+import Bagde1 from "../../assets/award21.svg";
+
+import Bagde2 from "../../assets/award20.svg";
 import Bagde3 from "../../assets/Bagde3.svg";
-import Bagde4 from "../../assets/Bagde4.svg";
+import Bagde4 from "../../assets/award23.svg";
 
 const { Title, Text } = Typography;
 function FloridaProperties() {
@@ -32,6 +34,12 @@ function FloridaProperties() {
                 />
                 <img
                   src={Bagde2}
+                  data-aos="fade-right"
+                  data-aos-easing="ease-in-sine"
+                  data-aos-duration="1500"
+                />
+                <img
+                  src={Bagde1}
                   data-aos="fade-right"
                   data-aos-easing="ease-in-sine"
                   data-aos-duration="1500"

@@ -33,13 +33,14 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import InternalServerError from "./pages/InternalError/InternalServerError";
 import MlsPropertyDetail from "./pages/MlsPropertyDetail";
+import GlobalPartner from "./pages/GlobalPartner";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
 
   useEffect(() => {
     AOS.init({
-      once: false, // whether animation should happen only once
+      once: true, // whether animation should happen only once
     });
   }, []);
 
@@ -64,7 +65,7 @@ function App() {
           <Route path="/community/:id" element={<Communities />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="/500" element={<InternalServerError />} />
-
+          <Route path="global" element={<GlobalPartner />} />
           <Route path="mls-listing" element={<Mls />} />
           <Route path="mls-detail/:id" element={<MlsPropertyDetail />} />
 
