@@ -48,3 +48,5 @@ export const store = configureStore({
     getGlobalPropertiesReducer: getGlobalPropertiesSlice,
   },
 });
+
+export default store;

@@ -9,6 +9,7 @@ import { Container } from "react-bootstrap";
 import LetTalk from "../../components/LetTalk";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import Loading from "../../components/Loading";
 
 import useAgent from "../../hooks/useAgent";
 const { Title, Paragraph } = Typography;
@@ -16,6 +17,7 @@ function AgentProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isLoading, data, isError } = useAgent(id);
+  if (isLoading) return <Loading />;
 
   return (
     <>

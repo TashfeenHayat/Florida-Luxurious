@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAgent, resetAgent } from "../api/Agents";
-
+import Loading from "../components/Loading";
 function useAgent(id) {
   const dispatch = useDispatch();
   const { isLoading, data, isError } = useSelector((s) => s.getAgentReducer);
