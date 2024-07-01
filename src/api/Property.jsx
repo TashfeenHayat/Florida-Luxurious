@@ -4,7 +4,18 @@ import customAxios from "./Axios";
 export const getProperties = createAsyncThunk(
   "getPropertiesReducer",
   async function (
-    { agentId, limit, page, status, filterId, mlsOnly },
+    {
+      agentId,
+      limit,
+      page,
+      status,
+      filterId,
+      mlsOnly,
+      minBedCount,
+      minBathCount,
+      maxBathCount,
+      cities,
+    },
     { rejectWithValue }
   ) {
     try {
@@ -16,6 +27,10 @@ export const getProperties = createAsyncThunk(
           status,
           filterId,
           mlsOnly,
+          minBedCount,
+          minBathCount,
+          maxBathCount,
+          cities,
         },
       });
       return res.data;

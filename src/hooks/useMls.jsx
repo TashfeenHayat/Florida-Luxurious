@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getProperties } from "../api/Property";
 
 function useMls(
@@ -13,22 +13,9 @@ function useMls(
   minPrice
 ) {
   const dispatch = useDispatch();
-  const { isLoading, data } = useSelector((s) => s.getPropertiesReducer);
+
   useEffect(() => {
-    if (isLoading === false) {
-      dispatch(
-        getProperties({
-          mlsOnly,
-          limit,
-          page,
-          minBedCount,
-          maxBedCount,
-          minBathCount,
-          maxBathCount,
-          minPrice,
-        })
-      );
-    }
+    callApi();
   }, [
     dispatch,
     page,
@@ -38,7 +25,21 @@ function useMls(
     maxBathCount,
     minPrice,
   ]);
-  return { data, isLoading };
+
+  const callApi = () => {
+    dispatch(
+      getProperties({
+        mlsOnly,
+        limit,
+        page,
+        minBedCount,
+        maxBedCount,
+        minBathCount,
+        maxBathCount,
+        minPrice,
+      })
+    );
+  };
 }
 
 export default useMls;

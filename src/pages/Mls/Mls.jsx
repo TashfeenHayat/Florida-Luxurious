@@ -17,12 +17,13 @@ import MLSBG from "../../assets/MLS.png";
 import { Container } from "react-bootstrap";
 import Icons from "../../components/Icons";
 import { DownOutlined } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import useMls from "../../hooks/useMls";
 import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import LetTalk from "../../components/LetTalk";
+import { getProperties } from "../../api/Property";
 const { Title, Text } = Typography;
 
 const items = [
@@ -80,18 +81,19 @@ const maxBedRoom = [
 ];
 
 function Mls() {
+  const dispatch = useDispatch();
   const itemsPerPage = 20;
+  const mlsOnly = true;
   const [currentPage, setCurrentPage] = useState(1);
+  useMls(true, itemsPerPage, currentPage);
 
-  const { data: MLS, isLoading } = useMls(true, itemsPerPage, currentPage);
+  const { isLoading, data: MLS } = useSelector((s) => s.getPropertiesReducer);
   const [price, setPrice] = useState(0);
   const [propertyType, setPropertyType] = useState("Select property type");
-  const [minBathRooms, setMinBathRooms] = useState("min Bathrooms");
-  const [maxBathRooms, setMaxBathRooms] = useState("Max Bathrooms");
-  const [minBedRooms, setMinBedRooms] = useState("min BedRooms");
+  const [minBathCount, setMinBathCount] = useState("min Bathrooms");
+  const [maxBathCount, setMaxBathCount] = useState("Max Bathrooms");
+  const [minBedCount, setMinBedCount] = useState("min BedRooms");
   const [cities, setCities] = useState([]);
-  const [mlsProperty, setMlsProperty] = useState(MLS?.properties);
-  console.log(MLS);
 
   const navigate = useNavigate();
 
@@ -108,16 +110,16 @@ function Mls() {
 
   const handleMenuMinBathRoom = (e) => {
     const selectedItem = minBathRoom.find((item) => item.key === e.key);
-    setMinBathRooms(selectedItem.label.props.children);
+    setMinBathCount(selectedItem.label.props.children);
   };
 
   const handleMenuMaxBathRoom = (e) => {
     const selectedItem = maxBathRoom.find((item) => item.key === e.key);
-    setMaxBathRooms(selectedItem.label.props.children);
+    setMaxBathCount(selectedItem.label.props.children);
   };
   const handleMenuMinBedRoom = (e) => {
     const selectedItem = minBedRoom.find((item) => item.key === e.key);
-    setMinBedRooms(selectedItem.label.props.children);
+    setMinBedCount(selectedItem.label.props.children);
   };
 
   const handlePageChange = (page) => {
@@ -129,14 +131,14 @@ function Mls() {
   };
 
   const handleSearchButton = () => {
-    useMls(
-      true,
-      itemsPerPage,
-      currentPage,
-      minBedRooms,
-      null,
-      minBathRooms,
-      maxBathRooms
+    dispatch(
+      getProperties({
+        mlsOnly,
+        minBedCount,
+        minBathCount,
+        cities,
+        maxBathCount,
+      })
     );
   };
   const handleCities = (e) => {
@@ -226,7 +228,7 @@ function Mls() {
               >
                 <a onClick={(e) => e.preventDefault()}>
                   <Space>
-                    {minBathRooms}
+                    {minBathCount}
                     <DownOutlined style={{ color: "white" }} />
                   </Space>
                 </a>
@@ -242,7 +244,7 @@ function Mls() {
               >
                 <a onClick={(e) => e.preventDefault()}>
                   <Space>
-                    {maxBathRooms}
+                    {maxBathCount}
                     <DownOutlined style={{ color: "white" }} />
                   </Space>
                 </a>
@@ -258,7 +260,7 @@ function Mls() {
               >
                 <a onClick={(e) => e.preventDefault()}>
                   <Space>
-                    {minBedRooms}
+                    {minBedCount}
                     <DownOutlined style={{ color: "white" }} />
                   </Space>
                 </a>
@@ -266,7 +268,11 @@ function Mls() {
             </Col>
             <Col lg={24}>
               <Flex justify={"start"} wrap>
-                <Flex justify={"space-around"} gap={10} wrap>
+                <Flex
+                  justify={"space-around"}
+                  gap={10}
+                  style={{ flexWrap: "wrap" }}
+                >
                   {data?.filters.map((item, index) => (
                     <Checkbox
                       className="text-white f-16 text-upper"

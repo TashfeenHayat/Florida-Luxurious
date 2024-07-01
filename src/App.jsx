@@ -65,7 +65,7 @@ function App() {
           <Route path="/community/:id" element={<Communities />} />
           <Route path="/404" element={<NotFound />} />
           <Route path="/500" element={<InternalServerError />} />
-          <Route path="global" element={<GlobalPartner />} />
+          <Route path="/global" element={<GlobalPartner />} />
           <Route path="mls-listing" element={<Mls />} />
           <Route path="mls-detail/:id" element={<MlsPropertyDetail />} />
 

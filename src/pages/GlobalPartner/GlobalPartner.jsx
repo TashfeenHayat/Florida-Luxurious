@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BackgroundImage from "../../components/BackgroundImage";
 import BoatImage from "../../assets/boatowner.png";
 import { Typography, Row, Col, Flex, Image, Pagination, Spin } from "antd";
@@ -11,6 +11,7 @@ import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 const { Title, Text, Paragraph } = Typography;
 function GlobalPartner() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [showGlobalProperties, setShowGlobalProperties] = useState(true);
   const itemsPerPage = 10;
 
   const { data, isLoading } = useGlobalProperties(itemsPerPage, currentPage);
@@ -23,6 +24,35 @@ function GlobalPartner() {
     });
   };
 
+  useEffect(() => {
+    if (showGlobalProperties) {
+      const script = document.createElement("script");
+      script.src =
+        "https://luxuryrealestateftl.luxuryrealestate.com/reciprocity.js";
+      script.type = "text/javascript";
+      script.async = true;
+
+      // Append the script to the body
+      document.body.appendChild(script);
+
+      // Initialize the Reciprocity after the script is loaded
+      script.onload = () => {
+        if (window.Reciprocity) {
+          window.Reciprocity.init({
+            membersite: "luxuryrealestateftl",
+            parentLocation: window.location,
+          });
+        }
+      };
+      setShowGlobalProperties(false);
+    }
+    // Create script element for the external JS file
+
+    // Clean up the script when the component is unmounted
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   return (
     <div>
       <BackgroundImage Image={BoatImage}>
@@ -117,92 +147,15 @@ function GlobalPartner() {
           </Text>{" "}
           Offerings
         </Paragraph>
-        {isLoading ? (
-          <Spin
-            size="large"
-            className="d-flex w-100 justify-content-center align-items-center py-5"
-          />
-        ) : (
-          <>
-            <Row gutter={[60, 60]}>
-              {data?.properties?.map((item, index) => (
-                <Col
-                  key={index}
-                  lg={12}
-                  md={12}
-                  sm={24}
-                  onClick={() => navigate(`/mls-detail/${item?.mlsId}`)}
-                >
-                  <div className="displayy-teamimg-center">
-                    <Image
-                      src={
-                        item?.photos?.[2] ||
-                        item?.photos?.[0] ||
-                        "https://placehold.co/618x489"
-                      }
-                      width="100%"
-                      className="img-op"
-                      fallback="https://placehold.co/618x489"
-                      preview={false}
-                      style={{ aspectRatio: "5/4", objectFit: "cover" }}
-                    />
-
-                    <div className="info">
-                      <Flex justify={"space-between"} align={"center"}>
-                        <button className="button-view">View All</button>
-                        <Flex>
-                          <IoLocationOutline color="white" size={20} />
-                          <Text
-                            className="f-14 f-bold text-white"
-                            style={{ textAlign: "right" }}
-                          >
-                            {item?.address?.full}
-                            <br />
-                            <IoPricetagOutline size={20} /> $ {item?.listPrice}
-                          </Text>
-                        </Flex>
-                      </Flex>
-                    </div>
-
-                    <div className="show-info">
-                      <div style={{ background: "#fff", height: "50px" }}>
-                        <Flex
-                          justify={"space-between"}
-                          align={"center"}
-                          style={{ height: "100%" }}
-                        >
-                          <Text className="mx-4 f-16 f-bold">
-                            {item?.address?.full}
-                          </Text>
-                          <div className="prop-info">
-                            <Text
-                              style={{ color: "white" }}
-                              className="text-upper"
-                            >
-                              View More +
-                            </Text>
-                          </div>
-                        </Flex>
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-              ))}
-            </Row>
-            <Flex justify={"center"} align="center" className="my-4">
-              {data?.properties?.length > 0 && (
-                <Pagination
-                  current={currentPage}
-                  total={data?.totalCount}
-                  pageSize={itemsPerPage}
-                  onChange={handlePageChange}
-                  responsive
-                  showSizeChanger={false}
-                />
-              )}
-            </Flex>
-          </>
-        )}
+        <div
+          style={{
+            width: "100%",
+            padding: "0",
+            margin: "0",
+          }}
+        >
+          <div id="reciprocity"></div>
+        </div>
       </Container>
     </div>
   );
