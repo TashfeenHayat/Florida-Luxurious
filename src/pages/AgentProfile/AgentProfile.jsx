@@ -17,7 +17,6 @@ function AgentProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isLoading, data, isError } = useAgent(id);
-  if (isLoading) return <Loading />;
 
   return (
     <>
