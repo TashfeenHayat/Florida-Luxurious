@@ -25,8 +25,9 @@ function GlobalPartner() {
   };
 
   useEffect(() => {
+    const script = document.createElement("script");
+
     if (showGlobalProperties) {
-      const script = document.createElement("script");
       script.src =
         "https://luxuryrealestateftl.luxuryrealestate.com/reciprocity.js";
       script.type = "text/javascript";

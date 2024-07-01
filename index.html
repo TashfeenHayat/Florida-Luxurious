@@ -22,6 +22,16 @@
 
 <body>
   <div id="root"></div>
+  <div id="loading">
+    <h1 style="text-transform:uppercase">Florida Luxurious Properties</h1>
+    <br />
+    <div class="loader"></div>
+  </div>
+  <script>
+    window.onload = function () {
+      document.getElementById('loading').style.display = 'none';
+    };
+  </script>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 
