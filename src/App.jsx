@@ -9,6 +9,7 @@ import Filter from "./pages/Admin/Filters";
 import AddFilter from "./pages/Admin/AddFilter";
 import PropertyList from "./pages/Admin/Properties";
 import AddProperty from "./pages/Admin/AddProperty";
+import Press from "./pages/Admin/Press";
 import Inquiries from "./pages/Admin/Inquiries";
 
 import "./App.css";
@@ -81,6 +82,7 @@ function App() {
             <Route path="/admin/property" element={<PropertyList />} />
             <Route path="/admin/property/add" element={<AddProperty />} />
             <Route path="/admin/property/edit/:id" element={<AddProperty />} />
+            <Route path="/admin/press" element={<Press />} />
             <Route path="/admin/inquiry" element={<Inquiries />} />
           </Route>
         </Routes>

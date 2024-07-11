@@ -10,6 +10,7 @@ import {
   FunnelPlotOutlined,
   UsergroupAddOutlined,
   QuestionCircleOutlined,
+  PrinterOutlined
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 const { Header, Sider, Content } = Layout;
@@ -75,6 +76,11 @@ function Dashboard() {
               key: "/admin/property",
               icon: <PropertySafetyOutlined />,
               label: "Properties",
+            },
+            {
+              key: "/admin/press",
+              icon: <PrinterOutlined />,
+              label: "Press",
             },
             {
               key: "/admin/inquiry",
