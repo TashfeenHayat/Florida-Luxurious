@@ -314,7 +314,7 @@ body:focus-visible {
 
 .our-story-bg {
   background-color: black;
-  width: 600px;
+  max-width: 600px;
   margin-right: -200px;
   z-index: 1;
   padding: 30px;
