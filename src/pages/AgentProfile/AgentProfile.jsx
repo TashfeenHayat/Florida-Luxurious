@@ -72,7 +72,7 @@ function AgentProfile() {
                       <span className="agent-estate">Estate Agent</span>
                     </Paragraph>
                   </Flex>
-                  <Paragraph className="agent-description">
+                  <Paragraph className="agent-description text-capitalize">
                     {data?.description}
                   </Paragraph>
                 </>
@@ -129,12 +129,12 @@ function AgentProfile() {
                           <Flex align={"center"} gap={10}>
                             <MdOutlinePhone color="#838383" size={25} />{" "}
                             <span className="text-white f-32">
-                              {data?.phoneNumber}
+                              {"+" + data?.phoneNumber}
                             </span>
                           </Flex>
                           <Flex align={"center"} gap={10}>
                             <MdOutlineMailOutline color="#838383" size={25} />{" "}
-                            <span className="text-white f-32">
+                            <span className="text-white f-32 text-lower">
                               {data?.email}
                             </span>
                           </Flex>

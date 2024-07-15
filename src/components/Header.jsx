@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/Logonew.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { Flex, Image, Dropdown, Menu } from "antd";
 import { DownOutlined } from "@ant-design/icons";
@@ -42,7 +42,7 @@ function Header() {
     <nav ref={navbar} id="navbar_main">
       <Flex justify={"space-between"} align="center" gap={0}>
         <Link to="/" style={{ borderRight: "none", padding: "0px" }}>
-          <Image src={Logo} width={"75%"} preview={false} />
+          <Image src={Logo} width={"85%"} preview={false} />
         </Link>
         <Flex className="flex-hidden">
           <Dropdown

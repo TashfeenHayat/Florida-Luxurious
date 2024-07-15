@@ -2,7 +2,7 @@ import React from "react";
 import { Drawer, Flex, Row, Col, Typography, Image } from "antd";
 import { Link } from "react-router-dom";
 import Close from "../assets/closeicon.svg";
-import LogoMenu from "../assets/logomenu.svg";
+import LogoMenu from "../assets/Logonew.svg";
 import BG from "../assets/bg.svg";
 import useCommunities from "../hooks/useCommunities";
 const { Title, Text, Paragraph } = Typography;
