@@ -10,7 +10,8 @@ import {
   FunnelPlotOutlined,
   UsergroupAddOutlined,
   QuestionCircleOutlined,
-  PrinterOutlined
+  PrinterOutlined,
+  EditOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 const { Header, Sider, Content } = Layout;
@@ -57,11 +58,11 @@ function Dashboard() {
           defaultSelectedKeys={["1"]}
           onClick={handleSideMenu}
           items={[
-            {
-              key: "/admin/dashboard",
-              icon: <BarChartOutlined />,
-              label: "Dashboard",
-            },
+            // {
+            //   key: "/admin/dashboard",
+            //   icon: <BarChartOutlined />,
+            //   label: "Dashboard",
+            // },
             {
               key: "/admin/community",
               icon: <FunnelPlotOutlined />,
@@ -86,6 +87,11 @@ function Dashboard() {
               key: "/admin/inquiry",
               icon: <QuestionCircleOutlined />,
               label: "Inquiries",
+            },
+            {
+              key: "/admin/blog",
+              icon: <EditOutlined />,
+              label: "Blogs",
             },
           ]}
         />

@@ -10,37 +10,28 @@ import {
   Modal,
   Select,
   notification,
+  Form,
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getProperties, updateProperty } from "../../api/Properties";
+import { getBlogs, addBlog, getBlog, updateBlog, deleteBlog } from "../../api/Blogs";
 import customAxios from "../../api/Axios";
 
 const { Search } = Input;
 
-function Press() {
+function Blog() {
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "Title",
+      dataIndex: "title",
+      key: "title",
     },
     {
-      title: "Status",
+      title: "Agent",
       dataIndex: "status",
       key: "status",
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      render: (_, address) => {
-        if (address)
-          return `${address.addressLine1} 
-        ${address.addressLine2 ? address.addressLine2 : ""} 
-        ${address.city} ${address.state} 
-        ${address.zipCode} ${address.country}`;
-      },
+      render: (_, record) =>
+        `${record?.agentId?.firstName} ${record?.agentId?.lastName} `,
     },
     {
       title: "",
@@ -50,10 +41,10 @@ function Press() {
           <Link onClick={() => showModal(record)}>Edit</Link>
           <Popconfirm
             title="Delete this task"
-            description="Are you sure to delete this property?"
+            description="Are you sure to delete this?"
             okText="Yes"
             cancelText="No"
-            onConfirm={() => handleOk(record._id)}
+            onConfirm={() => handleDelete(record._id)}
           >
             <Button type="link">Delete</Button>
           </Popconfirm>
@@ -62,6 +53,8 @@ function Press() {
     },
   ];
 
+  const [form] = Form.useForm();
+  const [title, setTitle] = useState();
   const [api, contextHolder] = notification.useNotification();
   const openNotification = (type, description) => {
     api[type]({ description });
@@ -76,18 +69,16 @@ function Press() {
   const [modalSearch, setModalSearch] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProp, setSelectedProp] = useState();
+  const [selectedBlog, setSelectedBlog] = useState();
 
-  const { isLoading, isError, data } = useSelector(
-    (s) => s.getPropertiesReducer
-  );
+  const { isLoading, isError, data } = useSelector((s) => s.getBlogsReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(
-      getProperties({
+      getBlogs({
         page: tableParams.current,
         limit: tableParams.pageSize,
-        fromPress: true,
       })
     );
     if (isError) {
@@ -95,61 +86,63 @@ function Press() {
     }
   }, []);
 
-  const onSearch = (key) => {
-    setKey(key);
+  const onSearch = (agentId) => {
+    setKey(agentId);
     setTableParams({
       pagination: {
         ...tableParams,
         current: 1,
       },
     });
-    dispatch(getProperties({ key, fromPress: true }));
+    dispatch(getBlogs({ agentId }));
   };
 
   const handleTableChange = (pagination) => {
     console.log(pagination);
     setTableParams(pagination);
     dispatch(
-      getProperties({
-        key,
+      getBlogs({
+        agentId,
         page: pagination.current,
-        fromPress: true,
       })
     );
   };
 
   const handleSearch = async (key) => {
-    const res = await customAxios.get(`property`, {
-      params: { key, withoutPress: true },
+    const res = await customAxios.get(`agent`, {
+      params: { key },
     });
     const data = res.data;
-    setModalProps(data.properties);
+    setModalProps(data.agents);
   };
 
   const handleChange = (newValue) => {
-    setModalSearch(modalSearch);
     const property = modalProps.find((i) => i._id == newValue);
     setSelectedProp(property);
-
-    var parser = new DOMParser();
-    var decodedHtml = parser.parseFromString(property?.press, "text/html").body
-      .textContent;
-    window.$("#summernote").summernote("code", decodedHtml);
+    setModalSearch(`${property?.firstName} ${property?.lastName}`);
   };
 
   const showModal = (property) => {
     console.log(property);
     setIsModalOpen(true);
     if (property._id) {
-      setSelectedProp(property);
-      setModalSearch(property.name);
+      setSelectedBlog(property);
+      setSelectedProp(property.agentId);
+      setTitle(property.title);
+      setModalSearch(
+        `${property?.agentId?.firstName} ${property?.agentId?.lastName}`
+      );
       setTimeout(() => {
         var parser = new DOMParser();
-        var decodedHtml = parser.parseFromString(property?.press, "text/html")
+        var decodedHtml = parser.parseFromString(property?.content, "text/html")
           .body.textContent;
         window.$("#summernote").summernote("code", decodedHtml);
       }, 1000);
     } else {
+      setSelectedBlog("");
+      setSelectedProp("");
+      setTitle("");
+      setModalSearch("");
       setTimeout(() => {
         var parser = new DOMParser();
         var decodedHtml = parser.parseFromString("", "text/html").body
@@ -160,58 +153,66 @@ function Press() {
   };
 
   const handleOk = async (ok) => {
-    console.log(ok);
-    if (ok === "ok") {
+    console.log(selectedProp);
+    if (selectedProp?._id) {
       var markupStr = $("#summernote").summernote("code");
-      const res = await dispatch(
-        updateProperty({
-          id: selectedProp._id,
-          press: markupStr,
-        })
-      ).unwrap();
-      openNotification("success", res);
-      dispatch(
-        getProperties({
-          page: tableParams.current,
-          limit: tableParams.pageSize,
-          fromPress: true,
-        })
-      );
-    } else {
-      const res = await dispatch(
-        updateProperty({
-          id: ok,
-          press: undefined,
-        })
-      ).unwrap();
-      openNotification("success", res);
-      dispatch(
-        getProperties({
-          page: tableParams.current,
-          limit: tableParams.pageSize,
-          fromPress: true,
-        })
-      );
+
+      if (ok === "ok" && !selectedBlog?._id) {
+        const res = await dispatch(
+          addBlog({
+            agentId: selectedProp._id,
+            title: title,
+            content: markupStr,
+          })
+        ).unwrap();
+        openNotification("success", res);
+        dispatch(
+          getBlogs({
+            page: tableParams.current,
+            limit: tableParams.pageSize,
+          })
+        );
+      } else {
+        const res = await dispatch(
+          updateBlog({
+            agentId: selectedProp._id,
+            title: title,
+            content: markupStr,
+            id: selectedBlog._id,
+          })
+        ).unwrap();
+        openNotification("success", res);
+        dispatch(
+          getBlogs({
+            page: tableParams.current,
+            limit: tableParams.pageSize,
+          })
+        );
+      }
+      setIsModalOpen(false);
     }
-    setIsModalOpen(false);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
+  const handleDelete = (id) => {
+    dispatch(deleteBlog(id));
+  }
+
   return (
     <>
       <Card
-        title="Press Info"
+        title="Blogs"
         extra={
           <Space>
-            <Search
+            {/* <Search
               placeholder="input search text"
               onSearch={onSearch}
               enterButton
               allowClear
-            />
+            /> */}
             <Button onClick={showModal} type="primary">
               <Link>
                 <PlusOutlined />
@@ -227,12 +228,12 @@ function Press() {
           loading={isLoading}
           isError={isError}
           pagination={{ ...tableParams, total: data?.totalCount }}
-          dataSource={data?.properties}
+          dataSource={data?.blogs}
           onChange={handleTableChange}
         />
       </Card>
       <Modal
-        title="Add Press Info"
+        title="Add Blog"
         open={isModalOpen}
         onOk={() => handleOk("ok")}
         onCancel={handleCancel}
@@ -241,7 +242,7 @@ function Press() {
         <Select
           showSearch
           value={modalSearch}
-          placeholder={"Select property"}
+          placeholder={"Select agent"}
           style={{ width: "100%", marginBottom: 20 }}
           suffixIcon={null}
           filterOption={false}
@@ -250,8 +251,15 @@ function Press() {
           notFoundContent={null}
           options={(modalProps || []).map((d) => ({
             value: d._id,
-            label: d.name,
+            label: `${d.firstName} ${d.lastName}`,
           }))}
+        />
+
+        <Input
+          value={title}
+          placeholder="Title "
+          onChange={(e) => setTitle(e.target.value)}
+          style={{ width: "100%", marginBottom: 20 }}
         />
 
         <div id="summernote"></div>
@@ -260,4 +268,4 @@ function Press() {
   );
 }
 
-export default Press;
+export default Blog;
