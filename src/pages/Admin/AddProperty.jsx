@@ -157,6 +157,7 @@ function AddProperty() {
         form.resetFields();
         form.setFieldsValue({
           ...property,
+          mlsId: parseInt(property?.mlsId),
           agentId: property.agentId?._id,
           filters: property.filters?.map((i) => i._id),
           yearBuilt: dayJs(property.yearBuilt),

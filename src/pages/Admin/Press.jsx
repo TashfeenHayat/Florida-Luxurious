@@ -108,6 +108,7 @@ function Press() {
         current: 1,
       },
     });
+    dispatch(getProperties({ key, fromPress: true }));
   };
 
   const handleTableChange = (pagination) => {
@@ -117,6 +118,7 @@ function Press() {
       getProperties({
         key,
         page: pagination.current,
+        fromPress: true,
       })
     );
   };

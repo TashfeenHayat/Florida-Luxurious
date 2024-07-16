@@ -282,6 +282,26 @@ function AddAgent() {
               <Input size="large" placeholder="Zip Code" />
             </Form.Item>
           </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item name={["social", "facebook"]}>
+              <Input size="large" placeholder="Facebook" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item name={["social", "insta"]}>
+              <Input size="large" placeholder="Instagram" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item name={["social", "linkedin"]}>
+              <Input size="large" placeholder="Linkedin" />
+            </Form.Item>
+          </Col>
+          <Col span={12} className="gutter-row">
+            <Form.Item name={["social", "twitter"]}>
+              <Input size="large" placeholder="Twitter" />
+            </Form.Item>
+          </Col>
         </Row>
         <Col span={24} className="gutter-row">
           <Form.Item style={{ marginBottom: "0px" }}>
