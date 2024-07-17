@@ -11,6 +11,7 @@ import PropertyList from "./pages/Admin/Properties";
 import AddProperty from "./pages/Admin/AddProperty";
 import Press from "./pages/Admin/Press";
 import Inquiries from "./pages/Admin/Inquiries";
+import Blog from "./pages/Admin/Blog";
 
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -86,6 +87,7 @@ function App() {
             <Route path="/admin/property/edit/:id" element={<AddProperty />} />
             <Route path="/admin/press" element={<Press />} />
             <Route path="/admin/inquiry" element={<Inquiries />} />
+            <Route path="/admin/blog" element={<Blog />} />
           </Route>
         </Routes>
       </TopToScroll>
