@@ -1652,3 +1652,12 @@ body:focus-visible {
 
   height: 280px;
 }
+.ant-input-group-addon .ant-btn {
+  background-color: #000;
+}
+.ant-input-group-addon .ant-btn:hover {
+  background-color: #000 !important;
+}
+.ant-input-outlined {
+  border-color: transparent !important;
+}

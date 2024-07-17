@@ -11,9 +11,8 @@ import useAgents from "../../hooks/useAgents";
 import { useNavigate } from "react-router-dom";
 const { Title, Text, Paragraph } = Typography;
 function Agents() {
-  const { isLoading, data } = useAgents(10, 1);
+  const { isLoading, data } = useAgents(30, 1);
   const navigate = useNavigate();
-  console.log(isLoading);
   return (
     <>
       <div className="team-banner">

@@ -1,6 +1,6 @@
 import React from "react";
 import FloridaProperties from "./FloridaProperties";
-import { Typography, Flex } from "antd";
+import { Typography, Flex, Input } from "antd";
 import RecognitionSlide from "./RecognitionSlide";
 import OurStory from "./OurStory";
 import Team from "./MeetTeam";
@@ -8,7 +8,9 @@ import FeatureListing from "./FeatureListing";
 import Neighborhoods from "./Neighborhoods";
 import Icons from "../../components/Icons";
 const { Title, Text } = Typography;
+const { Search } = Input;
 function Home() {
+  const onSearch = (value, _e, info) => console.log(info?.source, value);
   return (
     <div>
       <div className="background-video-container">
@@ -41,10 +43,19 @@ function Home() {
               Discover Your Dream Home in the Heart of Florida with Florida
               Luxurious Properties
             </Text>
-            <div>
-              <button className="button-secondary text-upper mt-5">
-                Watch Video
-              </button>
+            <div className="pt-5">
+              <Search
+                placeholder="Search community"
+                allowClear
+                enterButton={
+                  <span style={{ backgroundColor: "#000000" }}>Search</span>
+                }
+                size="large"
+                onSearch={onSearch}
+                style={{
+                  width: "80ch",
+                }}
+              />
             </div>
           </Flex>
         </div>

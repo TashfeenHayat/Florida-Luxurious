@@ -136,7 +136,7 @@ function Header() {
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <Link rel="noopener noreferrer" className="text-upper f-10">
+                  <Link to="/propertypress" className="text-upper f-10">
                     Property press
                   </Link>
                 </Menu.Item>
