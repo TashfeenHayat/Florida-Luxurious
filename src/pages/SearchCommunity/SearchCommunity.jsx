@@ -27,7 +27,6 @@ function SearchCommunity() {
     null,
     query.get("name")
   );
-  console.log(data);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -36,9 +35,7 @@ function SearchCommunity() {
   return (
     <>
       <BackgroundImage Image={FeaturedPropertiesImage}>
-        <Title className="text-white text-upper f-50 f-100">
-          Search Communities
-        </Title>
+        <Title className="text-white text-upper f-50 f-100">Search</Title>
       </BackgroundImage>
       {isLoading ? (
         <Flex justify={"center"} align="center" className="py-5">
