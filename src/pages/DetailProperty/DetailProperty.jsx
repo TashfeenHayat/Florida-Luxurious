@@ -112,7 +112,7 @@ export default function DetailProperty() {
         <Image
           preview={false}
           src={
-            data?.property?.media[3]?.mdUrl || "https://placehold.co/1512x934"
+            data?.property?.media[0]?.mdUrl || "https://placehold.co/1512x934"
           }
           width="100%"
           fallback="https://placehold.co/1512x934"
