@@ -1,9 +1,3 @@
-import React from 'react'
-
-function index() {
-  return (
-    <div>index</div>
-  )
-}
-
-export default index
+import React, { memo } from "react";
+import AgentBlog from "./AgentBlog";
+export default memo(AgentBlog);
