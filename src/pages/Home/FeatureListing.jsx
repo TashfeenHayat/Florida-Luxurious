@@ -135,9 +135,7 @@ function FeatureListing() {
                               className="f-14 f-bold text-white"
                               style={{ textAlign: "right" }}
                             >
-                              {properties?.addressLine1 +
-                                " " +
-                                properties?.addressLine2}
+                              {properties?.addressLine1}
                               <br />
                               <IoPricetagOutline size={20} /> ${" "}
                               {properties.salePrice}

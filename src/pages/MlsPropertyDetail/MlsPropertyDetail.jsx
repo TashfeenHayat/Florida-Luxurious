@@ -124,14 +124,6 @@ export default function DetailProperty() {
           fallback="https://placehold.co/1512x934"
         />
         <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-          }}
         ></div>
         <div
           className="properties-single-slideshow-info"

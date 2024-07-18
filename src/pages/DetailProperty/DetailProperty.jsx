@@ -149,9 +149,7 @@ export default function DetailProperty() {
               MLS® #: F10423862
             </Text>
             <Title className="text-upper" style={{ color: "white" }} level={3}>
-              {data?.property?.addressLine1 +
-                " " +
-                data?.property?.addressLine2}
+              {data?.property?.addressLine1}
             </Title>
             <Paragraph
               className="text-upper f-20 f-100"
@@ -305,9 +303,7 @@ export default function DetailProperty() {
                 style={{ textAlign: "center", lineHeight: 2 }}
                 className="text-upper"
               >
-                {data?.property?.addressLine1 +
-                  " " +
-                  data?.property?.addressLine2}
+                {data?.property?.addressLine1}
               </Title>
               <Paragraph className="f-16 f-200" style={{ lineHeight: 2.8 }}>
                 {data?.property?.description}

@@ -1658,6 +1658,6 @@ body:focus-visible {
 .ant-input-group-addon .ant-btn:hover {
   background-color: #000 !important;
 }
-.ant-input-outlined {
+.ant-input-outlined:focus {
   border-color: transparent !important;
 }
