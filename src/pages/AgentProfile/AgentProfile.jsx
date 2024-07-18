@@ -8,7 +8,7 @@ import Button from "../../components/Buttons";
 import { Container } from "react-bootstrap";
 import LetTalk from "../../components/LetTalk";
 import { useParams, useNavigate } from "react-router-dom";
-import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import Loading from "../../components/Loading";
 
 import useAgent from "../../hooks/useAgent";
@@ -17,6 +17,7 @@ function AgentProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isLoading, data, isError } = useAgent(id);
+  console.log(data);
 
   return (
     <>
@@ -115,15 +116,30 @@ function AgentProfile() {
                           style={{ marginLeft: "-50px" }}
                           gap={10}
                         >
-                          <div className="bg-social-media">
+                          <a
+                            className="bg-social-media"
+                            style={{ cursor: "pointer" }}
+                            href={data?.social?.facebook}
+                            target="_blank"
+                          >
                             <FaFacebookF color="black" size={24} />
-                          </div>
-                          <div className="bg-social-media">
+                          </a>
+                          <a
+                            className="bg-social-media"
+                            style={{ cursor: "pointer" }}
+                            href={data?.social?.linkedin}
+                            target="_blank"
+                          >
                             <FaLinkedinIn color="black" size={24} />
-                          </div>
-                          <div className="bg-social-media">
-                            <RiTwitterXLine color="black" size={24} />
-                          </div>
+                          </a>
+                          <a
+                            className="bg-social-media"
+                            style={{ cursor: "pointer" }}
+                            href={data?.social?.insta}
+                            target="_blank"
+                          >
+                            <FaInstagram color="black" size={24} />
+                          </a>
                         </Flex>
                         <Flex vertical justify="center" gap={10}>
                           <Flex align={"center"} gap={10}>

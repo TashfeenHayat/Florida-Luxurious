@@ -7,10 +7,13 @@ import Team from "./MeetTeam";
 import FeatureListing from "./FeatureListing";
 import Neighborhoods from "./Neighborhoods";
 import Icons from "../../components/Icons";
+import { useNavigate } from "react-router-dom";
 const { Title, Text } = Typography;
 const { Search } = Input;
 function Home() {
-  const onSearch = (value, _e, info) => console.log(info?.source, value);
+  const navigate = useNavigate();
+  const onSearch = (value, _e, info) =>
+    navigate(`/searchcommunity?name=${value}`);
   return (
     <div>
       <div className="background-video-container">

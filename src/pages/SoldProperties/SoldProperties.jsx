@@ -20,7 +20,7 @@ function SoldProperties() {
     currentPage,
     "sold"
   );
-  console.log(data);
+
   const navigate = useNavigate();
   // Dummy data for demonstration
   // const soldProperties = [

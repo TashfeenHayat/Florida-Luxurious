@@ -37,6 +37,7 @@ import InternalServerError from "./pages/InternalError/InternalServerError";
 import MlsPropertyDetail from "./pages/MlsPropertyDetail";
 import GlobalPartner from "./pages/GlobalPartner";
 import PropertyPress from "./pages/PropertyPress";
+import SearchCommunity from "./pages/SearchCommunity";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
@@ -72,6 +73,7 @@ function App() {
           <Route path="mls-listing" element={<Mls />} />
           <Route path="mls-detail/:id" element={<MlsPropertyDetail />} />
           <Route path="/propertypress" element={<PropertyPress />} />
+          <Route path="/searchcommunity" element={<SearchCommunity />} />
 
           <Route path="*" element={<NotFound />} />
           <Route element={<Dashboard />}>
