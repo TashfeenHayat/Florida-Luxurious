@@ -135,11 +135,11 @@ function Header() {
                     Meet the team
                   </Link>
                 </Menu.Item>
-                <Menu.Item>
+                {/* <Menu.Item>
                   <Link to="/propertypress" className="text-upper f-10">
                     Property press
                   </Link>
-                </Menu.Item>
+                </Menu.Item> */}
               </Menu>
             }
           >
