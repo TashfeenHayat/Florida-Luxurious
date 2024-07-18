@@ -1,23 +1,21 @@
 import React from "react";
 import BackgroundImage from "../../components/BackgroundImage";
 import Agent from "../../assets/Agent.png";
-import { Typography, Row, Col, Image, Flex, Spin, Skeleton } from "antd";
+import { Typography, Row, Col, Image, Flex, Spin, Skeleton, Card } from "antd";
 import { MdOutlinePhone, MdOutlineMailOutline } from "react-icons/md";
-import { RiTwitterXLine } from "react-icons/ri";
 import Button from "../../components/Buttons";
 import { Container } from "react-bootstrap";
 import LetTalk from "../../components/LetTalk";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
-import Loading from "../../components/Loading";
-
 import useAgent from "../../hooks/useAgent";
+import useBlogs from "../../hooks/useBlogs";
 const { Title, Paragraph } = Typography;
 function AgentProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isLoading, data, isError } = useAgent(id);
-  console.log(data);
+  const { isLoading: isBlogLoading, data: blogData } = useBlogs(10, 1, id);
 
   return (
     <>
@@ -208,6 +206,36 @@ function AgentProfile() {
             </Row>
           </div>
         </div>
+        {blogData?.blogs.length !== 0 && (
+          <Container>
+            <div className="pt-98 pb-98">
+              <Title className="text-upper f-100 text-center">My blog</Title>
+              <div>
+                <Row gutter={[30, 30]}>
+                  {blogData?.blogs?.map((item, index) => (
+                    <Col lg={8} key={index}>
+                      <Card style={{ width: 400, background: "#E8E8E8" }}>
+                        <Flex justify={"center"} align="center" vertical>
+                          <Image
+                            src={item?.agentId?.photo}
+                            preview={false}
+                            style={{ borderRadius: "300px" }}
+                            width="40%"
+                          />
+                          <Title className="f-16 pt-4 text-upper">
+                            {item?.title}
+                          </Title>
+                          <button class="button-view">Read More </button>
+                        </Flex>
+                      </Card>
+                    </Col>
+                  ))}
+                  <Col></Col>
+                </Row>
+              </div>
+            </div>
+          </Container>
+        )}
         <LetTalk />
       </>
     </>
