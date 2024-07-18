@@ -15,12 +15,14 @@ export const getProperties = createAsyncThunk(
       minBathCount,
       maxBathCount,
       cities,
+      key,
     },
     { rejectWithValue }
   ) {
     try {
       const res = await customAxios.get(`property`, {
         params: {
+          key,
           agentId,
           limit,
           page,

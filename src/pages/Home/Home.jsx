@@ -48,11 +48,9 @@ function Home() {
             </Text>
             <div className="pt-5">
               <Search
-                placeholder="Search community"
+                placeholder=""
                 allowClear
-                enterButton={
-                  <span style={{ backgroundColor: "#000000" }}>Search</span>
-                }
+                enterButton={<span className="search-button">Search</span>}
                 size="large"
                 onSearch={onSearch}
                 style={{

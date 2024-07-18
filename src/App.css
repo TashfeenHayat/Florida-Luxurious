@@ -1661,3 +1661,24 @@ body:focus-visible {
 .ant-input-outlined:focus {
   border-color: transparent !important;
 }
+.search-button {
+  position: relative;
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 15px 52px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 14px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  width: 151px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

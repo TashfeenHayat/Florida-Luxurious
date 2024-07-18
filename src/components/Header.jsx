@@ -91,7 +91,7 @@ function Header() {
                 <Menu.Item style={contentStyle}>
                   <Link
                     to="mls-listing"
-                    target="_blank"
+                    
                     rel="noopener noreferrer "
                     className="f-10"
                   >
