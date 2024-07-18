@@ -112,7 +112,7 @@ function Neighborhoods() {
                     className="button-view1"
                     onClick={() => navigate(`/community/${community?._id}`)}
                   >
-                    View All
+                    View
                   </button>
                 </Flex>
               </div>
