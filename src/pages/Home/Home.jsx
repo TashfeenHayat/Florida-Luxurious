@@ -1,14 +1,19 @@
 import React from "react";
 import FloridaProperties from "./FloridaProperties";
-import { Typography, Flex } from "antd";
+import { Typography, Flex, Input } from "antd";
 import RecognitionSlide from "./RecognitionSlide";
 import OurStory from "./OurStory";
 import Team from "./MeetTeam";
 import FeatureListing from "./FeatureListing";
 import Neighborhoods from "./Neighborhoods";
 import Icons from "../../components/Icons";
+import { useNavigate } from "react-router-dom";
 const { Title, Text } = Typography;
+const { Search } = Input;
 function Home() {
+  const navigate = useNavigate();
+  const onSearch = (value, _e, info) =>
+    navigate(`/searchcommunity?name=${value}`);
   return (
     <div>
       <div className="background-video-container">
@@ -41,10 +46,17 @@ function Home() {
               Discover Your Dream Home in the Heart of Florida with Florida
               Luxurious Properties
             </Text>
-            <div>
-              <button className="button-secondary text-upper mt-5">
-                Watch Video
-              </button>
+            <div className="pt-5">
+              <Search
+                placeholder=""
+                allowClear
+                enterButton={<span className="search-button">Search</span>}
+                size="large"
+                onSearch={onSearch}
+                style={{
+                  width: "80ch",
+                }}
+              />
             </div>
           </Flex>
         </div>

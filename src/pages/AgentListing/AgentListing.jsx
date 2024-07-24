@@ -58,7 +58,7 @@ function AgentListing() {
                           className="f-14 f-bold text-white"
                           style={{ textAlign: "right" }}
                         >
-                          {item?.addressLine1 + " " + item?.addressLine2}
+                          {item?.addressLine1}
                           <br />
                           <IoPricetagOutline size={20} /> $ {item?.salePrice}
                           {/* {Number(properties?.salePrice).toLocaleString()} */}
@@ -76,7 +76,7 @@ function AgentListing() {
                       >
                         <Text className="mx-4 f-16 f-bold">
                           {" "}
-                          {item?.addressLine1 + " " + item?.addressLine2}
+                          {item?.addressLine1}
                         </Text>
                         <div className="prop-info">
                           <Text

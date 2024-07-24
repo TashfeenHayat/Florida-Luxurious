@@ -12,7 +12,7 @@ import AddProperty from "./pages/Admin/AddProperty";
 import Press from "./pages/Admin/Press";
 import Inquiries from "./pages/Admin/Inquiries";
 import Blog from "./pages/Admin/Blog";
-
+import AgentBlog from "./pages/AgentBlog";
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
@@ -36,6 +36,8 @@ import "aos/dist/aos.css";
 import InternalServerError from "./pages/InternalError/InternalServerError";
 import MlsPropertyDetail from "./pages/MlsPropertyDetail";
 import GlobalPartner from "./pages/GlobalPartner";
+import PropertyPress from "./pages/PropertyPress";
+import SearchCommunity from "./pages/SearchCommunity";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
@@ -70,7 +72,9 @@ function App() {
           <Route path="/global" element={<GlobalPartner />} />
           <Route path="mls-listing" element={<Mls />} />
           <Route path="mls-detail/:id" element={<MlsPropertyDetail />} />
-
+          {/* <Route path="/propertypress" element={<PropertyPress />} /> */}
+          <Route path="/searchcommunity" element={<SearchCommunity />} />
+          <Route path="/agent/blog/:id" element={<AgentBlog />} />
           <Route path="*" element={<NotFound />} />
           <Route element={<Dashboard />}>
             <Route path="/admin/dashboard" element={<p>Dashboard</p>} />

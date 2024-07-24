@@ -112,10 +112,7 @@ export default function DetailProperty() {
         <Image
           preview={false}
           src={
-            backgroundImage
-              ? backgroundImage
-              : data?.property?.media[3]?.mdUrl ||
-                "https://placehold.co/1512x934"
+            data?.property?.media[0]?.mdUrl || "https://placehold.co/1512x934"
           }
           width="100%"
           fallback="https://placehold.co/1512x934"
@@ -152,9 +149,7 @@ export default function DetailProperty() {
               MLS® #: F10423862
             </Text>
             <Title className="text-upper" style={{ color: "white" }} level={3}>
-              {data?.property?.addressLine1 +
-                " " +
-                data?.property?.addressLine2}
+              {data?.property?.addressLine1}
             </Title>
             <Paragraph
               className="text-upper f-20 f-100"
@@ -308,9 +303,7 @@ export default function DetailProperty() {
                 style={{ textAlign: "center", lineHeight: 2 }}
                 className="text-upper"
               >
-                {data?.property?.addressLine1 +
-                  " " +
-                  data?.property?.addressLine2}
+                {data?.property?.addressLine1}
               </Title>
               <Paragraph className="f-16 f-200" style={{ lineHeight: 2.8 }}>
                 {data?.property?.description}
@@ -323,11 +316,8 @@ export default function DetailProperty() {
                 <Col lg={12} sm={24} md={24}>
                   <Image
                     src={data?.property?.media[0]?.mdUrl}
-                    onClick={(e) =>
-                      setBackGroundImage(e.target.getAttribute("src"))
-                    }
                     style={{ cursor: "pointer" }}
-                    preview={false}
+                    preview
                     width="100%"
                     fallback="https://placehold.co/272x215"
                   />
@@ -335,25 +325,19 @@ export default function DetailProperty() {
                 <Col lg={12} sm={24} md={24}>
                   <Image
                     src={data?.property?.media[1]?.mdUrl}
+                    style={{ cursor: "pointer" }}
+                    preview
                     width="100%"
                     fallback="https://placehold.co/272x215"
-                    onClick={(e) =>
-                      setBackGroundImage(e.target.getAttribute("src"))
-                    }
-                    style={{ cursor: "pointer" }}
-                    preview={false}
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
                   <Image
                     src={data?.property?.media[2]?.mdUrl}
+                    style={{ cursor: "pointer" }}
+                    preview
                     width="100%"
                     fallback="https://placehold.co/272x215"
-                    onClick={(e) =>
-                      setBackGroundImage(e.target.getAttribute("src"))
-                    }
-                    style={{ cursor: "pointer" }}
-                    preview={false}
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
@@ -389,13 +373,10 @@ export default function DetailProperty() {
                           <Col lg={8} md={12} sm={24}>
                             <Image
                               src={item?.mdUrl}
-                              width="100%"
-                              fallback="https://placehold.co/195x154"
-                              onClick={(e) =>
-                                setBackGroundImage(e.target.getAttribute("src"))
-                              }
-                              preview={false}
                               style={{ cursor: "pointer" }}
+                              preview
+                              width="100%"
+                              fallback="https://placehold.co/272x215"
                             />
                           </Col>
                         ))}

@@ -1,22 +1,23 @@
 import React from "react";
 import BackgroundImage from "../../components/BackgroundImage";
 import Agent from "../../assets/Agent.png";
-import { Typography, Row, Col, Image, Flex, Spin, Skeleton } from "antd";
+import { Typography, Row, Col, Image, Flex, Spin, Skeleton, Card } from "antd";
 import { MdOutlinePhone, MdOutlineMailOutline } from "react-icons/md";
-import { RiTwitterXLine } from "react-icons/ri";
 import Button from "../../components/Buttons";
 import { Container } from "react-bootstrap";
 import LetTalk from "../../components/LetTalk";
 import { useParams, useNavigate } from "react-router-dom";
-import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
-import Loading from "../../components/Loading";
+import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import Logo from "../../assets/logoicon1.png";
 
 import useAgent from "../../hooks/useAgent";
-const { Title, Paragraph } = Typography;
+import useBlogs from "../../hooks/useBlogs";
+const { Title, Paragraph, Text } = Typography;
 function AgentProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isLoading, data, isError } = useAgent(id);
+  const { isLoading: isBlogLoading, data: blogData } = useBlogs(10, 1, id);
 
   return (
     <>
@@ -72,7 +73,7 @@ function AgentProfile() {
                       <span className="agent-estate">Estate Agent</span>
                     </Paragraph>
                   </Flex>
-                  <Paragraph className="agent-description">
+                  <Paragraph className="agent-description text-capitalize">
                     {data?.description}
                   </Paragraph>
                 </>
@@ -115,26 +116,41 @@ function AgentProfile() {
                           style={{ marginLeft: "-50px" }}
                           gap={10}
                         >
-                          <div className="bg-social-media">
+                          <a
+                            className="bg-social-media"
+                            style={{ cursor: "pointer" }}
+                            href={data?.social?.facebook}
+                            target="_blank"
+                          >
                             <FaFacebookF color="black" size={24} />
-                          </div>
-                          <div className="bg-social-media">
+                          </a>
+                          <a
+                            className="bg-social-media"
+                            style={{ cursor: "pointer" }}
+                            href={data?.social?.linkedin}
+                            target="_blank"
+                          >
                             <FaLinkedinIn color="black" size={24} />
-                          </div>
-                          <div className="bg-social-media">
-                            <RiTwitterXLine color="black" size={24} />
-                          </div>
+                          </a>
+                          <a
+                            className="bg-social-media"
+                            style={{ cursor: "pointer" }}
+                            href={data?.social?.insta}
+                            target="_blank"
+                          >
+                            <FaInstagram color="black" size={24} />
+                          </a>
                         </Flex>
                         <Flex vertical justify="center" gap={10}>
                           <Flex align={"center"} gap={10}>
                             <MdOutlinePhone color="#838383" size={25} />{" "}
                             <span className="text-white f-32">
-                              {data?.phoneNumber}
+                              {"+" + data?.phoneNumber}
                             </span>
                           </Flex>
                           <Flex align={"center"} gap={10}>
                             <MdOutlineMailOutline color="#838383" size={25} />{" "}
-                            <span className="text-white f-32">
+                            <span className="text-white f-32 text-lower">
                               {data?.email}
                             </span>
                           </Flex>
@@ -192,6 +208,83 @@ function AgentProfile() {
             </Row>
           </div>
         </div>
+        {blogData?.blogs.length !== 0 && (
+          <Container>
+            <div className="pt-98 pb-98">
+              <Title className="text-upper f-100 text-center">My blog</Title>
+              <div>
+                <Row gutter={[30, 30]}>
+                  {blogData?.blogs?.map((item, index) => (
+                    <Col lg={8} md={8} sm={24} key={index}>
+                      <Card style={{ width: 400, background: "#E8E8E8" }}>
+                        <Flex justify={"center"} align="center" vertical>
+                          <Image
+                            src={item?.agentId?.photo}
+                            preview={false}
+                            style={{ borderRadius: "300px" }}
+                            width="40%"
+                          />
+                          <Title className="f-16 pt-4 text-upper">
+                            {item?.title}
+                          </Title>
+                          <button
+                            class="button-view"
+                            onClick={() => navigate(`/agent/blog/${item?._id}`)}
+                          >
+                            Read More{" "}
+                          </button>
+                        </Flex>
+                      </Card>
+                    </Col>
+                  ))}
+                  <Col lg={8} md={8} sm={24} key={""}>
+                    <Card style={{ width: 400, background: "#E8E8E8" }}>
+                      <Flex justify={"center"} align="center" vertical>
+                        <Flex vertical>
+                          <Flex
+                            justify={"center"}
+                            align="center"
+                            className="py-3"
+                          >
+                            <img src={Logo} width={"30%"} preview={false} />
+                          </Flex>
+                          <Text className="text-upper text-black text-center f-16 f-200">
+                            {" "}
+                            Florida
+                          </Text>
+                          <Text className="text-upper text-black text-center f-16 f-bold">
+                            {" "}
+                            LUXURIOUS
+                          </Text>
+                          <Text className="text-upper text-black text-center f-16 f-200">
+                            {" "}
+                            properties
+                          </Text>
+                          <Flex
+                            className="mt-1"
+                            justify={"center"}
+                            align="center"
+                          >
+                            <Text className="text-upper text-black text-center f-20 f-200">
+                              ANNUAL{" "}
+                              <Text className="text-upper text-black text-center f-20 f-bold">
+                                LUXURY
+                              </Text>{" "}
+                              SALES REPORT
+                            </Text>
+                          </Flex>
+                        </Flex>
+                      </Flex>
+                      <Flex justify={"center"}>
+                        <button class="button-view">Read More </button>
+                      </Flex>
+                    </Card>
+                  </Col>
+                </Row>
+              </div>
+            </div>
+          </Container>
+        )}
         <LetTalk />
       </>
     </>

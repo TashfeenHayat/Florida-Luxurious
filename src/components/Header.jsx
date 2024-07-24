@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/Logonew.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { Flex, Image, Dropdown, Menu } from "antd";
 import { DownOutlined } from "@ant-design/icons";
@@ -42,7 +42,7 @@ function Header() {
     <nav ref={navbar} id="navbar_main">
       <Flex justify={"space-between"} align="center" gap={0}>
         <Link to="/" style={{ borderRight: "none", padding: "0px" }}>
-          <Image src={Logo} width={"75%"} preview={false} />
+          <Image src={Logo} width={"85%"} preview={false} />
         </Link>
         <Flex className="flex-hidden">
           <Dropdown
@@ -91,7 +91,7 @@ function Header() {
                 <Menu.Item style={contentStyle}>
                   <Link
                     to="mls-listing"
-                    target="_blank"
+                    
                     rel="noopener noreferrer "
                     className="f-10"
                   >
@@ -135,11 +135,11 @@ function Header() {
                     Meet the team
                   </Link>
                 </Menu.Item>
-                <Menu.Item>
-                  <Link rel="noopener noreferrer" className="text-upper f-10">
+                {/* <Menu.Item>
+                  <Link to="/propertypress" className="text-upper f-10">
                     Property press
                   </Link>
-                </Menu.Item>
+                </Menu.Item> */}
               </Menu>
             }
           >
