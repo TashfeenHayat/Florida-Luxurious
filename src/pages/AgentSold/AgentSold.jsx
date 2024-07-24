@@ -51,7 +51,14 @@ function AgentSold() {
                 onClick={() => navigate(`features/660719a7b27711bbbdc092b6`)}
               >
                 <div className="displayy-teamimg-center">
-                  <img src={Property} width="100%" className="" />
+                  <img
+                    src={
+                      properties?.media?.[0]?.mdUrl ||
+                      "https://placehold.co/618x489"
+                    }
+                    width="100%"
+                    className=""
+                  />
                   <div className="more-info-property">
                     <Flex
                       vertical
@@ -70,9 +77,7 @@ function AgentSold() {
                           address
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          {properties?.addressLine1 +
-                            " " +
-                            properties?.addressLine2}
+                          {properties?.addressLine1}
                         </Text>
                       </Flex>
                       <Flex vertical>
@@ -91,7 +96,7 @@ function AgentSold() {
                           {name}
                         </Text>
                       </Flex>
-                      <Flex vertical>
+                      {/* <Flex vertical>
                         <button
                           className="let-talk-btn"
                           onClick={() =>
@@ -100,7 +105,7 @@ function AgentSold() {
                         >
                           View Property
                         </button>
-                      </Flex>
+                      </Flex> */}
                     </Flex>
                   </div>
                   {/* <div className="p-absoulte right-0 top-0 for-sale-more">
@@ -136,10 +141,7 @@ function AgentSold() {
                       <Flex>
                         <IoLocationOutline color="white" size={20} />
                         <Text className="f-14 f-bold text-white">
-                          {properties?.addressLine1 +
-                            " " +
-                            properties?.addressLine2}{" "}
-                          <br />
+                          {properties?.addressLine1} <br />
                           <IoPricetagOutline size={20} /> ${" "}
                           {properties?.salePrice}
                         </Text>
