@@ -23,22 +23,17 @@ function AgentBlog() {
 
   return (
     <div>
+      <BackgroundImage Image={Agent}>
+        <Title className="text-white text-upper f-50 f-100">Agent Blog</Title>
+      </BackgroundImage>
       {isLoading ? (
-        <Flex justify={"center"} align="center">
-          {" "}
-          <Spin size={"large"} />
+        <Flex justify="center" align="center">
+          <Spin size="large" />
         </Flex>
       ) : (
-        <>
-          <BackgroundImage Image={Agent}>
-            <Title className="text-white text-upper f-50 f-100">
-              Agent Blog
-            </Title>
-          </BackgroundImage>
-          <Container>
-            <div ref={refHtml} />
-          </Container>
-        </>
+        <Container>
+          <div ref={refHtml} />
+        </Container>
       )}
     </div>
   );
