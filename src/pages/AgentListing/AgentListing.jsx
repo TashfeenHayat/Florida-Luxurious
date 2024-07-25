@@ -48,7 +48,14 @@ function AgentListing() {
                   className="displayy-teamimg-center"
                   onClick={() => navigate(`/features/${item._id}`)}
                 >
-                  <img src={Property} width="100%" className="img-op" />
+                  <img
+                    src={
+                      item?.media?.[0]?.mdUrl ||
+                      "https://placehold.co/618x489"
+                    }
+                    width="100%"
+                    className="img-op"
+                  />
                   <div className="info">
                     <Flex justify={"space-between"} align={"center"}>
                       <button className="button-view">View All</button>
