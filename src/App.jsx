@@ -38,6 +38,7 @@ import MlsPropertyDetail from "./pages/MlsPropertyDetail";
 import GlobalPartner from "./pages/GlobalPartner";
 import PropertyPress from "./pages/PropertyPress";
 import SearchCommunity from "./pages/SearchCommunity";
+import Allcommunities from "./pages/Home/AllCommunicaties";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
@@ -70,6 +71,7 @@ function App() {
           <Route path="/404" element={<NotFound />} />
           <Route path="/500" element={<InternalServerError />} />
           <Route path="/global" element={<GlobalPartner />} />
+          <Route path="/all-communities" element={<Allcommunities />} />
           <Route path="mls-listing" element={<Mls />} />
           <Route path="mls-detail/:id" element={<MlsPropertyDetail />} />
           {/* <Route path="/propertypress" element={<PropertyPress />} /> */}

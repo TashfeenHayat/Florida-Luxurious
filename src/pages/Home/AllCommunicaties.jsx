@@ -3,10 +3,12 @@ import { Typography, Flex, Row, Col } from "antd";
 import Slider from "react-slick";
 import Florida from "../../assets/florida.png";
 import useCommunities from "../../hooks/useCommunities";
-
 import { useNavigate } from "react-router-dom";
+import BackgroundImage from "../../components/BackgroundImage";
+import BoatImage from "../../assets/boatowner.png";
+
 const { Title, Text, Paragraph } = Typography;
-function Neighborhoods() {
+function Allcommunities() {
   const { data, isLoading } = useCommunities(20, 1);
   const navigate = useNavigate();
 
@@ -50,107 +52,62 @@ function Neighborhoods() {
     },
   };
   return (
-    <div style={{ paddingTop: 98, paddingBottom: 98 }}>
-      <Title className="florida-heading-feature-negibour" level={1}>
-        Feature Neighborhoods
-      </Title>
-      <Row className="px-4">
-        <Col lg={6}>
-          <div className="displayy-teamimg-center show-btn-community-home ">
-            <div style={{ background: "black" }} className="communities-grid">
-              <div
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "0%",
-                  width: "100%",
-                }}
-              >
-                <Flex
-                  justify={"center"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                  vertical
-                >
-                  <Text className="text-upper text-white f-24 f-100">
-                    Communities
-                  </Text>
-                </Flex>
-              </div>
-            </div>
-          </div>
-        </Col>
-        {data?.filters?.map((community, index) => (
-          <Col lg={6} md={12} sm={24} key={index} className="">
-            <div className="displayy-teamimg-center show-btn-community-home ">
-              <img
-                src={community?.photo}
-                width="100%"
-                className="img-op communities-grid "
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "0%",
-                  width: "100%",
-                }}
-              >
-                <Flex
-                  justify={"center"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                  vertical
-                >
-                  <Text
-                    className="text-upper text-white f-100"
-                    style={{ fontSize: "20px" }}
-                  >
-                    {community?.name}
-                  </Text>
-
-                  <button
-                    className="button-view1"
-                    onClick={() => navigate(`/community/${community?._id}`)}
-                  >
-                    View
-                  </button>
-                </Flex>
-              </div>
-            </div>
-          </Col>
-        ))}
-        <Col
-          lg={6}
-          onClick={() => navigate("/all-communities")}
-          style={{ cursor: "pointer" }}
+    <>
+      <BackgroundImage Image={BoatImage}>
+        <Title
+          style={{ color: "white", lineHeight: "14px", letterSpacing: "2px" }}
+          className="text-upper f-50 f-100"
         >
-          <div className="displayy-teamimg-center show-btn-community-home ">
-            <div style={{ background: "black" }} className="communities-grid">
-              <div
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "0%",
-                  width: "100%",
-                }}
-              >
-                <Flex
-                  justify={"center"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                  vertical
+          All Communities
+        </Title>
+      </BackgroundImage>
+      <div style={{ paddingTop: 98, paddingBottom: 98 }}>
+        <Title className="florida-heading-feature-negibour" level={1}>
+          Feature Neighborhoods
+        </Title>
+        <Row className="px-4">
+          {data?.filters?.map((community, index) => (
+            <Col lg={6} md={12} sm={24} key={index} className="">
+              <div className="displayy-teamimg-center show-btn-community-home ">
+                <img
+                  src={community?.photo}
+                  width="100%"
+                  className="img-op communities-grid "
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "0%",
+                    width: "100%",
+                  }}
                 >
-                  <Text className="text-upper text-white f-24 f-100">
-                    View All
-                  </Text>
-                </Flex>
+                  <Flex
+                    justify={"center"}
+                    align={"center"}
+                    style={{ width: "95%" }}
+                    vertical
+                  >
+                    <Text
+                      className="text-upper text-white f-100"
+                      style={{ fontSize: "20px" }}
+                    >
+                      {community?.name}
+                    </Text>
+
+                    <button
+                      className="button-view1"
+                      onClick={() => navigate(`/community/${community?._id}`)}
+                    >
+                      View
+                    </button>
+                  </Flex>
+                </div>
               </div>
-            </div>
-          </div>
-        </Col>
-      </Row>
-      {/* <Flex
+            </Col>
+          ))}
+        </Row>
+        {/* <Flex
         justify={"center"}
         align={"center"}
         style={{
@@ -363,8 +320,9 @@ function Neighborhoods() {
       <Flex justify="center" align="center">
         <button className="button-neighborhood">See All Neighborhoods </button>
       </Flex> */}
-    </div>
+      </div>
+    </>
   );
 }
 
-export default Neighborhoods;
+export default Allcommunities;
