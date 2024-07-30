@@ -90,14 +90,14 @@ function SearchCommunity() {
                           ${property?.salePrice}
                         </Text>
                       </Flex>
-                      <Flex vertical>
+                      {/* <Flex vertical>
                         <Text className="text-center text-upper f-24 f-bold text-white">
                           Agent Listing
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
                           Abraham
                         </Text>
-                      </Flex>
+                      </Flex> */}
                       <Flex vertical>
                         <button className="let-talk-btn">View Property</button>
                       </Flex>
