@@ -22,7 +22,7 @@ function Properties() {
     null
   );
 
-  const check = data?.properties?.filter((item) => item.status);
+  const check = data?.properties?.filter((item) => item.status !== "sold");
   const navigate = useNavigate();
 
   // const properties = [
