@@ -10,7 +10,7 @@ function LetTalk() {
     <div className="background-video-container" style={{ height: "70vh" }}>
       <video autoPlay muted loop className="background-video">
         <source
-          src="https://videos.pexels.com/video-files/3773486/3773486-hd_1920_1080_30fps.mp4"
+          src="https://videos.pexels.com/video-files/3410663/3410663-uhd_2562_1440_30fps.mp4"
           type="video/mp4"
         />
       </video>
