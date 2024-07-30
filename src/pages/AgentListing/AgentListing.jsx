@@ -3,7 +3,6 @@ import BackgroundImage from "../../components/BackgroundImage";
 import BoatImage from "../../assets/boatowner.png";
 import { Container } from "react-bootstrap";
 import { Col, Row, Typography, Flex, Spin, Pagination } from "antd";
-import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 import useProperties from "../../hooks/useProperties";
 import { useParams, useNavigate } from "react-router";
@@ -50,8 +49,7 @@ function AgentListing() {
                 >
                   <img
                     src={
-                      item?.media?.[0]?.mdUrl ||
-                      "https://placehold.co/618x489"
+                      item?.media?.[0]?.mdUrl || "https://placehold.co/618x489"
                     }
                     width="100%"
                     className="img-op"

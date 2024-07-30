@@ -213,9 +213,16 @@ function AgentProfile() {
             <div className="pt-98 pb-98">
               <Title className="text-upper f-100 text-center">My blog</Title>
               <div>
-                <Row gutter={[30, 30]}>
+                <Row gutter={[16, 24]}>
                   {blogData?.blogs?.map((item, index) => (
-                    <Col lg={8} md={8} sm={24} key={index}>
+                    <Col
+                      xl={8}
+                      lg={12}
+                      md={12}
+                      sm={24}
+                      key={index}
+                      style={{ gap: "10px" }}
+                    >
                       <Card style={{ width: 400, background: "#E8E8E8" }}>
                         <Flex justify={"center"} align="center" vertical>
                           <Image

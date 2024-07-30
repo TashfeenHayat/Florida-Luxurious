@@ -22,7 +22,7 @@ function Properties() {
     null
   );
 
-  const check = data?.properties?.filter((item) => item.status !== "sold");
+  const check = data?.properties?.filter((item) => item.status);
   const navigate = useNavigate();
 
   // const properties = [
@@ -102,17 +102,17 @@ function Properties() {
                           last list price
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          ${property?.salePrice}
+                          {property?.salePrice}
                         </Text>
                       </Flex>
-                      <Flex vertical>
+                      {/* <Flex vertical>
                         <Text className="text-center text-upper f-24 f-bold text-white">
                           Agent Listing
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          Abraham
+                          {property?.agent}
                         </Text>
-                      </Flex>
+                      </Flex> */}
                       <Flex vertical>
                         <button className="let-talk-btn">View Property</button>
                       </Flex>
