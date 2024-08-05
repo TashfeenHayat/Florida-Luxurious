@@ -990,7 +990,88 @@ body:focus-visible {
   .text-paragraph {
     font-size: 12px !important;
   }
+
+  .ant-flex {
+    display: flex;
+  }
+  .ant-input-group-wrapper.ant-input-group-wrapper-lg.ant-input-group-wrapper-outlined.ant-input-search.ant-input-search-large.ant-input-search-with-button {
+    width: 90% !important;
+    margin: 0 auto;
+  }
+  .f-64 {
+    font-size: 37px !important;
+  }
+  .features_section_slider .slick-track {
+    display: flex;
+    gap: unset;
+  }
+  h1.ant-typography, 
+  div.ant-typography-h1, 
+  div.ant-typography-h1 > textarea, 
+  .ant-typography h1 {
+    font-size: 25px !important;
+  }
+  .p-5 {
+    padding: 1rem !important;
+  }
+  .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    width: 247px !important;
+  }
+  .bg-img-logo {
+    padding: 0 !important;
+  }
+  .heading-florida-lux-listing {
+    font-size: 24px !important;
+  }
+  .slick-arrow {
+    display: none !important;
+  }
+
+  /*.ant-row {
+    display: flex;
+    flex-flow: column;
+    min-width: 0;
+  }*/
+  .ant-col-6 {
+    max-width: 100% !important;
+  }
+  .ant-flex {
+    display: flex;
+  
+    align-content: center;
+    justify-content: center;
+  }
+  .ant-typography.aos-init.aos-animate {
+    width: 100% !important;
+  }
+  .footer-bg-img-shadow {
+    padding: 20px;
+  }
+    .ant-row-middle {
+        width: 80%;
+    }
+  
+.w-100 {
+    width: 82% !important;
+    overflow: hidden;
 }
+.rec-slide {
+  position: relative; /* Ensure proper positioning of child elements */
+  height: 250px;
+  width: 98%;
+  overflow: hidden; /* Hide overflowing content */
+}
+.f-24{
+  font-size: 24px !important;
+
+}
+
+
+}
+
+
+
+
 .detail-property .ant-input::placeholder {
   color: #838383;
   font-size: 16px;
