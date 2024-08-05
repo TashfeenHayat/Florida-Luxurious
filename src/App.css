@@ -995,17 +995,22 @@ body:focus-visible {
   .ant-input-search {
     width: 90%;
   }
-
+.search-input {
+    width: 60ch;
+  }
 }
 @media screen and (max-width: 425px) {
   .title-home-page {
     font-size: 26px !important;
   }
-  .f-24 {
-    margin-bottom: 43em;
-    margin-top: 45em;
+.set {
+        
+        margin-top: 83em;
+    }
 
-}
+.search-input {
+    width: 40ch;
+  }
  /* .text-paragraph {
     font-size: 12px !important;
   }

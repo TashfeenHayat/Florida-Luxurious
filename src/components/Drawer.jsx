@@ -135,6 +135,7 @@ function Drawers({ setOpenDrawer, openDrawer }) {
           </Row>
         </div>
       </div>
+      <div className="set">
       <Flex justify="flex-start" vertical align="flex-start">
         <Flex justify="space-between" align="center" className="w-100">
           <Paragraph className="f-24 text-white" style={{ fontWeight: 100 }}>
@@ -251,7 +252,7 @@ function Drawers({ setOpenDrawer, openDrawer }) {
             </a>
           </Flex>
         </Flex>
-      </Flex>
+      </Flex></div>
     </Drawer>
   );
 }

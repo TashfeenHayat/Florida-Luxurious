@@ -30,7 +30,7 @@ function Home() {
           justify="center"
           align="center"
           vertical
-          style={{ width: "100%", height: "100%", textAlign: "center" }}
+          style={{ width: "100%", height: "115%", textAlign: "center" }}
         >
           <Text className="text-paragraph">
             Luxury. Innovation. Excellence.
@@ -43,11 +43,11 @@ function Home() {
             Discover Your Dream Home in the Heart of Florida with Florida
             Luxurious Properties
           </Text>
-         <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }}>
+         <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center' }}>
       <Search
         placeholder=""
         allowClear
-        enterButton={<span className="search-button">Search</span>}
+        enterButton={<span className="">Search</span>}
         size="large"
         onSearch={onSearch}
         style={{ width: '100%', maxWidth: '600px' }}
