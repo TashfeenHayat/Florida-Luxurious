@@ -999,7 +999,7 @@ body:focus-visible {
     width: 60ch;
   }
 }
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 678px) {
   .title-home-page {
     font-size: 26px !important;
   }
@@ -1011,42 +1011,7 @@ body:focus-visible {
 .search-input {
     width: 40ch;
   }
- /* .text-paragraph {
-    font-size: 12px !important;
-  }
 
-  .ant-flex {
-    display: flex;
-  }
-  .ant-input-group-wrapper.ant-input-group-wrapper-lg.ant-input-group-wrapper-outlined.ant-input-search.ant-input-search-large.ant-input-search-with-button {
-    width: 90% !important;
-    margin: 0 auto;
-  }
-  .f-64 {
-    font-size: 37px !important;
-  }
-  .features_section_slider .slick-track {
-    display: flex;
-    gap: unset;
-  }
-  h1.ant-typography, 
-  div.ant-typography-h1, 
-  div.ant-typography-h1 > textarea, 
-  .ant-typography h1 {
-    font-size: 25px !important;
-  }
-  .p-5 {
-    padding: 1rem !important;
-  }
-  .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
-    width: 247px !important;
-  }
-  .bg-img-logo {
-    padding: 0 !important;
-  }
-  .heading-florida-lux-listing {
-    font-size: 24px !important;
-  }*/
   .slick-arrow {
     display: none !important;
   }
@@ -1065,6 +1030,20 @@ body:focus-visible {
   .ant-input-search {
     width: 100%;
   }
+  body .contact-us-title {
+    font-size: 35px !important;
+    line-height: 110px !important;
+    font-weight: 600 !important;
+    letter-spacing: -2.75px !important;
+    color: #1b1b1b !important;
+    margin: 0 !important;
+    text-align: right;
+}
+body .contact-us-sub {
+    color: #838383;
+    font-size: 75px;
+    margin-top: -20px;
+}
   /*.ant-row {
     display: flex;
     flex-flow: column;
@@ -1103,7 +1082,42 @@ body:focus-visible {
   font-size: 24px !important;
 
 }
-*/
+ /* .text-paragraph {
+    font-size: 12px !important;
+  }
+
+  .ant-flex {
+    display: flex;
+  }
+  .ant-input-group-wrapper.ant-input-group-wrapper-lg.ant-input-group-wrapper-outlined.ant-input-search.ant-input-search-large.ant-input-search-with-button {
+    width: 90% !important;
+    margin: 0 auto;
+  }
+  .f-64 {
+    font-size: 37px !important;
+  }
+  .features_section_slider .slick-track {
+    display: flex;
+    gap: unset;
+  }
+  h1.ant-typography, 
+  div.ant-typography-h1, 
+  div.ant-typography-h1 > textarea, 
+  .ant-typography h1 {
+    font-size: 25px !important;
+  }
+  .p-5 {
+    padding: 1rem !important;
+  }
+  .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    width: 247px !important;
+  }
+  .bg-img-logo {
+    padding: 0 !important;
+  }
+  .heading-florida-lux-listing {
+    font-size: 24px !important;
+  }*/
 
 }
 
