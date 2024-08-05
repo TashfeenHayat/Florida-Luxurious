@@ -982,12 +982,31 @@ body:focus-visible {
     display: block;
     padding-left: 0px !important;
   }
+  .info {
+    padding: 10px;
+  }
+  .info-text {
+    font-size: 12px;
+  }
+  .button-view,
+  .button-view1 {
+    padding: 8px 16px;
+  }
+  .ant-input-search {
+    width: 90%;
+  }
+
 }
 @media screen and (max-width: 425px) {
   .title-home-page {
     font-size: 26px !important;
   }
-  .text-paragraph {
+  .f-24 {
+    margin-bottom: 43em;
+    margin-top: 45em;
+
+}
+ /* .text-paragraph {
     font-size: 12px !important;
   }
 
@@ -1022,16 +1041,30 @@ body:focus-visible {
   }
   .heading-florida-lux-listing {
     font-size: 24px !important;
-  }
+  }*/
   .slick-arrow {
     display: none !important;
   }
-
+.info {
+    padding: 8px;
+  }
+  .info-text {
+    font-size: 10px;
+  }
+  .button-view,
+  .button-view1 {
+    padding: 5px 10px;
+  }.property-card {
+    flex-direction: column;
+  }
+  .ant-input-search {
+    width: 100%;
+  }
   /*.ant-row {
     display: flex;
     flex-flow: column;
     min-width: 0;
-  }*/
+  }
   .ant-col-6 {
     max-width: 100% !important;
   }
@@ -1056,16 +1089,16 @@ body:focus-visible {
     overflow: hidden;
 }
 .rec-slide {
-  position: relative; /* Ensure proper positioning of child elements */
+  position: relative; 
   height: 250px;
   width: 98%;
-  overflow: hidden; /* Hide overflowing content */
+  overflow: hidden; 
 }
 .f-24{
   font-size: 24px !important;
 
 }
-
+*/
 
 }
 
@@ -1775,4 +1808,51 @@ body:focus-visible {
   pointer-events: none;
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
+}
+/*allcommuntites*/
+/* Ensure background image covers the whole section */
+.background-image {
+  background-size: cover;
+  background-position: center;
+}
+
+/* Style for the community overlay */
+.community-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.5); /* Optional: Adds a background to text */
+  padding: 10px;
+}
+
+/* Style for the slider container */
+.slider-container {
+  width: 100%;
+  margin-top: 40px;
+}
+
+/* Style for the slider overlay */
+.slider-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 100%;
+}
+
+/* Make the 'See All Neighborhoods' button responsive */
+.button-neighborhood {
+  background-color: #981e59;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.button-neighborhood:hover {
+  background-color: #ff1284;
 }

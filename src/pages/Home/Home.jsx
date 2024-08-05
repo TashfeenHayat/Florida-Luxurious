@@ -10,10 +10,11 @@ import Icons from "../../components/Icons";
 import { useNavigate } from "react-router-dom";
 const { Title, Text } = Typography;
 const { Search } = Input;
+
 function Home() {
   const navigate = useNavigate();
-  const onSearch = (value, _e, info) =>
-    navigate(`/searchcommunity?name=${value}`);
+  const onSearch = (value) => navigate(`/searchcommunity?name=${value}`);
+
   return (
     <div>
       <div className="background-video-container">
@@ -24,42 +25,35 @@ function Home() {
           />
         </video>
       </div>
-      <div className="content-hero w-100">
-        <div className="hero-bg-img-shadow">
-          <Flex
-            justify={"center"}
-            align={"center"}
-            vertical
-            style={{ height: "100%" }}
-          >
-            <Text style={{ color: "#D4CFC9" }} className="text-paragraph">
-              Luxury. Innovation. Excellence.
-            </Text>
-            <Title className="title-home-page f-64">
-              unlock exclusive living <br />
-              explore florida’s finest properties
-            </Title>
-            <Text
-              style={{ color: "#D4CFC9" }}
-              className="text-paragraph text-center"
-            >
-              Discover Your Dream Home in the Heart of Florida with Florida
-              Luxurious Properties
-            </Text>
-            <div className="pt-5">
-              <Search
-                placeholder=""
-                allowClear
-                enterButton={<span className="search-button">Search</span>}
-                size="large"
-                onSearch={onSearch}
-                style={{
-                  width: "80ch",
-                }}
-              />
-            </div>
-          </Flex>
-        </div>
+      <div className="content-hero">
+        <Flex
+          justify="center"
+          align="center"
+          vertical
+          style={{ width: "100%", height: "100%", textAlign: "center" }}
+        >
+          <Text className="text-paragraph">
+            Luxury. Innovation. Excellence.
+          </Text>
+          <Title className="title-home-page">
+            unlock exclusive living <br />
+            explore florida’s finest properties
+          </Title>
+          <Text className="text-paragraph">
+            Discover Your Dream Home in the Heart of Florida with Florida
+            Luxurious Properties
+          </Text>
+         <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }}>
+      <Search
+        placeholder=""
+        allowClear
+        enterButton={<span className="search-button">Search</span>}
+        size="large"
+        onSearch={onSearch}
+        style={{ width: '100%', maxWidth: '600px' }}
+      />
+    </div>
+        </Flex>
       </div>
       <Icons />
       <FloridaProperties />
