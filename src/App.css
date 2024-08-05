@@ -1000,7 +1000,7 @@ body:focus-visible {
   }
 }
 @media screen and (max-width: 678px) {
-  .title-home-page {
+   body .title-home-page {
     font-size: 26px !important;
   }
 .set {
