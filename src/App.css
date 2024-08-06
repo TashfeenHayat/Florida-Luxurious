@@ -946,6 +946,9 @@ body:focus-visible {
   border-radius: 0px;
   margin-top: -90px;
 }
+.global{
+ marginLeft: 50 
+}
 
 /* Media Queries */
 
@@ -998,8 +1001,7 @@ body:focus-visible {
 .search-input {
     width: 60ch;
   }
-}
-@media screen and (max-width: 678px) {
+
    body .title-home-page {
     font-size: 26px !important;
   }
@@ -1007,6 +1009,23 @@ body:focus-visible {
         
         margin-top: 83em;
     }
+    .ourstory{
+      overflow: hidden;
+    }
+   .story-title {
+    color: #000;
+    font-weight: bold;
+    font-size: 39px !important;
+    letter-spacing: 2px;
+    line-height: 0.9;
+}
+.our-title {
+    color: #838383;
+    font-weight: 100;
+    font-size: 43px !important;
+    letter-spacing: 2px;
+    line-height: 22.5px;
+}
 .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
@@ -1039,19 +1058,55 @@ body:focus-visible {
   .ant-input-search {
     width: 100%;
   }
+  .contact-us-content {
+    background-color: #fff;
+    padding: 0rem 1rem 0rem !important;
+    margin: 0.8rem !important;
+}
+
+
   body .contact-us-title {
-    font-size: 35px !important;
-    line-height: 110px !important;
+    font-size: 25px !important;
+    line-height: 60px !important;
     font-weight: 600 !important;
-    letter-spacing: -2.75px !important;
+    letter-spacing: -3px !important;
     color: #1b1b1b !important;
     margin: 0 !important;
     text-align: right;
 }
 body .contact-us-sub {
     color: #838383;
-    font-size: 75px;
+    font-size: 45px;
     margin-top: -20px;
+}
+.globalcontainer{
+  overflow: hidden;
+}
+.f-24 {
+    font-size: 13px !important;
+    margin-right: 2rem;
+}
+.p-5{
+  margin-right: 3rem;
+}
+body .p-5{
+  padding:1rem !important;
+}
+ body .boxshadow-section  {
+    padding: 1rem !important;
+}
+.single_property{
+  overflow: hidden;
+}
+body .properties-single-slideshow-info {
+    position: relative !important;
+    z-index: 4;
+    top: 0%;
+    height: 23rem;
+    background: black;
+    max-width: 550px;
+    padding: 0 15px 0 65px;
+    overflow-y: hidden;
 }
   /*.ant-row {
     display: flex;

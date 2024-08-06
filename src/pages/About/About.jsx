@@ -11,7 +11,7 @@ import Bagde4 from "../../assets/Bagde4.svg";
 const { Title, Text, Paragraph } = Typography;
 function OurStory() {
   return (
-    <>
+    <div className="ourstory">
       <BackgroundImage Image={About}>
         <Title
           style={{ color: "white", lineHeight: "14px", letterSpacing: "2px" }}
@@ -27,7 +27,7 @@ function OurStory() {
               <span className="our-title">Our</span>
               <i className="title-line-story"></i>
               <br />
-              <span style={{ marginLeft: "40px" }} className="story-title">
+              <span style={{ marginLeft: "0px" }} className="story-title">
                 Story
               </span>
             </Title>
@@ -123,7 +123,7 @@ function OurStory() {
       </Row>
       <LetTalk />
       <Icons />
-    </>
+    </div>
   );
 }
 

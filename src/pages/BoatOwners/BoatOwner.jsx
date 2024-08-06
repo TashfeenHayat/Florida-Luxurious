@@ -1125,7 +1125,7 @@ function BoatOwner() {
     <>
       <BackgroundImage Image={BoatImage}>
         <Title
-          style={{ color: "white", lineHeight: "14px", letterSpacing: "2px" }}
+          style={{ color: "white", lineHeight: "40px", letterSpacing: "2px",textAlign: "center" }}
           className="text-upper f-50 f-100"
         >
           Boat owners

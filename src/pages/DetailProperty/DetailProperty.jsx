@@ -107,8 +107,8 @@ export default function DetailProperty() {
     });
   }, [google_api_key, data?.property?.latitude, data?.property?.longitude]);
   return (
-    <>
-      <div style={{ position: "relative", overflowX: "hidden" }}>
+    <div className="single_property">
+      <div style={{ position: "relative", overflowX: "hidden" }} >
         <Image
           preview={false}
           src={
@@ -626,6 +626,6 @@ export default function DetailProperty() {
         </Container>
       </div>
       <LetTalk />
-    </>
+    </div>
   );
 }

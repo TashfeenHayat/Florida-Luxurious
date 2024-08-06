@@ -9,6 +9,7 @@ import useGlobalProperties from "../../hooks/useGlobalProperty";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 
 const { Title, Text, Paragraph } = Typography;
+
 function GlobalPartner() {
   const [currentPage, setCurrentPage] = useState(1);
   const [showGlobalProperties, setShowGlobalProperties] = useState(true);
@@ -47,19 +48,18 @@ function GlobalPartner() {
       };
       setShowGlobalProperties(false);
     }
-    // Create script element for the external JS file
 
     // Clean up the script when the component is unmounted
     return () => {
       document.body.removeChild(script);
     };
   }, []);
+
   return (
-    <div>
+    <div className="globalcontainer">
       <BackgroundImage Image={BoatImage}>
-        {" "}
-        <Title
-          style={{ color: "white", lineHeight: "14px", letterSpacing: "2px" }}
+       <Title
+          style={{ color: "white", lineHeight: "41px", letterSpacing: "2px" ,textAlign:"center" }}
           className="text-upper f-50 f-100"
         >
           Global properties
@@ -70,15 +70,15 @@ function GlobalPartner() {
         <Text className="f-40 text-black text-center text-upper f-bold">
           Luxurious
         </Text>{" "}
-        Properties GLOBAL
+        Properties GLOBAL
       </Paragraph>
       <Row gutter={[60, 60]} className="py-2">
         <Col lg={12} md={24} sm={24}>
           <div style={{ marginLeft: 50 }}>
             <Flex vertical justify={"center"} align="center">
               <Text
-                className="text-black f-24 "
-                style={{ textTransform: "capitalize" }}
+                className="text-black f-24"
+                style={{ textTransform: "capitalize", overflow: "hidden" }}
               >
                 Florida Luxurious Properties has a longstanding affiliation with
                 a worldwide collection of more than 125,000 brokers covering 62
@@ -87,8 +87,8 @@ function GlobalPartner() {
                 of this hand – selected group of top brokers representing the
                 finest luxury properties across the globe. With collective sales
                 of over $240 Billion of real estate annually, it is the most
-                elite and  comprehensive luxury real estate network in the
-                world. Who’s Who in Luxury Real Estate’s is showcased on
+                elite and comprehensive luxury real estate network in the world.
+                Who’s Who in Luxury Real Estate’s is showcased on
                 LuxuryRealEstate.com the No.1 portal for luxury properties
                 online, allowing Florida Luxurious Properties to present our
                 exclusive inventory to more than any near-peer.
@@ -121,7 +121,7 @@ function GlobalPartner() {
                 style={{ background: "black" }}
                 className="p-5 text-center my-5"
               >
-                <Text className="text-white f-bold f-32 text-center ">
+                <Text className="text-white f-bold f-32 text-center">
                   WINNER
                 </Text>
                 <br />
@@ -137,6 +137,7 @@ function GlobalPartner() {
             src={Globalpartnerimg}
             className="bg-img-shadow"
             preview={false}
+            style={{ width: "100%" }}
           />
         </Col>
       </Row>
