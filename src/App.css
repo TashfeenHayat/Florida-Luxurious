@@ -1033,7 +1033,8 @@ body:focus-visible {
     padding-right: calc(var(--bs-gutter-x)* .5);
     padding-left: calc(var(--bs-gutter-x)* .5);
     margin-right: auto;
-    margin-left: auto;
+    margin-left: 1rem;
+    padding: 2rem;
     overflow: hidden;
 }
 .search-input {
@@ -1098,16 +1099,11 @@ body .p-5{
 .single_property{
   overflow: hidden;
 }
-body .properties-single-slideshow-info {
-    position: relative !important;
-    z-index: 4;
-    top: 0%;
-    height: 23rem;
-    background: black;
-    max-width: 550px;
-    padding: 0 15px 0 65px;
-    overflow-y: hidden;
+.card-feature {
+    border-radius: 0px;
+    margin-top: -32px;
 }
+ 
   /*.ant-row {
     display: flex;
     flex-flow: column;

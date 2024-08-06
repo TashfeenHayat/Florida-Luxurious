@@ -299,92 +299,74 @@ export default function DetailProperty() {
           </Col>
           <Col lg={12} xs={24} sm={24} className="p-5">
             <div>
-              <Row gutter={[8, 16]}>
-                <Col lg={12} sm={24} md={24}>
-                  <Image
-                    src={data?.mls?.photos[0]}
-                    width="100%"
-                    onClick={(e) =>
-                      setBackGroundImage(e.target.getAttribute("src"))
-                    }
-                    style={{ cursor: "pointer" }}
-                    preview={false}
-                    fallback="https://placehold.co/272x215"
-                  />
-                </Col>
-                <Col lg={12} sm={24} md={24}>
-                  <Image
-                    src={data?.mls?.photos[1]}
-                    width="100%"
-                    onClick={(e) =>
-                      setBackGroundImage(e.target.getAttribute("src"))
-                    }
-                    style={{ cursor: "pointer" }}
-                    preview={false}
-                    fallback="https://placehold.co/272x215"
-                  />
-                </Col>
-                <Col lg={12} sm={24} md={24}>
-                  <Image
-                    src={data?.mls?.photos[2]}
-                    width="100%"
-                    onClick={(e) =>
-                      setBackGroundImage(e.target.getAttribute("src"))
-                    }
-                    style={{ cursor: "pointer" }}
-                    preview={false}
-                    fallback="https://placehold.co/272x215"
-                  />
-                </Col>
-                <Col lg={12} sm={24} md={24}>
-                  <div
-                    style={{ background: "#1C1C1C", height: "100%" }}
-                    onClick={showModal}
-                  >
-                    <Flex
-                      style={{ height: "100%", cursor: "pointer" }}
-                      justify="center"
-                      align="center"
-                    >
-                      <FaPlus size={60} color="#D4CFC9" />
-                    </Flex>
+    <Row gutter={[8, 16]}>
+      {/* Image Columns */}
+      {[0, 1, 2].map(index => (
+        <Col key={index} xs={24} sm={12} md={8} lg={8} xl={8}>
+          <Image
+            src={data?.mls?.photos[index]}
+            width="100%"
+            onClick={(e) =>
+              setBackGroundImage(e.target.getAttribute("src"))
+            }
+            style={{ cursor: "pointer" }}
+            preview={false}
+            fallback="https://placehold.co/272x215"
+          />
+        </Col>
+      ))}
 
-                    <Modal
-                      open={openModal}
-                      footer={null}
-                      styles={{
-                        content: {
-                          backgroundColor: "black",
-                          borderRadius: "0px",
-                          height: "400px",
-                          overflowY: "auto",
-                          padding: "3rem",
-                        },
-                      }}
-                      width={"700px"}
-                      closeIcon={<IoMdClose size={20} color={"#FFFFFF"} />}
-                    >
-                      <Row gutter={[8, 16]}>
-                        {data?.mls?.photos?.map((item, index) => (
-                          <Col lg={8} md={12} sm={24}>
-                            <Image
-                              src={item}
-                              width="100%"
-                              onClick={(e) =>
-                                setBackGroundImage(e.target.getAttribute("src"))
-                              }
-                              style={{ cursor: "pointer" }}
-                              preview={false}
-                              fallback="https://placehold.co/195x154"
-                            />
-                          </Col>
-                        ))}
-                      </Row>
-                    </Modal>
-                  </div>
+      {/* Modal Trigger */}
+      <Col xs={24} sm={12} md={8} lg={8} xl={8}>
+        <div
+          style={{ background: "#1C1C1C", height: "100%" }}
+          onClick={showModal}
+        >
+          <Flex
+            style={{ height: "100%", cursor: "pointer" }}
+            justify="center"
+            align="center"
+          >
+            <FaPlus size={60} color="#D4CFC9" />
+          </Flex>
+
+          <Modal
+            open={openModal}
+            footer={null}
+            styles={{
+              content: {
+                backgroundColor: "black",
+                borderRadius: "0px",
+                height: "400px",
+                overflowY: "auto",
+                padding: "3rem",
+              },
+            }}
+            width={"700px"}
+            closeIcon={<IoMdClose size={20} color={"#FFFFFF"} />}
+            onCancel={() => {}}
+          >
+            <Row gutter={[8, 16]}>
+              {data?.mls?.photos?.map((item, index) => (
+                <Col key={index} xs={12} sm={8} md={6} lg={6} xl={6}>
+                  <Image
+                    src={item}
+                    width="100%"
+                    onClick={(e) =>
+                      setBackGroundImage(e.target.getAttribute("src"))
+                    }
+                    style={{ cursor: "pointer" }}
+                    preview={false}
+                    fallback="https://placehold.co/195x154"
+                  />
                 </Col>
-              </Row>
-            </div>
+              ))}
+            </Row>
+          </Modal>
+        </div>
+      </Col>
+    </Row>
+  </div>
             <Flex
               vertical
               justify={"center"}
@@ -490,6 +472,8 @@ export default function DetailProperty() {
       </div>
       <Flex
         gap={30}
+       
+        style={{ overflow: 'hidden' }}
         className="mt-5 mb-5"
         justify="center"
         align="center"
