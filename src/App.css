@@ -965,6 +965,9 @@ body:focus-visible {
   .our-story-bg {
     margin-right: 0px !important;
   }
+  .search-button{
+    display: none !important;
+  }
   .bg-img-logo {
     background-size: cover !important;
   }
@@ -1087,15 +1090,11 @@ body .contact-us-sub {
     font-size: 13px !important;
     margin-right: 2rem;
 }
-.p-5{
-  margin-right: 3rem;
-}
+
 body .p-5{
   padding:1rem !important;
 }
- body .boxshadow-section  {
-    padding: 1rem !important;
-}
+ 
 .single_property{
   overflow: hidden;
 }
@@ -1103,7 +1102,25 @@ body .p-5{
     border-radius: 0px;
     margin-top: -32px;
 }
+.f-32 {
+    font-size: 25px;
+}
+ .button-secondary-line-left{
+      margin-left: 33px;
+ }
+ .agent-description{
+      font-size: 21px !important;
+ }
+  body .agent-first-name{
+      font-size: 58px !important;
+ }
+body  .agent-last-name{
+      font-size: 40px !important;
+    margin-left: 97px;
+ }
+ .agent-estate{    margin-left: 25px;}
  
+
   /*.ant-row {
     display: flex;
     flex-flow: column;
@@ -1182,8 +1199,17 @@ body .p-5{
 }
 
 
-
-
+.agent-first-name{
+  font-size: 70px !important;
+  
+}
+.agent-last-name {
+    color: black;
+    font-weight: 100;
+    font-size: 72px !important;
+    letter-spacing: -4%;
+    line-height: 0.8;
+}
 .detail-property .ant-input::placeholder {
   color: #838383;
   font-size: 16px;
@@ -1935,3 +1961,5 @@ body .p-5{
 .button-neighborhood:hover {
   background-color: #ff1284;
 }
+
+

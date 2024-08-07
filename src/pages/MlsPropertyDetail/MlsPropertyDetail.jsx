@@ -464,7 +464,7 @@ export default function DetailProperty() {
             </Col>
             <Col lg={10} md={24} sm={24}>
               <div className="pt-5">
-                <div ref={mapRef} style={{ height: "500px", width: "100%" }} />;
+                <div ref={mapRef} style={{ height: "500px", width: "32rem" }} />;
               </div>
             </Col>
           </Row>

@@ -47,7 +47,7 @@ function Home() {
       <Search
         placeholder=""
         allowClear
-        enterButton={<span className="">Search</span>}
+        enterButton={<span className="search-button sm">Search</span>}
         size="large"
         onSearch={onSearch}
         style={{ width: '100%', maxWidth: '600px' }}

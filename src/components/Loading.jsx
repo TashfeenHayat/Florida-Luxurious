@@ -1,17 +1,20 @@
 import React from "react";
+import { Row, Col } from "antd";
 import LoadingImage from "../assets/LoadingFlorida.gif";
+
 function Loading() {
   return (
-    <div
+    <Row
+      justify="center"
+      align="middle"
       style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
         height: "100vh",
       }}
     >
-      <img src={LoadingImage} width={"50%"} />
-    </div>
+      <Col xs={24} sm={18} md={12} lg={8} xl={6}>
+        <img src={LoadingImage} style={{ width: "100%" }} alt="Loading" />
+      </Col>
+    </Row>
   );
 }
 

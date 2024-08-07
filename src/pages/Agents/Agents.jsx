@@ -18,8 +18,8 @@ function Agents() {
       <div className="team-banner">
         <div className="team-banner-shadow">
           <Flex justify={"center"} align="center">
-            <Title className="text-upper text-white f-50 f-100">
-              Find Your Advisor
+            <Title className="text-upper text-white f-50 f-100" style={{textAlign:"center"}}>
+           Meet The Team
             </Title>
           </Flex>
         </div>
@@ -29,7 +29,7 @@ function Agents() {
         <Container className="py-5">
           <Row gutter={[20, 60]}>
             <Col lg={24} md={24} sm={24} xs={24}>
-              <Title className="text-center f-100 text-upper">Our Agents</Title>
+              <Title className="text-center f-100 text-upper">Our Team Member</Title>
             </Col>
             {isLoading ? (
               <Flex justify={"center"} align="center" className="w-100">
