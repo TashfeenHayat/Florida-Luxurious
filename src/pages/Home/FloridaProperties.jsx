@@ -14,11 +14,11 @@ const [counter, setCounter] = useState(1831197188); // Starting value
 
   useEffect(() => {
     
-    const target = 3000000000; // total value
+    const target = 3245291899; // total value
 
     
-    const duration = 50000; 
-    const intervalTime = 50; 
+    const duration = 500000; 
+    const intervalTime = 30; 
     const increment = (target - counter) / (duration / intervalTime);
 
     // Set up the interval
