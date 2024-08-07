@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useEffect ,useState} from "react";
 import { Col, Flex, Row, Typography } from "antd";
 import DownArrow from "../../assets/downarrow.svg";
 import Bagde from "../../assets/award19.svg";
@@ -10,6 +10,29 @@ import Bagde4 from "../../assets/award23.svg";
 
 const { Title, Text } = Typography;
 function FloridaProperties() {
+const [counter, setCounter] = useState(1831197188); // Starting value
+
+  useEffect(() => {
+    
+    const target = 3000000000; // total value
+
+    
+    const duration = 50000; 
+    const intervalTime = 50; 
+    const increment = (target - counter) / (duration / intervalTime);
+
+    // Set up the interval
+    const interval = setInterval(() => {
+      setCounter((prev) => {
+        const newValue = Math.min(prev + increment, target);
+        return newValue;
+      });
+    }, intervalTime);
+    if (counter >= target) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [counter]);
   return (
     <div
       className="bg-img-logo"
@@ -95,7 +118,7 @@ function FloridaProperties() {
                 data-aos="fade-left"
                 data-aos-duration="1500"
               >
-                $1.8 BILLION <br />
+                $3 BILLION <br />
                 <Text className="text-gray text-upper f-16">
                   Has exceeded the mark
                 </Text>
@@ -107,7 +130,7 @@ function FloridaProperties() {
                 data-aos="fade-left"
                 data-aos-duration="1500"
               >
-                $1,831,197,188 <br />{" "}
+                ${counter.toLocaleString()} <br />{" "}
                 <Text className="text-gray text-upper f-16 ">Total Sales</Text>
               </Title>
             </Flex>
