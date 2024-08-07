@@ -14,10 +14,10 @@ const [counter, setCounter] = useState(1831197188); // Starting value
 
   useEffect(() => {
     
-    const target = 3245291899; // total value
+    const target = 3005291899; // total value
 
     
-    const duration = 500000; 
+    const duration = 500; 
     const intervalTime = 30; 
     const increment = (target - counter) / (duration / intervalTime);
 
@@ -130,7 +130,7 @@ const [counter, setCounter] = useState(1831197188); // Starting value
                 data-aos="fade-left"
                 data-aos-duration="1500"
               >
-                ${counter.toLocaleString()} <br />{" "}
+                 ${Math.floor(counter).toLocaleString()} <br />{" "}
                 <Text className="text-gray text-upper f-16 ">Total Sales</Text>
               </Title>
             </Flex>

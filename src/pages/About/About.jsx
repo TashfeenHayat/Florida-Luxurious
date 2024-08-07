@@ -8,8 +8,34 @@ import Bagde from "../../assets/Bagde1.svg";
 import Bagde2 from "../../assets/Bagde2.svg";
 import Bagde3 from "../../assets/Bagde3.svg";
 import Bagde4 from "../../assets/Bagde4.svg";
+import { useState,useEffect } from "react";
 const { Title, Text, Paragraph } = Typography;
 function OurStory() {
+  const [counter, setCounter] = useState(1831197188); // Starting value
+
+  useEffect(() => {
+    
+    const target = 30052918000; // total value
+
+    
+    const duration = 5000; 
+    const intervalTime = 30; 
+    const increment = (target - counter) / (duration / intervalTime);
+  const interval = setInterval(() => {
+      setCounter((prev) => {
+        const newValue = Math.min(prev + increment, target);
+        return newValue;
+      });
+    }, intervalTime);
+
+    // Clear the interval when the target is reached
+    if (counter >= target) {
+      clearInterval(interval);
+    }
+
+    // Cleanup function to clear the interval on unmount
+    return () => clearInterval(interval)
+  }, [counter]);
   return (
     <div className="ourstory">
       <BackgroundImage Image={About}>
@@ -83,7 +109,7 @@ function OurStory() {
                   Has exceeded the mark
                 </Text>
                 <br />
-                <Text className="text-white text-upper f-40">$1.8 BILLION</Text>
+                <Text className="text-white text-upper f-40">$3 BILLION</Text>
               </div>
             </Col>
             <Col xl={8} lg={12} md={12} sm={12}>
@@ -93,7 +119,7 @@ function OurStory() {
                 <Text className="text-gray f-16 text-upper">Total Sales</Text>
                 <br />
                 <Text className="text-white text-upper f-40">
-                  $1,831,197,188
+                   ${Math.floor(counter).toLocaleString()}
                 </Text>
               </div>
             </Col>

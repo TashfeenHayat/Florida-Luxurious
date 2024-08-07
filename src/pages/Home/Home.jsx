@@ -43,16 +43,39 @@ function Home() {
             Discover Your Dream Home in the Heart of Florida with Florida
             Luxurious Properties
           </Text>
-         <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center' }}>
-      <Search
-        placeholder=""
-        allowClear
-        enterButton={<span className="search-button sm">Search</span>}
-        size="large"
-        onSearch={onSearch}
-        style={{ width: '100%', maxWidth: '600px' }}
-      />
-    </div>
+       <div
+  style={{
+    marginTop: '1rem',
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+    padding: '0 1rem', // Optional: Adds some padding for small screen devices
+  }}
+>
+  <Search
+    placeholder=""
+    allowClear
+    enterButton={
+      <span
+        className="search-button sm"
+        style={{
+          width: 'auto', // Adjust width to auto for button content
+          padding: '0 1rem', // Add some padding for better look
+        }}
+      >
+        Search
+      </span>
+    }
+    size="large"
+    onSearch={onSearch}
+    style={{
+      width: '40%', // Use percentage for adaptive sizing
+      maxWidth: '500px', // Optional: Limit max width for larger screens
+      minWidth: '250px',
+      overflow:"hidden" // Optional: Ensure a minimum width for smaller screens
+    }}
+  />
+</div>
         </Flex>
       </div>
       <Icons />

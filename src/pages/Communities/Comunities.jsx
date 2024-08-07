@@ -143,38 +143,53 @@ function Comunities() {
               </Row>
             </Container>
           </div>
-          <div className="py-5">
-            <Row gutter={[16, 60]} align="middle">
-              <Col lg={12} md={24} sm={24}>
-                <div className="d-flex-story-center">
+       <div className="py-5">
+            <Row gutter={[60, 60]} align="middle">
+              <Col lg={8} md={24} sm={0}>
+                <div>
                   <div
-                    className="our-story-bg p-5"
-                    data-aos="fade-down-right"
-                    data-aos-duration="2000"
+                    className="d-flex-story-center"
+                    style={{ marginLeft: "200" }}
                   >
-                    <Flex justify={"space-between"}>
-                      <Flex vertical>
-                        <Title
-                          level={2}
-                          className="our-story-title text-upper"
-                        >
-                          Condominium Options
-                        </Title>
+                    <div
+                      className="our-story-bg p-5"
+                      data-aos="fade-down-right"
+                      data-aos-duration="2000"
+                    >
+                      <Flex justify={"space-between"}>
+                        <Flex vertical>
+                          <Title
+                            level={2}
+                            className="our-story-title text-upper"
+                          >
+                            {" "}
+                            Condominium Options
+                          </Title>
+                        </Flex>
                       </Flex>
-                    </Flex>
-                    <Flex vertical>
-                      <Text className="our-story-text f-100 f-16 text-white text-left">
-                        {data?.condominiumOptions}
-                      </Text>
-                    </Flex>
+                      <Flex vertical>
+                        <Text className="our-story-text f-100 f-16 text-white text-left">
+                          {data?.condominiumOptions}
+                        </Text>
+                      </Flex>
+                    </div>
                   </div>
                 </div>
               </Col>
-              <Col lg={12} md={24} sm={24} className="py-4">
+              <Col
+                lg={16}
+                md={0}
+                xs={0}
+                sm={0}
+                className="py-4"
+                data-aos="fade-down-left"
+                data-aos-duration="2000"
+              >
                 <Image src={Story} preview={false} width="100%" />
               </Col>
             </Row>
           </div>
+
           <Container className="py-5">
             <Title className="f-40 f-100 text-center text-upper">
               Search {data?.name} Luxury Homes For Sale
