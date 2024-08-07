@@ -19,7 +19,7 @@ function Agents() {
         <div className="team-banner-shadow">
           <Flex justify={"center"} align="center">
             <Title className="text-upper text-white f-50 f-100" style={{textAlign:"center"}}>
-           Meet The Team
+           Meet The Team 
             </Title>
           </Flex>
         </div>
