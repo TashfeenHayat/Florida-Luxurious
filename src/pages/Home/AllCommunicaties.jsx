@@ -56,7 +56,7 @@ function Allcommunities() {
     <>
       <BackgroundImage Image={BoatImage}>
         <Title
-          style={{ color: "white", lineHeight: "47px", letterSpacing: "2px", textAlign:'center' }}
+          style={{ color: "white", lineHeight: "46px", letterSpacing: "2px", textAlign: "center" }}
           className="text-upper f-50 f-100"
         >
           All Communities
@@ -64,7 +64,7 @@ function Allcommunities() {
       </BackgroundImage>
       <div style={{ paddingTop: 98, paddingBottom: 98 }}>
         <Title className="florida-heading-feature-negibour" level={1}>
-          Feature Neighborhoods
+          Featured Communties
         </Title>
         <Row className="px-4">
           {sortingArr.map((community, index) => (
@@ -98,7 +98,7 @@ function Allcommunities() {
 
                     <button
                       className="button-view1"
-                      onClick={() => navigate(`/all-communities`)}
+                      onClick={() => navigate(`/community/${community?._id}`)}
                     >
                       View
                     </button>
