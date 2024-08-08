@@ -59,7 +59,7 @@ function Header() {
                 </Menu.Item>
                 <Menu.Item>
                   <Link
-                    href="https://www.antgroup.com"
+                 to="/all-communities"
                     rel="noopener noreferrer"
                     className="text-upper  f-10"
                   >

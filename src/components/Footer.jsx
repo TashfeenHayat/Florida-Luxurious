@@ -11,7 +11,9 @@ function Footer() {
   const { loading } = useSelector((s) => s.contactUsReducer);
 
   const { data, isLoading } = useCommunities(20, 1);
-
+const sortcommunity = [...(data?.filters ?? [])].sort((a, b) => a?.name?.localeCompare(b?.name))
+const community6=sortcommunity.slice(0, 6) 
+const navigate=useNavigate()
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -130,7 +132,7 @@ function Footer() {
                 <Col lg={12}>
                   <Text className="text-upper f-24 f-bold">Communities</Text>
                   <Flex className="pt-2" vertical gap={10}>
-                    {data?.filters.map((item, index) => (
+                    {community6.map((item, index) => (
                       <Link
                         key={index}
                         className="text-upper f-14 text-black"
@@ -139,7 +141,7 @@ function Footer() {
                       >
                         {item?.name}
                       </Link>
-                    ))}
+                    ))}<Text className="text-upper f-14 text-black"  style={{cursor: "pointer"}}  onClick={() => navigate("/all-communities")}>View All</Text>
                   </Flex>
                 </Col>
               </Col>

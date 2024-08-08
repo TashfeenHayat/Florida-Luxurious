@@ -56,7 +56,7 @@ function Allcommunities() {
     <>
       <BackgroundImage Image={BoatImage}>
         <Title
-          style={{ color: "white", lineHeight: "14px", letterSpacing: "2px" }}
+          style={{ color: "white", lineHeight: "47px", letterSpacing: "2px", textAlign:'center' }}
           className="text-upper f-50 f-100"
         >
           All Communities
@@ -98,7 +98,7 @@ function Allcommunities() {
 
                     <button
                       className="button-view1"
-                      onClick={() => navigate(`/community/${community?._id}`)}
+                      onClick={() => navigate(`/all-communities`)}
                     >
                       View
                     </button>
