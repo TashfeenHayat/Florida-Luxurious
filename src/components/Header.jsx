@@ -63,7 +63,7 @@ function Header() {
                     rel="noopener noreferrer"
                     className="text-upper  f-10"
                   >
-                    Featured neighborhood
+                    Featured Communties
                   </Link>
                 </Menu.Item>
                 <Menu.Item>

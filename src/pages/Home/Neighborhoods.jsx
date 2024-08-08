@@ -52,7 +52,7 @@ function Neighborhoods() {
   return (
     <div style={{ paddingTop: 98, paddingBottom: 98 }}>
       <Title className="florida-heading-feature-negibour" level={1}>
-        Feature Neighborhoods
+        Featured Communities 
       </Title>
       <Row className="px-4">
         <Col lg={6}>

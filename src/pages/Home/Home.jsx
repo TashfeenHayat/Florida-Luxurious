@@ -32,17 +32,19 @@ function Home() {
           vertical
           style={{ width: "100%", height: "115%", textAlign: "center" }}
         >
-          <Text className="text-paragraph">
+         {/*<Text className="text-paragraph ">
             Luxury. Innovation. Excellence.
-          </Text>
+          </Text>*/} 
           <Title className="title-home-page">
-            unlock exclusive living <br />
-            explore florida’s finest properties
+             Luxury. Innovation. Excellence.
+           
           </Title>
           <Text className="text-paragraph">
-            Discover Your Dream Home in the Heart of Florida with Florida
-            Luxurious Properties
-          </Text>
+             unlock exclusive living <br />
+            explore florida’s finest properties
+            
+          </Text>{/*Discover Your Dream Home in the Heart of Florida with Florida
+            Luxurious Properties*/}
        <div
   style={{
     marginTop: '1rem',
@@ -57,7 +59,7 @@ function Home() {
     allowClear
     enterButton={
       <span
-        className="search-button sm"
+        className="search-button"
         style={{
           width: 'auto', // Adjust width to auto for button content
           padding: '0 1rem', // Add some padding for better look
@@ -69,10 +71,10 @@ function Home() {
     size="large"
     onSearch={onSearch}
     style={{
-      width: '40%', // Use percentage for adaptive sizing
-      maxWidth: '500px', // Optional: Limit max width for larger screens
+      width: '90%', 
+      maxWidth: '500px',
       minWidth: '250px',
-      overflow:"hidden" // Optional: Ensure a minimum width for smaller screens
+      overflow:"hidden" 
     }}
   />
 </div>
