@@ -98,7 +98,7 @@ function OurStory() {
                   Ranked Private Brokerage
                 </Text>
                 <br />
-                <Text className="text-white text-upper f-40">#1</Text>
+                <Text className="text-white text-upper " style={{fontSize:'30px', }}>#1</Text>
               </div>
             </Col>
             <Col xl={8} lg={12} md={12} sm={12}>
@@ -109,7 +109,7 @@ function OurStory() {
                   Has exceeded the mark
                 </Text>
                 <br />
-                <Text className="text-white text-upper f-40">$3 BILLION</Text>
+                <Text className="text-white text-upper " style={{fontSize:'30px', }}>$3 BILLION</Text>
               </div>
             </Col>
             <Col xl={8} lg={12} md={12} sm={12}>
@@ -118,7 +118,7 @@ function OurStory() {
               >
                 <Text className="text-gray f-16 text-upper">Total Sales</Text>
                 <br />
-                <Text className="text-white text-upper f-40">
+                <Text className="text-white text-upper " style={{fontSize:'30px', }}>
                    ${Math.floor(counter).toLocaleString()}
                 </Text>
               </div>

@@ -45,7 +45,7 @@ function LetTalk() {
                 letterSpacing: "1px",
                 fontSize: "24px",
                 textAlign: "center",
-                width: "45%",
+                  maxWidth: "550px",
                 fontWeight: 100,
               }}
               data-aos="fade-left"

@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Flex, Button, Spin, Image } from "antd";
+import { Typography, Flex, Col, Row, Button, Spin, Image } from "antd";
 import { useNavigate } from "react-router-dom";
 import BackArrow from "../../assets/backArrow.svg";
 import NextArrow from "../../assets/nextArrow.svg";
@@ -7,13 +7,11 @@ import Slider from "react-slick";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 import { Container } from "react-bootstrap";
 import useProperties from "../../hooks/useProperties";
-
-const { Paragraph, Text } = Typography;
-
+const { Title, Text, Paragraph } = Typography;
 function FeatureListing() {
   const { data, isLoading } = useProperties();
+  console.log(data?.properties);
   const navigate = useNavigate();
-
   const CustomPrevArrow = (props) => {
     const { className, style, onClick } = props;
     return (
@@ -53,7 +51,7 @@ function FeatureListing() {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToScroll: 2,
         },
       },
       {
@@ -72,6 +70,7 @@ function FeatureListing() {
           nextArrow: false,
         },
       },
+      // Add more breakpoints as needed
     ],
   };
 
@@ -81,7 +80,6 @@ function FeatureListing() {
         className="heading-florida-lux-listing"
         data-aos="fade-down-left"
         data-aos-duration="2000"
-        style={{ textAlign: "center" }}
       >
         Featured{" "}
         <Text
@@ -93,7 +91,7 @@ function FeatureListing() {
         Listing
       </Paragraph>
       {isLoading ? (
-        <Flex justify={"center"}>
+        <Flex justify={"center"} xs={24} sm={12} md={8} lg={6}>
           <Spin size="large" />
         </Flex>
       ) : (
@@ -105,19 +103,19 @@ function FeatureListing() {
               style={{
                 marginTop: 65,
                 marginBottom: 65,
+                overflow:'hidden'
               }}
               className="features_section_slider"
               data-aos="fade-down-left"
               data-aos-duration="2000"
+              xs={24} sm={12} md={8} lg={6}
             >
               <div className="meet-slider-width">
                 <Slider {...settings}>
-                  {data?.properties.map((properties) => (
+                  {data?.properties.map((properties, index) => (
                     <div
-                      key={properties._id}
                       className="displayy-teamimg-center"
                       onClick={() => navigate(`/features/${properties._id}`)}
-                      style={{ cursor: "pointer" }}
                     >
                       <Image
                         src={
@@ -129,26 +127,29 @@ function FeatureListing() {
                         fallback="https://placehold.co/618x489"
                         preview={false}
                       />
+
                       <div className="info">
-                        <Flex justify={"space-between"} align={"center"} direction="column" style={{ textAlign: "center" }}>
-                          <Button className="button-view">View All </Button>
-                          <Flex justify={"center"} align={"center"}>
+                        <Flex justify={"space-between"} align={"center"} xs={24} sm={12} md={8} lg={6}>
+                          <button className="button-view">View All </button>
+                          <Flex>
                             <IoLocationOutline color="white" size={20} />
                             <Text
                               className="f-14 f-bold text-white"
-                              style={{ textAlign: "center" }}
+                              style={{ textAlign: "right" }}
                             >
                               {properties?.addressLine1}
                               <br />
                               <IoPricetagOutline size={20} /> ${" "}
                               {properties.salePrice}
+                              {/* {Number(properties?.salePrice).toLocaleString()} */}
                             </Text>
                           </Flex>
                         </Flex>
                       </div>
+
                       <div className="show-info">
                         <div style={{ background: "#fff", height: "50px" }}>
-                          <Flex
+                          <Flex xs={24} sm={12} md={8} lg={6}
                             justify={"space-between"}
                             align={"center"}
                             style={{ height: "100%" }}
@@ -177,10 +178,9 @@ function FeatureListing() {
           <Flex
             justify="center"
             align="center"
-            style={{ marginTop: 30 }}
             onClick={() => navigate("/properties")}
           >
-            <Button className="button-view1">View All</Button>
+            <button className="button-view1">View All</button>
           </Flex>
         </>
       )}

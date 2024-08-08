@@ -8,6 +8,10 @@ import { useNavigate } from "react-router-dom";
 const { Title, Text, Paragraph } = Typography;
 function Neighborhoods() {
   const { data, isLoading } = useCommunities(20, 1);
+  console.log(data?.filters,"ali")
+ const sortingArr = [...(data?.filters ?? [])].sort((a, b) => a?.name?.localeCompare(b?.name));
+  console.log(sortingArr,"bitch sort")
+    const displayedCommunities = sortingArr.slice(0, 6);
   const navigate = useNavigate();
 
   const settings = {
@@ -80,7 +84,7 @@ function Neighborhoods() {
             </div>
           </div>
         </Col>
-        {data?.filters?.map((community, index) => (
+        {displayedCommunities.map((community, index) => (
           <Col lg={6} md={12} sm={24} key={index} className="">
             <div className="displayy-teamimg-center show-btn-community-home ">
               <img
@@ -125,11 +129,11 @@ function Neighborhoods() {
           onClick={() => navigate("/all-communities")}
           style={{ cursor: "pointer" }}
         >
-          <div className="displayy-teamimg-center show-btn-community-home ">
+           <div className="displayy-teamimg-center show-btn-community-home ">
             <div style={{ background: "black" }} className="communities-grid">
               <div
                 style={{
-                  position: "absolute",
+                position:"relative",
                   top: "50%",
                   left: "0%",
                   width: "100%",
@@ -139,7 +143,7 @@ function Neighborhoods() {
                   justify={"center"}
                   align={"center"}
                   style={{ width: "95%" }}
-                  vertical
+               
                 >
                   <Text className="text-upper text-white f-24 f-100">
                     View All

@@ -959,9 +959,13 @@ body:focus-visible {
   .text-1024 {
     font-size: 9px;
   }
+  .communities-grid{
+    width: 22rem !important;
+  }
 }
 
 @media screen and (max-width: 768px) {
+  
   .our-story-bg {
     margin-right: 0px !important;
   }
@@ -1303,7 +1307,9 @@ body  .agent-last-name{
   background-repeat: no-repeat;
   background-size: cover;
 }
-
+..button-view {
+  padding:9px !important;
+}
 /* Property Deatil */
 
 .properties-single-slideshow-info {
@@ -1642,7 +1648,7 @@ body  .agent-last-name{
 .story-title {
   color: #000;
   font-weight: bold;
-  font-size: 80px;
+  font-size: 76px;
   letter-spacing: 2px;
   line-height: 0.9;
 }
@@ -1949,17 +1955,5 @@ body  .agent-last-name{
 }
 
 /* Make the 'See All Neighborhoods' button responsive */
-.button-neighborhood {
-  background-color: #981e59;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  padding: 10px 20px;
-  font-size: 16px;
-}
-
-.button-neighborhood:hover {
-  background-color: #ff1284;
-}
 
 

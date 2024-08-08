@@ -34,7 +34,7 @@ function Footer() {
   return (
     <div className="bg-footer">
       <div className="footer-bg-img-shadow">
-        <Row align={""} >
+        <Row align={""}>
           <Col span={6} align="">
             <Image src={FooterLogo} width="60%" preview={false} />
           </Col>
@@ -58,7 +58,7 @@ function Footer() {
                         className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >
-                        Featured Communities
+                        Featured NEIGHBORHOODS
                       </Link>
                       <Link
                         className="text-upper f-14 text-black"
@@ -150,7 +150,7 @@ function Footer() {
           <Col span={24} align={"bottom"}>
             <Paragraph className="f-24" style={{ fontWeight: 100 }}>
               BROWARD COUNTY'S <br />
-              <Text className="f-bold f-24">#1 RANKED </Text>
+              <Text className="f-bold f-24">#1 RANKED</Text>
               <br />
               PRIVATE LUXURY BROKERAGE
             </Paragraph>

@@ -58,7 +58,7 @@ function Agents() {
                           className=""
                           preview={false}
                           fallback="https://placehold.co/300x388"
-                          style={{ aspectRatio: "5/6" }}
+                          style={{ aspectRatio: "5/7.5" , objectFit: "cover"}}
                         />
                       }
                       bImg={
@@ -71,7 +71,7 @@ function Agents() {
                           className="img-op1"
                           preview={false}
                           fallback="https://placehold.co/300x388"
-                          style={{ aspectRatio: "5/6" }}
+                          style={{ aspectRatio: "5/7.5" , objectFit: "cover"}}
                         />
                       }
                     >
@@ -152,15 +152,15 @@ function Agents() {
                       </Text>
                     </Flex>
                     <Flex align={"center"} gap={5}>
-                      <CiMail color="#838383" size={15} />
+                      <CiMail color="#838383" size={12} />
                       <Text className="text-black text-upper text-1024">
-                        floridainfo@gmail.com
+                       info@floridaluxurious.com
                       </Text>
                     </Flex>
                     <Flex align={"center"} gap={5}>
                       <CiPhone color="#838383" size={15} />
                       <Text className="text-black text-upper text-1024">
-                        2954.870.080
+                         954.870.4080
                       </Text>
                     </Flex>
                   </Flex>
