@@ -141,7 +141,9 @@ const navigate=useNavigate()
                       >
                         {item?.name}
                       </Link>
-                    ))}<Text className="text-upper f-14 text-black"  style={{cursor: "pointer"}}  onClick={() => navigate("/all-communities")}>View All</Text>
+                    ))}<Text className="text-upper f-14 text-black"  style={{cursor: "pointer"}}  onClick={() => navigate("/all-communities")}>View All
+                   <span style={{ marginLeft: "5px", fontWeight: "bold", fontSize: "20px" }}>&rarr;</span>
+</Text>
                   </Flex>
                 </Col>
               </Col>
