@@ -1158,6 +1158,12 @@ font-size: 31px  !important;
 .f-30{
   font-size: 22px !important;
 }
+.f-50 {
+    font-size: 30px !important;
+}
+.florida-heading-feature-negibour {
+  font-size: 30px !important;
+}
   /*.ant-row {
     display: flex;
     flex-flow: column;

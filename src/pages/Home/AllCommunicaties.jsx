@@ -75,7 +75,11 @@ function Allcommunities() {
                   width="100%"
                   className="img-op communities-grid "
                 />
-                <div
+                {isLoading ? (
+        <Flex justify={"center"} xs={24} sm={12} md={8} lg={6}>
+          <Spin size="large" />
+        </Flex>
+      ) : (<div
                   style={{
                     position: "absolute",
                     top: "50%",
@@ -103,7 +107,7 @@ function Allcommunities() {
                       View
                     </button>
                   </Flex>
-                </div>
+                </div>)}
               </div>
             </Col>
           ))}

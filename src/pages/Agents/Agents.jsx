@@ -58,7 +58,7 @@ function Agents() {
                           className=""
                           preview={false}
                           fallback="https://placehold.co/300x388"
-                          style={{ aspectRatio: "5/7.5" , objectFit: "cover"}}
+                          style={{ aspectRatio: "5/7.5" , objectFit: "cover", width:"90%"}}
                         />
                       }
                       bImg={
@@ -71,7 +71,7 @@ function Agents() {
                           className="img-op1"
                           preview={false}
                           fallback="https://placehold.co/300x388"
-                          style={{ aspectRatio: "5/7.5" , objectFit: "cover"}}
+                          style={{ aspectRatio: "5/7.5" , objectFit: "cover" , width:"90%"}}
                         />
                       }
                     >
