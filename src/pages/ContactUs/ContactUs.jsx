@@ -163,13 +163,13 @@ function ContactUs() {
                       <Flex align={"center"} gap={5}>
                         <CiMail color="#838383" size={15} />
                         <Text className="text-white text-upper">
-                          floridainfo@gmail.com
+                         info@floridaluxurious.com
                         </Text>
                       </Flex>
                       <Flex align={"center"} gap={5}>
                         <CiPhone color="#838383" size={15} />
                         <Text className="text-white text-upper">
-                          2954.870.080
+                          954.870.4080
                         </Text>
                       </Flex>
                     </Flex>

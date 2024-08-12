@@ -91,7 +91,7 @@ function FeatureListing() {
         Listing
       </Paragraph>
       {isLoading ? (
-        <Flex justify={"center"}>
+        <Flex justify={"center"} xs={24} sm={12} md={8} lg={6}>
           <Spin size="large" />
         </Flex>
       ) : (
@@ -103,10 +103,12 @@ function FeatureListing() {
               style={{
                 marginTop: 65,
                 marginBottom: 65,
+                overflow:'hidden'
               }}
               className="features_section_slider"
               data-aos="fade-down-left"
               data-aos-duration="2000"
+              xs={24} sm={12} md={8} lg={6}
             >
               <div className="meet-slider-width">
                 <Slider {...settings}>
@@ -127,7 +129,7 @@ function FeatureListing() {
                       />
 
                       <div className="info">
-                        <Flex justify={"space-between"} align={"center"}>
+                        <Flex justify={"space-between"} align={"center"} xs={24} sm={12} md={8} lg={6}>
                           <button className="button-view">View All </button>
                           <Flex>
                             <IoLocationOutline color="white" size={20} />
@@ -147,7 +149,7 @@ function FeatureListing() {
 
                       <div className="show-info">
                         <div style={{ background: "#fff", height: "50px" }}>
-                          <Flex
+                          <Flex xs={24} sm={12} md={8} lg={6}
                             justify={"space-between"}
                             align={"center"}
                             style={{ height: "100%" }}

@@ -119,7 +119,7 @@ function Footer() {
                 <Col lg={12}>
                   <Text className="text-upper f-24 f-bold">Communities</Text>
                   <Flex className="pt-2" vertical gap={10}>
-                    {data?.filters.map((item, index) => (
+                    {community6.map((item, index) => (
                       <Link
                         key={index}
                         className="text-upper f-14 text-black"
@@ -128,7 +128,9 @@ function Footer() {
                       >
                         {item?.name}
                       </Link>
-                    ))}
+                    ))}<Text className="text-upper f-14 text-black"  style={{cursor: "pointer"}}  onClick={() => navigate("/all-communities")}>View All
+                   <span style={{ marginLeft: "5px", fontWeight: "bold", fontSize: "20px" }}>&rarr;</span>
+</Text>
                   </Flex>
                 </Col>
               </Col>
@@ -139,9 +141,9 @@ function Footer() {
           <Col span={24} align={"bottom"}>
             <Paragraph className="f-24" style={{ fontWeight: 100 }}>
               BROWARD COUNTY'S <br />
-              <Text className="f-bold f-24">#1 RANKED PRIVATE</Text>
+              <Text className="f-bold f-24">#1 RANKED</Text>
               <br />
-              PRIVATE LUXURIOUS BROKERAGE
+              PRIVATE LUXURY BROKERAGE
             </Paragraph>
           </Col>
         </Row>

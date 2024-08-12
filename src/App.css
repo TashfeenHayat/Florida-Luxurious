@@ -947,6 +947,9 @@ body:focus-visible {
   border-radius: 0px;
   margin-top: -90px;
 }
+.global{
+ marginLeft: 50 
+}
 
 /* Media Queries */
 
@@ -957,11 +960,18 @@ body:focus-visible {
   .text-1024 {
     font-size: 9px;
   }
+  .communities-grid{
+    width: 22rem !important;
+  }
 }
 
 @media screen and (max-width: 768px) {
+  
   .our-story-bg {
     margin-right: 0px !important;
+  }
+  .search-button{
+    display: none !important;
   }
   .bg-img-logo {
     background-size: cover !important;
@@ -983,14 +993,227 @@ body:focus-visible {
     display: block;
     padding-left: 0px !important;
   }
-}
-@media screen and (max-width: 425px) {
-  .title-home-page {
+  .info {
+    padding: 10px;
+  }
+  .info-text {
+    font-size: 12px;
+  }
+  .button-view,
+  .button-view1 {
+    padding: 8px 16px;
+  }
+  .ant-input-search {
+    width: 90%;
+  }
+.search-input {
+    width: 60ch;
+  }
+
+   body .title-home-page {
     font-size: 26px !important;
   }
-  .text-paragraph {
+.set {
+        
+        margin-top: 83em;
+    }
+    .ourstory{
+      overflow: hidden;
+    }
+   .story-title {
+    color: #000;
+    font-weight: bold;
+    font-size: 39px !important;
+    letter-spacing: 2px;
+    line-height: 0.9;
+}
+.our-title {
+    color: #838383;
+    font-weight: 100;
+    font-size: 43px !important;
+    letter-spacing: 2px;
+    line-height: 22.5px;
+}
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x)* .5);
+    padding-left: calc(var(--bs-gutter-x)* .5);
+    margin-right: auto;
+    margin-left: 1rem;
+    padding: 2rem;
+    overflow: hidden;
+}
+.search-input {
+    width: 40ch;
+  }
+
+  .slick-arrow {
+    display: none !important;
+  }
+.info {
+    padding: 8px;
+  }
+  .info-text {
+    font-size: 10px;
+  }
+  .button-view,
+  .button-view1 {
+    padding: 5px 10px;
+  }.property-card {
+    flex-direction: column;
+  }
+  .ant-input-search {
+    width: 100%;
+  }
+  .contact-us-content {
+    background-color: #fff;
+    padding: 0rem 1rem 0rem !important;
+    margin: 0.8rem !important;
+}
+
+
+  body .contact-us-title {
+    font-size: 25px !important;
+    line-height: 60px !important;
+    font-weight: 600 !important;
+    letter-spacing: -3px !important;
+    color: #1b1b1b !important;
+    margin: 0 !important;
+    text-align: right;
+}
+body .contact-us-sub {
+    color: #838383;
+    font-size: 45px;
+    margin-top: -20px;
+}
+.globalcontainer{
+  overflow: hidden;
+}
+.f-24 {
+    font-size: 13px !important;
+    margin-right: 2rem;
+}
+
+body .p-5{
+  padding:1rem !important;
+}
+ 
+.single_property{
+  overflow: hidden;
+}
+.card-feature {
+    border-radius: 0px;
+    margin-top: -32px;
+}
+.f-32 {
+    font-size: 25px;
+}
+ .button-secondary-line-left{
+      margin-left: 33px;
+ }
+ .agent-description{
+      font-size: 21px !important;
+ }
+  body .agent-first-name{
+      font-size: 58px !important;
+ }
+body  .agent-last-name{
+      font-size: 40px !important;
+    margin-left: 97px;
+ }
+ .agent-estate{    margin-left: 25px;}
+ 
+
+  /*.ant-row {
+    display: flex;
+    flex-flow: column;
+    min-width: 0;
+  }
+  .ant-col-6 {
+    max-width: 100% !important;
+  }
+  .ant-flex {
+    display: flex;
+  
+    align-content: center;
+    justify-content: center;
+  }
+  .ant-typography.aos-init.aos-animate {
+    width: 100% !important;
+  }
+  .footer-bg-img-shadow {
+    padding: 20px;
+  }
+    .ant-row-middle {
+        width: 80%;
+    }
+  
+.w-100 {
+    width: 82% !important;
+    overflow: hidden;
+}
+.rec-slide {
+  position: relative; 
+  height: 250px;
+  width: 98%;
+  overflow: hidden; 
+}
+.f-24{
+  font-size: 24px !important;
+
+}
+ /* .text-paragraph {
     font-size: 12px !important;
   }
+
+  .ant-flex {
+    display: flex;
+  }
+  .ant-input-group-wrapper.ant-input-group-wrapper-lg.ant-input-group-wrapper-outlined.ant-input-search.ant-input-search-large.ant-input-search-with-button {
+    width: 90% !important;
+    margin: 0 auto;
+  }
+  .f-64 {
+    font-size: 37px !important;
+  }
+  .features_section_slider .slick-track {
+    display: flex;
+    gap: unset;
+  }
+  h1.ant-typography, 
+  div.ant-typography-h1, 
+  div.ant-typography-h1 > textarea, 
+  .ant-typography h1 {
+    font-size: 25px !important;
+  }
+  .p-5 {
+    padding: 1rem !important;
+  }
+  .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    width: 247px !important;
+  }
+  .bg-img-logo {
+    padding: 0 !important;
+  }
+  .heading-florida-lux-listing {
+    font-size: 24px !important;
+  }*/
+
+}
+
+
+.agent-first-name{
+  font-size: 70px !important;
+  
+}
+.agent-last-name {
+    color: black;
+    font-weight: 100;
+    font-size: 72px !important;
+    letter-spacing: -4%;
+    line-height: 0.8;
 }
 .detail-property .ant-input::placeholder {
   color: #838383;
@@ -1085,7 +1308,9 @@ body:focus-visible {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
+..button-view {
+  padding:9px !important;
+}
 /* Property Deatil */
 
 .properties-single-slideshow-info {
@@ -1424,7 +1649,7 @@ body:focus-visible {
 .story-title {
   color: #000;
   font-weight: bold;
-  font-size: 80px;
+  font-size: 76px;
   letter-spacing: 2px;
   line-height: 0.9;
 }
@@ -1696,3 +1921,40 @@ body:focus-visible {
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
 }
+/*allcommuntites*/
+/* Ensure background image covers the whole section */
+.background-image {
+  background-size: cover;
+  background-position: center;
+}
+
+/* Style for the community overlay */
+.community-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.5); /* Optional: Adds a background to text */
+  padding: 10px;
+}
+
+/* Style for the slider container */
+.slider-container {
+  width: 100%;
+  margin-top: 40px;
+}
+
+/* Style for the slider overlay */
+.slider-overlay {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 100%;
+}
+
+/* Make the 'See All Neighborhoods' button responsive */
+
+

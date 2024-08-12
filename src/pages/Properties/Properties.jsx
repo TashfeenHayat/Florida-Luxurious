@@ -49,7 +49,9 @@ function Properties() {
   return (
     <>
       <BackgroundImage Image={FeaturedPropertiesImage}>
-        <Title className="text-white text-upper f-50 f-100">
+        <Title className="text-white text-upper f-50 f-100" style={{
+          textAlign:'center'
+        }}>
           Featured properties
         </Title>
       </BackgroundImage>

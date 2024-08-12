@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import BackgroundImage from "../../components/BackgroundImage";
-import Community from "../../assets/community.png";
 import {
   Typography,
   Row,
@@ -18,12 +17,12 @@ import useProperties from "../../hooks/useProperties";
 import LetTalk from "../../components/LetTalk";
 import { Loader } from "@googlemaps/js-api-loader";
 import { google_api_key } from "../../api/Axios";
-import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Story from "../../assets/communitysection.png";
-import Logoicon from "../../assets/logoicon.png";
+
 const { Title, Paragraph, Text } = Typography;
+
 function Comunities() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -52,7 +51,7 @@ function Comunities() {
             lat: parseFloat(data?.geo?.geometry?.location?.lat),
             lng: parseFloat(data?.geo?.geometry?.location?.lng),
           },
-          zoom: 20,
+          zoom: 15, // Adjusted zoom level for better responsiveness
           tilt: 45,
         });
         new window.google.maps.Marker({
@@ -66,7 +65,7 @@ function Comunities() {
     });
   }, [
     google_api_key,
-    data?.geo?.geometry?.location?.lng,
+    data?.geo?.geometry?.location?.lat,
     data?.geo?.geometry?.location?.lng,
   ]);
 
@@ -90,9 +89,8 @@ function Comunities() {
         </Flex>
       ) : (
         <>
-          <Row>
-            <Col lg={8} md={8} sm={0}></Col>
-            <Col lg={8} md={8} sm={24}>
+          <Row justify="center">
+            <Col lg={12} md={16} sm={24}>
               <Card className="card-feature boxshadow-section">
                 <Title
                   style={{ textAlign: "center", lineHeight: 2 }}
@@ -105,35 +103,30 @@ function Comunities() {
                 </Paragraph>
               </Card>
             </Col>
-            <Col lg={8} md={8} sm={0}></Col>
           </Row>
           <div className="boxshadow-section p-5 mt-5">
-            <Container className="p-5">
+            <Container>
               <Title className="text-upper" style={{ letterSpacing: "1px" }}>
                 Features
               </Title>
-              <Row gutter={[8, 40]}>
-                <Col lg={24} md={24} sm={24}>
-                  <Row gutter={[40, 24]}>
-                    {data?.features?.map((item, index) => (
-                      <Col lg={8} md={12} sm={24}>
-                        <Title className="" level={2}>
-                          {item?.name}
-                        </Title>
-                        <Paragraph className="f-16 f-100">
-                          {item?.description}
-                        </Paragraph>
-                      </Col>
-                    ))}
-                  </Row>
-                </Col>
+              <Row gutter={[16, 40]}>
+                {data?.features?.map((item, index) => (
+                  <Col lg={8} md={12} sm={24} key={index}>
+                    <Title className="" level={2}>
+                      {item?.name}
+                    </Title>
+                    <Paragraph className="f-16 f-100">
+                      {item?.description}
+                    </Paragraph>
+                  </Col>
+                ))}
               </Row>
             </Container>
           </div>
           <div style={{ background: "black" }} className="py-5">
             <Container>
               <Row gutter={[60, 60]}>
-                <Col lg={12} md={12} sm={24}>
+                <Col lg={12} md={24} sm={24}>
                   <Title className="text-white f-32 f-bold text-upper">
                     Why choose {data?.name}?
                   </Title>
@@ -141,16 +134,16 @@ function Comunities() {
                     {data?.description}
                   </Text>
                 </Col>
-                <Col lg={12} md={12} sm={24}>
+                <Col lg={12} md={24} sm={24}>
                   <div
                     ref={mapRef}
-                    style={{ height: "500px", width: "100%" }}
+                    style={{ height: "300px", width: "100%" }}
                   />
                 </Col>
               </Row>
             </Container>
           </div>
-          <div className="py-5">
+       <div className="py-5">
             <Row gutter={[60, 60]} align="middle">
               <Col lg={8} md={24} sm={0}>
                 <div>
@@ -196,11 +189,12 @@ function Comunities() {
               </Col>
             </Row>
           </div>
+
           <Container className="py-5">
             <Title className="f-40 f-100 text-center text-upper">
               Search {data?.name} Luxury Homes For Sale
             </Title>
-            <Row gutter={[60, 60]}>
+            <Row gutter={[16, 60]}>
               {property?.properties.map((property, index) => (
                 <Col
                   lg={12}
@@ -214,7 +208,6 @@ function Comunities() {
                     <Image
                       src={property?.media[0]?.mdUrl}
                       width="100%"
-                      className=""
                       fallback="https://placehold.co/618x489"
                     />
                     <div className="more-info-property">
@@ -223,7 +216,7 @@ function Comunities() {
                         align={"center"}
                         justify="center"
                         style={{ height: "100%" }}
-                        gap={30}
+                        gap={20}
                       >
                         <Flex vertical>
                           <Text className="text-center text-upper f-24 f-bold text-white">
@@ -241,14 +234,6 @@ function Comunities() {
                             ${property?.salePrice}
                           </Text>
                         </Flex>
-                        {/* <Flex vertical>
-                          <Text className="text-center text-upper f-24 f-bold text-white">
-                            Agent Listing
-                          </Text>
-                          <Text className="text-center text-upper f-24 f-100 text-gray">
-                            Abraham
-                          </Text>
-                        </Flex> */}
                         <Flex vertical>
                           <button className="let-talk-btn">
                             View Property
@@ -278,7 +263,7 @@ function Comunities() {
               ))}
             </Row>
             <Flex justify={"center"} align="center" className="my-4">
-              {data?.properties?.length === 0 ? null : (
+              {property?.properties.length === 0 ? null : (
                 <Pagination
                   defaultCurrent={1}
                   total={data?.totalCount}

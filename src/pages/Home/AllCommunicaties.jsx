@@ -10,6 +10,7 @@ import BoatImage from "../../assets/boatowner.png";
 const { Title, Text, Paragraph } = Typography;
 function Allcommunities() {
   const { data, isLoading } = useCommunities(20, 1);
+   const sortingArr = [...(data?.filters ?? [])].sort((a, b) => a?.name?.localeCompare(b?.name));
   const navigate = useNavigate();
 
   const settings = {
@@ -55,7 +56,7 @@ function Allcommunities() {
     <>
       <BackgroundImage Image={BoatImage}>
         <Title
-          style={{ color: "white", lineHeight: "14px", letterSpacing: "2px" }}
+          style={{ color: "white", lineHeight: "46px", letterSpacing: "2px", textAlign: "center" }}
           className="text-upper f-50 f-100"
         >
           All Communities
@@ -63,10 +64,10 @@ function Allcommunities() {
       </BackgroundImage>
       <div style={{ paddingTop: 98, paddingBottom: 98 }}>
         <Title className="florida-heading-feature-negibour" level={1}>
-          Feature Neighborhoods
+          Featured Communties
         </Title>
         <Row className="px-4">
-          {data?.filters?.map((community, index) => (
+          {sortingArr.map((community, index) => (
             <Col lg={6} md={12} sm={24} key={index} className="">
               <div className="displayy-teamimg-center show-btn-community-home ">
                 <img
