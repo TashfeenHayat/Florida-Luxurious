@@ -369,6 +369,7 @@ function AddProperty() {
             <Col span={12} className="gutter-row">
               <Form.Item
                 name="name"
+                label="Name"
                 rules={[
                   {
                     required: true,
@@ -382,6 +383,7 @@ function AddProperty() {
             <Col span={12} className="gutter-row">
               <Form.Item
                 name="agentId"
+                label="Agent"
                 rules={[
                   {
                     required: true,
@@ -403,7 +405,7 @@ function AddProperty() {
               </Form.Item>
             </Col>
             <Col span={12} className="gutter-row">
-              <Form.Item name="status">
+              <Form.Item name="status" label="Status">
                 <Select
                   size="large"
                   options={statusList}
@@ -412,7 +414,7 @@ function AddProperty() {
               </Form.Item>
             </Col>
             <Col span={12} className="gutter-row">
-              <Form.Item name="mlsId">
+              <Form.Item name="mlsId" label="MLS ID">
                 <Select
                   showSearch
                   size="large"
@@ -427,7 +429,7 @@ function AddProperty() {
               </Form.Item>
             </Col>
             <Col span={12} className="gutter-row">
-              <Form.Item name="filters">
+              <Form.Item name="filters" label="Commuities">
                 <Select
                   mode="multiple"
                   showSearch
@@ -441,18 +443,19 @@ function AddProperty() {
                   placeholder="Search filters"
                 />
               </Form.Item>
-              <Form.Item name="neighborhood">
+              <Form.Item name="neighborhood" label="Neighborhood">
                 <Input size="large" placeholder="Neighborhood" />
               </Form.Item>
             </Col>
             <Col span={12} className="gutter-row">
-              <Form.Item name="description">
+              <Form.Item name="description" label="Description">
                 <TextArea size="large" rows={4} placeholder="Description" />
               </Form.Item>
             </Col>
             <Col span={12} className="gutter-row">
               <Form.Item
                 name={["addressLine1"]}
+                label="Address Line 1"
                 rules={[
                   {
                     required: true,
@@ -462,11 +465,12 @@ function AddProperty() {
               >
                 <Input size="large" placeholder="Address Line 1" />
               </Form.Item>
-              <Form.Item name={["addressLine2"]}>
+              <Form.Item name={["addressLine2"]} label="Address Line 2">
                 <Input size="large" placeholder="Address Line 2" />
               </Form.Item>
               <Form.Item
                 name={["city"]}
+                label="City"
                 rules={[
                   {
                     required: true,
@@ -478,6 +482,7 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name={["state"]}
+                label="State"
                 rules={[
                   {
                     required: true,
@@ -489,6 +494,7 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name={["country"]}
+                label="Country"
                 rules={[
                   {
                     required: true,
@@ -505,6 +511,7 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name={["zipCode"]}
+                label="Zip Code"
                 rules={[
                   {
                     required: true,
@@ -516,6 +523,7 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="area"
+                label="Area"
                 rules={[
                   {
                     required: true,
@@ -531,6 +539,7 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="salePrice"
+                label="Sale Price"
                 rules={[
                   {
                     required: true,
@@ -544,11 +553,13 @@ function AddProperty() {
                   placeholder="Sale Price"
                 />
               </Form.Item>
-              <Form.Item name="compensation">
+              <Form.Item name="compensation" label="Compensation">
                 <Input size="large" placeholder="Compensation" />
               </Form.Item>
               <Form.Item
                 name="visitHours"
+                label="Visiting Hours"
+                placeholder="Visiting Hours"
                 rules={[
                   {
                     required: true,
@@ -560,6 +571,8 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="reducedPrice"
+                label="Reduced Price"
+                placeholder="Reduced Price"
                 rules={[
                   {
                     required: true,
@@ -571,6 +584,10 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="yearBuilt"
+                label="Built Year"
+                placeholder="Built Year"
+                format="YYYY"
+                showTime={false}
                 rules={[
                   {
                     required: true,
@@ -586,6 +603,8 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="foundation"
+                label="Foundation"
+                placeholder="Foundation"
                 rules={[
                   {
                     required: true,
@@ -597,6 +616,7 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="bedroomCount"
+                label="Bedroom Count"
                 rules={[
                   {
                     required: true,
@@ -608,6 +628,8 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="bathCount"
+                label="Bathroom Count"
+                placeholder="Bathroom Count"
                 rules={[
                   {
                     required: true,
@@ -619,6 +641,8 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="stories"
+                label="Stories"
+                placeholder="Stories"
                 rules={[
                   {
                     required: true,
@@ -630,6 +654,7 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="roof"
+                label="Roof"
                 rules={[
                   {
                     required: true,
@@ -641,6 +666,8 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="flooring"
+                label="Flooring"
+                placeholder="Flooring"
                 rules={[
                   {
                     required: true,
@@ -652,6 +679,8 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="cooling"
+                label="Cooling"
+                placeholder="Cooling"
                 rules={[
                   {
                     required: true,
@@ -663,6 +692,8 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="heating"
+                label="Heating"
+                placeholder="Heating"
                 rules={[
                   {
                     required: true,
@@ -674,6 +705,8 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="fireplace"
+                label="Fire Place"
+                placeholder="Fire Place"
                 rules={[
                   {
                     required: true,
@@ -685,6 +718,8 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="style"
+                label="Style"
+                placeholder="Style"
                 rules={[
                   {
                     required: true,
@@ -696,6 +731,8 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="pool"
+                label="Pool"
+                placeholder="Pool"
                 rules={[
                   {
                     required: true,
@@ -707,6 +744,8 @@ function AddProperty() {
               </Form.Item>
               <Form.Item
                 name="parking"
+                label="Parking"
+                placeholder="Parking"
                 rules={[
                   {
                     required: true,
@@ -780,10 +819,6 @@ function AddProperty() {
                     </>
                   )}
                 </Form.List>
-              </Card>
-
-              <Card title="Press">
-                <div id="summernote"></div>
               </Card>
             </Col>
           </Row>

@@ -1,34 +1,23 @@
 import React, { useState } from "react";
 import FooterLogo from "../assets/footerlogo.png";
-import { Row, Col, Flex, Typography, Input, Button, Image } from "antd";
+import { Row, Col, Flex, Form, Typography, Input, Button, Image } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { contactUs } from "../api/Inquiry";
 import useCommunities from "../hooks/useCommunities";
 const { Text, Title, Paragraph } = Typography;
 function Footer() {
+  const [form] = Form.useForm();
+
   const dispatch = useDispatch();
   const { loading } = useSelector((s) => s.contactUsReducer);
 
   const { data, isLoading } = useCommunities(20, 1);
 
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = () => {
-    dispatch(contactUs(formData));
-    setFormData({});
+  const handleSubmit = (values) => {
+    console.log(values);
+    dispatch(contactUs(values));
+    form.resetFields();
   };
 
   return (
@@ -240,37 +229,74 @@ function Footer() {
                 &nbsp;Properties for Sale
               </Paragraph>
               <Flex gap={5} align="center" justify={"center"} vertical>
-                <form className="footer-form-display">
-                  <Flex gap={10}>
-                    <Input
-                      name="firstName"
-                      placeholder="Your First Name"
-                      style={{ borderRadius: "0px" }}
-                      onChange={handleChange}
-                    />
-                    <Input
-                      name="lastName"
-                      placeholder="Your Last Name"
-                      style={{ borderRadius: "0px" }}
-                      onChange={handleChange}
-                    />
-                  </Flex>
-                  <Flex gap={10} style={{ marginTop: 10 }}>
-                    <Input
-                      name="email"
-                      placeholder="Your Email Address"
-                      style={{ borderRadius: "0px" }}
-                      onChange={handleChange}
-                    />
-                    <Button
-                      className="btn-sub-footer"
-                      onClick={handleSubmit}
-                      disabled={loading}
-                    >
-                      {loading ? "Submitting" : "Submit my info"}
-                    </Button>
-                  </Flex>
-                </form>
+                <div className="footer-form-display">
+                  <Form form={form} name="contact_us" onFinish={handleSubmit}>
+                    <Flex gap={10}>
+                      <Form.Item
+                        name="firstName"
+                        rules={[
+                          {
+                            required: true,
+                            message: "",
+                          },
+                        ]}
+                        style={{ marginBottom: "0px", width: "50%" }}
+                      >
+                        <Input
+                          name="firstName"
+                          placeholder="Your First Name"
+                          style={{ borderRadius: "0px" }}
+                        />
+                      </Form.Item>
+                      <Form.Item
+                        name="lastName"
+                        rules={[
+                          {
+                            required: true,
+                            message: "",
+                          },
+                        ]}
+                        style={{ marginBottom: "0px", width: "50%" }}
+                      >
+                        <Input
+                          name="lastName"
+                          placeholder="Your Last Name"
+                          style={{ borderRadius: "0px" }}
+                        />
+                      </Form.Item>
+                    </Flex>
+                    <Flex gap={10} style={{ marginTop: 10 }}>
+                      <Form.Item
+                        name="email"
+                        rules={[
+                          {
+                            required: true,
+                            message: "",
+                          },
+                        ]}
+                        style={{ marginBottom: "0px", width: "75%" }}
+                      >
+                        <Input
+                          name="email"
+                          placeholder="Your Email Address"
+                          style={{ borderRadius: "0px" }}
+                        />
+                      </Form.Item>
+                      <Form.Item style={{ marginBottom: "0px" }}>
+                        <Button
+                          size="large"
+                          block="true"
+                          type="primary"
+                          className="btn-sub-footer"
+                          htmlType="submit"
+                          disabled={loading}
+                        >
+                          {loading ? "Submitting" : "Submit my info"}
+                        </Button>
+                      </Form.Item>
+                    </Flex>
+                  </Form>
+                </div>
               </Flex>
             </div>
           </Col>

@@ -31,6 +31,13 @@ import {
   updateBlogSlice,
   deleteBlogSlice,
 } from "./slices/BlogSlice";
+import {
+  getPostsSlice,
+  addPostSlice,
+  getPostSlice,
+  updatePostSlice,
+  deletePostSlice,
+} from "./slices/PressSlice";
 
 export const store = configureStore({
   reducer: {
@@ -59,6 +66,11 @@ export const store = configureStore({
     getBlogReducer: getBlogSlice,
     updateBlogReducer: updateBlogSlice,
     deleteBlogReducer: deleteBlogSlice,
+    getPostsReducer: getPostsSlice,
+    addPostReducer: addPostSlice,
+    getPosteducer: getPostSlice,
+    updatePostReducer: updatePostSlice,
+    deletePostReducer: deletePostSlice,
   },
 });
 
