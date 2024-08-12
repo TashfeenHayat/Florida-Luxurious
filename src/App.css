@@ -1154,6 +1154,9 @@ font-size: 31px  !important;
     padding-top: 3rem !important;
     padding-left: 3rem;
 }
+.f-30{
+  font-size: 22px !important;
+}
   /*.ant-row {
     display: flex;
     flex-flow: column;

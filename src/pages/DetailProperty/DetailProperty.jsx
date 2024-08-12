@@ -576,15 +576,16 @@ export default function DetailProperty() {
       <div style={{ backgroundColor: "#000" }} ref={requestRef}>
         <Container>
           <Row>
-            <Col lg={14} sm={24} md={24} className="p-5">
+            <Col lg={14} sm={24} md={24} xsm={24} className="p-5">
               <Title
                 level={2}
+               
                 style={{
                   lineHeight: 2,
                   color: "white",
                   letterSpacing: "1.5px",
                 }}
-                className="text-upper"
+                className="text-upper f-30"
               >
                 Interested in{" "}
                 {data?.property?.addressLine1 +
@@ -632,7 +633,9 @@ export default function DetailProperty() {
             </Col>
             <Col lg={10} md={24} sm={24}>
               <div className="pt-5">
-                <div ref={mapRef} style={{ height: "500px", width: "100%" }} />;
+                <div ref={mapRef} style={{ height: "500px", 
+      width: "50rem",
+    maxWidth: "82vw"}} />;
               </div>
             </Col>
           </Row>
