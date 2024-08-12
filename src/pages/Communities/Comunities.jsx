@@ -74,15 +74,19 @@ function Comunities() {
   };
 
   return (
-    <div>
-      <BackgroundImage Image={data?.photo}>
-        <Title
-          style={{ color: "white", lineHeight: "14px", letterSpacing: "2px" }}
-          className="text-upper f-50 f-100"
-        >
-          Communities
-        </Title>
-      </BackgroundImage>
+    <div  style={{ overflow: "hidden" }}>
+     <BackgroundImage 
+  Image={data?.photo} 
+  
+>
+  <Title
+    style={{ color: "white", lineHeight: "14px", letterSpacing: "2px" }}
+    className="text-upper f-50 f-100"
+  >
+    Communities
+  </Title>
+</BackgroundImage>
+
       {isLoading ? (
         <Flex justify={"center"} align="center" className="w-100 py-5">
           <Spin size="large" />

@@ -257,8 +257,8 @@ export default function DetailProperty() {
                 <div
                   className="circle-bg-white"
                   style={{
-                    width: "30px",
-                    height: "30px",
+                    width: "20px",
+                    height: "20px",
                     marginBottom: "0px",
                   }}
                 >
@@ -496,8 +496,8 @@ export default function DetailProperty() {
                   >
                     <Flex
                       style={{ height: "100%", cursor: "pointer" }}
-                      justify="center"
-                      align="center"
+            justify="center"
+            align="center"
                     >
                       <FaPlus size={60} color="#D4CFC9" />
                     </Flex>
@@ -612,16 +612,17 @@ export default function DetailProperty() {
                   <Col lg={12} md={12} sm={24}>
                     <Input placeholder="Phone:" type="text" />
                   </Col>
+               
                   <Col lg={24} md={24}>
+                    <Input placeholder="Message" type="text" />
+                  </Col>
+                     <Col lg={24} md={24}>
                     <Flex gap={10}>
                       <Checkbox />
                       <Text style={{ lineHeight: 2, color: "white" }}>
                         Request A showing
                       </Text>
                     </Flex>
-                  </Col>
-                  <Col lg={24} md={24}>
-                    <Input placeholder="Message" type="text" />
                   </Col>
                   <Col lg={24} md={24} align="middle">
                     <Button classNam="button-secondary-line-left">

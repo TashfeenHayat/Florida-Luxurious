@@ -1111,7 +1111,7 @@ body .p-5{
     margin-top: -32px;
 }
 .f-32 {
-    font-size: 25px;
+    font-size: 25px !important;
 }
  .button-secondary-line-left{
       margin-left: 33px;
@@ -1139,7 +1139,7 @@ font-size: 31px  !important;
   font-size: 48px !important;
 }
 .f-40 {
-    font-size: 29px !important;
+    font-size: 25px !important;
 }
 .my-5{
   margin-right: 3rem !important;
@@ -1163,6 +1163,9 @@ font-size: 31px  !important;
 }
 .florida-heading-feature-negibour {
   font-size: 30px !important;
+}
+.detail-property .ant-input {
+  width: 317px !important;
 }
   /*.ant-row {
     display: flex;
