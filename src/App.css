@@ -949,7 +949,9 @@ body:focus-visible {
 .global{
  marginLeft: 50 
 }
-
+ .detail-container{
+  display: none;
+}
 /* Media Queries */
 
 @media screen and (max-width: 1024px) {
@@ -962,6 +964,7 @@ body:focus-visible {
   .communities-grid{
     width: 22rem !important;
   }
+ 
 }
 
 @media screen and (max-width: 768px) {
@@ -1091,7 +1094,7 @@ body .contact-us-sub {
   overflow: hidden;
 }
 .f-24 {
-    font-size: 23px !important;
+    font-size: 18px !important;
     margin-right: 2rem;
 }
 
@@ -1134,7 +1137,23 @@ font-size: 31px  !important;
 .f-64{
   font-size: 48px !important;
 }
-
+.f-40 {
+    font-size: 29px !important;
+}
+.my-5{
+  margin-right: 3rem !important;
+}
+.hideetails{
+  display: none !important;
+}
+.properties-single-slideshow-info{ display: none !important;}
+ .detail-container{
+  display:block !important;;
+}
+.pt-5 {
+    padding-top: 3rem !important;
+    padding-left: 3rem;
+}
   /*.ant-row {
     display: flex;
     flex-flow: column;
@@ -1209,9 +1228,17 @@ font-size: 31px  !important;
   .heading-florida-lux-listing {
     font-size: 24px !important;
   }*/
-
+.f-16 {
+    font-size: 13px !important;
+    margin-left: 38px;
 }
-
+.ant-form-item-control-input{
+  width:19rem !important;
+}
+}
+.text-1024 {
+        font-size: 11px;
+    }
 
 .agent-first-name{
   font-size: 70px !important;

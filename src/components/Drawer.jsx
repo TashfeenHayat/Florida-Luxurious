@@ -57,27 +57,29 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                 </Col>
                 <Col lg={12} md={12} sm={24}>
                   <Title className="text-white text-upper" level={3}>
-                    Search by location
+                    Other Offering
                   </Title>
                   <Flex className="pt-2" vertical gap={10}>
                     <Link
                       className="text-upper f-14 text-white"
                       style={{ textDecoration: "none" }}
+                      to="mls-listing"
                     >
-                      Other offering
+                     MLS
                     </Link>
                     <Link
                       className="text-upper f-14 text-white"
                       style={{ textDecoration: "none" }}
+                      to="global"
                     >
-                      Other offering
+                      Global Partner 
                     </Link>
-                    <Link
+                    {/*<Link
                       className="text-upper f-14 text-white"
                       style={{ textDecoration: "none" }}
                     >
                       Other offering
-                    </Link>
+                    </Link>*/}
                   </Flex>
                 </Col>
                 <Col lg={12} md={12} sm={24}>
