@@ -8,39 +8,19 @@ import {
   Input,
   Popconfirm,
   Modal,
-  Select,
   notification,
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getProperties, updateProperty } from "../../api/Properties";
+import { getPosts, addPost, updatePost, deletePost } from "../../api/Press";
 import customAxios from "../../api/Axios";
-
-const { Search } = Input;
 
 function Press() {
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      render: (_, address) => {
-        if (address)
-          return `${address.addressLine1} 
-        ${address.addressLine2 ? address.addressLine2 : ""} 
-        ${address.city} ${address.state} 
-        ${address.zipCode} ${address.country}`;
-      },
+      title: "Title",
+      dataIndex: "title",
+      key: "title",
     },
     {
       title: "",
@@ -50,10 +30,10 @@ function Press() {
           <Link onClick={() => showModal(record)}>Edit</Link>
           <Popconfirm
             title="Delete this task"
-            description="Are you sure to delete this property?"
+            description="Are you sure to delete this post?"
             okText="Yes"
             cancelText="No"
-            onConfirm={() => handleOk(record._id)}
+            onConfirm={() => dispatch(deletePost(record._id))}
           >
             <Button type="link">Delete</Button>
           </Popconfirm>
@@ -71,23 +51,20 @@ function Press() {
     current: 1,
     pageSize: 10,
   });
-  const [key, setKey] = useState();
+  const [title, setTitle] = useState("");
   const [modalProps, setModalProps] = useState([]);
   const [modalSearch, setModalSearch] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProp, setSelectedProp] = useState();
+  const [selectedProp, setSelectedProp] = useState({});
 
-  const { isLoading, isError, data } = useSelector(
-    (s) => s.getPropertiesReducer
-  );
+  const { isLoading, isError, data } = useSelector((s) => s.getPostsReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(
-      getProperties({
+      getPosts({
         page: tableParams.current,
         limit: tableParams.pageSize,
-        fromPress: true,
       })
     );
     if (isError) {
@@ -95,35 +72,14 @@ function Press() {
     }
   }, []);
 
-  const onSearch = (key) => {
-    setKey(key);
-    setTableParams({
-      pagination: {
-        ...tableParams,
-        current: 1,
-      },
-    });
-    dispatch(getProperties({ key, fromPress: true }));
-  };
-
   const handleTableChange = (pagination) => {
     console.log(pagination);
     setTableParams(pagination);
     dispatch(
-      getProperties({
-        key,
+      getPosts({
         page: pagination.current,
-        fromPress: true,
       })
     );
-  };
-
-  const handleSearch = async (key) => {
-    const res = await customAxios.get(`property`, {
-      params: { key, withoutPress: true },
-    });
-    const data = res.data;
-    setModalProps(data.properties);
   };
 
   const handleChange = (newValue) => {
@@ -141,15 +97,16 @@ function Press() {
     console.log(property);
     setIsModalOpen(true);
     if (property._id) {
-      setSelectedProp(property);
-      setModalSearch(property.name);
       setTimeout(() => {
+        setSelectedProp(property);
+        setTitle(property.title);
         var parser = new DOMParser();
-        var decodedHtml = parser.parseFromString(property?.press, "text/html")
+        var decodedHtml = parser.parseFromString(property?.content, "text/html")
           .body.textContent;
         window.$("#summernote").summernote("code", decodedHtml);
       }, 1000);
     } else {
+      setTitle("");
       setTimeout(() => {
         var parser = new DOMParser();
         var decodedHtml = parser.parseFromString("", "text/html").body
@@ -161,35 +118,34 @@ function Press() {
 
   const handleOk = async (ok) => {
     console.log(ok);
-    if (ok === "ok") {
-      var markupStr = $("#summernote").summernote("code");
+    var markupStr = $("#summernote").summernote("code");
+    if (selectedProp._id) {
       const res = await dispatch(
-        updateProperty({
+        updatePost({
           id: selectedProp._id,
-          press: markupStr,
+          content: markupStr,
         })
       ).unwrap();
       openNotification("success", res);
+      setSelectedProp({});
       dispatch(
-        getProperties({
+        getPosts({
           page: tableParams.current,
           limit: tableParams.pageSize,
-          fromPress: true,
         })
       );
     } else {
       const res = await dispatch(
-        updateProperty({
-          id: ok,
-          press: undefined,
+        addPost({
+          title,
+          content: markupStr,
         })
       ).unwrap();
       openNotification("success", res);
       dispatch(
-        getProperties({
+        getPosts({
           page: tableParams.current,
           limit: tableParams.pageSize,
-          fromPress: true,
         })
       );
     }
@@ -198,6 +154,7 @@ function Press() {
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    setSelectedProp({});
   };
 
   return (
@@ -206,12 +163,6 @@ function Press() {
         title="Press Info"
         extra={
           <Space>
-            <Search
-              placeholder="input search text"
-              onSearch={onSearch}
-              enterButton
-              allowClear
-            />
             <Button onClick={showModal} type="primary">
               <Link>
                 <PlusOutlined />
@@ -227,7 +178,7 @@ function Press() {
           loading={isLoading}
           isError={isError}
           pagination={{ ...tableParams, total: data?.totalCount }}
-          dataSource={data?.properties}
+          dataSource={data?.posts}
           onChange={handleTableChange}
         />
       </Card>
@@ -238,20 +189,11 @@ function Press() {
         onCancel={handleCancel}
         width={1000}
       >
-        <Select
-          showSearch
-          value={modalSearch}
-          placeholder={"Select property"}
-          style={{ width: "100%", marginBottom: 20 }}
-          suffixIcon={null}
-          filterOption={false}
-          onSearch={handleSearch}
-          onChange={handleChange}
-          notFoundContent={null}
-          options={(modalProps || []).map((d) => ({
-            value: d._id,
-            label: d.name,
-          }))}
+        <Input
+          value={title}
+          placeholder="Enter title"
+          onChange={(e) => setTitle(e.target.value)}
+          style={{ marginBottom: "20px" }}
         />
 
         <div id="summernote"></div>

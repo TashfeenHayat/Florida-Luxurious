@@ -819,6 +819,7 @@ body:focus-visible {
   font-weight: bold;
   letter-spacing: 0%;
   line-height: 18px;
+  height: 32px;
 }
 .btn-sub-footer:hover {
   background-color: transparent !important;
