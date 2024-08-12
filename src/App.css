@@ -978,7 +978,7 @@ body:focus-visible {
   .cover_rectagle::before {
     content: none;
   }
-  .title-home-page {
+  body .title-home-page {
     font-size: 34px !important;
   }
   .text-paragraph {
@@ -1091,7 +1091,7 @@ body .contact-us-sub {
   overflow: hidden;
 }
 .f-24 {
-    font-size: 13px !important;
+    font-size: 23px !important;
     margin-right: 2rem;
 }
 
@@ -1124,6 +1124,16 @@ body  .agent-last-name{
  }
  .agent-estate{    margin-left: 25px;}
  
+.heading-florida-lux-listing {
+font-size: 31px  !important;
+    padding-top: 60px;
+}
+.Downarrow{
+  display: none !important;
+}
+.f-64{
+  font-size: 48px !important;
+}
 
   /*.ant-row {
     display: flex;

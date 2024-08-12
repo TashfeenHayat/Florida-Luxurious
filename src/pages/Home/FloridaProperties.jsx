@@ -86,7 +86,7 @@ const [counter, setCounter] = useState(1831197188); // Starting value
         <Col lg={12} md={24}>
           <Col lg={19} offset={1}>
             <Flex justify="center" align={"center"}>
-              <img src={DownArrow} height="250px" />
+              <img src={DownArrow}  className="Downarrow"height="250px" />
             </Flex>
             <Flex
               vertical

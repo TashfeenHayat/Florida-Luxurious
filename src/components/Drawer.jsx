@@ -13,7 +13,7 @@ function Drawers({ setOpenDrawer, openDrawer }) {
       placement="right"
       onClose={() => setOpenDrawer(false)}
       open={openDrawer}
-      width="1200px"
+    width="1200px"
       style={{ background: "black", cursor: "pointer" }}
     >
       <Flex justify={"space-between"} align={"center"}>
@@ -44,7 +44,7 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                       className="text-upper f-14 text-white"
                       style={{ textDecoration: "none" }}
                     >
-                      Featured NEIGHBORHOODS
+                      Featured Communities
                     </Link>
                     <Link
                       className="text-upper f-14 text-white"

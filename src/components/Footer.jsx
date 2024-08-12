@@ -60,7 +60,7 @@ const navigate=useNavigate()
                         className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >
-                        Featured NEIGHBORHOODS
+                        Featured Communities
                       </Link>
                       <Link
                         className="text-upper f-14 text-black"
