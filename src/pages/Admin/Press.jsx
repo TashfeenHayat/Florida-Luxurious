@@ -12,7 +12,7 @@ import {
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getPosts, addPost, updatePost } from "../../api/Press";
+import { getPosts, addPost, updatePost, deletePost } from "../../api/Press";
 import customAxios from "../../api/Axios";
 
 function Press() {
@@ -30,10 +30,10 @@ function Press() {
           <Link onClick={() => showModal(record)}>Edit</Link>
           <Popconfirm
             title="Delete this task"
-            description="Are you sure to delete this property?"
+            description="Are you sure to delete this post?"
             okText="Yes"
             cancelText="No"
-            onConfirm={() => handleOk(record._id)}
+            onConfirm={() => dispatch(deletePost(record._id))}
           >
             <Button type="link">Delete</Button>
           </Popconfirm>
