@@ -8,7 +8,7 @@ import {
   Spin,
   Flex,
   Image,
-  Pagination,
+  Pagination
 } from "antd";
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
@@ -32,7 +32,7 @@ function Comunities() {
   const {
     data: property,
     isLoading: isPropertyLoading,
-    isError: isPropertyError,
+    isError: isPropertyError
   } = useProperties(null, itemsPerPage, currentPage, null, id);
 
   const mapRef = useRef(null);
@@ -41,7 +41,7 @@ function Comunities() {
   useEffect(() => {
     const loader = new Loader({
       apiKey: google_api_key,
-      libraries: ["places"],
+      libraries: ["places"]
     });
 
     loader.load().then(() => {
@@ -49,24 +49,24 @@ function Comunities() {
         const map = new window.google.maps.Map(mapRef.current, {
           center: {
             lat: parseFloat(data?.geo?.geometry?.location?.lat),
-            lng: parseFloat(data?.geo?.geometry?.location?.lng),
+            lng: parseFloat(data?.geo?.geometry?.location?.lng)
           },
           zoom: 15, // Adjusted zoom level for better responsiveness
-          tilt: 45,
+          tilt: 45
         });
         new window.google.maps.Marker({
           position: {
             lat: parseFloat(data?.geo?.geometry?.location?.lat),
-            lng: parseFloat(data?.geo?.geometry?.location?.lng),
+            lng: parseFloat(data?.geo?.geometry?.location?.lng)
           },
-          map: map,
+          map: map
         });
       }
     });
   }, [
     google_api_key,
     data?.geo?.geometry?.location?.lat,
-    data?.geo?.geometry?.location?.lng,
+    data?.geo?.geometry?.location?.lng
   ]);
 
   const handlePageChange = (page) => {
@@ -74,18 +74,15 @@ function Comunities() {
   };
 
   return (
-    <div  style={{ overflow: "hidden" }}>
-     <BackgroundImage 
-  Image={data?.photo} 
-  
->
-  <Title
-    style={{ color: "white", lineHeight: "14px", letterSpacing: "2px" }}
-    className="text-upper f-50 f-100"
-  >
-    Communities
-  </Title>
-</BackgroundImage>
+    <div style={{ overflow: "hidden" }}>
+      <BackgroundImage Image={data?.photo}>
+        <Title
+          style={{ color: "white", lineHeight: "14px", letterSpacing: "2px" }}
+          className="text-upper f-50 f-100"
+        >
+          Communities
+        </Title>
+      </BackgroundImage>
 
       {isLoading ? (
         <Flex justify={"center"} align="center" className="w-100 py-5">
@@ -147,7 +144,7 @@ function Comunities() {
               </Row>
             </Container>
           </div>
-       <div className="py-5">
+          <div className="py-5">
             <Row gutter={[60, 60]} align="middle">
               <Col lg={8} md={24} sm={0}>
                 <div>

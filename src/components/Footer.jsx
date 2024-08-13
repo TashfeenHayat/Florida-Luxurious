@@ -11,20 +11,22 @@ function Footer() {
   const { loading } = useSelector((s) => s.contactUsReducer);
 
   const { data, isLoading } = useCommunities(20, 1);
-const sortcommunity = [...(data?.filters ?? [])].sort((a, b) => a?.name?.localeCompare(b?.name))
-const community6=sortcommunity.slice(0, 6) 
-const navigate=useNavigate()
+  const sortcommunity = [...(data?.filters ?? [])].sort((a, b) =>
+    a?.name?.localeCompare(b?.name)
+  );
+  const community6 = sortcommunity.slice(0, 6);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    email: "",
+    email: ""
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: value
     });
   };
 
@@ -141,9 +143,23 @@ const navigate=useNavigate()
                       >
                         {item?.name}
                       </Link>
-                    ))}<Text className="text-upper f-14 text-black"  style={{cursor: "pointer"}}  onClick={() => navigate("/all-communities")}>View All
-                   <span style={{ marginLeft: "5px", fontWeight: "bold", fontSize: "20px" }}>&rarr;</span>
-</Text>
+                    ))}
+                    <Text
+                      className="text-upper f-14 text-black"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => navigate("/all-communities")}
+                    >
+                      View All
+                      <span
+                        style={{
+                          marginLeft: "5px",
+                          fontWeight: "bold",
+                          fontSize: "20px"
+                        }}
+                      >
+                        &rarr;
+                      </span>
+                    </Text>
                   </Flex>
                 </Col>
               </Col>

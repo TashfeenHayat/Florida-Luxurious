@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Row, Col, Flex, Pagination, Spin, Image } from "antd";
 import BackgroundImage from "../../components/BackgroundImage";
-import FeaturedPropertiesImage from "../../assets/Agent.png";
+import FeaturedPropertiesImage from "../../assets/featureproperties.jpg";
 import { Container } from "react-bootstrap";
 import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
@@ -48,10 +48,13 @@ function Properties() {
 
   return (
     <>
-      <BackgroundImage Image={FeaturedPropertiesImage}>
-        <Title className="text-white text-upper f-50 f-100" style={{
-          textAlign:'center'
-        }}>
+      <BackgroundImage Image={FeaturedPropertiesImage} style={"back"}>
+        <Title
+          className="text-white text-upper f-50 f-100"
+          style={{
+            textAlign: "center"
+          }}
+        >
           Featured properties
         </Title>
       </BackgroundImage>
