@@ -12,16 +12,24 @@ import {
   Input,
   Popconfirm,
   Modal,
-  notification
+  notification,
+  Upload
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts, addPost, updatePost, deletePost } from "../../api/Press";
 import { api_base_URL } from "../../api/Axios";
-import { Upload } from "antd";
+
+// Define the stripHtml function
+const stripHtml = (html) => {
+  const element = document.createElement("div");
+  element.innerHTML = html;
+  return element.textContent || "";
+};
 
 function Press() {
   const [photo, setPhoto] = useState(); // Only one declaration here
   const [photoUploading, setPhotoUploading] = useState(false);
+
   const columns = [
     {
       title: "Photo",
@@ -40,6 +48,12 @@ function Press() {
       dataIndex: "title",
       key: "title"
     },
+    /* {
+      title: "Content",
+      dataIndex: "content",
+      key: "content",
+      render: (content) => <span>{stripHtml(content)}</span>
+    },*/
     {
       title: "",
       key: "action",
