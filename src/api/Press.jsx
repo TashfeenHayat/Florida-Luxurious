@@ -8,7 +8,7 @@ export const getPosts = createAsyncThunk(
       const res = await customAxios.get(`press`, {
         params: { limit, page },
       });
-
+console.log(res.data)
       return res.data;
     } catch ({ response }) {
       console.log(response);

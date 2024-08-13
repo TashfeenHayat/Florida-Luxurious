@@ -8,7 +8,7 @@ import {
   Input,
   Select,
   Upload,
-  notification,
+  notification
 } from "antd";
 import { api_base_URL } from "../../api/Axios";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
@@ -46,7 +46,7 @@ function AddAgent() {
     if (id) {
       setLoading(true);
       dispatch(getAgent(params.id)).then((agent) => {
-        console.log(agent);
+        console.log("agent url", agent);
         setLoading(false);
         setPhoto(agent.payload?.photo);
         setInitialValue(agent.payload);
@@ -67,7 +67,7 @@ function AddAgent() {
           phoneNumber:
             values.phoneNumber.countryCode +
             values.phoneNumber.areaCode +
-            values.phoneNumber.phoneNumber,
+            values.phoneNumber.phoneNumber
         })
       ).unwrap();
       setInitialValue({});
@@ -81,7 +81,7 @@ function AddAgent() {
           phoneNumber:
             values.phoneNumber.countryCode +
             values.phoneNumber.areaCode +
-            values.phoneNumber.phoneNumber,
+            values.phoneNumber.phoneNumber
         })
       ).unwrap();
       setInitialValue({});
@@ -102,7 +102,7 @@ function AddAgent() {
 
   const handleChange = (info) => {
     if (info.file.status === "done") {
-      console.log(info.file.response.url);
+      console.log("agent photo ", info.file.response.url);
       setPhotoUplaoding(false);
       setPhoto(info.file.response.url);
     }
@@ -129,7 +129,7 @@ function AddAgent() {
                 loading={photoUplaoding}
                 showUploadList={false}
                 headers={{
-                  Authorization: `Bearer ${localStorage.token}`,
+                  Authorization: `Bearer ${localStorage.token}`
                 }}
                 action={`${api_base_URL}upload`}
                 beforeUpload={beforeUpload}
@@ -153,8 +153,8 @@ function AddAgent() {
               rules={[
                 {
                   required: true,
-                  message: "First Name is required",
-                },
+                  message: "First Name is required"
+                }
               ]}
             >
               <Input size="large" placeholder="First Name" />
@@ -166,8 +166,8 @@ function AddAgent() {
               rules={[
                 {
                   required: true,
-                  message: "Last Name is required",
-                },
+                  message: "Last Name is required"
+                }
               ]}
             >
               <Input size="large" placeholder="Last Name" />
@@ -180,8 +180,8 @@ function AddAgent() {
                 {
                   type: "email",
                   required: true,
-                  message: "Email is required",
-                },
+                  message: "Email is required"
+                }
               ]}
             >
               <Input size="large" placeholder="Email" />
@@ -213,8 +213,8 @@ function AddAgent() {
               rules={[
                 {
                   required: true,
-                  message: "Address Line 1 is required",
-                },
+                  message: "Address Line 1 is required"
+                }
               ]}
             >
               <Input size="large" placeholder="Address Line 1" />
@@ -231,8 +231,8 @@ function AddAgent() {
               rules={[
                 {
                   required: true,
-                  message: "State is required",
-                },
+                  message: "State is required"
+                }
               ]}
             >
               <Input size="large" placeholder="State" />
@@ -244,8 +244,8 @@ function AddAgent() {
               rules={[
                 {
                   required: true,
-                  message: "City is required",
-                },
+                  message: "City is required"
+                }
               ]}
             >
               <Input size="large" placeholder="City" />
@@ -257,8 +257,8 @@ function AddAgent() {
               rules={[
                 {
                   required: true,
-                  message: "Country is required",
-                },
+                  message: "Country is required"
+                }
               ]}
             >
               <Select
@@ -275,8 +275,8 @@ function AddAgent() {
               rules={[
                 {
                   required: true,
-                  message: "Zip Code is required",
-                },
+                  message: "Zip Code is required"
+                }
               ]}
             >
               <Input size="large" placeholder="Zip Code" />
