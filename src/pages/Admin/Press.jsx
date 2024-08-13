@@ -117,6 +117,7 @@ function Press() {
       setTimeout(() => {
         setSelectedProp(property);
         setTitle(property.title);
+        setPhoto(property.photo);
         var parser = new DOMParser();
         var decodedHtml = parser.parseFromString(property?.content, "text/html")
           .body.textContent;
