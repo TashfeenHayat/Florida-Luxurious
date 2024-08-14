@@ -8,12 +8,13 @@ import {
   Input,
   Popconfirm,
   Modal,
+  Upload,
   notification,
 } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, LoadingOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts, addPost, updatePost, deletePost } from "../../api/Press";
-import customAxios from "../../api/Axios";
+import { api_base_URL } from "../../api/Axios";
 
 function Press() {
   const columns = [
@@ -56,6 +57,8 @@ function Press() {
   const [modalSearch, setModalSearch] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProp, setSelectedProp] = useState({});
+  const [photo, setPhoto] = useState();
+  const [photoUplaoding, setPhotoUplaoding] = useState(false);
 
   const { isLoading, isError, data } = useSelector((s) => s.getPostsReducer);
   const dispatch = useDispatch();
@@ -82,17 +85,6 @@ function Press() {
     );
   };
 
-  const handleChange = (newValue) => {
-    setModalSearch(modalSearch);
-    const property = modalProps.find((i) => i._id == newValue);
-    setSelectedProp(property);
-
-    var parser = new DOMParser();
-    var decodedHtml = parser.parseFromString(property?.press, "text/html").body
-      .textContent;
-    window.$("#summernote").summernote("code", decodedHtml);
-  };
-
   const showModal = (property) => {
     console.log(property);
     setIsModalOpen(true);
@@ -100,6 +92,7 @@ function Press() {
       setTimeout(() => {
         setSelectedProp(property);
         setTitle(property.title);
+        setPhoto(property.cover);
         var parser = new DOMParser();
         var decodedHtml = parser.parseFromString(property?.content, "text/html")
           .body.textContent;
@@ -107,6 +100,7 @@ function Press() {
       }, 1000);
     } else {
       setTitle("");
+      setPhoto("");
       setTimeout(() => {
         var parser = new DOMParser();
         var decodedHtml = parser.parseFromString("", "text/html").body
@@ -116,6 +110,26 @@ function Press() {
     }
   };
 
+  const beforeUpload = (e) => {
+    console.log(e);
+    setPhotoUplaoding(true);
+  };
+
+  const handleChange = (info) => {
+    if (info.file.status === "done") {
+      console.log(info.file.response.url);
+      setPhotoUplaoding(false);
+      setPhoto(info.file.response.url);
+    }
+  };
+
+  const uploadButton = (
+    <div>
+      {photoUplaoding ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
   const handleOk = async (ok) => {
     console.log(ok);
     var markupStr = $("#summernote").summernote("code");
@@ -123,6 +137,8 @@ function Press() {
       const res = await dispatch(
         updatePost({
           id: selectedProp._id,
+          title,
+          cover: photo,
           content: markupStr,
         })
       ).unwrap();
@@ -138,6 +154,7 @@ function Press() {
       const res = await dispatch(
         addPost({
           title,
+          cover: photo,
           content: markupStr,
         })
       ).unwrap();
@@ -189,6 +206,30 @@ function Press() {
         onCancel={handleCancel}
         width={1000}
       >
+        <div style={{ marginBottom: "20px" }}>
+          <Upload
+            name="file"
+            listType="picture-card"
+            className="avatar-uploader"
+            loading={photoUplaoding}
+            showUploadList={false}
+            headers={{
+              Authorization: `Bearer ${localStorage.token}`,
+            }}
+            action={`${api_base_URL}upload`}
+            beforeUpload={beforeUpload}
+            onChange={handleChange}
+          >
+            {photo ? (
+              <img src={photo} alt="avatar" style={{ width: "100%" }} />
+            ) : photoUplaoding ? (
+              <LoadingOutlined />
+            ) : (
+              uploadButton
+            )}
+          </Upload>
+        </div>
+
         <Input
           value={title}
           placeholder="Enter title"
