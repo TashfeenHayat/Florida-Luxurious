@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
+  Avatar,
   Space,
   Card,
   Button,
@@ -18,6 +19,18 @@ import { api_base_URL } from "../../api/Axios";
 
 function Press() {
   const columns = [
+    {
+      title: "",
+      key: "action",
+      render: (_, record) => (
+        <Avatar
+          style={{ verticalAlign: "middle" }}
+          shape="square"
+          size={64}
+          src={record.cover}
+        ></Avatar>
+      ),
+    },
     {
       title: "Title",
       dataIndex: "title",
