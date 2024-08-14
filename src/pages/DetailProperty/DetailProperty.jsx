@@ -117,7 +117,7 @@ export default function DetailProperty() {
           width="100%"
           fallback="https://placehold.co/1512x934"
         />
-        <div
+        <div className="hideetails" 
           style={{
             position: "absolute",
             top: 0,
@@ -257,8 +257,8 @@ export default function DetailProperty() {
                 <div
                   className="circle-bg-white"
                   style={{
-                    width: "30px",
-                    height: "30px",
+                    width: "20px",
+                    height: "20px",
                     marginBottom: "0px",
                   }}
                 >
@@ -295,7 +295,156 @@ export default function DetailProperty() {
           </Flex>
         </div>
       </div>
-      <Container>
+     <div
+  className="detail-container"
+  style={{
+    backgroundColor: "black",
+    padding: "20px",
+  }}
+>
+  <Flex className="pt-5" vertical>
+    <Text
+      className="f-20 f-100"
+      style={{ lineHeight: "14px", color: "#D4CFC9" }}
+    >
+      MLS® #: F10423862
+    </Text>
+    <Title className="text-upper" style={{ color: "white" }} level={3}>
+      {data?.property?.addressLine1}
+    </Title>
+    <Paragraph
+      className="text-upper f-20 f-100"
+      style={{ lineHeight: "10px", color: "#D4CFC9" }}
+    >
+      {data?.property?.city}, {data?.property?.state}, {data?.property?.zipCode}
+    </Paragraph>
+  </Flex>
+  
+  <Row gutter={[8, 16]} style={{ marginTop: "20px" }}>
+    <Col xs={24} sm={12} >
+      <Flex gap={5}>
+        <div
+          className="circle-bg-white"
+          style={{
+            width: "20px",
+            height: "20px",
+            marginBottom: "0px",
+          }}
+        >
+          <IoBedOutline size={15} />
+        </div>
+        <Text className="text-white f-16 f-100">
+          {data?.property?.bedroomCount} Bedrooms
+        </Text>
+      </Flex>
+    </Col>
+    <Col xs={12} sm={8}>
+      <Flex gap={5}>
+        <div
+          className="circle-bg-white"
+          style={{
+            width: "20px",
+            height: "20px",
+            marginBottom: "0px",
+          }}
+        >
+          <FaWater size={15} />
+        </div>
+        <Text className="text-white f-16 f-100">100± Waterfront</Text>
+      </Flex>
+    </Col>
+    <Col xs={24} sm={12} md={8} lg={8}>
+      <Flex gap={5}>
+        <div
+          className="circle-bg-white"
+          style={{
+            width: "20px",
+            height: "20px",
+            marginBottom: "0px",
+          }}
+        >
+          <LuBath size={15} />
+        </div>
+        <Text className="text-white f-16">{data?.property?.bathCount} Baths</Text>
+      </Flex>
+    </Col>
+    <Col xs={24} sm={12} md={8} lg={8}>
+      <Flex gap={5}>
+        <div
+          className="circle-bg-white"
+          style={{
+            width: "20px",
+            height: "20px",
+            marginBottom: "0px",
+          }}
+        >
+          <FaVectorSquare size={15} />
+        </div>
+        <Text className="text-white f-16 f-100">
+          {data?.property?.area} {data?.property?.areaUnit}
+        </Text>
+      </Flex>
+    </Col>
+    <Col xs={24} sm={12} md={8} lg={8}>
+      <Flex gap={5}>
+        <div
+          className="circle-bg-white"
+          style={{
+            width: "30px",
+            height: "30px",
+            marginBottom: "0px",
+          }}
+        >
+          <TbCarGarage size={15} />
+        </div>
+        <Text className="text-white f-16 f-100">Car garage</Text>
+      </Flex>
+    </Col>
+    <Col xs={24} sm={12} md={8} lg={8}>
+      <Flex gap={5}>
+        <div
+          className="circle-bg-white"
+          style={{
+            width: "20px",
+            height: "20px",
+            marginBottom: "0px",
+          }}
+        >
+          <LuSofa size={15} />
+        </div>
+        <Text className="text-white f-16">SF Living</Text>
+      </Flex>
+    </Col>
+  </Row>
+
+  <Flex justify="center" align="center" vertical>
+    <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
+      New construction - single family residence
+    </Text>
+  </Flex>
+  
+  <Flex justify="center" align="center" vertical>
+    <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
+      Compensation Offered?{" "}
+      <Text
+        style={{ color: "#D4CFC9", cursor: "pointer" }}
+        className="my-4 f-16 f-100"
+        onClick={() => setCompensation(true)}
+      >
+        Yes
+      </Text>
+      &nbsp; &nbsp;
+      <Text
+        style={{ color: "#D4CFC9", cursor: "pointer" }}
+        className="my-4 f-16 f-100"
+        onClick={() => setCompensation(false)}
+      >
+        No
+      </Text>
+    </Text>
+  </Flex>
+</div><Container>
+        
         <Row>
           <Col lg={12} xs={24} sm={24} className="p-3">
             <Card className="card-feature">
@@ -347,8 +496,8 @@ export default function DetailProperty() {
                   >
                     <Flex
                       style={{ height: "100%", cursor: "pointer" }}
-                      justify="center"
-                      align="center"
+            justify="center"
+            align="center"
                     >
                       <FaPlus size={60} color="#D4CFC9" />
                     </Flex>
@@ -427,15 +576,16 @@ export default function DetailProperty() {
       <div style={{ backgroundColor: "#000" }} ref={requestRef}>
         <Container>
           <Row>
-            <Col lg={14} sm={24} md={24} className="p-5">
+            <Col lg={14} sm={24} md={24} xsm={24} className="p-5">
               <Title
                 level={2}
+               
                 style={{
                   lineHeight: 2,
                   color: "white",
                   letterSpacing: "1.5px",
                 }}
-                className="text-upper"
+                className="text-upper f-30"
               >
                 Interested in{" "}
                 {data?.property?.addressLine1 +
@@ -462,16 +612,17 @@ export default function DetailProperty() {
                   <Col lg={12} md={12} sm={24}>
                     <Input placeholder="Phone:" type="text" />
                   </Col>
+               
                   <Col lg={24} md={24}>
+                    <Input placeholder="Message" type="text" />
+                  </Col>
+                     <Col lg={24} md={24}>
                     <Flex gap={10}>
                       <Checkbox />
                       <Text style={{ lineHeight: 2, color: "white" }}>
                         Request A showing
                       </Text>
                     </Flex>
-                  </Col>
-                  <Col lg={24} md={24}>
-                    <Input placeholder="Message" type="text" />
                   </Col>
                   <Col lg={24} md={24} align="middle">
                     <Button classNam="button-secondary-line-left">
@@ -483,7 +634,9 @@ export default function DetailProperty() {
             </Col>
             <Col lg={10} md={24} sm={24}>
               <div className="pt-5">
-                <div ref={mapRef} style={{ height: "500px", width: "100%" }} />;
+                <div ref={mapRef} style={{ height: "500px", 
+      width: "50rem",
+    maxWidth: "82vw"}} />;
               </div>
             </Col>
           </Row>

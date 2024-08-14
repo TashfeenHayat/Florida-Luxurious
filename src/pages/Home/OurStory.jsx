@@ -36,7 +36,7 @@ function OurStory() {
                       Broward’s Leading Private Brokerage!
                     </Text>
                   </Flex>
-                  <img src={Logoicon} />
+                  <div className="ourstoryimg"><img src={Logoicon} /></div>
                 </Flex>
                 <Flex vertical>
                   <Text className="our-story-text f-100 f-16 text-white text-left">

@@ -122,7 +122,7 @@ function MeetTeam() {
                               className=""
                               preview={false}
                               fallback="https://placehold.co/300x388"
-                              style={{ aspectRatio: "5/6"}}
+                              style={{ aspectRatio: "5/7.5",  width:"90%" , objectFit: "cover"}}
                             />
                           }
                           bImg={
@@ -135,7 +135,7 @@ function MeetTeam() {
                               className="img-op1"
                               preview={false}
                               fallback="https://placehold.co/300x388"
-                              style={{ aspectRatio: "5/6" }}
+                              style={{ aspectRatio: "5/7.5" ,width:"90%" , objectFit: "cover"}}
                             />
                           }
                         >

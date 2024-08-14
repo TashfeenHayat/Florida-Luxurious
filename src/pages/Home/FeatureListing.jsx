@@ -103,7 +103,7 @@ function FeatureListing() {
               style={{
                 marginTop: 65,
                 marginBottom: 65,
-                overflow:'hidden'
+               
               }}
               className="features_section_slider"
               data-aos="fade-down-left"

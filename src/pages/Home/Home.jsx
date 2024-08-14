@@ -61,8 +61,8 @@ function Home() {
       <span
         className="search-button"
         style={{
-          width: 'auto', // Adjust width to auto for button content
-          padding: '0 1rem', // Add some padding for better look
+          width: 'auto', 
+          padding: '0 1rem',
         }}
       >
         Search
@@ -71,8 +71,8 @@ function Home() {
     size="large"
     onSearch={onSearch}
     style={{
-      width: '90%', 
-      maxWidth: '500px',
+      width: '100%', 
+      maxWidth: '550px',
       minWidth: '250px',
       overflow:"hidden" 
     }}

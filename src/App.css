@@ -950,7 +950,9 @@ body:focus-visible {
 .global{
  marginLeft: 50 
 }
-
+ .detail-container{
+  display: none;
+}
 /* Media Queries */
 
 @media screen and (max-width: 1024px) {
@@ -963,6 +965,7 @@ body:focus-visible {
   .communities-grid{
     width: 22rem !important;
   }
+ 
 }
 
 @media screen and (max-width: 768px) {
@@ -979,7 +982,7 @@ body:focus-visible {
   .cover_rectagle::before {
     content: none;
   }
-  .title-home-page {
+  body .title-home-page {
     font-size: 34px !important;
   }
   .text-paragraph {
@@ -1092,7 +1095,7 @@ body .contact-us-sub {
   overflow: hidden;
 }
 .f-24 {
-    font-size: 13px !important;
+    font-size: 18px !important;
     margin-right: 2rem;
 }
 
@@ -1108,7 +1111,7 @@ body .p-5{
     margin-top: -32px;
 }
 .f-32 {
-    font-size: 25px;
+    font-size: 25px !important;
 }
  .button-secondary-line-left{
       margin-left: 33px;
@@ -1125,7 +1128,45 @@ body  .agent-last-name{
  }
  .agent-estate{    margin-left: 25px;}
  
-
+.heading-florida-lux-listing {
+font-size: 31px  !important;
+    padding-top: 60px;
+}
+.Downarrow{
+  display: none !important;
+}
+.f-64{
+  font-size: 48px !important;
+}
+.f-40 {
+    font-size: 25px !important;
+}
+.my-5{
+  margin-right: 3rem !important;
+}
+.hideetails{
+  display: none !important;
+}
+.properties-single-slideshow-info{ display: none !important;}
+ .detail-container{
+  display:block !important;;
+}
+.pt-5 {
+    padding-top: 3rem !important;
+    padding-left: 3rem;
+}
+.f-30{
+  font-size: 22px !important;
+}
+.f-50 {
+    font-size: 30px !important;
+}
+.florida-heading-feature-negibour {
+  font-size: 30px !important;
+}
+.detail-property .ant-input {
+  width: 317px !important;
+}
   /*.ant-row {
     display: flex;
     flex-flow: column;
@@ -1200,9 +1241,17 @@ body  .agent-last-name{
   .heading-florida-lux-listing {
     font-size: 24px !important;
   }*/
-
+.f-16 {
+    font-size: 13px !important;
+    margin-left: 38px;
 }
-
+.ant-form-item-control-input{
+  width:19rem !important;
+}
+}
+.text-1024 {
+        font-size: 11px;
+    }
 
 .agent-first-name{
   font-size: 70px !important;
