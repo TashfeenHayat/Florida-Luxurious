@@ -74,7 +74,7 @@ function App() {
           <Route path="/all-communities" element={<Allcommunities />} />
           <Route path="mls-listing" element={<Mls />} />
           <Route path="mls-detail/:id" element={<MlsPropertyDetail />} />
-          {/* <Route path="/propertypress" element={<PropertyPress />} /> */}
+          <Route path="/propertypress" element={<PropertyPress />} />
           <Route path="/searchcommunity" element={<SearchCommunity />} />
           <Route path="/agent/blog/:id" element={<AgentBlog />} />
           <Route path="*" element={<NotFound />} />
