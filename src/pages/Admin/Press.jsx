@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import {
+<<<<<<< HEAD
   Form,
   Row,
   Col,
+=======
+  Avatar,
+>>>>>>> af9da7579b48def8622362648534ef6ab0611a7c
   Space,
   Card,
   Button,
@@ -12,9 +16,11 @@ import {
   Input,
   Popconfirm,
   Modal,
+  Upload,
   notification,
   Upload
 } from "antd";
+<<<<<<< HEAD
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts, addPost, updatePost, deletePost } from "../../api/Press";
 import { api_base_URL } from "../../api/Axios";
@@ -25,6 +31,12 @@ const stripHtml = (html) => {
   element.innerHTML = html;
   return element.textContent || "";
 };
+=======
+import { PlusOutlined, LoadingOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { getPosts, addPost, updatePost, deletePost } from "../../api/Press";
+import { api_base_URL } from "../../api/Axios";
+>>>>>>> af9da7579b48def8622362648534ef6ab0611a7c
 
 function Press() {
   const [photo, setPhoto] = useState(); // Only one declaration here
@@ -32,6 +44,7 @@ function Press() {
 
   const columns = [
     {
+<<<<<<< HEAD
       title: "Photo",
       dataIndex: "photo",
       key: "photo",
@@ -42,6 +55,18 @@ function Press() {
           style={{ width: "50px", height: "50px", objectFit: "cover" }}
         />
       )
+=======
+      title: "",
+      key: "action",
+      render: (_, record) => (
+        <Avatar
+          style={{ verticalAlign: "middle" }}
+          shape="square"
+          size={64}
+          src={record.cover}
+        ></Avatar>
+      ),
+>>>>>>> af9da7579b48def8622362648534ef6ab0611a7c
     },
     {
       title: "Title",
@@ -88,6 +113,12 @@ function Press() {
   const [modalSearch, setModalSearch] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProp, setSelectedProp] = useState({});
+<<<<<<< HEAD
+=======
+  const [photo, setPhoto] = useState();
+  const [photoUplaoding, setPhotoUplaoding] = useState(false);
+
+>>>>>>> af9da7579b48def8622362648534ef6ab0611a7c
   const { isLoading, isError, data } = useSelector((s) => s.getPostsReducer);
   const dispatch = useDispatch();
 
@@ -113,17 +144,6 @@ function Press() {
     );
   };
 
-  const handleChange = (newValue) => {
-    setModalSearch(modalSearch);
-    const property = modalProps.find((i) => i._id == newValue);
-    setSelectedProp(property);
-
-    var parser = new DOMParser();
-    var decodedHtml = parser.parseFromString(property?.press, "text/html").body
-      .textContent;
-    window.$("#summernote").summernote("code", decodedHtml);
-  };
-
   const showModal = (property) => {
     console.log(property);
     setIsModalOpen(true);
@@ -131,7 +151,11 @@ function Press() {
       setTimeout(() => {
         setSelectedProp(property);
         setTitle(property.title);
+<<<<<<< HEAD
         setPhoto(property.photo);
+=======
+        setPhoto(property.cover);
+>>>>>>> af9da7579b48def8622362648534ef6ab0611a7c
         var parser = new DOMParser();
         var decodedHtml = parser.parseFromString(property?.content, "text/html")
           .body.textContent;
@@ -139,6 +163,7 @@ function Press() {
       }, 1000);
     } else {
       setTitle("");
+      setPhoto("");
       setTimeout(() => {
         var parser = new DOMParser();
         var decodedHtml = parser.parseFromString("", "text/html").body
@@ -148,9 +173,30 @@ function Press() {
     }
   };
 
+  const beforeUpload = (e) => {
+    console.log(e);
+    setPhotoUplaoding(true);
+  };
+
+  const handleChange = (info) => {
+    if (info.file.status === "done") {
+      console.log(info.file.response.url);
+      setPhotoUplaoding(false);
+      setPhoto(info.file.response.url);
+    }
+  };
+
+  const uploadButton = (
+    <div>
+      {photoUplaoding ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
   const handleOk = async (ok) => {
     console.log(ok);
     var markupStr = $("#summernote").summernote("code");
+<<<<<<< HEAD
     let res;
     try {
       if (selectedProp._id) {
@@ -179,6 +225,18 @@ function Press() {
       $("#summernote").summernote("code", ""); // Clear summernote content
 
       // Reset the selected property and close the modal
+=======
+    if (selectedProp._id) {
+      const res = await dispatch(
+        updatePost({
+          id: selectedProp._id,
+          title,
+          cover: photo,
+          content: markupStr,
+        })
+      ).unwrap();
+      openNotification("success", res);
+>>>>>>> af9da7579b48def8622362648534ef6ab0611a7c
       setSelectedProp({});
       setIsModalOpen(false);
 
@@ -186,7 +244,26 @@ function Press() {
       dispatch(
         getPosts({
           page: tableParams.current,
+<<<<<<< HEAD
           limit: tableParams.pageSize
+=======
+          limit: tableParams.pageSize,
+        })
+      );
+    } else {
+      const res = await dispatch(
+        addPost({
+          title,
+          cover: photo,
+          content: markupStr,
+        })
+      ).unwrap();
+      openNotification("success", res);
+      dispatch(
+        getPosts({
+          page: tableParams.current,
+          limit: tableParams.pageSize,
+>>>>>>> af9da7579b48def8622362648534ef6ab0611a7c
         })
       );
     } catch (error) {
@@ -252,6 +329,7 @@ function Press() {
         onCancel={handleCancel}
         width={1000}
       >
+<<<<<<< HEAD
         <Form.Item name="photo">
           <Row justify="center">
             <Col span={4} className="gutter-row">
@@ -279,6 +357,32 @@ function Press() {
             </Col>
           </Row>
         </Form.Item>
+=======
+        <div style={{ marginBottom: "20px" }}>
+          <Upload
+            name="file"
+            listType="picture-card"
+            className="avatar-uploader"
+            loading={photoUplaoding}
+            showUploadList={false}
+            headers={{
+              Authorization: `Bearer ${localStorage.token}`,
+            }}
+            action={`${api_base_URL}upload`}
+            beforeUpload={beforeUpload}
+            onChange={handleChange}
+          >
+            {photo ? (
+              <img src={photo} alt="avatar" style={{ width: "100%" }} />
+            ) : photoUplaoding ? (
+              <LoadingOutlined />
+            ) : (
+              uploadButton
+            )}
+          </Upload>
+        </div>
+
+>>>>>>> af9da7579b48def8622362648534ef6ab0611a7c
         <Input
           value={title}
           placeholder="Enter title"
