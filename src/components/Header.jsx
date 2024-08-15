@@ -59,7 +59,7 @@ function Header() {
                 </Menu.Item>
                 <Menu.Item>
                   <Link
-                 to="/all-communities"
+                    to="/all-communities"
                     rel="noopener noreferrer"
                     className="text-upper  f-10"
                   >
@@ -91,7 +91,6 @@ function Header() {
                 <Menu.Item style={contentStyle}>
                   <Link
                     to="mls-listing"
-                    
                     rel="noopener noreferrer "
                     className="f-10"
                   >
@@ -135,11 +134,11 @@ function Header() {
                     Meet the team
                   </Link>
                 </Menu.Item>
-                {/* <Menu.Item>
+                <Menu.Item>
                   <Link to="/propertypress" className="text-upper f-10">
                     Property press
                   </Link>
-                </Menu.Item> */}
+                </Menu.Item>
               </Menu>
             }
           >
