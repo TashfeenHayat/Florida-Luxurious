@@ -1,6 +1,6 @@
 import React from "react";
 import BackgroundImage from "../../components/BackgroundImage";
-import Agent from "../../assets/Agent.png";
+import Agent from "../../assets/Agent_profile.jpg";
 import { Typography, Row, Col, Image, Flex, Spin, Skeleton, Card } from "antd";
 import { MdOutlinePhone, MdOutlineMailOutline } from "react-icons/md";
 import Button from "../../components/Buttons";
@@ -21,8 +21,14 @@ function AgentProfile() {
 
   return (
     <>
-      <BackgroundImage Image={Agent}>
-        <Title className="text-white text-upper f-50 f-100" style={{ textAlign: 'center' }}>
+      <BackgroundImage
+        Image={Agent}
+        style={{ backgroundSize: "cover", backgroundPosition: "center" }}
+      >
+        <Title
+          className="text-white text-upper f-50 f-100"
+          style={{ textAlign: "center" }}
+        >
           Agent Profile
         </Title>
       </BackgroundImage>
@@ -84,12 +90,8 @@ function AgentProfile() {
         <div className="agent-info-bg">
           <div className="agent-info-bg-shadow" style={{ overflow: "hidden" }}>
             <Row gutter={[8, 16]} align="middle" style={{ height: "100%" }}>
-              <Col lg={12} xl={8}
-                      
-                      md={12}
-                      sm={24}
-                      xsm={24}></Col>
-              <Col  align={"center"}>
+              <Col lg={12} xl={8} md={12} sm={24} xsm={24}></Col>
+              <Col align={"center"}>
                 <Flex
                   justify={"center"}
                   align="center"
@@ -105,24 +107,20 @@ function AgentProfile() {
                       loading={isLoading}
                     />
                   ) : (
-                    <Flex  vertical gap={10} wrap="nowrap">
+                    <Flex vertical gap={10} wrap="nowrap">
                       <div>
                         <Title className="text-white text-upper">
                           Contact {data?.firstName}
                         </Title>
                       </div>
 
-                      <Flex gap={20} lg={12} xl={8}
-                      md={12}
-                      sm={24}
-                      xsm={24}>
+                      <Flex gap={20} lg={12} xl={8} md={12} sm={24} xsm={24}>
                         <Flex
                           vertical
                           justify={"center"}
                           align={"center"}
                           style={{ marginLeft: "-50px" }}
                           gap={10}
-                         
                         >
                           <a
                             className="bg-social-media"
@@ -149,7 +147,12 @@ function AgentProfile() {
                             <FaInstagram color="black" size={24} />
                           </a>
                         </Flex>
-                        <Flex vertical justify="center" gap={10} className="contact">
+                        <Flex
+                          vertical
+                          justify="center"
+                          gap={10}
+                          className="contact"
+                        >
                           <Flex align={"center"} gap={10}>
                             <MdOutlinePhone color="#838383" size={25} />{" "}
                             <span className="text-white f-32">
@@ -168,11 +171,7 @@ function AgentProfile() {
                   )}
                 </Flex>
               </Col>
-              <Col lg={12} xl={8}
-                      
-                      md={12}
-                      sm={24}
-                      xsm={24}>
+              <Col lg={12} xl={8} md={12} sm={24} xsm={24}>
                 {isLoading ? (
                   <Skeleton
                     active
@@ -188,10 +187,10 @@ function AgentProfile() {
                     style={{ height: "100%" }}
                     gap={10}
                     xl={8}
-                      lg={12}
-                      md={12}
-                      sm={24}
-                      xsm={24}
+                    lg={12}
+                    md={12}
+                    sm={24}
+                    xsm={24}
                   >
                     <Button
                       classNam="button-secondary-line-left"
@@ -242,7 +241,15 @@ function AgentProfile() {
                       style={{ gap: "10px" }}
                     >
                       <Card style={{ width: 400, background: "#E8E8E8" }}>
-                        <Flex justify={"center"} align="center" vertical  lg={8} md={8} sm={24} xsm={24} >
+                        <Flex
+                          justify={"center"}
+                          align="center"
+                          vertical
+                          lg={8}
+                          md={8}
+                          sm={24}
+                          xsm={24}
+                        >
                           <Image
                             src={item?.agentId?.photo}
                             preview={false}
@@ -267,7 +274,10 @@ function AgentProfile() {
                       <Flex justify={"center"} align="center" vertical>
                         <Flex vertical>
                           <Flex
-                          lg={8} md={8} sm={24} xsm={24} 
+                            lg={8}
+                            md={8}
+                            sm={24}
+                            xsm={24}
                             justify={"center"}
                             align="center"
                             className="py-3"
@@ -301,7 +311,7 @@ function AgentProfile() {
                           </Flex>
                         </Flex>
                       </Flex>
-                      <Flex justify={"center"} lg={8} md={8} sm={24} xsm={24} >
+                      <Flex justify={"center"} lg={8} md={8} sm={24} xsm={24}>
                         <button class="button-view">Read More </button>
                       </Flex>
                     </Card>
