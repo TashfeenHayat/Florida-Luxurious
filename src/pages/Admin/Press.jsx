@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import {
-  Form,
-  Row,
-  Col,
+  Avatar,
   Space,
   Card,
   Button,
@@ -12,19 +10,14 @@ import {
   Input,
   Popconfirm,
   Modal,
+  Upload,
   notification,
   Upload
 } from "antd";
+import { PlusOutlined, LoadingOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts, addPost, updatePost, deletePost } from "../../api/Press";
 import { api_base_URL } from "../../api/Axios";
-
-// Define the stripHtml function
-const stripHtml = (html) => {
-  const element = document.createElement("div");
-  element.innerHTML = html;
-  return element.textContent || "";
-};
 
 function Press() {
   const [photo, setPhoto] = useState(); // Only one declaration here
@@ -32,16 +25,16 @@ function Press() {
 
   const columns = [
     {
-      title: "Photo",
-      dataIndex: "photo",
-      key: "photo",
-      render: (text) => (
-        <img
-          src={text}
-          alt="photo"
-          style={{ width: "50px", height: "50px", objectFit: "cover" }}
-        />
-      )
+      title: "",
+      key: "action",
+      render: (_, record) => (
+        <Avatar
+          style={{ verticalAlign: "middle" }}
+          shape="square"
+          size={64}
+          src={record.cover}
+        ></Avatar>
+      ),
     },
     {
       title: "Title",
@@ -88,6 +81,9 @@ function Press() {
   const [modalSearch, setModalSearch] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProp, setSelectedProp] = useState({});
+  const [photo, setPhoto] = useState();
+  const [photoUplaoding, setPhotoUplaoding] = useState(false);
+
   const { isLoading, isError, data } = useSelector((s) => s.getPostsReducer);
   const dispatch = useDispatch();
 
@@ -113,17 +109,6 @@ function Press() {
     );
   };
 
-  const handleChange = (newValue) => {
-    setModalSearch(modalSearch);
-    const property = modalProps.find((i) => i._id == newValue);
-    setSelectedProp(property);
-
-    var parser = new DOMParser();
-    var decodedHtml = parser.parseFromString(property?.press, "text/html").body
-      .textContent;
-    window.$("#summernote").summernote("code", decodedHtml);
-  };
-
   const showModal = (property) => {
     console.log(property);
     setIsModalOpen(true);
@@ -131,7 +116,7 @@ function Press() {
       setTimeout(() => {
         setSelectedProp(property);
         setTitle(property.title);
-        setPhoto(property.photo);
+        setPhoto(property.cover);
         var parser = new DOMParser();
         var decodedHtml = parser.parseFromString(property?.content, "text/html")
           .body.textContent;
@@ -139,6 +124,7 @@ function Press() {
       }, 1000);
     } else {
       setTitle("");
+      setPhoto("");
       setTimeout(() => {
         var parser = new DOMParser();
         var decodedHtml = parser.parseFromString("", "text/html").body
@@ -148,37 +134,39 @@ function Press() {
     }
   };
 
+  const beforeUpload = (e) => {
+    console.log(e);
+    setPhotoUplaoding(true);
+  };
+
+  const handleChange = (info) => {
+    if (info.file.status === "done") {
+      console.log(info.file.response.url);
+      setPhotoUplaoding(false);
+      setPhoto(info.file.response.url);
+    }
+  };
+
+  const uploadButton = (
+    <div>
+      {photoUplaoding ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
   const handleOk = async (ok) => {
     console.log(ok);
     var markupStr = $("#summernote").summernote("code");
-    let res;
-    try {
-      if (selectedProp._id) {
-        res = await dispatch(
-          updatePost({
-            id: selectedProp._id,
-            content: markupStr,
-            photo,
-            title
-          })
-        ).unwrap();
-      } else {
-        res = await dispatch(
-          addPost({
-            photo,
-            title,
-            content: markupStr
-          })
-        ).unwrap();
-      }
-      openNotification("success", "Post saved successfully!");
-
-      // Clear fields after a successful response
-      setPhoto(null);
-      setTitle("");
-      $("#summernote").summernote("code", ""); // Clear summernote content
-
-      // Reset the selected property and close the modal
+    if (selectedProp._id) {
+      const res = await dispatch(
+        updatePost({
+          id: selectedProp._id,
+          title,
+          cover: photo,
+          content: markupStr,
+        })
+      ).unwrap();
+      openNotification("success", res);
       setSelectedProp({});
       setIsModalOpen(false);
 
@@ -186,7 +174,22 @@ function Press() {
       dispatch(
         getPosts({
           page: tableParams.current,
-          limit: tableParams.pageSize
+          limit: tableParams.pageSize,
+        })
+      );
+    } else {
+      const res = await dispatch(
+        addPost({
+          title,
+          cover: photo,
+          content: markupStr,
+        })
+      ).unwrap();
+      openNotification("success", res);
+      dispatch(
+        getPosts({
+          page: tableParams.current,
+          limit: tableParams.pageSize,
         })
       );
     } catch (error) {
@@ -252,33 +255,30 @@ function Press() {
         onCancel={handleCancel}
         width={1000}
       >
-        <Form.Item name="photo">
-          <Row justify="center">
-            <Col span={4} className="gutter-row">
-              <Upload
-                name="file"
-                listType="picture-card"
-                className="avatar-uploader"
-                loading={photoUploading}
-                showUploadList={false}
-                headers={{
-                  Authorization: `Bearer ${localStorage.token}`
-                }}
-                action={`${api_base_URL}upload`}
-                beforeUpload={beforeUpload}
-                onChange={handleFileChange}
-              >
-                {photo ? (
-                  <img src={photo} alt="avatar" style={{ width: "100%" }} />
-                ) : photoUploading ? (
-                  <LoadingOutlined />
-                ) : (
-                  uploadButton
-                )}
-              </Upload>
-            </Col>
-          </Row>
-        </Form.Item>
+        <div style={{ marginBottom: "20px" }}>
+          <Upload
+            name="file"
+            listType="picture-card"
+            className="avatar-uploader"
+            loading={photoUplaoding}
+            showUploadList={false}
+            headers={{
+              Authorization: `Bearer ${localStorage.token}`,
+            }}
+            action={`${api_base_URL}upload`}
+            beforeUpload={beforeUpload}
+            onChange={handleChange}
+          >
+            {photo ? (
+              <img src={photo} alt="avatar" style={{ width: "100%" }} />
+            ) : photoUplaoding ? (
+              <LoadingOutlined />
+            ) : (
+              uploadButton
+            )}
+          </Upload>
+        </div>
+
         <Input
           value={title}
           placeholder="Enter title"
