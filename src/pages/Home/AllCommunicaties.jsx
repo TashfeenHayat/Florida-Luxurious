@@ -5,7 +5,7 @@ import Florida from "../../assets/florida.png";
 import useCommunities from "../../hooks/useCommunities";
 import { useNavigate } from "react-router-dom";
 import BackgroundImage from "../../components/BackgroundImage";
-import BoatImage from "../../assets/boatowner.png";
+import BoatImage from "../../assets/Allcommunities.jpg";
 
 const { Title, Text, Paragraph } = Typography;
 function Allcommunities() {
@@ -56,7 +56,10 @@ function Allcommunities() {
   };
   return (
     <>
-      <BackgroundImage Image={BoatImage}>
+      <BackgroundImage
+        Image={BoatImage}
+        style={{ backgroundSize: "cover", backgroundPosition: "center" }}
+      >
         <Title
           style={{
             color: "white",

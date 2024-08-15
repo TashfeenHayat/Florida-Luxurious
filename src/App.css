@@ -750,6 +750,7 @@ body:focus-visible {
 }
 
 .back {
+
   transform: rotateY(180deg);
   background: #000;
   color: #fff;
@@ -797,6 +798,7 @@ body:focus-visible {
 .bg-footer {
   background-image: url("./assets/footer.jpg");
   background-size: cover;
+  background-position: center;
 
   background-repeat: no-repeat;
   -webkit-filter: grayscale(1);
@@ -804,7 +806,7 @@ body:focus-visible {
 }
 .footer-bg-img-shadow {
   position: relative;
-  padding: 130px 30px 30px 30px;
+  padding: 60px 30px 30px 30px;
 }
 .footer-form-display {
   display: flex;
@@ -1531,10 +1533,12 @@ font-size: 31px  !important;
 
 .team-banner {
   position: relative;
-  height: 450px;
+  height:450px;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url("./assets//TeamBanner.png");
+  background-position: center;
+
+  background-image: url("./assets/aBOUT.jpg");
 }
 .team-banner-shadow {
   background: rgba(0, 0, 0, 0.2);
@@ -1552,6 +1556,7 @@ font-size: 31px  !important;
   height: 537px;
   background-repeat: no-repeat;
   background-size: cover;
+      background-position: center;
 }
 .bg-img-shadow {
   background: rgba(0, 0, 0, 0.1);

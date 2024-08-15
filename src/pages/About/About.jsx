@@ -8,20 +8,18 @@ import Bagde from "../../assets/Bagde1.svg";
 import Bagde2 from "../../assets/Bagde2.svg";
 import Bagde3 from "../../assets/Bagde3.svg";
 import Bagde4 from "../../assets/Bagde4.svg";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 const { Title, Text, Paragraph } = Typography;
 function OurStory() {
   const [counter, setCounter] = useState(1831197188); // Starting value
 
   useEffect(() => {
-    
     const target = 30052918000; // total value
 
-    
-    const duration = 5000; 
-    const intervalTime = 30; 
+    const duration = 5000;
+    const intervalTime = 30;
     const increment = (target - counter) / (duration / intervalTime);
-  const interval = setInterval(() => {
+    const interval = setInterval(() => {
       setCounter((prev) => {
         const newValue = Math.min(prev + increment, target);
         return newValue;
@@ -34,7 +32,7 @@ function OurStory() {
     }
 
     // Cleanup function to clear the interval on unmount
-    return () => clearInterval(interval)
+    return () => clearInterval(interval);
   }, [counter]);
   return (
     <div className="ourstory">
@@ -98,7 +96,12 @@ function OurStory() {
                   Ranked Private Brokerage
                 </Text>
                 <br />
-                <Text className="text-white text-upper " style={{fontSize:'30px', }}>#1</Text>
+                <Text
+                  className="text-white text-upper "
+                  style={{ fontSize: "30px" }}
+                >
+                  #1
+                </Text>
               </div>
             </Col>
             <Col xl={8} lg={12} md={12} sm={12}>
@@ -109,7 +112,12 @@ function OurStory() {
                   Has exceeded the mark
                 </Text>
                 <br />
-                <Text className="text-white text-upper " style={{fontSize:'30px', }}>$3 BILLION</Text>
+                <Text
+                  className="text-white text-upper "
+                  style={{ fontSize: "30px" }}
+                >
+                  $3 BILLION
+                </Text>
               </div>
             </Col>
             <Col xl={8} lg={12} md={12} sm={12}>
@@ -118,8 +126,11 @@ function OurStory() {
               >
                 <Text className="text-gray f-16 text-upper">Total Sales</Text>
                 <br />
-                <Text className="text-white text-upper " style={{fontSize:'30px', }}>
-                   ${Math.floor(counter).toLocaleString()}
+                <Text
+                  className="text-white text-upper "
+                  style={{ fontSize: "30px" }}
+                >
+                  ${Math.floor(counter).toLocaleString()}
                 </Text>
               </div>
             </Col>

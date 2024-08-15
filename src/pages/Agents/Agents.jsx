@@ -18,8 +18,11 @@ function Agents() {
       <div className="team-banner">
         <div className="team-banner-shadow">
           <Flex justify={"center"} align="center">
-            <Title className="text-upper text-white f-50 f-100" style={{textAlign:"center"}}>
-           Meet The Team 
+            <Title
+              className="text-upper text-white f-50 f-100"
+              style={{ textAlign: "center" }}
+            >
+              Meet The Team
             </Title>
           </Flex>
         </div>
@@ -29,7 +32,9 @@ function Agents() {
         <Container className="py-5">
           <Row gutter={[20, 60]}>
             <Col lg={24} md={24} sm={24} xs={24}>
-              <Title className="text-center f-100 text-upper">Our Team Member</Title>
+              <Title className="text-center f-100 text-upper">
+                Our Team Member
+              </Title>
             </Col>
             {isLoading ? (
               <Flex justify={"center"} align="center" className="w-100">
@@ -58,7 +63,11 @@ function Agents() {
                           className=""
                           preview={false}
                           fallback="https://placehold.co/300x388"
-                          style={{ aspectRatio: "5/7.5" , objectFit: "cover", width:"90%"}}
+                          style={{
+                            aspectRatio: "5/7.5",
+                            objectFit: "cover",
+                            width: "90%"
+                          }}
                         />
                       }
                       bImg={
@@ -71,7 +80,11 @@ function Agents() {
                           className="img-op1"
                           preview={false}
                           fallback="https://placehold.co/300x388"
-                          style={{ aspectRatio: "5/7.5" , objectFit: "cover" , width:"90%"}}
+                          style={{
+                            aspectRatio: "5/7.5",
+                            objectFit: "cover",
+                            width: "90%"
+                          }}
                         />
                       }
                     >
@@ -154,13 +167,13 @@ function Agents() {
                     <Flex align={"center"} gap={5}>
                       <CiMail color="#838383" size={12} />
                       <Text className="text-black text-upper text-1024">
-                       info@floridaluxurious.com
+                        info@floridaluxurious.com
                       </Text>
                     </Flex>
                     <Flex align={"center"} gap={5}>
                       <CiPhone color="#838383" size={15} />
                       <Text className="text-black text-upper text-1024">
-                         954.870.4080
+                        954.870.4080
                       </Text>
                     </Flex>
                   </Flex>

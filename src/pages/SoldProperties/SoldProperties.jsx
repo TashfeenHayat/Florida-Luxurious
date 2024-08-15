@@ -1,7 +1,7 @@
 import { Typography, Row, Col, Flex, Pagination, Spin, Image } from "antd";
 import { useState } from "react";
 import BackgroundImage from "../../components/BackgroundImage";
-import FeaturedPropertiesImage from "../../assets/Agent.png";
+import FeaturedPropertiesImage from "../../assets/soldproperties.jpg";
 import { Container } from "react-bootstrap";
 import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
@@ -46,7 +46,10 @@ function SoldProperties() {
 
   return (
     <>
-      <BackgroundImage Image={FeaturedPropertiesImage}>
+      <BackgroundImage
+        Image={FeaturedPropertiesImage}
+        style={{ backgroundSize: "cover", backgroundPosition: "center" }}
+      >
         <Title className="text-white text-upper f-50 f-100">
           Sold properties
         </Title>
