@@ -12,15 +12,12 @@ import {
   Modal,
   Upload,
   notification,
-  Upload
 } from "antd";
-import { PlusOutlined, LoadingOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts, addPost, updatePost, deletePost } from "../../api/Press";
 import { api_base_URL } from "../../api/Axios";
 
 function Press() {
-  const [photo, setPhoto] = useState(); // Only one declaration here
   const [photoUploading, setPhotoUploading] = useState(false);
 
   const columns = [
@@ -39,7 +36,7 @@ function Press() {
     {
       title: "Title",
       dataIndex: "title",
-      key: "title"
+      key: "title",
     },
     /* {
       title: "Content",
@@ -63,8 +60,8 @@ function Press() {
             <Button type="link">Delete</Button>
           </Popconfirm>
         </Space>
-      )
-    }
+      ),
+    },
   ];
 
   const [api, contextHolder] = notification.useNotification();
@@ -74,7 +71,7 @@ function Press() {
 
   const [tableParams, setTableParams] = useState({
     current: 1,
-    pageSize: 10
+    pageSize: 10,
   });
   const [title, setTitle] = useState("");
   const [modalProps, setModalProps] = useState([]);
@@ -91,7 +88,7 @@ function Press() {
     dispatch(
       getPosts({
         page: tableParams.current,
-        limit: tableParams.pageSize
+        limit: tableParams.pageSize,
       })
     );
     if (isError) {
@@ -104,7 +101,7 @@ function Press() {
     setTableParams(pagination);
     dispatch(
       getPosts({
-        page: pagination.current
+        page: pagination.current,
       })
     );
   };
@@ -134,11 +131,6 @@ function Press() {
     }
   };
 
-  const beforeUpload = (e) => {
-    console.log(e);
-    setPhotoUplaoding(true);
-  };
-
   const handleChange = (info) => {
     if (info.file.status === "done") {
       console.log(info.file.response.url);
@@ -146,13 +138,6 @@ function Press() {
       setPhoto(info.file.response.url);
     }
   };
-
-  const uploadButton = (
-    <div>
-      {photoUplaoding ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
 
   const handleOk = async (ok) => {
     console.log(ok);
@@ -192,9 +177,6 @@ function Press() {
           limit: tableParams.pageSize,
         })
       );
-    } catch (error) {
-      console.error("Failed to save the post:", error);
-      openNotification("error", "Failed to save the post.");
     }
   };
 
@@ -204,7 +186,6 @@ function Press() {
   };
 
   const beforeUpload = (e) => {
-    console.log(e);
     setPhotoUploading(true);
   };
 
