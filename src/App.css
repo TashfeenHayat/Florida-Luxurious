@@ -1622,8 +1622,9 @@ font-size: 31px  !important;
 }
 
 .contact-us-form-bg {
-  background-image: url("./assets/Backgrouncontact.png");
+  background-image: url("./assets/contact_bg.jpg");
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   position: relative;
 }
