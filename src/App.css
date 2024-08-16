@@ -1613,11 +1613,12 @@ font-size: 31px  !important;
 /* Contact us */
 
 .contact-us-banner {
-  background-image: url("./assets/lettalk.png");
-  background-size: cover;
+  background-image: url("./assets/Contact_banner.jpg");
+  background-size:cover;
+  background-position: center;
   background-repeat: no-repeat;
   min-height: 500px;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .contact-us-form-bg {
@@ -1786,8 +1787,9 @@ font-size: 31px  !important;
   text-align: justify;
 }
 .agent-info-bg {
-  background-image: url("./assets/agentdetail.png");
+  background-image: url("./assets/agentcontact.jpg");
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   height: 500px;
   position: relative;

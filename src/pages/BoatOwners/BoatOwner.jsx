@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row, Typography, Card, Image, Table } from "antd";
 import BackgroundImage from "../../components/BackgroundImage";
-import BoatImage from "../../assets/boatowner.png";
+import BoatImage from "../../assets/Boatowner.jpg";
 import { Container } from "react-bootstrap";
 import Bdiagram from "../../assets/Bdiagram.png";
 import LetTalk from "../../components/LetTalk";
@@ -1123,7 +1123,7 @@ const data10 = [
 function BoatOwner() {
   return (
     <>
-      <BackgroundImage Image={BoatImage}>
+      <BackgroundImage Image={BoatImage} style={{ backgroundSize: 'cover', backgroundPosition: 'center' }}>
         <Title
           style={{ color: "white", lineHeight: "40px", letterSpacing: "2px",textAlign: "center" }}
           className="text-upper f-50 f-100"
