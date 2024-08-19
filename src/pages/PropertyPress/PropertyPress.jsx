@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, Row, Col, Image, Spin } from "antd";
 import { Container } from "react-bootstrap";
 import usePress from "../../hooks/usePress";
+import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
@@ -9,11 +10,11 @@ function PropertyPress() {
   const { data, isLoading, error } = usePress();
 
   // Log the data to check its structure
-  console.log("Press Data:", data);
 
   // Check if data is an object with a posts array
   const pressData = data?.posts || [];
-  console.log("Press Data Array:", pressData);
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -23,7 +24,7 @@ function PropertyPress() {
             style={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <Title className="text-upper text-white f-50 f-100">
@@ -41,7 +42,7 @@ function PropertyPress() {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  width: "100%"
+                  width: "100%",
                 }}
               >
                 <Spin size="large" />
@@ -54,7 +55,7 @@ function PropertyPress() {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  width: "100%"
+                  width: "100%",
                 }}
               >
                 <Text type="danger">Failed to load data.</Text>
@@ -77,7 +78,7 @@ function PropertyPress() {
                     style={{
                       display: "flex",
                       justifyContent: "end",
-                      alignItems: "center"
+                      alignItems: "center",
                     }}
                   >
                     <button
@@ -85,8 +86,9 @@ function PropertyPress() {
                       style={{
                         width: "45%",
                         background: "black",
-                        color: "white"
+                        color: "white",
                       }}
+                      onClick={() => navigate(`/propertypress/${item._id}`)}
                     >
                       Read More
                     </button>
@@ -101,7 +103,7 @@ function PropertyPress() {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  width: "100%"
+                  width: "100%",
                 }}
               >
                 <Text>No data available.</Text>

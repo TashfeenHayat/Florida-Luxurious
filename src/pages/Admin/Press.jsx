@@ -11,7 +11,7 @@ import {
   Popconfirm,
   Modal,
   notification,
-  Upload
+  Upload,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts, addPost, updatePost, deletePost } from "../../api/Press";
@@ -29,12 +29,12 @@ function Press() {
           size={64}
           src={record.cover}
         />
-      )
+      ),
     },
     {
       title: "Title",
       dataIndex: "title",
-      key: "title"
+      key: "title",
     },
     {
       title: "",
@@ -52,8 +52,8 @@ function Press() {
             <Button type="link">Delete</Button>
           </Popconfirm>
         </Space>
-      )
-    }
+      ),
+    },
   ];
 
   const [api, contextHolder] = notification.useNotification();
@@ -63,7 +63,7 @@ function Press() {
 
   const [tableParams, setTableParams] = useState({
     current: 1,
-    pageSize: 10
+    pageSize: 10,
   });
   const [title, setTitle] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -78,7 +78,7 @@ function Press() {
     dispatch(
       getPosts({
         page: tableParams.current,
-        limit: tableParams.pageSize
+        limit: tableParams.pageSize,
       })
     );
     if (isError) {
@@ -90,7 +90,7 @@ function Press() {
     setTableParams(pagination);
     dispatch(
       getPosts({
-        page: pagination.current
+        page: pagination.current,
       })
     );
   };
@@ -142,14 +142,14 @@ function Press() {
   const handleOk = async () => {
     try {
       const markupStr = $("#summernote").summernote("code");
-
+      console.log(markupStr);
       if (selectedProp._id) {
         const res = await dispatch(
           updatePost({
             id: selectedProp._id,
             title,
             cover: photo,
-            content: markupStr
+            content: markupStr,
           })
         ).unwrap();
         openNotification("success", "Post updated successfully.");
@@ -160,7 +160,7 @@ function Press() {
         dispatch(
           getPosts({
             page: tableParams.current,
-            limit: tableParams.pageSize
+            limit: tableParams.pageSize,
           })
         );
       } else {
@@ -168,7 +168,7 @@ function Press() {
           addPost({
             title,
             cover: photo,
-            content: markupStr
+            content: markupStr,
           })
         ).unwrap();
         openNotification("success", "Post added successfully.");
@@ -178,7 +178,7 @@ function Press() {
         dispatch(
           getPosts({
             page: tableParams.current,
-            limit: tableParams.pageSize
+            limit: tableParams.pageSize,
           })
         );
       }
@@ -232,7 +232,7 @@ function Press() {
             loading={photoUploading}
             showUploadList={false}
             headers={{
-              Authorization: `Bearer ${localStorage.token}`
+              Authorization: `Bearer ${localStorage.token}`,
             }}
             action={`${api_base_URL}upload`}
             beforeUpload={beforeUpload}

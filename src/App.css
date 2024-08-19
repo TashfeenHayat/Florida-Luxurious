@@ -2016,3 +2016,6 @@ font-size: 31px  !important;
 /* Make the 'See All Neighborhoods' button responsive */
 
 
+.note-modal-backdrop {
+  z-index: 0;
+}
