@@ -69,7 +69,7 @@ function App() {
           <Route path="/my-listing/:name/:id" element={<AgentListing />} />
           <Route path="/my-sold/:name/:id" element={<AgentSold />} />
           <Route path="/community/:id" element={<Communities />} />
-          <Route path="/404" element={<NotFound />} />
+          {/* <Route path="/404" element={<NotFound />} /> */}
           <Route path="/500" element={<InternalServerError />} />
           <Route path="/global" element={<GlobalPartner />} />
           <Route path="/all-communities" element={<Allcommunities />} />

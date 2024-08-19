@@ -68,7 +68,7 @@ function Press() {
   const [title, setTitle] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProp, setSelectedProp] = useState({});
-  const [photo, setPhoto] = useState();
+  const [photo, setPhoto] = useState("");
   const [photoUploading, setPhotoUploading] = useState(false);
 
   const { isLoading, isError, data } = useSelector((s) => s.getPostsReducer);
@@ -91,8 +91,28 @@ function Press() {
     dispatch(
       getPosts({
         page: pagination.current,
+        limit: pagination.pageSize,
       })
     );
+  };
+
+  const extractBase64Data = (content) => {
+    const regex = /data:image\/[a-zA-Z]+;base64,([^\"]*)/;
+    const match = content.match(regex);
+    return match
+      ? match[0].replace(/^data:image\/[a-zA-Z]+;base64,/, "")
+      : null;
+  };
+
+  const base64ToBlobURL = (base64Data) => {
+    const byteCharacters = atob(base64Data);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: "image/jpeg" }); // Adjust type as needed
+    return URL.createObjectURL(blob);
   };
 
   const showModal = (property) => {
@@ -101,7 +121,12 @@ function Press() {
       setTimeout(() => {
         setSelectedProp(property);
         setTitle(property.title);
-        setPhoto(property.cover);
+        const base64Data = extractBase64Data(property.content);
+        if (base64Data) {
+          setPhoto(base64ToBlobURL(base64Data));
+        } else {
+          setPhoto(property.cover); // Fallback to default if no base64 data
+        }
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString(
           property?.content,
@@ -142,9 +167,8 @@ function Press() {
   const handleOk = async () => {
     try {
       const markupStr = $("#summernote").summernote("code");
-      console.log(markupStr);
       if (selectedProp._id) {
-        const res = await dispatch(
+        await dispatch(
           updatePost({
             id: selectedProp._id,
             title,
@@ -164,7 +188,7 @@ function Press() {
           })
         );
       } else {
-        const res = await dispatch(
+        await dispatch(
           addPost({
             title,
             cover: photo,
@@ -199,7 +223,7 @@ function Press() {
         title="Press Info"
         extra={
           <Space>
-            <Button onClick={showModal} type="primary">
+            <Button onClick={() => showModal({})} type="primary">
               <Link>
                 <PlusOutlined />
                 Add

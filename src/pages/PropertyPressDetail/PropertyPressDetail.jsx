@@ -17,6 +17,8 @@ function PropertyPressDetail() {
   useEffect(() => {
     if (refHtml.current) {
       refHtml.current.innerHTML = parse(htmlContent);
+      console.log(refHtml.current.innerHTML);
+
       /*const iframes = refHtml.current.querySelectorAll("iframe");
       iframes.forEach((iframe) => {
        iframe.style.maxWidth = "550px";
