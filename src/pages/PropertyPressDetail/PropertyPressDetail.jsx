@@ -1,31 +1,32 @@
 import React, { useEffect, useRef } from "react";
-import { Typography, Row, Col, Image, Spin } from "antd";
+import { Typography, Row, Col, Spin } from "antd";
 import { Container } from "react-bootstrap";
 import usePressDetail from "../../hooks/usePressDetail";
 import { useParams } from "react-router-dom";
-import parse from "html-react-parser";
+import { decode } from "html-entities";
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 function PropertyPressDetail() {
-  // Log the data to check its structure
   const { id } = useParams();
   const { data, isLoading } = usePressDetail(id);
-  const htmlContent = `${data?.content}`;
   const refHtml = useRef(null);
 
   useEffect(() => {
-    if (refHtml.current) {
-      refHtml.current.innerHTML = parse(htmlContent);
-      console.log(refHtml.current.innerHTML);
+    if (refHtml.current && data?.content) {
+      // Decode HTML entities
+      const decodedContent = decode(data.content);
 
-      /*const iframes = refHtml.current.querySelectorAll("iframe");
-      iframes.forEach((iframe) => {
-       iframe.style.maxWidth = "550px";
-      
-    })*/
+      // Set the innerHTML with decoded content
+      refHtml.current.innerHTML = decodedContent;
+
+      // Uncomment the following block to set the max width of iframes
+      // const iframes = refHtml.current.querySelectorAll('iframe');
+      // iframes.forEach((iframe) => {
+      //   iframe.style.maxWidth = '550px';
+      // });
     }
-  }, [htmlContent]);
+  }, [data?.content]);
 
   return (
     <>

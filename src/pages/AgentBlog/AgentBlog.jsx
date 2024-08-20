@@ -19,11 +19,12 @@ function AgentBlog() {
   useEffect(() => {
     if (refHtml.current) {
       refHtml.current.innerHTML = parse(htmlContent);
-     /*const iframes = refHtml.current.querySelectorAll("iframe");
+      /*const iframes = refHtml.current.querySelectorAll("iframe");
       iframes.forEach((iframe) => {
        iframe.style.maxWidth = "550px";
       
-    })*/}
+    })*/
+    }
   }, [htmlContent]);
 
   return (
@@ -40,16 +41,16 @@ function AgentBlog() {
         </Container>
       </BackgroundImage>
       {isLoading ? (
-        <Row  style={{ minHeight: "50vh" }}>
+        <Row style={{ minHeight: "50vh" }}>
           <Col>
             <Spin size="large" />
           </Col>
         </Row>
       ) : (
-        <Container className="mt-4" style={{  maxWidth:"950px" }}>
-          <Row >
+        <Container className="mt-4" style={{ maxWidth: "950px" }}>
+          <Row>
             <Col xs={18} sm={20} md={16} lg={12} xl={10} className="youtube">
-              <div   ref={refHtml} />
+              <div ref={refHtml} />
             </Col>
           </Row>
         </Container>
