@@ -439,7 +439,7 @@ body:focus-visible {
   background-color: #000; /* Green */
   border: none;
   color: white;
-  padding: 15px 52px;
+  padding: 8px 52px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -1005,9 +1005,11 @@ body:focus-visible {
   .info-text {
     font-size: 12px;
   }
-  .button-view,
+  .button-view {
+    padding: 8px 16px !important;
+  }
   .button-view1 {
-    padding: 8px 16px;
+    padding: 8px 16px !important;
   }
   .ant-input-search {
     width: 90%;
