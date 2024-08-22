@@ -1062,7 +1062,11 @@ body:focus-visible {
   }
 .info {
     padding: 8px;
+  ;
   }
+.boatowner{
+  overflow: hidden;
+}
   .info-text {
     font-size: 10px;
   }

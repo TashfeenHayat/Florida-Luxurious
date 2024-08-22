@@ -19,14 +19,14 @@ function Footer() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    email: ""
+    email: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -154,7 +154,7 @@ function Footer() {
                         style={{
                           marginLeft: "5px",
                           fontWeight: "bold",
-                          fontSize: "20px"
+                          fontSize: "20px",
                         }}
                       >
                         &rarr;

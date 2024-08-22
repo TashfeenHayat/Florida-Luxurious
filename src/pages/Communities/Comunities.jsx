@@ -8,7 +8,7 @@ import {
   Spin,
   Flex,
   Image,
-  Pagination
+  Pagination,
 } from "antd";
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
@@ -32,7 +32,7 @@ function Comunities() {
   const {
     data: property,
     isLoading: isPropertyLoading,
-    isError: isPropertyError
+    isError: isPropertyError,
   } = useProperties(null, itemsPerPage, currentPage, null, id);
 
   const mapRef = useRef(null);
@@ -41,7 +41,7 @@ function Comunities() {
   useEffect(() => {
     const loader = new Loader({
       apiKey: google_api_key,
-      libraries: ["places"]
+      libraries: ["places"],
     });
 
     loader.load().then(() => {
@@ -49,24 +49,24 @@ function Comunities() {
         const map = new window.google.maps.Map(mapRef.current, {
           center: {
             lat: parseFloat(data?.geo?.geometry?.location?.lat),
-            lng: parseFloat(data?.geo?.geometry?.location?.lng)
+            lng: parseFloat(data?.geo?.geometry?.location?.lng),
           },
           zoom: 15, // Adjusted zoom level for better responsiveness
-          tilt: 45
+          tilt: 45,
         });
         new window.google.maps.Marker({
           position: {
             lat: parseFloat(data?.geo?.geometry?.location?.lat),
-            lng: parseFloat(data?.geo?.geometry?.location?.lng)
+            lng: parseFloat(data?.geo?.geometry?.location?.lng),
           },
-          map: map
+          map: map,
         });
       }
     });
   }, [
     google_api_key,
     data?.geo?.geometry?.location?.lat,
-    data?.geo?.geometry?.location?.lng
+    data?.geo?.geometry?.location?.lng,
   ]);
 
   const handlePageChange = (page) => {

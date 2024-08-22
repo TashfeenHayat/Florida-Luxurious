@@ -66,7 +66,7 @@ function Agents() {
                           style={{
                             aspectRatio: "5/7.5",
                             objectFit: "cover",
-                            width: "90%"
+                            width: "90%",
                           }}
                         />
                       }
@@ -83,7 +83,7 @@ function Agents() {
                           style={{
                             aspectRatio: "5/7.5",
                             objectFit: "cover",
-                            width: "90%"
+                            width: "90%",
                           }}
                         />
                       }

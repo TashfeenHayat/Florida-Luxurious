@@ -1122,10 +1122,18 @@ const data10 = [
 ];
 function BoatOwner() {
   return (
-    <>
-      <BackgroundImage Image={BoatImage} style={{ backgroundSize: 'cover', backgroundPosition: 'center' }}>
+    <div className="boatowner">
+      <BackgroundImage
+        Image={BoatImage}
+        style={{ backgroundSize: "cover", backgroundPosition: "center" }}
+      >
         <Title
-          style={{ color: "white", lineHeight: "40px", letterSpacing: "2px",textAlign: "center" }}
+          style={{
+            color: "white",
+            lineHeight: "40px",
+            letterSpacing: "2px",
+            textAlign: "center",
+          }}
           className="text-upper f-50 f-100"
         >
           Boat owners
@@ -1484,7 +1492,7 @@ function BoatOwner() {
         </div>
         <LetTalk />
       </div>
-    </>
+    </div>
   );
 }
 
