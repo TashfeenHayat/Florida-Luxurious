@@ -1238,7 +1238,7 @@ function BoatOwner() {
           </Title>
           <Row>
             <Col lg={4}></Col>
-            <Col lg={16} className="pt-5">
+            <Col lg={16}>
               <Table
                 columns={columns}
                 dataSource={data}

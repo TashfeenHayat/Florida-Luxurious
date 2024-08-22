@@ -157,8 +157,10 @@ function Agents() {
                     </Text>
                   </Flex>
                   <hr style={{ opacity: 1.25, color: "white" }} />
-                  <Flex justify={"space-between"} align="center">
-                    <Flex align={"center"} gap={5}>
+
+                  <div className="florida_info">
+                    {" "}
+                    <Flex align={"center"} gap={15}>
                       <CiMap color="#838383" size={15} />
                       <Text className="text-black text-upper text-1024">
                         2438 East Las Olas Boulevard Fort Lauderdale, FL 33301
@@ -175,8 +177,8 @@ function Agents() {
                       <Text className="text-black text-upper text-1024">
                         954.870.4080
                       </Text>
-                    </Flex>
-                  </Flex>
+                    </Flex>{" "}
+                  </div>
                 </Flex>
               </Card>
             </Col>
