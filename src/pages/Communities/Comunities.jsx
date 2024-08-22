@@ -146,7 +146,7 @@ function Comunities() {
           </div>
           <div className="py-5">
             <Row gutter={[60, 60]} align="middle">
-              <Col lg={8} md={24} sm={0}>
+              <Col lg={data?.condominiumOptions ? 8 : 0} md={24} sm={0}>
                 <div>
                   <div
                     className="d-flex-story-center"
@@ -178,7 +178,7 @@ function Comunities() {
                 </div>
               </Col>
               <Col
-                lg={16}
+                lg={data?.condominiumOptions ? 16 : 24}
                 md={0}
                 xs={0}
                 sm={0}
@@ -232,7 +232,7 @@ function Comunities() {
                             last list price
                           </Text>
                           <Text className="text-center text-upper f-24 f-100 text-gray">
-                            ${property?.salePrice}
+                            {property?.salePrice}
                           </Text>
                         </Flex>
                         <Flex vertical>

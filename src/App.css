@@ -470,6 +470,26 @@ body:focus-visible {
   width: 250px;
   height: 75px;
 }
+.button-view2 {
+  position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
+  background-color: #000; /* Green */
+  border: none;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 52px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 14px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  width: 250px;
+  height: 75px;
+}
 .button-neighborhood {
   position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
   background-color: #000; /* Green */

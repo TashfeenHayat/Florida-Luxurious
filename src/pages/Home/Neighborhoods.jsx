@@ -61,6 +61,7 @@ function Neighborhoods() {
                   className="img-op communities-grid"
                 />
                 <div
+                  className="show-info"
                   style={{
                     position: "absolute",
                     top: "50%",
@@ -69,23 +70,31 @@ function Neighborhoods() {
                   }}
                 >
                   <div
+                    justify={"space-between"}
+                    align={"center"}
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      width: "95%",
-                      flexDirection: "column",
+                      overflow: "hidden",
+                      position: "absolute",
+                      bottom: "10px",
+                      left: "10px",
+                      right: "10px",
+                      background: "rgba(0, 0, 0, 0.5)",
+                      padding: "10px",
+                      borderRadius: "5px",
                     }}
                   >
                     <Text
-                      className="text-upper text-white f-100"
-                      style={{ fontSize: "20px" }}
+                      className="text-upper text-white f-100 "
+                      style={{
+                        fontSize: "20px",
+                        display: "block",
+                      }}
                     >
                       {community?.name}
                     </Text>
 
                     <button
-                      className="button-view1"
+                      className="button-view2"
                       onClick={() => navigate(`/community/${community?._id}`)}
                     >
                       View
