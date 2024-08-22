@@ -3,18 +3,20 @@ import { Typography, Row, Col, Image, Spin } from "antd";
 import { Container } from "react-bootstrap";
 import usePress from "../../hooks/usePress";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 const { Title, Text } = Typography;
 
 function PropertyPress() {
   const { data, isLoading, error } = usePress();
 
-  // Log the data to check its structure
-
   // Check if data is an object with a posts array
   const pressData = data?.posts || [];
 
   const navigate = useNavigate();
+
+  // Use a media query to detect if the screen width is less than or equal to 768px (mobile/tablet)
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   return (
     <>
@@ -34,7 +36,7 @@ function PropertyPress() {
         </div>
       </div>
       <Container className="py-4">
-        <Row gutter={[60, 60]}>
+        <Row gutter={[30, 30]}>
           {isLoading ? (
             <Col span={24}>
               <div
@@ -64,12 +66,16 @@ function PropertyPress() {
           ) : pressData.length > 0 ? (
             pressData.map((item, index) => (
               <React.Fragment key={index}>
-                <Col lg={12} sm={24} md={24}>
-                  <Image src={item.cover} preview={false} />
+                <Col xs={24} sm={24} md={12} lg={12}>
+                  <Image
+                    src={item.cover}
+                    preview={false}
+                    style={{ width: "100%" }}
+                  />
                 </Col>
-                <Col lg={12} sm={24} md={24}>
+                <Col xs={24} sm={24} md={12} lg={12}>
                   <div>
-                    <Title className="text-upper f-40 f-100">
+                    <Title className="text-upper f-30 f-100">
                       {item.title}
                     </Title>
                     <Text>{item.date}</Text>
@@ -77,14 +83,16 @@ function PropertyPress() {
                   <div
                     style={{
                       display: "flex",
-                      justifyContent: "end",
+                      justifyContent: isMobile ? "center" : "end", // Center button on mobile
                       alignItems: "center",
+                      marginTop: 24,
                     }}
                   >
                     <button
-                      className="button-secondary text-upper mt-32"
+                      className="button-secondary text-upper"
                       style={{
-                        width: "45%",
+                        width: "100%",
+                        maxWidth: "200px",
                         background: "black",
                         color: "white",
                       }}

@@ -971,7 +971,7 @@ body:focus-visible {
  
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (767px >= width ) {
   
   .our-story-bg {
     margin-right: 0px !important;

@@ -20,11 +20,20 @@ function PropertyPressDetail() {
       // Set the innerHTML with decoded content
       refHtml.current.innerHTML = decodedContent;
 
-      // Uncomment the following block to set the max width of iframes
-      // const iframes = refHtml.current.querySelectorAll('iframe');
-      // iframes.forEach((iframe) => {
-      //   iframe.style.maxWidth = '550px';
-      // });
+      // Ensure iframes are responsive
+      const iframes = refHtml.current.querySelectorAll("iframe");
+      iframes.forEach((iframe) => {
+        iframe.style.maxWidth = "100%";
+        iframe.style.width = "100%";
+        iframe.style.height = "auto";
+      });
+
+      // Ensure images are responsive
+      const images = refHtml.current.querySelectorAll("img");
+      images.forEach((img) => {
+        img.style.maxWidth = "100%";
+        img.style.height = "auto";
+      });
     }
   }, [data?.content]);
 
@@ -37,6 +46,7 @@ function PropertyPressDetail() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              textAlign: "center",
             }}
           >
             <Title className="text-upper text-white f-50 f-100">
@@ -46,15 +56,23 @@ function PropertyPressDetail() {
         </div>
       </div>
       {isLoading ? (
-        <Row style={{ minHeight: "50vh" }}>
-          <Col>
-            <Spin size="large" />
-          </Col>
+        <Row
+          style={{
+            minHeight: "50vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Spin size="large" />
         </Row>
       ) : (
-        <Container className="mt-4" style={{ maxWidth: "950px" }}>
-          <Row>
-            <Col xs={18} sm={20} md={16} lg={12} xl={10} className="youtube">
+        <Container
+          className="mt-4"
+          style={{ maxWidth: "100%", padding: "0 15px" }}
+        >
+          <Row justify="center">
+            <Col xs={24} md={20} lg={16}>
               <div ref={refHtml} />
             </Col>
           </Row>

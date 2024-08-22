@@ -14,7 +14,13 @@ import {
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getBlogs, addBlog, getBlog, updateBlog, deleteBlog } from "../../api/Blogs";
+import {
+  getBlogs,
+  addBlog,
+  getBlog,
+  updateBlog,
+  deleteBlog,
+} from "../../api/Blogs";
 import customAxios from "../../api/Axios";
 
 const { Search } = Input;
@@ -73,7 +79,7 @@ function Blog() {
 
   const { isLoading, isError, data } = useSelector((s) => s.getBlogsReducer);
   const dispatch = useDispatch();
-
+  console.log(data);
   useEffect(() => {
     dispatch(
       getBlogs({
@@ -199,7 +205,7 @@ function Blog() {
 
   const handleDelete = (id) => {
     dispatch(deleteBlog(id));
-  }
+  };
 
   return (
     <>

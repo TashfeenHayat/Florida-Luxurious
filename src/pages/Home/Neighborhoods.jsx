@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Typography, Flex, Row, Col, Spin } from "antd";
+import React from "react";
+import { Typography, Row, Col, Spin, Flex } from "antd";
 import { useNavigate } from "react-router-dom";
 import useCommunities from "../../hooks/useCommunities";
 
@@ -16,47 +16,49 @@ function Neighborhoods() {
   return (
     <div style={{ paddingTop: 98, paddingBottom: 98 }}>
       <Title className="florida-heading-feature-negibour" level={1}>
-        Featured Communities 
+        Featured Communities
       </Title>
-      <Row className="px-4">
-        <Col lg={6}>
-          <div className="displayy-teamimg-center show-btn-community-home ">
-            <div style={{ background: "black" }} className="communities-grid">
-              <div
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "0%",
-                  width: "100%",
-                }}
-              >
-                <Flex
-                  justify={"center"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                  vertical
+      {isLoading ? (
+        <Flex justify={"center"}>
+          <Spin size="large" />
+        </Flex>
+      ) : (
+        <Row className="px-4">
+          <Col lg={6}>
+            <div className="displayy-teamimg-center show-btn-community-home">
+              <div style={{ background: "black" }} className="communities-grid">
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "0%",
+                    width: "100%",
+                  }}
                 >
-                  <Text className="text-upper text-white f-24 f-100">
-                    Communities
-                  </Text>
-                </Flex>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "95%",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <Text className="text-upper text-white f-24 f-100">
+                      Communities
+                    </Text>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </Col>
-
-        {isLoading ? (
-          <Flex justify={"center"} xs={24} sm={12} md={8} lg={6}>
-            <Spin size="large" />
-          </Flex>
-        ) : (
-          displayedCommunities.map((community, index) => (
+          </Col>
+          {displayedCommunities.map((community, index) => (
             <Col lg={6} md={12} sm={24} key={index}>
-              <div className="displayy-teamimg-center show-btn-community-home ">
+              <div className="displayy-teamimg-center show-btn-community-home">
                 <img
                   src={community?.photo}
                   width="100%"
-                  className="img-op communities-grid "
+                  className="img-op communities-grid"
                 />
                 <div
                   style={{
@@ -66,11 +68,14 @@ function Neighborhoods() {
                     width: "100%",
                   }}
                 >
-                  <Flex
-                    justify={"center"}
-                    align={"center"}
-                    style={{ width: "95%" }}
-                    vertical
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "95%",
+                      flexDirection: "column",
+                    }}
                   >
                     <Text
                       className="text-upper text-white f-100"
@@ -85,42 +90,44 @@ function Neighborhoods() {
                     >
                       View
                     </button>
-                  </Flex>
+                  </div>
                 </div>
               </div>
             </Col>
-          ))
-        )}
-
-        <Col
-          lg={6}
-          onClick={() => navigate("/all-communities")}
-          style={{ cursor: "pointer" }}
-        >
-          <div className="displayy-teamimg-center show-btn-community-home ">
-            <div style={{ background: "black" }} className="communities-grid">
-              <div
-                style={{
-                  position: "relative",
-                  top: "50%",
-                  left: "0%",
-                  width: "100%",
-                }}
-              >
-                <Flex
-                  justify={"center"}
-                  align={"center"}
-                  style={{ width: "95%" }}
+          ))}
+          <Col
+            lg={6}
+            onClick={() => navigate("/all-communities")}
+            style={{ cursor: "pointer" }}
+          >
+            <div className="displayy-teamimg-center show-btn-community-home">
+              <div style={{ background: "black" }} className="communities-grid">
+                <div
+                  style={{
+                    position: "relative",
+                    top: "50%",
+                    left: "0%",
+                    width: "100%",
+                  }}
                 >
-                  <Text className="text-upper text-white f-24 f-100">
-                    View All
-                  </Text>
-                </Flex>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "95%",
+                    }}
+                  >
+                    <Text className="text-upper text-white f-24 f-100">
+                      View All
+                    </Text>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      )}
     </div>
   );
 }

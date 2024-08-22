@@ -1,6 +1,6 @@
 import React from "react";
+import { Typography, Input } from "antd";
 import FloridaProperties from "./FloridaProperties";
-import { Typography, Flex, Input } from "antd";
 import RecognitionSlide from "./RecognitionSlide";
 import OurStory from "./OurStory";
 import Team from "./MeetTeam";
@@ -8,6 +8,7 @@ import FeatureListing from "./FeatureListing";
 import Neighborhoods from "./Neighborhoods";
 import Icons from "../../components/Icons";
 import { useNavigate } from "react-router-dom";
+
 const { Title, Text } = Typography;
 const { Search } = Input;
 
@@ -26,59 +27,68 @@ function Home() {
         </video>
       </div>
       <div className="content-hero">
-        <Flex
-          justify="center"
-          align="center"
-          vertical
-          style={{ width: "100%", height: "115%", textAlign: "center" }}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            padding: "2rem",
+            height: "100vh",
+            width: "100%",
+            color: "#fff", // Ensure text is visible on the background
+            position: "relative",
+            zIndex: 1,
+          }}
         >
-         {/*<Text className="text-paragraph ">
+          <Title
+            className="title-home-page"
+            style={{ fontSize: "3rem", marginBottom: "1rem" }}
+          >
             Luxury. Innovation. Excellence.
-          </Text>*/} 
-          <Title className="title-home-page">
-             Luxury. Innovation. Excellence.
-           
           </Title>
-          <Text className="text-paragraph">
-             unlock exclusive living <br />
+          <Text
+            className="text-paragraph"
+            style={{ fontSize: "1.5rem", marginBottom: "2rem" }}
+          >
+            unlock exclusive living <br />
             explore florida’s finest properties
-            
-          </Text>{/*Discover Your Dream Home in the Heart of Florida with Florida
-            Luxurious Properties*/}
-       <div
-  style={{
-    marginTop: '1rem',
-    display: 'flex',
-    justifyContent: 'center',
-    width: '100%',
-    padding: '0 1rem', // Optional: Adds some padding for small screen devices
-  }}
->
-  <Search
-    placeholder=""
-    allowClear
-    enterButton={
-      <span
-        className="search-button"
-        style={{
-          width: 'auto', 
-          padding: '0 1rem',
-        }}
-      >
-        Search
-      </span>
-    }
-    size="large"
-    onSearch={onSearch}
-    style={{
-      width: '100%', 
-      maxWidth: '550px',
-      minWidth: '250px',
-      overflow:"hidden" 
-    }}
-  />
-</div>
-        </Flex>
+          </Text>
+          <div
+            style={{
+              marginTop: "1rem",
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
+              padding: "0 1rem",
+            }}
+          >
+            <Search
+              placeholder=""
+              allowClear
+              enterButton={
+                <span
+                  className="search-button"
+                  style={{
+                    width: "auto",
+                    padding: "0 1rem",
+                  }}
+                >
+                  Search
+                </span>
+              }
+              size="large"
+              onSearch={onSearch}
+              style={{
+                width: "100%",
+                maxWidth: "550px",
+                minWidth: "250px",
+                overflow: "hidden",
+              }}
+            />
+          </div>
+        </div>
       </div>
       <Icons />
       <FloridaProperties />

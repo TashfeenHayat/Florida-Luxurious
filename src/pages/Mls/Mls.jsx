@@ -273,7 +273,7 @@ function Mls() {
                   gap={10}
                   style={{ flexWrap: "wrap" }}
                 >
-                  {data?.filters.map((item, index) => (
+                  {data?.filters?.map((item, index) => (
                     <Checkbox
                       className="text-white f-16 text-upper"
                       key={index}
