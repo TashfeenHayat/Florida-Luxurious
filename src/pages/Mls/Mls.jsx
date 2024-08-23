@@ -88,6 +88,7 @@ function Mls() {
   useMls(true, itemsPerPage, currentPage);
 
   const { isLoading, data: MLS } = useSelector((s) => s.getPropertiesReducer);
+  console.log({ isLoading, data: MLS });
   const [price, setPrice] = useState(0);
   const [propertyType, setPropertyType] = useState("Select property type");
   const [minBathCount, setMinBathCount] = useState("min Bathrooms");

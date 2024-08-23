@@ -40,7 +40,7 @@ export default function DetailProperty() {
   const { id } = useParams();
 
   const { data, isLoading } = MlsPropertyDetail(id, true);
-
+  console.log(data);
   const navigate = useNavigate();
 
   const showModal = () => {

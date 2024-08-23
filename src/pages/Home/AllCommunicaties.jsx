@@ -90,7 +90,7 @@ function Allcommunities() {
                     width="100%"
                     className="img-op communities-grid"
                   />
-                  <div
+                  {/* <div
                     style={{
                       position: "absolute",
                       top: "50%",
@@ -104,7 +104,7 @@ function Allcommunities() {
                       style={{ width: "95%" }}
                       vertical
                     >
-                      <Text
+                         <Text
                         className="text-upper text-white f-100"
                         style={{ fontSize: "20px" }}
                       >
@@ -116,9 +116,49 @@ function Allcommunities() {
                         onClick={() => navigate(`/community/${community?._id}`)}
                       >
                         View
+                      </button></Flex>
+                  </div>*/}
+                  <div
+                    className="show-info"
+                    style={{
+                      position: "absolute",
+                      top: "50%",
+                      left: "0%",
+                      width: "100%",
+                    }}
+                  >
+                    <div
+                      justify={"space-between"}
+                      align={"center"}
+                      style={{
+                        overflow: "hidden",
+                        position: "absolute",
+                        bottom: "10px",
+                        left: "10px",
+                        right: "10px",
+                        background: "rgba(0, 0, 0, 0.5)",
+                        padding: "10px",
+                        borderRadius: "5px",
+                      }}
+                    >
+                      <Text
+                        className="text-upper text-white f-100 "
+                        style={{
+                          fontSize: "20px",
+                          display: "block",
+                        }}
+                      >
+                        {community?.name}
+                      </Text>
+
+                      <button
+                        className="button-view2"
+                        onClick={() => navigate(`/community/${community?._id}`)}
+                      >
+                        View
                       </button>
-                    </Flex>
-                  </div>
+                    </div>
+                  </div>{" "}
                 </div>
               </Col>
             ))
