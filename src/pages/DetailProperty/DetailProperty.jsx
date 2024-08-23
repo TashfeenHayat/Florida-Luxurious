@@ -39,6 +39,7 @@ export default function DetailProperty() {
   const { id } = useParams();
 
   const { data, isLoading } = useProperty(id);
+  console.log(data?.property?.compensation);
   const [backgroundImage, setBackGroundImage] = useState(null);
 
   useEffect(() => {
@@ -77,13 +78,16 @@ export default function DetailProperty() {
           zoom: 20,
           tilt: 45,
         });
+
         new window.google.maps.Marker({
           position: {
             lat: parseFloat(data?.property?.latitude),
+
             lng: parseFloat(data?.property?.longitude),
           },
           map: map,
         });
+        console.log(data?.property?.latitude);
         const buildingsLayer = new google.maps.ImageMapType({
           getTileUrl: (coord, zoom) => {
             return (
@@ -106,9 +110,10 @@ export default function DetailProperty() {
       }
     });
   }, [google_api_key, data?.property?.latitude, data?.property?.longitude]);
+
   return (
     <div className="single_property">
-      <div style={{ position: "relative", overflowX: "hidden" }} >
+      <div style={{ position: "relative", overflowX: "hidden" }}>
         <Image
           preview={false}
           src={
@@ -117,7 +122,8 @@ export default function DetailProperty() {
           width="100%"
           fallback="https://placehold.co/1512x934"
         />
-        <div className="hideetails" 
+        <div
+          className="hideetails"
           style={{
             position: "absolute",
             top: 0,
@@ -163,7 +169,7 @@ export default function DetailProperty() {
               style={{ color: "white", marginTop: ".2em" }}
               level={2}
             >
-              ${data?.property?.salePrice}
+              {data?.property?.salePrice}
             </Title>
           </Flex>
           <Row gutter={[8, 16]}>
@@ -275,14 +281,20 @@ export default function DetailProperty() {
           </Flex>
           <Flex justify={"center"} align="center" vertical>
             <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-              Compensation Offered?{" "}
+              Compensation Offered?
               <Text
                 style={{ color: "#D4CFC9", cursor: "pointer" }}
                 className="my-4 f-16 f-100"
-                onClick={() => setCompensation(true)}
               >
-                Yes
+                {data?.property?.compensation}
               </Text>
+            </Text>
+
+            {/*<Text
+                style={{ color: "#D4CFC9", cursor: "pointer" }}
+                className="my-4 f-16 f-100"
+                onClick={() => setCompensation(true)}
+              ></Text>
               &nbsp; &nbsp;
               <Text
                 style={{ color: "#D4CFC9", cursor: "pointer" }}
@@ -291,160 +303,172 @@ export default function DetailProperty() {
               >
                 No
               </Text>
-            </Text>
+            */}
           </Flex>
         </div>
       </div>
-     <div
-  className="detail-container"
-  style={{
-    backgroundColor: "black",
-    padding: "20px",
-  }}
->
-  <Flex className="pt-5" vertical>
-    <Text
-      className="f-20 f-100"
-      style={{ lineHeight: "14px", color: "#D4CFC9" }}
-    >
-      MLS® #: F10423862
-    </Text>
-    <Title className="text-upper" style={{ color: "white" }} level={3}>
-      {data?.property?.addressLine1}
-    </Title>
-    <Paragraph
-      className="text-upper f-20 f-100"
-      style={{ lineHeight: "10px", color: "#D4CFC9" }}
-    >
-      {data?.property?.city}, {data?.property?.state}, {data?.property?.zipCode}
-    </Paragraph>
-  </Flex>
-  
-  <Row gutter={[8, 16]} style={{ marginTop: "20px" }}>
-    <Col xs={24} sm={12} >
-      <Flex gap={5}>
-        <div
-          className="circle-bg-white"
-          style={{
-            width: "20px",
-            height: "20px",
-            marginBottom: "0px",
-          }}
-        >
-          <IoBedOutline size={15} />
-        </div>
-        <Text className="text-white f-16 f-100">
-          {data?.property?.bedroomCount} Bedrooms
-        </Text>
-      </Flex>
-    </Col>
-    <Col xs={12} sm={8}>
-      <Flex gap={5}>
-        <div
-          className="circle-bg-white"
-          style={{
-            width: "20px",
-            height: "20px",
-            marginBottom: "0px",
-          }}
-        >
-          <FaWater size={15} />
-        </div>
-        <Text className="text-white f-16 f-100">100± Waterfront</Text>
-      </Flex>
-    </Col>
-    <Col xs={24} sm={12} md={8} lg={8}>
-      <Flex gap={5}>
-        <div
-          className="circle-bg-white"
-          style={{
-            width: "20px",
-            height: "20px",
-            marginBottom: "0px",
-          }}
-        >
-          <LuBath size={15} />
-        </div>
-        <Text className="text-white f-16">{data?.property?.bathCount} Baths</Text>
-      </Flex>
-    </Col>
-    <Col xs={24} sm={12} md={8} lg={8}>
-      <Flex gap={5}>
-        <div
-          className="circle-bg-white"
-          style={{
-            width: "20px",
-            height: "20px",
-            marginBottom: "0px",
-          }}
-        >
-          <FaVectorSquare size={15} />
-        </div>
-        <Text className="text-white f-16 f-100">
-          {data?.property?.area} {data?.property?.areaUnit}
-        </Text>
-      </Flex>
-    </Col>
-    <Col xs={24} sm={12} md={8} lg={8}>
-      <Flex gap={5}>
-        <div
-          className="circle-bg-white"
-          style={{
-            width: "30px",
-            height: "30px",
-            marginBottom: "0px",
-          }}
-        >
-          <TbCarGarage size={15} />
-        </div>
-        <Text className="text-white f-16 f-100">Car garage</Text>
-      </Flex>
-    </Col>
-    <Col xs={24} sm={12} md={8} lg={8}>
-      <Flex gap={5}>
-        <div
-          className="circle-bg-white"
-          style={{
-            width: "20px",
-            height: "20px",
-            marginBottom: "0px",
-          }}
-        >
-          <LuSofa size={15} />
-        </div>
-        <Text className="text-white f-16">SF Living</Text>
-      </Flex>
-    </Col>
-  </Row>
+      <div
+        className="detail-container"
+        style={{
+          backgroundColor: "black",
+          padding: "20px",
+        }}
+      >
+        <Flex className="pt-5" vertical>
+          <Text
+            className="f-20 f-100"
+            style={{ lineHeight: "14px", color: "#D4CFC9" }}
+          >
+            MLS® #: F10423862
+          </Text>
+          <Title className="text-upper" style={{ color: "white" }} level={3}>
+            {data?.property?.addressLine1}
+          </Title>
+          <Paragraph
+            className="text-upper f-20 f-100"
+            style={{ lineHeight: "10px", color: "#D4CFC9" }}
+          >
+            {data?.property?.city}, {data?.property?.state},{" "}
+            {data?.property?.zipCode}
+          </Paragraph>
+        </Flex>
 
-  <Flex justify="center" align="center" vertical>
-    <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-      New construction - single family residence
-    </Text>
-  </Flex>
-  
-  <Flex justify="center" align="center" vertical>
-    <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-      Compensation Offered?{" "}
-      <Text
-        style={{ color: "#D4CFC9", cursor: "pointer" }}
-        className="my-4 f-16 f-100"
-        onClick={() => setCompensation(true)}
-      >
-        Yes
-      </Text>
-      &nbsp; &nbsp;
-      <Text
-        style={{ color: "#D4CFC9", cursor: "pointer" }}
-        className="my-4 f-16 f-100"
-        onClick={() => setCompensation(false)}
-      >
-        No
-      </Text>
-    </Text>
-  </Flex>
-</div><Container>
-        
+        <Row gutter={[8, 16]} style={{ marginTop: "20px" }}>
+          <Col xs={24} sm={12}>
+            <Flex gap={5}>
+              <div
+                className="circle-bg-white"
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  marginBottom: "0px",
+                }}
+              >
+                <IoBedOutline size={15} />
+              </div>
+              <Text className="text-white f-16 f-100">
+                {data?.property?.bedroomCount} Bedrooms
+              </Text>
+            </Flex>
+          </Col>
+          <Col xs={12} sm={8}>
+            <Flex gap={5}>
+              <div
+                className="circle-bg-white"
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  marginBottom: "0px",
+                }}
+              >
+                <FaWater size={15} />
+              </div>
+              <Text className="text-white f-16 f-100">100± Waterfront</Text>
+            </Flex>
+          </Col>
+          <Col xs={24} sm={12} md={8} lg={8}>
+            <Flex gap={5}>
+              <div
+                className="circle-bg-white"
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  marginBottom: "0px",
+                }}
+              >
+                <LuBath size={15} />
+              </div>
+              <Text className="text-white f-16">
+                {data?.property?.bathCount} Baths
+              </Text>
+            </Flex>
+          </Col>
+          <Col xs={24} sm={12} md={8} lg={8}>
+            <Flex gap={5}>
+              <div
+                className="circle-bg-white"
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  marginBottom: "0px",
+                }}
+              >
+                <FaVectorSquare size={15} />
+              </div>
+              <Text className="text-white f-16 f-100">
+                {data?.property?.area} {data?.property?.areaUnit}
+              </Text>
+            </Flex>
+          </Col>
+          <Col xs={24} sm={12} md={8} lg={8}>
+            <Flex gap={5}>
+              <div
+                className="circle-bg-white"
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  marginBottom: "0px",
+                }}
+              >
+                <TbCarGarage size={15} />
+              </div>
+              <Text className="text-white f-16 f-100">Car garage</Text>
+            </Flex>
+          </Col>
+          <Col xs={24} sm={12} md={8} lg={8}>
+            <Flex gap={5}>
+              <div
+                className="circle-bg-white"
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  marginBottom: "0px",
+                }}
+              >
+                <LuSofa size={15} />
+              </div>
+              <Text className="text-white f-16">SF Living</Text>
+            </Flex>
+          </Col>
+        </Row>
+
+        <Flex justify="center" align="center" vertical>
+          <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
+            New construction - single family residence
+          </Text>
+        </Flex>
+
+        <Flex justify="center" align="center" vertical>
+          <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
+            Compensation Offered?
+            <Text
+              style={{ color: "#D4CFC9", cursor: "pointer" }}
+              className="my-4 f-16 f-100"
+            >
+              {data?.property?.compensation}
+            </Text>
+          </Text>
+          {/* <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
+            Compensation Offered?{" "}
+            <Text
+              style={{ color: "#D4CFC9", cursor: "pointer" }}
+              className="my-4 f-16 f-100"
+              onClick={() => setCompensation(true)}
+            >
+              Yes
+            </Text>
+            &nbsp; &nbsp;
+            <Text
+              style={{ color: "#D4CFC9", cursor: "pointer" }}
+              className="my-4 f-16 f-100"
+              onClick={() => setCompensation(false)}
+            >
+              No
+            </Text>
+          </Text>*/}
+        </Flex>
+      </div>
+      <Container>
         <Row>
           <Col lg={12} xs={24} sm={24} className="p-3">
             <Card className="card-feature">
@@ -496,8 +520,8 @@ export default function DetailProperty() {
                   >
                     <Flex
                       style={{ height: "100%", cursor: "pointer" }}
-            justify="center"
-            align="center"
+                      justify="center"
+                      align="center"
                     >
                       <FaPlus size={60} color="#D4CFC9" />
                     </Flex>
@@ -579,7 +603,6 @@ export default function DetailProperty() {
             <Col lg={14} sm={24} md={24} xsm={24} className="p-5">
               <Title
                 level={2}
-               
                 style={{
                   lineHeight: 2,
                   color: "white",
@@ -588,9 +611,9 @@ export default function DetailProperty() {
                 className="text-upper f-30"
               >
                 Interested in{" "}
-                {data?.property?.addressLine1 +
-                  " " +
-                  data?.property?.addressLine2}
+                {data?.property?.addressLine1 ||
+                  "" + " " + data?.property?.addressLine2 ||
+                  ""}
                 ?
               </Title>
               <form>
@@ -612,17 +635,24 @@ export default function DetailProperty() {
                   <Col lg={12} md={12} sm={24}>
                     <Input placeholder="Phone:" type="text" />
                   </Col>
-               
+
                   <Col lg={24} md={24}>
                     <Input placeholder="Message" type="text" />
                   </Col>
-                     <Col lg={24} md={24}>
-                    <Flex gap={10}>
+                  <Col lg={24} md={24}>
+                    <div
+                      style={{
+                        display: "flex", // Added a comma here
+                        flexDirection: "column",
+                      }}
+                    >
+                      {" "}
+                      {/* Adjust the gap value as needed */}
                       <Checkbox />
-                      <Text style={{ lineHeight: 2, color: "white" }}>
-                        Request A showing
+                      <Text style={{ lineHeight: "normal", color: "white" }}>
+                        Request a showing
                       </Text>
-                    </Flex>
+                    </div>
                   </Col>
                   <Col lg={24} md={24} align="middle">
                     <Button classNam="button-secondary-line-left">
@@ -634,9 +664,11 @@ export default function DetailProperty() {
             </Col>
             <Col lg={10} md={24} sm={24}>
               <div className="pt-5">
-                <div ref={mapRef} style={{ height: "500px", 
-      width: "50rem",
-    maxWidth: "82vw"}} />;
+                <div
+                  ref={mapRef}
+                  style={{ height: "500px", width: "39rem", maxWidth: "82vw" }}
+                />
+                ;
               </div>
             </Col>
           </Row>
@@ -670,28 +702,7 @@ export default function DetailProperty() {
             Features
           </Title>
           <Row gutter={[8, 40]}>
-            <Col lg={24} md={24} sm={24}>
-              <Row gutter={[40, 24]}>
-                {data?.property?.features.map((item, index) => (
-                  <Col lg={8} md={12} sm={24}>
-                    <Title className="" level={2}>
-                      {item.name}
-                    </Title>
-                    <Paragraph className="f-16 f-100">
-                      {item.description}
-                    </Paragraph>
-                  </Col>
-                ))}
-                {compensation && (
-                  <Col lg={8} md={12} sm={24}>
-                    <Title className="" level={2}>
-                      Compensation
-                    </Title>
-                    <Paragraph className="f-16 f-100">5%</Paragraph>
-                  </Col>
-                )}
-              </Row>
-            </Col>
+            <Col lg={24} md={24} sm={24}></Col>
           </Row>
         </Container>
       </div>

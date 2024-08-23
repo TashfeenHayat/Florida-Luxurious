@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
-
+import talk from "../assets/videos/lettalk.mp4";
 const { Title, Text, Paragraph } = Typography;
 
 function LetTalk() {
@@ -9,10 +9,7 @@ function LetTalk() {
   return (
     <div className="background-video-container" style={{ height: "70vh" }}>
       <video autoPlay muted loop className="background-video">
-        <source
-          src="https://videos.pexels.com/video-files/3410663/3410663-uhd_2562_1440_30fps.mp4"
-          type="video/mp4"
-        />
+        <source src={talk} type="video/mp4" />
       </video>
       <div className="content-hero w-100">
         <div className="hero-bg-img-shadow ">
@@ -45,7 +42,7 @@ function LetTalk() {
                 letterSpacing: "1px",
                 fontSize: "24px",
                 textAlign: "center",
-                  maxWidth: "550px",
+                maxWidth: "550px",
                 fontWeight: 100,
               }}
               data-aos="fade-left"

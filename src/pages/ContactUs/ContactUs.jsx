@@ -6,6 +6,7 @@ import Logo from "../../assets/logoicon.png";
 import { CiMap, CiPhone, CiMail } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { contactUs } from "../../api/Inquiry";
+import bootomvideo from "../../assets/videos/contactus.mp4";
 const { Title, Text } = Typography;
 
 function ContactUs() {
@@ -163,7 +164,7 @@ function ContactUs() {
                       <Flex align={"center"} gap={5}>
                         <CiMail color="#838383" size={15} />
                         <Text className="text-white text-upper">
-                         info@floridaluxurious.com
+                          info@floridaluxurious.com
                         </Text>
                       </Flex>
                       <Flex align={"center"} gap={5}>
@@ -184,10 +185,7 @@ function ContactUs() {
       <div style={{ position: "relative" }}>
         <div className="background-video-container" style={{ height: "70vh" }}>
           <video autoPlay muted loop className="background-video">
-            <source
-              src="https://videos.pexels.com/video-files/3773486/3773486-hd_1920_1080_30fps.mp4"
-              type="video/mp4"
-            />
+            <source src={bootomvideo} type="video/mp4" />
           </video>
         </div>
         <div className="content-hero w-100">
