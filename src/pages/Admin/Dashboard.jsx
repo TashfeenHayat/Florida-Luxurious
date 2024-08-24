@@ -7,6 +7,7 @@ import {
   UserOutlined,
   PropertySafetyOutlined,
   BarChartOutlined,
+  FileTextOutlined,
   FunnelPlotOutlined,
   UsergroupAddOutlined,
   QuestionCircleOutlined,
@@ -92,6 +93,11 @@ function Dashboard() {
               key: "/admin/blog",
               icon: <EditOutlined />,
               label: "Blogs",
+            },
+            {
+              key: "/admin/report",
+              icon: <FileTextOutlined />,
+              label: "Reports",
             },
           ]}
         />

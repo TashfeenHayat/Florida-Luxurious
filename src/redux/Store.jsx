@@ -38,6 +38,13 @@ import {
   updatePostSlice,
   deletePostSlice,
 } from "./slices/PressSlice";
+import {
+  getReportsSlice,
+  addReportSlice,
+  getReportSlice,
+  updateReportSlice,
+  deleteReportSlice,
+} from "./slices/ReportSlice";
 
 export const store = configureStore({
   reducer: {
@@ -68,9 +75,14 @@ export const store = configureStore({
     deleteBlogReducer: deleteBlogSlice,
     getPostsReducer: getPostsSlice,
     addPostReducer: addPostSlice,
-    getPosteducer: getPostSlice,
+    getPostReducer: getPostSlice,
     updatePostReducer: updatePostSlice,
     deletePostReducer: deletePostSlice,
+    getReportsReducer: getReportsSlice,
+    addReportReducer: addReportSlice,
+    getReportReducer: getReportSlice,
+    updateReportReducer: updateReportSlice,
+    deleteReportReducer: deleteReportSlice,
   },
 });
 

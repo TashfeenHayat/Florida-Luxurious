@@ -9,10 +9,16 @@ import { CiMap, CiPhone, CiMail } from "react-icons/ci";
 import Buttons from "../../components/Buttons";
 import useAgents from "../../hooks/useAgents";
 import { useNavigate } from "react-router-dom";
-const { Title, Text, Paragraph } = Typography;
+import useReport from "../../hooks/useReport";
+
+const { Title, Text } = Typography;
+
 function Agents() {
   const { isLoading, data } = useAgents(30, 1);
+  const { reports } = useReport();
+  console.log(reports, "DataReports");
   const navigate = useNavigate();
+
   return (
     <>
       <div className="team-banner">
@@ -122,15 +128,12 @@ function Agents() {
                     <img src={Logo} width={"20%"} preview={false} />
                   </Flex>
                   <Text className="text-upper text-black text-center f-40 f-200">
-                    {" "}
                     Florida
                   </Text>
                   <Text className="text-upper text-black text-center f-50 f-bold">
-                    {" "}
                     LUXURIOUS
                   </Text>
                   <Text className="text-upper text-black text-center f-40 f-200">
-                    {" "}
                     properties
                   </Text>
                   <Flex className="mt-5" justify={"center"} align="center">
@@ -152,14 +155,13 @@ function Agents() {
                         #1 Ranked{" "}
                       </Text>
                       <br />
-                      Private Luxurious <br />
+                      Private Luxurious <br />
                       Brokerage
                     </Text>
                   </Flex>
                   <hr style={{ opacity: 1.25, color: "white" }} />
 
                   <div className="florida_info">
-                    {" "}
                     <Flex align={"center"} gap={15}>
                       <CiMap color="#838383" size={15} />
                       <Text className="text-black text-upper text-1024">
@@ -177,35 +179,40 @@ function Agents() {
                       <Text className="text-black text-upper text-1024">
                         954.870.4080
                       </Text>
-                    </Flex>{" "}
+                    </Flex>
                   </div>
                 </Flex>
               </Card>
             </Col>
             <Col lg={8} md={24} sm={24}>
-              <div>
-                <Title
-                  style={{ color: "black" }}
-                  className="text-upper f-100 "
-                  level={2}
-                >
-                  FLP ANNUAL REPORT 2023
-                </Title>
-              </div>
-              <div>
-                <Text
-                  style={{ color: "#838383" }}
-                  className="text-upper f-24 f-100"
-                >
-                  February 2024
-                </Text>
-              </div>
-              <Flex justify={"center"} className="mt-3">
-                {" "}
-                <Buttons classNam="button-view1" width="200px">
-                  Read More
-                </Buttons>
-              </Flex>
+              {reports?.map((reportItem, index) => (
+                <div key={index}>
+                  <Title
+                    style={{ color: "black" }}
+                    className="text-upper f-100"
+                    level={2}
+                  >
+                    {reportItem.title || "FLP ANNUAL REPORT 2023"}
+                  </Title>
+                  <div>
+                    <Text
+                      style={{ color: "#838383" }}
+                      className="text-upper f-24 f-100"
+                    >
+                      {reportItem.date || "February 2024"}
+                    </Text>
+                  </div>
+                  <Flex justify={"center"} className="mt-3">
+                    <Buttons
+                      classNam="button-view1"
+                      width="200px"
+                      Click={() => navigate(`/reports/${reportItem._id}`)}
+                    >
+                      Read More
+                    </Buttons>
+                  </Flex>
+                </div>
+              ))}
             </Col>
           </Row>
         </Container>

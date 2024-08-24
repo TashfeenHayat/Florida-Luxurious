@@ -10,6 +10,7 @@ import AddFilter from "./pages/Admin/AddFilter";
 import PropertyList from "./pages/Admin/Properties";
 import AddProperty from "./pages/Admin/AddProperty";
 import Press from "./pages/Admin/Press";
+import Report from "./pages/Admin/Report";
 import Inquiries from "./pages/Admin/Inquiries";
 import Blog from "./pages/Admin/Blog";
 import AgentBlog from "./pages/AgentBlog";
@@ -40,6 +41,8 @@ import PropertyPress from "./pages/PropertyPress";
 import SearchCommunity from "./pages/SearchCommunity";
 import Allcommunities from "./pages/Home/AllCommunicaties";
 import PropertyPressDetail from "./pages/PropertyPressDetail";
+import ReportDetail from "./pages/ReportDetail";
+
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
@@ -79,6 +82,7 @@ function App() {
           <Route path="/propertypress/:id" element={<PropertyPressDetail />} />
           <Route path="/searchcommunity" element={<SearchCommunity />} />
           <Route path="/agent/blog/:id" element={<AgentBlog />} />
+          <Route path="/reports/:id" element={<ReportDetail />} />
           <Route path="*" element={<NotFound />} />
           <Route element={<Dashboard />}>
             <Route path="/admin/dashboard" element={<p>Dashboard</p>} />
@@ -94,6 +98,7 @@ function App() {
             <Route path="/admin/press" element={<Press />} />
             <Route path="/admin/inquiry" element={<Inquiries />} />
             <Route path="/admin/blog" element={<Blog />} />
+            <Route path="/admin/report" element={<Report />} />
           </Route>
         </Routes>
       </TopToScroll>
