@@ -4,7 +4,8 @@ import { getPost } from "../api/Press";
 
 function usePressDetail(id) {
   const dispatch = useDispatch();
-  const { isLoading, data } = useSelector((state) => state.getPosteducer);
+  const { data, isLoading } = useSelector((state) => state.getPostReducer);
+
   useEffect(() => {
     // Always dispatch getPosts when limit or page changes
     dispatch(getPost(id));

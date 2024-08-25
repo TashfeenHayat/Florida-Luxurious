@@ -10,6 +10,7 @@ const { Title } = Typography;
 function PropertyPressDetail() {
   const { id } = useParams();
   const { data, isLoading } = usePressDetail(id);
+  console.log(data);
   const refHtml = useRef(null);
 
   useEffect(() => {
