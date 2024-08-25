@@ -18,6 +18,7 @@ customAxios.interceptors.response.use(
   (error) => {
     if (error.response.status === 401) {
       localStorage.removeItem("token");
+
       window.location.href = "/admin/login";
     } else if (error.response.status === 400) {
       console.log("404");
