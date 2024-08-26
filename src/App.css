@@ -1038,6 +1038,9 @@ body:focus-visible {
   .flex-hidden {
     display: none !important;
   }
+  .f-24 {
+    font-size: 18px !important;
+}
   .text-1024 {
     font-size: 9px;
   }
