@@ -16,7 +16,7 @@ function OurStory() {
   useEffect(() => {
     const target = 30052918000; // total value
 
-    const duration = 5000;
+    const duration = 500;
     const intervalTime = 30;
     const increment = (target - counter) / (duration / intervalTime);
     const interval = setInterval(() => {
@@ -45,7 +45,7 @@ function OurStory() {
         </Title>
       </BackgroundImage>
       <Row>
-        <Col lg={10} sm={24} md={24} className="p-5">
+        <Col lg={10} sm={24} md={18} className="p-5">
           <Flex justify={"center"} align="center" className="w-75">
             <Title className="text-upper">
               <span className="our-title">Our</span>
