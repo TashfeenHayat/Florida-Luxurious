@@ -4,6 +4,7 @@ import FloridaProperties from "./FloridaProperties";
 import RecognitionSlide from "./RecognitionSlide";
 import OurStory from "./OurStory";
 import Team from "./MeetTeam";
+import LetTalk from "../../components/LetTalk";
 import FeatureListing from "./FeatureListing";
 import Neighborhoods from "./Neighborhoods";
 import Icons from "../../components/Icons";
@@ -94,6 +95,7 @@ function Home() {
       <Neighborhoods />
       <OurStory />
       <Team />
+      <LetTalk />
     </div>
   );
 }
