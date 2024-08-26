@@ -79,7 +79,7 @@ function OurStory() {
               <span style={{ fontWeight: 100 }}>Properties</span>
             </Title>
           </div>
-          <Flex justify={"center"} align="center" wrap="wrap" gap={20}>
+          <Flex className="bagde" justify={"center"} align="center" wrap="wrap" gap={20}>
             <Image preview={false} src={Bagde} />
             <Image preview={false} src={Bagde2} />
             <Image preview={false} src={Bagde3} />
