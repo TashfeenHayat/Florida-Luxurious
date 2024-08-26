@@ -9,7 +9,7 @@ function LetTalk() {
   return (
     <div className="background-video-container" style={{ height: "70vh" }}>
       <video autoPlay muted loop className="background-video">
-        <source src={talk} type="video/mp4" />
+        <source src="https://firebasestorage.googleapis.com/v0/b/floridaluxrious.appspot.com/o/talk.mp4?alt=media&token=859b58a0-8029-4b2c-8059-69a25f3ccd95" type="video/mp4" />
       </video>
       <div className="content-hero w-100">
         <div className="hero-bg-img-shadow ">
