@@ -1050,6 +1050,14 @@ body:focus-visible {
     flex-direction: column !important;
   padding: 12px 12px 12px 12px !important;
 }
+  .bagde{
+    display: flex;
+    gap: 14px !important;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+  }
 }
 
 @media screen and (767px >= width ) {
