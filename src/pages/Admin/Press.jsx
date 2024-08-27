@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  LoadingOutlined,
+  PlusOutlined,
+  FilePdfOutlined,
+} from "@ant-design/icons";
 import {
   Avatar,
   Space,
@@ -70,6 +74,8 @@ function Press() {
   const [selectedProp, setSelectedProp] = useState({});
   const [photo, setPhoto] = useState("");
   const [photoUploading, setPhotoUploading] = useState(false);
+  const [pdf, setPdf] = useState("");
+  const [pdfUploading, setPdfUploading] = useState(false);
 
   const { isLoading, isError, data } = useSelector((s) => s.getPostsReducer);
   const dispatch = useDispatch();
@@ -96,37 +102,14 @@ function Press() {
     );
   };
 
-  const extractBase64Data = (content) => {
-    const regex = /data:image\/[a-zA-Z]+;base64,([^\"]*)/;
-    const match = content.match(regex);
-    return match
-      ? match[0].replace(/^data:image\/[a-zA-Z]+;base64,/, "")
-      : null;
-  };
-
-  const base64ToBlobURL = (base64Data) => {
-    const byteCharacters = atob(base64Data);
-    const byteNumbers = new Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-    const byteArray = new Uint8Array(byteNumbers);
-    const blob = new Blob([byteArray], { type: "image/jpeg" }); // Adjust type as needed
-    return URL.createObjectURL(blob);
-  };
-
   const showModal = (property) => {
     setIsModalOpen(true);
     if (property._id) {
       setTimeout(() => {
         setSelectedProp(property);
         setTitle(property.title);
-        const base64Data = extractBase64Data(property.content);
-        if (base64Data) {
-          setPhoto(base64ToBlobURL(base64Data));
-        } else {
-          setPhoto(property.cover); // Fallback to default if no base64 data
-        }
+        setPhoto(property.cover);
+        setPdf(property.pdf || ""); // Set PDF URL or empty string
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString(
           property?.content,
@@ -137,6 +120,7 @@ function Press() {
     } else {
       setTitle("");
       setPhoto("");
+      setPdf(""); // Clear PDF URL
       setTimeout(() => {
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString("", "text/html").body
@@ -147,13 +131,22 @@ function Press() {
   };
 
   const beforeUpload = (e) => {
-    setPhotoUploading(true);
+    if (e.type === "application/pdf") {
+      setPdfUploading(true);
+    } else {
+      setPhotoUploading(true);
+    }
   };
 
   const handleFileChange = (info) => {
     if (info.file.status === "done") {
-      setPhotoUploading(false);
-      setPhoto(info.file.response.url);
+      if (info.file.type === "application/pdf") {
+        setPdfUploading(false);
+        setPdf(info.file.response.url);
+      } else {
+        setPhotoUploading(false);
+        setPhoto(info.file.response.url);
+      }
     }
   };
 
@@ -167,45 +160,36 @@ function Press() {
   const handleOk = async () => {
     try {
       const markupStr = $("#summernote").summernote("code");
+      const postData = {
+        title,
+        cover: photo,
+        content: markupStr,
+        file: pdf || "", // Include PDF URL if available
+      };
+
       if (selectedProp._id) {
         await dispatch(
           updatePost({
             id: selectedProp._id,
-            title,
-            cover: photo,
-            content: markupStr,
+            ...postData,
           })
         ).unwrap();
         openNotification("success", "Post updated successfully.");
         setSelectedProp({});
         setIsModalOpen(false);
-
-        // Refresh the posts list
-        dispatch(
-          getPosts({
-            page: tableParams.current,
-            limit: tableParams.pageSize,
-          })
-        );
       } else {
-        await dispatch(
-          addPost({
-            title,
-            cover: photo,
-            content: markupStr,
-          })
-        ).unwrap();
+        await dispatch(addPost(postData)).unwrap();
         openNotification("success", "Post added successfully.");
         setIsModalOpen(false);
-
-        // Refresh the posts list
-        dispatch(
-          getPosts({
-            page: tableParams.current,
-            limit: tableParams.pageSize,
-          })
-        );
       }
+
+      // Refresh the posts list
+      dispatch(
+        getPosts({
+          page: tableParams.current,
+          limit: tableParams.pageSize,
+        })
+      );
     } catch (error) {
       console.error("Failed to save the post:", error);
       openNotification("error", "Failed to save the post.");
@@ -276,6 +260,34 @@ function Press() {
           onChange={(e) => setTitle(e.target.value)}
           style={{ marginBottom: "20px" }}
         />
+        <div style={{ marginBottom: "20px" }}>
+          <Upload
+            name="file"
+            listType="text"
+            className="pdf-uploader"
+            loading={pdfUploading}
+            showUploadList={false}
+            headers={{
+              Authorization: `Bearer ${localStorage.token}`,
+            }}
+            action={`${api_base_URL}upload`}
+            beforeUpload={beforeUpload}
+            onChange={handleFileChange}
+          >
+            {pdf ? (
+              <a href={pdf} target="_blank" rel="noopener noreferrer">
+                <FilePdfOutlined
+                  style={{ fontSize: "32px", color: "#ff4d4f" }}
+                />
+                <span style={{ marginLeft: "8px" }}>View PDF</span>
+              </a>
+            ) : (
+              <Button>
+                <PlusOutlined /> Upload PDF
+              </Button>
+            )}
+          </Upload>
+        </div>
         <div id="summernote"></div>
       </Modal>
     </>

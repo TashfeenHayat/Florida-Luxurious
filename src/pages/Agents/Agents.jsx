@@ -187,6 +187,7 @@ function Agents() {
             <Col lg={8} md={24} sm={24}>
               {reports?.map((reportItem, index) => (
                 <div key={index}>
+                  <img src={Logo} width={"20%"} preview={false} />
                   <Title
                     style={{ color: "black" }}
                     className="text-upper f-100"

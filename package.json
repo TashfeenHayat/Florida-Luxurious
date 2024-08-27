@@ -24,6 +24,7 @@
     "florida-admin": "file:",
     "html-entities": "^2.5.2",
     "html-react-parser": "^5.1.12",
+    "pdfjs-dist": "^3.11.174",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0",

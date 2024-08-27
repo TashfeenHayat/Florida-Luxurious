@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  LoadingOutlined,
+  PlusOutlined,
+  FilePdfOutlined,
+} from "@ant-design/icons";
 import {
   Avatar,
   Space,
@@ -75,7 +79,8 @@ function Report() {
   const [selectedProp, setSelectedProp] = useState({});
   const [photo, setPhoto] = useState("");
   const [photoUploading, setPhotoUploading] = useState(false);
-
+  const [pdf, setPdf] = useState("");
+  const [pdfUploading, setPdfUploading] = useState(false);
   const { isLoading, isError, data } = useSelector((s) => s.getReportsReducer);
   console.log(data);
   const dispatch = useDispatch();
@@ -127,6 +132,8 @@ function Report() {
       setTimeout(() => {
         setSelectedProp(property);
         setTitle(property.title);
+        setPhoto(property.cover);
+        setPdf(property.pdf || "");
         const base64Data = extractBase64Data(property.content);
         if (base64Data) {
           setPhoto(base64ToBlobURL(base64Data));
@@ -143,6 +150,7 @@ function Report() {
     } else {
       setTitle("");
       setPhoto("");
+      setPdf("");
       setTimeout(() => {
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString("", "text/html").body
@@ -153,13 +161,22 @@ function Report() {
   };
 
   const beforeUpload = (e) => {
-    setPhotoUploading(true);
+    if (e.type === "application/pdf") {
+      setPdfUploading(true);
+    } else {
+      setPhotoUploading(true);
+    }
   };
 
   const handleFileChange = (info) => {
     if (info.file.status === "done") {
-      setPhotoUploading(false);
-      setPhoto(info.file.response.url);
+      if (info.file.type === "application/pdf") {
+        setPdfUploading(false);
+        setPdf(info.file.response.url);
+      } else {
+        setPhotoUploading(false);
+        setPhoto(info.file.response.url);
+      }
     }
   };
 
@@ -180,6 +197,7 @@ function Report() {
             title,
             cover: photo,
             content: markupStr,
+            file: pdf || "",
           })
         ).unwrap();
         openNotification("success", "Report updated successfully.");
@@ -321,40 +339,66 @@ function Report() {
         width={1000}
         style={{ top: 20 }}
       >
-        <Card
-          cover={
-            <Upload
-              name="file"
-              listType="picture-card"
-              className="avatar-uploader"
-              showUploadList={false}
-              action={`${api_base_URL}upload`}
-              beforeUpload={beforeUpload}
-              onChange={handleFileChange}
-              headers={{ Authorization: `Bearer ${localStorage.token}` }}
-            >
-              {photo ? (
-                <img
-                  src={photo}
-                  alt="avatar"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                  }}
+        {" "}
+        <div style={{ marginBottom: "20px" }}>
+          <Upload
+            name="file"
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            action={`${api_base_URL}upload`}
+            beforeUpload={beforeUpload}
+            onChange={handleFileChange}
+            headers={{ Authorization: `Bearer ${localStorage.token}` }}
+          >
+            {photo ? (
+              <img
+                src={photo}
+                alt="avatar"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                }}
+              />
+            ) : (
+              uploadButton
+            )}
+          </Upload>{" "}
+        </div>
+        <Input
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <div style={{ marginBottom: "20px" }}>
+          <Upload
+            name="file"
+            listType="text"
+            className="pdf-uploader"
+            loading={pdfUploading}
+            showUploadList={false}
+            headers={{
+              Authorization: `Bearer ${localStorage.token}`,
+            }}
+            action={`${api_base_URL}upload`}
+            beforeUpload={beforeUpload}
+            onChange={handleFileChange}
+          >
+            {pdf ? (
+              <a href={pdf} target="_blank" rel="noopener noreferrer">
+                <FilePdfOutlined
+                  style={{ fontSize: "32px", color: "#ff4d4f" }}
                 />
-              ) : (
-                uploadButton
-              )}
-            </Upload>
-          }
-        >
-          <Input
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </Card>
+                <span style={{ marginLeft: "8px" }}>View PDF</span>
+              </a>
+            ) : (
+              <Button>
+                <PlusOutlined /> Upload PDF
+              </Button>
+            )}
+          </Upload>
+        </div>
         <div id="summernote"></div>
       </Modal>
     </>
