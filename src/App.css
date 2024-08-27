@@ -1055,7 +1055,7 @@ body:focus-visible {
 }
   .bagde{
     display: flex;
-    gap: 14px !important;
+    gap: 4px !important;
     flex-wrap: nowrap;
     align-content: center;
     justify-content: center;
