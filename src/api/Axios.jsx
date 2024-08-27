@@ -1,13 +1,9 @@
 import axios from "axios";
 
 //export const api_base_URL = "http://localhost:3002/v1/";
-<<<<<<< HEAD
 
 export const api_base_URL = "https://florida-lux-api.onrender.com/v1/";
 
-=======
-export const api_base_URL = "https://florida-lux-api.onrender.com/v1/";
->>>>>>> 7dae55c1c717790f4574fe87abf7f21ec9443d94
 //export const api_base_URL = "https://a032-182-177-42-127.ngrok-free.app/v1/";
 // export const api_base_URL = "https://florida-lux-back.waveio.site/v1/";
 //export const api_base_URL = "https://florida-lux-nodejs.onrender.com/v1/";

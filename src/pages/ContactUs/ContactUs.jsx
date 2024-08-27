@@ -185,14 +185,10 @@ function ContactUs() {
       <div style={{ position: "relative" }}>
         <div className="background-video-container" style={{ height: "70vh" }}>
           <video autoPlay muted loop className="background-video">
-<<<<<<< HEAD
             <source
               src="https://firebasestorage.googleapis.com/v0/b/floridaluxrious.appspot.com/o/contactus.mp4?alt=media&token=e7a90eec-4b56-4882-b2b2-04697ad777f2"
               type="video/mp4"
             />
-=======
-            <source src="https://firebasestorage.googleapis.com/v0/b/floridaluxrious.appspot.com/o/contactus.mp4?alt=media&token=e7a90eec-4b56-4882-b2b2-04697ad777f2" type="video/mp4" />
->>>>>>> 7dae55c1c717790f4574fe87abf7f21ec9443d94
           </video>
         </div>
         <div className="content-hero w-100">
