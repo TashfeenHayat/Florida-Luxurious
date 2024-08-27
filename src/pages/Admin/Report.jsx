@@ -95,7 +95,7 @@ function Report() {
   const handleTableChange = (pagination) => {
     setTableParams(pagination);
     dispatch(
-      getreports({
+      getReports({
         page: pagination.current,
         limit: pagination.pageSize,
       })
@@ -178,7 +178,7 @@ function Report() {
           updateReport({
             id: selectedProp._id,
             title,
-
+            cover: photo,
             content: markupStr,
           })
         ).unwrap();
@@ -196,7 +196,7 @@ function Report() {
         await dispatch(
           addReport({
             title,
-
+            cover: photo,
             content: markupStr,
           })
         ).unwrap();
@@ -222,8 +222,75 @@ function Report() {
     setSelectedProp({});
   };
 
+  // Function to add PDF upload button to Summernote toolbar
+  const addPdfUploadButton = () => {
+    window.$.summernote.ui
+      .button({
+        contents: '<i class="note-icon-picture"></i> Upload PDF',
+        tooltip: "Upload PDF",
+        click: function () {
+          const input = document.createElement("input");
+          input.type = "file";
+          input.accept = "application/pdf";
+          input.onchange = async (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            try {
+              const response = await fetch(`${api_base_URL}upload`, {
+                method: "POST",
+                headers: {
+                  Authorization: `Bearer ${localStorage.token}`,
+                },
+                body: formData,
+              });
+              const result = await response.json();
+
+              if (result.url) {
+                const pdfEmbed =
+                  '<a href="' +
+                  result.url +
+                  '" target="_blank">' +
+                  file.name +
+                  "</a>";
+                window.$("#summernote").summernote("pasteHTML", pdfEmbed);
+              }
+            } catch (error) {
+              openNotification("error", "Failed to upload PDF.");
+            }
+          };
+          input.click();
+        },
+      })
+      .render();
+  };
+
+  useEffect(() => {
+    // Initialize Summernote with custom toolbar including PDF upload button
+    window.$("#summernote").summernote({
+      height: 200,
+      toolbar: [
+        ["style", ["style"]],
+        ["font", ["bold", "underline", "clear"]],
+        ["color", ["color"]],
+        ["para", ["ul", "ol", "paragraph"]],
+        ["table", ["table"]],
+        ["insert", ["link", "picture", "video"]],
+        ["view", ["fullscreen", "codeview", "help"]],
+        ["upload", ["uploadPdf"]],
+      ],
+      callbacks: {
+        onInit: addPdfUploadButton,
+      },
+    });
+  }, []);
+
   return (
     <>
+      {contextHolder}
       <Card
         title="Report Info"
         extra={
@@ -252,13 +319,42 @@ function Report() {
         onOk={handleOk}
         onCancel={handleCancel}
         width={1000}
+        style={{ top: 20 }}
       >
-        <Input
-          value={title}
-          placeholder="Enter title"
-          onChange={(e) => setTitle(e.target.value)}
-          style={{ marginBottom: "20px" }}
-        />
+        <Card
+          cover={
+            <Upload
+              name="file"
+              listType="picture-card"
+              className="avatar-uploader"
+              showUploadList={false}
+              action={`${api_base_URL}upload`}
+              beforeUpload={beforeUpload}
+              onChange={handleFileChange}
+              headers={{ Authorization: `Bearer ${localStorage.token}` }}
+            >
+              {photo ? (
+                <img
+                  src={photo}
+                  alt="avatar"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                  }}
+                />
+              ) : (
+                uploadButton
+              )}
+            </Upload>
+          }
+        >
+          <Input
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </Card>
         <div id="summernote"></div>
       </Modal>
     </>

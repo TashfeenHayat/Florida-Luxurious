@@ -16,7 +16,7 @@ const { Title, Text } = Typography;
 function Agents() {
   const { isLoading, data } = useAgents(30, 1);
   const { reports } = useReport();
-  console.log(reports, "DataReports");
+  // console.log(reports, "DataReports");
   const navigate = useNavigate();
 
   return (

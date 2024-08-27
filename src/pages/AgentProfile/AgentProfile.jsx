@@ -12,13 +12,16 @@ import Logo from "../../assets/logoicon1.png";
 
 import useAgent from "../../hooks/useAgent";
 import useBlogs from "../../hooks/useBlogs";
+
+import useReport from "./../../hooks/useReport";
 const { Title, Paragraph, Text } = Typography;
 function AgentProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isLoading, data, isError } = useAgent(id);
   const { isLoading: isBlogLoading, data: blogData } = useBlogs(10, 1, id);
-
+  const { isloading: isReportLoading, reports } = useReport();
+  console.log(reports);
   return (
     <>
       <BackgroundImage
@@ -230,48 +233,115 @@ function AgentProfile() {
               <Title className="text-upper f-100 text-center">My blog</Title>
               <div>
                 <Row gutter={[16, 24]}>
-                  {blogData?.blogs?.map((item, index) => (
-                    <Col
-                      xl={8}
-                      lg={12}
-                      md={12}
-                      sm={24}
-                      xsm={24}
-                      key={index}
-                      style={{ gap: "10px" }}
-                    >
-                      <Card style={{ width: 400, background: "#E8E8E8" }}>
-                        <Flex
-                          justify={"center"}
-                          align="center"
-                          vertical
-                          lg={8}
-                          md={8}
+                  {blogData?.blogs?.length === 0 && reports?.length === 0 ? (
+                    <Col span={24}>
+                      <Text>No blogs or reports available.</Text>
+                    </Col>
+                  ) : (
+                    <>
+                      {" "}
+                      {blogData?.blogs?.map((item, index) => (
+                        <Col
+                          xl={8}
+                          lg={12}
+                          md={12}
                           sm={24}
                           xsm={24}
+                          key={index}
+                          style={{ gap: "10px" }}
                         >
-                          <Image
-                            src={item?.agentId?.photo}
-                            preview={false}
-                            style={{ borderRadius: "300px" }}
-                            width="40%"
-                          />
-                          <Title className="f-16 pt-4 text-upper">
-                            {item?.title}
-                          </Title>
-                          <button
-                            class="button-view"
-                            onClick={() => navigate(`/agent/blog/${item?._id}`)}
-                          >
-                            Read More{" "}
-                          </button>
-                        </Flex>
-                      </Card>
-                    </Col>
-                  ))}
-                  <Col lg={8} md={8} sm={24} xsm={24} key={""}>
-                    <Card style={{ width: 400, background: "#E8E8E8" }}>
-                      <Flex justify={"center"} align="center" vertical>
+                          <Card style={{ width: 400, background: "#E8E8E8" }}>
+                            <Flex
+                              justify={"center"}
+                              align="center"
+                              vertical
+                              lg={8}
+                              md={8}
+                              sm={24}
+                              xsm={24}
+                            >
+                              <Image
+                                src={item?.agentId?.photo}
+                                preview={false}
+                                style={{ borderRadius: "300px" }}
+                                width="40%"
+                              />
+                              <Title className="f-16 pt-4 text-upper">
+                                {item?.title}
+                              </Title>
+                              <button
+                                class="button-view"
+                                onClick={() =>
+                                  navigate(`/agent/blog/${item?._id}`)
+                                }
+                              >
+                                Read More{" "}
+                              </button>
+                            </Flex>
+                          </Card>
+                        </Col>
+                      ))}
+                      <br />
+                      <Col
+                        lg={8}
+                        md={8}
+                        sm={24}
+                        xsm={24}
+                        key={""}
+                        align="center"
+                        vertical
+                        style={{ gap: "10px" }}
+                      >
+                        <Card style={{ width: 400, background: "#E8E8E8" }}>
+                          {reports?.map((reportItem, index) => (
+                            <div key={index}>
+                              <img src={Logo} width={"30%"} preview={false} />
+                              <Title
+                                style={{ color: "black" }}
+                                className="text-upper f-100"
+                                level={2}
+                              >
+                                {reportItem.title || "FLP ANNUAL REPORT 2023"}
+                              </Title>
+                              <div>
+                                <Text
+                                  style={{ color: "#838383" }}
+                                  className="text-upper f-24 f-100"
+                                >
+                                  {reportItem.date || "February 2024"}
+                                </Text>
+                              </div>
+                              <Flex
+                                justify={"center"}
+                                lg={8}
+                                md={8}
+                                sm={24}
+                                xsm={24}
+                              >
+                                <button
+                                  class="button-view"
+                                  width="200px"
+                                  onClick={() =>
+                                    navigate(`/reports/${reportItem._id}`)
+                                  }
+                                >
+                                  Read More{" "}
+                                </button>
+                              </Flex>
+                              {/* <Flex justify={"center"} className="mt-3">
+                            <button
+                              classNam="button-view1"
+                              width="200px"
+                              Click={() =>
+                                navigate(`/reports/${reportItem._id}`)
+                              }
+                            >
+                              Read More
+                            </button>
+                          </Flex>*/}
+                            </div>
+                          ))}
+                          {/*  <Flex justify={"center"} align="center" vertical>
                         <Flex vertical>
                           <Flex
                             lg={8}
@@ -313,9 +383,11 @@ function AgentProfile() {
                       </Flex>
                       <Flex justify={"center"} lg={8} md={8} sm={24} xsm={24}>
                         <button class="button-view">Read More </button>
-                      </Flex>
-                    </Card>
-                  </Col>
+                      </Flex>*/}
+                        </Card>
+                      </Col>
+                    </>
+                  )}
                 </Row>
               </div>
             </div>
