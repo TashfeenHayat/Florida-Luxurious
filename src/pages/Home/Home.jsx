@@ -4,12 +4,13 @@ import FloridaProperties from "./FloridaProperties";
 import RecognitionSlide from "./RecognitionSlide";
 import OurStory from "./OurStory";
 import Team from "./MeetTeam";
+import LetTalk from "../../components/LetTalk";
 import FeatureListing from "./FeatureListing";
 import Neighborhoods from "./Neighborhoods";
 import Icons from "../../components/Icons";
 import { useNavigate } from "react-router-dom";
 
-import letTalk from "../../components/LetTalk";
+
 import LetTalk from "../../components/LetTalk";
 const { Title, Text } = Typography;
 const { Search } = Input;
@@ -22,10 +23,14 @@ function Home() {
     <div>
       <div className="background-video-container">
         <video autoPlay muted loop className="background-video">
+<<<<<<< HEAD
           <source
             src="https://firebasestorage.googleapis.com/v0/b/floridaluxrious.appspot.com/o/HOMES.mp4?alt=media&token=d1a0cf50-6483-47fa-9a55-40d6ad68e2a6"
             type="video/mp4"
           />
+=======
+          <source src="https://firebasestorage.googleapis.com/v0/b/floridaluxrious.appspot.com/o/HOMES.mp4?alt=media&token=d1a0cf50-6483-47fa-9a55-40d6ad68e2a6" type="video/mp4" />
+>>>>>>> 7dae55c1c717790f4574fe87abf7f21ec9443d94
         </video>
       </div>
       <div className="content-hero">

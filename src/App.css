@@ -1046,6 +1046,15 @@ body:focus-visible {
   .flex-hidden {
     display: none !important;
   }
+  .f-24 {
+    font-size: 18px !important;
+} .story-title {
+    color: #000;
+    font-weight: 700;
+    font-size: 70px !important;
+    letter-spacing: 2px;
+    line-height: .9;
+}
   .text-1024 {
     font-size: 9px;
   }
@@ -1058,6 +1067,14 @@ body:focus-visible {
     flex-direction: column !important;
   padding: 12px 12px 12px 12px !important;
 }
+  .bagde{
+    display: flex;
+    gap: 4px !important;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+  }
 }
 
 @media screen and (767px >= width ) {
