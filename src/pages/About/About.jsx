@@ -4,10 +4,13 @@ import BackgroundImage from "../../components/BackgroundImage";
 import { Typography, Col, Row, Flex, Image } from "antd";
 import Icons from "../../components/Icons";
 import LetTalk from "../../components/LetTalk";
-import Bagde from "../../assets/Bagde1.svg";
-import Bagde2 from "../../assets/Bagde2.svg";
+import Bagde from "../../assets/award19.svg";
+import Bagde1 from "../../assets/award21.svg";
+
+import Bagde2 from "../../assets/award20.svg";
 import Bagde3 from "../../assets/Bagde3.svg";
-import Bagde4 from "../../assets/Bagde4.svg";
+import Bagde4 from "../../assets/award23.svg";
+
 import { useState, useEffect } from "react";
 const { Title, Text, Paragraph } = Typography;
 function OurStory() {
@@ -16,7 +19,7 @@ function OurStory() {
   useEffect(() => {
     const target = 30052918000; // total value
 
-    const duration = 5000;
+    const duration = 500;
     const intervalTime = 30;
     const increment = (target - counter) / (duration / intervalTime);
     const interval = setInterval(() => {
@@ -79,16 +82,25 @@ function OurStory() {
               <span style={{ fontWeight: 100 }}>Properties</span>
             </Title>
           </div>
-          <Flex justify={"center"} align="center" wrap="wrap" gap={20}>
+          <Flex
+            xl={8}
+            lg={12}
+            md={18}
+            sm={24}
+            justify={"center"}
+            align="center"
+            wrap="wrap"
+            className="bagde"
+            gap={20}
+          >
             <Image preview={false} src={Bagde} />
             <Image preview={false} src={Bagde2} />
+            <Image preview={false} src={Bagde1} />
             <Image preview={false} src={Bagde3} />
-            <Image preview={false} src={Bagde4} />
-            <Image preview={false} src={Bagde4} />
             <Image preview={false} src={Bagde4} />
           </Flex>
           <Row gutter={[20, 20]} className="my-124 px-3">
-            <Col xl={8} lg={12} md={12} sm={12}>
+            <Col xl={8} lg={18} md={24} sm={24}>
               <div
                 style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}
               >
@@ -104,7 +116,7 @@ function OurStory() {
                 </Text>
               </div>
             </Col>
-            <Col xl={8} lg={12} md={12} sm={12}>
+            <Col xl={8} lg={18} md={24} sm={32}>
               <div
                 style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}
               >

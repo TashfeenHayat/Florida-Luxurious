@@ -9,10 +9,10 @@ const { Title, Text } = Typography;
 
 function PropertyPress() {
   const { data, isLoading, error } = usePress();
-
+  // console.log("press", data);
   // Check if data is an object with a posts array
   const pressData = data?.posts || [];
-
+  console.log("press", pressData);
   const navigate = useNavigate();
 
   // Use a media query to detect if the screen width is less than or equal to 768px (mobile/tablet)

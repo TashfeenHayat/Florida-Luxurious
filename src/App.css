@@ -1035,6 +1035,14 @@ body:focus-visible {
 /* Media Queries */
 
 @media screen and (max-width: 1024px) {
+  .bagde{
+    display: flex;
+    gap: 14px !important;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+  }
   .flex-hidden {
     display: none !important;
   }

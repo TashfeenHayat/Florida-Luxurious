@@ -75,6 +75,19 @@ function PropertyPressDetail() {
           <Row justify="center">
             <Col xs={24} md={20} lg={16}>
               <div ref={refHtml} />
+              {data?.file && (
+                <div style={{ marginTop: "20px", textAlign: "center" }}>
+                  <iframe
+                    src={data.file}
+                    style={{
+                      width: "60%", // Set to 100% to ensure full-width
+                      height: "calc(100vh - 200px)", // Dynamically set the height relative to viewport height
+                    }}
+                    frameBorder="0"
+                    title="PDF Viewer"
+                  />
+                </div>
+              )}
             </Col>
           </Row>
         </Container>
