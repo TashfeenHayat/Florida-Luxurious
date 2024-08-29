@@ -69,7 +69,7 @@ function Allcommunities() {
           }}
           className="text-upper f-50 f-100"
         >
-          All Communities
+          Featured Communties
         </Title>
       </BackgroundImage>
       <div style={{ paddingTop: 98, paddingBottom: 98 }}>
