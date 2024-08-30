@@ -195,7 +195,7 @@ function FeatureListing() {
             style={{ marginTop: "24px" }}
             onClick={() => navigate("/properties")}
           >
-            <Button className="button-view" style={{ fontSize: "16px" }}>
+            <Button className="button-view1" style={{ fontSize: "16px" }}>
               View All
             </Button>
           </Flex>

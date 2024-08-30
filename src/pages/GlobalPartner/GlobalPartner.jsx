@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import BackgroundImage from "../../components/BackgroundImage";
-import BoatImage from "../../assets/boatowner.png";
+import BoatImage from "../../assets/Globalpartner.jpg";
 import { Typography, Row, Col, Flex, Image, Pagination, Spin } from "antd";
 import Globalpartnerimg from "../../assets/globalpartnerimg.png";
 import Lux from "../../assets/Lux.png";
@@ -58,8 +58,13 @@ function GlobalPartner() {
   return (
     <div className="globalcontainer">
       <BackgroundImage Image={BoatImage}>
-       <Title
-          style={{ color: "white", lineHeight: "41px", letterSpacing: "2px" ,textAlign:"center" }}
+        <Title
+          style={{
+            color: "white",
+            lineHeight: "41px",
+            letterSpacing: "2px",
+            textAlign: "center",
+          }}
           className="text-upper f-50 f-100"
         >
           Global properties
@@ -76,10 +81,7 @@ function GlobalPartner() {
         <Col lg={12} md={24} sm={24}>
           <div style={{ marginLeft: 50 }}>
             <Flex vertical justify={"center"} align="center">
-              <Text
-                className="text-black f-24"
-                style={{ textTransform: "capitalize", overflow: "hidden" }}
-              >
+              <Text className="text-black f-24" style={{ overflow: "hidden" }}>
                 Florida Luxurious Properties has a longstanding affiliation with
                 a worldwide collection of more than 125,000 brokers covering 62
                 countries. Who’s Who in Luxury Real Estate has been leading the
@@ -114,7 +116,13 @@ function GlobalPartner() {
                 </Text>
                 <br />
                 <Text className="text-white f-bold f-32 text-center text-upper">
-                  “Significant Sales Award”
+                  “Best Brand Integration”
+                </Text>
+                <br />
+                <Text className="text-white f-20 text-center">
+                  Given to the member that creatively and consistently exhibits
+                  the Board of Regents and/or Luxury Real Estate Brand in
+                  conjunction with their own brand.
                 </Text>
               </div>
               <div
@@ -127,6 +135,13 @@ function GlobalPartner() {
                 <br />
                 <Text className="text-white f-bold f-32 text-center text-upper">
                   “Significant Sales Award”
+                </Text>{" "}
+                <br />
+                <Text className="text-white f-20 text-center">
+                  Bestowed upon five members who have had the most noteworthy
+                  sale of a single property within the last 12 months. The
+                  significant sale must represent the best/most expensive
+                  property in a specific location.
                 </Text>
               </div>
             </Flex>

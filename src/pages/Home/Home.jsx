@@ -50,7 +50,7 @@ function Home() {
           >
             Luxury. Innovation. Excellence.
           </Title>
-          <Text
+          {/* <Text
             className="text-paragraph"
             style={{ fontSize: "1.5rem", marginBottom: "2rem" }}
           >
@@ -89,7 +89,7 @@ function Home() {
                 overflow: "hidden",
               }}
             />
-          </div>
+          </div>*/}
         </div>
       </div>
       <Icons />
