@@ -135,8 +135,8 @@ function Header() {
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <Link to="/propertypress" className="text-upper f-10">
-                    Property press
+                  <Link to="/ourMarket" className="text-upper f-10">
+                    our Market
                   </Link>
                 </Menu.Item>
               </Menu>
