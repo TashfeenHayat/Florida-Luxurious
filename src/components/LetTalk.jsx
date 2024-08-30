@@ -51,8 +51,8 @@ function LetTalk() {
               data-aos="fade-left"
               data-aos-duration="1500"
             >
-              Reach out to us today and let's start turning your real estate
-              dreams into reality
+              Please contact a member of our specialized Team to discuss how we
+              can help meet your real estate goals
             </Text>
             <div onClick={() => navigate("/contact-us")}>
               <button

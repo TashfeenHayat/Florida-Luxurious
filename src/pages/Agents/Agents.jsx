@@ -15,9 +15,19 @@ const { Title, Text } = Typography;
 
 function Agents() {
   const { isLoading, data } = useAgents(30, 1);
+
   const { reports } = useReport();
   // console.log(reports, "DataReports");
   const navigate = useNavigate();
+  // Sort filters alphabetically by name
+  const sortingArr = [...(data?.filters ?? [])].sort((a, b) =>
+    a?.name?.localeCompare(b?.name)
+  );
+
+  // Sort agents alphabetically by full name (firstName + lastName)
+  const sortedAgents = [...(data?.agents ?? [])].sort((a, b) =>
+    `${a.firstName} ${a.lastName}`.localeCompare(`${b.firstName} ${b.lastName}`)
+  );
 
   return (
     <>
@@ -39,7 +49,7 @@ function Agents() {
           <Row gutter={[20, 60]}>
             <Col lg={24} md={24} sm={24} xs={24}>
               <Title className="text-center f-100 text-upper">
-                Our Team Member
+                Our Team Members
               </Title>
             </Col>
             {isLoading ? (
@@ -48,7 +58,7 @@ function Agents() {
               </Flex>
             ) : (
               <>
-                {data?.agents?.map((item, index) => (
+                {sortedAgents.map((item, index) => (
                   <Col
                     lg={6}
                     md={12}
@@ -108,7 +118,7 @@ function Agents() {
                     </Flex>
                     <Flex justify={"center"} align="center">
                       <Text className="text-center text-upper f-bold">
-                        florida retailer
+                        Estate Agent
                       </Text>
                     </Flex>
                   </Col>

@@ -696,7 +696,7 @@ export default function DetailProperty() {
           Search Mls
         </Button>
       </Flex>
-      <div className="boxshadow-section p-5">
+      {/*<div className="boxshadow-section p-5">
         <Container className="p-5">
           <Title className="text-upper" style={{ letterSpacing: "1px" }}>
             Features
@@ -705,7 +705,7 @@ export default function DetailProperty() {
             <Col lg={24} md={24} sm={24}></Col>
           </Row>
         </Container>
-      </div>
+      </div>*/}
       <div style={{ backgroundColor: "#000" }}>
         <Container>
           <Row>

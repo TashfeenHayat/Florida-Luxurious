@@ -1,61 +1,24 @@
 import React, { useState } from "react";
-import { Typography, Flex, Row, Col, Spin } from "antd";
-import Slider from "react-slick";
-import Florida from "../../assets/florida.png";
+import { Typography, Row, Col, Spin, Grid } from "antd";
 import useCommunities from "../../hooks/useCommunities";
 import { useNavigate } from "react-router-dom";
 import BackgroundImage from "../../components/BackgroundImage";
 import BoatImage from "../../assets/Allcommunities.jpg";
 
-const { Title, Text, Paragraph } = Typography;
+const { Title, Text } = Typography;
+const { useBreakpoint } = Grid;
+
 function Allcommunities() {
   const { data, isLoading } = useCommunities(20, 1);
   const sortingArr = [...(data?.filters ?? [])].sort((a, b) =>
     a?.name?.localeCompare(b?.name)
   );
   const navigate = useNavigate();
+  const screens = useBreakpoint();
 
-  const settings = {
-    className: "center",
-    infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 4,
-    responsive: [
-      {
-        breakpoint: 1024, // Adjust as per your requirement
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 2,
-          infinite: true,
-        },
-      },
-      {
-        breakpoint: 768, // Adjust as per your requirement
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
-      },
-      {
-        breakpoint: 425, // Adjust as per your requirement
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
-        },
-      },
-      // Add more responsive configurations as needed
-    ],
-    swipeToSlide: true,
-    afterChange: function (index) {
-      console.log(
-        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-      );
-    },
-  };
   return (
     <>
+      {/* Background Image with Title */}
       <BackgroundImage
         Image={BoatImage}
         style={{ backgroundSize: "cover", backgroundPosition: "center" }}
@@ -69,315 +32,75 @@ function Allcommunities() {
           }}
           className="text-upper f-50 f-100"
         >
-          All Communities
+          Featured Communities
         </Title>
       </BackgroundImage>
-      <div style={{ paddingTop: 98, paddingBottom: 98 }}>
-        <Title className="florida-heading-feature-negibour" level={1}>
-          Featured Communties
-        </Title>
-        <Row className="px-4">
+
+      {/* Communities Section */}
+      <div style={{ paddingTop: 98, paddingBottom: 98, overflow: "hidden" }}>
+        <Row gutter={[32, 32]} className="px-4">
+          {/* Loading Spinner */}
           {isLoading ? (
-            <Flex justify={"center"} xs={24} sm={12} md={8} lg={6}>
+            <Col span={24} style={{ textAlign: "center" }}>
               <Spin size="large" />
-            </Flex>
+            </Col>
           ) : (
             sortingArr.map((community, index) => (
-              <Col lg={6} md={12} sm={24} key={index} className="">
-                <div className="displayy-teamimg-center show-btn-community-home">
+              <Col
+                lg={8}
+                md={12}
+                sm={24}
+                key={index}
+                className="displayy-teamimg-center show-btn-community-home"
+              >
+                <div style={{ position: "relative" }}>
                   <img
                     src={community?.photo}
                     width="100%"
                     className="img-op communities-grid"
+                    alt={community?.name}
+                    style={{ display: "block" }}
                   />
-                  {/* <div
-                    style={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "0%",
-                      width: "100%",
-                    }}
-                  >
-                    <Flex
-                      justify={"center"}
-                      align={"center"}
-                      style={{ width: "95%" }}
-                      vertical
-                    >
-                         <Text
-                        className="text-upper text-white f-100"
-                        style={{ fontSize: "20px" }}
-                      >
-                        {community?.name}
-                      </Text>
-
-                      <button
-                        className="button-view1"
-                        onClick={() => navigate(`/community/${community?._id}`)}
-                      >
-                        View
-                      </button></Flex>
-                  </div>*/}
                   <div
                     className="show-info"
                     style={{
-                      position: "absolute",
-                      top: "50%",
-                      left: "0%",
-                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexDirection: "column",
+                      textAlign: "center",
+                      background: "rgba(0, 0, 0, 0.5)",
+                      padding: "10px",
+                      borderRadius: "5px",
                     }}
                   >
-                    <div
-                      justify={"space-between"}
-                      align={"center"}
+                    <Text
+                      className="text-upper text-white f-100"
                       style={{
-                        overflow: "hidden",
-                        position: "absolute",
-                        bottom: "10px",
-                        left: "10px",
-                        right: "10px",
-                        background: "rgba(0, 0, 0, 0.5)",
-                        padding: "10px",
-                        borderRadius: "5px",
+                        fontSize: screens.xs ? "16px" : "20px",
+                        display: "block",
                       }}
                     >
-                      <Text
-                        className="text-upper text-white f-100 "
-                        style={{
-                          fontSize: "20px",
-                          display: "block",
-                        }}
-                      >
-                        {community?.name}
-                      </Text>
+                      {community?.name}
+                    </Text>
 
-                      <button
-                        className="button-view2"
-                        onClick={() => navigate(`/community/${community?._id}`)}
-                      >
-                        View
-                      </button>
-                    </div>
-                  </div>{" "}
+                    <button
+                      className="button-view2"
+                      onClick={() => navigate(`/community/${community?._id}`)}
+                      style={{
+                        marginTop: "10px",
+                        padding: "5px 20px",
+                        fontSize: screens.xs ? "14px" : "16px",
+                      }}
+                    >
+                      View
+                    </button>
+                  </div>
                 </div>
               </Col>
             ))
           )}
         </Row>
-
-        {/* <Flex
-        justify={"center"}
-        align={"center"}
-        style={{
-          marginTop: 65,
-          marginBottom: 65,
-        }}
-        className="negborihood-list"
-      >
-        <div className="meet-slider-width" style={{ width: "100%" }}>
-          <Slider {...settings}>
-            <div className="displayy-teamimg-center">
-              <img src={Florida} width="100%" className="img-op" />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 20,
-                  left: 20,
-                  width: "100%",
-                }}
-              >
-                <Flex
-                  justify={"space-between"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 28,
-                      lineHeight: "36.4px",
-                      fontWeight: 100,
-                    }}
-                  >
-                    Florida
-                  </Text>
-                </Flex>
-              </div>
-            </div>
-            <div className="displayy-teamimg-center">
-              <img src={Florida} width="100%" className="img-op" />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 20,
-                  left: 20,
-                  width: "100%",
-                }}
-              >
-                <Flex
-                  justify={"space-between"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 28,
-                      lineHeight: "36.4px",
-                      fontWeight: 100,
-                    }}
-                  >
-                    Florida
-                  </Text>
-                </Flex>
-              </div>
-            </div>
-            <div className="displayy-teamimg-center">
-              <img src={Florida} width="100%" className="img-op" />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 20,
-                  left: 20,
-                  width: "100%",
-                }}
-              >
-                <Flex
-                  justify={"space-between"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 28,
-                      lineHeight: "36.4px",
-                      fontWeight: 100,
-                    }}
-                  >
-                    Florida
-                  </Text>
-                </Flex>
-              </div>
-            </div>
-            <div className="displayy-teamimg-center">
-              <img src={Florida} width="100%" className="img-op" />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 20,
-                  left: 20,
-                  width: "100%",
-                }}
-              >
-                <Flex
-                  justify={"space-between"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 28,
-                      lineHeight: "36.4px",
-                      fontWeight: 100,
-                    }}
-                  >
-                    Florida
-                  </Text>
-                </Flex>
-              </div>
-            </div>
-            <div className="displayy-teamimg-center">
-              <img src={Florida} width="100%" className="img-op" />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 20,
-                  left: 20,
-                  width: "100%",
-                }}
-              >
-                <Flex
-                  justify={"space-between"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 28,
-                      lineHeight: "36.4px",
-                      fontWeight: 100,
-                    }}
-                  >
-                    Florida
-                  </Text>
-                </Flex>
-              </div>
-            </div>
-            <div className="displayy-teamimg-center">
-              <img src={Florida} width="100%" className="img-op" />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 20,
-                  left: 20,
-                  width: "100%",
-                }}
-              >
-                <Flex
-                  justify={"space-between"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 28,
-                      lineHeight: "36.4px",
-                      fontWeight: 100,
-                    }}
-                  >
-                    Florida
-                  </Text>
-                </Flex>
-              </div>
-            </div>
-            <div className="displayy-teamimg-center">
-              <img src={Florida} width="100%" className="img-op" />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 20,
-                  left: 20,
-                  width: "100%",
-                }}
-              >
-                <Flex
-                  justify={"space-between"}
-                  align={"center"}
-                  style={{ width: "95%" }}
-                >
-                  <Text
-                    style={{
-                      color: "white",
-                      fontSize: 28,
-                      lineHeight: "36.4px",
-                      fontWeight: 100,
-                    }}
-                  >
-                    Florida
-                  </Text>
-                </Flex>
-              </div>
-            </div>
-          </Slider>
-        </div>
-      </Flex>
-      <Flex justify="center" align="center">
-        <button className="button-neighborhood">See All Neighborhoods </button>
-      </Flex> */}
       </div>
     </>
   );

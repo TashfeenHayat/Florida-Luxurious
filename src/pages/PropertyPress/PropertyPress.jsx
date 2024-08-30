@@ -96,7 +96,7 @@ function PropertyPress() {
                         background: "black",
                         color: "white",
                       }}
-                      onClick={() => navigate(`/propertypress/${item._id}`)}
+                      onClick={() => navigate(`/ourMarket/${item._id}`)}
                     >
                       Read More
                     </button>

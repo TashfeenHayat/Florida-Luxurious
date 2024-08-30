@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { contactUs } from "../api/Inquiry";
 import useCommunities from "../hooks/useCommunities";
+
 const { Text, Title, Paragraph } = Typography;
 function Footer() {
   const dispatch = useDispatch();
@@ -85,16 +86,17 @@ function Footer() {
                         Other offering
                       </Link>
                       <Link
+                        to=""
                         className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >
-                        Other offering
+                        MLS
                       </Link>
                       <Link
                         className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >
-                        Other offering
+                        GlobalPartner
                       </Link>
                     </Flex>
                   </Col>
@@ -116,10 +118,11 @@ function Footer() {
                         meet the team
                       </Link>
                       <Link
+                        to="/ourMarket"
                         className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >
-                        property press
+                        ourMarket
                       </Link>
                     </Flex>
                   </Col>

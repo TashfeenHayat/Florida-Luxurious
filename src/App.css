@@ -882,7 +882,7 @@ body:focus-visible {
 }
 .footer-bg-img-shadow {
   position: relative;
-  padding: 60px 30px 30px 30px;
+  padding: 20px 30px 30px 20px;
 }
 .footer-form-display {
   display: flex;
