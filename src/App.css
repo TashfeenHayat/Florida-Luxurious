@@ -1038,6 +1038,7 @@ body:focus-visible {
 
 @media screen and (max-width: 1024px) {
   .bagde{
+            padding: 12px;
     display: flex;
     gap: 14px !important;
     flex-wrap: nowrap;
