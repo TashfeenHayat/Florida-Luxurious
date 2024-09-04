@@ -292,7 +292,12 @@ export default function DetailProperty() {
                   data?.mls?.address?.streetName}
               </Title>
               <Paragraph className="f-16 f-200" style={{ lineHeight: 2.8 }}>
-                {data?.mls?.remarks}
+                {data?.mls?.remarks
+                  ?.split("\n")
+                  .filter((txt) => txt.trim() !== "")
+                  .map((txt) => (
+                    <p>{txt}</p>
+                  ))}
               </Paragraph>
             </Card>
           </Col>
@@ -305,11 +310,11 @@ export default function DetailProperty() {
                     <Image
                       src={data?.mls?.photos[index]}
                       width="100%"
-                      onClick={(e) =>
+                      /*onClick={(e) =>
                         setBackGroundImage(e.target.getAttribute("src"))
-                      }
+                      }*/
                       style={{ cursor: "pointer" }}
-                      preview={false}
+                      preview
                       fallback="https://placehold.co/272x215"
                     />
                   </Col>
@@ -355,7 +360,7 @@ export default function DetailProperty() {
                                 setBackGroundImage(e.target.getAttribute("src"))
                               }
                               style={{ cursor: "pointer" }}
-                              preview={false}
+                              preview
                               fallback="https://placehold.co/195x154"
                             />
                           </Col>
