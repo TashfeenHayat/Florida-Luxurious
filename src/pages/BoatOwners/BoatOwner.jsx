@@ -1123,10 +1123,7 @@ const data10 = [
 function BoatOwner() {
   return (
     <div className="boatowner">
-      <BackgroundImage
-        Image={BoatImage}
-        style={{ backgroundSize: "cover", backgroundPosition: "center" }}
-      >
+      <BackgroundImage Image={BoatImage}>
         <Title
           style={{
             color: "white",
@@ -1139,6 +1136,7 @@ function BoatOwner() {
           Boat owners
         </Title>
       </BackgroundImage>
+
       <Container>
         <Row gutter={[80, 80]} align="middle">
           <Col lg={12} md={12} sm={24} xs={24}>

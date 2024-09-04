@@ -150,6 +150,7 @@ body:focus-visible {
 
 .text-center {
   text-align: center;
+  
 }
 .pt-90 {
   padding-top: 90px;
@@ -1037,6 +1038,7 @@ body:focus-visible {
 /* Media Queries */
 
 @media screen and (max-width: 1024px) {
+  
   .bagde{
             padding: 12px;
     display: flex;
@@ -1064,7 +1066,12 @@ body:focus-visible {
 }
 
 @media screen and (767px >= width ) {
-
+.awards-box{
+    width:70% !important;
+  }
+  .bg-img-shadow{
+    height: 70% !important;
+  }
   .our-story-bg {
     margin-right: 0px !important;
   }

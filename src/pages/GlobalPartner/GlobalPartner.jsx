@@ -78,84 +78,87 @@ function GlobalPartner() {
         Properties GLOBAL
       </Paragraph>
       <Row gutter={[60, 60]} className="py-2">
-        <Col lg={12} md={24} sm={24}>
-          <div style={{ marginLeft: 50 }}>
+        <Col lg={12} md={18} sm={24}>
+          <div style={{ marginLeft: 50, height: "100%" }}>
             <Flex vertical justify={"center"} align="center">
               <Text className="text-black f-24" style={{ overflow: "hidden" }}>
                 Florida Luxurious Properties has a longstanding affiliation with
                 a worldwide collection of more than 125,000 brokers covering 62
                 countries. Who’s Who in Luxury Real Estate has been leading the
                 real estate industry since 1986 and we are proud to be members
-                of this hand – selected group of top brokers representing the
+                of this hand-selected group of top brokers representing the
                 finest luxury properties across the globe. With collective sales
                 of over $240 Billion of real estate annually, it is the most
                 elite and comprehensive luxury real estate network in the world.
-                Who’s Who in Luxury Real Estate’s is showcased on
-                LuxuryRealEstate.com the No.1 portal for luxury properties
+                Who’s Who in Luxury Real Estate is showcased on
+                LuxuryRealEstate.com, the No.1 portal for luxury properties
                 online, allowing Florida Luxurious Properties to present our
                 exclusive inventory to more than any near-peer.
               </Text>
-              <Text className="f-40 f-bold text-center text-upper text-black mt-4">
-                Our Global Partner
-              </Text>
-              <Image
-                src={Lux}
-                width="15%"
-                className="text-center"
-                preview={false}
-              />
-              <Text className="f-24 f-100 text-center text-upper text-black mt-4">
-                Honored in 2019 by LUXURY REAL ESTATE
-              </Text>
-              <div
-                style={{ background: "black" }}
-                className="p-5 text-center my-5"
-              >
-                <Text className="text-white f-bold f-32 text-center text-upper">
-                  WINNER
-                </Text>
-                <br />
-                <Text className="text-white f-bold f-32 text-center text-upper">
-                  “Best Brand Integration”
-                </Text>
-                <br />
-                <Text className="text-white f-20 text-center">
-                  Given to the member that creatively and consistently exhibits
-                  the Board of Regents and/or Luxury Real Estate Brand in
-                  conjunction with their own brand.
-                </Text>
-              </div>
-              <div
-                style={{ background: "black" }}
-                className="p-5 text-center my-5"
-              >
-                <Text className="text-white f-bold f-32 text-center">
-                  WINNER
-                </Text>
-                <br />
-                <Text className="text-white f-bold f-32 text-center text-upper">
-                  “Significant Sales Award”
-                </Text>{" "}
-                <br />
-                <Text className="text-white f-20 text-center">
-                  Bestowed upon five members who have had the most noteworthy
-                  sale of a single property within the last 12 months. The
-                  significant sale must represent the best/most expensive
-                  property in a specific location.
-                </Text>
-              </div>
             </Flex>
           </div>
         </Col>
         <Col lg={12} md={24} sm={24}>
-          <Image
-            src={Globalpartnerimg}
-            className="bg-img-shadow"
-            preview={false}
-            style={{ width: "100%" }}
-          />
+          <Flex justify="center" align="center" style={{ height: "100%" }}>
+            <Image
+              src={Globalpartnerimg}
+              preview={false}
+              style={{ maxHeight: "480px", objectFit: "contain" }} // Adjust the maxHeight as needed
+            />
+          </Flex>
         </Col>
       </Row>
+
+      <div>
+        <Flex vertical justify={"center"} align="center">
+          <Text className="f-32 f-bold text-center text-upper text-black mt-4">
+            Our Global Partner
+          </Text>
+          <img
+            src={Lux}
+            width="169px"
+            className="text-center"
+            preview={false}
+          />
+          <Text className="f-24 f-100 text-center text-upper text-black mt-4">
+            Honored in 2019 by LUXURY REAL ESTATE
+          </Text>
+        </Flex>
+        <Row justify="center" gutter={[16, 16]} className="mt-5">
+          <Col xs={24} sm={12} md={10} lg={8}>
+            <div style={{ background: "black" }} className="p-5 text-center">
+              <Text className="text-white f-bold f-24 text-upper">WINNER</Text>
+              <br />
+              <Text className="text-white f-bold f-24 text-upper">
+                “Best Brand Integration”
+              </Text>
+              <br />
+              <Text className="text-white f-18">
+                Given to the member that creatively and consistently exhibits
+                the Board of Regents and/or Luxury Real Estate Brand in
+                conjunction with their own brand.
+              </Text>
+            </div>
+          </Col>
+
+          <Col xs={24} sm={12} md={10} lg={8}>
+            <div style={{ background: "black" }} className="p-5 text-center">
+              <Text className="text-white f-bold f-24">WINNER</Text>
+              <br />
+              <Text className="text-white f-bold f-24 text-upper">
+                “Significant Sales Award”
+              </Text>
+              <br />
+              <Text className="text-white f-18">
+                Bestowed upon five members who have had the most noteworthy sale
+                of a single property within the last 12 months. The significant
+                sale must represent the best/most expensive property in a
+                specific location.
+              </Text>
+            </div>
+          </Col>
+        </Row>
+      </div>
       <Container className="my-5">
         <Paragraph className="f-40 f-100 text-black text-center text-upper pt-4">
           Global{" "}
