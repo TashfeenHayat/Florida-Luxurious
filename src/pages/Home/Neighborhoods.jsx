@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Row, Col, Spin, Flex } from "antd";
+import { Typography, Row, Col, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import useCommunities from "../../hooks/useCommunities";
 
@@ -19,11 +19,11 @@ function Neighborhoods() {
         Featured Communities
       </Title>
       {isLoading ? (
-        <Flex justify={"center"}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <Spin size="large" />
-        </Flex>
+        </div>
       ) : (
-        <Row className="px-4">
+        <Row gutter={[16, 16]} className="px-4">
           <Col lg={6}>
             <div className="displayy-teamimg-center show-btn-community-home">
               <div style={{ background: "black" }} className="communities-grid">
@@ -70,9 +70,12 @@ function Neighborhoods() {
                   }}
                 >
                   <div
-                    justify={"space-between"}
-                    align={"center"}
                     style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexDirection: "column",
+                      textAlign: "center",
                       overflow: "hidden",
                       position: "absolute",
                       bottom: "10px",
@@ -84,7 +87,7 @@ function Neighborhoods() {
                     }}
                   >
                     <Text
-                      className="text-upper text-white f-100 "
+                      className="text-upper text-white f-100"
                       style={{
                         fontSize: "20px",
                         display: "block",

@@ -90,10 +90,20 @@ function AgentProfile() {
       </Container>
 
       <div className="agent-info-bg">
-        <div className="agent-info-bg-shadow" style={{ overflow: "hidden" }}>
+        <div
+          className="agent-info-bg-shadow"
+          style={{
+            overflow: "hidden",
+            backgroundBlendMode: "normal",
+            filter: "none",
+          }}
+        >
           <Row gutter={[8, 16]} align="middle" style={{ height: "100%" }}>
             <Col lg={12} xl={8} md={12} sm={24} xsm={24}></Col>
-            <Col align={"center"}>
+            <Col
+              align={"center"}
+              style={{ backgroundBlendMode: "normal", filter: "none" }}
+            >
               <Flex
                 justify={"center"}
                 align="center"

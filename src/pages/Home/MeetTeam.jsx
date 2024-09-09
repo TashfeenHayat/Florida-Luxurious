@@ -87,89 +87,100 @@ function MeetTeam() {
 
   return (
     <>
-      <div style={{ background: "black", padding: "98px 0" }}>
-        <Container>
-          <Title
-            level={1}
-            className="meet-team-heading f-40"
-            data-aos="fade-up"
-            data-aos-duration="2000"
-            style={{ textAlign: "center", color: "#fff" }}
-          >
-            Meet The Team
-          </Title>
-          {isLoading ? (
-            <Flex
-              justify={"center"}
-              align={"center"}
-              style={{ minHeight: "200px" }}
+      <div style={{ background: "black" }}>
+        <div style={{ padding: "98px 0" }}>
+          <Container>
+            <Title
+              level={1}
+              className="meet-team-heading f-40"
+              data-aos="fade-up"
+              data-aos-duration="2000"
+              style={{ textAlign: "center", color: "#fff" }}
             >
-              <Spin size="large" />
-            </Flex>
-          ) : (
-            <>
-              <div
-                className="slider-container team-section"
-                style={{ margin: "65px 0" }}
-                data-aos="fade-down"
-                data-aos-duration="2000"
-              >
-                <Slider {...settings}>
-                  {data?.agents?.map((agent, index) => (
-                    <div
-                      onClick={() => navigate(`/agent/${agent._id}`)}
-                      key={index}
-                      style={{ padding: "0 10px" }}
-                    >
-                      <Flip
-                        fImg={
-                          <Image
-                            src={agent.photo || "https://placehold.co/300x388"}
-                            preview={false}
-                            fallback="https://placehold.co/300x388"
-                            style={{
-                              aspectRatio: "5/7.5",
-                              width: "100%",
-                              objectFit: "cover",
-                            }}
-                          />
-                        }
-                        bImg={
-                          <Image
-                            src={agent.photo || "https://placehold.co/300x388"}
-                            preview={false}
-                            fallback="https://placehold.co/300x388"
-                            style={{
-                              aspectRatio: "5/7.5",
-                              width: "100%",
-                              objectFit: "cover",
-                            }}
-                          />
-                        }
-                      >
-                        <div className="p-absolute p-b-30-left-0 w-100">
-                          <Flex justify="center" align="center">
-                            <Text className="text-white text-upper f-24">
-                              {agent.firstName}
-                            </Text>
-                          </Flex>
-                        </div>
-                      </Flip>
-                    </div>
-                  ))}
-                </Slider>
-              </div>
+              Meet The Team
+            </Title>
+            {isLoading ? (
               <Flex
-                justify="center"
-                align="center"
-                onClick={() => navigate("/meet-the-team")}
-                className="mt-5"
+                justify={"center"}
+                align={"center"}
+                style={{ minHeight: "200px" }}
               >
-                <button className="let-talk-btn">View All</button>
+                <Spin size="large" />
               </Flex>
-            </>
-          )}
-        </Container>
+            ) : (
+              <>
+                <div
+                  className="slider-container team-section"
+                  style={{
+                    marginTop: "65px",
+                    // marginBottom: "65px",
+                    cursor: "pointer",
+                  }}
+                  data-aos="fade-down"
+                  data-aos-duration="2000"
+                >
+                  <Slider {...settings}>
+                    {data?.agents?.map((agent, index) => (
+                      <div
+                        onClick={() => navigate(`/agent/${agent._id}`)}
+                        key={index}
+                        style={{ padding: "0 10px" }}
+                      >
+                        <Flip
+                          fImg={
+                            <Image
+                              src={
+                                agent.photo || "https://placehold.co/300x388"
+                              }
+                              preview={false}
+                              fallback="https://placehold.co/300x388"
+                              style={{
+                                aspectRatio: "5/7.5",
+                                width: "100%",
+                                objectFit: "cover",
+                              }}
+                            />
+                          }
+                          bImg={
+                            <Image
+                              src={
+                                agent.photo || "https://placehold.co/300x388"
+                              }
+                              className="img-op1"
+                              preview={false}
+                              fallback="https://placehold.co/300x388"
+                              style={{
+                                aspectRatio: "5/7.5",
+                                width: "100%",
+                                objectFit: "cover",
+                              }}
+                            />
+                          }
+                        >
+                          <div className="p-absoulte p-b-30-left-0 w-100">
+                            <Flex justify="center" align="center">
+                              <Text className="text-white text-upper f-24">
+                                {agent.firstName}{" "}
+                              </Text>
+                            </Flex>
+                          </div>
+                        </Flip>
+                      </div>
+                    ))}
+                  </Slider>
+                </div>
+                <Flex
+                  justify="center"
+                  align="center"
+                  onClick={() => navigate("/meet-the-team")}
+                  className="mt-5"
+                >
+                  <button className="let-talk-btn">View All</button>
+                </Flex>
+              </>
+            )}
+          </Container>
+        </div>
       </div>
     </>
   );

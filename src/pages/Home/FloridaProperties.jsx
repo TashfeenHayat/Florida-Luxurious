@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Col, Flex, Row, Typography } from "antd";
 import DownArrow from "../../assets/downarrow.svg";
-import Bagde from "../../assets/award19.svg";
-import Bagde1 from "../../assets/award21.svg";
+import Bagde from "../../assets/2019.svg";
+import Bagde1 from "../../assets/2021.svg";
 
 import Bagde2 from "../../assets/award20.svg";
-import Bagde3 from "../../assets/Bagde3.svg";
-import Bagde4 from "../../assets/award23.svg";
+import Bagde3 from "../../assets/2022.svg";
+import Bagde4 from "../../assets/2023.svg";
 
 const { Title, Text } = Typography;
 function FloridaProperties() {
@@ -46,7 +46,7 @@ function FloridaProperties() {
               <Title level={1} className="text-white" data-aos="fade-right">
                 Florida Luxurious Properties
               </Title>
-              <Flex gap={20} justify="center" wrap="wrap">
+              <Flex gap={20} justify="center" wrap="wrap" overflow="hidden">
                 <img
                   src={Bagde}
                   data-aos="fade-right"

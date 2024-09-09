@@ -30,7 +30,7 @@ function PropertyPress() {
             }}
           >
             <Title className="text-upper text-white f-50 f-100">
-              Property Press
+              Our Market
             </Title>
           </div>
         </div>

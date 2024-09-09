@@ -35,7 +35,7 @@ function Home() {
             justifyContent: "center",
             alignItems: "center",
             textAlign: "center",
-            padding: "2rem",
+            //padding: "2rem",
             height: "100vh",
             width: "100%",
             color: "#fff", // Ensure text is visible on the background
@@ -47,7 +47,7 @@ function Home() {
             className="title-home-page"
             style={{ fontSize: "3rem", marginBottom: "1rem" }}
           >
-            Luxury. Innovation. Excellence.
+            Luxury. Innovation .Excellence.
           </Title>
           {/* <Text
             className="text-paragraph"

@@ -4,12 +4,12 @@ import BackgroundImage from "../../components/BackgroundImage";
 import { Typography, Col, Row, Flex, Image } from "antd";
 import Icons from "../../components/Icons";
 import LetTalk from "../../components/LetTalk";
-import Bagde from "../../assets/award19.svg";
-import Bagde1 from "../../assets/award21.svg";
+import Bagde from "../../assets/2019.svg";
+import Bagde1 from "../../assets/2021.svg";
 
 import Bagde2 from "../../assets/award20.svg";
-import Bagde3 from "../../assets/Bagde3.svg";
-import Bagde4 from "../../assets/award23.svg";
+import Bagde3 from "../../assets/2022.svg";
+import Bagde4 from "../../assets/2023.svg";
 
 import { useState, useEffect } from "react";
 const { Title, Text, Paragraph } = Typography;

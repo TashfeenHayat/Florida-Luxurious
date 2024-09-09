@@ -479,7 +479,15 @@ export default function DetailProperty() {
                 {data?.property?.addressLine1}
               </Title>
               <Paragraph className="f-16 f-200" style={{ lineHeight: 2.8 }}>
-                {data?.property?.description}
+                {data?.property?.description
+                  ?.split("\n")
+                  .filter((txt) => txt.trim() !== "")
+                  .map((txt) => (
+                    <p>{txt}</p>
+                  ))}
+                {/*{data?.property?.description.split("\n").slice(0,3).map((txt) => (
+                  <p>{txt}</p>
+                ))}w*/}
               </Paragraph>
             </Card>
           </Col>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Typography, Row, Col, Spin, Grid } from "antd";
 import useCommunities from "../../hooks/useCommunities";
 import { useNavigate } from "react-router-dom";
@@ -26,9 +26,10 @@ function Allcommunities() {
         <Title
           style={{
             color: "white",
-            lineHeight: "46px",
-            letterSpacing: "2px",
+            lineHeight: "36px", // Reduced line height
+            letterSpacing: "1px", // Reduced letter spacing
             textAlign: "center",
+            marginBottom: "0", // Removed margin
           }}
           className="text-upper f-50 f-100"
         >
@@ -37,8 +38,12 @@ function Allcommunities() {
       </BackgroundImage>
 
       {/* Communities Section */}
-      <div style={{ paddingTop: 98, paddingBottom: 98, overflow: "hidden" }}>
-        <Row gutter={[32, 32]} className="px-4">
+      <div style={{ padding: "40px 20px", overflow: "hidden" }}>
+        {" "}
+        {/* Reduced padding */}
+        <Row gutter={[16, 16]} className="px-2">
+          {" "}
+          {/* Reduced gutter */}
           {/* Loading Spinner */}
           {isLoading ? (
             <Col span={24} style={{ textAlign: "center" }}>
@@ -70,14 +75,14 @@ function Allcommunities() {
                       flexDirection: "column",
                       textAlign: "center",
                       background: "rgba(0, 0, 0, 0.5)",
-                      padding: "10px",
-                      borderRadius: "5px",
+                      padding: "8px", // Reduced padding
+                      borderRadius: "4px", // Reduced border radius
                     }}
                   >
                     <Text
                       className="text-upper text-white f-100"
                       style={{
-                        fontSize: screens.xs ? "16px" : "20px",
+                        fontSize: screens.xs ? "14px" : "18px", // Adjusted font size
                         display: "block",
                       }}
                     >
@@ -88,9 +93,9 @@ function Allcommunities() {
                       className="button-view2"
                       onClick={() => navigate(`/community/${community?._id}`)}
                       style={{
-                        marginTop: "10px",
-                        padding: "5px 20px",
-                        fontSize: screens.xs ? "14px" : "16px",
+                        marginTop: "8px", // Reduced margin top
+                        padding: "4px 16px", // Reduced padding
+                        fontSize: screens.xs ? "12px" : "14px", // Adjusted font size
                       }}
                     >
                       View

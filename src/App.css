@@ -150,6 +150,7 @@ body:focus-visible {
 
 .text-center {
   text-align: center;
+  
 }
 .pt-90 {
   padding-top: 90px;
@@ -296,7 +297,9 @@ body:focus-visible {
   text-transform: uppercase;
   text-align: center;
   margin-top: 0.9rem !important;
+ 
 }
+
 .bg-img-logo {
   background-image: url("./assets/bg2.png");
   background-size: 100%;
@@ -1035,7 +1038,9 @@ body:focus-visible {
 /* Media Queries */
 
 @media screen and (max-width: 1024px) {
+  
   .bagde{
+            padding: 12px;
     display: flex;
     gap: 14px !important;
     flex-wrap: nowrap;
@@ -1078,7 +1083,12 @@ body:focus-visible {
 }
 
 @media screen and (767px >= width ) {
-  
+.awards-box{
+    width:70% !important;
+  }
+  .bg-img-shadow{
+    height: 70% !important;
+  }
   .our-story-bg {
     margin-right: 0px !important;
   }
@@ -1906,6 +1916,7 @@ font-size: 31px  !important;
   background-position: center;
   background-repeat: no-repeat;
   height: 500px;
+   opacity: 2;
   position: relative;
 }
 .agent-info-bg-shadow {
@@ -1917,6 +1928,7 @@ font-size: 31px  !important;
   );
   height: 100%;
   position: relative;
+    opacity: 1;
 }
 /* Agent Profile End*/
 .displayy-teamimg-center:hover .more-info-property {
