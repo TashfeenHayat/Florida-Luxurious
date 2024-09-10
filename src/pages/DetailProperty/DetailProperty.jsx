@@ -39,7 +39,7 @@ export default function DetailProperty() {
   const { id } = useParams();
 
   const { data, isLoading } = useProperty(id);
-  console.log(data?.property?.compensation);
+  console.log(data?.property);
   const [backgroundImage, setBackGroundImage] = useState(null);
 
   useEffect(() => {
@@ -717,86 +717,287 @@ export default function DetailProperty() {
       <div style={{ backgroundColor: "#000" }}>
         <Container>
           <Row>
-            <Col lg={18} md={24} sm={24} className="p-5">
-              <Row align={"middle"}>
-                <Col lg={10} md={6} sm={24}>
-                  <Image
-                    src={data?.property?.agentId?.photo}
-                    preview={false}
-                    width="80%"
-                  />
+            {data?.property?.Secondary_agentId ? (
+              <>
+                {/* Primary Agent Column */}
+                <Col lg={12}>
+                  <Row>
+                    <Col lg={18} md={24} sm={24} className="p-5">
+                      <Row align={"middle"}>
+                        <Col lg={10} md={6} sm={24}>
+                          <Image
+                            src={data?.property?.Primary_agentId?.photo}
+                            preview={false}
+                            width="80%"
+                          />
+                        </Col>
+                        <Col lg={14} md={18} sm={24}>
+                          <Flex vertical justify={"flex-start"} align={""}>
+                            <Title className="text-white">Contact</Title>
+                            <Flex
+                              justify={"flex-start"}
+                              align="center"
+                              gap={10}
+                            >
+                              <FaRegUser size={20} color="white" />
+                              <Text className="text-white f-24 f-100">
+                                {data?.property?.Primary_agentId?.firstName +
+                                  " " +
+                                  data?.property?.Primary_agentId?.lastName}
+                              </Text>
+                            </Flex>
+                            <Flex
+                              justify={"flex-start"}
+                              align="center"
+                              gap={10}
+                            >
+                              <CiPhone size={20} color="white" />
+                              <Text className="text-white f-24 f-100">
+                                {"+" +
+                                  data?.property?.Primary_agentId?.phoneNumber}
+                              </Text>
+                            </Flex>
+                            <Flex
+                              justify={"flex-start"}
+                              align="center"
+                              gap={10}
+                            >
+                              <CiMail size={20} color="white" />
+                              <Text className="text-white f-24 f-100">
+                                {data?.property?.Primary_agentId?.email}
+                              </Text>
+                            </Flex>
+                          </Flex>
+                        </Col>
+                      </Row>
+                    </Col>
+                    <Col lg={6} md={24} sm={24}>
+                      <Flex
+                        vertical
+                        justify={"center"}
+                        align="center"
+                        style={{ height: "100%" }}
+                        gap={10}
+                      >
+                        <Button
+                          className="button-secondary-line-left"
+                          width="300px"
+                          onClick={() =>
+                            navigate(
+                              `/my-sold/${
+                                data?.property?.Primary_agentId?.firstName +
+                                " " +
+                                data?.property?.Primary_agentId?.lastName
+                              }/${data?.property?.Primary_agentId?._id}`
+                            )
+                          }
+                        >
+                          Sold Properties
+                        </Button>
+                        <Button
+                          className="button-secondary-line-left"
+                          width="300px"
+                          onClick={() =>
+                            navigate(
+                              `/my-listing/${
+                                data?.property?.Primary_agentId?.firstName +
+                                " " +
+                                data?.property?.Primary_agentId?.lastName
+                              }/${data?.property?.Primary_agentId?._id}`
+                            )
+                          }
+                        >
+                          View my listing
+                        </Button>
+                      </Flex>
+                    </Col>
+                  </Row>
                 </Col>
-                <Col lg={14} md={18} sm={24}>
-                  <Flex vertical justify={"flex-start"} align={""}>
-                    <Title className="text-white">Contact</Title>
-                    <Flex justify={"flex-start"} align="center" gap={10}>
-                      <FaRegUser size={20} color="white" />
-                      <Text className="text-white f-24 f-100">
-                        {data?.property?.agentId?.firstName +
-                          " " +
-                          data?.property?.agentId?.lastName}
-                      </Text>
-                    </Flex>
-                    <Flex justify={"flex-start"} align="center" gap={10}>
-                      <CiPhone size={20} color="white" />
-                      <Text className="text-white f-24 f-100">
-                        {"+" + data?.property?.agentId?.phoneNumber}
-                      </Text>
-                    </Flex>
-                    <Flex justify={"flex-start"} align="center" gap={10}>
-                      <CiMail size={20} color="white" />
 
-                      <Text className="text-white f-24 f-100">
-                        {data?.property?.agentId?.email}
-                      </Text>
-                    </Flex>
-                  </Flex>
+                {/* Secondary Agent Column */}
+                <Col lg={12}>
+                  <Row>
+                    <Col lg={18} md={24} sm={24} className="p-5">
+                      <Row align={"middle"}>
+                        <Col lg={10} md={6} sm={24}>
+                          <Image
+                            src={data?.property?.Secondary_agentId?.photo}
+                            preview={false}
+                            width="80%"
+                          />
+                        </Col>
+                        <Col lg={14} md={18} sm={24}>
+                          <Flex vertical justify={"flex-start"} align={""}>
+                            <Title className="text-white">Contact</Title>
+                            <Flex
+                              justify={"flex-start"}
+                              align="center"
+                              gap={10}
+                            >
+                              <FaRegUser size={20} color="white" />
+                              <Text className="text-white f-24 f-100">
+                                {data?.property?.Secondary_agentId?.firstName +
+                                  " " +
+                                  data?.property?.Secondary_agentId?.lastName}
+                              </Text>
+                            </Flex>
+                            <Flex
+                              justify={"flex-start"}
+                              align="center"
+                              gap={10}
+                            >
+                              <CiPhone size={20} color="white" />
+                              <Text className="text-white f-24 f-100">
+                                {"+" +
+                                  data?.property?.Secondary_agentId
+                                    ?.phoneNumber}
+                              </Text>
+                            </Flex>
+                            <Flex
+                              justify={"flex-start"}
+                              align="center"
+                              gap={10}
+                            >
+                              <CiMail size={20} color="white" />
+                              <Text className="text-white f-24 f-100">
+                                {data?.property?.Secondary_agentId?.email}
+                              </Text>
+                            </Flex>
+                          </Flex>
+                        </Col>
+                      </Row>
+                    </Col>
+                    <Col lg={6} md={24} sm={24}>
+                      <Flex
+                        vertical
+                        justify={"center"}
+                        align="center"
+                        style={{ height: "100%" }}
+                        gap={10}
+                      >
+                        <Button
+                          className="button-secondary-line-left"
+                          width="300px"
+                          onClick={() =>
+                            navigate(
+                              `/my-sold/${
+                                data?.property?.Secondary_agentId?.firstName +
+                                " " +
+                                data?.property?.Secondary_agentId?.lastName
+                              }/${data?.property?.Secondary_agentId?._id}`
+                            )
+                          }
+                        >
+                          Sold Properties
+                        </Button>
+                        <Button
+                          className="button-secondary-line-left"
+                          width="300px"
+                          onClick={() =>
+                            navigate(
+                              `/my-listing/${
+                                data?.property?.Secondary_agentId?.firstName +
+                                " " +
+                                data?.property?.Secondary_agentId?.lastName
+                              }/${data?.property?.Secondary_agentId?._id}`
+                            )
+                          }
+                        >
+                          View my listing
+                        </Button>
+                      </Flex>
+                    </Col>
+                  </Row>
                 </Col>
-              </Row>
-            </Col>
-            <Col lg={6} md={24} sm={24}>
-              <Flex
-                vertical
-                justify={"center"}
-                align="center"
-                style={{ height: "100%" }}
-                gap={10}
-              >
-                <Button
-                  classNam="button-secondary-line-left"
-                  width="300px"
-                  Click={() =>
-                    navigate(
-                      `/my-sold/${
-                        data?.property?.agentId?.firstName +
-                        " " +
-                        data?.property?.agentId?.lastName
-                      }/${data?.property?.agentId?._id}`
-                    )
-                  }
-                >
-                  Sold Properties{" "}
-                </Button>
-                <Button
-                  classNam="button-secondary-line-left"
-                  width="300px"
-                  Click={() =>
-                    navigate(
-                      `/my-listing/${
-                        data?.property?.agentId?.firstName +
-                        " " +
-                        data?.property?.agentId?.lastName
-                      }/${data?.property?.agentId?._id}`
-                    )
-                  }
-                >
-                  View my listing{" "}
-                </Button>
-              </Flex>
-            </Col>
+              </>
+            ) : (
+              /* Show only Primary Agent when Secondary Agent is not present */
+              <Col lg={24}>
+                <Row>
+                  <Col lg={18} md={24} sm={24} className="p-5">
+                    <Row align={"middle"}>
+                      <Col lg={10} md={6} sm={24}>
+                        <Image
+                          src={data?.property?.Primary_agentId?.photo}
+                          preview={false}
+                          width="80%"
+                        />
+                      </Col>
+                      <Col lg={14} md={18} sm={24}>
+                        <Flex vertical justify={"flex-start"} align={""}>
+                          <Title className="text-white">Contact</Title>
+                          <Flex justify={"flex-start"} align="center" gap={10}>
+                            <FaRegUser size={20} color="white" />
+                            <Text className="text-white f-24 f-100">
+                              {data?.property?.Primary_agentId?.firstName +
+                                " " +
+                                data?.property?.Primary_agentId?.lastName}
+                            </Text>
+                          </Flex>
+                          <Flex justify={"flex-start"} align="center" gap={10}>
+                            <CiPhone size={20} color="white" />
+                            <Text className="text-white f-24 f-100">
+                              {"+" +
+                                data?.property?.Primary_agentId?.phoneNumber}
+                            </Text>
+                          </Flex>
+                          <Flex justify={"flex-start"} align="center" gap={10}>
+                            <CiMail size={20} color="white" />
+                            <Text className="text-white f-24 f-100">
+                              {data?.property?.Primary_agentId?.email}
+                            </Text>
+                          </Flex>
+                        </Flex>
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col lg={6} md={24} sm={24}>
+                    <Flex
+                      vertical
+                      justify={"center"}
+                      align="center"
+                      style={{ height: "100%" }}
+                      gap={10}
+                    >
+                      <Button
+                        className="button-secondary-line-left"
+                        width="300px"
+                        onClick={() =>
+                          navigate(
+                            `/my-sold/${
+                              data?.property?.Primary_agentId?.firstName +
+                              " " +
+                              data?.property?.Primary_agentId?.lastName
+                            }/${data?.property?.Primary_agentId?._id}`
+                          )
+                        }
+                      >
+                        Sold Properties
+                      </Button>
+                      <Button
+                        className="button-secondary-line-left"
+                        width="300px"
+                        onClick={() =>
+                          navigate(
+                            `/my-listing/${
+                              data?.property?.Primary_agentId?.firstName +
+                              " " +
+                              data?.property?.Primary_agentId?.lastName
+                            }/${data?.property?.Primary_agentId?._id}`
+                          )
+                        }
+                      >
+                        View my listing
+                      </Button>
+                    </Flex>
+                  </Col>
+                </Row>
+              </Col>
+            )}
           </Row>
         </Container>
       </div>
+
       <LetTalk />
     </div>
   );

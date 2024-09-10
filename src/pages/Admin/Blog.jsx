@@ -11,17 +11,13 @@ import {
   Select,
   notification,
   Form,
+  Upload,
 } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, FilePdfOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getBlogs,
-  addBlog,
-  getBlog,
-  updateBlog,
-  deleteBlog,
-} from "../../api/Blogs";
+import { getBlogs, addBlog, updateBlog, deleteBlog } from "../../api/Blogs";
 import customAxios from "../../api/Axios";
+import { api_base_URL } from "../../api/Axios";
 
 const { Search } = Input;
 
@@ -46,7 +42,7 @@ function Blog() {
         <Space size="middle">
           <Link onClick={() => showModal(record)}>Edit</Link>
           <Popconfirm
-            title="Delete this task"
+            title="Delete this blog"
             description="Are you sure to delete this?"
             okText="Yes"
             cancelText="No"
@@ -60,7 +56,7 @@ function Blog() {
   ];
 
   const [form] = Form.useForm();
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState("");
   const [api, contextHolder] = notification.useNotification();
   const openNotification = (type, description) => {
     api[type]({ description });
@@ -70,16 +66,17 @@ function Blog() {
     current: 1,
     pageSize: 10,
   });
-  const [key, setKey] = useState();
+  const [key, setKey] = useState("");
   const [modalProps, setModalProps] = useState([]);
-  const [modalSearch, setModalSearch] = useState();
+  const [modalSearch, setModalSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProp, setSelectedProp] = useState();
-  const [selectedBlog, setSelectedBlog] = useState();
-
+  const [selectedProp, setSelectedProp] = useState(null);
+  const [selectedBlog, setSelectedBlog] = useState(null);
+  const [pdf, setPdf] = useState("");
+  const [pdfUploading, setPdfUploading] = useState(false);
   const { isLoading, isError, data } = useSelector((s) => s.getBlogsReducer);
   const dispatch = useDispatch();
-  console.log(data);
+
   useEffect(() => {
     dispatch(
       getBlogs({
@@ -90,113 +87,141 @@ function Blog() {
     if (isError) {
       console.log(isError);
     }
-  }, []);
+  }, [dispatch, tableParams.current, tableParams.pageSize, isError]);
 
   const onSearch = (agentId) => {
     setKey(agentId);
-    setTableParams({
-      pagination: {
-        ...tableParams,
-        current: 1,
-      },
-    });
+    setTableParams((prev) => ({
+      ...prev,
+      current: 1,
+    }));
     dispatch(getBlogs({ agentId }));
   };
 
   const handleTableChange = (pagination) => {
-    console.log(pagination);
     setTableParams(pagination);
     dispatch(
       getBlogs({
-        agentId,
+        agentId: key,
         page: pagination.current,
+        limit: pagination.pageSize,
       })
     );
   };
 
   const handleSearch = async (key) => {
-    const res = await customAxios.get(`agent`, {
-      params: { key },
-    });
-    const data = res.data;
-    setModalProps(data.agents);
+    try {
+      const res = await customAxios.get(`agent`, {
+        params: { key },
+      });
+      const data = res.data;
+      setModalProps(data.agents);
+    } catch (error) {
+      console.error("Error fetching agents:", error);
+    }
   };
 
   const handleChange = (newValue) => {
-    const property = modalProps.find((i) => i._id == newValue);
+    const property = modalProps.find((i) => i._id === newValue);
     setSelectedProp(property);
     setModalSearch(`${property?.firstName} ${property?.lastName}`);
   };
 
   const showModal = (property) => {
-    console.log(property);
     setIsModalOpen(true);
     if (property._id) {
       setSelectedBlog(property);
       setSelectedProp(property.agentId);
       setTitle(property.title);
+      setPdf(property.pdf || "");
+
       setModalSearch(
         `${property?.agentId?.firstName} ${property?.agentId?.lastName}`
       );
+
       setTimeout(() => {
-        var parser = new DOMParser();
-        var decodedHtml = parser.parseFromString(property?.content, "text/html")
-          .body.textContent;
+        const parser = new DOMParser();
+        const decodedHtml = parser.parseFromString(
+          property?.content,
+          "text/html"
+        ).body.textContent;
         window.$("#summernote").summernote("code", decodedHtml);
       }, 1000);
     } else {
-      setSelectedBlog("");
-      setSelectedProp("");
+      setSelectedBlog(null);
+      setSelectedProp(null);
       setTitle("");
       setModalSearch("");
+      setPdf("");
       setTimeout(() => {
-        var parser = new DOMParser();
-        var decodedHtml = parser.parseFromString("", "text/html").body
-          .textContent;
-        window.$("#summernote").summernote("code", decodedHtml);
+        window.$("#summernote").summernote("code", "");
       }, 1000);
     }
   };
 
-  const handleOk = async (ok) => {
-    console.log(selectedProp);
-    if (selectedProp?._id) {
-      var markupStr = $("#summernote").summernote("code");
+  const beforeUpload = (file) => {
+    if (file.type === "application/pdf") {
+      setPdfUploading(true);
+      return true; // Allow the upload
+    } else {
+      setPdfUploading(false);
+      return false; // Prevent the upload for non-PDF files
+    }
+  };
 
-      if (ok === "ok" && !selectedBlog?._id) {
+  const handleFileChange = (info) => {
+    if (info.file.status === "done") {
+      if (info.file.type === "application/pdf") {
+        setPdfUploading(false);
+        setPdf(info.file.response.url);
+      }
+    } else if (info.file.status === "error") {
+      setPdfUploading(false);
+      openNotification("error", "Failed to upload PDF.");
+    }
+  };
+
+  const handleOk = async () => {
+    const markupStr = $("#summernote").summernote("code");
+
+    if (!pdf && !markupStr.trim()) {
+      openNotification("error", "Please provide either a PDF or content.");
+      return;
+    }
+
+    try {
+      if (!selectedBlog?._id) {
         const res = await dispatch(
           addBlog({
             agentId: selectedProp._id,
-            title: title,
+            title,
             content: markupStr,
+            file: pdf || "",
           })
         ).unwrap();
         openNotification("success", res);
-        dispatch(
-          getBlogs({
-            page: tableParams.current,
-            limit: tableParams.pageSize,
-          })
-        );
       } else {
         const res = await dispatch(
           updateBlog({
             agentId: selectedProp._id,
-            title: title,
+            title,
             content: markupStr,
             id: selectedBlog._id,
+            pdf,
           })
         ).unwrap();
         openNotification("success", res);
-        dispatch(
-          getBlogs({
-            page: tableParams.current,
-            limit: tableParams.pageSize,
-          })
-        );
       }
-      setIsModalOpen(false);
+      dispatch(
+        getBlogs({
+          page: tableParams.current,
+          limit: tableParams.pageSize,
+        })
+      );
+    } catch (error) {
+      openNotification("error", "Failed to save blog.");
     }
+    setIsModalOpen(false);
   };
 
   const handleCancel = () => {
@@ -209,21 +234,14 @@ function Blog() {
 
   return (
     <>
+      {contextHolder}
       <Card
         title="Blogs"
         extra={
           <Space>
-            {/* <Search
-              placeholder="input search text"
-              onSearch={onSearch}
-              enterButton
-              allowClear
-            /> */}
-            <Button onClick={showModal} type="primary">
-              <Link>
-                <PlusOutlined />
-                Add
-              </Link>
+            <Button onClick={() => showModal({})} type="primary">
+              <PlusOutlined />
+              Add
             </Button>
           </Space>
         }
@@ -232,16 +250,15 @@ function Blog() {
         <Table
           columns={columns}
           loading={isLoading}
-          isError={isError}
-          pagination={{ ...tableParams, total: data?.totalCount }}
           dataSource={data?.blogs}
+          pagination={{ ...tableParams, total: data?.totalCount }}
           onChange={handleTableChange}
         />
       </Card>
       <Modal
         title="Add Blog"
         open={isModalOpen}
-        onOk={() => handleOk("ok")}
+        onOk={handleOk}
         onCancel={handleCancel}
         width={1000}
       >
@@ -250,7 +267,6 @@ function Blog() {
           value={modalSearch}
           placeholder={"Select agent"}
           style={{ width: "100%", marginBottom: 20 }}
-          suffixIcon={null}
           filterOption={false}
           onSearch={handleSearch}
           onChange={handleChange}
@@ -260,15 +276,41 @@ function Blog() {
             label: `${d.firstName} ${d.lastName}`,
           }))}
         />
-
         <Input
           value={title}
           placeholder="Title "
           onChange={(e) => setTitle(e.target.value)}
           style={{ width: "100%", marginBottom: 20 }}
         />
-
-        <div id="summernote"></div>
+        <div style={{ marginBottom: "20px" }}>
+          <Upload
+            name="file"
+            listType="text"
+            className="pdf-uploader"
+            showUploadList={false}
+            headers={{
+              Authorization: `Bearer ${localStorage.token}`,
+            }}
+            action={`${api_base_URL}upload`}
+            beforeUpload={beforeUpload}
+            onChange={handleFileChange}
+          >
+            {pdf ? (
+              <a href={pdf} target="_blank" rel="noopener noreferrer">
+                <FilePdfOutlined /> PDF Uploaded
+              </a>
+            ) : (
+              <Button type="primary">Upload PDF</Button>
+            )}
+          </Upload>
+        </div>
+        <div>
+          <div>Content</div>
+          <div
+            id="summernote"
+            style={{ border: "1px solid #d9d9d9", borderRadius: "4px" }}
+          ></div>
+        </div>
       </Modal>
     </>
   );

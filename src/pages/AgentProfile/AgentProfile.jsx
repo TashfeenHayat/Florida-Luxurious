@@ -237,104 +237,107 @@ function AgentProfile() {
         </div>
       </div>
 
-      {blogData?.blogs.length !== 0 && (
+      {blogData?.blogs.length > 0 ? (
         <Container>
           <div className="pt-98 pb-98">
             <Title className="text-upper f-100 text-center">My blog</Title>
             <div>
               <Row gutter={[16, 24]}>
-                {blogData?.blogs?.length === 0 && reports?.length === 0 ? (
-                  <Col span={24}>
-                    <Text>No blogs or reports available.</Text>
+                {blogData.blogs.map((item, index) => (
+                  <Col
+                    xl={8}
+                    lg={12}
+                    md={12}
+                    sm={24}
+                    xsm={24}
+                    key={index}
+                    style={{ gap: "10px" }}
+                  >
+                    <Card style={{ width: 400, background: "#E8E8E8" }}>
+                      <Flex
+                        justify={"center"}
+                        align="center"
+                        vertical
+                        lg={8}
+                        md={8}
+                        sm={24}
+                        xsm={24}
+                      >
+                        <Image
+                          src={item?.agentId?.photo}
+                          preview={false}
+                          style={{ borderRadius: "300px" }}
+                          width="40%"
+                        />
+                        <Title className="f-16 pt-4 text-upper">
+                          {item?.title}
+                        </Title>
+                        <button
+                          className="button-view1"
+                          onClick={() => navigate(`/agent/blog/${item?._id}`)}
+                        >
+                          Read More
+                        </button>
+                      </Flex>
+                    </Card>
                   </Col>
-                ) : (
-                  <>
-                    {blogData?.blogs?.map((item, index) => (
-                      <Col
-                        xl={8}
-                        lg={12}
-                        md={12}
-                        sm={24}
-                        xsm={24}
-                        key={index}
-                        style={{ gap: "10px" }}
-                      >
-                        <Card style={{ width: 400, background: "#E8E8E8" }}>
-                          <Flex
-                            justify={"center"}
-                            align="center"
-                            vertical
-                            lg={8}
-                            md={8}
-                            sm={24}
-                            xsm={24}
-                          >
-                            <Image
-                              src={item?.agentId?.photo}
-                              preview={false}
-                              style={{ borderRadius: "300px" }}
-                              width="40%"
-                            />
-                            <Title className="f-16 pt-4 text-upper">
-                              {item?.title}
-                            </Title>
-                            <button
-                              className="button-view1"
-                              onClick={() =>
-                                navigate(`/agent/blog/${item?._id}`)
-                              }
-                            >
-                              Read More{" "}
-                            </button>
-                          </Flex>
-                        </Card>
-                      </Col>
-                    ))}
-                    <br />
-                    {reports?.map((reportItem, index) => (
-                      <Col
-                        xl={8}
-                        lg={12}
-                        md={12}
-                        sm={24}
-                        xsm={24}
-                        key={index}
-                        style={{ gap: "10px" }}
-                      >
-                        <Card style={{ width: 400, background: "#E8E8E8" }}>
-                          <Flex justify={"center"} align="center" vertical>
-                            <img src={Logo} width={"30%"} />
-                            <Title
-                              style={{ color: "black" }}
-                              className="text-upper f-100"
-                              level={2}
-                            >
-                              {reportItem.title || "FLP ANNUAL REPORT 2023"}
-                            </Title>
-                            <div>
-                              <Text
-                                style={{ color: "#838383" }}
-                                className="text-upper f-24 f-100"
-                              >
-                                {reportItem.date || "February 20, 2024"}
-                              </Text>
-                            </div>
-                            <Button
-                              classNam="button-view1"
-                              Click={() =>
-                                navigate(`/reports/${reportItem._id}`)
-                              }
-                            >
-                              Read more
-                            </Button>
-                          </Flex>
-                        </Card>
-                      </Col>
-                    ))}
-                  </>
-                )}
+                ))}
               </Row>
             </div>
+          </div>
+        </Container>
+      ) : reports?.length > 0 ? (
+        <Container>
+          <div className="pt-98 pb-98">
+            <Title className="text-upper f-100 text-center">Reports</Title>
+            <div>
+              <Row gutter={[16, 24]}>
+                {reports.map((reportItem, index) => (
+                  <Col
+                    xl={8}
+                    lg={12}
+                    md={12}
+                    sm={24}
+                    xsm={24}
+                    key={index}
+                    style={{ gap: "10px" }}
+                  >
+                    <Card style={{ width: 400, background: "#E8E8E8" }}>
+                      <Flex justify={"center"} align="center" vertical>
+                        <img src={Logo} width={"30%"} />
+                        <Title
+                          style={{ color: "black" }}
+                          className="text-upper f-100"
+                          level={2}
+                        >
+                          {reportItem.title || "FLP ANNUAL REPORT 2023"}
+                        </Title>
+                        <div>
+                          <Text
+                            style={{ color: "#838383" }}
+                            className="text-upper f-24 f-100"
+                          >
+                            {reportItem.date || "February 20, 2024"}
+                          </Text>
+                        </div>
+                        <Button
+                          className="button-view1"
+                          onClick={() => navigate(`/reports/${reportItem._id}`)}
+                        >
+                          Read more
+                        </Button>
+                      </Flex>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </div>
+          </div>
+        </Container>
+      ) : (
+        <Container>
+          <div className="pt-98 pb-98">
+            <Text className="text-center">No blogs or reports available.</Text>
           </div>
         </Container>
       )}
