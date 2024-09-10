@@ -767,10 +767,7 @@ export default function DetailProperty() {
                         style={{ height: "100%" }}
                         gap={10}
                       >
-                        <Button
-                          className="button-secondary-line-left"
-                          style={{ color: "white", borderColor: "white" }}
-                          width="100%"
+                        <button
                           onClick={() =>
                             navigate(
                               `/my-sold/${
@@ -782,10 +779,9 @@ export default function DetailProperty() {
                           }
                         >
                           Sold Properties
-                        </Button>
-                        <Button
-                          className="button-secondary-line-left"
-                          style={{ color: "white", borderColor: "white" }}
+                        </button>
+                        <button
+                          className="let-talk-btn"
                           width="100%"
                           onClick={() =>
                             navigate(
@@ -798,7 +794,7 @@ export default function DetailProperty() {
                           }
                         >
                           View my listing
-                        </Button>
+                        </button>
                       </Flex>
                     </Col>
                   </Row>
@@ -853,9 +849,8 @@ export default function DetailProperty() {
                         style={{ height: "100%" }}
                         gap={10}
                       >
-                        <Button
-                          className="button-secondary-line-left"
-                          style={{ color: "white", borderColor: "white" }}
+                        <button
+                          className="let-talk-btn"
                           width="100%"
                           onClick={() =>
                             navigate(
@@ -868,10 +863,9 @@ export default function DetailProperty() {
                           }
                         >
                           Sold Properties
-                        </Button>
-                        <Button
-                          className="button-secondary-line-left"
-                          style={{ color: "white", borderColor: "white" }}
+                        </button>
+                        <button
+                          className="let-talk-btn"
                           width="100%"
                           onClick={() =>
                             navigate(
@@ -884,7 +878,7 @@ export default function DetailProperty() {
                           }
                         >
                           View my listing
-                        </Button>
+                        </button>
                       </Flex>
                     </Col>
                   </Row>
@@ -939,9 +933,8 @@ export default function DetailProperty() {
                       style={{ height: "100%" }}
                       gap={10}
                     >
-                      <Button
-                        className="button-secondary-line-left"
-                        style={{ color: "white", borderColor: "white" }}
+                      <button
+                        className="let-talk-btn"
                         width="100%"
                         onClick={() =>
                           navigate(
@@ -954,10 +947,9 @@ export default function DetailProperty() {
                         }
                       >
                         Sold Properties
-                      </Button>
-                      <Button
-                        className="button-secondary-line-left"
-                        style={{ color: "white", borderColor: "white" }}
+                      </button>
+                      <button
+                        className="let-talk-btn"
                         width="100%"
                         onClick={() =>
                           navigate(
@@ -970,7 +962,7 @@ export default function DetailProperty() {
                         }
                       >
                         View my listing
-                      </Button>
+                      </button>
                     </Flex>
                   </Col>
                 </Row>
