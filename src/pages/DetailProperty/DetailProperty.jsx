@@ -714,56 +714,44 @@ export default function DetailProperty() {
           </Row>
         </Container>
       </div>*/}
-      <div style={{ backgroundColor: "#000" }}>
+      <div style={{ backgroundColor: "#000", padding: "20px" }}>
         <Container>
-          <Row>
+          <Row gutter={16}>
             {data?.property?.Secondary_agentId ? (
               <>
                 {/* Primary Agent Column */}
-                <Col lg={12}>
-                  <Row>
-                    <Col lg={18} md={24} sm={24} className="p-5">
-                      <Row align={"middle"}>
-                        <Col lg={10} md={6} sm={24}>
+                <Col lg={12} md={24} sm={24} xs={24}>
+                  <Row gutter={16}>
+                    <Col lg={18} md={24} sm={24} xs={24} className="p-5">
+                      <Row align="middle">
+                        <Col lg={10} md={6} sm={24} xs={24}>
                           <Image
                             src={data?.property?.Primary_agentId?.photo}
                             preview={false}
                             width="80%"
                           />
                         </Col>
-                        <Col lg={14} md={18} sm={24}>
-                          <Flex vertical justify={"flex-start"} align={""}>
+                        <Col lg={14} md={18} sm={24} xs={24}>
+                          <Flex vertical justify="flex-start" align="">
                             <Title className="text-white">Contact</Title>
-                            <Flex
-                              justify={"flex-start"}
-                              align="center"
-                              gap={10}
-                            >
+                            <Flex justify="flex-start" align="center" gap={10}>
                               <FaRegUser size={20} color="white" />
-                              <Text className="text-white f-24 f-100">
+                              <Text className="text-white f-20 f-100">
                                 {data?.property?.Primary_agentId?.firstName +
                                   " " +
                                   data?.property?.Primary_agentId?.lastName}
                               </Text>
                             </Flex>
-                            <Flex
-                              justify={"flex-start"}
-                              align="center"
-                              gap={10}
-                            >
+                            <Flex justify="flex-start" align="center" gap={10}>
                               <CiPhone size={20} color="white" />
-                              <Text className="text-white f-24 f-100">
+                              <Text className="text-white f-20 f-100">
                                 {"+" +
                                   data?.property?.Primary_agentId?.phoneNumber}
                               </Text>
                             </Flex>
-                            <Flex
-                              justify={"flex-start"}
-                              align="center"
-                              gap={10}
-                            >
+                            <Flex justify="flex-start" align="center" gap={10}>
                               <CiMail size={20} color="white" />
-                              <Text className="text-white f-24 f-100">
+                              <Text className="text-white f-20 f-100">
                                 {data?.property?.Primary_agentId?.email}
                               </Text>
                             </Flex>
@@ -771,17 +759,18 @@ export default function DetailProperty() {
                         </Col>
                       </Row>
                     </Col>
-                    <Col lg={6} md={24} sm={24}>
+                    <Col lg={6} md={24} sm={24} xs={24}>
                       <Flex
                         vertical
-                        justify={"center"}
+                        justify="center"
                         align="center"
                         style={{ height: "100%" }}
                         gap={10}
                       >
                         <Button
                           className="button-secondary-line-left"
-                          width="300px"
+                          style={{ color: "white", borderColor: "white" }}
+                          width="100%"
                           onClick={() =>
                             navigate(
                               `/my-sold/${
@@ -796,7 +785,8 @@ export default function DetailProperty() {
                         </Button>
                         <Button
                           className="button-secondary-line-left"
-                          width="300px"
+                          style={{ color: "white", borderColor: "white" }}
+                          width="100%"
                           onClick={() =>
                             navigate(
                               `/my-listing/${
@@ -815,51 +805,39 @@ export default function DetailProperty() {
                 </Col>
 
                 {/* Secondary Agent Column */}
-                <Col lg={12}>
-                  <Row>
-                    <Col lg={18} md={24} sm={24} className="p-5">
-                      <Row align={"middle"}>
-                        <Col lg={10} md={6} sm={24}>
+                <Col lg={12} md={24} sm={24} xs={24}>
+                  <Row gutter={16}>
+                    <Col lg={18} md={24} sm={24} xs={24} className="p-5">
+                      <Row align="middle">
+                        <Col lg={10} md={6} sm={24} xs={24}>
                           <Image
                             src={data?.property?.Secondary_agentId?.photo}
                             preview={false}
                             width="80%"
                           />
                         </Col>
-                        <Col lg={14} md={18} sm={24}>
-                          <Flex vertical justify={"flex-start"} align={""}>
+                        <Col lg={14} md={18} sm={24} xs={24}>
+                          <Flex vertical justify="flex-start" align="">
                             <Title className="text-white">Contact</Title>
-                            <Flex
-                              justify={"flex-start"}
-                              align="center"
-                              gap={10}
-                            >
+                            <Flex justify="flex-start" align="center" gap={10}>
                               <FaRegUser size={20} color="white" />
-                              <Text className="text-white f-24 f-100">
+                              <Text className="text-white f-20 f-100">
                                 {data?.property?.Secondary_agentId?.firstName +
                                   " " +
                                   data?.property?.Secondary_agentId?.lastName}
                               </Text>
                             </Flex>
-                            <Flex
-                              justify={"flex-start"}
-                              align="center"
-                              gap={10}
-                            >
+                            <Flex justify="flex-start" align="center" gap={10}>
                               <CiPhone size={20} color="white" />
-                              <Text className="text-white f-24 f-100">
+                              <Text className="text-white f-20 f-100">
                                 {"+" +
                                   data?.property?.Secondary_agentId
                                     ?.phoneNumber}
                               </Text>
                             </Flex>
-                            <Flex
-                              justify={"flex-start"}
-                              align="center"
-                              gap={10}
-                            >
+                            <Flex justify="flex-start" align="center" gap={10}>
                               <CiMail size={20} color="white" />
-                              <Text className="text-white f-24 f-100">
+                              <Text className="text-white f-20 f-100">
                                 {data?.property?.Secondary_agentId?.email}
                               </Text>
                             </Flex>
@@ -867,17 +845,18 @@ export default function DetailProperty() {
                         </Col>
                       </Row>
                     </Col>
-                    <Col lg={6} md={24} sm={24}>
+                    <Col lg={6} md={24} sm={24} xs={24}>
                       <Flex
                         vertical
-                        justify={"center"}
+                        justify="center"
                         align="center"
                         style={{ height: "100%" }}
                         gap={10}
                       >
                         <Button
                           className="button-secondary-line-left"
-                          width="300px"
+                          style={{ color: "white", borderColor: "white" }}
+                          width="100%"
                           onClick={() =>
                             navigate(
                               `/my-sold/${
@@ -892,7 +871,8 @@ export default function DetailProperty() {
                         </Button>
                         <Button
                           className="button-secondary-line-left"
-                          width="300px"
+                          style={{ color: "white", borderColor: "white" }}
+                          width="100%"
                           onClick={() =>
                             navigate(
                               `/my-listing/${
@@ -912,36 +892,36 @@ export default function DetailProperty() {
               </>
             ) : (
               /* Show only Primary Agent when Secondary Agent is not present */
-              <Col lg={24}>
-                <Row>
-                  <Col lg={18} md={24} sm={24} className="p-5">
-                    <Row align={"middle"}>
-                      <Col lg={10} md={6} sm={24}>
+              <Col lg={24} md={24} sm={24} xs={24}>
+                <Row gutter={16}>
+                  <Col lg={18} md={24} sm={24} xs={24} className="p-5">
+                    <Row align="middle">
+                      <Col lg={10} md={6} sm={24} xs={24}>
                         <Image
                           src={data?.property?.Primary_agentId?.photo}
                           preview={false}
                           width="80%"
                         />
                       </Col>
-                      <Col lg={14} md={18} sm={24}>
-                        <Flex vertical justify={"flex-start"} align={""}>
+                      <Col lg={14} md={18} sm={24} xs={24}>
+                        <Flex vertical justify="flex-start" align="">
                           <Title className="text-white">Contact</Title>
-                          <Flex justify={"flex-start"} align="center" gap={10}>
+                          <Flex justify="flex-start" align="center" gap={10}>
                             <FaRegUser size={20} color="white" />
-                            <Text className="text-white f-24 f-100">
+                            <Text className="text-white f-20 f-100">
                               {data?.property?.Primary_agentId?.firstName +
                                 " " +
                                 data?.property?.Primary_agentId?.lastName}
                             </Text>
                           </Flex>
-                          <Flex justify={"flex-start"} align="center" gap={10}>
+                          <Flex justify="flex-start" align="center" gap={10}>
                             <CiPhone size={20} color="white" />
-                            <Text className="text-white f-24 f-100">
+                            <Text className="text-white f-20 f-100">
                               {"+" +
                                 data?.property?.Primary_agentId?.phoneNumber}
                             </Text>
                           </Flex>
-                          <Flex justify={"flex-start"} align="center" gap={10}>
+                          <Flex justify="flex-start" align="center" gap={10}>
                             <CiMail size={20} color="white" />
                             <Text className="text-white f-24 f-100">
                               {data?.property?.Primary_agentId?.email}
@@ -951,17 +931,18 @@ export default function DetailProperty() {
                       </Col>
                     </Row>
                   </Col>
-                  <Col lg={6} md={24} sm={24}>
+                  <Col lg={6} md={24} sm={24} xs={24}>
                     <Flex
                       vertical
-                      justify={"center"}
+                      justify="center"
                       align="center"
                       style={{ height: "100%" }}
                       gap={10}
                     >
                       <Button
                         className="button-secondary-line-left"
-                        width="300px"
+                        style={{ color: "white", borderColor: "white" }}
+                        width="100%"
                         onClick={() =>
                           navigate(
                             `/my-sold/${
@@ -976,7 +957,8 @@ export default function DetailProperty() {
                       </Button>
                       <Button
                         className="button-secondary-line-left"
-                        width="300px"
+                        style={{ color: "white", borderColor: "white" }}
+                        width="100%"
                         onClick={() =>
                           navigate(
                             `/my-listing/${

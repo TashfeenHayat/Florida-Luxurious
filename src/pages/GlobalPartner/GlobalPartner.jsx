@@ -126,14 +126,35 @@ function GlobalPartner() {
         </Flex>
         <Row justify="center" gutter={[16, 16]} className="mt-5">
           <Col xs={24} sm={12} md={10} lg={8}>
-            <div style={{ background: "black" }} className="p-5 text-center">
-              <Text className="text-white f-bold f-24 text-upper">WINNER</Text>
+            <div
+              style={{
+                background: "black",
+                color: "white",
+                padding: "32px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                textAlign: "center",
+                minHeight: "250px", // Ensure boxes are of equal height
+                borderRadius: "8px", // Optional: Add rounded corners for a nicer look
+                boxShadow: "0 4px 8px rgba(0,0,0,0.1)", // Optional: Add shadow for depth
+              }}
+            >
+              <Text
+                className="f-bold f-24 text-upper"
+                style={{ color: "white" }}
+              >
+                WINNER
+              </Text>
               <br />
-              <Text className="text-white f-bold f-24 text-upper">
+              <Text
+                className="f-bold f-24 text-upper"
+                style={{ color: "white" }}
+              >
                 “Best Brand Integration”
               </Text>
               <br />
-              <Text className="text-white f-18">
+              <Text className="f-18" style={{ color: "white" }}>
                 Given to the member that creatively and consistently exhibits
                 the Board of Regents and/or Luxury Real Estate Brand in
                 conjunction with their own brand.
@@ -142,14 +163,32 @@ function GlobalPartner() {
           </Col>
 
           <Col xs={24} sm={12} md={10} lg={8}>
-            <div style={{ background: "black" }} className="p-5 text-center">
-              <Text className="text-white f-bold f-24">WINNER</Text>
+            <div
+              style={{
+                background: "black",
+                color: "white",
+                padding: "20px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                textAlign: "center",
+                minHeight: "250px", // Ensure boxes are of equal height
+                borderRadius: "8px", // Optional: Add rounded corners for a nicer look
+                boxShadow: "0 4px 8px rgba(0,0,0,0.1)", // Optional: Add shadow for depth
+              }}
+            >
+              <Text className="f-bold f-24 " style={{ color: "white" }}>
+                WINNER
+              </Text>
               <br />
-              <Text className="text-white f-bold f-24 text-upper">
+              <Text
+                className="f-bold f-24 text-upper"
+                style={{ color: "white" }}
+              >
                 “Significant Sales Award”
               </Text>
               <br />
-              <Text className="text-white f-18">
+              <Text className="f-18" style={{ color: "white" }}>
                 Bestowed upon five members who have had the most noteworthy sale
                 of a single property within the last 12 months. The significant
                 sale must represent the best/most expensive property in a
