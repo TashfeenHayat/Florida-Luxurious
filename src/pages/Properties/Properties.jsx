@@ -14,7 +14,7 @@ import useAgent from "../../hooks/useAgent";
 const { Title, Text } = Typography;
 function Properties() {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 10;
   const { data, isLoading } = useProperties(
     null,
     itemsPerPage,
@@ -23,6 +23,7 @@ function Properties() {
   );
 
   const check = data?.properties?.filter((item) => item.status !== "sold");
+  console.log(check);
   const navigate = useNavigate();
 
   // const properties = [

@@ -94,6 +94,8 @@ function Mls() {
   const [minBathCount, setMinBathCount] = useState("min Bathrooms");
   const [maxBathCount, setMaxBathCount] = useState("Max Bathrooms");
   const [minBedCount, setMinBedCount] = useState("min BedRooms");
+  const [maxBedCount, setMaxBedCount] = useState("Max BedRooms");
+
   const [cities, setCities] = useState([]);
 
   const navigate = useNavigate();
@@ -121,6 +123,10 @@ function Mls() {
   const handleMenuMinBedRoom = (e) => {
     const selectedItem = minBedRoom.find((item) => item.key === e.key);
     setMinBedCount(selectedItem.label.props.children);
+  };
+  const handleMenumaxBedRoom = (e) => {
+    const selectedItem = maxBedRoom.find((item) => item.key === e.key);
+    setMaxBedCount(selectedItem.label.props.children);
   };
 
   const handlePageChange = (page) => {
@@ -169,7 +175,7 @@ function Mls() {
           <Title className="text-center text-white f-40 f-100 text-upper">
             search active LISTING
           </Title>
-          <Row gutter={[60, 60]}>
+          <Row gutter={[60, 60]} align="middle">
             <Col lg={12}>
               <Text className="text-white f-bold f-14">Price</Text>
               <Slider
@@ -190,7 +196,7 @@ function Mls() {
                 <Text className="text-white f-bold f-14">20 M</Text>
               </Flex>
             </Col>
-            <Col lg={12}>
+            {/* <Col lg={12}>
               <Text className="text-white f-bold f-14">LIVING AREA</Text>
               <Slider
                 className="custom-slider"
@@ -202,7 +208,7 @@ function Mls() {
                 }}
                 tooltip={{ open: false }}
               />
-            </Col>
+            </Col> */}
             <Col lg={12}>
               <Dropdown
                 menu={{
@@ -267,6 +273,23 @@ function Mls() {
                 </a>
               </Dropdown>
             </Col>
+            <Col lg={12}>
+              <Dropdown
+                menu={{
+                  items: maxBedRoom,
+                  onClick: handleMenumaxBedRoom,
+                }}
+                className="custom-dropdown"
+              >
+                <a onClick={(e) => e.preventDefault()}>
+                  <Space>
+                    {maxBedCount}
+                    <DownOutlined style={{ color: "white" }} />
+                  </Space>
+                </a>
+              </Dropdown>
+            </Col>
+
             <Col lg={24}>
               <Flex justify={"start"} wrap>
                 <Flex

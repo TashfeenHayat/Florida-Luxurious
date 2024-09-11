@@ -2073,7 +2073,7 @@ body:focus-visible {
 
 .custom-dropdown .ant-space {
   justify-content: space-between;
-  width: 100%;
+  width: 60%;
   color: #838383;
   text-transform: uppercase;
   font-size: 20px;
@@ -2180,4 +2180,7 @@ body:focus-visible {
 
 .note-modal-backdrop {
   z-index: 0;
+}
+.custom-dropdown-menu {
+  width: 200px; /* Set your desired width here */
 }

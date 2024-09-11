@@ -2,4 +2,11 @@ label {
   min-width: 130px;
 }
 
-
+.ul.ant-dropdown-menu.ant-dropdown-menu-root.ant-dropdown-menu-vertical.ant-dropdown-menu-light.css-dev-only-do-not-override-1kuana8 {
+  min-width: 300px !important;
+  max-width: 400px !important;
+}
+span.ant-dropdown-menu-title-content {
+  font-size: 20px !important;
+  
+}
