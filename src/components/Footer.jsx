@@ -123,7 +123,7 @@ function Footer() {
                         className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >
-                        ourMarket
+                        our Market
                       </Link>
                     </Flex>
                   </Col>
@@ -289,7 +289,12 @@ function Footer() {
                     <Button
                       className="btn-sub-footer"
                       onClick={handleSubmit}
-                      disabled={loading}
+                      disabled={
+                        formData.email === "" ||
+                        formData.firstName === "" ||
+                        formData.lastName === "" ||
+                        loading
+                      }
                     >
                       {loading ? "Submitting" : "Submit my info"}
                     </Button>

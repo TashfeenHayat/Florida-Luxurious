@@ -9,6 +9,7 @@ import {
   Input,
   Checkbox,
   Modal,
+  Form,
 } from "antd";
 import { Container } from "react-bootstrap";
 import Button from "../../components/Buttons";
@@ -24,7 +25,9 @@ import { TbCarGarage } from "react-icons/tb";
 import { useParams, useNavigate } from "react-router-dom";
 import useProperty from "../../hooks/useProperty";
 import { Loader } from "@googlemaps/js-api-loader";
+import { useDispatch } from "react-redux";
 import { google_api_key } from "../../api/Axios";
+import { contactUs } from "../../api/Inquiry";
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -33,6 +36,14 @@ export default function DetailProperty() {
   const [details, setDetails] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [compensation, setCompensation] = useState(false);
+  const [contact, setContact] = useState({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    email: "",
+    message: "",
+  });
+  const dispatch = useDispatch();
   const formatPhoneNumber = (phoneNumber) => {
     if (!phoneNumber) return "";
 
@@ -135,6 +146,33 @@ export default function DetailProperty() {
       }
     });
   }, [google_api_key, data?.property?.latitude, data?.property?.longitude]);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setContact((prevContact) => ({
+      ...prevContact,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    dispatch(contactUs(contact));
+  };
+
+  const validateForm = () => {
+    const { firstName, lastName, email, message } = contact;
+    if (!firstName || !lastName || !email || !message) {
+      message.error("Please fill out all required fields.");
+      return false;
+    }
+    return true;
+  };
 
   return (
     <div className="single_property">
@@ -505,7 +543,7 @@ export default function DetailProperty() {
               >
                 {data?.property?.addressLine1} {data?.property?.addressLine2}
               </Title>
-              <Paragraph className="f-16 f-200" style={{ lineHeight: 2.8 }}>
+              <Paragraph className="f-16 f-200" style={{ lineHeight: 1.5 }}>
                 {data?.property?.description
                   ?.split("\n")
                   .filter((txt) => txt.trim() !== "")
@@ -648,48 +686,75 @@ export default function DetailProperty() {
                 Interested in {data?.property?.addressLine1}{" "}
                 {data?.property?.addressLine2}?
               </Title>
-              <form>
-                {" "}
+              <form onSubmit={handleSubmit}>
                 <Row gutter={[8, 40]} className="detail-property">
                   <Col lg={12} md={12} sm={24}>
                     <Input
                       placeholder="First Name"
                       type="text"
                       className="child1"
+                      name="firstName"
+                      value={contact.firstName}
+                      onChange={handleChange}
+                      required
                     />
                   </Col>
                   <Col lg={12} md={12} sm={24}>
-                    <Input placeholder="Last Name" type="text" />
+                    <Input
+                      placeholder="Last Name"
+                      type="text"
+                      name="lastName"
+                      value={contact.lastName}
+                      onChange={handleChange}
+                      required
+                    />
                   </Col>
                   <Col lg={12} md={12} sm={24}>
-                    <Input placeholder="Email:" type="email" />
+                    <Input
+                      placeholder="Email"
+                      type="email"
+                      name="email"
+                      value={contact.email}
+                      onChange={handleChange}
+                      required
+                    />
                   </Col>
                   <Col lg={12} md={12} sm={24}>
-                    <Input placeholder="Phone:" type="text" />
+                    <Input
+                      placeholder="Phone"
+                      type="text"
+                      name="phoneNumber"
+                      value={contact.phoneNumber}
+                      onChange={handleChange}
+                    />
                   </Col>
-
                   <Col lg={24} md={24}>
-                    <Input placeholder="Message" type="text" />
+                    <Input
+                      placeholder="Message"
+                      type="text"
+                      name="message"
+                      value={contact.message}
+                      onChange={handleChange}
+                      required
+                    />
                   </Col>
                   <Col lg={24} md={24}>
-                    <div
-                      style={{
-                        display: "flex", // Added a comma here
-                        flexDirection: "column",
-                      }}
+                    <Checkbox
+                      style={{ color: "white" }}
+                      name="requestShowing"
+                      checked={contact.requestShowing}
+                      onChange={handleChange}
                     >
-                      {" "}
-                      {/* Adjust the gap value as needed */}
-                      <Checkbox />
-                      <Text style={{ lineHeight: "normal", color: "white" }}>
-                        Request a showing
-                      </Text>
-                    </div>
+                      Request a showing
+                    </Checkbox>
                   </Col>
                   <Col lg={24} md={24} align="middle">
-                    <Button classNam="button-secondary-line-left">
+                    <button
+                      className="button-secondary-line-left"
+                      htmlType="submit"
+                    >
                       Submit info
-                    </Button>
+                    </button>
                   </Col>
                 </Row>
               </form>

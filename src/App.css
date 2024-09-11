@@ -150,7 +150,6 @@ body:focus-visible {
 
 .text-center {
   text-align: center;
-  
 }
 .pt-90 {
   padding-top: 90px;
@@ -267,7 +266,7 @@ body:focus-visible {
 }
 
 #navbar_main.sticky {
-  padding: 10px 20px;
+  padding: 6px 20px;
   background-color: #000;
 }
 
@@ -297,7 +296,6 @@ body:focus-visible {
   text-transform: uppercase;
   text-align: center;
   margin-top: 0.9rem !important;
- 
 }
 
 .bg-img-logo {
@@ -583,10 +581,10 @@ body:focus-visible {
   transition: all 0.4s ease-in-out;
 }
 .button-view1:hover {
-  border: 1px solid black;
+  border: 1px solid black !important;
   background-color: transparent !important;
   transition: background-color 1s ease; /* added 's' after 0.8 for seconds */
-  color: black;
+  color: black !important;
 }
 .button-secondary {
   position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
@@ -829,7 +827,6 @@ body:focus-visible {
 }
 
 .back {
-
   transform: rotateY(180deg);
   background: #000;
   color: #fff;
@@ -1070,18 +1067,17 @@ body:focus-visible {
   border-radius: 0px;
   margin-top: -90px;
 }
-.global{
- marginLeft: 50 
+.global {
+  marginleft: 50;
 }
- .detail-container{
+.detail-container {
   display: none;
 }
 /* Media Queries */
 
 @media screen and (max-width: 1024px) {
-  
-  .bagde{
-            padding: 12px;
+  .bagde {
+    padding: 12px;
     display: flex;
     gap: 14px !important;
     flex-wrap: nowrap;
@@ -1094,26 +1090,26 @@ body:focus-visible {
   }
   .f-24 {
     font-size: 18px !important;
-} .story-title {
+  }
+  .story-title {
     color: #000;
     font-weight: 700;
     font-size: 70px !important;
     letter-spacing: 2px;
-    line-height: .9;
-}
+    line-height: 0.9;
+  }
   .text-1024 {
     font-size: 9px;
   }
-  .communities-grid{
+  .communities-grid {
     width: 22rem !important;
   }
- .florida_info{
-  
- display: flex !important;
+  .florida_info {
+    display: flex !important;
     flex-direction: column !important;
-  padding: 12px 12px 12px 12px !important;
-}
-  .bagde{
+    padding: 12px 12px 12px 12px !important;
+  }
+  .bagde {
     display: flex;
     gap: 4px !important;
     flex-wrap: nowrap;
@@ -1123,17 +1119,17 @@ body:focus-visible {
   }
 }
 
-@media screen and (767px >= width ) {
-.awards-box{
-    width:70% !important;
+@media screen and (767px >= width) {
+  .awards-box {
+    width: 70% !important;
   }
-  .bg-img-shadow{
+  .bg-img-shadow {
     height: 70% !important;
   }
   .our-story-bg {
     margin-right: 0px !important;
   }
-  .search-button{
+  .search-button {
     display: none !important;
   }
   .bg-img-logo {
@@ -1171,67 +1167,72 @@ body:focus-visible {
   .ant-input-search {
     width: 90%;
   }
-.search-input {
+  .search-input {
     width: 60ch;
   }
 
-   body .title-home-page {
+  body .title-home-page {
     font-size: 26px !important;
   }
-.set {
-        
-        margin-top: 83em;
-    }
-    .ourstory{
-      overflow: hidden;
-    }
-   .story-title {
+  .set {
+    margin-top: 83em;
+  }
+  .ourstory {
+    overflow: hidden;
+  }
+  .story-title {
     color: #000;
     font-weight: bold;
     font-size: 39px !important;
     letter-spacing: 2px;
     line-height: 0.9;
-}
+  }
 
-.our-title {
+  .our-title {
     color: #838383;
     font-weight: 100;
     font-size: 43px !important;
     letter-spacing: 2px;
     line-height: 22.5px;
-}
-.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+  }
+  .container,
+  .container-fluid,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
     width: 100%;
-    padding-right: calc(var(--bs-gutter-x)* .5);
-    padding-left: calc(var(--bs-gutter-x)* .5);
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
     margin-right: auto;
     margin-left: 1rem;
     padding: 2rem;
     overflow: hidden;
-}
-.search-input {
+  }
+  .search-input {
     width: 40ch;
   }
 
   .slick-arrow {
     display: none !important;
   }
-.info {
+  .info {
     padding: 8px;
-  ;
   }
-.boatowner{
-  overflow: hidden;
-}
+  .boatowner {
+    overflow: hidden;
+  }
   .info-text {
     font-size: 10px;
   }
   .button-view,
   .button-view1 {
     padding: 5px 10px;
-  }.property-card {
+  }
+  .property-card {
     flex-direction: column;
   }
   .ant-input-search {
@@ -1241,8 +1242,7 @@ body:focus-visible {
     background-color: #fff;
     padding: 0rem 1rem 0rem !important;
     margin: 0.8rem !important;
-}
-
+  }
 
   body .contact-us-title {
     font-size: 25px !important;
@@ -1252,88 +1252,92 @@ body:focus-visible {
     color: #1b1b1b !important;
     margin: 0 !important;
     text-align: right;
-}
-body .contact-us-sub {
+  }
+  body .contact-us-sub {
     color: #838383;
     font-size: 45px;
     margin-top: -20px;
-}
-.globalcontainer{
-  overflow: hidden;
-}
-.f-24 {
+  }
+  .globalcontainer {
+    overflow: hidden;
+  }
+  .f-24 {
     font-size: 18px !important;
     margin-right: 2rem;
-}
+  }
 
-body .p-5{
-  padding:1rem !important;
-}
- 
-.single_property{
-  overflow: hidden;
-}
-.card-feature {
+  body .p-5 {
+    padding: 1rem !important;
+  }
+
+  .single_property {
+    overflow: hidden;
+  }
+  .card-feature {
     border-radius: 0px;
     margin-top: -32px;
-}
-.f-32 {
+  }
+  .f-32 {
     font-size: 25px !important;
-}
- .button-secondary-line-left{
-      margin-left: 33px;
- }
- .agent-description{
-      font-size: 21px !important;
- }
-  body .agent-first-name{
-      font-size: 58px !important;
- }
-body  .agent-last-name{
-      font-size: 40px !important;
+  }
+  .button-secondary-line-left {
+    margin-left: 33px;
+  }
+  .agent-description {
+    font-size: 21px !important;
+  }
+  body .agent-first-name {
+    font-size: 58px !important;
+  }
+  body .agent-last-name {
+    font-size: 40px !important;
     margin-left: 97px;
- }
- .agent-estate{    margin-left: 25px;}
- 
-.heading-florida-lux-listing {
-font-size: 31px  !important;
+  }
+  .agent-estate {
+    margin-left: 25px;
+  }
+
+  .heading-florida-lux-listing {
+    font-size: 31px !important;
     padding-top: 60px;
-}
-.Downarrow{
-  display: none !important;
-}
-.f-64{
-  font-size: 48px !important;
-}
-.f-40 {
+  }
+  .Downarrow {
+    display: none !important;
+  }
+  .f-64 {
+    font-size: 48px !important;
+  }
+  .f-40 {
     font-size: 25px !important;
-}
-.my-5{
-  margin-right: 3rem !important;
-}
-.hideetails{
-  display: none !important;
-}
-.properties-single-slideshow-info{ display: none !important;}
- .detail-container{
-  display:block !important;;
-}
-.pt-5 {
+  }
+  .my-5 {
+    margin-right: 3rem !important;
+  }
+  .hideetails {
+    display: none !important;
+  }
+  .properties-single-slideshow-info {
+    display: none !important;
+  }
+  .detail-container {
+    display: block !important;
+  }
+  .pt-5 {
     padding-top: 3rem !important;
     padding-left: 3rem;
-}
-.f-30{
-  font-size: 22px !important;
-}
-.f-50 {
+  }
+  .f-30 {
+    font-size: 22px !important;
+  }
+  .f-50 {
     font-size: 30px !important;
-}
-.florida-heading-feature-negibour {
-  font-size: 30px !important;
-}
-.detail-property .ant-input {
-  width: 317px !important;
-}
+  }
+  .florida-heading-feature-negibour {
+    font-size: 30px !important;
+  }
+  .detail-property .ant-input {
+    width: 317px !important;
+  }
   /*.ant-row {
     display: flex;
     flex-flow: column;
@@ -1408,28 +1412,27 @@ font-size: 31px  !important;
   .heading-florida-lux-listing {
     font-size: 24px !important;
   }*/
-.f-16 {
+  .f-16 {
     font-size: 13px !important;
     margin-left: 38px;
-}
-.ant-form-item-control-input{
-  width:19rem !important;
-}
+  }
+  .ant-form-item-control-input {
+    width: 19rem !important;
+  }
 }
 .text-1024 {
-        font-size: 11px;
-    }
+  font-size: 11px;
+}
 
-.agent-first-name{
+.agent-first-name {
   font-size: 70px !important;
-  
 }
 .agent-last-name {
-    color: black;
-    font-weight: 100;
-    font-size: 72px !important;
-    letter-spacing: -4%;
-    line-height: 0.8;
+  color: black;
+  font-weight: 100;
+  font-size: 72px !important;
+  letter-spacing: -4%;
+  line-height: 0.8;
 }
 .detail-property .ant-input::placeholder {
   color: #838383;
@@ -1525,7 +1528,7 @@ font-size: 31px  !important;
   background-size: cover;
 }
 ..button-view {
-  padding:9px !important;
+  padding: 9px !important;
 }
 /* Property Deatil */
 
@@ -1697,7 +1700,7 @@ font-size: 31px  !important;
 
 .team-banner {
   position: relative;
-  height:450px;
+  height: 450px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -1720,7 +1723,7 @@ font-size: 31px  !important;
   height: 537px;
   background-repeat: no-repeat;
   background-size: cover;
-      background-position: center;
+  background-position: center;
 }
 .bg-img-shadow {
   background: rgba(0, 0, 0, 0.1);
@@ -1778,7 +1781,7 @@ font-size: 31px  !important;
 
 .contact-us-banner {
   background-image: url("./assets/Contact_banner.jpg");
-  background-size:cover;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 500px;
@@ -1957,14 +1960,13 @@ font-size: 31px  !important;
   background-position: center;
   background-repeat: no-repeat;
   height: 500px;
-   opacity: 0.9;
+  opacity: 0.9;
   position: relative;
 }
 .agent-info-bg-shadow {
-
   height: 100%;
   position: relative;
-    opacity: 2;
+  opacity: 2;
 }
 /* Agent Profile End*/
 .displayy-teamimg-center:hover .more-info-property {
@@ -2175,7 +2177,6 @@ font-size: 31px  !important;
 }
 
 /* Make the 'See All Neighborhoods' button responsive */
-
 
 .note-modal-backdrop {
   z-index: 0;

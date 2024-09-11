@@ -21,6 +21,7 @@ function Properties() {
     currentPage,
     null
   );
+  console.log(currentPage);
 
   const check = data?.properties?.filter((item) => item.status !== "sold");
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ function Properties() {
         <Title
           className="text-white text-upper f-50 f-100"
           style={{
-            textAlign: "center"
+            textAlign: "center",
           }}
         >
           Featured properties
@@ -107,7 +108,10 @@ function Properties() {
                           last list price
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          {property?.salePrice}
+                          $
+                          {Number(
+                            property?.salePrice?.slice(1).replace(/,/g, "") || 0
+                          ).toLocaleString()}
                         </Text>
                       </Flex>
                       {/* <Flex vertical>
@@ -151,6 +155,7 @@ function Properties() {
                 pageSize={itemsPerPage}
                 onChange={handlePageChange}
                 responsive
+                current={currentPage}
               />
             </Flex>
           )}
