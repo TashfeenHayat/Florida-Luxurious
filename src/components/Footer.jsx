@@ -86,13 +86,14 @@ function Footer() {
                         Other offering
                       </Link>
                       <Link
-                        to=""
+                        to="/mls-listing"
                         className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >
                         MLS
                       </Link>
                       <Link
+                        to="/global"
                         className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >
