@@ -34,7 +34,30 @@ export default function DetailProperty() {
   const [details, setDetails] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [backgroundImage, setBackGroundImage] = useState(null);
+  const formatPhoneNumber = (phoneNumber) => {
+    if (!phoneNumber) return "";
 
+    // Remove non-numeric characters
+    const cleaned = ("" + phoneNumber).replace(/\D/g, "");
+
+    // Check if the number is 10 digits long (assume US number)
+    if (cleaned.length === 10) {
+      return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(
+        6
+      )}`;
+    }
+
+    // If the number is 11 digits long (potentially including country code)
+    if (cleaned.length === 11 && cleaned.startsWith("1")) {
+      const number = cleaned.slice(1); // Remove leading '1' (US country code)
+      return `+1 (${number.slice(0, 3)}) ${number.slice(3, 6)}-${number.slice(
+        6
+      )}`;
+    }
+
+    // Return the number as-is if it doesn't match expected patterns
+    return phoneNumber;
+  };
   const mapRef = useRef(null);
 
   const { id } = useParams();
@@ -608,7 +631,7 @@ export default function DetailProperty() {
                     <Flex justify={"flex-start"} align="center" gap={10}>
                       <CiPhone size={20} color="white" />
                       <Text className="text-white f-24 f-100">
-                        {data?.mls?.agent?.contact?.cell}
+                        {formatPhoneNumber(data?.mls?.agent?.contact?.cell)}
                       </Text>
                     </Flex>
                     <Flex justify={"flex-start"} align="center" gap={10}>

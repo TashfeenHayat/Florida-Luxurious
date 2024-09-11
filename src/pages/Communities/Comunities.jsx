@@ -144,7 +144,7 @@ function Comunities() {
               </Row>
             </Container>
           </div>
-          <div className="py-5">
+          {/*<div className="py-5">
             <Row gutter={[60, 60]} align="middle">
               <Col lg={data?.condominiumOptions ? 8 : 0} md={24} sm={0}>
                 <div>
@@ -189,7 +189,7 @@ function Comunities() {
                 <Image src={Story} preview={false} width="100%" />
               </Col>
             </Row>
-          </div>
+          </div>*/}
 
           <Container className="py-5">
             <Title className="f-40 f-100 text-center text-upper">

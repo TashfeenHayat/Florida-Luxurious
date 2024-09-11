@@ -22,6 +22,30 @@ function AgentProfile() {
   const { isLoading, data, isError } = useAgent(id);
   const { isLoading: isBlogLoading, data: blogData } = useBlogs(10, 1, id);
   const { isLoading: isReportLoading, reports } = useReport();
+  const formatPhoneNumber = (phoneNumber) => {
+    if (!phoneNumber) return "";
+
+    // Remove non-numeric characters
+    const cleaned = ("" + phoneNumber).replace(/\D/g, "");
+
+    // Check if the number is 10 digits long (assume US number)
+    if (cleaned.length === 10) {
+      return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(
+        6
+      )}`;
+    }
+
+    // If the number is 11 digits long (potentially including country code)
+    if (cleaned.length === 11 && cleaned.startsWith("1")) {
+      const number = cleaned.slice(1); // Remove leading '1' (US country code)
+      return `+1 (${number.slice(0, 3)}) ${number.slice(3, 6)}-${number.slice(
+        6
+      )}`;
+    }
+
+    // Return the number as-is if it doesn't match expected patterns
+    return phoneNumber;
+  };
 
   return (
     <>
@@ -168,7 +192,7 @@ function AgentProfile() {
                         <Flex align={"center"} gap={10}>
                           <MdOutlinePhone color="#838383" size={25} />{" "}
                           <span className="text-white f-32">
-                            {"+" + data?.phoneNumber}
+                            {formatPhoneNumber(data?.phoneNumber)}
                           </span>
                         </Flex>
                         <Flex align={"center"} gap={10}>

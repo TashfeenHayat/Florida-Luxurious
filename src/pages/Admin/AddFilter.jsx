@@ -250,13 +250,13 @@ function AddFilter() {
             </Form.Item>
           </Col>
           <Col span={12} className="gutter-row">
-            <Form.Item name="condominiumOptions">
+            {/*<Form.Item name="condominiumOptions">
               <TextArea
                 size="large"
                 rows={4}
                 placeholder="Condominium Options"
               />
-            </Form.Item>
+            </Form.Item>*/}
             <Card title="Features">
               <Form.List name="features">
                 {(fields, { add, remove }) => (
