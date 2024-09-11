@@ -47,11 +47,13 @@ export default function DetailProperty() {
     }
 
     // If the number is 11 digits long (potentially including country code)
-    if (cleaned.length === 11 && cleaned.startsWith("1")) {
-      const number = cleaned.slice(1); // Remove leading '1' (US country code)
-      return `+1 (${number.slice(0, 3)}) ${number.slice(3, 6)}-${number.slice(
-        6
-      )}`;
+    {
+      if (cleaned.length === 11 && cleaned.startsWith("1")) {
+        const number = cleaned.slice(1); // Remove leading '1' (US country code)
+        return `(${number.slice(0, 3)}) ${number.slice(3, 6)}-${number.slice(
+          6
+        )}`;
+      }
     }
 
     // Return the number as-is if it doesn't match expected patterns
