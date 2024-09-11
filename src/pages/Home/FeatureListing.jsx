@@ -11,7 +11,8 @@ import useProperties from "../../hooks/useProperties";
 const { Text, Paragraph } = Typography;
 
 function FeatureListing() {
-  const { data, isLoading } = useProperties();
+  const { data, isLoading } = useProperties(null, 30, 1, "for_sale");
+
   const navigate = useNavigate();
 
   const CustomPrevArrow = (props) => {

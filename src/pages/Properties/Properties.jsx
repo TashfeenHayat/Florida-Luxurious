@@ -21,7 +21,6 @@ function Properties() {
     currentPage,
     null
   );
-  console.log(currentPage);
 
   const check = data?.properties?.filter((item) => item.status !== "sold");
   const navigate = useNavigate();
