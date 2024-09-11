@@ -180,7 +180,7 @@ export default function DetailProperty() {
               MLS® #: F10423862
             </Text>
             <Title className="text-upper" style={{ color: "white" }} level={3}>
-              {data?.property?.addressLine1}
+              {data?.property?.addressLine1} {data?.property?.addressLine2}
             </Title>
             <Paragraph
               className="text-upper f-20 f-100"
@@ -280,10 +280,12 @@ export default function DetailProperty() {
                 >
                   <TbCarGarage size={15} />
                 </div>
-                <Text className="text-white f-16 f-100">Car garage</Text>
+                <Text className="text-white f-16 f-100">
+                  {data?.property?.parking} Car garage
+                </Text>
               </Flex>
             </Col>
-            <Col lg={8}>
+            {/* <Col lg={8}>
               <Flex justify={"flex-start"} align={"center"} gap={5}>
                 <div
                   className="circle-bg-white"
@@ -297,7 +299,7 @@ export default function DetailProperty() {
                 </div>
                 <Text className="text-white f-16">SF Living</Text>
               </Flex>
-            </Col>
+            </Col> */}
           </Row>
           <Flex justify={"center"} align="center" vertical>
             <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
@@ -306,7 +308,7 @@ export default function DetailProperty() {
           </Flex>
           <Flex justify={"center"} align="center" vertical>
             <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-              Compensation Offered?
+              Compensation Offered?{""} &nbsp;
               <Text
                 style={{ color: "#D4CFC9", cursor: "pointer" }}
                 className="my-4 f-16 f-100"
@@ -347,7 +349,7 @@ export default function DetailProperty() {
             MLS® #: F10423862
           </Text>
           <Title className="text-upper" style={{ color: "white" }} level={3}>
-            {data?.property?.addressLine1}
+            {data?.property?.addressLine1} {data?.property?.addressLine2}
           </Title>
           <Paragraph
             className="text-upper f-20 f-100"
@@ -501,7 +503,7 @@ export default function DetailProperty() {
                 style={{ textAlign: "center", lineHeight: 2 }}
                 className="text-upper"
               >
-                {data?.property?.addressLine1}
+                {data?.property?.addressLine1} {data?.property?.addressLine2}
               </Title>
               <Paragraph className="f-16 f-200" style={{ lineHeight: 2.8 }}>
                 {data?.property?.description
@@ -643,11 +645,8 @@ export default function DetailProperty() {
                 }}
                 className="text-upper f-30"
               >
-                Interested in{" "}
-                {data?.property?.addressLine1 ||
-                  "" + " " + data?.property?.addressLine2 ||
-                  ""}
-                ?
+                Interested in {data?.property?.addressLine1}{" "}
+                {data?.property?.addressLine2}?
               </Title>
               <form>
                 {" "}

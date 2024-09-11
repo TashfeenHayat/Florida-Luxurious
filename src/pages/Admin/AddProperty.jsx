@@ -467,7 +467,6 @@ function AddProperty() {
                     mode="multiple"
                     showSearch
                     size="large"
-                    filterOption={filterOption}
                     loading={getFiltersReducer.isLoading}
                     options={getFiltersReducer.data?.filters.map((i) => ({
                       value: i._id,
@@ -804,7 +803,7 @@ function AddProperty() {
                 </Form.Item>
                 <Col span={12} className="gutter-row">
                   <Form.Item name="mlsId" label="MLS ID">
-                    <Select
+                    <Input
                       showSearch
                       size="large"
                       filterOption={filterOption}
@@ -815,7 +814,7 @@ function AddProperty() {
                           label: i.mlsId + " - " + i.address?.full,
                         })
                       )}
-                      placeholder="Search MLS property"
+                      placeholder=" MLS property"
                     />
                   </Form.Item>
                 </Col>

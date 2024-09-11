@@ -327,7 +327,10 @@ function Mls() {
                       className="img-op"
                       fallback="https://placehold.co/618x489"
                       preview={false}
-                      style={{ aspectRatio: "5/4", objectFit: "cover" }}
+                      style={{
+                        aspectRatio: "5/4 !important",
+                        objectFit: "cover",
+                      }}
                     />
 
                     <div className="info">
