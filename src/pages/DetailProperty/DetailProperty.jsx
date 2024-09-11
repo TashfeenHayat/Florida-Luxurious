@@ -928,7 +928,9 @@ export default function DetailProperty() {
                         <Flex justify="flex-start" align="center" gap={10}>
                           <CiPhone size={20} color="white" />
                           <Text className="text-white f-20 f-100">
-                            {"+" + data?.property?.Primary_agentId?.phoneNumber}
+                            {formatPhoneNumber(
+                              data?.property?.Primary_agentId?.phoneNumber
+                            )}
                           </Text>
                         </Flex>
                         <Flex justify="flex-start" align="center" gap={10}>
