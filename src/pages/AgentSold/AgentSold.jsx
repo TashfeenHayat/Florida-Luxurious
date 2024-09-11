@@ -44,12 +44,7 @@ function AgentSold() {
         ) : (
           <Row gutter={[60, 60]}>
             {data?.properties.map((properties, index) => (
-              <Col
-                lg={12}
-                md={12}
-                sm={24}
-                onClick={() => navigate(`features/660719a7b27711bbbdc092b6`)}
-              >
+              <Col lg={12} md={12} sm={24}>
                 <div className="displayy-teamimg-center">
                   <img
                     src={
@@ -77,7 +72,7 @@ function AgentSold() {
                           address
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          {properties?.addressLine1}
+                          {properties?.addressLine1} {properties?.addressLine2}
                         </Text>
                       </Flex>
                       <Flex vertical>

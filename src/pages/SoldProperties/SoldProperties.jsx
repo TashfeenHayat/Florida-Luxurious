@@ -63,13 +63,7 @@ function SoldProperties() {
         ) : (
           <Row gutter={[60, 60]}>
             {data?.properties.map((property, index) => (
-              <Col
-                lg={12}
-                md={12}
-                sm={24}
-                key={index}
-                onClick={() => navigate(`/features/${property._id}`)}
-              >
+              <Col lg={12} md={12} sm={24} key={index}>
                 <div className="displayy-teamimg-center">
                   <Image
                     src={
@@ -118,9 +112,9 @@ function SoldProperties() {
                           Abraham
                         </Text>
                       </Flex> */}
-                      <Flex vertical>
+                      {/* <Flex vertical>
                         <button className="let-talk-btn">View Property</button>
-                      </Flex>
+                      </Flex> */}
                     </Flex>
                   </div>
                   {/* <div className="p-absoulte right-0 top-0 for-sale-more">
