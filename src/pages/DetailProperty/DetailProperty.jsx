@@ -177,7 +177,7 @@ export default function DetailProperty() {
               className="f-20 f-100"
               style={{ lineHeight: "14px", color: "#D4CFC9" }}
             >
-              MLS® #: F10423862
+              MLS® #: {data?.property?.mlsId}
             </Text>
             <Title className="text-upper" style={{ color: "white" }} level={3}>
               {data?.property?.addressLine1} {data?.property?.addressLine2}

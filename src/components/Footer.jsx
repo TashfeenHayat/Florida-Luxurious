@@ -97,7 +97,7 @@ function Footer() {
                         className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >
-                        GlobalPartner
+                        Global Partner
                       </Link>
                     </Flex>
                   </Col>

@@ -158,6 +158,7 @@ function FeatureListing() {
                           style={{ textAlign: "right", marginLeft: "8px" }}
                         >
                           {property?.addressLine1}
+                          <br />
                           {property?.addressLine2}
                           <br />
                           <IoPricetagOutline size={20} /> {property.salePrice}
@@ -173,7 +174,7 @@ function FeatureListing() {
                         style={{ height: "100%", padding: "0 10px" }}
                       >
                         <Text className="mx-4 f-16 f-bold">
-                          {property?.addressLine1}
+                          {property?.addressLine1} <br />
                           {property?.addressLine2}
                         </Text>
                         <div className="prop-info">
