@@ -71,7 +71,7 @@ function SoldProperties() {
                       "https://placehold.co/618x489"
                     }
                     width="100%"
-                    style={{ aspectratio: "5 / 4" }}
+                    style={{ aspectRatio: "5/4" }}
                     className=""
                     fallback="https://placehold.co/618x489"
                     preview={false}
