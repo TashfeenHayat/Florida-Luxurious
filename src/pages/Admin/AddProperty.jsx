@@ -736,13 +736,13 @@ function AddProperty() {
                   <Input size="large" placeholder="Heating" />
                 </Form.Item>
                 <Form.Item
-                  name="fireplace"
-                  label="Fire Place"
-                  placeholder="Fire Place"
+                  name="Waterfront"
+                  label="Waterfront"
+                  placeholder="Waterfront"
                   rules={[
                     {
                       required: true,
-                      message: "Fire Place is required",
+                      message: "Waterfront Place is required",
                     },
                   ]}
                 >
