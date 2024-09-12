@@ -87,10 +87,7 @@ function AddProperty() {
   const handleSecondaryAgentChange = (e) => {
     setAddSecondaryAgent(e.target.value === "yes");
   };
-  const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
-  };
+
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -345,7 +342,6 @@ function AddProperty() {
           initialValues={initialVlues}
           name="add_property"
           onFinish={onFinish}
-          {...layout}
         >
           <Row justify="center">
             <Col span={24} className="gutter-row">
