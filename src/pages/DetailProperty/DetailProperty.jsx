@@ -753,6 +753,7 @@ export default function DetailProperty() {
                       className="button-secondary-line-left"
                       htmlType="submit"
                     >
+                      
                       Submit info
                     </button>
                   </Col>
