@@ -3,14 +3,13 @@ import { Typography, Row, Col, Flex, Pagination, Spin, Image } from "antd";
 import BackgroundImage from "../../components/BackgroundImage";
 import FeaturedPropertiesImage from "../../assets/featureproperties.jpg";
 import { Container } from "react-bootstrap";
-import Property from "../../assets/property.png";
+//import Property from "../../assets/property.png";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Icons from "../../components/Icons";
 import LetTalk from "../../components/LetTalk";
 import useProperties from "../../hooks/useProperties";
-import useAgent from "../../hooks/useAgent";
-
+//import useAgent from "../../hooks/useAgent";
 const { Title, Text } = Typography;
 function Properties() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -19,13 +18,13 @@ function Properties() {
     null,
     itemsPerPage,
     currentPage,
-    null
+    "for_sale"
   );
-
-  const check = data?.properties?.filter((item) => item.status !== "sold");
-  console.log(check);
+  {
+    /*const check = data?.properties?.filter((item) => item.status !== "sold");
+  console.log(check);*/
+  }
   const navigate = useNavigate();
-
   // const properties = [
   //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
   //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
@@ -36,17 +35,14 @@ function Properties() {
   //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
   //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
   // ];
-
   // // Calculate the index range for the current page
   // const indexOfLastItem = currentPage * itemsPerPage;
   // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   // const currentItems = properties.slice(indexOfFirstItem, indexOfLastItem);
-
   // Function to handle page change
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
   return (
     <>
       <BackgroundImage Image={FeaturedPropertiesImage} style={"back"}>
@@ -67,7 +63,7 @@ function Properties() {
       ) : (
         <Container className="pt-98 pb-98">
           <Row gutter={[60, 60]}>
-            {check?.map((property, index) => (
+            {data?.properties.map((property, index) => (
               <Col
                 lg={12}
                 md={12}
@@ -108,7 +104,10 @@ function Properties() {
                           last list price
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          $
+                          $ {/*property?.salePrice.slice(1).replace(/,/g, "")*/}
+                          {/*                          
+                          &nbsp;
+                          {property?.currency} */}
                           {Number(
                             property?.salePrice?.slice(1).replace(/,/g, "") || 0
                           ).toLocaleString()}
@@ -127,7 +126,6 @@ function Properties() {
                       </Flex>
                     </Flex>
                   </div>
-
                   <div className="info">
                     <Flex justify={"end"} align={"center"}>
                       <Flex>
@@ -138,7 +136,8 @@ function Properties() {
                         >
                           {property?.addressLine1} {property?.addressLine2}{" "}
                           <br />
-                          <IoPricetagOutline size={20} /> ${property?.salePrice}
+                          <IoPricetagOutline size={20} /> $
+                          {property?.salePrice?.slice(1).replace(/,/g, "") || 0}
                         </Text>
                       </Flex>
                     </Flex>
@@ -164,11 +163,9 @@ function Properties() {
           )}
         </Container>
       )}
-
       <LetTalk />
       <Icons />
     </>
   );
 }
-
 export default Properties;
