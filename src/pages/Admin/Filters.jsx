@@ -31,7 +31,7 @@ function Filters() {
         <Space size="middle">
           <Link to={`/admin/community/edit/${record._id}`}>Edit</Link>
           <Popconfirm
-            title="Delete this task"
+            title="Delete this filter"
             description="Are you sure to delete this filter?"
             okText="Yes"
             cancelText="No"
@@ -43,6 +43,7 @@ function Filters() {
       ),
     },
   ];
+
   const [tableParams, setTableParams] = useState({
     current: 1,
     pageSize: 10,
@@ -62,15 +63,13 @@ function Filters() {
     if (isError) {
       console.log(isError);
     }
-  }, []);
+  }, [dispatch, tableParams.current, tableParams.pageSize, isError]);
 
   const onSearch = (key) => {
     setKey(key);
     setTableParams({
-      pagination: {
-        ...tableParams,
-        current: 1,
-      },
+      current: 1,
+      pageSize: tableParams.pageSize,
     });
     dispatch(getFilters({ key }));
   };
@@ -85,38 +84,66 @@ function Filters() {
       getFilters({
         key,
         page: pagination.current,
+        limit: pagination.pageSize,
       })
     );
   };
 
   return (
     <Card
-      title="Communities"
+      title="Filters"
       extra={
-        <Space>
+        <Space
+          direction="vertical"
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            marginBottom: "16px",
+          }}
+        >
           <Search
-            placeholder="input search text"
+            placeholder="Search filters"
             onSearch={onSearch}
             enterButton
             allowClear
+            style={{ width: "100%", maxWidth: "400px" }}
           />
-          <Button type="primary">
-            <Link to="/admin/community/add">
-              <PlusOutlined />
+          <Button type="primary" style={{ width: "100%", maxWidth: "200px" }}>
+            <Link
+              to="/admin/community/add"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                textDecoration: "none",
+                color: "inherit",
+              }}
+            >
+              <PlusOutlined style={{ marginRight: "8px" }} />
               Add
             </Link>
           </Button>
         </Space>
       }
-      style={{ padding: 0 }}
+      style={{
+        padding: 0,
+        width: "100%",
+        maxWidth: "1800px",
+        margin: "0 auto",
+      }}
     >
       <Table
         columns={columns}
         loading={isLoading}
         isError={isError}
-        pagination={{ ...tableParams, total: data?.totalCount }}
+        pagination={{
+          ...tableParams,
+          total: data?.totalCount,
+          pageSizeOptions: ["10", "20", "50"],
+        }}
         dataSource={data?.filters}
         onChange={handleTableChange}
+        style={{ width: "100%" }}
+        scroll={{ x: true }} // Allows horizontal scrolling on small screens
       />
     </Card>
   );

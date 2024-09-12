@@ -48,7 +48,7 @@ function Agents() {
     //       <Link to={`/admin/agent/edit/${record._id}`}>Edit</Link>
     //       <Popconfirm
     //         title="Delete this task"
-    //         description="Are you sure to delete this agent ?"
+    //         description="Are you sure to delete this agent?"
     //         okText="Yes"
     //         cancelText="No"
     //         onConfirm={() => onDelete(record._id)}
@@ -59,12 +59,13 @@ function Agents() {
     //   ),
     // },
   ];
+
   const [tableParams, setTableParams] = useState({
     current: 1,
     pageSize: 10,
   });
 
-  const [key, setKey] = useState();
+  const [key, setKey] = useState("");
 
   const { isLoading, isError, data } = useSelector((s) => s.getInquiryReducer);
   const dispatch = useDispatch();
@@ -79,43 +80,42 @@ function Agents() {
     if (isError) {
       console.log(isError);
     }
-  }, []);
-
-  //   const onSearch = (key) => {
-  //     setKey(key);
-  //     setTableParams({
-  //       pagination: {
-  //         ...tableParams,
-  //         current: 1,
-  //       },
-  //     });
-  //     dispatch(getAgents({ key }));
-  //   };
-
-  //   const onDelete = (id) => {
-  //     dispatch(deleteAgent(id));
-  //   };
+  }, [dispatch, tableParams.current, tableParams.pageSize, isError]);
 
   const handleTableChange = (pagination) => {
-    console.log(pagination);
     setTableParams(pagination);
     dispatch(
       getInquiries({
         key,
         page: pagination.current,
+        limit: pagination.pageSize,
       })
     );
   };
-  console.log(data);
+
   return (
-    <Card title="Inquiries" style={{ padding: 0 }}>
+    <Card
+      title="Inquiries"
+      style={{
+        padding: 0,
+        margin: "0 auto",
+        maxWidth: "100%",
+        boxSizing: "border-box",
+      }}
+    >
       <Table
         columns={columns}
         loading={isLoading}
-        isError={isError}
-        pagination={{ ...tableParams, total: data?.totalCount }}
         dataSource={data?.inquiries}
+        pagination={{
+          ...tableParams,
+          total: data?.totalCount,
+          pageSizeOptions: ["10", "20", "30", "40"], // Pagination options
+          showSizeChanger: true, // Allows changing page size
+        }}
         onChange={handleTableChange}
+        scroll={{ x: "max-content" }} // Enable horizontal scroll for table if content overflows
+        style={{ width: "100%" }} // Ensure table stretches to full width
       />
     </Card>
   );

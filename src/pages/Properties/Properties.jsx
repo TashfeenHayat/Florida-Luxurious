@@ -10,10 +10,6 @@ import Icons from "../../components/Icons";
 import LetTalk from "../../components/LetTalk";
 import useProperties from "../../hooks/useProperties";
 //import useAgent from "../../hooks/useAgent";
-<<<<<<< HEAD
-
-=======
->>>>>>> 8d64d8110e40bef6d8458e5ac7438da2f117e9f4
 const { Title, Text } = Typography;
 function Properties() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,10 +20,6 @@ function Properties() {
     currentPage,
     "for_sale"
   );
-<<<<<<< HEAD
-
-=======
->>>>>>> 8d64d8110e40bef6d8458e5ac7438da2f117e9f4
   {
     /*const check = data?.properties?.filter((item) => item.status !== "sold");
   console.log(check);*/
@@ -113,11 +105,10 @@ function Properties() {
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
                           $ {/*property?.salePrice.slice(1).replace(/,/g, "")*/}
-<<<<<<< HEAD
                           {/*                           
-=======
+
                           {/*                          
->>>>>>> 8d64d8110e40bef6d8458e5ac7438da2f117e9f4
+ 
                           &nbsp;
                           {property?.currency} */}
                           {Number(

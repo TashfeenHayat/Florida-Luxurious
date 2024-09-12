@@ -54,7 +54,7 @@ function Properties() {
         <Space size="middle">
           <Link to={`/admin/property/edit/${record._id}`}>Edit</Link>
           <Popconfirm
-            title="Delete this task"
+            title="Delete this property"
             description="Are you sure to delete this property?"
             okText="Yes"
             cancelText="No"
@@ -66,6 +66,7 @@ function Properties() {
       ),
     },
   ];
+
   const [tableParams, setTableParams] = useState({
     current: 1,
     pageSize: 10,
@@ -88,15 +89,13 @@ function Properties() {
     if (isError) {
       console.log(isError);
     }
-  }, []);
+  }, [dispatch, isError, tableParams.current, tableParams.pageSize]);
 
   const onSearch = (key) => {
     setKey(key);
     setTableParams({
-      pagination: {
-        ...tableParams,
-        current: 1,
-      },
+      ...tableParams,
+      current: 1,
     });
     dispatch(getProperties({ key }));
   };
@@ -106,7 +105,6 @@ function Properties() {
   };
 
   const handleTableChange = (pagination) => {
-    console.log(pagination);
     setTableParams(pagination);
     dispatch(
       getProperties({
@@ -116,36 +114,53 @@ function Properties() {
     );
   };
 
+  const containerStyle = {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    padding: "10px",
+    boxSizing: "border-box",
+  };
+
+  const cardStyle = {
+    width: "100%",
+    overflowX: "auto",
+  };
+
   return (
-    <Card
-      title="Properties"
-      extra={
-        <Space>
-          <Search
-            placeholder="input search text"
-            onSearch={onSearch}
-            enterButton
-            allowClear
-          />
-          <Button type="primary">
-            <Link to="/admin/property/add">
-              <PlusOutlined />
-              Add
-            </Link>
-          </Button>
-        </Space>
-      }
-      style={{ padding: 0 }}
-    >
-      <Table
-        columns={columns}
-        loading={isLoading}
-        isError={isError}
-        pagination={{ ...tableParams, total: data?.totalCount }}
-        dataSource={data?.properties}
-        onChange={handleTableChange}
-      />
-    </Card>
+    <div style={containerStyle}>
+      <Card
+        title="Properties"
+        extra={
+          <Space style={{ flexWrap: "wrap" }}>
+            <Search
+              placeholder="input search text"
+              onSearch={onSearch}
+              enterButton
+              allowClear
+              style={{ width: "100%", maxWidth: "300px", marginBottom: "10px" }}
+            />
+            <Button type="primary" style={{ marginBottom: "10px" }}>
+              <Link to="/admin/property/add">
+                <PlusOutlined />
+                Add
+              </Link>
+            </Button>
+          </Space>
+        }
+        style={cardStyle}
+      >
+        <Table
+          columns={columns}
+          loading={isLoading}
+          isError={isError}
+          pagination={{ ...tableParams, total: data?.totalCount }}
+          dataSource={data?.properties}
+          onChange={handleTableChange}
+          scroll={{ x: "max-content" }} // Ensure horizontal scrolling
+        />
+      </Card>
+    </div>
   );
 }
 

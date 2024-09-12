@@ -87,6 +87,10 @@ function AddProperty() {
   const handleSecondaryAgentChange = (e) => {
     setAddSecondaryAgent(e.target.value === "yes");
   };
+  const layout = {
+    labelCol: { span: 8 },
+    wrapperCol: { span: 16 },
+  };
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -330,72 +334,146 @@ function AddProperty() {
   );
 
   return (
-    <>
-      <Card title={id ? "Edit Property" : "Add Property"}>
-        {contextHolder}
-        <Form
-          form={form}
-          initialValues={initialVlues}
-          name="add_property"
-          onFinish={onFinish}
-        >
-          <Row justify="center">
-            <Col span={24} className="gutter-row">
-              <Form.Item name="media">
-                <Upload
-                  name="file"
-                  listType="picture-card"
-                  fileList={fileList}
-                  onPreview={handlePreview}
-                  onChange={handleChange}
-                  headers={{
-                    Authorization: `Bearer ${localStorage.token}`,
-                  }}
-                  action={`${api_base_URL}upload`}
-                >
-                  {fileList?.length >= 8 ? null : uploadButton}
-                </Upload>
-                {previewImage && (
-                  <Image
-                    wrapperStyle={{
-                      display: "none",
-                    }}
-                    preview={{
-                      visible: previewOpen,
-                      onVisibleChange: (visible) => setPreviewOpen(visible),
-                      afterOpenChange: (visible) =>
-                        !visible && setPreviewImage(""),
-                    }}
-                    src={previewImage}
-                  />
-                )}
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row>
-            <Col span={12} className="gutter-row">
-              <Form.Item
-                name="name"
-                label="Name"
-                rules={[
-                  {
-                    required: true,
-                    message: "Name is required",
-                  },
-                ]}
+    <Card
+      title={id ? "Edit Property" : "Add Property"}
+      style={{ maxWidth: "1800px", margin: "0 auto" }}
+    >
+      {contextHolder}
+      <Form
+        form={form}
+        initialValues={initialVlues}
+        name="add_property"
+        onFinish={onFinish}
+        style={{ maxWidth: "100%" }}
+      >
+        <Row justify="center">
+          <Col
+            xs={24}
+            sm={24}
+            md={12}
+            lg={12}
+            xl={12}
+            style={{ marginBottom: "16px" }}
+          >
+            <Form.Item name="media">
+              <Upload
+                name="file"
+                listType="picture-card"
+                fileList={fileList}
+                onPreview={handlePreview}
+                onChange={handleChange}
+                headers={{
+                  Authorization: `Bearer ${localStorage.token}`,
+                }}
+                action={`${api_base_URL}upload`}
               >
-                <Input size="large" placeholder="Name" />
-              </Form.Item>
-            </Col>
-            <Col span={12} className="gutter-row">
+                {fileList?.length >= 8 ? null : uploadButton}
+              </Upload>
+              {previewImage && (
+                <Image
+                  preview={{
+                    visible: previewOpen,
+                    onVisibleChange: (visible) => setPreviewOpen(visible),
+                    afterOpenChange: (visible) =>
+                      !visible && setPreviewImage(""),
+                  }}
+                  src={previewImage}
+                />
+              )}
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row gutter={16}>
+          <Col
+            xs={24}
+            sm={24}
+            md={12}
+            lg={12}
+            xl={12}
+            style={{ marginBottom: "16px" }}
+          >
+            <Form.Item
+              name="name"
+              label="Name"
+              rules={[{ required: true, message: "Name is required" }]}
+            >
+              <Input size="large" placeholder="Name" />
+            </Form.Item>
+          </Col>
+          <Col
+            xs={24}
+            sm={24}
+            md={12}
+            lg={12}
+            xl={12}
+            style={{ marginBottom: "16px" }}
+          >
+            <Form.Item
+              name="Primary_agentId"
+              label="Primary Agent"
+              rules={[{ required: true, message: "Agent is required" }]}
+            >
+              <Select
+                showSearch
+                size="large"
+                filterOption={filterOption}
+                loading={getAgentsReducer.isLoading}
+                options={getAgentsReducer.data?.agents.map((i) => ({
+                  value: i._id,
+                  label: i.firstName + " " + i.lastName,
+                }))}
+                placeholder="Search agent"
+              />
+            </Form.Item>
+          </Col>
+          <Col
+            xs={24}
+            sm={24}
+            md={12}
+            lg={12}
+            xl={12}
+            style={{ marginBottom: "16px" }}
+          >
+            <Form.Item name="status" label="Status">
+              <Select
+                size="large"
+                options={statusList}
+                placeholder="Select status"
+              />
+            </Form.Item>
+          </Col>
+          <Col
+            xs={24}
+            sm={24}
+            md={12}
+            lg={12}
+            xl={12}
+            style={{ marginBottom: "16px" }}
+          >
+            <Form.Item label="Add Secondary Agent">
+              <Radio.Group
+                onChange={handleSecondaryAgentChange}
+                value={addSecondaryAgent ? "yes" : "no"}
+              >
+                <Radio value="yes">Yes</Radio>
+                <Radio value="no">No</Radio>
+              </Radio.Group>
+            </Form.Item>
+          </Col>
+          {addSecondaryAgent && (
+            <Col
+              xs={24}
+              sm={24}
+              md={12}
+              lg={12}
+              xl={12}
+              style={{ marginBottom: "16px" }}
+            >
               <Form.Item
-                name="Primary_agentId"
-                label="Primary Agent"
+                name="Secondary_agentId"
+                label="Secondary Agent"
                 rules={[
-                  {
-                    required: true,
-                    message: "Agent is required",
-                  },
+                  { required: true, message: "Secondary Agent is required" },
                 ]}
               >
                 <Select
@@ -403,484 +481,314 @@ function AddProperty() {
                   size="large"
                   filterOption={filterOption}
                   loading={getAgentsReducer.isLoading}
-                  options={getAgentsReducer.data?.agents.map((i) => ({
-                    value: i._id,
-                    label: i.firstName + " " + i.lastName,
+                  options={getAgentsReducer.data?.agents.map((agent) => ({
+                    value: agent._id,
+                    label: `${agent.firstName} ${agent.lastName}`,
                   }))}
                   placeholder="Search agent"
                 />
               </Form.Item>
-            </Col>{" "}
-            <Col span={12} className="gutter-row">
-              <Form.Item name="status" label="Status">
-                <Select
-                  size="large"
-                  options={statusList}
-                  placeholder="Select status"
-                />
-              </Form.Item>
             </Col>
-            <Col>
-              <Form.Item label="Add Secondary Agent">
-                <Radio.Group
-                  onChange={handleSecondaryAgentChange}
-                  value={addSecondaryAgent ? "yes" : "no"}
-                >
-                  <Radio value="yes">Yes</Radio>
-                  <Radio value="no">No</Radio>
-                </Radio.Group>
-              </Form.Item>
-            </Col>
-            <Col span={12} className="gutter-row"></Col>
-            {/*  Conditional Secondary Agent Field */}
-            {addSecondaryAgent && (
-              <Col span={12}>
-                <Form.Item
-                  name="Secondary_agentId"
-                  label="Secondary Agent"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Secondary Agent is required",
-                    },
-                  ]}
-                >
-                  <Select
-                    showSearch
-                    size="large"
-                    filterOption={filterOption}
-                    loading={getAgentsReducer.isLoading}
-                    options={getAgentsReducer.data?.agents.map((agent) => ({
-                      value: agent._id,
-                      label: `${agent.firstName} ${agent.lastName}`,
-                    }))}
-                    placeholder="Search agent"
-                  />
-                </Form.Item>
-              </Col>
-            )}
-            <Row>
-              {" "}
-              <Col span={12} className="gutter-row">
-                <Form.Item name="filters" label="Commuities">
-                  <Select
-                    mode="multiple"
-                    showSearch
-                    size="large"
-                    loading={getFiltersReducer.isLoading}
-                    options={getFiltersReducer.data?.filters.map((i) => ({
-                      value: i._id,
-                      label: i.name + " - " + i.code,
-                    }))}
-                    placeholder="Search filters"
-                  />
-                </Form.Item>
-                <Form.Item name="neighborhood" label="Neighborhood">
-                  <Input size="large" placeholder="Neighborhood" />
-                </Form.Item>
-              </Col>
-              <Col span={12} className="gutter-row">
-                <Form.Item name="description" label="Description">
-                  <TextArea size="large" rows={4} placeholder="Description" />
-                </Form.Item>
-              </Col>
-              <Col span={12} className="gutter-row">
-                <Form.Item
-                  name={["addressLine1"]}
-                  label="Address Line 1"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Address Line 1 is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Address Line 1" />
-                </Form.Item>
-                <Form.Item name={["addressLine2"]} label="Address Line 2">
-                  <Input size="large" placeholder="Address Line 2" />
-                </Form.Item>
-                <Form.Item
-                  name={["city"]}
-                  label="City"
-                  rules={[
-                    {
-                      required: true,
-                      message: "City is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="City" />
-                </Form.Item>
-                <Form.Item
-                  name={["state"]}
-                  label="State"
-                  rules={[
-                    {
-                      required: true,
-                      message: "State is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="State" />
-                </Form.Item>
-                <Form.Item
-                  name={["country"]}
-                  label="Country"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Country is required",
-                    },
-                  ]}
-                >
-                  <Select
-                    showSearch
-                    size="large"
-                    options={options}
-                    placeholder="Search country"
-                  />
-                </Form.Item>
-                <Form.Item
-                  name={["zipCode"]}
-                  label="Zip Code"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Zip Code is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Zip Code" />
-                </Form.Item>
-                <Form.Item
-                  name="area"
-                  label="Area"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Area is required",
-                    },
-                  ]}
-                >
-                  <Input
-                    size="large"
-                    addonAfter={selectAfter}
-                    placeholder="Area"
-                  />
-                </Form.Item>
-                <Form.Item
-                  name="salePrice"
-                  label="Sale Price"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Price is required",
-                    },
-                  ]}
-                >
-                  <Input
-                    size="large"
-                    addonAfter={curencyAfter}
-                    placeholder="Sale Price"
-                  />
-                </Form.Item>
-                <Form.Item name="compensation" label="Compensation">
-                  <Input size="large" placeholder="Compensation" />
-                </Form.Item>
-                <Form.Item
-                  name="visitHours"
-                  label="Visiting Hours"
-                  placeholder="Visiting Hours"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Visiting Hours is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Visiting Hours" />
-                </Form.Item>
-                <Form.Item
-                  name="reducedPrice"
-                  label="Reduced Price"
-                  placeholder="Reduced Price"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Price is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Reduced Price" />
-                </Form.Item>
-                <Form.Item
-                  name="yearBuilt"
-                  label="Built Year"
-                  placeholder="Built Year"
-                  format="YYYY"
-                  showTime={false}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Built Year is required",
-                    },
-                  ]}
-                >
-                  <DatePicker
-                    size="large"
-                    picker="year"
-                    style={{ width: "100%" }}
-                  />
-                </Form.Item>
-                <Form.Item
-                  name="foundation"
-                  label="Foundation"
-                  placeholder="Foundation"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Foundation is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Foundation" />
-                </Form.Item>
-                <Form.Item
-                  name="bedroomCount"
-                  label="Bedroom Count"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Bedroom Count is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Bedroom Count" />
-                </Form.Item>
-                <Form.Item
-                  name="bathCount"
-                  label="Bathroom Count"
-                  placeholder="Bathroom Count"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Bathroom Count is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Bathroom Count" />
-                </Form.Item>
-                <Form.Item
-                  name="stories"
-                  label="Stories"
-                  placeholder="Stories"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Stories is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Stories" />
-                </Form.Item>
-                <Form.Item
-                  name="roof"
-                  label="Roof"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Roof is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Roof" />
-                </Form.Item>
-                <Form.Item
-                  name="flooring"
-                  label="Flooring"
-                  placeholder="Flooring"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Flooring is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Flooring" />
-                </Form.Item>
-                <Form.Item
-                  name="cooling"
-                  label="Cooling"
-                  placeholder="Cooling"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Cooling is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Cooling" />
-                </Form.Item>
-                <Form.Item
-                  name="heating"
-                  label="Heating"
-                  placeholder="Heating"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Heating is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Heating" />
-                </Form.Item>
-                <Form.Item
-                  name="fireplace"
-                  label="Water Front"
-                  placeholder="Water Front"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Water Front is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Fire Place" />
-                </Form.Item>
-                <Form.Item
-                  name="style"
-                  label="Style"
-                  placeholder="Style"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Style is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Style" />
-                </Form.Item>
-                <Form.Item
-                  name="pool"
-                  label="Pool"
-                  placeholder="Pool"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Pool is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Pool" />
-                </Form.Item>
-                <Form.Item
-                  name="parking"
-                  label="Parking"
-                  placeholder="Parking"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Parking is required",
-                    },
-                  ]}
-                >
-                  <Input size="large" placeholder="Parking" />
-                </Form.Item>
-              </Col>
-              <Col span={12} className="gutter-row">
-                <Form.Item>
-                  <div className="ant-form-item-control-input">
-                    <div className="ant-form-item-control-input-content">
-                      <input
-                        ref={inputRef}
-                        type="text"
-                        placeholder="Search a location"
-                        className="ant-input ant-input-lg ant-input-outlined css-dev-only-do-not-override-1kuana8"
-                      />
-                    </div>
-                  </div>
-                </Form.Item>
-                <Col span={12} className="gutter-row">
-                  <Form.Item name="mlsId" label="MLS ID">
-                    <Input
-                      showSearch
-                      size="large"
-                      filterOption={filterOption}
-                      loading={getPropertiesReducer.isLoading}
-                      options={getPropertiesReducer.data?.properties.map(
-                        (i) => ({
-                          value: i.mlsId,
-                          label: i.mlsId + " - " + i.address?.full,
-                        })
-                      )}
-                      placeholder=" MLS property"
-                    />
-                  </Form.Item>
-                </Col>
-                <Form.Item>
-                  <div
-                    ref={mapRef}
-                    style={{ width: "100%", height: "400px" }}
-                  />
-                </Form.Item>
-                <Card title="Features">
-                  <Form.List name="features">
-                    {(fields, { add, remove }) => (
-                      <>
-                        {fields.map((field, i) => (
-                          <Space
-                            key={field.key}
-                            style={{ display: "flex", marginBottom: 8 }}
-                          >
-                            <Form.Item
-                              {...field}
-                              name={[field.name, "name"]}
-                              fieldKey={[field.fieldKey, "name"]}
-                              key={i + field.name}
-                            >
-                              <Input placeholder="Name" />
-                            </Form.Item>
-                            <Form.Item
-                              {...field}
-                              name={[field.name, "description"]}
-                              fieldKey={[field.fieldKey, "description"]}
-                              key={i + 1 + field.name}
-                            >
-                              <TextArea
-                                size="large"
-                                rows={2}
-                                placeholder="Description"
-                              />
-                            </Form.Item>
-                            <MinusCircleOutlined
-                              onClick={() => remove(field.name)}
-                            />
-                          </Space>
-                        ))}
-                        <Form.Item>
-                          <Button
-                            type="dashed"
-                            onClick={() => add()}
-                            block
-                            icon={<PlusOutlined />}
-                          >
-                            Add item
-                          </Button>
-                        </Form.Item>
-                      </>
-                    )}
-                  </Form.List>
-                </Card>
-              </Col>
-            </Row>{" "}
-          </Row>
-
-          <Col span={24} className="gutter-row">
+          )}
+          <Col
+            xs={24}
+            sm={24}
+            md={12}
+            lg={12}
+            xl={12}
+            style={{ marginBottom: "16px" }}
+          >
+            <Form.Item name="filters" label="Communities">
+              <Select
+                mode="multiple"
+                showSearch
+                size="large"
+                loading={getFiltersReducer.isLoading}
+                options={getFiltersReducer.data?.filters.map((i) => ({
+                  value: i._id,
+                  label: i.name + " - " + i.code,
+                }))}
+                placeholder="Search filters"
+              />
+            </Form.Item>
+            <Form.Item name="neighborhood" label="Neighborhood">
+              <Input size="large" placeholder="Neighborhood" />
+            </Form.Item>
+          </Col>
+          <Col
+            xs={24}
+            sm={24}
+            md={12}
+            lg={12}
+            xl={12}
+            style={{ marginBottom: "16px" }}
+          >
+            <Form.Item name="description" label="Description">
+              <TextArea size="large" rows={4} placeholder="Description" />
+            </Form.Item>
+          </Col>
+          <Col
+            xs={24}
+            sm={24}
+            md={12}
+            lg={12}
+            xl={12}
+            style={{ marginBottom: "16px" }}
+          >
+            <Form.Item
+              name={["addressLine1"]}
+              label="Address Line 1"
+              rules={[
+                { required: true, message: "Address Line 1 is required" },
+              ]}
+            >
+              <Input size="large" placeholder="Address Line 1" />
+            </Form.Item>
+            <Form.Item name={["addressLine2"]} label="Address Line 2">
+              <Input size="large" placeholder="Address Line 2" />
+            </Form.Item>
+            <Form.Item
+              name={["city"]}
+              label="City"
+              rules={[{ required: true, message: "City is required" }]}
+            >
+              <Input size="large" placeholder="City" />
+            </Form.Item>
+            <Form.Item
+              name={["state"]}
+              label="State"
+              rules={[{ required: true, message: "State is required" }]}
+            >
+              <Input size="large" placeholder="State" />
+            </Form.Item>
+            <Form.Item
+              name={["country"]}
+              label="Country"
+              rules={[{ required: true, message: "Country is required" }]}
+            >
+              <Select
+                showSearch
+                size="large"
+                options={options}
+                placeholder="Search country"
+              />
+            </Form.Item>
+            <Form.Item
+              name={["zipCode"]}
+              label="Zip Code"
+              rules={[{ required: true, message: "Zip Code is required" }]}
+            >
+              <Input size="large" placeholder="Zip Code" />
+            </Form.Item>
+            <Form.Item
+              name="area"
+              label="Area"
+              rules={[{ required: true, message: "Area is required" }]}
+            >
+              <Input size="large" addonAfter={selectAfter} placeholder="Area" />
+            </Form.Item>
+            <Form.Item
+              name="salePrice"
+              label="Sale Price"
+              rules={[{ required: true, message: "Price is required" }]}
+            >
+              <Input
+                size="large"
+                addonAfter={curencyAfter}
+                placeholder="Sale Price"
+              />
+            </Form.Item>
+            <Form.Item name="compensation" label="Compensation">
+              <Input size="large" placeholder="Compensation" />
+            </Form.Item>
+            <Form.Item
+              name="visitHours"
+              label="Visiting Hours"
+              rules={[
+                { required: true, message: "Visiting Hours is required" },
+              ]}
+            >
+              <Input size="large" placeholder="Visiting Hours" />
+            </Form.Item>
+            <Form.Item
+              name="reducedPrice"
+              label="Reduced Price"
+              rules={[{ required: true, message: "Price is required" }]}
+            >
+              <Input size="large" placeholder="Reduced Price" />
+            </Form.Item>
+            <Form.Item
+              name="yearBuilt"
+              label="Built Year"
+              format="YYYY"
+              showTime={false}
+              rules={[{ required: true, message: "Built Year is required" }]}
+            >
+              <DatePicker
+                size="large"
+                picker="year"
+                style={{ width: "100%" }}
+              />
+            </Form.Item>
+            <Form.Item
+              name="foundation"
+              label="Foundation"
+              rules={[{ required: true, message: "Foundation is required" }]}
+            >
+              <Input size="large" placeholder="Foundation" />
+            </Form.Item>
+            <Form.Item
+              name="roofType"
+              label="Roof Type"
+              rules={[{ required: true, message: "Roof Type is required" }]}
+            >
+              <Input size="large" placeholder="Roof Type" />
+            </Form.Item>
+            <Form.Item
+              name="landSize"
+              label="Land Size"
+              rules={[{ required: true, message: "Land Size is required" }]}
+            >
+              <Input size="large" placeholder="Land Size" />
+            </Form.Item>
+          </Col>
+          <Col
+            xs={24}
+            sm={24}
+            md={12}
+            lg={12}
+            xl={12}
+            style={{ marginBottom: "16px" }}
+          >
+            <Form.Item
+              name="bedroomCount"
+              label="Bedroom Count"
+              rules={[{ required: true, message: "Bedroom Count is required" }]}
+            >
+              <Input size="large" placeholder="Bedroom Count" />
+            </Form.Item>
+            <Form.Item
+              name="bathCount"
+              label="Bathroom Count"
+              rules={[
+                { required: true, message: "Bathroom Count is required" },
+              ]}
+            >
+              <Input size="large" placeholder="Bathroom Count" />
+            </Form.Item>
+            <Form.Item
+              name="stories"
+              label="Stories"
+              rules={[{ required: true, message: "Stories is required" }]}
+            >
+              <Input size="large" placeholder="Stories" />
+            </Form.Item>
+            <Form.Item
+              name="roof"
+              label="Roof"
+              rules={[{ required: true, message: "Roof is required" }]}
+            >
+              <Input size="large" placeholder="Roof" />
+            </Form.Item>
+            <Form.Item
+              name="flooring"
+              label="Flooring"
+              rules={[{ required: true, message: "Flooring is required" }]}
+            >
+              <Input size="large" placeholder="Flooring" />
+            </Form.Item>
+            <Form.Item
+              name="cooling"
+              label="Cooling"
+              rules={[{ required: true, message: "Cooling is required" }]}
+            >
+              <Input size="large" placeholder="Cooling" />
+            </Form.Item>
+            <Form.Item
+              name="heating"
+              label="Heating"
+              rules={[{ required: true, message: "Heating is required" }]}
+            >
+              <Input size="large" placeholder="Heating" />
+            </Form.Item>
+            <Form.Item
+              name="fireplace"
+              label="Fire Place"
+              rules={[{ required: true, message: "Fire Place is required" }]}
+            >
+              <Input size="large" placeholder="Fire Place" />
+            </Form.Item>
+            <Form.Item
+              name="style"
+              label="Style"
+              rules={[{ required: true, message: "Style is required" }]}
+            >
+              <Input size="large" placeholder="Style" />
+            </Form.Item>
+            <Form.Item
+              name="pool"
+              label="Pool"
+              rules={[{ required: true, message: "Pool is required" }]}
+            >
+              <Input size="large" placeholder="Pool" />
+            </Form.Item>
+            <Form.Item
+              name="parking"
+              label="Parking"
+              rules={[{ required: true, message: "Parking is required" }]}
+            >
+              <Input size="large" placeholder="Parking" />
+            </Form.Item>
+          </Col>
+          <Col
+            xs={24}
+            sm={24}
+            md={24}
+            lg={24}
+            xl={24}
+            style={{ marginBottom: "16px" }}
+          >
+            <Form.Item>
+              <div ref={mapRef} style={{ width: "100%", height: "400px" }} />
+            </Form.Item>
+            <Form.Item>
+              <input
+                ref={inputRef}
+                type="text"
+                placeholder="Search a location"
+                style={{ width: "100%", padding: "8px", fontSize: "16px" }}
+              />
+            </Form.Item>
+          </Col>
+          <Col
+            xs={24}
+            sm={24}
+            md={12}
+            lg={12}
+            xl={12}
+            style={{ marginBottom: "16px" }}
+          >
+            <Form.Item name="mlsId" label="MLS ID">
+              <Select
+                showSearch
+                size="large"
+                filterOption={filterOption}
+                loading={getPropertiesReducer.isLoading}
+                options={getPropertiesReducer.data?.properties.map((i) => ({
+                  value: i.mlsId,
+                  label: i.mlsId + " - " + i.address?.full,
+                }))}
+                placeholder="MLS property"
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row justify="center" style={{ marginTop: "16px" }}>
+          <Col span={24}>
             <Form.Item style={{ marginBottom: "0px" }}>
               <Button
                 size="large"
-                block="true"
+                block
                 type="primary"
                 htmlType="submit"
                 loading={
@@ -893,9 +801,9 @@ function AddProperty() {
               </Button>
             </Form.Item>
           </Col>
-        </Form>
-      </Card>
-    </>
+        </Row>
+      </Form>
+    </Card>
   );
 }
 

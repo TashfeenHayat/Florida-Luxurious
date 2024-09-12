@@ -33,7 +33,7 @@ function Blog() {
       dataIndex: "status",
       key: "status",
       render: (_, record) =>
-        `${record?.agentId?.firstName} ${record?.agentId?.lastName} `,
+        `${record?.agentId?.firstName} ${record?.agentId?.lastName}`,
     },
     {
       title: "",
@@ -134,11 +134,9 @@ function Blog() {
       setSelectedProp(property.agentId);
       setTitle(property.title);
       setPdf(property.pdf || "");
-
       setModalSearch(
         `${property?.agentId?.firstName} ${property?.agentId?.lastName}`
       );
-
       setTimeout(() => {
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString(
@@ -245,7 +243,12 @@ function Blog() {
             </Button>
           </Space>
         }
-        style={{ padding: 0 }}
+        style={{
+          padding: 0,
+          margin: "0 auto",
+          maxWidth: "100%",
+          boxSizing: "border-box",
+        }}
       >
         <Table
           columns={columns}
@@ -253,6 +256,8 @@ function Blog() {
           dataSource={data?.blogs}
           pagination={{ ...tableParams, total: data?.totalCount }}
           onChange={handleTableChange}
+          scroll={{ x: "max-content" }} // Ensure horizontal scrolling
+          style={{ width: "100%" }}
         />
       </Card>
       <Modal
@@ -260,7 +265,9 @@ function Blog() {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        width={1000}
+        width="90%"
+        style={{ maxWidth: "1000px" }}
+        bodyStyle={{ padding: "20px" }}
       >
         <Select
           showSearch
@@ -278,7 +285,7 @@ function Blog() {
         />
         <Input
           value={title}
-          placeholder="Title "
+          placeholder="Title"
           onChange={(e) => setTitle(e.target.value)}
           style={{ width: "100%", marginBottom: 20 }}
         />
@@ -294,6 +301,7 @@ function Blog() {
             action={`${api_base_URL}upload`}
             beforeUpload={beforeUpload}
             onChange={handleFileChange}
+            style={{ width: "100%" }}
           >
             {pdf ? (
               <a href={pdf} target="_blank" rel="noopener noreferrer">
@@ -305,10 +313,16 @@ function Blog() {
           </Upload>
         </div>
         <div>
-          <div>Content</div>
+          <div style={{ marginBottom: "10px", fontWeight: "bold" }}>
+            Content
+          </div>
           <div
             id="summernote"
-            style={{ border: "1px solid #d9d9d9", borderRadius: "4px" }}
+            style={{
+              border: "1px solid #d9d9d9",
+              borderRadius: "4px",
+              minHeight: "200px",
+            }}
           ></div>
         </div>
       </Modal>

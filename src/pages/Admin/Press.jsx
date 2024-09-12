@@ -25,10 +25,14 @@ function Press() {
   const columns = [
     {
       title: "",
-      key: "action",
+      key: "cover",
       render: (_, record) => (
         <Avatar
-          style={{ verticalAlign: "middle" }}
+          style={{
+            verticalAlign: "middle",
+            maxWidth: "100px",
+            maxHeight: "100px",
+          }}
           shape="square"
           size={64}
           src={record.cover}
@@ -151,7 +155,7 @@ function Press() {
   };
 
   const uploadButton = (
-    <div>
+    <div style={{ textAlign: "center" }}>
       {photoUploading ? <LoadingOutlined /> : <PlusOutlined />}
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
@@ -215,7 +219,7 @@ function Press() {
             </Button>
           </Space>
         }
-        style={{ padding: 0 }}
+        style={{ padding: 0, margin: "0 auto", maxWidth: "100%" }}
       >
         <Table
           columns={columns}
@@ -223,6 +227,7 @@ function Press() {
           pagination={{ ...tableParams, total: data?.totalCount }}
           dataSource={data?.posts}
           onChange={handleTableChange}
+          scroll={{ x: "max-content" }} // Ensure horizontal scrolling
         />
       </Card>
       <Modal
@@ -230,7 +235,9 @@ function Press() {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        width={1000}
+        width="90%"
+        style={{ maxWidth: "1000px" }}
+        bodyStyle={{ padding: "20px" }}
       >
         <div style={{ marginBottom: "20px" }}>
           <Upload
@@ -245,9 +252,18 @@ function Press() {
             action={`${api_base_URL}upload`}
             beforeUpload={beforeUpload}
             onChange={handleFileChange}
+            style={{ width: "100%" }}
           >
             {photo ? (
-              <img src={photo} alt="avatar" style={{ width: "100%" }} />
+              <img
+                src={photo}
+                alt="avatar"
+                style={{
+                  width: "100%",
+                  maxHeight: "150px",
+                  objectFit: "cover",
+                }}
+              />
             ) : (
               uploadButton
             )}
@@ -275,7 +291,12 @@ function Press() {
             onChange={handleFileChange}
           >
             {pdf ? (
-              <a href={pdf} target="_blank" rel="noopener noreferrer">
+              <a
+                href={pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: "flex", alignItems: "center" }}
+              >
                 <FilePdfOutlined
                   style={{ fontSize: "32px", color: "#ff4d4f" }}
                 />
@@ -288,7 +309,7 @@ function Press() {
             )}
           </Upload>
         </div>
-        <div id="summernote"></div>
+        <div id="summernote" style={{ minHeight: "200px" }}></div>
       </Modal>
     </>
   );

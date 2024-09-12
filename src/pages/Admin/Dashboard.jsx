@@ -23,11 +23,11 @@ function Dashboard() {
   const items = [
     {
       key: "1",
-      label: "Profile",
+      label: <span style={{ color: "black" }}>Profile</span>,
     },
     {
       key: "2",
-      label: "Logout",
+      label: <span style={{ color: "black" }}>Logout</span>,
     },
   ];
 
@@ -51,7 +51,15 @@ function Dashboard() {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        breakpoint="lg"
+        onBreakpoint={(broken) => {
+          setCollapsed(broken);
+        }}
+      >
         <div className="demo-logo-vertical" />
         <Menu
           theme="dark"
@@ -104,7 +112,15 @@ function Dashboard() {
       </Sider>
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
-          <div className="flex-between">
+          <div
+            className="flex-between"
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "0 16px",
+            }}
+          >
             <Button
               type="text"
               icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -119,6 +135,7 @@ function Dashboard() {
             <Dropdown
               menu={{
                 items,
+
                 onClick: (e) => handleMenu(e),
               }}
               placement="bottomLeft"
@@ -133,6 +150,7 @@ function Dashboard() {
             margin: "24px 16px",
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
+            minHeight: "calc(100vh - 112px)",
           }}
         >
           <Outlet />
