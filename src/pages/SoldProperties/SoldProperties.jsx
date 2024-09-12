@@ -75,6 +75,7 @@ function SoldProperties() {
                     className=""
                     fallback="https://placehold.co/618x489"
                     preview={false}
+                    style={{ aspectRatio: 5 / 4 }}
                   />
                   <div className="more-info-property">
                     <Flex

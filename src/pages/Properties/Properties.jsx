@@ -10,7 +10,10 @@ import Icons from "../../components/Icons";
 import LetTalk from "../../components/LetTalk";
 import useProperties from "../../hooks/useProperties";
 //import useAgent from "../../hooks/useAgent";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8d64d8110e40bef6d8458e5ac7438da2f117e9f4
 const { Title, Text } = Typography;
 function Properties() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,13 +24,15 @@ function Properties() {
     currentPage,
     "for_sale"
   );
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8d64d8110e40bef6d8458e5ac7438da2f117e9f4
   {
     /*const check = data?.properties?.filter((item) => item.status !== "sold");
   console.log(check);*/
   }
   const navigate = useNavigate();
-
   // const properties = [
   //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
   //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
@@ -38,17 +43,14 @@ function Properties() {
   //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
   //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
   // ];
-
   // // Calculate the index range for the current page
   // const indexOfLastItem = currentPage * itemsPerPage;
   // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   // const currentItems = properties.slice(indexOfFirstItem, indexOfLastItem);
-
   // Function to handle page change
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
   return (
     <>
       <BackgroundImage Image={FeaturedPropertiesImage} style={"back"}>
@@ -111,7 +113,11 @@ function Properties() {
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
                           $ {/*property?.salePrice.slice(1).replace(/,/g, "")*/}
+<<<<<<< HEAD
                           {/*                           
+=======
+                          {/*                          
+>>>>>>> 8d64d8110e40bef6d8458e5ac7438da2f117e9f4
                           &nbsp;
                           {property?.currency} */}
                           {Number(
@@ -132,7 +138,6 @@ function Properties() {
                       </Flex>
                     </Flex>
                   </div>
-
                   <div className="info">
                     <Flex justify={"end"} align={"center"}>
                       <Flex>
@@ -170,11 +175,9 @@ function Properties() {
           )}
         </Container>
       )}
-
       <LetTalk />
       <Icons />
     </>
   );
 }
-
 export default Properties;

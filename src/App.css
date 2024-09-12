@@ -1485,6 +1485,10 @@ body:focus-visible {
   line-height: 14px;
   letter-spacing: 1.5px;
   cursor: pointer;
+  min-width: 250px;
+  max-width: 200px;
+  align-items: center;
+  justify-content: center;
 }
 .button-secondary-line-left:hover {
   position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
