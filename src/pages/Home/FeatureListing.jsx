@@ -20,7 +20,11 @@ function FeatureListing() {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", zIndex: 10 }}
+        style={{
+          ...style,
+          display: "block",
+          zIndex: 10,
+        }}
         onClick={onClick}
       >
         <img src={BackArrow} alt="Previous" width="45px" />
@@ -77,7 +81,10 @@ function FeatureListing() {
   };
 
   return (
-    <div className="boxshadow-section" style={{ paddingBottom: "98px" }}>
+    <div
+      className="boxshadow-section"
+      style={{ paddingBottom: "98px", overflow: "hidden" }}
+    >
       <Paragraph
         className="heading-florida-lux-listing"
         data-aos="fade-down-left"

@@ -1,7 +1,17 @@
 import React from "react";
 import BackgroundImage from "../../components/BackgroundImage";
 import Agent from "../../assets/Agent_profile.jpg";
-import { Typography, Row, Col, Image, Flex, Spin, Skeleton, Card } from "antd";
+import {
+  Carousel,
+  Typography,
+  Row,
+  Col,
+  Image,
+  Flex,
+  Spin,
+  Skeleton,
+  Card,
+} from "antd";
 import { MdOutlinePhone, MdOutlineMailOutline } from "react-icons/md";
 import Button from "../../components/Buttons";
 import { Container } from "react-bootstrap";
@@ -9,19 +19,81 @@ import LetTalk from "../../components/LetTalk";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import Logo from "../../assets/logoicon1.png";
-
+import BackArrow from "../../assets/backArrow.svg";
+import NextArrow from "../../assets/nextArrow.svg";
 import useAgent from "../../hooks/useAgent";
 import useBlogs from "../../hooks/useBlogs";
 import useReport from "./../../hooks/useReport";
-
+import Slider from "react-slick";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 const { Title, Paragraph, Text } = Typography;
+const CustomPrevArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", zIndex: 10 }}
+      onClick={onClick}
+    >
+      <img src={BackArrow} alt="Previous" width="45px" />
+    </div>
+  );
+};
 
+const CustomNextArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", zIndex: 10 }}
+      onClick={onClick}
+    >
+      <img src={NextArrow} alt="Next" width="45px" />
+    </div>
+  );
+};
+
+const settings = {
+  dots: false,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  prevArrow: <CustomPrevArrow />,
+  nextArrow: <CustomNextArrow />,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 425,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        prevArrow: false,
+        nextArrow: false,
+      },
+    },
+  ],
+};
 function AgentProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isLoading, data, isError } = useAgent(id);
   const { isLoading: isBlogLoading, data: blogData } = useBlogs(10, 1, id);
   const { isLoading: isReportLoading, reports } = useReport();
+
   const formatPhoneNumber = (phoneNumber) => {
     if (!phoneNumber) return "";
 
@@ -262,98 +334,93 @@ function AgentProfile() {
       {blogData?.blogs.length > 0 ? (
         <Container>
           <div className="pt-98 pb-98">
-            <Title className="text-upper f-100 text-center">My blog</Title>
-            <div>
-              <Row gutter={[16, 24]}>
-                {blogData.blogs.map((item, index) => (
-                  <Col
-                    xl={8}
-                    lg={12}
-                    md={12}
-                    sm={24}
-                    xsm={24}
-                    key={index}
-                    style={{ gap: "10px" }}
+            <Title className="text-upper f-100 text-center">My Blog</Title>
+            <Slider {...settings}>
+              {" "}
+              {blogData.blogs.map((item, index) => (
+                <div key={index} style={{ padding: "0 10px" }}>
+                  <Card
+                    style={{
+                      width: "100%",
+                      maxWidth: 400,
+                      background: "#E8E8E8",
+                      margin: "0 auto",
+                      padding: "20px",
+                      borderRadius: "10px",
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                    }}
                   >
-                    <Card style={{ width: 400, background: "#E8E8E8" }}>
-                      <Flex
-                        justify={"center"}
-                        align="center"
-                        vertical
-                        lg={8}
-                        md={8}
-                        sm={24}
-                        xsm={24}
+                    <Flex justify="center" align="center" vertical>
+                      <Image
+                        src={item?.agentId?.photo}
+                        preview={false}
+                        style={{ borderRadius: "50%", marginBottom: "10px" }}
+                        width="40%"
+                      />
+                      <Title className="f-16 pt-4 text-upper">
+                        {item?.title}
+                      </Title>
+                      <button
+                        className="button-view1"
+                        onClick={() => navigate(`/agent/blog/${item?._id}`)}
+                        style={{ marginTop: "10px" }}
                       >
-                        <Image
-                          src={item?.agentId?.photo}
-                          preview={false}
-                          style={{ borderRadius: "300px" }}
-                          width="40%"
-                        />
-                        <Title className="f-16 pt-4 text-upper">
-                          {item?.title}
-                        </Title>
-                        <button
-                          className="button-view1"
-                          onClick={() => navigate(`/agent/blog/${item?._id}`)}
-                        >
-                          Read More
-                        </button>
-                      </Flex>
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
-            </div>
+                        Read More
+                      </button>
+                    </Flex>
+                  </Card>
+                </div>
+              ))}
+            </Slider>
           </div>
         </Container>
       ) : reports?.length > 0 ? (
         <Container>
           <div className="pt-98 pb-98">
             <Title className="text-upper f-100 text-center">Reports</Title>
-            <div>
-              <Row gutter={[16, 24]}>
-                {reports.map((reportItem, index) => (
-                  <Col
-                    xl={8}
-                    lg={12}
-                    md={12}
-                    sm={24}
-                    xsm={24}
-                    key={index}
-                    style={{ gap: "10px" }}
+            <Slider {...settings}>
+              {reports.map((reportItem, index) => (
+                <div key={index} style={{ padding: "0 10px" }}>
+                  <Card
+                    style={{
+                      width: "100%",
+                      maxWidth: 400,
+                      background: "#E8E8E8",
+                      margin: "0 auto",
+                      padding: "20px",
+                      borderRadius: "10px",
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                    }}
                   >
-                    <Card style={{ width: 400, background: "#E8E8E8" }}>
-                      <Flex justify={"center"} align="center" vertical>
-                        <img src={Logo} width={"30%"} />
-                        <Title
-                          style={{ color: "black" }}
-                          className="text-upper f-100"
-                          level={2}
+                    <Flex justify="center" align="center" vertical>
+                      <img src={Logo} width={"30%"} alt="Report Logo" />
+                      <Title
+                        style={{ color: "black" }}
+                        className="text-upper f-100"
+                        level={2}
+                      >
+                        {reportItem.title || "FLP ANNUAL REPORT 2023"}
+                      </Title>
+                      <div>
+                        <Text
+                          style={{ color: "#838383" }}
+                          className="text-upper f-24 f-100"
                         >
-                          {reportItem.title || "FLP ANNUAL REPORT 2023"}
-                        </Title>
-                        <div>
-                          <Text
-                            style={{ color: "#838383" }}
-                            className="text-upper f-24 f-100"
-                          >
-                            {reportItem.date || "February 20, 2024"}
-                          </Text>
-                        </div>
-                        <Button
-                          className="button-view1"
-                          onClick={() => navigate(`/reports/${reportItem._id}`)}
-                        >
-                          Read more
-                        </Button>
-                      </Flex>
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
-            </div>
+                          {reportItem.date || "February 20, 2024"}
+                        </Text>
+                      </div>
+                      <Button
+                        className="button-view1"
+                        onClick={() => navigate(`/reports/${reportItem._id}`)}
+                        style={{ marginTop: "10px" }}
+                      >
+                        Read more
+                      </Button>
+                    </Flex>
+                  </Card>
+                </div>
+              ))}
+            </Slider>
           </div>
         </Container>
       ) : (
