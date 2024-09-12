@@ -409,13 +409,13 @@ function AgentProfile() {
                           {reportItem.date || "February 20, 2024"}
                         </Text>
                       </div>
-                      <Button
+                      <button
                         className="button-view1"
                         onClick={() => navigate(`/reports/${reportItem._id}`)}
                         style={{ marginTop: "10px" }}
                       >
                         Read more
-                      </Button>
+                      </button>
                     </Flex>
                   </Card>
                 </div>
