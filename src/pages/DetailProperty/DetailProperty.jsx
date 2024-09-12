@@ -638,11 +638,11 @@ export default function DetailProperty() {
               align="center"
               style={{ marginTop: 40 }}
             >
-              <div style={{ marginBottom: 40 }}>
+              {/* <div style={{ marginBottom: 40 }}>
                 <Button classNam="button-view1" width="300px">
                   Watch Videos
                 </Button>
-              </div>
+              </div> */}
               {/* <div style={{ marginBottom: 40 }}>
                 <Button classNam="button-view1" width="300px">
                   Request details
@@ -753,7 +753,6 @@ export default function DetailProperty() {
                       className="button-secondary-line-left"
                       htmlType="submit"
                     >
-                      
                       Submit info
                     </button>
                   </Col>
