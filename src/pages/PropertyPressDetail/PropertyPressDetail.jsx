@@ -26,7 +26,7 @@ function PropertyPressDetail() {
       iframes.forEach((iframe) => {
         iframe.style.maxWidth = "100%";
         iframe.style.width = "100%";
-        iframe.style.height = "auto";
+        iframe.style.height = "100vh";
       });
 
       // Ensure images are responsive
