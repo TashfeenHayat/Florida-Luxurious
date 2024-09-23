@@ -34,7 +34,7 @@ function AgentBlog() {
       const images = refHtml.current.querySelectorAll("img");
       images.forEach((img) => {
         img.style.maxWidth = "100%";
-        img.style.height = "100vh";
+        img.style.height = "auto";
       });
     }
   }, [data?.content]);
