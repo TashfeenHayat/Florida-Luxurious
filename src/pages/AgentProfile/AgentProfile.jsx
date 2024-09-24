@@ -352,10 +352,10 @@ function AgentProfile() {
                   >
                     <Flex justify="center" align="center" vertical>
                       <Image
-                        src={item?.agentId?.photo}
+                        src={item?.cover || item?.agentId?.photo}
                         preview={false}
-                        style={{ borderRadius: "50%", marginBottom: "10px" }}
-                        width="40%"
+                        style={{ borderRadius: "5%", marginBottom: "10px" }}
+                        width="100%"
                       />
                       <Title className="f-16 pt-4 text-upper">
                         {item?.title}

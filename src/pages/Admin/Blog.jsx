@@ -13,7 +13,7 @@ import {
   Form,
   Upload,
 } from "antd";
-import { PlusOutlined, FilePdfOutlined } from "@ant-design/icons";
+import { PlusOutlined, FilePdfOutlined, LoadingOutlined} from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlogs, addBlog, updateBlog, deleteBlog } from "../../api/Blogs";
 import customAxios from "../../api/Axios";
@@ -73,8 +73,11 @@ function Blog() {
   const [selectedProp, setSelectedProp] = useState(null);
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [pdf, setPdf] = useState("");
+  const [photo, setPhoto] = useState("");
   const [pdfUploading, setPdfUploading] = useState(false);
   const { isLoading, isError, data } = useSelector((s) => s.getBlogsReducer);
+  
+  const [photoUploading, setPhotoUploading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -126,18 +129,44 @@ function Blog() {
     setSelectedProp(property);
     setModalSearch(`${property?.firstName} ${property?.lastName}`);
   };
+ const extractBase64Data = (content) => {
+    const regex = /data:image\/[a-zA-Z]+;base64,([^\"]*)/;
+    const match = content.match(regex);
+    return match
+      ? match[0].replace(/^data:image\/[a-zA-Z]+;base64,/, "")
+      : null;
+  };
+
+  const base64ToBlobURL = (base64Data) => {
+    const byteCharacters = atob(base64Data);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: "image/jpeg" }); // Adjust type as needed
+    return URL.createObjectURL(blob);
+  };
+
 
   const showModal = (property) => {
     setIsModalOpen(true);
     if (property._id) {
-      setSelectedBlog(property);
+       setSelectedBlog(property);
       setSelectedProp(property.agentId);
       setTitle(property.title);
+      setPhoto(property.cover||"");
       setPdf(property.pdf || "");
       setModalSearch(
         `${property?.agentId?.firstName} ${property?.agentId?.lastName}`
       );
-      setTimeout(() => {
+     setTimeout(() => {
+        const base64Data = extractBase64Data(property.content);
+        if (base64Data) {
+          setPhoto(base64ToBlobURL(base64Data));
+        } else {
+          setPhoto(property.cover); // Fallback to default if no base64 data
+        }
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString(
           property?.content,
@@ -150,13 +179,29 @@ function Blog() {
       setSelectedProp(null);
       setTitle("");
       setModalSearch("");
+      setPhoto("");
       setPdf("");
       setTimeout(() => {
+        const parser = new DOMParser();
+        const decodedHtml = parser.parseFromString("", "text/html").body
+          .textContent;
         window.$("#summernote").summernote("code", "");
       }, 1000);
     }
   };
-
+ const beforeUploadPhoto = (file) => {
+    setPhotoUploading(true);
+    return true; // Allow the upload
+  };
+   const handlePhotoChange = (info) => {
+    if (info.file.status === "done") {
+      setPhotoUploading(false);
+      setPhoto(info.file.response.url);
+    } else if (info.file.status === "error") {
+      setPhotoUploading(false);
+      openNotification("error", "Failed to upload photo.");
+    }
+  };
   const beforeUpload = (file) => {
     if (file.type === "application/pdf") {
       setPdfUploading(true);
@@ -194,6 +239,7 @@ function Blog() {
             agentId: selectedProp._id,
             title,
             content: markupStr,
+             cover: photo,
             file: pdf || "",
           })
         ).unwrap();
@@ -204,6 +250,7 @@ function Blog() {
             agentId: selectedProp._id,
             title,
             content: markupStr,
+              cover: photo,
             id: selectedBlog._id,
             pdf,
           })
@@ -229,7 +276,12 @@ function Blog() {
   const handleDelete = (id) => {
     dispatch(deleteBlog(id));
   };
-
+const uploadButton = (
+    <div>
+      {photoUploading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
   return (
     <>
       {contextHolder}
@@ -269,6 +321,32 @@ function Blog() {
         style={{ maxWidth: "1000px" }}
         bodyStyle={{ padding: "20px" }}
       >
+          <div style={{ marginBottom: "20px" }}>
+          <Upload
+            name="file"
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            action={`${api_base_URL}upload`}
+           beforeUpload={beforeUploadPhoto}
+              onChange={handlePhotoChange}
+            headers={{ Authorization: `Bearer ${localStorage.token}` }}
+          >
+            {photo ? (
+              <img
+                src={photo}
+                alt="avatar"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                }}
+              />
+            ) : (
+              uploadButton
+            )}
+          </Upload>{" "}
+        </div>
         <Select
           showSearch
           value={modalSearch}
