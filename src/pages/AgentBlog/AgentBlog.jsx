@@ -8,7 +8,7 @@ import { decode } from "html-entities";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
 import HTMLFlipBook from "react-pageflip"; // Import the react-pageflip package
 import Agent from "../../assets/Agent_profile.jpg";
-
+import { Container } from "react-bootstrap";
 // Set the workerSrc for PDF.js
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
 
@@ -31,7 +31,7 @@ const Flipbook = ({ pages }) => {
       style={{
         margin: "0 auto",
         background: "#f5f5f5",
-        borderRadius: "10px",
+       borderRadius: "20px",
         boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
       }}
     >
@@ -43,7 +43,7 @@ const Flipbook = ({ pages }) => {
             style={{
               width: "600px",
               height: "100%",
-             
+             borderRadius: "20px",
             }}
           />
         </div>
@@ -155,10 +155,10 @@ function AgentBlog() {
           </Col>
         </Row>
       ) : (
-        <div style={{ padding: "15px", flex: "1" }}>
+        <Container style={{ padding: "15px", flex: "1" }} justify="center">
           <div ref={refHtml} />
           {pages.length > 1 && <Flipbook pages={pages} />}
-        </div>
+        </Container>
       )}
     </div>
   );

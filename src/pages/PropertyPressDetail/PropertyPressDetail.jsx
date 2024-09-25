@@ -1,27 +1,65 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Typography, Row, Col, Spin } from "antd";
 import { Container } from "react-bootstrap";
 import usePressDetail from "../../hooks/usePressDetail";
 import { useParams } from "react-router-dom";
 import { decode } from "html-entities";
+import HTMLFlipBook from "react-pageflip";
+import * as pdfjsLib from "pdfjs-dist/build/pdf";
 
 const { Title } = Typography;
+
+// Set the workerSrc for PDF.js
+pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
+
+const Flipbook = ({ pages }) => {
+  return (
+    <HTMLFlipBook
+      width={500}
+      height={700}
+      size="stretch"
+      minWidth={315}
+      maxWidth={600}
+      minHeight={400}
+      maxHeight={1533}
+      drawShadow={true}
+      flippingTime={1000}
+      useMouseEvents={true}
+      style={{
+        margin: "0 auto",
+        background: "#f5f5f5",
+        borderRadius: "20px",
+        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
+      }}
+    >
+      {pages.map((page, index) => (
+        <div key={index} className="page" style={{ padding: "20px" }}>
+          <img
+            src={page}
+            alt={`Page ${index + 1}`}
+            style={{
+              width: "600px",
+              height: "100%",
+               borderRadius: "20px",
+            }}
+          />
+        </div>
+      ))}
+    </HTMLFlipBook>
+  );
+};
 
 function PropertyPressDetail() {
   const { id } = useParams();
   const { data, isLoading } = usePressDetail(id);
-  console.log(data);
   const refHtml = useRef(null);
+  const [pages, setPages] = useState([]);
 
   useEffect(() => {
     if (refHtml.current && data?.content) {
-      // Decode HTML entities
       const decodedContent = decode(data.content);
-
-      // Set the innerHTML with decoded content
       refHtml.current.innerHTML = decodedContent;
 
-      // Ensure iframes are responsive
       const iframes = refHtml.current.querySelectorAll("iframe");
       iframes.forEach((iframe) => {
         iframe.style.maxWidth = "100%";
@@ -29,7 +67,6 @@ function PropertyPressDetail() {
         iframe.style.height = "70vh";
       });
 
-      // Ensure images are responsive
       const images = refHtml.current.querySelectorAll("img");
       images.forEach((img) => {
         img.style.maxWidth = "100%";
@@ -37,6 +74,41 @@ function PropertyPressDetail() {
       });
     }
   }, [data?.content]);
+
+  useEffect(() => {
+    if (data?.file) {
+      const url = data.file;
+      const loadingTask = pdfjsLib.getDocument(url);
+      loadingTask.promise.then((pdf) => {
+        const totalPages = pdf.numPages;
+        const pageImages = [];
+
+        const loadPage = async (pageNumber) => {
+          const page = await pdf.getPage(pageNumber);
+          const scale = 1.5;
+          const viewport = page.getViewport({ scale });
+
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+
+          await page.render({ canvasContext: context, viewport }).promise;
+
+          const imgData = canvas.toDataURL("image/png");
+          pageImages.push(imgData);
+
+          if (pageImages.length === totalPages) {
+            setPages(pageImages);
+          }
+        };
+
+        for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+          loadPage(pageNumber);
+        }
+      });
+    }
+  }, [data?.file]);
 
   return (
     <>
@@ -72,22 +144,19 @@ function PropertyPressDetail() {
           className="mt-4"
           style={{ maxWidth: "100%", padding: "0 15px" }}
         >
-          <Row justify="center">
+          <Row justify="center" style={{paddingBottom:"30px"}}>
             <Col xs={24} md={20} lg={16}>
               <div ref={refHtml} />
-              {data?.file && (
-                <div style={{ marginTop: "20px", textAlign: "center" }}>
-                  <iframe
-                    src={data.file}
-                    style={{
-                      width: "60%", // Set to 100% to ensure full-width
-                      height: "calc(100vh - 200px)", // Dynamically set the height relative to viewport height
-                    }}
-                    frameBorder="0"
-                    title="PDF Viewer"
-                  />
-                </div>
+           
+              
+                {pages.length > 1 && ( // Change to 1 to ensure at least one page is displayed
+                
+                  
+                    <Flipbook pages={pages} />
+                 
+               
               )}
+              
             </Col>
           </Row>
         </Container>
