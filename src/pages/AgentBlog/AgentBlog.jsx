@@ -31,7 +31,7 @@ const Flipbook = ({ pages }) => {
       style={{
         margin: "0 auto",
         background: "#f5f5f5",
-       borderRadius: "20px",
+        borderRadius: "20px",
         boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
       }}
     >
@@ -43,7 +43,7 @@ const Flipbook = ({ pages }) => {
             style={{
               width: "600px",
               height: "100%",
-             borderRadius: "20px",
+              borderRadius: "20px",
             }}
           />
         </div>
@@ -117,7 +117,9 @@ function AgentBlog() {
   }, [data?.file]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+    <div
+      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+    >
       <BackgroundImage Image={Agent}>
         <Row justify="center" align="middle">
           <Col>
