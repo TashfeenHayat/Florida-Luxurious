@@ -1,4 +1,4 @@
-import React, { useEffect, useRef , useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Typography, Row, Col, Spin } from "antd";
 import { Container } from "react-bootstrap";
 import useReportDetail from "../../hooks/useReportDetail";
@@ -7,19 +7,21 @@ import { decode } from "html-entities";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
 import HTMLFlipBook from "react-pageflip";
 const { Title } = Typography;
+
 // Set the workerSrc for PDF.js
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
+
 // Flipbook component using react-pageflip
 const Flipbook = ({ pages }) => {
   return (
     <HTMLFlipBook
-      width={500}
-      height={700}
+      width={window.innerWidth > 768 ? 500 : 300} // Adjust based on screen size
+      height={window.innerWidth > 768 ? 700 : 420}
       size="stretch"
-      minWidth={315}
+      minWidth={300}
       maxWidth={600}
       minHeight={400}
-      maxHeight={1533}
+      maxHeight={1000}
       drawShadow={true}
       flippingTime={1000}
       useMouseEvents={true}
@@ -36,9 +38,9 @@ const Flipbook = ({ pages }) => {
             src={page}
             alt={`Page ${index + 1}`}
             style={{
-              width: "600px",
-              height: "100%",
-               borderRadius: "20px",
+              width: "100%",
+              height: "auto",
+              borderRadius: "20px",
             }}
           />
         </div>
@@ -46,11 +48,13 @@ const Flipbook = ({ pages }) => {
     </HTMLFlipBook>
   );
 };
+
 function ReportDetail() {
   const { id } = useParams();
   const { data, isLoading } = useReportDetail(id);
   const refHtml = useRef(null);
   const [pages, setPages] = useState([]);
+
   useEffect(() => {
     if (refHtml.current && data?.content) {
       // Decode HTML entities
@@ -75,7 +79,8 @@ function ReportDetail() {
       });
     }
   }, [data?.content]);
- useEffect(() => {
+
+  useEffect(() => {
     if (data?.file) {
       const url = data.file;
       const loadingTask = pdfjsLib.getDocument(url);
@@ -85,7 +90,7 @@ function ReportDetail() {
 
         const loadPage = async (pageNumber) => {
           const page = await pdf.getPage(pageNumber);
-          const scale = 1.5;
+          const scale = window.innerWidth > 768 ? 1.5 : 1; // Adjust scaling based on screen size
           const viewport = page.getViewport({ scale });
 
           const canvas = document.createElement("canvas");
@@ -109,6 +114,7 @@ function ReportDetail() {
       });
     }
   }, [data?.file]);
+
   return (
     <>
       <div className="team-banner">
@@ -121,7 +127,10 @@ function ReportDetail() {
               textAlign: "center",
             }}
           >
-            <Title className="text-upper text-white f-50 f-100">
+            <Title
+              className="text-upper text-white f-50 f-100"
+              style={{ fontSize: window.innerWidth > 768 ? "50px" : "30px" }} // Responsive font size
+            >
               {data?.title}
             </Title>
           </div>
@@ -143,17 +152,11 @@ function ReportDetail() {
           className="mt-4"
           style={{ maxWidth: "100%", padding: "0 15px" }}
         >
-          <Row justify="center" style={{paddingBottom:"40px"}}>
+          <Row justify="center" style={{ paddingBottom: "40px" }}>
             <Col xs={24} md={20} lg={16}>
               <div ref={refHtml} />
-             
-                {pages.length > 0 && ( 
-                
-                  
-                    <Flipbook pages={pages} />
-                 
-               
-              )}
+
+              {pages.length > 0 && <Flipbook pages={pages} />}
             </Col>
           </Row>
         </Container>

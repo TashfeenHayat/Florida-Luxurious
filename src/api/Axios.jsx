@@ -12,6 +12,7 @@ export const customAxios = axios.create({
 
   headers: {
     Authorization: `Bearer ${localStorage.token}`,
+    mode: "no-cors",
   },
 });
 

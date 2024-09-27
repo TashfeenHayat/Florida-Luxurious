@@ -30,6 +30,7 @@ const Flipbook = ({ pages }) => {
         background: "#f5f5f5",
         borderRadius: "20px",
         boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
+        maxWidth: "100%", // Ensure full width on smaller screens
       }}
     >
       {pages.map((page, index) => (
@@ -38,9 +39,9 @@ const Flipbook = ({ pages }) => {
             src={page}
             alt={`Page ${index + 1}`}
             style={{
-              width: "600px",
-              height: "100%",
-               borderRadius: "20px",
+              width: "100%", // Responsive width
+              height: "auto", // Maintain aspect ratio
+              borderRadius: "20px",
             }}
           />
         </div>
@@ -64,7 +65,7 @@ function PropertyPressDetail() {
       iframes.forEach((iframe) => {
         iframe.style.maxWidth = "100%";
         iframe.style.width = "100%";
-        iframe.style.height = "70vh";
+        iframe.style.height = "400px"; // Fixed height for iframes
       });
 
       const images = refHtml.current.querySelectorAll("img");
@@ -120,9 +121,13 @@ function PropertyPressDetail() {
               justifyContent: "center",
               alignItems: "center",
               textAlign: "center",
+              padding: "20px",
             }}
           >
-            <Title className="text-upper text-white f-50 f-100">
+            <Title
+              className="text-upper text-white f-50 f-100"
+              style={{ fontSize: "clamp(24px, 5vw, 50px)" }} // Responsive text size
+            >
               {data?.title}
             </Title>
           </div>
@@ -144,19 +149,11 @@ function PropertyPressDetail() {
           className="mt-4"
           style={{ maxWidth: "100%", padding: "0 15px" }}
         >
-          <Row justify="center" style={{paddingBottom:"30px"}}>
+          <Row justify="center" style={{ paddingBottom: "30px" }}>
             <Col xs={24} md={20} lg={16}>
               <div ref={refHtml} />
-           
-              
-                {pages.length > 1 && ( // Change to 1 to ensure at least one page is displayed
-                
-                  
-                    <Flipbook pages={pages} />
-                 
-               
-              )}
-              
+
+              {pages.length > 1 && <Flipbook pages={pages} />}
             </Col>
           </Row>
         </Container>
