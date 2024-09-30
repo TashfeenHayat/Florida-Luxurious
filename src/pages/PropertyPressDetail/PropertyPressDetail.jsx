@@ -26,13 +26,13 @@ const Flipbook = React.forwardRef(({ pages, onPageChange }, ref) => {
       drawShadow={true}
       flippingTime={1000}
       useMouseEvents={true}
-      onFlip={onPageChange} // Call this on flip event
+      onFlip={onPageChange}
       style={{
         margin: "0 auto",
         background: "#f5f5f5",
         borderRadius: "20px",
         boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
-        maxWidth: "100%", // Ensure full width on smaller screens
+        maxWidth: "100%",
       }}
     >
       {pages.map((page, index) => (
@@ -41,7 +41,7 @@ const Flipbook = React.forwardRef(({ pages, onPageChange }, ref) => {
             src={page}
             alt={`Page ${index + 1}`}
             style={{
-              width: "100%", // Make the image responsive
+              width: "100%",
               height: "auto",
               borderRadius: "20px",
             }}
@@ -58,7 +58,8 @@ function PropertyPressDetail() {
   const refHtml = useRef(null);
   const flipbookRef = useRef(null);
   const [pages, setPages] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0); // State for current page
+  const [currentPage, setCurrentPage] = useState(0);
+  const [isFlipbookLoading, setIsFlipbookLoading] = useState(true); // State for flipbook loading
 
   useEffect(() => {
     if (refHtml.current && data?.content) {
@@ -69,7 +70,7 @@ function PropertyPressDetail() {
       iframes.forEach((iframe) => {
         iframe.style.maxWidth = "100%";
         iframe.style.width = "100%";
-        iframe.style.height = "400px"; // Fixed height for iframes
+        iframe.style.height = "400px";
       });
 
       const images = refHtml.current.querySelectorAll("img");
@@ -104,6 +105,7 @@ function PropertyPressDetail() {
 
           if (pageImages.length === totalPages) {
             setPages(pageImages);
+            setIsFlipbookLoading(false); // Set flipbook loading to false once pages are loaded
           }
         };
 
@@ -149,7 +151,7 @@ function PropertyPressDetail() {
           >
             <Title
               className="text-upper text-white f-50 f-100"
-              style={{ fontSize: "clamp(24px, 5vw, 50px)" }} // Responsive text size
+              style={{ fontSize: "clamp(24px, 5vw, 50px)" }}
             >
               {data?.title}
             </Title>
@@ -175,28 +177,43 @@ function PropertyPressDetail() {
           <Row justify="center" style={{ paddingBottom: "30px" }}>
             <Col xs={24} md={20} lg={16}>
               <div ref={refHtml} />
-              {pages.length > 0 && (
+              {isFlipbookLoading ? ( // Show loader while flipbook is loading
+                <Row
+                  style={{
+                    minHeight: "50vh",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Spin size="large" />
+                </Row>
+              ) : (
                 <>
-                  <Flipbook
-                    ref={flipbookRef} // Pass the ref to the flipbook
-                    pages={pages}
-                    onPageChange={handlePageChange}
-                  />
-                  <div style={{ marginTop: "20px", textAlign: "center" }}>
-                    <Button
-                      onClick={prevPage}
-                      disabled={currentPage === 0}
-                      style={{ marginRight: "10px" }}
-                    >
-                      Previous
-                    </Button>
-                    <Button
-                      onClick={nextPage}
-                      disabled={currentPage === pages.length - 1}
-                    >
-                      Next
-                    </Button>
-                  </div>
+                  {pages.length > 0 && (
+                    <>
+                      <Flipbook
+                        ref={flipbookRef}
+                        pages={pages}
+                        onPageChange={handlePageChange}
+                      />
+                      <div style={{ marginTop: "20px", textAlign: "center" }}>
+                        <Button
+                          onClick={prevPage}
+                          disabled={currentPage === 0}
+                          style={{ marginRight: "10px" }}
+                        >
+                          Previous
+                        </Button>
+                        <Button
+                          onClick={nextPage}
+                          disabled={currentPage === pages.length - 1}
+                        >
+                          Next
+                        </Button>
+                      </div>
+                    </>
+                  )}
                 </>
               )}
             </Col>

@@ -59,6 +59,7 @@ function AgentBlog() {
   const refHtml = useRef(null);
   const flipbookRef = useRef(null); // Create a ref for the flipbook
   const [pages, setPages] = useState([]);
+  const [loadingPages, setLoadingPages] = useState(true); // Track loading of flipbook pages
 
   // Decode HTML content and adjust images for better rendering
   useEffect(() => {
@@ -101,6 +102,7 @@ function AgentBlog() {
 
           if (pageImages.length === totalPages) {
             setPages(pageImages);
+            setLoadingPages(false); // Set loadingPages to false when all pages are loaded
           }
         };
 
@@ -167,7 +169,7 @@ function AgentBlog() {
       ) : (
         <Container style={{ padding: "15px", flex: "1" }} justify="center">
           <div ref={refHtml} />
-          {isLoading ? (
+          {loadingPages ? (
             <Row
               style={{
                 minHeight: "50vh",

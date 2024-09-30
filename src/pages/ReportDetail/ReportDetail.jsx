@@ -19,9 +19,9 @@ const Flipbook = React.forwardRef(({ pages }, ref) => {
       width={window.innerWidth > 768 ? 500 : 300} // Adjust based on screen size
       height={window.innerWidth > 768 ? 700 : 420}
       size="stretch"
-      minWidth={300}
-      maxWidth={600}
-      minHeight={400}
+      minWidth={400}
+      maxWidth={500}
+      minHeight={500}
       maxHeight={1000}
       drawShadow={true}
       flippingTime={1000}
@@ -58,6 +58,7 @@ function ReportDetail() {
   const refHtml = useRef(null);
   const flipbookRef = useRef(null); // Ref for the Flipbook instance
   const [pages, setPages] = useState([]);
+  const [isLoadingPages, setIsLoadingPages] = useState(true); // State for pages loading
 
   useEffect(() => {
     if (refHtml.current && data?.content) {
@@ -109,6 +110,7 @@ function ReportDetail() {
 
           if (pageImages.length === totalPages) {
             setPages(pageImages);
+            setIsLoadingPages(false); // Set loading to false when all pages are loaded
           }
         };
 
@@ -155,7 +157,7 @@ function ReportDetail() {
           </div>
         </div>
       </div>
-      {isLoading ? (
+      {isLoading || isLoadingPages ? ( // Check both data loading and pages loading
         <Row
           style={{
             minHeight: "50vh",
