@@ -116,6 +116,7 @@ function AgentBlog() {
     if (flipbookRef.current) {
       flipbookRef.current.pageFlip().flipPrev(); // Use pageFlip().flipPrev() correctly
     }
+    
   };
 
   const handleNextPage = () => {
