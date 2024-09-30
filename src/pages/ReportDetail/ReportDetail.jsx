@@ -1,20 +1,23 @@
-import React, { useEffect, useRef , useState } from "react";
-import { Typography, Row, Col, Spin } from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import { Typography, Row, Col, Spin, Button } from "antd";
 import { Container } from "react-bootstrap";
 import useReportDetail from "../../hooks/useReportDetail";
 import { useParams } from "react-router-dom";
 import { decode } from "html-entities";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
 import HTMLFlipBook from "react-pageflip";
+
 const { Title } = Typography;
+
 // Set the workerSrc for PDF.js
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
+
 // Flipbook component using react-pageflip
-const Flipbook = ({ pages }) => {
+const Flipbook = React.forwardRef(({ pages }, ref) => {
   return (
     <HTMLFlipBook
       width={500}
-      height={700}
+      height={750}
       size="stretch"
       minWidth={315}
       maxWidth={600}
@@ -23,11 +26,13 @@ const Flipbook = ({ pages }) => {
       drawShadow={true}
       flippingTime={1000}
       useMouseEvents={true}
+      ref={ref} // Pass ref to HTMLFlipBook
       style={{
         margin: "0 auto",
         background: "#f5f5f5",
         borderRadius: "20px",
         boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
+        overflow: "hidden", // Ensure that content doesn't overflow
       }}
     >
       {pages.map((page, index) => (
@@ -36,21 +41,24 @@ const Flipbook = ({ pages }) => {
             src={page}
             alt={`Page ${index + 1}`}
             style={{
-              width: "600px",
-              height: "100%",
-               borderRadius: "20px",
+              width: "100%", // Make the image responsive
+              height: "auto",
+              borderRadius: "20px",
             }}
           />
         </div>
       ))}
     </HTMLFlipBook>
   );
-};
+});
+
 function ReportDetail() {
   const { id } = useParams();
   const { data, isLoading } = useReportDetail(id);
   const refHtml = useRef(null);
+  const flipbookRef = useRef(null); // Ref for the Flipbook instance
   const [pages, setPages] = useState([]);
+
   useEffect(() => {
     if (refHtml.current && data?.content) {
       // Decode HTML entities
@@ -75,7 +83,8 @@ function ReportDetail() {
       });
     }
   }, [data?.content]);
- useEffect(() => {
+
+  useEffect(() => {
     if (data?.file) {
       const url = data.file;
       const loadingTask = pdfjsLib.getDocument(url);
@@ -109,6 +118,21 @@ function ReportDetail() {
       });
     }
   }, [data?.file]);
+
+  // Handler for flipping to the next page
+  const handleNextPage = () => {
+    if (flipbookRef.current) {
+      flipbookRef.current.pageFlip().flipNext();
+    }
+  };
+
+  // Handler for flipping to the previous page
+  const handlePrevPage = () => {
+    if (flipbookRef.current) {
+      flipbookRef.current.pageFlip().flipPrev();
+    }
+  };
+
   return (
     <>
       <div className="team-banner">
@@ -119,9 +143,13 @@ function ReportDetail() {
               justifyContent: "center",
               alignItems: "center",
               textAlign: "center",
+              padding: "20px", // Add padding for better spacing
             }}
           >
-            <Title className="text-upper text-white f-50 f-100">
+            <Title
+              className="text-upper text-white f-50 f-100"
+              style={{ fontSize: "clamp(24px, 5vw, 50px)" }}
+            >
               {data?.title}
             </Title>
           </div>
@@ -143,16 +171,32 @@ function ReportDetail() {
           className="mt-4"
           style={{ maxWidth: "100%", padding: "0 15px" }}
         >
-          <Row justify="center" style={{paddingBottom:"40px"}}>
+          <Row justify="center" style={{ paddingBottom: "40px" }}>
             <Col xs={24} md={20} lg={16}>
-              <div ref={refHtml} />
-             
-                {pages.length > 0 && ( 
-                
-                  
-                    <Flipbook pages={pages} />
-                 
-               
+              <div ref={refHtml} style={{ marginBottom: "20px" }} />
+
+              {pages.length > 0 && (
+                <>
+                  <Flipbook ref={flipbookRef} pages={pages} />
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginTop: "20px",
+                    }}
+                  >
+                    <Button
+                      type="primary"
+                      onClick={handlePrevPage}
+                      style={{ marginRight: "10px" }}
+                    >
+                      Previous Page
+                    </Button>
+                    <Button type="primary" onClick={handleNextPage}>
+                      Next Page
+                    </Button>
+                  </div>
+                </>
               )}
             </Col>
           </Row>
