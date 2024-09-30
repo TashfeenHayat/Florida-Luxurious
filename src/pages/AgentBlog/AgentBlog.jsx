@@ -42,13 +42,8 @@ const Flipbook = ({ pages, flipbookRef }) => {
             src={page}
             alt={`Page ${index + 1}`}
             style={{
-<<<<<<< HEAD
               width: "600px",
               height: "100%",
-=======
-              width: "100%", // Make images responsive
-              height: "auto",
->>>>>>> 56264c876973ebccfa89965679c8bf00366068b4
               borderRadius: "20px",
             }}
           />

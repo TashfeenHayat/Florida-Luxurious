@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-<<<<<<< HEAD
-import { Typography, Row, Col, Spin } from "antd";
-=======
 import { Typography, Row, Col, Spin, Button } from "antd";
->>>>>>> 56264c876973ebccfa89965679c8bf00366068b4
 import { Container } from "react-bootstrap";
 import useReportDetail from "../../hooks/useReportDetail";
 import { useParams } from "react-router-dom";
@@ -20,13 +16,8 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs
 const Flipbook = React.forwardRef(({ pages }, ref) => {
   return (
     <HTMLFlipBook
-<<<<<<< HEAD
       width={window.innerWidth > 768 ? 500 : 300} // Adjust based on screen size
       height={window.innerWidth > 768 ? 700 : 420}
-=======
-      width={500}
-      height={750}
->>>>>>> 56264c876973ebccfa89965679c8bf00366068b4
       size="stretch"
       minWidth={300}
       maxWidth={600}
@@ -50,11 +41,7 @@ const Flipbook = React.forwardRef(({ pages }, ref) => {
             src={page}
             alt={`Page ${index + 1}`}
             style={{
-<<<<<<< HEAD
-              width: "100%",
-=======
               width: "100%", // Make the image responsive
->>>>>>> 56264c876973ebccfa89965679c8bf00366068b4
               height: "auto",
               borderRadius: "20px",
             }}
@@ -63,11 +50,7 @@ const Flipbook = React.forwardRef(({ pages }, ref) => {
       ))}
     </HTMLFlipBook>
   );
-<<<<<<< HEAD
-};
-=======
 });
->>>>>>> 56264c876973ebccfa89965679c8bf00366068b4
 
 function ReportDetail() {
   const { id } = useParams();
@@ -136,8 +119,6 @@ function ReportDetail() {
     }
   }, [data?.file]);
 
-<<<<<<< HEAD
-=======
   // Handler for flipping to the next page
   const handleNextPage = () => {
     if (flipbookRef.current) {
@@ -152,7 +133,6 @@ function ReportDetail() {
     }
   };
 
->>>>>>> 56264c876973ebccfa89965679c8bf00366068b4
   return (
     <>
       <div className="team-banner">
@@ -168,11 +148,7 @@ function ReportDetail() {
           >
             <Title
               className="text-upper text-white f-50 f-100"
-<<<<<<< HEAD
               style={{ fontSize: window.innerWidth > 768 ? "50px" : "30px" }} // Responsive font size
-=======
-              style={{ fontSize: "clamp(24px, 5vw, 50px)" }}
->>>>>>> 56264c876973ebccfa89965679c8bf00366068b4
             >
               {data?.title}
             </Title>
@@ -197,11 +173,6 @@ function ReportDetail() {
         >
           <Row justify="center" style={{ paddingBottom: "40px" }}>
             <Col xs={24} md={20} lg={16}>
-<<<<<<< HEAD
-              <div ref={refHtml} />
-
-              {pages.length > 0 && <Flipbook pages={pages} />}
-=======
               <div ref={refHtml} style={{ marginBottom: "20px" }} />
 
               {pages.length > 0 && (
@@ -227,7 +198,6 @@ function ReportDetail() {
                   </div>
                 </>
               )}
->>>>>>> 56264c876973ebccfa89965679c8bf00366068b4
             </Col>
           </Row>
         </Container>

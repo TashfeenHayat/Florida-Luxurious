@@ -41,13 +41,8 @@ const Flipbook = React.forwardRef(({ pages, onPageChange }, ref) => {
             src={page}
             alt={`Page ${index + 1}`}
             style={{
-<<<<<<< HEAD
-              width: "100%", // Responsive width
-              height: "auto", // Maintain aspect ratio
-=======
               width: "100%", // Make the image responsive
               height: "auto",
->>>>>>> 56264c876973ebccfa89965679c8bf00366068b4
               borderRadius: "20px",
             }}
           />
@@ -180,10 +175,6 @@ function PropertyPressDetail() {
           <Row justify="center" style={{ paddingBottom: "30px" }}>
             <Col xs={24} md={20} lg={16}>
               <div ref={refHtml} />
-<<<<<<< HEAD
-
-              {pages.length > 1 && <Flipbook pages={pages} />}
-=======
               {pages.length > 0 && (
                 <>
                   <Flipbook
@@ -208,7 +199,6 @@ function PropertyPressDetail() {
                   </div>
                 </>
               )}
->>>>>>> 56264c876973ebccfa89965679c8bf00366068b4
             </Col>
           </Row>
         </Container>
