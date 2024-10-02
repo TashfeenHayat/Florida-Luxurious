@@ -2188,3 +2188,7 @@ body:focus-visible {
 .custom-dropdown-menu {
   width: 200px; /* Set your desired width here */
 }
+/*swipper*/
+.swiper-3d .swiper-slide-shadow{
+  background-color: transparent !important;
+}

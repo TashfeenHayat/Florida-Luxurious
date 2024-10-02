@@ -89,6 +89,7 @@ const AddTestimonial = () => {
   const [modalSearch, setModalSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedAgent, setSelectedAgent] = useState(null);
+  const [selectedProp, setSelectedProp] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -121,7 +122,7 @@ const AddTestimonial = () => {
       setUsername(testimonial.Username);
       setRating(testimonial.rating);
       setModalSearch(
-        `${testimonial.agentId.firstName} ${testimonial.agentId.lastName}`
+        `${testimonial?.agentId?.firstName} ${testimonial?.agentId?.lastName}`
       );
     } else {
       setCurrentTestimonial(null); // Reset for adding a new testimonial
@@ -189,15 +190,21 @@ const AddTestimonial = () => {
   const handleSearch = async (key) => {
     try {
       const res = await customAxios.get(`agent`, {
-        params: { key },
+        params: { key, limit: 30, page: 1 },
       });
       const data = res.data;
+      console.log(res.data);
       setModalProps(data.agents);
     } catch (error) {
       console.error("Error fetching agents:", error);
     }
   };
-
+  console.log("search", handleSearch);
+  const handleChange = (newValue) => {
+    const property = modalProps.find((i) => i._id === newValue);
+    setSelectedAgent(property);
+    setModalSearch(`${property?.firstName} ${property?.lastName}`);
+  };
   return (
     <>
       {contextHolder}
@@ -250,19 +257,16 @@ const AddTestimonial = () => {
           value={modalSearch}
           placeholder="Select agent"
           style={{ width: "100%", marginBottom: 20 }}
+          filterOption={false}
           onSearch={handleSearch}
-          onChange={(value) => {
-            const agent = modalProps.find((agent) => agent._id === value);
-            setSelectedAgent(agent);
-            setModalSearch(`${agent.firstName} ${agent.lastName}`);
-          }}
-        >
-          {modalProps.map((agent) => (
-            <Select.Option key={agent._id} value={agent._id}>
-              {`${agent.firstName} ${agent.lastName}`}
-            </Select.Option>
-          ))}
-        </Select>
+          onChange={handleChange}
+          notFoundContent={null}
+          options={(modalProps || []).map((d) => ({
+            value: d._id,
+            label: `${d.firstName} ${d.lastName}`,
+          }))}
+        />
+
         <Form layout="vertical">
           <Form.Item label="Username">
             <Input

@@ -13,7 +13,11 @@ import {
   Form,
   Upload,
 } from "antd";
-import { PlusOutlined, FilePdfOutlined, LoadingOutlined} from "@ant-design/icons";
+import {
+  PlusOutlined,
+  FilePdfOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlogs, addBlog, updateBlog, deleteBlog } from "../../api/Blogs";
 import customAxios from "../../api/Axios";
@@ -76,7 +80,7 @@ function Blog() {
   const [photo, setPhoto] = useState("");
   const [pdfUploading, setPdfUploading] = useState(false);
   const { isLoading, isError, data } = useSelector((s) => s.getBlogsReducer);
-  
+
   const [photoUploading, setPhotoUploading] = useState(false);
   const dispatch = useDispatch();
 
@@ -115,7 +119,7 @@ function Blog() {
   const handleSearch = async (key) => {
     try {
       const res = await customAxios.get(`agent`, {
-        params: { key },
+        params: { key, limit: 30, page: 1 },
       });
       const data = res.data;
       setModalProps(data.agents);
@@ -129,7 +133,7 @@ function Blog() {
     setSelectedProp(property);
     setModalSearch(`${property?.firstName} ${property?.lastName}`);
   };
- const extractBase64Data = (content) => {
+  const extractBase64Data = (content) => {
     const regex = /data:image\/[a-zA-Z]+;base64,([^\"]*)/;
     const match = content.match(regex);
     return match
@@ -148,19 +152,18 @@ function Blog() {
     return URL.createObjectURL(blob);
   };
 
-
   const showModal = (property) => {
     setIsModalOpen(true);
     if (property._id) {
-       setSelectedBlog(property);
+      setSelectedBlog(property);
       setSelectedProp(property.agentId);
       setTitle(property.title);
-      setPhoto(property.cover||"");
+      setPhoto(property.cover || "");
       setPdf(property.pdf || "");
       setModalSearch(
         `${property?.agentId?.firstName} ${property?.agentId?.lastName}`
       );
-     setTimeout(() => {
+      setTimeout(() => {
         const base64Data = extractBase64Data(property.content);
         if (base64Data) {
           setPhoto(base64ToBlobURL(base64Data));
@@ -189,11 +192,11 @@ function Blog() {
       }, 1000);
     }
   };
- const beforeUploadPhoto = (file) => {
+  const beforeUploadPhoto = (file) => {
     setPhotoUploading(true);
     return true; // Allow the upload
   };
-   const handlePhotoChange = (info) => {
+  const handlePhotoChange = (info) => {
     if (info.file.status === "done") {
       setPhotoUploading(false);
       setPhoto(info.file.response.url);
@@ -239,7 +242,7 @@ function Blog() {
             agentId: selectedProp._id,
             title,
             content: markupStr,
-             cover: photo,
+            cover: photo,
             file: pdf || "",
           })
         ).unwrap();
@@ -250,7 +253,7 @@ function Blog() {
             agentId: selectedProp._id,
             title,
             content: markupStr,
-              cover: photo,
+            cover: photo,
             id: selectedBlog._id,
             pdf,
           })
@@ -276,7 +279,7 @@ function Blog() {
   const handleDelete = (id) => {
     dispatch(deleteBlog(id));
   };
-const uploadButton = (
+  const uploadButton = (
     <div>
       {photoUploading ? <LoadingOutlined /> : <PlusOutlined />}
       <div style={{ marginTop: 8 }}>Upload</div>
@@ -321,15 +324,15 @@ const uploadButton = (
         style={{ maxWidth: "1000px" }}
         bodyStyle={{ padding: "20px" }}
       >
-          <div style={{ marginBottom: "20px" }}>
+        <div style={{ marginBottom: "20px" }}>
           <Upload
             name="file"
             listType="picture-card"
             className="avatar-uploader"
             showUploadList={false}
             action={`${api_base_URL}upload`}
-           beforeUpload={beforeUploadPhoto}
-              onChange={handlePhotoChange}
+            beforeUpload={beforeUploadPhoto}
+            onChange={handlePhotoChange}
             headers={{ Authorization: `Bearer ${localStorage.token}` }}
           >
             {photo ? (

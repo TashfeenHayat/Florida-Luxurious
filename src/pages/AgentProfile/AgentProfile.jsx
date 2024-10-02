@@ -28,7 +28,11 @@ import useReport from "./../../hooks/useReport";
 import useTestimonials from "../../hooks/useTestimonials";
 import Slider from "react-slick";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCards } from "swiper/modules";
+import "swiper/swiper-bundle.css";
 const { Title, Paragraph, Text } = Typography;
+
 const CustomPrevArrow = (props) => {
   const { className, style, onClick } = props;
   return (
@@ -483,21 +487,28 @@ function AgentProfile() {
 
               <Row justify="center">
                 <Col xs={24} md={20}>
-                  <Carousel autoplay>
+                  <Swiper
+                    effect={"cards"}
+                    grabCursor={true}
+                    modules={[EffectCards]}
+                    className=""
+                    autoplay
+                  >
                     {Array.isArray(testimonialsData?.testmonials) &&
                     testimonialsData.testmonials.length > 0 ? (
                       testimonialsData.testmonials.map((testimonial, index) => (
-                        <div key={index}>
+                        <SwiperSlide key={index}>
                           <Card
                             style={{
-                              width: "100%",
-                              maxWidth: 400,
+                              width: "40%",
+                              maxWidth: "200",
                               background: "#E8E8E8",
                               margin: "0 auto",
                               padding: "20px",
                               borderRadius: "10px",
                               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                               textAlign: "center",
+                              border: "2px solid black",
                             }}
                           >
                             <div
@@ -552,14 +563,14 @@ function AgentProfile() {
                               </span>
                             </Paragraph>
                           </Card>
-                        </div>
+                        </SwiperSlide>
                       ))
                     ) : (
                       <div style={{ textAlign: "center", padding: "20px" }}>
                         <p>No testimonials available.</p>
                       </div>
                     )}
-                  </Carousel>
+                  </Swiper>
                 </Col>
               </Row>
             </div>
