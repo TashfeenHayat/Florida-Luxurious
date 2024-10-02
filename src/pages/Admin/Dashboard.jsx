@@ -13,6 +13,7 @@ import {
   QuestionCircleOutlined,
   PrinterOutlined,
   EditOutlined,
+  StarOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 const { Header, Sider, Content } = Layout;
@@ -106,6 +107,11 @@ function Dashboard() {
               key: "/admin/report",
               icon: <FileTextOutlined />,
               label: "Reports",
+            },
+            {
+              key: "/admin/Testimonial",
+              icon: <StarOutlined />,
+              label: "Testimonial",
             },
           ]}
         />
