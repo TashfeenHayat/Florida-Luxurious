@@ -17,8 +17,7 @@ function OurStory() {
   const [counter, setCounter] = useState(1831197188); // Starting value
 
   useEffect(() => {
-    const target = 30052918000; // total value
-
+    const target = 3625843999; // total value
     const duration = 500;
     const intervalTime = 30;
     const increment = (target - counter) / (duration / intervalTime);
@@ -71,8 +70,8 @@ function OurStory() {
             entrepreneurial team with a broad expertise in servicing the needs
             of our clientele we consistently achieve top sales results in
             Broward’s luxury market. To better facilitate the needs of our
-            clients, we have Agents fluent in French, German, Italian, Polish,
-            Portuguese, Russian, Spanish, Japanese, Arabic and Romanian.
+            clients, we have Agents fluent in Italian, Portuguese, Russian,
+            Spanish, Romanian, Hebrew and Turkish .
           </Paragraph>
         </Col>
         <Col lg={14} sm={24} md={24} style={{ background: "#000" }}>
@@ -128,7 +127,7 @@ function OurStory() {
                   className="text-white text-upper "
                   style={{ fontSize: "30px" }}
                 >
-                  $3 BILLION
+                  $3.26 BILLION
                 </Text>
               </div>
             </Col>

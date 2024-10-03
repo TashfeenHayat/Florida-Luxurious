@@ -43,6 +43,11 @@ function Properties() {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+  const sortedProperties = data?.properties?.slice().sort((a, b) => {
+    const priceA = Number(a?.salePrice?.slice(1).replace(/,/g, "") || 0);
+    const priceB = Number(b?.salePrice?.slice(1).replace(/,/g, "") || 0);
+    return priceB - priceA;
+  });
   return (
     <>
       <BackgroundImage Image={FeaturedPropertiesImage} style={"back"}>
@@ -63,7 +68,7 @@ function Properties() {
       ) : (
         <Container className="pt-98 pb-98">
           <Row gutter={[60, 60]}>
-            {data?.properties.map((property, index) => (
+            {sortedProperties?.map((property, index) => (
               <Col
                 lg={12}
                 md={12}

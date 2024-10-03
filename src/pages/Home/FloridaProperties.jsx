@@ -10,10 +10,10 @@ import Bagde4 from "../../assets/2023.svg";
 
 const { Title, Text } = Typography;
 function FloridaProperties() {
-  const [counter, setCounter] = useState(1831197188); // Starting value
+  const [counter, setCounter] = useState(3000000); // Starting value
 
   useEffect(() => {
-    const target = 3005291899; // total value
+    const target = 3625844000; // total value
 
     const duration = 500;
     const intervalTime = 30;
@@ -116,7 +116,7 @@ function FloridaProperties() {
                 data-aos="fade-left"
                 data-aos-duration="1500"
               >
-                $3 BILLION <br />
+                $3.26 BILLION <br />
                 <Text className="text-gray text-upper f-16">
                   Has exceeded the mark
                 </Text>
