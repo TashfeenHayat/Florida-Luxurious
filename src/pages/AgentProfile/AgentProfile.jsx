@@ -471,7 +471,7 @@ function AgentProfile() {
           </div>
         </Container>
       )}
-      <>
+      <div className="boxshadow-section">
         {" "}
         {isLoading ? (
           <Skeleton.Image
@@ -576,7 +576,7 @@ function AgentProfile() {
             </div>
           </Container>
         )}
-      </>
+      </div>
       <LetTalk />
     </>
   );
