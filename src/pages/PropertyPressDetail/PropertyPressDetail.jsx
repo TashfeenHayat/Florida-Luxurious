@@ -129,6 +129,7 @@ function PropertyPressDetail() {
       const prevPageIndex = currentPage - 1;
       setCurrentPage(prevPageIndex);
       flipbookRef.current.pageFlip().flip(prevPageIndex);
+      
     }
   };
 
