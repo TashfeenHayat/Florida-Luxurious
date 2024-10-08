@@ -9,6 +9,7 @@ import {
   Upload,
   notification,
   Space,
+  Spin,
 } from "antd";
 import { api_base_URL, google_api_key } from "../../api/Axios";
 import { Loader } from "@googlemaps/js-api-loader";
@@ -30,6 +31,7 @@ function AddFilter() {
 
   const inputRef = useRef(null);
   const mapRef = useRef(null);
+
   const [coordinates, setCoordinates] = useState({
     lat: 47.7511,
     lng: 120.7401,
@@ -57,75 +59,80 @@ function AddFilter() {
       libraries: ["places"],
     });
 
-    if (id) {
-      setLoading(true);
-      dispatch(getFilter(id)).then((filter) => {
+    if (!mapRef.current) {
+      console.error("mapRef is not yet set");
+      return;
+    }
+
+    const loadMap = async () => {
+      await loader.load();
+      const google = window.google;
+
+      const map = new google.maps.Map(mapRef.current, {
+        center: coordinates,
+        zoom: 9,
+      });
+
+      const marker = new google.maps.Marker({
+        map,
+        position: coordinates,
+        draggable: false,
+      });
+
+      const autocomplete = new google.maps.places.Autocomplete(
+        inputRef.current,
+        {
+          componentRestrictions: { country: "us" },
+        }
+      );
+
+      autocomplete.addListener("place_changed", () => {
+        const selectedPlace = autocomplete.getPlace();
+        if (!selectedPlace.geometry) {
+          console.error("Place not found");
+          return;
+        }
+
+        const bounds = new google.maps.LatLngBounds();
+        if (selectedPlace.geometry.viewport) {
+          bounds.union(selectedPlace.geometry.viewport);
+        } else {
+          bounds.extend(selectedPlace.geometry.location);
+        }
+
+        map.fitBounds(bounds);
+        marker.setPosition(selectedPlace.geometry.location);
+      });
+    };
+
+    const fetchData = async () => {
+      if (id) {
+        setLoading(true);
+        const filter = await dispatch(getFilter(id));
         setLoading(false);
         setPhoto(filter.payload?.photo);
-        setInitialValue(filter?.payload);
-        setCoordinates(filter.payload?.geo);
-      });
-    } else {
-      // Load map with default coordinates if no ID is present
-      loadMap(loader, coordinates);
-    }
-  }, [dispatch, id]);
+        setInitialValue(filter.payload);
+        const geo = filter.payload?.geo;
 
-  useEffect(() => {
-    const loader = new Loader({
-      apiKey: google_api_key,
-      libraries: ["places"],
-    });
-
-    // Load the map whenever coordinates change
-    if (coordinates) {
-      loadMap(loader, { geometry: { location: coordinates } });
-    }
-  }, [coordinates]);
-
-  const loadMap = (loader, place) => {
-    loader.load().then(() => {
-      if (inputRef.current && mapRef.current) {
-        let google = window.google;
-        const map = new google.maps.Map(mapRef.current, {
-          center: place.geometry?.location || { lat: 37.7749, lng: -122.4194 },
-          zoom: 9,
-        });
-
-        const marker = new google.maps.Marker({
-          map,
-          draggable: false,
-        });
-
-        const autocomplete = new google.maps.places.Autocomplete(
-          inputRef.current,
-          {
-            componentRestrictions: { country: "us" },
-          }
-        );
-
-        autocomplete.addListener("place_changed", () => {
-          const selectedPlace = autocomplete.getPlace();
-          setGeo(selectedPlace);
-          if (!selectedPlace.geometry) {
-            console.error("Place not found");
-            return;
-          }
-
-          const bounds = new google.maps.LatLngBounds();
-          if (selectedPlace.geometry.viewport) {
-            bounds.union(selectedPlace.geometry.viewport);
-          } else if (selectedPlace.geometry.bounds) {
-            bounds.extend(selectedPlace.geometry.bounds.getNorthEast());
-            bounds.extend(selectedPlace.geometry.bounds.getSouthWest());
-          }
-
-          map.fitBounds(bounds);
-          marker.setPosition(selectedPlace.geometry.location);
-        });
+        if (geo) {
+          setCoordinates(geo.location);
+        }
       }
-    });
-  };
+
+      const intervalId = setInterval(async () => {
+        try {
+          await loadMap();
+          clearInterval(intervalId);
+        } catch (error) {
+          console.error("Error loading map:", error);
+        }
+      }, 1000);
+
+      return () => clearInterval(intervalId);
+    };
+
+    fetchData();
+  }, [dispatch, id, google_api_key]);
 
   const onFinish = async (values) => {
     console.log("Received values of form: ", values, photo);
