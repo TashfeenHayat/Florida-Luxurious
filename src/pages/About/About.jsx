@@ -7,7 +7,7 @@ import LetTalk from "../../components/LetTalk";
 import Bagde from "../../assets/2019.svg";
 import Bagde1 from "../../assets/2021.svg";
 
-import Bagde2 from "../../assets/award20.svg";
+import Bagde2 from "../../assets/2020.svg";
 import Bagde3 from "../../assets/2022.svg";
 import Bagde4 from "../../assets/2023.svg";
 

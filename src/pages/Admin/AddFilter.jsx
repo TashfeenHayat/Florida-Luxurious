@@ -30,22 +30,23 @@ function AddFilter() {
 
   const inputRef = useRef(null);
   const mapRef = useRef(null);
+  const [coordinates, setCoordinates] = useState({
+    lat: 47.7511,
+    lng: 120.7401,
+  });
   const [initialVlues, setInitialValue] = useState({});
   const [photo, setPhoto] = useState("");
   const [geo, setGeo] = useState({});
   const [photoUplaoding, setPhotoUplaoding] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [coordinates, setCoordinates] = useState({
-    lat: 47.7511,
-    lng: 120.7401,
-  });
+
   const params = useParams();
   const { id } = params;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
-  //console.log(api);
+
   const openNotification = (type, description) => {
     api[type]({ description });
   };
@@ -56,50 +57,38 @@ function AddFilter() {
       libraries: ["places"],
     });
 
-    loadMap(loader, coordinates);
     if (id) {
       setLoading(true);
-      dispatch(getFilter(params.id)).then((filter) => {
-        //console.log("filter", filter.payload);
+      dispatch(getFilter(id)).then((filter) => {
         setLoading(false);
         setPhoto(filter.payload?.photo);
         setInitialValue(filter?.payload);
-        //console.log(setInitialValue(filter?.payload));
-        loadMap(loader, filter.payload?.geo);
-        console.log("geo", filter.payload?.geo);
-
         setCoordinates(filter.payload?.geo);
-
-        // setGeo(place);
-        //   console.log(place);
-
-        //   if (!place.geometry) {
-        //     console.error("Place not found");
-        //     return;
-        //   }
-
-        //   var bounds = new google.maps.LatLngBounds();
-        //   if (place.geometry.viewport) {
-        //     bounds.union(place.geometry.viewport);
-        //   } else if (place.geometry.bounds) {
-        //     bounds.extend(place.geometry.bounds.getNorthEast());
-        //     bounds.extend(place.geometry.bounds.getSouthWest());
-        //   }
-
-        //   map.fitBounds(bounds);
-        //   marker.setPosition(place.geometry.location);
       });
+    } else {
+      // Load map with default coordinates if no ID is present
+      loadMap(loader, coordinates);
     }
   }, [dispatch, id]);
+
+  useEffect(() => {
+    const loader = new Loader({
+      apiKey: google_api_key,
+      libraries: ["places"],
+    });
+
+    // Load the map whenever coordinates change
+    if (coordinates) {
+      loadMap(loader, { geometry: { location: coordinates } });
+    }
+  }, [coordinates]);
 
   const loadMap = (loader, place) => {
     loader.load().then(() => {
       if (inputRef.current && mapRef.current) {
         let google = window.google;
         const map = new google.maps.Map(mapRef.current, {
-          center: place
-            ? place.geometry?.location
-            : { lat: 37.7749, lng: -122.4194 },
+          center: place.geometry?.location || { lat: 37.7749, lng: -122.4194 },
           zoom: 9,
         });
 
@@ -114,27 +103,25 @@ function AddFilter() {
             componentRestrictions: { country: "us" },
           }
         );
-        console.log("geometry");
+
         autocomplete.addListener("place_changed", () => {
-          const place = autocomplete.getPlace();
-          setGeo(place);
-          console.log("place", place);
-          console.log("geometry", place.geometry.viewport);
-          if (!place.geometry) {
+          const selectedPlace = autocomplete.getPlace();
+          setGeo(selectedPlace);
+          if (!selectedPlace.geometry) {
             console.error("Place not found");
             return;
           }
 
-          var bounds = new google.maps.LatLngBounds();
-          if (place.geometry.viewport) {
-            bounds.union(place.geometry.viewport);
-          } else if (place.geometry.bounds) {
-            bounds.extend(place.geometry.bounds.getNorthEast());
-            bounds.extend(place.geometry.bounds.getSouthWest());
+          const bounds = new google.maps.LatLngBounds();
+          if (selectedPlace.geometry.viewport) {
+            bounds.union(selectedPlace.geometry.viewport);
+          } else if (selectedPlace.geometry.bounds) {
+            bounds.extend(selectedPlace.geometry.bounds.getNorthEast());
+            bounds.extend(selectedPlace.geometry.bounds.getSouthWest());
           }
 
           map.fitBounds(bounds);
-          marker.setPosition(place.geometry.location);
+          marker.setPosition(selectedPlace.geometry.location);
         });
       }
     });

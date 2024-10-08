@@ -4,16 +4,16 @@ import DownArrow from "../../assets/downarrow.svg";
 import Bagde from "../../assets/2019.svg";
 import Bagde1 from "../../assets/2021.svg";
 
-import Bagde2 from "../../assets/award20.svg";
+import Bagde2 from "../../assets/2020.svg";
 import Bagde3 from "../../assets/2022.svg";
 import Bagde4 from "../../assets/2023.svg";
 
 const { Title, Text } = Typography;
 function FloridaProperties() {
-  const [counter, setCounter] = useState(3000000); // Starting value
+  const [counter, setCounter] = useState(3000000);
 
   useEffect(() => {
-    const target = 3625844000; // total value
+    const target = 3625844000;
 
     const duration = 500;
     const intervalTime = 30;
