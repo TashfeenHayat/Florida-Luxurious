@@ -816,7 +816,7 @@ export default function DetailProperty() {
                         src={data?.property?.Primary_agentId?.photo}
                         preview={false}
                         width="40%"
-                        style={{ aspectRatio: 5 / 5 }}
+                        style={{ aspectRatio: 5 / 7, objectFit: "cover" }}
                       />
 
                       <Flex vertical justify="flex-start" align="">
@@ -896,7 +896,7 @@ export default function DetailProperty() {
                         src={data?.property?.Secondary_agentId?.photo}
                         preview={false}
                         width="40%"
-                        style={{ aspectRatio: 5 / 5 }}
+                        style={{ aspectRatio: 5 / 7, objectFit: "cover" }}
                       />
 
                       <Flex vertical justify="flex-start" align="">
