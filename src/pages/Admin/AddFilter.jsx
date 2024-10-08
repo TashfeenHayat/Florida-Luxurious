@@ -35,14 +35,17 @@ function AddFilter() {
   const [geo, setGeo] = useState({});
   const [photoUplaoding, setPhotoUplaoding] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [coordinates, setCoordinates] = useState({
+    lat: 47.7511,
+    lng: 120.7401,
+  });
   const params = useParams();
   const { id } = params;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
-
+  //console.log(api);
   const openNotification = (type, description) => {
     api[type]({ description });
   };
@@ -52,15 +55,21 @@ function AddFilter() {
       apiKey: google_api_key,
       libraries: ["places"],
     });
-    loadMap(loader);
+
+    loadMap(loader, coordinates);
     if (id) {
       setLoading(true);
       dispatch(getFilter(params.id)).then((filter) => {
-        console.log(filter.payload);
+        //console.log("filter", filter.payload);
         setLoading(false);
         setPhoto(filter.payload?.photo);
         setInitialValue(filter?.payload);
+        //console.log(setInitialValue(filter?.payload));
         loadMap(loader, filter.payload?.geo);
+        console.log("geo", filter.payload?.geo);
+
+        setCoordinates(filter.payload?.geo);
+
         // setGeo(place);
         //   console.log(place);
 
@@ -81,7 +90,7 @@ function AddFilter() {
         //   marker.setPosition(place.geometry.location);
       });
     }
-  }, []);
+  }, [dispatch, id]);
 
   const loadMap = (loader, place) => {
     loader.load().then(() => {
@@ -90,7 +99,7 @@ function AddFilter() {
         const map = new google.maps.Map(mapRef.current, {
           center: place
             ? place.geometry?.location
-            : { lat: 37.7749, lng: -122.4194 }, // Default center (San Francisco)
+            : { lat: 37.7749, lng: -122.4194 },
           zoom: 9,
         });
 
@@ -105,12 +114,12 @@ function AddFilter() {
             componentRestrictions: { country: "us" },
           }
         );
-
+        console.log("geometry");
         autocomplete.addListener("place_changed", () => {
           const place = autocomplete.getPlace();
           setGeo(place);
-          console.log(place);
-
+          console.log("place", place);
+          console.log("geometry", place.geometry.viewport);
           if (!place.geometry) {
             console.error("Place not found");
             return;
@@ -142,6 +151,8 @@ function AddFilter() {
           geo,
         })
       ).unwrap();
+      //console.log(values);
+      console.log("eidt", geo);
       // setInitialValue({});
       openNotification("success", res);
       setTimeout(navigate("/admin/community"), 1000);

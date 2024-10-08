@@ -37,7 +37,7 @@ function Comunities() {
 
   const mapRef = useRef(null);
   const { data, isLoading, isError } = useCommunity(id);
-
+  console.log("data", data);
   useEffect(() => {
     const loader = new Loader({
       apiKey: google_api_key,

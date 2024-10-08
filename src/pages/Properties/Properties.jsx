@@ -20,6 +20,7 @@ function Properties() {
     currentPage,
     "for_sale"
   );
+  //console.log("dara", data);
   {
     /*const check = data?.properties?.filter((item) => item.status !== "sold");
   console.log(check);*/

@@ -4,6 +4,7 @@ import {
   LoadingOutlined,
   PlusOutlined,
   FilePdfOutlined,
+  EyeOutlined,
 } from "@ant-design/icons";
 import {
   Avatar,
@@ -28,7 +29,6 @@ import { api_base_URL } from "../../api/Axios";
 
 function Report() {
   const columns = [
-   
     {
       title: "Title",
       dataIndex: "title",
@@ -71,7 +71,6 @@ function Report() {
   const [pdf, setPdf] = useState("");
   const [pdfUploading, setPdfUploading] = useState(false);
   const { isLoading, isError, data } = useSelector((s) => s.getReportsReducer);
-  console.log(data);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -96,25 +95,6 @@ function Report() {
     );
   };
 
-  const extractBase64Data = (content) => {
-    const regex = /data:image\/[a-zA-Z]+;base64,([^\"]*)/;
-    const match = content.match(regex);
-    return match
-      ? match[0].replace(/^data:image\/[a-zA-Z]+;base64,/, "")
-      : null;
-  };
-
-  const base64ToBlobURL = (base64Data) => {
-    const byteCharacters = atob(base64Data);
-    const byteNumbers = new Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-    const byteArray = new Uint8Array(byteNumbers);
-    const blob = new Blob([byteArray], { type: "image/jpeg" }); // Adjust type as needed
-    return URL.createObjectURL(blob);
-  };
-
   const showModal = (property) => {
     setIsModalOpen(true);
     if (property._id) {
@@ -122,13 +102,8 @@ function Report() {
         setSelectedProp(property);
         setTitle(property.title);
         setPhoto(property.cover);
-        setPdf(property.pdf || "");
-        const base64Data = extractBase64Data(property.content);
-        if (base64Data) {
-          setPhoto(base64ToBlobURL(base64Data));
-        } else {
-          setPhoto(property.cover); // Fallback to default if no base64 data
-        }
+        setPdf(property.file || "");
+        console.log(property.file);
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString(
           property?.content,
@@ -139,7 +114,7 @@ function Report() {
     } else {
       setTitle("");
       setPhoto("");
-      setPdf("");
+      setPdf(""); // Clear PDF URL
       setTimeout(() => {
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString("", "text/html").body
@@ -158,66 +133,123 @@ function Report() {
   };
 
   const handleFileChange = (info) => {
+    if (info.file.status === "uploading") {
+      setPdfUploading(true);
+    }
+
     if (info.file.status === "done") {
       if (info.file.type === "application/pdf") {
         setPdfUploading(false);
         setPdf(info.file.response.url);
-      } else {
-        setPhotoUploading(false);
-        setPhoto(info.file.response.url);
+        openNotification("success", "PDF uploaded successfully.");
       }
+    } else if (info.file.status === "error") {
+      setPdfUploading(false);
+      openNotification("error", "Failed to upload PDF.");
     }
   };
 
   const uploadButton = (
-    <div>
+    <div style={{ textAlign: "center" }}>
       {photoUploading ? <LoadingOutlined /> : <PlusOutlined />}
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
+  const handlePreview = async (file) => {
+    const fileURL =
+      file.url || file.thumbUrl || URL.createObjectURL(file.originFileObj);
+
+    if (file.type === "application/pdf") {
+      // Open PDF in a new tab
+      window.open(fileURL, "_blank");
+    } else {
+      // Handle other file previews if necessary
+    }
+  };
+
+  const handleImageUpload = ({ file }) => {
+    setPhotoUploading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    fetch(`${api_base_URL}upload`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setPhoto(data.url);
+        openNotification("success", "Image uploaded successfully.");
+      })
+      .catch(() => {
+        openNotification("error", "Image upload failed.");
+      })
+      .finally(() => {
+        setPhotoUploading(false);
+      });
+  };
+
+  const handlePdfUpload = ({ file }) => {
+    setPdfUploading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    fetch(`${api_base_URL}upload`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setPdf(data.url);
+        openNotification("success", "PDF uploaded successfully.");
+      })
+      .catch(() => {
+        openNotification("error", "PDF upload failed.");
+      })
+      .finally(() => {
+        setPdfUploading(false);
+      });
+  };
 
   const handleOk = async () => {
     try {
       const markupStr = $("#summernote").summernote("code");
+      const postData = {
+        title,
+        cover: photo,
+        content: markupStr,
+        file: pdf || "", // Include PDF URL if available
+      };
+
       if (selectedProp._id) {
         await dispatch(
-          updateReport({
+          updatePost({
             id: selectedProp._id,
-            title,
-            cover: photo,
-            content: markupStr,
-            file: pdf || "",
+            ...postData,
           })
         ).unwrap();
-        openNotification("success", "Report updated successfully.");
+        openNotification("success", "Post updated successfully.");
         setSelectedProp({});
         setIsModalOpen(false);
-
-        dispatch(
-          getReports({
-            page: tableParams.current,
-            limit: tableParams.pageSize,
-          })
-        );
       } else {
-        await dispatch(
-          addReport({
-            title,
-            cover: photo,
-            content: markupStr,
-          })
-        ).unwrap();
-        openNotification("success", "Report added successfully.");
+        await dispatch(addPost(postData)).unwrap();
+        openNotification("success", "Post added successfully.");
         setIsModalOpen(false);
-
-        // Refresh the posts list
-        dispatch(
-          getReports({
-            page: tableParams.current,
-            limit: tableParams.pageSize,
-          })
-        );
       }
+
+      // Refresh the posts list
+      dispatch(
+        getPosts({
+          page: tableParams.current,
+          limit: tableParams.pageSize,
+        })
+      );
     } catch (error) {
       console.error("Failed to save the post:", error);
       openNotification("error", "Failed to save the post.");
@@ -229,88 +261,16 @@ function Report() {
     setSelectedProp({});
   };
 
-  // Function to add PDF upload button to Summernote toolbar
-  const addPdfUploadButton = () => {
-    window.$.summernote.ui
-      .button({
-        contents: '<i class="note-icon-picture"></i> Upload PDF',
-        tooltip: "Upload PDF",
-        click: function () {
-          const input = document.createElement("input");
-          input.type = "file";
-          input.accept = "application/pdf";
-          input.onchange = async (event) => {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const formData = new FormData();
-            formData.append("file", file);
-
-            try {
-              const response = await fetch(`${api_base_URL}upload`, {
-                method: "POST",
-                headers: {
-                  Authorization: `Bearer ${localStorage.token}`,
-                },
-                body: formData,
-              });
-              const result = await response.json();
-
-              if (result.url) {
-                const pdfEmbed =
-                  '<a href="' +
-                  result.url +
-                  '" target="_blank">' +
-                  file.name +
-                  "</a>";
-                window.$("#summernote").summernote("pasteHTML", pdfEmbed);
-              }
-            } catch (error) {
-              openNotification("error", "Failed to upload PDF.");
-            }
-          };
-          input.click();
-        },
-      })
-      .render();
-  };
-
-  useEffect(() => {
-    // Initialize Summernote with custom toolbar including PDF upload button
-    window.$("#summernote").summernote({
-      height: 200,
-      toolbar: [
-        ["style", ["style"]],
-        ["font", ["bold", "underline", "clear"]],
-        ["color", ["color"]],
-        ["para", ["ul", "ol", "paragraph"]],
-        ["table", ["table"]],
-        ["insert", ["link", "picture", "video"]],
-        ["view", ["fullscreen", "codeview", "help"]],
-        ["upload", ["uploadPdf"]],
-      ],
-      callbacks: {
-        onInit: addPdfUploadButton,
-      },
-    });
-  }, []);
-
   return (
     <>
       {contextHolder}
       <Card
         title="Report Info"
         extra={
-          <Space>
-            <Button onClick={() => showModal({})} type="primary">
-              <Link>
-                <PlusOutlined />
-                Add
-              </Link>
-            </Button>
-          </Space>
+          <Button onClick={() => showModal({})} type="primary">
+            <PlusOutlined /> Add
+          </Button>
         }
-        style={{ padding: 0 }}
       >
         <Table
           columns={columns}
@@ -326,69 +286,80 @@ function Report() {
         onOk={handleOk}
         onCancel={handleCancel}
         width={1000}
-        style={{ top: 20 }}
       >
-        {" "}
+        <Upload
+          listType="picture-card"
+          showUploadList={false}
+          customRequest={handleImageUpload}
+        >
+          {photo ? (
+            <img src={photo} alt="uploaded" style={{ width: "100%" }} />
+          ) : (
+            <div>
+              {photoUploading ? <LoadingOutlined /> : <PlusOutlined />}
+              <div style={{ marginTop: 8 }}>Upload Image</div>
+            </div>
+          )}
+        </Upload>
+
         <div style={{ marginBottom: "20px" }}>
           <Upload
             name="file"
             listType="picture-card"
-            className="avatar-uploader"
-            showUploadList={false}
+            className="pdf-uploader"
             action={`${api_base_URL}upload`}
             beforeUpload={beforeUpload}
             onChange={handleFileChange}
-            headers={{ Authorization: `Bearer ${localStorage.token}` }}
+            headers={{
+              Authorization: `Bearer ${localStorage.token}`,
+            }}
           >
-            {photo ? (
-              <img
-                src={photo}
-                alt="avatar"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "contain",
-                }}
-              />
+            {pdf ? (
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <a
+                  href={pdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: pdfUploading ? "grey" : "#1890ff",
+                    marginRight: "8px",
+                  }}
+                >
+                  {pdfUploading ? (
+                    <>
+                      <LoadingOutlined style={{ marginRight: "8px" }} />
+                      Uploading...
+                    </>
+                  ) : (
+                    <span>
+                      <FilePdfOutlined />
+                      Uploaded
+                    </span>
+                  )}
+                </a>
+
+                {!pdfUploading && (
+                  <EyeOutlined
+                    style={{ cursor: "pointer", color: "#1890ff" }}
+                    onClick={() =>
+                      handlePreview({ url: pdf, type: "application/pdf" })
+                    }
+                  />
+                )}
+              </div>
             ) : (
               uploadButton
             )}
-          </Upload>{" "}
+          </Upload>
         </div>
+
         <Input
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          style={{ marginBottom: 20 }}
         />
-        <div style={{ marginBottom: "20px" }}>
-          <Upload
-            name="file"
-            listType="text"
-            className="pdf-uploader"
-            loading={pdfUploading}
-            showUploadList={false}
-            headers={{
-              Authorization: `Bearer ${localStorage.token}`,
-            }}
-            action={`${api_base_URL}upload`}
-            beforeUpload={beforeUpload}
-            onChange={handleFileChange}
-          >
-            {pdf ? (
-              <a href={pdf} target="_blank" rel="noopener noreferrer">
-                <FilePdfOutlined
-                  style={{ fontSize: "32px", color: "#ff4d4f" }}
-                />
-                <span style={{ marginLeft: "8px" }}>View PDF</span>
-              </a>
-            ) : (
-              <Button>
-                <PlusOutlined /> Upload PDF
-              </Button>
-            )}
-          </Upload>
-        </div>
-        <div id="summernote"></div>
+        <div id="summernote" style={{ minHeight: "200px" }}></div>
       </Modal>
     </>
   );

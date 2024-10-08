@@ -88,19 +88,31 @@ function AddProperty() {
     setAddSecondaryAgent(e.target.value === "yes");
   };
 
+  const handleChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
+
   const handlePreview = async (file) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
-    }
     setPreviewImage(file.url || file.preview);
     setPreviewOpen(true);
   };
 
-  const handleChange = ({ fileList: newFileList }) => {
-    console.log(newFileList);
+  const handleDragStart = (e, index) => {
+    e.dataTransfer.setData("text/plain", index);
+  };
+
+  const handleDrop = (e, index) => {
+    e.preventDefault();
+    const fromIndex = e.dataTransfer.getData("text/plain");
+    const newFileList = [...fileList];
+    const [movedItem] = newFileList.splice(fromIndex, 1);
+    newFileList.splice(index, 0, movedItem);
     setFileList(newFileList);
   };
 
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
   const uploadButton = (
     <button
       style={{
@@ -131,8 +143,10 @@ function AddProperty() {
   const openNotification = (type, description) => {
     api[type]({ description });
   };
+  // Inside the AddProperty component, where you are fetching data and setting form values
 
-  useEffect(() => {
+  {
+    /* useEffect(() => {
     const loader = new Loader({
       apiKey: google_api_key,
       libraries: ["places"],
@@ -141,20 +155,85 @@ function AddProperty() {
     dispatch(getAgents({ page: 1, limit: 50 }));
     dispatch(getFilters({ page: 1, limit: 50 }));
     dispatch(getProperties({ mlsOnly: true }));
+
     if (id) {
       setLoading(true);
       dispatch(getProperty(params.id)).then(({ payload }) => {
-        console.log(payload);
         const { property } = payload;
         setLoading(false);
 
+        // Decode HTML for summernote editor
+        const parser = new DOMParser();
+        const decodedHtml = parser.parseFromString(property.press, "text/html")
+          .body.textContent;
+        window.$("#summernote").summernote("code", decodedHtml);
+
+        // Set initial fileList from property media
+        setFileList(property?.media?.map((media) => ({ url: media.mdUrl })));
+
+        // Set coordinates
+        const coords = {
+          lat: parseFloat(property.latitude),
+          lng: parseFloat(property.longitude),
+        };
+        setCoordinates(coords);
+
+        // Load the map with coordinates
+        loadMap(loader, coords);
+
+        // Populate form fields with property data
+        form.setFieldsValue({
+          ...property,
+          mlsId: parseInt(property?.mlsId),
+          Primary_agentId: property.agentId?._id,
+          Secondary_agentId: property.agentId?._id,
+          filters: property.filters?.map((i) => i._id),
+          yearBuilt: dayJs(property.yearBuilt),
+          addressLine1: property.addressLine1,
+        });
+
+        // Set the search location input with the address
+        if (inputRef.current) {
+          inputRef.current.value = property?.addressLine1;
+        }
+      });
+    } else {
+      window.$("#summernote").summernote();
+    }
+
+    return () => {
+      window.$("#summernote").summernote("destroy");
+    };
+  }, [id, dispatch, form]);*/
+  }
+
+  useEffect(() => {
+    const loader = new Loader({
+      apiKey: google_api_key,
+      libraries: ["places"],
+    });
+    loadMap(loader, coordinates);
+    dispatch(getAgents({ page: 1, limit: 50 }));
+
+    dispatch(getFilters({ page: 1, limit: 50 }));
+    dispatch(getProperties({ mlsOnly: true }));
+    if (id) {
+      setLoading(true);
+      dispatch(getProperty(params.id)).then(({ payload }) => {
+        //console.log(payload);
+        const { property } = payload;
+        console.log(property);
+        console.log("Primary Agent ID:", property.Primary_agentId);
+        console.log("Secondary Agent ID:", property.Secondary_agentId);
+        console.log("MlsId:", property.mlsId);
+        setLoading(false);
         // Decode HTML
         var parser = new DOMParser();
         var decodedHtml = parser.parseFromString(property.press, "text/html")
           .body.textContent;
         window.$("#summernote").summernote("code", decodedHtml);
         setFileList(property?.media?.map((media) => ({ url: media.mdUrl })));
-        console.log(fileList);
+        //console.log(fileList);
         const coords = {
           lat: parseFloat(property.latitude),
           lng: parseFloat(property.longitude),
@@ -164,12 +243,23 @@ function AddProperty() {
         form.resetFields();
         form.setFieldsValue({
           ...property,
-          mlsId: parseInt(property?.mlsId),
-          Primary_agentId: property.agentId?._id,
-          Secondary_agentId: property.agentId?._id,
+          mlsId: property.mlsId,
+          Primary_agentId: property.Primary_agentId?._id,
+          Secondary_agentId: property.Secondary_agentId?._id,
           filters: property.filters?.map((i) => i._id),
           yearBuilt: dayJs(property.yearBuilt),
+          addressLine1: property.addressLine1,
         });
+
+        // Determine if a secondary agent exists
+        setAddSecondaryAgent(!!property.Secondary_agentId);
+
+        // Populate location input
+        if (inputRef.current) {
+          inputRef.current.value = `${property?.addressLine1 || ""}, ${
+            property?.city || ""
+          }, ${property?.state || ""}, ${property?.country || ""}`;
+        }
       });
     } else {
       window.$("#summernote").summernote();
@@ -177,7 +267,7 @@ function AddProperty() {
     return () => {
       window.$("#summernote").summernote("destroy");
     };
-  }, []);
+  }, [dispatch, id]);
 
   // const loadSumernote = (value = "") => {
   //   console.log("calling", value);
@@ -352,18 +442,49 @@ function AddProperty() {
                   fileList={fileList}
                   onPreview={handlePreview}
                   onChange={handleChange}
+                  moveable="true"
                   headers={{
                     Authorization: `Bearer ${localStorage.token}`,
                   }}
                   action={`${api_base_URL}upload`}
                 >
-                  {fileList?.length >= 8 ? null : uploadButton}
+                  {fileList.length >= 8 ? null : uploadButton}
                 </Upload>
-                {previewImage && (
+                <div>
+                  <h5>Reorder the images </h5>
+                  {fileList.map((file, index) => (
+                    <div
+                      key={file.uid}
+                      draggable
+                      onDragStart={(e) => handleDragStart(e, index)}
+                      onDrop={(e) => handleDrop(e, index)}
+                      onDragOver={handleDragOver}
+                      style={{
+                        display: "inline-block",
+                        margin: "8px",
+                        border: "1px solid #d9d9d9",
+                        borderRadius: "4px",
+                        padding: "4px",
+                        cursor: "move",
+                      }}
+                    >
+                      <Image
+                        src={
+                          file.url || URL.createObjectURL(file.originFileObj)
+                        }
+                        alt={file.name}
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          objectFit: "cover",
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                {previewOpen && previewImage && (
                   <Image
-                    wrapperStyle={{
-                      display: "none",
-                    }}
                     preview={{
                       visible: previewOpen,
                       onVisibleChange: (visible) => setPreviewOpen(visible),
@@ -376,6 +497,7 @@ function AddProperty() {
               </Form.Item>
             </Col>
           </Row>
+
           <Row>
             <Col span={12} className="gutter-row">
               <Form.Item

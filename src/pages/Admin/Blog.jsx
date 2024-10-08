@@ -17,6 +17,7 @@ import {
   PlusOutlined,
   FilePdfOutlined,
   LoadingOutlined,
+  EyeOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlogs, addBlog, updateBlog, deleteBlog } from "../../api/Blogs";
@@ -159,7 +160,8 @@ function Blog() {
       setSelectedProp(property.agentId);
       setTitle(property.title);
       setPhoto(property.cover || "");
-      setPdf(property.pdf || "");
+      setPdf(property.file || "");
+      //console.log(property.file);
       setModalSearch(
         `${property?.agentId?.firstName} ${property?.agentId?.lastName}`
       );
@@ -168,7 +170,8 @@ function Blog() {
         if (base64Data) {
           setPhoto(base64ToBlobURL(base64Data));
         } else {
-          setPhoto(property.cover); // Fallback to default if no base64 data
+          setPhoto(property.cover);
+          setPdf(property.pdf); // Ensure PDF is set correctly here
         }
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString(
@@ -183,7 +186,7 @@ function Blog() {
       setTitle("");
       setModalSearch("");
       setPhoto("");
-      setPdf("");
+      setPdf(""); // Clear the PDF field when adding new
       setTimeout(() => {
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString("", "text/html").body
@@ -192,6 +195,7 @@ function Blog() {
       }, 1000);
     }
   };
+
   const beforeUploadPhoto = (file) => {
     setPhotoUploading(true);
     return true; // Allow the upload
@@ -216,17 +220,32 @@ function Blog() {
   };
 
   const handleFileChange = (info) => {
+    if (info.file.status === "uploading") {
+      setPdfUploading(true);
+    }
+
     if (info.file.status === "done") {
       if (info.file.type === "application/pdf") {
         setPdfUploading(false);
         setPdf(info.file.response.url);
+        openNotification("success", "PDF uploaded successfully.");
       }
     } else if (info.file.status === "error") {
       setPdfUploading(false);
       openNotification("error", "Failed to upload PDF.");
     }
   };
+  const handlePreview = async (file) => {
+    const fileURL =
+      file.url || file.thumbUrl || URL.createObjectURL(file.originFileObj);
 
+    if (file.type === "application/pdf") {
+      // Open PDF in a new tab
+      window.open(fileURL, "_blank");
+    } else {
+      // Handle other file previews if necessary
+    }
+  };
   const handleOk = async () => {
     const markupStr = $("#summernote").summernote("code");
 
@@ -255,7 +274,7 @@ function Blog() {
             content: markupStr,
             cover: photo,
             id: selectedBlog._id,
-            pdf,
+            file: pdf || "",
           })
         ).unwrap();
         openNotification("success", res);
@@ -373,23 +392,53 @@ function Blog() {
         <div style={{ marginBottom: "20px" }}>
           <Upload
             name="file"
-            listType="text"
+            listType="picture-card"
             className="pdf-uploader"
-            showUploadList={false}
-            headers={{
-              Authorization: `Bearer ${localStorage.token}`,
-            }}
             action={`${api_base_URL}upload`}
             beforeUpload={beforeUpload}
             onChange={handleFileChange}
-            style={{ width: "100%" }}
+            onPreview={() =>
+              handlePreview({ url: pdf, type: "application/pdf" })
+            }
+            headers={{
+              Authorization: `Bearer ${localStorage.token}`,
+            }}
           >
             {pdf ? (
-              <a href={pdf} target="_blank" rel="noopener noreferrer">
-                <FilePdfOutlined /> PDF Uploaded
-              </a>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <a
+                  href={pdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: pdfUploading ? "grey" : "#1890ff",
+                    marginRight: "8px",
+                  }}
+                >
+                  {pdfUploading ? (
+                    <>
+                      <LoadingOutlined style={{ marginRight: "8px" }} />
+                      Uploading...
+                    </>
+                  ) : (
+                    <span>
+                      <FilePdfOutlined />
+                      Uploaded
+                    </span>
+                  )}
+                </a>
+
+                {!pdfUploading && (
+                  <EyeOutlined
+                    style={{ cursor: "pointer", color: "#1890ff" }}
+                    onClick={() =>
+                      handlePreview({ url: pdf, type: "application/pdf" })
+                    }
+                  />
+                )}
+              </div>
             ) : (
-              <Button type="primary">Upload PDF</Button>
+              uploadButton
             )}
           </Upload>
         </div>

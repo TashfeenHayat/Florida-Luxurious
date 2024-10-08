@@ -4,6 +4,7 @@ import {
   LoadingOutlined,
   PlusOutlined,
   FilePdfOutlined,
+  EyeOutlined,
 } from "@ant-design/icons";
 import {
   Avatar,
@@ -113,7 +114,8 @@ function Press() {
         setSelectedProp(property);
         setTitle(property.title);
         setPhoto(property.cover);
-        setPdf(property.pdf || ""); // Set PDF URL or empty string
+        setPdf(property.file || "");
+        console.log(property.file);
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString(
           property?.content,
@@ -143,14 +145,19 @@ function Press() {
   };
 
   const handleFileChange = (info) => {
+    if (info.file.status === "uploading") {
+      setPdfUploading(true);
+    }
+
     if (info.file.status === "done") {
       if (info.file.type === "application/pdf") {
         setPdfUploading(false);
         setPdf(info.file.response.url);
-      } else {
-        setPhotoUploading(false);
-        setPhoto(info.file.response.url);
+        openNotification("success", "PDF uploaded successfully.");
       }
+    } else if (info.file.status === "error") {
+      setPdfUploading(false);
+      openNotification("error", "Failed to upload PDF.");
     }
   };
 
@@ -160,7 +167,17 @@ function Press() {
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
+  const handlePreview = async (file) => {
+    const fileURL =
+      file.url || file.thumbUrl || URL.createObjectURL(file.originFileObj);
 
+    if (file.type === "application/pdf") {
+      // Open PDF in a new tab
+      window.open(fileURL, "_blank");
+    } else {
+      // Handle other file previews if necessary
+    }
+  };
   const handleOk = async () => {
     try {
       const markupStr = $("#summernote").summernote("code");
@@ -279,33 +296,53 @@ function Press() {
         <div style={{ marginBottom: "20px" }}>
           <Upload
             name="file"
-            listType="text"
+            listType="picture-card"
             className="pdf-uploader"
-            loading={pdfUploading}
-            showUploadList={false}
-            headers={{
-              Authorization: `Bearer ${localStorage.token}`,
-            }}
             action={`${api_base_URL}upload`}
             beforeUpload={beforeUpload}
             onChange={handleFileChange}
+            onPreview={() =>
+              handlePreview({ url: pdf, type: "application/pdf" })
+            }
+            headers={{
+              Authorization: `Bearer ${localStorage.token}`,
+            }}
           >
             {pdf ? (
-              <a
-                href={pdf}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ display: "flex", alignItems: "center" }}
-              >
-                <FilePdfOutlined
-                  style={{ fontSize: "32px", color: "#ff4d4f" }}
-                />
-                <span style={{ marginLeft: "8px" }}>View PDF</span>
-              </a>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <a
+                  href={pdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: pdfUploading ? "grey" : "#1890ff",
+                    marginRight: "8px",
+                  }}
+                >
+                  {pdfUploading ? (
+                    <>
+                      <LoadingOutlined style={{ marginRight: "8px" }} />
+                      Uploading...
+                    </>
+                  ) : (
+                    <span>
+                      <FilePdfOutlined />
+                      Uploaded
+                    </span>
+                  )}
+                </a>
+
+                {!pdfUploading && (
+                  <EyeOutlined
+                    style={{ cursor: "pointer", color: "#1890ff" }}
+                    onClick={() =>
+                      handlePreview({ url: pdf, type: "application/pdf" })
+                    }
+                  />
+                )}
+              </div>
             ) : (
-              <Button>
-                <PlusOutlined /> Upload PDF
-              </Button>
+              uploadButton
             )}
           </Upload>
         </div>

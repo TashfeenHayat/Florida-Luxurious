@@ -115,6 +115,7 @@ function MeetTeam() {
                     marginTop: "65px",
                     // marginBottom: "65px",
                     cursor: "pointer",
+                    //backgroundColor: "hsl(0, 0%, 90%)",
                   }}
                   data-aos="fade-down"
                   data-aos-duration="2000"
@@ -138,6 +139,7 @@ function MeetTeam() {
                                 aspectRatio: "5/7.5",
                                 width: "100%",
                                 objectFit: "cover",
+                                backgroundColor: "hsl(0, 0%, 90%) !important",
                               }}
                             />
                           }

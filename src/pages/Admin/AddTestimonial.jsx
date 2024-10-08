@@ -237,7 +237,7 @@ const AddTestimonial = () => {
               pagination={{ ...tableParams, total: data?.totalCount || 0 }}
               onChange={handleTableChange}
               rowKey="_id"
-              scroll={{ x: "max-content" }}
+              scroll={{ x: "true" }}
               style={{ width: "100%" }}
             />
           </div>

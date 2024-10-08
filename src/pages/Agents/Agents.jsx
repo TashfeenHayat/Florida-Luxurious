@@ -130,8 +130,7 @@ function Agents() {
       </div>
       <div className="boxshadow-section">
         <Container className="py-5">
-          <Row align={"middle"} gutter={[40, 16]}>
-            <Col lg={16} md={24} sm={24}>
+          {/*<Col lg={16} md={24} sm={24}>
               <Card bordered={false} style={{ backgroundColor: "#D4CFC9" }}>
                 <Flex vertical>
                   <Flex justify={"center"} align="center" className="py-3">
@@ -193,10 +192,25 @@ function Agents() {
                   </div>
                 </Flex>
               </Card>
-            </Col>
-            <Col lg={8} md={24} sm={24}>
-              {reports?.map((reportItem, index) => (
-                <div key={index}>
+            </Col>}*/}
+          <Row align="middle" gutter={[40, 16]}>
+            {reports?.map((reportItem, index) => (
+              <div
+                key={index}
+                style={{ marginBottom: "20px", marginRight: "20px" }}
+              >
+                <Card
+                  style={{
+                    width: "100%",
+                    maxWidth: 400,
+                    background: "#E8E8E8",
+                    margin: "0 auto",
+                    padding: "20px",
+                    borderRadius: "10px",
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                  }}
+                >
+                  {" "}
                   <img src={Logo} width={"20%"} preview={false} />
                   <Title
                     style={{ color: "black" }}
@@ -222,9 +236,9 @@ function Agents() {
                       Read More
                     </Buttons>
                   </Flex>
-                </div>
-              ))}
-            </Col>
+                </Card>
+              </div>
+            ))}
           </Row>
         </Container>
       </div>
