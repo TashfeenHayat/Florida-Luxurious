@@ -977,7 +977,8 @@ export default function DetailProperty() {
                       <Image
                         src={data?.property?.Primary_agentId?.photo}
                         preview={false}
-                        width="80%"
+                        width="50%"
+                        style={{ aspectRatio: 5 / 7, objectFit: "cover" }}
                       />
                     </Col>
                     <Col lg={14} md={18} sm={24} xs={24}>
