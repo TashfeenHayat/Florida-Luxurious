@@ -43,7 +43,12 @@ function SoldProperties() {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
+  const sortedProperties = data?.properties?.slice().sort((a, b) => {
+    const priceA = Number(a?.salePrice?.slice(1).replace(/,/g, "") || 0);
+    const priceB = Number(b?.salePrice?.slice(1).replace(/,/g, "") || 0);
+    return priceB - priceA;
+  });
+  console.log(sortedProperties);
   return (
     <>
       <BackgroundImage
@@ -62,7 +67,7 @@ function SoldProperties() {
           />
         ) : (
           <Row gutter={[60, 60]}>
-            {data?.properties.map((property, index) => (
+            {sortedProperties?.map((property, index) => (
               <Col lg={12} md={12} sm={24} key={index}>
                 <div className="displayy-teamimg-center">
                   <Image

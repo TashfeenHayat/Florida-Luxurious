@@ -42,7 +42,7 @@ import SearchCommunity from "./pages/SearchCommunity";
 import Allcommunities from "./pages/Home/AllCommunicaties";
 import PropertyPressDetail from "./pages/PropertyPressDetail";
 import ReportDetail from "./pages/ReportDetail";
-
+import AddTestimonial from "./pages/Admin/AddTestimonial";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
@@ -99,6 +99,7 @@ function App() {
             <Route path="/admin/inquiry" element={<Inquiries />} />
             <Route path="/admin/blog" element={<Blog />} />
             <Route path="/admin/report" element={<Report />} />
+            <Route path="/admin/Testimonial" element={<AddTestimonial />} />
           </Route>
         </Routes>
       </TopToScroll>

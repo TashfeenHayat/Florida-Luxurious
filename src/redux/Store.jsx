@@ -45,7 +45,13 @@ import {
   updateReportSlice,
   deleteReportSlice,
 } from "./slices/ReportSlice";
-
+import {
+  getTestimonialsSlice,
+  addTestimonialSlice,
+  getTestimonialSlice,
+  updateTestimonialSlice,
+  deleteTestimonialSlice,
+} from "./slices/TestimonialSlice";
 export const store = configureStore({
   reducer: {
     signInreducer: signInSlice,
@@ -83,6 +89,11 @@ export const store = configureStore({
     getReportReducer: getReportSlice,
     updateReportReducer: updateReportSlice,
     deleteReportReducer: deleteReportSlice,
+    getTestimonialsReducer: getTestimonialsSlice,
+    addTestimonialReducer: addTestimonialSlice,
+    getTestimonialReducer: getTestimonialSlice,
+    updateTestimonialReducer: updateTestimonialSlice,
+    deleteTestimonialReducer: deleteReportSlice,
   },
 });
 

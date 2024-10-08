@@ -11,6 +11,7 @@ import {
   Spin,
   Skeleton,
   Card,
+  Rate,
 } from "antd";
 import { MdOutlinePhone, MdOutlineMailOutline } from "react-icons/md";
 import Button from "../../components/Buttons";
@@ -24,9 +25,14 @@ import NextArrow from "../../assets/nextArrow.svg";
 import useAgent from "../../hooks/useAgent";
 import useBlogs from "../../hooks/useBlogs";
 import useReport from "./../../hooks/useReport";
+import useTestimonials from "../../hooks/useTestimonials";
 import Slider from "react-slick";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCards } from "swiper/modules";
+import "swiper/swiper-bundle.css";
 const { Title, Paragraph, Text } = Typography;
+
 const CustomPrevArrow = (props) => {
   const { className, style, onClick } = props;
   return (
@@ -52,7 +58,40 @@ const CustomNextArrow = (props) => {
     </div>
   );
 };
-
+const testimonials = [
+  {
+    name: "Teresa May",
+    position: "Founder at ET Company",
+    imgSrc: "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp",
+    rating: 4.5,
+    quote:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.",
+  },
+  {
+    name: "Maggie McLoan",
+    position: "Photographer at Studio LA",
+    imgSrc: "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(15).webp",
+    rating: 5,
+    quote:
+      "Autem, totam debitis suscipit saepe sapiente magnam officiis quaerat necessitatibus odio assumenda perferendis labore laboriosam.",
+  },
+  {
+    name: "Alexa Horwitz",
+    position: "Front-end Developer in NY",
+    imgSrc: "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(17).webp",
+    rating: 4,
+    quote:
+      "Cras sit amet nibh libero, in gravida nulla metus scelerisque ante sollicitudin commodo cras purus odio, vestibulum in tempus viverra turpis.",
+  },
+  {
+    name: "Teresa May",
+    position: "Founder at ET Company",
+    imgSrc: "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp",
+    rating: 4.5,
+    quote:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.",
+  },
+];
 const settings = {
   dots: false,
   infinite: false,
@@ -93,7 +132,9 @@ function AgentProfile() {
   const { isLoading, data, isError } = useAgent(id);
   const { isLoading: isBlogLoading, data: blogData } = useBlogs(10, 1, id);
   const { isLoading: isReportLoading, reports } = useReport();
-
+  const { isLoading: isTestimonialsLoading, data: testimonialsData } =
+    useTestimonials(10, 1, id);
+  console.log("data", testimonialsData);
   const formatPhoneNumber = (phoneNumber) => {
     if (!phoneNumber) return "";
 
@@ -430,6 +471,113 @@ function AgentProfile() {
           </div>
         </Container>
       )}
+      <div className="boxshadow-section">
+        {" "}
+        {isLoading ? (
+          <Skeleton.Image
+            active
+            style={{ maxWidth: "400px", maxHeight: "400px" }}
+          />
+        ) : (
+          <Container>
+            <div className="pt-98 pb-98">
+              <Title className="text-upper f-100 text-center">
+                Testimonials
+              </Title>
+
+              <Row justify="center">
+                <Col xs={24} md={20}>
+                  <Swiper
+                    effect={"cards"}
+                    grabCursor={true}
+                    modules={[EffectCards]}
+                    className=""
+                    autoplay
+                  >
+                    {Array.isArray(testimonialsData?.testmonials) &&
+                    testimonialsData.testmonials.length > 0 ? (
+                      testimonialsData.testmonials.map((testimonial, index) => (
+                        <SwiperSlide key={index}>
+                          <Card
+                            style={{
+                              width: "40%",
+                              maxWidth: "200",
+                              background: "#E8E8E8",
+                              margin: "0 auto",
+                              padding: "20px",
+                              borderRadius: "10px",
+                              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                              textAlign: "center",
+                              border: "2px solid black",
+                            }}
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                marginBottom: "16px",
+                              }}
+                            >
+                              <img
+                                src={Logo}
+                                alt={testimonial.name}
+                                style={{
+                                  borderRadius: "50%",
+                                  boxShadow: "0 0 10px rgba(0,0,0,0.2)",
+                                }}
+                                width="80"
+                                height="80"
+                              />
+                            </div>
+                            <Title
+                              level={5}
+                              style={{ fontWeight: "bold", fontSize: "16px" }}
+                            >
+                              {testimonial.Username}
+                            </Title>
+
+                            <Rate
+                              disabled
+                              defaultValue={testimonial.rating}
+                              style={{ marginBottom: "8px" }}
+                            />
+                            <Paragraph
+                              style={{ marginBottom: "0", fontSize: "14px" }}
+                            >
+                              <span
+                                style={{
+                                  fontSize: "20px",
+                                  paddingRight: "8px",
+                                }}
+                              >
+                                “
+                              </span>
+                              {testimonial.content}
+                              <span
+                                style={{
+                                  fontSize: "20px",
+                                  paddingRight: "8px",
+                                }}
+                              >
+                                "
+                              </span>
+                            </Paragraph>
+                          </Card>
+                        </SwiperSlide>
+                      ))
+                    ) : (
+                      <div style={{ textAlign: "center", padding: "20px" }}>
+                        <p>No testimonials available.</p>
+                      </div>
+                    )}
+                  </Swiper>
+                </Col>
+              </Row>
+            </div>
+          </Container>
+        )}
+      </div>
+      <LetTalk />
     </>
   );
 }

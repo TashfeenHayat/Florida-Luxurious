@@ -75,7 +75,7 @@ export default function DetailProperty() {
   const { id } = useParams();
 
   const { data, isLoading } = useProperty(id);
-  console.log(data?.property);
+  console.log("data", data?.property);
   const [backgroundImage, setBackGroundImage] = useState(null);
 
   useEffect(() => {
@@ -816,7 +816,7 @@ export default function DetailProperty() {
                         src={data?.property?.Primary_agentId?.photo}
                         preview={false}
                         width="40%"
-                        style={{ aspectRatio: 5 / 7 }}
+                        style={{ aspectRatio: 5 / 5 }}
                       />
 
                       <Flex vertical justify="flex-start" align="">
@@ -896,7 +896,7 @@ export default function DetailProperty() {
                         src={data?.property?.Secondary_agentId?.photo}
                         preview={false}
                         width="40%"
-                        style={{ aspectRatio: 5 / 7 }}
+                        style={{ aspectRatio: 5 / 5 }}
                       />
 
                       <Flex vertical justify="flex-start" align="">

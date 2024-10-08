@@ -13,7 +13,12 @@ import {
   Form,
   Upload,
 } from "antd";
-import { PlusOutlined, FilePdfOutlined, LoadingOutlined} from "@ant-design/icons";
+import {
+  PlusOutlined,
+  FilePdfOutlined,
+  LoadingOutlined,
+  EyeOutlined,
+} from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlogs, addBlog, updateBlog, deleteBlog } from "../../api/Blogs";
 import customAxios from "../../api/Axios";
@@ -76,7 +81,7 @@ function Blog() {
   const [photo, setPhoto] = useState("");
   const [pdfUploading, setPdfUploading] = useState(false);
   const { isLoading, isError, data } = useSelector((s) => s.getBlogsReducer);
-  
+
   const [photoUploading, setPhotoUploading] = useState(false);
   const dispatch = useDispatch();
 
@@ -115,7 +120,7 @@ function Blog() {
   const handleSearch = async (key) => {
     try {
       const res = await customAxios.get(`agent`, {
-        params: { key },
+        params: { key, limit: 30, page: 1 },
       });
       const data = res.data;
       setModalProps(data.agents);
@@ -129,7 +134,7 @@ function Blog() {
     setSelectedProp(property);
     setModalSearch(`${property?.firstName} ${property?.lastName}`);
   };
- const extractBase64Data = (content) => {
+  const extractBase64Data = (content) => {
     const regex = /data:image\/[a-zA-Z]+;base64,([^\"]*)/;
     const match = content.match(regex);
     return match
@@ -148,24 +153,25 @@ function Blog() {
     return URL.createObjectURL(blob);
   };
 
-
   const showModal = (property) => {
     setIsModalOpen(true);
     if (property._id) {
-       setSelectedBlog(property);
+      setSelectedBlog(property);
       setSelectedProp(property.agentId);
       setTitle(property.title);
-      setPhoto(property.cover||"");
-      setPdf(property.pdf || "");
+      setPhoto(property.cover || "");
+      setPdf(property.file || "");
+      //console.log(property.file);
       setModalSearch(
         `${property?.agentId?.firstName} ${property?.agentId?.lastName}`
       );
-     setTimeout(() => {
+      setTimeout(() => {
         const base64Data = extractBase64Data(property.content);
         if (base64Data) {
           setPhoto(base64ToBlobURL(base64Data));
         } else {
-          setPhoto(property.cover); // Fallback to default if no base64 data
+          setPhoto(property.cover);
+          setPdf(property.pdf); // Ensure PDF is set correctly here
         }
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString(
@@ -180,7 +186,7 @@ function Blog() {
       setTitle("");
       setModalSearch("");
       setPhoto("");
-      setPdf("");
+      setPdf(""); // Clear the PDF field when adding new
       setTimeout(() => {
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString("", "text/html").body
@@ -189,11 +195,12 @@ function Blog() {
       }, 1000);
     }
   };
- const beforeUploadPhoto = (file) => {
+
+  const beforeUploadPhoto = (file) => {
     setPhotoUploading(true);
     return true; // Allow the upload
   };
-   const handlePhotoChange = (info) => {
+  const handlePhotoChange = (info) => {
     if (info.file.status === "done") {
       setPhotoUploading(false);
       setPhoto(info.file.response.url);
@@ -213,17 +220,32 @@ function Blog() {
   };
 
   const handleFileChange = (info) => {
+    if (info.file.status === "uploading") {
+      setPdfUploading(true);
+    }
+
     if (info.file.status === "done") {
       if (info.file.type === "application/pdf") {
         setPdfUploading(false);
         setPdf(info.file.response.url);
+        openNotification("success", "PDF uploaded successfully.");
       }
     } else if (info.file.status === "error") {
       setPdfUploading(false);
       openNotification("error", "Failed to upload PDF.");
     }
   };
+  const handlePreview = async (file) => {
+    const fileURL =
+      file.url || file.thumbUrl || URL.createObjectURL(file.originFileObj);
 
+    if (file.type === "application/pdf") {
+      // Open PDF in a new tab
+      window.open(fileURL, "_blank");
+    } else {
+      // Handle other file previews if necessary
+    }
+  };
   const handleOk = async () => {
     const markupStr = $("#summernote").summernote("code");
 
@@ -239,7 +261,7 @@ function Blog() {
             agentId: selectedProp._id,
             title,
             content: markupStr,
-             cover: photo,
+            cover: photo,
             file: pdf || "",
           })
         ).unwrap();
@@ -250,9 +272,9 @@ function Blog() {
             agentId: selectedProp._id,
             title,
             content: markupStr,
-              cover: photo,
+            cover: photo,
             id: selectedBlog._id,
-            pdf,
+            file: pdf || "",
           })
         ).unwrap();
         openNotification("success", res);
@@ -276,7 +298,7 @@ function Blog() {
   const handleDelete = (id) => {
     dispatch(deleteBlog(id));
   };
-const uploadButton = (
+  const uploadButton = (
     <div>
       {photoUploading ? <LoadingOutlined /> : <PlusOutlined />}
       <div style={{ marginTop: 8 }}>Upload</div>
@@ -321,15 +343,15 @@ const uploadButton = (
         style={{ maxWidth: "1000px" }}
         bodyStyle={{ padding: "20px" }}
       >
-          <div style={{ marginBottom: "20px" }}>
+        <div style={{ marginBottom: "20px" }}>
           <Upload
             name="file"
             listType="picture-card"
             className="avatar-uploader"
             showUploadList={false}
             action={`${api_base_URL}upload`}
-           beforeUpload={beforeUploadPhoto}
-              onChange={handlePhotoChange}
+            beforeUpload={beforeUploadPhoto}
+            onChange={handlePhotoChange}
             headers={{ Authorization: `Bearer ${localStorage.token}` }}
           >
             {photo ? (
@@ -370,23 +392,53 @@ const uploadButton = (
         <div style={{ marginBottom: "20px" }}>
           <Upload
             name="file"
-            listType="text"
+            listType="picture-card"
             className="pdf-uploader"
-            showUploadList={false}
-            headers={{
-              Authorization: `Bearer ${localStorage.token}`,
-            }}
             action={`${api_base_URL}upload`}
             beforeUpload={beforeUpload}
             onChange={handleFileChange}
-            style={{ width: "100%" }}
+            onPreview={() =>
+              handlePreview({ url: pdf, type: "application/pdf" })
+            }
+            headers={{
+              Authorization: `Bearer ${localStorage.token}`,
+            }}
           >
             {pdf ? (
-              <a href={pdf} target="_blank" rel="noopener noreferrer">
-                <FilePdfOutlined /> PDF Uploaded
-              </a>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <a
+                  href={pdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: pdfUploading ? "grey" : "#1890ff",
+                    marginRight: "8px",
+                  }}
+                >
+                  {pdfUploading ? (
+                    <>
+                      <LoadingOutlined style={{ marginRight: "8px" }} />
+                      Uploading...
+                    </>
+                  ) : (
+                    <span>
+                      <FilePdfOutlined />
+                      Uploaded
+                    </span>
+                  )}
+                </a>
+
+                {!pdfUploading && (
+                  <EyeOutlined
+                    style={{ cursor: "pointer", color: "#1890ff" }}
+                    onClick={() =>
+                      handlePreview({ url: pdf, type: "application/pdf" })
+                    }
+                  />
+                )}
+              </div>
             ) : (
-              <Button type="primary">Upload PDF</Button>
+              uploadButton
             )}
           </Upload>
         </div>

@@ -128,9 +128,15 @@ function Footer() {
                     </Flex>
                   </Col>
                   <Col lg={12}>
-                    <Text className="text-upper f-24 f-bold">
-                      for boat owners
-                    </Text>
+                    <Link
+                      to="/boat-owner"
+                      className="text-upper f-14 text-black"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Text className="text-upper f-24 f-bold">
+                        for boat owners
+                      </Text>
+                    </Link>
                   </Col>
                 </Row>
               </Col>
