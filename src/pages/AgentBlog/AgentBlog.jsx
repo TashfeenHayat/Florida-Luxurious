@@ -47,7 +47,6 @@ const Flipbook = ({ pages, flipbookRef }) => {
               borderRadius: "20px",
             }}
           />
-          
         </div>
       ))}
     </HTMLFlipBook>
