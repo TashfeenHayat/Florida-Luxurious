@@ -174,12 +174,6 @@ function Press() {
     }
   };
 
-  const handlePreview = (file) => {
-    const fileURL =
-      file.url || file.thumbUrl || URL.createObjectURL(file.originFileObj);
-    window.open(fileURL, "_blank");
-  };
-
   const handleOk = async () => {
     try {
       const markupStr = $("#summernote").summernote("code");
@@ -226,7 +220,17 @@ function Press() {
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
+  const handlePreview = async (file) => {
+    const fileURL =
+      file.url || file.thumbUrl || URL.createObjectURL(file.originFileObj);
 
+    if (file.type === "application/pdf") {
+      // Open PDF in a new tab
+      window.open(fileURL, "_blank");
+    } else {
+      // Handle other file previews if necessary
+    }
+  };
   return (
     <>
       {contextHolder}
@@ -293,6 +297,14 @@ function Press() {
               <a href={pdf} target="_blank" rel="noopener noreferrer">
                 <FilePdfOutlined /> View PDF
               </a>
+              {!pdfUploading && (
+                <EyeOutlined
+                  style={{ cursor: "pointer", color: "#1890ff" }}
+                  onClick={() =>
+                    handlePreview({ url: pdf, type: "application/pdf" })
+                  }
+                />
+              )}
             </div>
           ) : (
             uploadButton(pdfUploading)

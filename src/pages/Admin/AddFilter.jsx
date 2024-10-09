@@ -93,15 +93,26 @@ function AddFilter() {
           return;
         }
 
+        const location = selectedPlace.geometry.location;
         const bounds = new google.maps.LatLngBounds();
+
         if (selectedPlace.geometry.viewport) {
           bounds.union(selectedPlace.geometry.viewport);
         } else {
-          bounds.extend(selectedPlace.geometry.location);
+          bounds.extend(location);
         }
 
         map.fitBounds(bounds);
-        marker.setPosition(selectedPlace.geometry.location);
+        marker.setPosition(location);
+
+        // **Set geo with the selected location's lat, lng, and formatted address**
+        setGeo({
+          location: {
+            lat: location.lat(),
+            lng: location.lng(),
+          },
+          address: selectedPlace.formatted_address,
+        });
       });
     };
 
@@ -135,7 +146,10 @@ function AddFilter() {
   }, [dispatch, id, google_api_key]);
 
   const onFinish = async (values) => {
-    console.log("Received values of form: ", values, photo);
+    console.log("Received values of form: ", values);
+    console.log("Photo data: ", photo);
+    console.log("Geo data: ", geo);
+
     if (id) {
       const res = await dispatch(
         updateFilter({
@@ -145,22 +159,22 @@ function AddFilter() {
           geo,
         })
       ).unwrap();
-      //console.log(values);
-      console.log("eidt", geo);
-      // setInitialValue({});
+
+      console.log("Update result: ", res);
       openNotification("success", res);
-      setTimeout(navigate("/admin/community"), 1000);
+      setTimeout(() => navigate("/admin/community"), 1000);
     } else {
       const res = await dispatch(
         addFilter({
           ...values,
           photo,
-          geo,
+          geo: geo ? geo : null,
         })
       ).unwrap();
-      // setInitialValue({});
+
+      console.log("Add result: ", res);
       openNotification("success", res);
-      setTimeout(navigate("/admin/community"), 1000);
+      setTimeout(() => navigate("/admin/community"), 1000);
     }
   };
 
