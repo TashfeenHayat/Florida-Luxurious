@@ -47,6 +47,7 @@ const Flipbook = ({ pages, flipbookRef }) => {
               borderRadius: "20px",
             }}
           />
+          
         </div>
       ))}
     </HTMLFlipBook>
@@ -118,7 +119,6 @@ function AgentBlog() {
     if (flipbookRef.current) {
       flipbookRef.current.pageFlip().flipPrev(); // Use pageFlip().flipPrev() correctly
     }
-    
   };
 
   const handleNextPage = () => {

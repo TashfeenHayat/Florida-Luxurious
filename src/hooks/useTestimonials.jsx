@@ -10,10 +10,9 @@ function useTestimonials(limit, page, agentId) {
 
   useEffect(() => {
     // Fetch data only if it's not loading and data is not already available
-    if (!isLoading && (!data || data.length === 0)) {
+    if (isLoading === false)
       dispatch(getTestimonials({ agentId, limit, page }));
-    }
-  }, [dispatch, agentId, limit, page, isLoading, data]);
+  }, [dispatch, page, limit]);
 
   return { data: data || [], isLoading }; // Ensure data is always an array
 }
