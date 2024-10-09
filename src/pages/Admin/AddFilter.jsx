@@ -168,7 +168,7 @@ function AddFilter() {
         addFilter({
           ...values,
           photo,
-          geo,
+          geo: geo ? geo : null,
         })
       ).unwrap();
 

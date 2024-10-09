@@ -397,9 +397,8 @@ function Blog() {
             action={`${api_base_URL}upload`}
             beforeUpload={beforeUpload}
             onChange={handleFileChange}
-            onPreview={() =>
-              handlePreview({ url: pdf, type: "application/pdf" })
-            }
+            onPreview={false}
+            showUploadList={false}
             headers={{
               Authorization: `Bearer ${localStorage.token}`,
             }}

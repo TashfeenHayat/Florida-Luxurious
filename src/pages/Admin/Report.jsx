@@ -301,7 +301,13 @@ function Report() {
             </div>
           )}
         </Upload>
-
+        <br />
+        <Input
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          style={{ marginBottom: 20 }}
+        />
         <div style={{ marginBottom: "20px" }}>
           <Upload
             name="file"
@@ -310,6 +316,7 @@ function Report() {
             action={`${api_base_URL}upload`}
             beforeUpload={beforeUpload}
             onChange={handleFileChange}
+            showUploadList={false}
             headers={{
               Authorization: `Bearer ${localStorage.token}`,
             }}
@@ -352,13 +359,6 @@ function Report() {
             )}
           </Upload>
         </div>
-
-        <Input
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          style={{ marginBottom: 20 }}
-        />
         <div id="summernote" style={{ minHeight: "200px" }}></div>
       </Modal>
     </>
