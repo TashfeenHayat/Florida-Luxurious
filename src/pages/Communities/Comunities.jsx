@@ -48,26 +48,22 @@ function Comunities() {
       if (mapRef.current) {
         const map = new window.google.maps.Map(mapRef.current, {
           center: {
-            lat: parseFloat(data?.geo?.geometry?.location?.lat),
-            lng: parseFloat(data?.geo?.geometry?.location?.lng),
+            lat: parseFloat(data?.geo?.location?.lat),
+            lng: parseFloat(data?.geo?.location?.lng),
           },
-          zoom: 15, // Adjusted zoom level for better responsiveness
+          zoom: 15,
           tilt: 45,
         });
         new window.google.maps.Marker({
           position: {
-            lat: parseFloat(data?.geo?.geometry?.location?.lat),
-            lng: parseFloat(data?.geo?.geometry?.location?.lng),
+            lat: parseFloat(data?.geo?.location?.lat),
+            lng: parseFloat(data?.geo?.location?.lng),
           },
           map: map,
         });
       }
     });
-  }, [
-    google_api_key,
-    data?.geo?.geometry?.location?.lat,
-    data?.geo?.geometry?.location?.lng,
-  ]);
+  }, [google_api_key, data?.geo?.location?.lat, data?.geo?.location?.lng]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
