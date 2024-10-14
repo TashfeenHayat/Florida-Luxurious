@@ -98,7 +98,7 @@ function FeatureListing() {
         >
           luxurious
         </Text>{" "}
-        Listing
+        Listings
       </Paragraph>
       {isLoading ? (
         <Flex

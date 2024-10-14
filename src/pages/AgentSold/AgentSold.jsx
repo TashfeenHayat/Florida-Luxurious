@@ -85,7 +85,7 @@ function AgentSold() {
                       </Flex>
                       <Flex vertical>
                         <Text className="text-center text-upper f-24 f-bold text-white">
-                          agent listing
+                          agent listings
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
                           {name}

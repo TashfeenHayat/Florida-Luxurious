@@ -543,7 +543,7 @@ export default function DetailProperty() {
               >
                 {data?.property?.addressLine1} {data?.property?.addressLine2}
               </Title>
-              <Paragraph className="f-16 f-200" style={{ lineHeight: 1.5 }}>
+              <Paragraph className="f-16 f-200" style={{ lineHeight: 1.2 }}>
                 {data?.property?.description
                   ?.split("\n")
                   .filter((txt) => txt.trim() !== "")
@@ -880,7 +880,7 @@ export default function DetailProperty() {
                           )
                         }
                       >
-                        View my listing
+                        View my listings
                       </Button>
                     </Flex>
                   </Col>
@@ -960,7 +960,7 @@ export default function DetailProperty() {
                           )
                         }
                       >
-                        View my listing
+                        View my listings
                       </Button>
                     </Flex>
                   </Col>
@@ -1046,7 +1046,7 @@ export default function DetailProperty() {
                         )
                       }
                     >
-                      View my listing
+                      View my listings
                     </button>
                   </Flex>
                 </Col>

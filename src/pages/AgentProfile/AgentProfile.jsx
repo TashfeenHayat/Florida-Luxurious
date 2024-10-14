@@ -131,6 +131,7 @@ function AgentProfile() {
   const navigate = useNavigate();
   const { isLoading, data, isError } = useAgent(id);
   const { isLoading: isBlogLoading, data: blogData } = useBlogs(10, 1, id);
+  console.log(blogData);
   const { isLoading: isReportLoading, reports } = useReport();
   const { isLoading: isTestimonialsLoading, data: testimonialsData } =
     useTestimonials(10, 1, id);

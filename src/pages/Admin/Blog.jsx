@@ -81,16 +81,12 @@ function Blog() {
   const [photo, setPhoto] = useState("");
   const [pdfUploading, setPdfUploading] = useState(false);
   const { isLoading, isError, data } = useSelector((s) => s.getBlogsReducer);
-
   const [photoUploading, setPhotoUploading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(
-      getBlogs({
-        page: tableParams.current,
-        limit: tableParams.pageSize,
-      })
+      getBlogs({ page: tableParams.current, limit: tableParams.pageSize })
     );
     if (isError) {
       console.log(isError);
@@ -99,10 +95,7 @@ function Blog() {
 
   const onSearch = (agentId) => {
     setKey(agentId);
-    setTableParams((prev) => ({
-      ...prev,
-      current: 1,
-    }));
+    setTableParams((prev) => ({ ...prev, current: 1 }));
     dispatch(getBlogs({ agentId }));
   };
 
@@ -122,8 +115,7 @@ function Blog() {
       const res = await customAxios.get(`agent`, {
         params: { key, limit: 30, page: 1 },
       });
-      const data = res.data;
-      setModalProps(data.agents);
+      setModalProps(res.data.agents);
     } catch (error) {
       console.error("Error fetching agents:", error);
     }
@@ -134,24 +126,6 @@ function Blog() {
     setSelectedProp(property);
     setModalSearch(`${property?.firstName} ${property?.lastName}`);
   };
-  const extractBase64Data = (content) => {
-    const regex = /data:image\/[a-zA-Z]+;base64,([^\"]*)/;
-    const match = content.match(regex);
-    return match
-      ? match[0].replace(/^data:image\/[a-zA-Z]+;base64,/, "")
-      : null;
-  };
-
-  const base64ToBlobURL = (base64Data) => {
-    const byteCharacters = atob(base64Data);
-    const byteNumbers = new Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-    const byteArray = new Uint8Array(byteNumbers);
-    const blob = new Blob([byteArray], { type: "image/jpeg" }); // Adjust type as needed
-    return URL.createObjectURL(blob);
-  };
 
   const showModal = (property) => {
     setIsModalOpen(true);
@@ -161,38 +135,21 @@ function Blog() {
       setTitle(property.title);
       setPhoto(property.cover || "");
       setPdf(property.file || "");
-      //console.log(property.file);
       setModalSearch(
         `${property?.agentId?.firstName} ${property?.agentId?.lastName}`
       );
-      setTimeout(() => {
-        const base64Data = extractBase64Data(property.content);
-        if (base64Data) {
-          setPhoto(base64ToBlobURL(base64Data));
-        } else {
-          setPhoto(property.cover);
-          setPdf(property.pdf); // Ensure PDF is set correctly here
-        }
-        const parser = new DOMParser();
-        const decodedHtml = parser.parseFromString(
-          property?.content,
-          "text/html"
-        ).body.textContent;
-        window.$("#summernote").summernote("code", decodedHtml);
-      }, 1000);
+      const parser = new DOMParser();
+      const decodedHtml = parser.parseFromString(property?.content, "text/html")
+        .body.textContent;
+      window.$("#summernote").summernote("code", decodedHtml);
     } else {
       setSelectedBlog(null);
       setSelectedProp(null);
       setTitle("");
       setModalSearch("");
       setPhoto("");
-      setPdf(""); // Clear the PDF field when adding new
-      setTimeout(() => {
-        const parser = new DOMParser();
-        const decodedHtml = parser.parseFromString("", "text/html").body
-          .textContent;
-        window.$("#summernote").summernote("code", "");
-      }, 1000);
+      setPdf("");
+      window.$("#summernote").summernote("code", "");
     }
   };
 
@@ -200,6 +157,7 @@ function Blog() {
     setPhotoUploading(true);
     return true; // Allow the upload
   };
+
   const handlePhotoChange = (info) => {
     if (info.file.status === "done") {
       setPhotoUploading(false);
@@ -209,6 +167,7 @@ function Blog() {
       openNotification("error", "Failed to upload photo.");
     }
   };
+
   const beforeUpload = (file) => {
     if (file.type === "application/pdf") {
       setPdfUploading(true);
@@ -235,59 +194,50 @@ function Blog() {
       openNotification("error", "Failed to upload PDF.");
     }
   };
+
   const handlePreview = async (file) => {
     const fileURL =
       file.url || file.thumbUrl || URL.createObjectURL(file.originFileObj);
-
     if (file.type === "application/pdf") {
-      // Open PDF in a new tab
       window.open(fileURL, "_blank");
-    } else {
-      // Handle other file previews if necessary
     }
   };
+
   const handleOk = async () => {
     const markupStr = $("#summernote").summernote("code");
-
     if (!pdf && !markupStr.trim()) {
       openNotification("error", "Please provide either a PDF or content.");
       return;
     }
 
+    // Extract cover image from content if not provided
+    let coverImage = photo;
+    // || extractImageFromContent(markupStr)
     try {
+      const payload = {
+        agentId: selectedProp?._id,
+        title,
+        content: markupStr,
+        cover: coverImage || "",
+        file: pdf || "",
+      };
+
       if (!selectedBlog?._id) {
-        const res = await dispatch(
-          addBlog({
-            agentId: selectedProp._id,
-            title,
-            content: markupStr,
-            cover: photo,
-            file: pdf || "",
-          })
-        ).unwrap();
+        const res = await dispatch(addBlog(payload)).unwrap();
         openNotification("success", res);
       } else {
-        const res = await dispatch(
-          updateBlog({
-            agentId: selectedProp._id,
-            title,
-            content: markupStr,
-            cover: photo,
-            id: selectedBlog._id,
-            file: pdf || "",
-          })
-        ).unwrap();
+        payload.id = selectedBlog._id;
+        const res = await dispatch(updateBlog(payload)).unwrap();
         openNotification("success", res);
       }
+
       dispatch(
-        getBlogs({
-          page: tableParams.current,
-          limit: tableParams.pageSize,
-        })
+        getBlogs({ page: tableParams.current, limit: tableParams.pageSize })
       );
     } catch (error) {
       openNotification("error", "Failed to save blog.");
     }
+
     setIsModalOpen(false);
   };
 
@@ -298,12 +248,20 @@ function Blog() {
   const handleDelete = (id) => {
     dispatch(deleteBlog(id));
   };
+
   const uploadButton = (
     <div>
       {photoUploading ? <LoadingOutlined /> : <PlusOutlined />}
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
+
+  const extractImageFromContent = (content) => {
+    const regex = /<img.*?src="(.*?)"/; // Regex to match <img> tags
+    const match = content.match(regex);
+    return match ? match[1] : ""; // Return the src if found, else empty
+  };
+
   return (
     <>
       {contextHolder}
@@ -330,7 +288,7 @@ function Blog() {
           dataSource={data?.blogs}
           pagination={{ ...tableParams, total: data?.totalCount }}
           onChange={handleTableChange}
-          scroll={{ x: "max-content" }} // Ensure horizontal scrolling
+          scroll={{ x: "max-content" }}
           style={{ width: "100%" }}
         />
       </Card>
@@ -367,7 +325,7 @@ function Blog() {
             ) : (
               uploadButton
             )}
-          </Upload>{" "}
+          </Upload>
         </div>
         <Select
           showSearch
@@ -426,7 +384,6 @@ function Blog() {
                     </span>
                   )}
                 </a>
-
                 {!pdfUploading && (
                   <EyeOutlined
                     style={{ cursor: "pointer", color: "#1890ff" }}
