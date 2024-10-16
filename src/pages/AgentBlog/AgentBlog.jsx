@@ -45,6 +45,7 @@ const Flipbook = ({ pages, flipbookRef }) => {
               width: "600px",
               height: "100%",
               borderRadius: "20px",
+              
             }}
           />
         </div>
