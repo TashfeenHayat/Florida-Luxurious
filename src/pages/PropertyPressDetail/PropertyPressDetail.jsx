@@ -84,6 +84,7 @@ function PropertyPressDetail() {
   useEffect(() => {
     if (data?.file) {
       const url = data.file;
+      console.log(url);
       const loadingTask = pdfjsLib.getDocument(url);
       loadingTask.promise.then((pdf) => {
         const totalPages = pdf.numPages;
@@ -129,7 +130,6 @@ function PropertyPressDetail() {
       const prevPageIndex = currentPage - 1;
       setCurrentPage(prevPageIndex);
       flipbookRef.current.pageFlip().flip(prevPageIndex);
-      
     }
   };
 
