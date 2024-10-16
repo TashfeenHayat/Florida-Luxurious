@@ -85,7 +85,14 @@ function App() {
           <Route path="/reports/:id" element={<ReportDetail />} />
           <Route path="*" element={<NotFound />} />
           <Route element={<Dashboard />}>
-            <Route path="/admin/dashboard" element={<p>Dashboard</p>} />
+            <Route
+              path="/admin/dashboard"
+              element={
+                <h1 style={{ textAlign: "center", margin: "16px 0" }}>
+                  Welcome to the Admin Panel
+                </h1>
+              }
+            />
             <Route path="/admin/community" element={<Filter />} />
             <Route path="/admin/community/add" element={<AddFilter />} />
             <Route path="/admin/community/edit/:id" element={<AddFilter />} />

@@ -22,10 +22,10 @@ function Dashboard() {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const items = [
-    {
-      key: "1",
-      label: <span style={{ color: "black" }}>Profile</span>,
-    },
+    // {
+    //   key: "1",
+    //   label: <span style={{ color: "black" }}>Profile</span>,
+    // },
     {
       key: "2",
       label: <span style={{ color: "black" }}>Logout</span>,

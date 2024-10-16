@@ -364,7 +364,7 @@ function AgentProfile() {
                       )
                     }
                   >
-                    View my listing{" "}
+                    View my listings{" "}
                   </Button>
                 </Flex>
               )}

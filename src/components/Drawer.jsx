@@ -1,13 +1,18 @@
 import React from "react";
 import { Drawer, Flex, Row, Col, Typography, Image } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Close from "../assets/closeicon.svg";
 import LogoMenu from "../assets/Logonew.svg";
 import BG from "../assets/bg.svg";
 import useCommunities from "../hooks/useCommunities";
 const { Title, Text, Paragraph } = Typography;
 function Drawers({ setOpenDrawer, openDrawer }) {
+  const navigate = useNavigate();
   const { data, isLoading } = useCommunities(20, 1);
+  const sortcommunity = [...(data?.filters ?? [])].sort((a, b) =>
+    a?.name?.localeCompare(b?.name)
+  );
+  const community6 = sortcommunity.slice(0, 6);
   return (
     <Drawer
       placement="right"
@@ -104,13 +109,18 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                     <Link
                       className="text-upper f-14 text-white"
                       style={{ textDecoration: "none" }}
+                      to="/ourMarket"
                     >
-                      property press
+                      Our Market
                     </Link>
                   </Flex>
                 </Col>
                 <Col lg={12} md={12} sm={24}>
-                  <Title className="text-white text-upper" level={3}>
+                  <Title
+                    className="text-white text-upper"
+                    to="/boat-owner"
+                    level={3}
+                  >
                     for boat owners
                   </Title>
                 </Col>
@@ -122,7 +132,7 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                 Communities
               </Title>
               <Flex className="pt-2" vertical gap={10}>
-                {data?.filters?.map((item, index) => (
+                {community6.map((item, index) => (
                   <Link
                     key={index}
                     className="text-upper f-14 text-white"
@@ -132,6 +142,22 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                     {item?.name}
                   </Link>
                 ))}
+                <Text
+                  className="text-upper f-14 text-white"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate("/all-communities")}
+                >
+                  View All
+                  <span
+                    style={{
+                      marginLeft: "5px",
+                      fontWeight: "bold",
+                      fontSize: "20px",
+                    }}
+                  >
+                    &rarr;
+                  </span>
+                </Text>
               </Flex>
             </Col>
           </Row>
@@ -166,7 +192,7 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                   <Text style={{ color: "#838383" }} className="f-14">
                     Schedule an appointment
                   </Text>
-                  <Text className="text-white f-bold">954.870.080</Text>
+                  <Text className="text-white f-bold">954.870.4080</Text>
                 </Flex>
               </Flex>
             </Flex>
