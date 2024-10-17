@@ -182,7 +182,7 @@ function App() {
               }
             />
             <Route
-              path="/ourMarket"
+              path="/ourmarket"
               element={
                 <Animation>
                   <PropertyPress />
@@ -190,16 +190,37 @@ function App() {
               }
             />
             <Route
-              path="/ourMarket/:id"
+              path="/ourmarket/:id"
               element={
                 <Animation>
                   <PropertyPressDetail />
                 </Animation>
               }
             />
-            <Route path="/searchcommunity" element={<SearchCommunity />} />
-            <Route path="/agent/blog/:id" element={<AgentBlog />} />
-            <Route path="/reports/:id" element={<ReportDetail />} />
+            <Route
+              path="/searchcommunity"
+              element={
+                <Animation>
+                  <SearchCommunity />
+                </Animation>
+              }
+            />
+            <Route
+              path="/agent/blog/:id"
+              element={
+                <Animation>
+                  <AgentBlog />
+                </Animation>
+              }
+            />
+            <Route
+              path="/reports/:id"
+              element={
+                <Animation>
+                  <ReportDetail />
+                </Animation>
+              }
+            />
             <Route path="*" element={<NotFound />} />
             <Route element={<Dashboard />}>
               <Route
