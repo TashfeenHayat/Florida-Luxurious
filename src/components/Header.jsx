@@ -136,7 +136,7 @@ const Header = () => {
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <Link to="/ourMarket" className="text-upper f-10">
+                  <Link to="/ourmarket" className="text-upper f-10">
                     Our Market
                   </Link>
                 </Menu.Item>
