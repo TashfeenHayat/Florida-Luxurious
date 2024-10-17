@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Flex, Image, Dropdown, Menu } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import Drawer from "../components/Drawer";
+import { motion } from "framer-motion";
 
 const contentStyle = {
   padding: 0,
@@ -18,7 +19,7 @@ const menuStyle = {
   boxShadow: "none",
 };
 
-function Header() {
+const Header = () => {
   const navbar = useRef(null);
   const navigate = useNavigate();
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -39,7 +40,14 @@ function Header() {
   };
 
   return (
-    <nav ref={navbar} id="navbar_main">
+    <motion.nav
+      ref={navbar}
+      id="navbar_main"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+    >
       <Flex justify={"space-between"} align="center" gap={0}>
         <Link to="/" style={{ borderRight: "none", padding: "0px" }}>
           <Image src={Logo} width={"85%"} preview={false} />
@@ -63,7 +71,7 @@ function Header() {
                     rel="noopener noreferrer"
                     className="text-upper  f-10"
                   >
-                    Featured Communties
+                    Featured Communities
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
@@ -136,7 +144,7 @@ function Header() {
                 </Menu.Item>
                 <Menu.Item>
                   <Link to="/ourMarket" className="text-upper f-10">
-                    our Market
+                    Our Market
                   </Link>
                 </Menu.Item>
               </Menu>
@@ -170,11 +178,17 @@ function Header() {
               <rect x="8" y="18.0195" width="18" height="2" fill="white" />
             </svg>
           </span>
-          <Drawer setOpenDrawer={setOpenDrawer} openDrawer={openDrawer} />
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: openDrawer ? 0 : "100%" }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <Drawer setOpenDrawer={setOpenDrawer} openDrawer={openDrawer} />
+          </motion.div>
         </Flex>
       </Flex>
-    </nav>
+    </motion.nav>
   );
-}
+};
 
 export default Header;
