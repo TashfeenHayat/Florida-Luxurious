@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -45,8 +45,9 @@ import Allcommunities from "./pages/Home/AllCommunicaties";
 import PropertyPressDetail from "./pages/PropertyPressDetail";
 import ReportDetail from "./pages/ReportDetail";
 import AddTestimonial from "./pages/Admin/AddTestimonial";
+import Animation from "./components/Animation";
 import "./App.css";
-
+import { AnimatePresence } from "framer-motion";
 function App() {
   const location = useLocation();
   let isAdminRoute = location.pathname.startsWith("/admin");
@@ -57,558 +58,175 @@ function App() {
     });
   }, []);
 
-  const pageVariants = {
-    initial: { opacity: 0, x: -100 },
-    in: { opacity: 1, x: 0 },
-    out: { opacity: 0, x: 100 },
-  };
-
-  const transition = { duration: 0.5 };
-
   return (
     <>
       {!isAdminRoute && <Header />}
       <TopToScroll>
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           <Routes location={location} key={location.key}>
-            <Route
-              path="/"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
-                  <Home />
-                </motion.div>
-              }
-              exact
-            />
+            <Route path="/" element={<Home />} exact />
             <Route
               path="/contact-us"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <ContactUs />
-                </motion.div>
+                </Animation>
               }
             />
             <Route
               path="/features/:id"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <DetailProperty />
-                </motion.div>
+                </Animation>
               }
             />
             <Route
               path="/meet-the-team"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <Agents />
-                </motion.div>
+                </Animation>
               }
             />
-            <Route
-              path="/admin/login"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
-                  <LoginAdmin />
-                </motion.div>
-              }
-            />
-            <Route
-              path="/admin/signup"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
-                  <Signup />
-                </motion.div>
-              }
-            />
+            <Route path="/admin/login" element={<LoginAdmin />} />
+            <Route path="/admin/signup" element={<Signup />} />
             <Route
               path="/our-story"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <OurStory />
-                </motion.div>
+                </Animation>
               }
             />
             <Route
               path="/agent/:id"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <AgentProfile />
-                </motion.div>
+                </Animation>
               }
             />
             <Route
               path="/properties"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <Properties />
-                </motion.div>
+                </Animation>
               }
             />
             <Route
               path="/sold-properties"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <SoldProperties />
-                </motion.div>
+                </Animation>
               }
             />
             <Route
               path="/boat-owner"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <BoatOwners />
-                </motion.div>
+                </Animation>
               }
             />
             <Route
               path="/my-listing/:name/:id"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <AgentListing />
-                </motion.div>
+                </Animation>
               }
             />
             <Route
               path="/my-sold/:name/:id"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <AgentSold />
-                </motion.div>
+                </Animation>
               }
             />
             <Route
               path="/community/:id"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <Communities />
-                </motion.div>
+                </Animation>
               }
             />
             <Route path="/500" element={<InternalServerError />} />
-            <Route
-              path="/global"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
-                  <GlobalPartner />
-                </motion.div>
-              }
-            />
+            <Route path="/global" element={<GlobalPartner />} />
             <Route
               path="/all-communities"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <Allcommunities />
-                </motion.div>
+                </Animation>
               }
             />
             <Route
               path="/mls-listing"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <Mls />
-                </motion.div>
+                </Animation>
               }
             />
             <Route
               path="/mls-detail/:id"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <MlsPropertyDetail />
-                </motion.div>
+                </Animation>
               }
             />
             <Route
               path="/ourMarket"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <PropertyPress />
-                </motion.div>
+                </Animation>
               }
             />
             <Route
               path="/ourMarket/:id"
               element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
+                <Animation>
                   <PropertyPressDetail />
-                </motion.div>
+                </Animation>
               }
             />
-            <Route
-              path="/searchcommunity"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
-                  <SearchCommunity />
-                </motion.div>
-              }
-            />
-            <Route
-              path="/agent/blog/:id"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
-                  <AgentBlog />
-                </motion.div>
-              }
-            />
-            <Route
-              path="/reports/:id"
-              element={
-                <motion.div
-                  initial="initial"
-                  animate="in"
-                  exit="out"
-                  variants={pageVariants}
-                  transition={transition}
-                >
-                  <ReportDetail />
-                </motion.div>
-              }
-            />
+            <Route path="/searchcommunity" element={<SearchCommunity />} />
+            <Route path="/agent/blog/:id" element={<AgentBlog />} />
+            <Route path="/reports/:id" element={<ReportDetail />} />
             <Route path="*" element={<NotFound />} />
             <Route element={<Dashboard />}>
               <Route
                 path="/admin/dashboard"
                 element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <h1 style={{ textAlign: "center", margin: "16px 0" }}>
-                      Welcome to the Admin Panel
-                    </h1>
-                  </motion.div>
+                  <h1 style={{ textAlign: "center", margin: "16px 0" }}>
+                    Welcome to the Admin Panel
+                  </h1>
                 }
               />
-              <Route
-                path="/admin/community"
-                element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <Filter />
-                  </motion.div>
-                }
-              />
-              <Route
-                path="/admin/community/add"
-                element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <AddFilter />
-                  </motion.div>
-                }
-              />
-              <Route
-                path="/admin/community/edit/:id"
-                element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <AddFilter />
-                  </motion.div>
-                }
-              />
-              <Route
-                path="/admin/agent"
-                element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <Agent />
-                  </motion.div>
-                }
-              />
-              <Route
-                path="/admin/agent/add"
-                element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <AddAgent />
-                  </motion.div>
-                }
-              />
-              <Route
-                path="/admin/agent/edit/:id"
-                element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <AddAgent />
-                  </motion.div>
-                }
-              />
-              <Route
-                path="/admin/property"
-                element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <PropertyList />
-                  </motion.div>
-                }
-              />
-              <Route
-                path="/admin/property/add"
-                element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <AddProperty />
-                  </motion.div>
-                }
-              />
+              <Route path="/admin/community" element={<Filter />} />
+              <Route path="/admin/community/add" element={<AddFilter />} />
+              <Route path="/admin/community/edit/:id" element={<AddFilter />} />
+              <Route path="/admin/agent" element={<Agent />} />
+              <Route path="/admin/agent/add" element={<AddAgent />} />
+              <Route path="/admin/agent/edit/:id" element={<AddAgent />} />
+              <Route path="/admin/property" element={<PropertyList />} />
+              <Route path="/admin/property/add" element={<AddProperty />} />
               <Route
                 path="/admin/property/edit/:id"
-                element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <AddProperty />
-                  </motion.div>
-                }
+                element={<AddProperty />}
               />
-              <Route
-                path="/admin/press"
-                element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <Press />
-                  </motion.div>
-                }
-              />
-              <Route
-                path="/admin/inquiry"
-                element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <Inquiries />
-                  </motion.div>
-                }
-              />
-              <Route
-                path="/admin/blog"
-                element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <Blog />
-                  </motion.div>
-                }
-              />
-              <Route
-                path="/admin/report"
-                element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <Report />
-                  </motion.div>
-                }
-              />
-              <Route
-                path="/admin/Testimonial"
-                element={
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={transition}
-                  >
-                    <AddTestimonial />
-                  </motion.div>
-                }
-              />
+              <Route path="/admin/press" element={<Press />} />
+              <Route path="/admin/inquiry" element={<Inquiries />} />
+              <Route path="/admin/blog" element={<Blog />} />
+              <Route path="/admin/report" element={<Report />} />
+              <Route path="/admin/Testimonial" element={<AddTestimonial />} />
             </Route>
           </Routes>
         </AnimatePresence>

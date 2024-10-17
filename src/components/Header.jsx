@@ -40,14 +40,7 @@ const Header = () => {
   };
 
   return (
-    <motion.nav
-      ref={navbar}
-      id="navbar_main"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3 }}
-    >
+    <nav ref={navbar} id="navbar_main">
       <Flex justify={"space-between"} align="center" gap={0}>
         <Link to="/" style={{ borderRight: "none", padding: "0px" }}>
           <Image src={Logo} width={"85%"} preview={false} />
@@ -178,16 +171,11 @@ const Header = () => {
               <rect x="8" y="18.0195" width="18" height="2" fill="white" />
             </svg>
           </span>
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: openDrawer ? 0 : "100%" }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <Drawer setOpenDrawer={setOpenDrawer} openDrawer={openDrawer} />
-          </motion.div>
+
+          <Drawer setOpenDrawer={setOpenDrawer} openDrawer={openDrawer} />
         </Flex>
       </Flex>
-    </motion.nav>
+    </nav>
   );
 };
 

@@ -10,6 +10,7 @@ import Neighborhoods from "./Neighborhoods";
 import Icons from "../../components/Icons";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import Animation from "../../components/Animation";
 const { Title, Text } = Typography;
 const { Search } = Input;
 
@@ -18,7 +19,7 @@ function Home() {
   const onSearch = (value) => navigate(`/searchcommunity?name=${value}`);
 
   return (
-    <div>
+    <>
       <div className="background-video-container">
         <motion.video
           autoPlay
@@ -109,7 +110,7 @@ function Home() {
       <OurStory />
       <Team />
       <LetTalk />
-    </div>
+    </>
   );
 }
 
