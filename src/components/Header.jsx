@@ -135,7 +135,7 @@ function Header() {
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <Link to="/ourMarket" className="text-upper f-10">
+                  <Link to="/ourmarket" className="text-upper f-10">
                     our Market
                   </Link>
                 </Menu.Item>

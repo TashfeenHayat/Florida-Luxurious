@@ -119,7 +119,7 @@ function Footer() {
                         meet the team
                       </Link>
                       <Link
-                        to="/ourMarket"
+                        to="/ourmarket"
                         className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
                       >

@@ -256,11 +256,10 @@ function Blog() {
     </div>
   );
 
-  const extractImageFromContent = (content) => {
-    const regex = /<img.*?src="(.*?)"/; // Regex to match <img> tags
-    const match = content.match(regex);
-    return match ? match[1] : ""; // Return the src if found, else empty
-  };
+  // const extractImageFromContent = (content) => {
+  //   const regex = /<img.*?src="(.*?)"/;
+  //   return match ? match[1] : "";
+  // };
 
   return (
     <>

@@ -78,8 +78,8 @@ function App() {
           <Route path="/all-communities" element={<Allcommunities />} />
           <Route path="mls-listing" element={<Mls />} />
           <Route path="mls-detail/:id" element={<MlsPropertyDetail />} />
-          <Route path="/ourMarket" element={<PropertyPress />} />
-          <Route path="/ourMarket/:id" element={<PropertyPressDetail />} />
+          <Route path="/ourmarket" element={<PropertyPress />} />
+          <Route path="/ourmarket/:id" element={<PropertyPressDetail />} />
           <Route path="/searchcommunity" element={<SearchCommunity />} />
           <Route path="/agent/blog/:id" element={<AgentBlog />} />
           <Route path="/reports/:id" element={<ReportDetail />} />

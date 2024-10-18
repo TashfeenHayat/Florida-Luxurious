@@ -179,11 +179,9 @@ export default function DetailProperty() {
       <div style={{ position: "relative", overflowX: "hidden" }}>
         <Image
           preview={false}
-          src={
-            data?.property?.media[0]?.mdUrl || "https://placehold.co/1512x934"
-          }
+          src={data?.property?.media[0]?.mdUrl}
           width="100%"
-          fallback="https://placehold.co/1512x934"
+          fallback="https://placehold.com"
         />
         <div
           className="hideetails"
@@ -565,7 +563,7 @@ export default function DetailProperty() {
                     style={{ cursor: "pointer" }}
                     preview
                     width="100%"
-                    fallback="https://placehold.co/272x215"
+                    // fallback="https://placehold.co/272x215"
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
@@ -574,7 +572,7 @@ export default function DetailProperty() {
                     style={{ cursor: "pointer" }}
                     preview
                     width="100%"
-                    fallback="https://placehold.co/272x215"
+                    // fallback="https://placehold.co/272x215"
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
@@ -583,7 +581,7 @@ export default function DetailProperty() {
                     style={{ cursor: "pointer" }}
                     preview
                     width="100%"
-                    fallback="https://placehold.co/272x215"
+                    // fallback="https://placehold.co/272x215"
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
@@ -622,7 +620,7 @@ export default function DetailProperty() {
                               style={{ cursor: "pointer" }}
                               preview
                               width="100%"
-                              fallback="https://placehold.co/272x215"
+                              // fallback="https://placehold.co/272x215"
                             />
                           </Col>
                         ))}
