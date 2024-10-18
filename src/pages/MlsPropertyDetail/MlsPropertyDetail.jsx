@@ -9,6 +9,7 @@ import {
   Input,
   Checkbox,
   Modal,
+  Skeleton,
 } from "antd";
 import { Container } from "react-bootstrap";
 import Button from "../../components/Buttons";
@@ -26,6 +27,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import MlsPropertyDetail from "../../hooks/useMlsDetail";
 import { Loader } from "@googlemaps/js-api-loader";
 import { google_api_key } from "../../api/Axios";
+import SkeletonImage from "antd/es/skeleton/Image";
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -34,6 +36,10 @@ export default function DetailProperty() {
   const [details, setDetails] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [backgroundImage, setBackGroundImage] = useState(null);
+  const [imageLoading, setImageLoading] = useState(true);
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
   const formatPhoneNumber = (phoneNumber) => {
     if (!phoneNumber) return "";
 
@@ -136,15 +142,19 @@ export default function DetailProperty() {
   return (
     <>
       <div style={{ position: "relative", overflowX: "hidden" }}>
+        {imageLoading && (
+          <Skeleton.Image style={{ width: "180vh", height: "500px" }} />
+        )}
         <Image
           preview={false}
           src={
             backgroundImage
               ? backgroundImage
-              : data?.mls?.photos[0] || "https://placehold.co/1512x934"
+              : data?.mls?.photos[0] || SkeletonImage
           }
+          onLoad={handleImageLoad}
+          style={{ display: imageLoading ? "none" : "block" }}
           width="100%"
-          fallback="https://placehold.co/1512x934"
         />
         <div></div>
         <div
@@ -330,15 +340,23 @@ export default function DetailProperty() {
                 {/* Image Columns */}
                 {[0, 1, 2]?.map((index) => (
                   <Col key={index} xs={24} sm={12} md={8} lg={8} xl={8}>
+                    {imageLoading && (
+                      <Skeleton.Image
+                        style={{ width: "100%", height: "200px" }}
+                      />
+                    )}{" "}
                     <Image
                       src={data?.mls?.photos[index]}
                       width="100%"
                       /*onClick={(e) =>
                         setBackGroundImage(e.target.getAttribute("src"))
                       }*/
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        cursor: "pointer",
+                        display: imageLoading ? "none" : "block",
+                      }}
                       preview
-                      fallback="https://placehold.co/272x215"
+                      onLoad={handleImageLoad}
                     />
                   </Col>
                 ))}
@@ -376,6 +394,11 @@ export default function DetailProperty() {
                       <Row gutter={[8, 16]}>
                         {data?.mls?.photos?.map((item, index) => (
                           <Col key={index} xs={12} sm={8} md={6} lg={6} xl={6}>
+                            {imageLoading && (
+                              <Skeleton.Image
+                                style={{ width: "100%", height: "200px" }}
+                              />
+                            )}
                             <Image
                               src={item}
                               width="100%"
@@ -384,7 +407,7 @@ export default function DetailProperty() {
                               }
                               style={{ cursor: "pointer" }}
                               preview
-                              fallback="https://placehold.co/195x154"
+                              onLoad={handleImageLoad}
                             />
                           </Col>
                         ))}

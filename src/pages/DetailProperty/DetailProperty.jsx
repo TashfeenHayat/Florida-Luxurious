@@ -10,6 +10,7 @@ import {
   Checkbox,
   Modal,
   Form,
+  Skeleton,
 } from "antd";
 import { Container } from "react-bootstrap";
 import Button from "../../components/Buttons";
@@ -28,7 +29,7 @@ import { Loader } from "@googlemaps/js-api-loader";
 import { useDispatch } from "react-redux";
 import { google_api_key } from "../../api/Axios";
 import { contactUs } from "../../api/Inquiry";
-
+import SkeletonImage from "antd/es/skeleton/Image";
 const { Title, Paragraph, Text } = Typography;
 
 export default function DetailProperty() {
@@ -43,6 +44,10 @@ export default function DetailProperty() {
     email: "",
     message: "",
   });
+  const [imageLoading, setImageLoading] = useState(true);
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
   const dispatch = useDispatch();
   const formatPhoneNumber = (phoneNumber) => {
     if (!phoneNumber) return "";
@@ -177,11 +182,15 @@ export default function DetailProperty() {
   return (
     <div className="single_property">
       <div style={{ position: "relative", overflowX: "hidden" }}>
+        {imageLoading && (
+          <Skeleton.Image style={{ width: "180vh", height: "500px" }} />
+        )}
         <Image
           preview={false}
-          src={data?.property?.media[0]?.mdUrl}
+          src={data?.property?.media[0]?.mdUrl || SkeletonImage}
           width="100%"
-          fallback="https://placehold.com"
+          onLoad={handleImageLoad}
+          style={{ display: imageLoading ? "none" : "block" }}
         />
         <div
           className="hideetails"
@@ -558,27 +567,54 @@ export default function DetailProperty() {
             <div>
               <Row gutter={[8, 16]}>
                 <Col lg={12} sm={24} md={24}>
+                  {imageLoading && (
+                    <Skeleton.Image
+                      style={{ width: "100%", height: "100px" }}
+                    />
+                  )}
                   <Image
-                    src={data?.property?.media[0]?.mdUrl}
-                    style={{ cursor: "pointer" }}
+                    src={data?.property?.media[0]?.mdUrl || SkeletonImage}
+                    preview
+                    onLoad={handleImageLoad}
+                    style={{
+                      display: imageLoading ? "none" : "block",
+                      cursor: "pointer",
+                    }}
+                    width="100%"
+                    // fallback="https://placehold.co/272x215"
+                  />
+                </Col>
+                <Col lg={12} sm={24} md={24}>
+                  {imageLoading && (
+                    <Skeleton.Image
+                      style={{ width: "100%", height: "100px" }}
+                    />
+                  )}
+                  <Image
+                    src={data?.property?.media[1]?.mdUrl || SkeletonImage}
+                    onLoad={handleImageLoad}
+                    style={{
+                      display: imageLoading ? "none" : "block",
+                      cursor: "pointer",
+                    }}
                     preview
                     width="100%"
                     // fallback="https://placehold.co/272x215"
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
+                  {imageLoading && (
+                    <Skeleton.Image
+                      style={{ width: "100%", height: "100px" }}
+                    />
+                  )}
                   <Image
-                    src={data?.property?.media[1]?.mdUrl}
-                    style={{ cursor: "pointer" }}
-                    preview
-                    width="100%"
-                    // fallback="https://placehold.co/272x215"
-                  />
-                </Col>
-                <Col lg={12} sm={24} md={24}>
-                  <Image
-                    src={data?.property?.media[2]?.mdUrl}
-                    style={{ cursor: "pointer" }}
+                    src={data?.property?.media[2]?.mdUrl || SkeletonImage}
+                    onLoad={handleImageLoad}
+                    style={{
+                      display: imageLoading ? "none" : "block",
+                      cursor: "pointer",
+                    }}
                     preview
                     width="100%"
                     // fallback="https://placehold.co/272x215"
@@ -615,9 +651,18 @@ export default function DetailProperty() {
                       <Row gutter={[8, 16]}>
                         {data?.property?.media?.map((item, index) => (
                           <Col lg={8} md={12} sm={24}>
+                            {imageLoading && (
+                              <Skeleton.Image
+                                style={{ width: "100%", height: "100px" }}
+                              />
+                            )}
                             <Image
-                              src={item?.mdUrl}
-                              style={{ cursor: "pointer" }}
+                              src={item?.mdUrl || SkeletonImage}
+                              onLoad={handleImageLoad}
+                              style={{
+                                display: imageLoading ? "none" : "block",
+                                cursor: "pointer",
+                              }}
                               preview
                               width="100%"
                               // fallback="https://placehold.co/272x215"
@@ -810,11 +855,22 @@ export default function DetailProperty() {
                 <Row gutter={[16, 16]}>
                   <Col lg={16} md={24} sm={24} xs={24} className="p-0">
                     <Flex gap={10} justify="center" align="center">
+                      {imageLoading && (
+                        <Skeleton.Image
+                          style={{ width: "100%", height: "100px" }}
+                        />
+                      )}
                       <img
                         src={data?.property?.Primary_agentId?.photo}
                         preview={false}
+                        onLoad={handleImageLoad}
+                        style={{
+                          display: imageLoading ? "none" : "block",
+
+                          aspectRatio: 5 / 7,
+                          objectFit: "cover",
+                        }}
                         width="40%"
-                        style={{ aspectRatio: 5 / 7, objectFit: "cover" }}
                       />
 
                       <Flex vertical justify="flex-start" align="">
