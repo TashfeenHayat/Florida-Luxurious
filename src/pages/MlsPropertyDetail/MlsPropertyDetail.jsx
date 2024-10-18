@@ -364,7 +364,7 @@ export default function DetailProperty() {
                 {/* Modal Trigger */}
                 <Col xs={24} sm={12} md={8} lg={8} xl={8}>
                   <div
-                    style={{ background: "#1C1C1C", height: "100%" }}
+                    style={{ background: "#1C1C1C", height: "109px%" }}
                     onClick={showModal}
                   >
                     <Flex
