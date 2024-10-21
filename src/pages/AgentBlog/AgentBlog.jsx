@@ -45,7 +45,6 @@ const Flipbook = ({ pages, flipbookRef }) => {
               width: "600px",
               height: "100%",
               borderRadius: "20px",
-              
             }}
           />
         </div>
@@ -74,6 +73,7 @@ function AgentBlog() {
         img.style.height = "auto";
       });
     }
+    
   }, [data?.content]);
 
   // Load PDF and convert pages to images
