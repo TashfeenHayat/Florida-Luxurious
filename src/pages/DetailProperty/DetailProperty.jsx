@@ -550,12 +550,12 @@ export default function DetailProperty() {
               >
                 {data?.property?.addressLine1} {data?.property?.addressLine2}
               </Title>
-              <Paragraph className="f-16 f-200" style={{ lineHeight: 1.2 }}>
+              <Paragraph className="f-16 f-200" style={{ lineHeight: 1.5 }}>
                 {data?.property?.description
                   ?.split("\n")
                   .filter((txt) => txt.trim() !== "")
                   .map((txt) => (
-                    <p>{txt}</p>
+                    <p style={{ marginBottom: 3 }}>{txt}</p>
                   ))}
                 {/*{data?.property?.description.split("\n").slice(0,3).map((txt) => (
                   <p>{txt}</p>
