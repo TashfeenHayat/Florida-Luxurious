@@ -23,6 +23,7 @@
     "dayjs": "^1.11.11",
     "dompurify": "^3.1.6",
     "florida-admin": "file:",
+    "framer-motion": "^11.11.9",
     "html-entities": "^2.5.2",
     "html-react-parser": "^5.1.12",
     "jquery": "^3.7.1",

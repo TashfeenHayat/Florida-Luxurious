@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Icons from "../../components/Icons";
 import LetTalk from "../../components/LetTalk";
 import useProperties from "../../hooks/useProperties";
+import { motion, AnimatePresence } from "framer-motion";
 //import useAgent from "../../hooks/useAgent";
 const { Title, Text } = Typography;
 function Properties() {
@@ -20,6 +21,11 @@ function Properties() {
     currentPage,
     "for_sale"
   );
+  // const pageVariants = {
+  //   initial: { opacity: 0, x: 100 },
+  //   animate: { opacity: 1, x: 0 },
+  //   exit: { opacity: 0, x: -100 },
+  // };
   //console.log("dara", data);
   {
     /*const check = data?.properties?.filter((item) => item.status !== "sold");
@@ -78,7 +84,13 @@ function Properties() {
                 onClick={() => navigate(`/features/${property?._id}`)}
                 style={{ cursor: "pointer" }}
               >
-                <div className="displayy-teamimg-center">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }} // Normal size and fully visible
+                  exit={{ opacity: 0, scale: 0.9 }} // Exit with the same transformation
+                  transition={{ duration: 0.3 }} // Adjust duration for card animations
+                  className="displayy-teamimg-center"
+                >
                   <Image
                     src={
                       property?.media?.[0]?.mdUrl ||
@@ -151,7 +163,7 @@ function Properties() {
                       </Flex>
                     </Flex>
                   </div>
-                </div>
+                </motion.div>
               </Col>
             ))}
           </Row>

@@ -9,7 +9,8 @@ import FeatureListing from "./FeatureListing";
 import Neighborhoods from "./Neighborhoods";
 import Icons from "../../components/Icons";
 import { useNavigate } from "react-router-dom";
-
+import { motion } from "framer-motion";
+import Animation from "../../components/Animation";
 const { Title, Text } = Typography;
 const { Search } = Input;
 
@@ -18,30 +19,40 @@ function Home() {
   const onSearch = (value) => navigate(`/searchcommunity?name=${value}`);
 
   return (
-    <div>
+    <>
       <div className="background-video-container">
-        <video autoPlay muted loop className="background-video">
+        <motion.video
+          autoPlay
+          muted
+          loop
+          className="background-video"
+          initial={{ opacity: 0 }} // Animation initial state
+          animate={{ opacity: 1 }} // Animation final state
+          transition={{ duration: 1.5 }} // Animation duration
+        >
           <source
             src="https://firebasestorage.googleapis.com/v0/b/floridaluxrious.appspot.com/o/HOMES.mp4?alt=media&token=d1a0cf50-6483-47fa-9a55-40d6ad68e2a6"
             type="video/mp4"
           />
-        </video>
+        </motion.video>
       </div>
       <div className="content-hero">
-        <div
+        <motion.div
           style={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
             textAlign: "center",
-            //padding: "2rem",
             height: "100vh",
             width: "100%",
-            color: "#fff", // Ensure text is visible on the background
+            color: "#fff",
             position: "relative",
             zIndex: 1,
           }}
+          initial={{ y: -50, opacity: 0 }} // Initial animation state
+          animate={{ y: 0, opacity: 1 }} // Final animation state
+          transition={{ duration: 1 }} // Animation duration
         >
           <Title
             className="title-home-page"
@@ -89,7 +100,7 @@ function Home() {
               }}
             />
           </div>*/}
-        </div>
+        </motion.div>
       </div>
       <Icons />
       <FloridaProperties />
@@ -99,7 +110,7 @@ function Home() {
       <OurStory />
       <Team />
       <LetTalk />
-    </div>
+    </>
   );
 }
 

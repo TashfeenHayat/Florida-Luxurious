@@ -84,6 +84,7 @@ function PropertyPressDetail() {
   useEffect(() => {
     if (data?.file) {
       const url = data.file;
+      console.log(url);
       const loadingTask = pdfjsLib.getDocument(url);
       loadingTask.promise.then((pdf) => {
         const totalPages = pdf.numPages;
