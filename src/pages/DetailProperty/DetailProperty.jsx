@@ -554,12 +554,16 @@ export default function DetailProperty() {
                 {data?.property?.description
                   ?.split("\n")
                   .filter((txt) => txt.trim() !== "")
+                  .slice(0, 3)
                   .map((txt) => (
                     <p style={{ marginBottom: 3 }}>{txt}</p>
                   ))}
-                {/*{data?.property?.description.split("\n").slice(0,3).map((txt) => (
-                  <p>{txt}</p>
-                ))}w*/}
+                {data?.property?.description
+                  .split("\n")
+                  .slice(3)
+                  .map((txt) => (
+                    <p style={{ marginTop: 8, lineHeight: 1.5 }}>{txt}</p>
+                  ))}
               </Paragraph>
             </Card>
           </Col>
@@ -706,7 +710,7 @@ export default function DetailProperty() {
                   width="300px"
                   Click={() => navigate("/properties")}
                 >
-                  View more listing
+                  View more listings
                 </Button>
               </div>
             </Flex>

@@ -448,7 +448,7 @@ export default function DetailProperty() {
                   width="300px"
                   Click={() => navigate("/properties")}
                 >
-                  View more listing
+                  View more listings
                 </Button>
               </div>
             </Flex>

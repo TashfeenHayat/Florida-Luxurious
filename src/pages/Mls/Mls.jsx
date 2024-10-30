@@ -85,11 +85,11 @@ function Mls() {
   const itemsPerPage = 20;
   const mlsOnly = true;
   const [currentPage, setCurrentPage] = useState(1);
-  useMls(true, itemsPerPage, currentPage);
+  useMls(true, itemsPerPage, currentPage, null, null, null, null, 600000);
 
   const { isLoading, data: MLS } = useSelector((s) => s.getPropertiesReducer);
   console.log({ isLoading, data: MLS });
-  const [price, setPrice] = useState(0);
+  const [minprice, setPrice] = useState(600000);
   const [propertyType, setPropertyType] = useState("Select property type");
   const [minBathCount, setMinBathCount] = useState("min Bathrooms");
   const [maxBathCount, setMaxBathCount] = useState("Max Bathrooms");
@@ -101,7 +101,7 @@ function Mls() {
   const navigate = useNavigate();
 
   const { data } = useSelector((s) => s.getFiltersReducer);
-
+  console.log("data", data);
   const handlePrice = (price) => {
     setPrice(price);
   };
@@ -145,9 +145,11 @@ function Mls() {
         minBathCount,
         cities,
         maxBathCount,
+        minprice,
       })
     );
   };
+
   const handleCities = (e) => {
     const { checked, name } = e.target;
     setCities((prevCities) => {
@@ -159,6 +161,12 @@ function Mls() {
     });
   };
   // Calculate the properties for the current page
+  const formatPrice = (num) => {
+    if (num >= 1000000) {
+      return `${(num / 1000000).toFixed(0)}M`;
+    }
+    return num.toString();
+  };
 
   return (
     <div>
@@ -173,29 +181,33 @@ function Mls() {
       <div className="mls-body">
         <Container className="py-5">
           <Title className="text-center text-white f-40 f-100 text-upper">
-            search active LISTING
+            search active LISTINGS
           </Title>
           <Row gutter={[60, 60]} align="middle">
             <Col lg={12}>
               <Text className="text-white f-bold f-14">Price</Text>
               <Slider
                 className="custom-slider"
-                defaultValue={price}
+                defaultValue={minprice}
                 trackStyle={{ backgroundColor: "black" }}
                 handleStyle={{
                   borderColor: "#838383",
                   backgroundColor: "#838383",
                 }}
                 tooltip={{ open: false }}
-                max={20}
-                value={price}
+                min={600000}
+                max={50000000}
+                value={minprice}
                 onChange={handlePrice}
               />
               <Flex justify={"space-between"}>
-                <Text className="text-white f-bold f-14">{price} M</Text>
-                <Text className="text-white f-bold f-14">20 M</Text>
+                <Text className="text-white f-bold f-14">
+                  {formatPrice(minprice)}{" "}
+                </Text>
+                <Text className="text-white f-bold f-14">50 M</Text>{" "}
               </Flex>
             </Col>
+
             {/* <Col lg={12}>
               <Text className="text-white f-bold f-14">LIVING AREA</Text>
               <Slider

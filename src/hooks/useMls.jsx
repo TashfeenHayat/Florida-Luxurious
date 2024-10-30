@@ -15,6 +15,7 @@ function useMls(
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log(minPrice);
     callApi();
   }, [
     dispatch,

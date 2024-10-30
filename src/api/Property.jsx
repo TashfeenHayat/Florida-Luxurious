@@ -14,12 +14,15 @@ export const getProperties = createAsyncThunk(
       minBedCount,
       minBathCount,
       maxBathCount,
+      minprice = 600000,
+      maxprice,
       cities,
       key,
     },
     { rejectWithValue }
   ) {
     try {
+      console.log(minprice, "in api");
       const res = await customAxios.get(`property`, {
         params: {
           key,
@@ -32,6 +35,8 @@ export const getProperties = createAsyncThunk(
           minBedCount,
           minBathCount,
           maxBathCount,
+          minprice,
+          maxprice,
           cities,
         },
       });
@@ -48,7 +53,6 @@ export const getProperty = createAsyncThunk(
   "getPropertyReducer",
   async function ({ id, mlsOnly }, { rejectWithValue }) {
     try {
-      console.lo0g;
       const res = await customAxios.get(`property/${id}`, {
         params: {
           mlsOnly,

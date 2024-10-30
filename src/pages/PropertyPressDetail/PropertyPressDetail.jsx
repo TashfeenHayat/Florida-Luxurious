@@ -59,7 +59,7 @@ function PropertyPressDetail() {
   const flipbookRef = useRef(null);
   const [pages, setPages] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [isFlipbookLoading, setIsFlipbookLoading] = useState(true); // State for flipbook loading
+  const [isFlipbookLoading, setIsFlipbookLoading] = useState(true);
 
   useEffect(() => {
     if (refHtml.current && data?.content) {
@@ -82,19 +82,26 @@ function PropertyPressDetail() {
   }, [data?.content]);
 
   useEffect(() => {
-    if (data?.file) {
+    const loadPdf = async () => {
+      // Check if the file exists
+      if (!data?.file) {
+        setIsFlipbookLoading(false); // No file, set loading to false
+        return; // Exit the function
+      }
+      setIsFlipbookLoading(true);
       const url = data.file;
-      console.log(url);
-      const loadingTask = pdfjsLib.getDocument(url);
-      loadingTask.promise.then((pdf) => {
+      console.log("PDF URL:", url); // Log to check URL
+
+      try {
+        const loadingTask = pdfjsLib.getDocument(url);
+        const pdf = await loadingTask.promise;
         const totalPages = pdf.numPages;
         const pageImages = [];
 
-        const loadPage = async (pageNumber) => {
+        for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
           const page = await pdf.getPage(pageNumber);
           const scale = 1.5;
           const viewport = page.getViewport({ scale });
-
           const canvas = document.createElement("canvas");
           const context = canvas.getContext("2d");
           canvas.width = viewport.width;
@@ -103,19 +110,23 @@ function PropertyPressDetail() {
           await page.render({ canvasContext: context, viewport }).promise;
           const imgData = canvas.toDataURL("image/png");
           pageImages.push(imgData);
-
-          if (pageImages.length === totalPages) {
-            setPages(pageImages);
-            setIsFlipbookLoading(false); // Set flipbook loading to false once pages are loaded
-          }
-        };
-
-        for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
-          loadPage(pageNumber);
         }
-      });
-    }
-  }, [data?.file]);
+
+        setPages(pageImages);
+      } catch (error) {
+        console.error("Error loading PDF:", error);
+      } finally {
+        // Ensure loading is set to false regardless of the outcome
+        setIsFlipbookLoading(false);
+      }
+    };
+
+    loadPdf();
+  }, [data]);
+
+  const handlePageChange = (e) => {
+    setCurrentPage(e.data);
+  };
 
   const nextPage = () => {
     if (currentPage < pages.length - 1) {
@@ -133,9 +144,17 @@ function PropertyPressDetail() {
     }
   };
 
-  const handlePageChange = (e) => {
-    setCurrentPage(e.data);
-  };
+  const renderLoader = () => (
+    <Row
+      style={{
+        minHeight: "50vh",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Spin size="large" />
+    </Row>
+  );
 
   return (
     <>
@@ -160,16 +179,7 @@ function PropertyPressDetail() {
         </div>
       </div>
       {isLoading ? (
-        <Row
-          style={{
-            minHeight: "50vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Spin size="large" />
-        </Row>
+        renderLoader()
       ) : (
         <Container
           className="mt-4"
@@ -178,17 +188,8 @@ function PropertyPressDetail() {
           <Row justify="center" style={{ paddingBottom: "30px" }}>
             <Col xs={24} md={20} lg={16}>
               <div ref={refHtml} />
-              {isFlipbookLoading ? ( // Show loader while flipbook is loading
-                <Row
-                  style={{
-                    minHeight: "50vh",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Spin size="large" />
-                </Row>
+              {isFlipbookLoading ? (
+                renderLoader()
               ) : (
                 <>
                   {pages.length > 0 && (
@@ -202,6 +203,7 @@ function PropertyPressDetail() {
                         <Button
                           onClick={prevPage}
                           disabled={currentPage === 0}
+                          aria-label="Previous Page"
                           style={{ marginRight: "10px" }}
                         >
                           Previous
@@ -209,6 +211,7 @@ function PropertyPressDetail() {
                         <Button
                           onClick={nextPage}
                           disabled={currentPage === pages.length - 1}
+                          aria-label="Next Page"
                         >
                           Next
                         </Button>
