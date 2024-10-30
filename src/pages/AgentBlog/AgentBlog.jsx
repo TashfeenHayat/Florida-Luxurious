@@ -42,6 +42,7 @@ const Flipbook = ({ pages, flipbookRef }) => {
       }}
     >
       {pages.map((page, index) => (
+        
         <div key={index} className="page" style={{ padding: "10px" }}>
           <img
             src={page}
