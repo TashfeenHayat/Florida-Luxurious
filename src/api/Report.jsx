@@ -8,7 +8,7 @@ export const getReports = createAsyncThunk(
       const res = await customAxios.get(`Report`, {
         params: { limit, page },
       });
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     } catch ({ response }) {
       console.log(response);

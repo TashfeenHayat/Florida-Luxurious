@@ -8,7 +8,7 @@ export const contactUs = createAsyncThunk(
       const res = await customAxios.post(`inquiry`, data);
       return res.data;
     } catch (e) {
-      console.log(e, "error");
+      // console.log(e, "error");
 
       return rejectWithValue(e.response.data.message);
     }

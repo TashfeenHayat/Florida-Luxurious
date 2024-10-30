@@ -48,6 +48,7 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                     <Link
                       className="text-upper f-14 text-white"
                       style={{ textDecoration: "none" }}
+                      to="/all-communities"
                     >
                       Featured Communities
                     </Link>

@@ -15,19 +15,24 @@ const { Title } = Typography;
 
 // Flipbook component using react-pageflip
 const Flipbook = ({ pages, flipbookRef }) => {
+  // Calculate width and height based on window size
+  const isMobile = window.innerWidth < 600;
+  const flipbookWidth = isMobile ? window.innerWidth * 0.9 : 500; // 90% of screen width on mobile
+  const flipbookHeight = isMobile ? flipbookWidth * 1.4 : 700; // Maintain aspect ratio
+
   return (
     <HTMLFlipBook
-      width={500}
-      height={700}
+      width={flipbookWidth}
+      height={flipbookHeight}
       size="stretch"
-      minWidth={300} // Adjusted minWidth for smaller screens
+      minWidth={300}
       maxWidth={600}
       minHeight={400}
-      maxHeight={800} // Adjusted maxHeight for better aspect ratio
+      maxHeight={800}
       drawShadow={true}
       flippingTime={1000}
       useMouseEvents={true}
-      ref={flipbookRef} // Attach the ref here
+      ref={flipbookRef}
       style={{
         margin: "0 auto",
         background: "#f5f5f5",
@@ -42,8 +47,8 @@ const Flipbook = ({ pages, flipbookRef }) => {
             src={page}
             alt={`Page ${index + 1}`}
             style={{
-              width: "600px",
-              height: "100%",
+              width: "100%", // Make images responsive
+              height: "auto",
               borderRadius: "20px",
             }}
           />
@@ -56,6 +61,7 @@ const Flipbook = ({ pages, flipbookRef }) => {
 function AgentBlog() {
   const { id } = useParams();
   const { data, isLoading, isError } = useBlog(id);
+
   const refHtml = useRef(null);
   const flipbookRef = useRef(null); // Create a ref for the flipbook
   const [pages, setPages] = useState([]);
@@ -73,7 +79,6 @@ function AgentBlog() {
         img.style.height = "auto";
       });
     }
-    
   }, [data?.content]);
 
   // Load PDF and convert pages to images

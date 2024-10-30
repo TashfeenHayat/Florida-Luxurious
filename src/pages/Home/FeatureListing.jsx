@@ -100,6 +100,7 @@ function FeatureListing() {
         </Text>{" "}
         Listings
       </Paragraph>
+
       {isLoading ? (
         <Flex
           justify={"center"}
@@ -114,8 +115,9 @@ function FeatureListing() {
             justify={"center"}
             align={"center"}
             style={{
-              marginTop: 65,
-              marginBottom: 65,
+              marginTop: "65px",
+              marginBottom: "65px",
+              flexWrap: "wrap",
             }}
             className="features_section_slider"
             data-aos="fade-down-left"
@@ -127,7 +129,13 @@ function FeatureListing() {
                   key={index}
                   className="displayy-teamimg-center"
                   onClick={() => navigate(`/features/${property._id}`)}
-                  style={{ position: "relative", cursor: "pointer" }}
+                  style={{
+                    position: "relative",
+                    cursor: "pointer",
+                    maxWidth: "300px",
+                    flex: "1 1 auto",
+                    margin: "10px",
+                  }}
                 >
                   <Image
                     src={
@@ -138,6 +146,7 @@ function FeatureListing() {
                     className="img-op"
                     fallback="https://placehold.co/618x489"
                     preview={false}
+                    style={{ borderRadius: "8px", objectFit: "cover" }}
                   />
                   <div className="info">
                     <Flex
@@ -173,7 +182,13 @@ function FeatureListing() {
                     </Flex>
                   </div>
                   <div className="show-info">
-                    <div style={{ background: "#fff", height: "50px" }}>
+                    <div
+                      style={{
+                        background: "#fff",
+                        height: "50px",
+                        borderRadius: "5px",
+                      }}
+                    >
                       <Flex
                         justify={"space-between"}
                         align={"center"}
@@ -197,6 +212,7 @@ function FeatureListing() {
               ))}
             </Slider>
           </Flex>
+
           <Flex
             justify="center"
             align="center"

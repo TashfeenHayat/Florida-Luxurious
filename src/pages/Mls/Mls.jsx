@@ -184,7 +184,7 @@ function Mls() {
             search active LISTINGS
           </Title>
           <Row gutter={[60, 60]} align="middle">
-            <Col lg={12}>
+            <Col xs={24} sm={12} lg={12}>
               <Text className="text-white f-bold f-14">Price</Text>
               <Slider
                 className="custom-slider"
@@ -221,7 +221,7 @@ function Mls() {
                 tooltip={{ open: false }}
               />
             </Col> */}
-            <Col lg={12}>
+            <Col lg={12} xs={9} sm={18}>
               <Dropdown
                 menu={{
                   items,
@@ -237,7 +237,7 @@ function Mls() {
                 </a>
               </Dropdown>
             </Col>
-            <Col lg={12}>
+            <Col lg={12} xs={9} sm={18}>
               <Dropdown
                 menu={{
                   items: minBathRoom,
@@ -253,7 +253,7 @@ function Mls() {
                 </a>
               </Dropdown>
             </Col>
-            <Col lg={12}>
+            <Col lg={12} xs={9} sm={18}>
               <Dropdown
                 menu={{
                   items: maxBathRoom,
@@ -269,7 +269,7 @@ function Mls() {
                 </a>
               </Dropdown>
             </Col>
-            <Col lg={12}>
+            <Col lg={12} xs={9} sm={18}>
               <Dropdown
                 menu={{
                   items: minBedRoom,
@@ -285,7 +285,7 @@ function Mls() {
                 </a>
               </Dropdown>
             </Col>
-            <Col lg={12}>
+            <Col lg={12} xs={24} sm={18}>
               <Dropdown
                 menu={{
                   items: maxBedRoom,
@@ -302,7 +302,7 @@ function Mls() {
               </Dropdown>
             </Col>
 
-            <Col lg={24}>
+            <Col lg={18} xs={24} sm={18}>
               <Flex justify={"start"} wrap>
                 <Flex
                   justify={"space-around"}
@@ -322,7 +322,7 @@ function Mls() {
                 </Flex>
               </Flex>
             </Col>
-            <Col lg={24} align="middle">
+            <Col lg={24} xs={24} sm={18} align="middle">
               <button
                 className="button-secondary text-upper mt-32"
                 style={{ width: "20%" }}

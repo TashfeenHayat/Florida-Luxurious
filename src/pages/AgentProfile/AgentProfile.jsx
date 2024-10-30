@@ -378,13 +378,12 @@ function AgentProfile() {
           <div className="pt-98 pb-98">
             <Title className="text-upper f-100 text-center">My Blog</Title>
             <Slider {...settings}>
-              {" "}
               {blogData.blogs.map((item, index) => (
                 <div key={index} style={{ padding: "0 10px" }}>
                   <Card
                     style={{
-                      width: "100%",
-                      maxWidth: 400,
+                      width: "90%", // Responsive width
+                      maxWidth: "400px", // Max width for larger screens
                       background: "#E8E8E8",
                       margin: "0 auto",
                       padding: "20px",
@@ -396,8 +395,12 @@ function AgentProfile() {
                       <Image
                         src={item?.cover || item?.agentId?.photo}
                         preview={false}
-                        style={{ borderRadius: "5%", marginBottom: "10px" }}
-                        width="100%"
+                        style={{
+                          borderRadius: "5%",
+                          marginBottom: "10px",
+                          width: "100%", // Ensure the image is responsive
+                          height: "auto", // Maintain aspect ratio
+                        }}
                       />
                       <Title className="f-16 pt-4 text-upper">
                         {item?.title}
@@ -405,7 +408,15 @@ function AgentProfile() {
                       <button
                         className="button-view1"
                         onClick={() => navigate(`/agent/blog/${item?._id}`)}
-                        style={{ marginTop: "10px" }}
+                        // style={{
+                        // //   marginTop: "10px",
+                        // //   padding: "10px 15px",
+                        // // // Example button color
+
+                        //   border: "none",
+                        //   borderRadius: "5px",
+                        //   cursor: "pointer",
+                        // }}
                       >
                         Read More
                       </button>
@@ -487,12 +498,12 @@ function AgentProfile() {
               </Title>
 
               <Row justify="center">
-                <Col xs={24} md={20}>
+                <Col lg={24} md={18}>
                   <Swiper
                     effect={"cards"}
                     grabCursor={true}
                     modules={[EffectCards]}
-                    className=""
+                    className="swiper-container"
                     autoplay
                   >
                     {Array.isArray(testimonialsData?.testmonials) &&
@@ -501,8 +512,8 @@ function AgentProfile() {
                         <SwiperSlide key={index}>
                           <Card
                             style={{
-                              width: "40%",
-                              maxWidth: "200",
+                              width: "90%", // Responsive width
+                              maxWidth: "400px", // Max width for larger screens
                               background: "#E8E8E8",
                               margin: "0 auto",
                               padding: "20px",

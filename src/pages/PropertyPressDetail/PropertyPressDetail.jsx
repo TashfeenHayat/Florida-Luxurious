@@ -61,6 +61,15 @@ function PropertyPressDetail() {
   const [currentPage, setCurrentPage] = useState(0);
   const [isFlipbookLoading, setIsFlipbookLoading] = useState(true);
 
+  const checkFileExists = async (url) => {
+    try {
+      const response = await fetch(url);
+      return response.ok;
+    } catch {
+      return false;
+    }
+  };
+
   useEffect(() => {
     if (refHtml.current && data?.content) {
       const decodedContent = decode(data.content);
@@ -83,15 +92,20 @@ function PropertyPressDetail() {
 
   useEffect(() => {
     const loadPdf = async () => {
-      // Check if the file exists
       if (!data?.file) {
-        setIsFlipbookLoading(false); // No file, set loading to false
-        return; // Exit the function
+        setIsFlipbookLoading(false);
+        return;
       }
-      setIsFlipbookLoading(true);
-      const url = data.file;
-      console.log("PDF URL:", url); // Log to check URL
 
+      const url = data.file;
+      const fileExists = await checkFileExists(url);
+      if (!fileExists) {
+        console.error("File does not exist:", url);
+        setIsFlipbookLoading(false);
+        return;
+      }
+
+      setIsFlipbookLoading(true);
       try {
         const loadingTask = pdfjsLib.getDocument(url);
         const pdf = await loadingTask.promise;
@@ -116,7 +130,6 @@ function PropertyPressDetail() {
       } catch (error) {
         console.error("Error loading PDF:", error);
       } finally {
-        // Ensure loading is set to false regardless of the outcome
         setIsFlipbookLoading(false);
       }
     };
