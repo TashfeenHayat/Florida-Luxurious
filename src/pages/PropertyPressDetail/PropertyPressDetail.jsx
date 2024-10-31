@@ -54,33 +54,17 @@ const Flipbook = React.forwardRef(({ pages, onPageChange }, ref) => {
 
 function PropertyPressDetail() {
   const { id } = useParams();
-  const { data, isLoading } = usePressDetail(id);
+  const { data, isLoading, isError } = usePressDetail(id);
   const refHtml = useRef(null);
   const flipbookRef = useRef(null);
-  const [pages, setPages] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [isFlipbookLoading, setIsFlipbookLoading] = useState(true);
 
-  const checkFileExists = async (url) => {
-    try {
-      const response = await fetch(url);
-      return response.ok;
-    } catch {
-      return false;
-    }
-  };
+  const [pages, setPages] = useState([]);
+  const [loadingPages, setLoadingPages] = useState(true);
 
   useEffect(() => {
     if (refHtml.current && data?.content) {
       const decodedContent = decode(data.content);
       refHtml.current.innerHTML = decodedContent;
-
-      const iframes = refHtml.current.querySelectorAll("iframe");
-      iframes.forEach((iframe) => {
-        iframe.style.maxWidth = "100%";
-        iframe.style.width = "100%";
-        iframe.style.height = "400px";
-      });
 
       const images = refHtml.current.querySelectorAll("img");
       images.forEach((img) => {
@@ -91,83 +75,57 @@ function PropertyPressDetail() {
   }, [data?.content]);
 
   useEffect(() => {
-    const loadPdf = async () => {
-      if (!data?.file) {
-        setIsFlipbookLoading(false);
-        return;
-      }
-
-      const url = data.file;
-      const fileExists = await checkFileExists(url);
-      if (!fileExists) {
-        console.error("File does not exist:", url);
-        setIsFlipbookLoading(false);
-        return;
-      }
-
-      setIsFlipbookLoading(true);
-      try {
-        const loadingTask = pdfjsLib.getDocument(url);
-        const pdf = await loadingTask.promise;
+    if (!data?.file) {
+      setLoadingPages(false);
+    } else {
+      setLoadingPages(true);
+      const url = data?.file;
+      const loadingTask = pdfjsLib.getDocument(url);
+      loadingTask.promise.then((pdf) => {
         const totalPages = pdf.numPages;
         const pageImages = [];
 
-        for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+        const loadPage = async (pageNumber) => {
           const page = await pdf.getPage(pageNumber);
-          const scale = 1.5;
+          const scale = 1.5; // Adjust scale for better quality
           const viewport = page.getViewport({ scale });
+
           const canvas = document.createElement("canvas");
           const context = canvas.getContext("2d");
           canvas.width = viewport.width;
           canvas.height = viewport.height;
 
           await page.render({ canvasContext: context, viewport }).promise;
+
+          // Convert canvas to image URL
           const imgData = canvas.toDataURL("image/png");
           pageImages.push(imgData);
+
+          if (pageImages.length === totalPages) {
+            setPages(pageImages);
+            setLoadingPages(false); // Set loadingPages to false when all pages are loaded
+          }
+        };
+
+        for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+          loadPage(pageNumber);
         }
+      });
+    }
+  }, [data?.file]);
 
-        setPages(pageImages);
-      } catch (error) {
-        console.error("Error loading PDF:", error);
-      } finally {
-        setIsFlipbookLoading(false);
-      }
-    };
-
-    loadPdf();
-  }, [data]);
-
-  const handlePageChange = (e) => {
-    setCurrentPage(e.data);
-  };
-
-  const nextPage = () => {
-    if (currentPage < pages.length - 1) {
-      const nextPageIndex = currentPage + 1;
-      setCurrentPage(nextPageIndex);
-      flipbookRef.current.pageFlip().flip(nextPageIndex);
+  // Handlers for flip actions
+  const handlePrevPage = () => {
+    if (flipbookRef.current) {
+      flipbookRef.current.pageFlip().flipPrev(); // Use pageFlip().flipPrev() correctly
     }
   };
 
-  const prevPage = () => {
-    if (currentPage > 0) {
-      const prevPageIndex = currentPage - 1;
-      setCurrentPage(prevPageIndex);
-      flipbookRef.current.pageFlip().flip(prevPageIndex);
+  const handleNextPage = () => {
+    if (flipbookRef.current) {
+      flipbookRef.current.pageFlip().flipNext(); // Use pageFlip().flipNext() correctly
     }
   };
-
-  const renderLoader = () => (
-    <Row
-      style={{
-        minHeight: "50vh",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Spin size="large" />
-    </Row>
-  );
 
   return (
     <>
@@ -192,49 +150,62 @@ function PropertyPressDetail() {
         </div>
       </div>
       {isLoading ? (
-        renderLoader()
-      ) : (
-        <Container
-          className="mt-4"
-          style={{ maxWidth: "100%", padding: "0 15px" }}
+        <Row
+          style={{
+            minHeight: "50vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
-          <Row justify="center" style={{ paddingBottom: "30px" }}>
-            <Col xs={24} md={20} lg={16}>
-              <div ref={refHtml} />
-              {isFlipbookLoading ? (
-                renderLoader()
-              ) : (
-                <>
-                  {pages.length > 0 && (
-                    <>
-                      <Flipbook
-                        ref={flipbookRef}
-                        pages={pages}
-                        onPageChange={handlePageChange}
-                      />
-                      <div style={{ marginTop: "20px", textAlign: "center" }}>
-                        <Button
-                          onClick={prevPage}
-                          disabled={currentPage === 0}
-                          aria-label="Previous Page"
-                          style={{ marginRight: "10px" }}
-                        >
-                          Previous
-                        </Button>
-                        <Button
-                          onClick={nextPage}
-                          disabled={currentPage === pages.length - 1}
-                          aria-label="Next Page"
-                        >
-                          Next
-                        </Button>
-                      </div>
-                    </>
-                  )}
-                </>
-              )}
-            </Col>
-          </Row>
+          <Col>
+            <Spin size="large" />
+          </Col>
+        </Row>
+      ) : isError ? (
+        <Row style={{ minHeight: "50vh" }}>
+          <Col>
+            <Alert message="Failed to load blog content" type="error" />
+          </Col>
+        </Row>
+      ) : (
+        <Container style={{ padding: "15px", flex: "1" }} justify="center">
+          <div ref={refHtml} />
+          {loadingPages ? (
+            <Row
+              style={{
+                minHeight: "50vh",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Col>
+                <Spin size="large" />
+              </Col>
+            </Row>
+          ) : (
+            pages.length > 1 && (
+              <>
+                <Flipbook pages={pages} flipbookRef={flipbookRef} />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "20px",
+                  }}
+                >
+                  <Button
+                    onClick={handlePrevPage}
+                    style={{ marginRight: "10px" }}
+                  >
+                    Previous Page
+                  </Button>
+                  <Button onClick={handleNextPage}>Next Page</Button>
+                </div>
+              </>
+            )
+          )}
         </Container>
       )}
     </>

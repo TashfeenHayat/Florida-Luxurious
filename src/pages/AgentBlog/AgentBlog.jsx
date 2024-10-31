@@ -42,7 +42,6 @@ const Flipbook = ({ pages, flipbookRef }) => {
       }}
     >
       {pages.map((page, index) => (
-        
         <div key={index} className="page" style={{ padding: "10px" }}>
           <img
             src={page}
@@ -84,8 +83,11 @@ function AgentBlog() {
 
   // Load PDF and convert pages to images
   useEffect(() => {
-    if (data?.file) {
-      const url = data.file;
+    if (!data?.file) {
+      setLoadingPages(false);
+    } else {
+      setLoadingPages(true);
+      const url = data?.file;
       const loadingTask = pdfjsLib.getDocument(url);
       loadingTask.promise.then((pdf) => {
         const totalPages = pdf.numPages;
