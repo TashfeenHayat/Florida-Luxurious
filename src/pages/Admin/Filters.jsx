@@ -51,6 +51,7 @@ function Filters() {
   const [key, setKey] = useState();
 
   const { isLoading, isError, data } = useSelector((s) => s.getFiltersReducer);
+  console.log(data);
   const dispatch = useDispatch();
 
   useEffect(() => {

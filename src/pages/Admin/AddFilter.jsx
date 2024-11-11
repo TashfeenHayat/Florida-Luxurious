@@ -155,6 +155,7 @@ function AddFilter() {
         updateFilter({
           id,
           ...values,
+
           photo,
           geo,
         })
@@ -167,6 +168,7 @@ function AddFilter() {
       const res = await dispatch(
         addFilter({
           ...values,
+
           photo,
           geo: geo ? geo : null,
         })
@@ -246,9 +248,17 @@ function AddFilter() {
               <Input size="large" placeholder="Code" />
             </Form.Item>
           </Col>
+
           <Col span={12} className="gutter-row">
             <Form.Item name="description">
               <TextArea size="large" rows={4} placeholder="Description" />
+            </Form.Item>
+            <Form.Item name="other_description">
+              <TextArea
+                size="large"
+                rows={5}
+                placeholder="Why choose this community"
+              />
             </Form.Item>
           </Col>
           <Col span={12} className="gutter-row">

@@ -26,11 +26,14 @@ import useAgent from "../../hooks/useAgent";
 import useBlogs from "../../hooks/useBlogs";
 import useReport from "./../../hooks/useReport";
 import useTestimonials from "../../hooks/useTestimonials";
+
 import Slider from "react-slick";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCards } from "swiper/modules";
+import { Autoplay, Virtual } from "swiper/modules";
 import "swiper/swiper-bundle.css";
+import { motion } from "framer-motion";
+
 const { Title, Paragraph, Text } = Typography;
 
 const CustomPrevArrow = (props) => {
@@ -58,40 +61,7 @@ const CustomNextArrow = (props) => {
     </div>
   );
 };
-const testimonials = [
-  {
-    name: "Teresa May",
-    position: "Founder at ET Company",
-    imgSrc: "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp",
-    rating: 4.5,
-    quote:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.",
-  },
-  {
-    name: "Maggie McLoan",
-    position: "Photographer at Studio LA",
-    imgSrc: "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(15).webp",
-    rating: 5,
-    quote:
-      "Autem, totam debitis suscipit saepe sapiente magnam officiis quaerat necessitatibus odio assumenda perferendis labore laboriosam.",
-  },
-  {
-    name: "Alexa Horwitz",
-    position: "Front-end Developer in NY",
-    imgSrc: "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(17).webp",
-    rating: 4,
-    quote:
-      "Cras sit amet nibh libero, in gravida nulla metus scelerisque ante sollicitudin commodo cras purus odio, vestibulum in tempus viverra turpis.",
-  },
-  {
-    name: "Teresa May",
-    position: "Founder at ET Company",
-    imgSrc: "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(10).webp",
-    rating: 4.5,
-    quote:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur quae quaerat ad velit ab hic tenetur.",
-  },
-];
+
 const settings = {
   dots: false,
   infinite: false,
@@ -497,84 +467,118 @@ function AgentProfile() {
                 Testimonials
               </Title>
 
-              <Row justify="center">
-                <Col lg={24} md={18}>
+              <Row justify="center" gutter={[16, 16]}>
+                <Col lg={24} md={24} sm={24}>
                   <Swiper
-                    effect={"cards"}
-                    grabCursor={true}
-                    modules={[EffectCards]}
                     className="swiper-container"
-                    autoplay
+                    spaceBetween={16} // Space between the cards
+                    slidesPerView={3} // Show 3 cards at once
+                    autoplay={{
+                      delay: 5000, // Auto-swipe every 3 seconds
+                      disableOnInteraction: true,
+                    }}
+                    modules={[Autoplay, Virtual]}
+                    virtual
+                    breakpoints={{
+                      1024: {
+                        slidesPerView: 3, // On large screens, show 3 slides
+                      },
+                      768: {
+                        slidesPerView: 2, // On tablets, show 2 slides
+                      },
+                      480: {
+                        slidesPerView: 1, // On small screens, show 1 slide
+                      },
+                    }}
                   >
                     {Array.isArray(testimonialsData?.testmonials) &&
                     testimonialsData.testmonials.length > 0 ? (
                       testimonialsData.testmonials.map((testimonial, index) => (
                         <SwiperSlide key={index}>
-                          <Card
-                            style={{
-                              width: "90%", // Responsive width
-                              maxWidth: "400px", // Max width for larger screens
-                              background: "#E8E8E8",
-                              margin: "0 auto",
-                              padding: "20px",
-                              borderRadius: "10px",
-                              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                              textAlign: "center",
-                              border: "2px solid black",
-                            }}
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
                           >
-                            <div
+                            <Card
+                              hoverable
                               style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                marginBottom: "16px",
+                                width: "100%",
+                                maxWidth: "350px",
+                                margin: "auto",
+                                borderRadius: "16px",
+                                boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+                                paddingTop: "80px", // Adding space for the image above
+                                background: "#fff",
                               }}
                             >
-                              <img
-                                src={Logo}
-                                alt={testimonial.name}
+                              {/* Image Section */}
+                              <div
                                 style={{
+                                  position: "absolute",
+                                  top: "50px", // Move image upwards
+                                  left: "50%",
+                                  transform: "translateX(-50%)",
                                   borderRadius: "50%",
-                                  boxShadow: "0 0 10px rgba(0,0,0,0.2)",
+                                  overflow: "hidden",
+                                  width: "90px",
+                                  height: "90px",
+                                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", // Soft shadow around the image
                                 }}
-                                width="80"
-                                height="80"
-                              />
-                            </div>
-                            <Title
-                              level={5}
-                              style={{ fontWeight: "bold", fontSize: "16px" }}
-                            >
-                              {testimonial.Username}
-                            </Title>
+                              >
+                                <img
+                                  src={Logo} // Image for user
+                                  alt={testimonial.Username}
+                                  style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover", // Ensures the image fully covers the circle
+                                  }}
+                                />
+                              </div>
 
-                            <Rate
-                              disabled
-                              defaultValue={testimonial.rating}
-                              style={{ marginBottom: "8px" }}
-                            />
-                            <Paragraph
-                              style={{ marginBottom: "0", fontSize: "14px" }}
-                            >
-                              <span
+                              {/* User Name and Testimonial Text */}
+                              <Title
+                                level={5}
                                 style={{
-                                  fontSize: "20px",
-                                  paddingRight: "8px",
+                                  fontWeight: "600",
+                                  fontSize: "18px",
+                                  textAlign: "center",
+                                  marginTop: "50px", // Adjust spacing after the image
                                 }}
                               >
-                                “
-                              </span>
-                              {testimonial.content}
-                              <span
+                                {testimonial.Username}
+                              </Title>
+
+                              <Paragraph
                                 style={{
-                                  fontSize: "20px",
-                                  paddingRight: "8px",
+                                  fontSize: "14px",
+                                  fontStyle: "italic",
+                                  marginBottom: "20px",
+                                  textAlign: "center",
+                                  color: "#555",
                                 }}
                               >
-                                "
-                              </span>
-                            </Paragraph>
-                          </Card>
+                                <span
+                                  style={{
+                                    fontSize: "24px",
+                                    paddingRight: "8px",
+                                  }}
+                                >
+                                  “
+                                </span>
+                                {testimonial.content}
+                                <span
+                                  style={{
+                                    fontSize: "24px",
+                                    paddingLeft: "8px",
+                                  }}
+                                >
+                                  ”
+                                </span>
+                              </Paragraph>
+                            </Card>
+                          </motion.div>
                         </SwiperSlide>
                       ))
                     ) : (

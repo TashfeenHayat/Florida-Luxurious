@@ -103,7 +103,7 @@ function FloridaProperties() {
                 #1
                 <br />{" "}
                 <Text
-                  className="text-gray text-upper f-16 mt-16"
+                  className="text-white text-upper f-24 mt-16"
                   data-aos="fade-left"
                 >
                   Ranked Private Brokerage
@@ -117,7 +117,7 @@ function FloridaProperties() {
                 data-aos-duration="1500"
               >
                 $3.26 BILLION <br />
-                <Text className="text-gray text-upper f-16">
+                <Text className="text-white text-upper f-24">
                   Has exceeded the mark
                 </Text>
               </Title>
@@ -129,7 +129,7 @@ function FloridaProperties() {
                 data-aos-duration="1500"
               >
                 ${Math.floor(counter).toLocaleString()} <br />{" "}
-                <Text className="text-gray text-upper f-16 ">Total Sales</Text>
+                <Text className="text-white text-upper f-24 ">Total Sales</Text>
               </Title>
             </Flex>
           </Col>

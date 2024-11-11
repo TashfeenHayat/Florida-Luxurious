@@ -18,6 +18,7 @@ import {
   FilePdfOutlined,
   LoadingOutlined,
   EyeOutlined,
+  CameraOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { getBlogs, addBlog, updateBlog, deleteBlog } from "../../api/Blogs";
@@ -45,7 +46,7 @@ function Blog() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Link onClick={() => showModal(record)}>Edit</Link>
+          <Button onClick={() => showModal(record)}>Edit</Button>
           <Popconfirm
             title="Delete this blog"
             description="Are you sure to delete this?"
@@ -129,27 +130,39 @@ function Blog() {
 
   const showModal = (property) => {
     setIsModalOpen(true);
+
     if (property._id) {
-      setSelectedBlog(property);
-      setSelectedProp(property.agentId);
-      setTitle(property.title);
-      setPhoto(property.cover || "");
-      setPdf(property.file || "");
-      setModalSearch(
-        `${property?.agentId?.firstName} ${property?.agentId?.lastName}`
-      );
-      const parser = new DOMParser();
-      const decodedHtml = parser.parseFromString(property?.content, "text/html")
-        .body.textContent;
-      window.$("#summernote").summernote("code", decodedHtml);
+      // Edit mode
+      setTimeout(() => {
+        setSelectedBlog(property);
+        setSelectedProp(property.agentId);
+        setTitle(property.title);
+        setPhoto(property.cover || "");
+        setPdf(property.file || "");
+        setModalSearch(
+          `${property?.agentId?.firstName} ${property?.agentId?.lastName}`
+        );
+        const parser = new DOMParser();
+        const decodedHtml = parser.parseFromString(
+          property?.content,
+          "text/html"
+        ).body.textContent;
+        window.$("#summernote").summernote("code", decodedHtml);
+      }, 1000);
     } else {
+      // Create mode
       setSelectedBlog(null);
       setSelectedProp(null);
       setTitle("");
       setModalSearch("");
       setPhoto("");
       setPdf("");
-      window.$("#summernote").summernote("code", "");
+      setTimeout(() => {
+        const parser = new DOMParser();
+        const decodedHtml = parser.parseFromString("", "text/html").body
+          .textContent;
+        window.$("#summernote").summernote("code", decodedHtml);
+      }, 1000);
     }
   };
 
@@ -312,6 +325,7 @@ function Blog() {
             headers={{ Authorization: `Bearer ${localStorage.token}` }}
           >
             {photo ? (
+              // Display the uploaded image
               <img
                 src={photo}
                 alt="avatar"
@@ -322,10 +336,25 @@ function Blog() {
                 }}
               />
             ) : (
-              uploadButton
+              // Placeholder when no image is uploaded
+              <div
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "#f0f0f0", // Light gray background for placeholder
+                  borderRadius: "4px",
+                  border: "1px dashed #ccc", // Dashed border to indicate upload area
+                }}
+              >
+                <CameraOutlined style={{ fontSize: "40px", color: "#ccc" }} />
+              </div>
             )}
           </Upload>
         </div>
+
         <Select
           showSearch
           value={modalSearch}
@@ -393,22 +422,24 @@ function Blog() {
                 )}
               </div>
             ) : (
-              uploadButton
+              // Placeholder content when no PDF is uploaded
+              <div
+                style={{ display: "flex", alignItems: "center", color: "#aaa" }}
+              >
+                <FilePdfOutlined
+                  style={{
+                    marginRight: "8px",
+                    fontSize: "40px",
+                    color: "#ccc",
+                  }}
+                />
+              </div>
             )}
           </Upload>
         </div>
+
         <div>
-          <div style={{ marginBottom: "10px", fontWeight: "bold" }}>
-            Content
-          </div>
-          <div
-            id="summernote"
-            style={{
-              border: "1px solid #d9d9d9",
-              borderRadius: "4px",
-              minHeight: "200px",
-            }}
-          ></div>
+          <div id="summernote" style={{ minHeight: "200px" }}></div>
         </div>
       </Modal>
     </>

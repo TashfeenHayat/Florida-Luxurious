@@ -54,7 +54,7 @@ const AddTestimonial = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Link onClick={() => showModal(record)}>Edit</Link>
+          <Button  onClick={() => showModal(record)}>Edit</Button>
           <Popconfirm
             title="Delete this testimonial?"
             onConfirm={() => handleDelete(record._id)}

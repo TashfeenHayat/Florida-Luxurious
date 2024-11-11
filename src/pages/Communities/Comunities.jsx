@@ -128,7 +128,7 @@ function Comunities() {
                     Why choose {data?.name}?
                   </Title>
                   <Text className="text-white f-16 f-100">
-                    {data?.description}
+                    {data?.other_description}
                   </Text>
                 </Col>
                 <Col lg={12} md={24} sm={24}>

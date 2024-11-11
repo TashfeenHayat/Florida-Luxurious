@@ -71,7 +71,7 @@ function OurStory() {
             of our clientele we consistently achieve top sales results in
             Broward’s luxury market. To better facilitate the needs of our
             clients, we have Agents fluent in Italian, Portuguese, Russian,
-            Spanish, Romanian, Hebrew and Turkish .
+            Spanish,Romanian, Hebrew ,Polish ,and Turkish .
           </Paragraph>
         </Col>
         <Col lg={14} sm={24} md={24} style={{ background: "#000" }}>
@@ -103,7 +103,7 @@ function OurStory() {
               <div
                 style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}
               >
-                <Text className="text-gray f-16 text-upper">
+                <Text className="text-white f-18 text-upper">
                   Ranked Private Brokerage
                 </Text>
                 <br />
@@ -119,7 +119,7 @@ function OurStory() {
               <div
                 style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}
               >
-                <Text className="text-gray f-16 text-upper">
+                <Text className="text-white f-18  text-upper">
                   Has exceeded the mark
                 </Text>
                 <br />
@@ -135,7 +135,7 @@ function OurStory() {
               <div
                 style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}
               >
-                <Text className="text-gray f-16 text-upper">Total Sales</Text>
+                <Text className="text-white f-18 text-upper">Total Sales</Text>
                 <br />
                 <Text
                   className="text-white text-upper "

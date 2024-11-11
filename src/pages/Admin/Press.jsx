@@ -50,7 +50,7 @@ function Press() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Link onClick={() => showModal(record)}>Edit</Link>
+          <Button onClick={() => showModal(record)}>Edit</Button>
           <Popconfirm
             title="Delete this task"
             description="Are you sure to delete this post?"
@@ -76,7 +76,7 @@ function Press() {
   });
   const [title, setTitle] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProp, setSelectedProp] = useState({});
+  const [selectedProp, setSelectedProp] = useState("working");
   const [photo, setPhoto] = useState("");
   const [photoUploading, setPhotoUploading] = useState(false);
   const [pdf, setPdf] = useState("");
@@ -108,13 +108,18 @@ function Press() {
   };
 
   const showModal = (property) => {
-    setIsModalOpen(true);
+    console.log(property._id);
     if (property._id) {
       setTimeout(() => {
+        console.log("working if");
+        setIsModalOpen(true);
+
         setSelectedProp(property);
         setTitle(property.title);
         setPhoto(property.cover);
         setPdf(property.file || "");
+        console.log(selectedProp, "dil dil");
+
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString(
           property?.content,
@@ -123,18 +128,20 @@ function Press() {
         window.$("#summernote").summernote("code", decodedHtml);
       }, 1000);
     } else {
+      console.log(" else");
+      setSelectedProp({});
       setTitle("");
       setPhoto("");
       setPdf("");
-      setTimeout(() => {
-        const parser = new DOMParser();
-        const decodedHtml = parser.parseFromString("", "text/html").body
-          .textContent;
-        window.$("#summernote").summernote("code", decodedHtml);
-      }, 1000);
-    }
-  };
 
+      const parser = new DOMParser();
+      const decodedHtml = parser.parseFromString("", "text/html").body
+        .textContent;
+      window.$("#summernote").summernote("code", decodedHtml);
+    }
+
+    // Open the modal after setting the state
+  };
   const beforeUpload = (file) => {
     if (file.type === "application/pdf") {
       setPdfUploading(true);
@@ -212,6 +219,7 @@ function Press() {
   const handleCancel = () => {
     setIsModalOpen(false);
     setSelectedProp({});
+    console.log("waja");
   };
 
   const uploadButton = (uploading) => (

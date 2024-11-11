@@ -5,6 +5,7 @@ import {
   PlusOutlined,
   FilePdfOutlined,
   EyeOutlined,
+  CameraOutlined,
 } from "@ant-design/icons";
 import {
   Avatar,
@@ -39,7 +40,9 @@ function Report() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Link onClick={() => showModal(record)}>Edit</Link>
+          <Button type="link" onClick={() => showModal(record)}>
+            Edit
+          </Button>
           <Popconfirm
             title="Delete this task"
             description="Are you sure to delete this Report?"
@@ -296,7 +299,11 @@ function Report() {
             <img src={photo} alt="uploaded" style={{ width: "100%" }} />
           ) : (
             <div>
-              {photoUploading ? <LoadingOutlined /> : <PlusOutlined />}
+              {photoUploading ? (
+                <LoadingOutlined />
+              ) : (
+                <CameraOutlined style={{ fontSize: "40px", color: "#ccc" }} />
+              )}
               <div style={{ marginTop: 8 }}>Upload Image</div>
             </div>
           )}
@@ -339,7 +346,7 @@ function Report() {
                     </>
                   ) : (
                     <span>
-                      <FilePdfOutlined />
+                      <FilePdfOutlined style={{ marginRight: "8px" }} />
                       Uploaded
                     </span>
                   )}
@@ -355,11 +362,22 @@ function Report() {
                 )}
               </div>
             ) : (
-              uploadButton
+              // Placeholder content when no PDF is uploaded
+              <div
+                style={{ display: "flex", alignItems: "center", color: "#aaa" }}
+              >
+                <FilePdfOutlined
+                  style={{ marginRight: "8px", fontSize: "24px" }}
+                />
+              </div>
             )}
           </Upload>
         </div>
-        <div id="summernote" style={{ minHeight: "200px" }}></div>
+
+        <div
+          id="summernote"
+          style={{ minHeight: "200px", fontSize: "40px", color: "#ccc" }}
+        ></div>
       </Modal>
     </>
   );
