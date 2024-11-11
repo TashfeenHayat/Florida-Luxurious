@@ -206,6 +206,7 @@ function Comunities() {
                       src={property?.media[0]?.mdUrl}
                       width="100%"
                       fallback="https://placehold.co/618x489"
+                      style={{aspectRatio:5/3}}
                     />
                     <div className="more-info-property">
                       <Flex
