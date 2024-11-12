@@ -92,11 +92,11 @@ function OurStory() {
             className="bagde"
             gap={20}
           >
-            <Image preview={false} src={Bagde} />
-            <Image preview={false} src={Bagde2} />
-            <Image preview={false} src={Bagde1} />
-            <Image preview={false} src={Bagde3} />
-            <Image preview={false} src={Bagde4} />
+            <Image style={{ width: "95px" }} preview={false} src={Bagde} />
+            <Image style={{ width: "95px" }} preview={false} src={Bagde2} />
+            <Image style={{ width: "95px" }} preview={false} src={Bagde1} />
+            <Image style={{ width: "95px" }} preview={false} src={Bagde3} />
+            <Image style={{ width: "95px" }} preview={false} src={Bagde4} />
           </Flex>
           <Row gutter={[20, 20]} className="my-124 px-3">
             <Col xl={8} lg={18} md={24} sm={24}>

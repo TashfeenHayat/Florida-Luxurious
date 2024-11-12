@@ -48,30 +48,35 @@ function FloridaProperties() {
               </Title>
               <Flex gap={20} justify="center" wrap="wrap" overflow="hidden">
                 <img
+                  style={{ width: "90px" }}
                   src={Bagde}
                   data-aos="fade-right"
                   data-aos-easing="ease-in-sine"
                   data-aos-duration="1000"
                 />
                 <img
+                  style={{ width: "90px" }}
                   src={Bagde2}
                   data-aos="fade-right"
                   data-aos-easing="ease-in-sine"
                   data-aos-duration="1500"
                 />
                 <img
+                  style={{ width: "90px" }}
                   src={Bagde1}
                   data-aos="fade-right"
                   data-aos-easing="ease-in-sine"
                   data-aos-duration="1500"
                 />
                 <img
+                  style={{ width: "90px" }}
                   src={Bagde3}
                   data-aos="fade-right"
                   data-aos-easing="ease-in-sine"
                   data-aos-duration="2000"
                 />
                 <img
+                  style={{ width: "90px" }}
                   src={Bagde4}
                   data-aos="fade-right"
                   data-aos-easing="ease-in-sine"

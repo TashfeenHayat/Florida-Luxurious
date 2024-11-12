@@ -117,13 +117,15 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                   </Flex>
                 </Col>
                 <Col lg={12} md={12} sm={24}>
-                  <Title
-                    className="text-white text-upper"
-                    to="/boat-owner"
-                    level={3}
-                  >
-                    for boat owners
-                  </Title>
+                  <Link to="/boat-owner" style={{ textDecoration: "none" }}>
+                    <Title
+                      className="text-white text-upper"
+                      to="boat-owner"
+                      level={3}
+                    >
+                      for boat owners
+                    </Title>
+                  </Link>
                 </Col>
               </Row>
             </Col>
