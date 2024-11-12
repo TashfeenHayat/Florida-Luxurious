@@ -453,117 +453,147 @@ function AgentProfile() {
           </div>
         </Container>
       )}
-      <Swiper
-        className="swiper-container"
-        spaceBetween={12} // Space between the cards
-        slidesPerView={4} // Show 3 cards at once
-        loop={true} // Enable continuous looping
-        speed={3000} // Adjust the speed for smoother transition
-        autoplay={
-          {
-            // Keep autoplay running even when interacting
-          }
-        }
-        style={{marginBottom:26}}
-        modules={[Autoplay]}
-        breakpoints={{
-          1024: {
-            slidesPerView: 4, // On large screens, show 3 slides
-          },
-          768: {
-            slidesPerView: 3, // On tablets, show 2 slides
-          },
-          480: {
-            slidesPerView: 1, // On small screens, show 1 slide
-          },
-        }}
-      >
-        {Array.isArray(testimonialsData?.testmonials) &&
-        testimonialsData.testmonials.length > 0 ? (
-          testimonialsData.testmonials.map((testimonial, index) => (
-            <SwiperSlide key={index}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              >
-                <Card
-                  hoverable
-                  style={{
-                    width: "100%",
-                    maxWidth: "350px",
-                    margin: "auto",
-                    borderRadius: "16px",
-                    boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
-                    paddingTop: "80px",
-                    background: "#fff",
-                  }}
+      <div style={{ position: "relative" }}>
+        {/* Left Shadow */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            height: "100%",
+            width: "50px",
+            background:
+              "linear-gradient(to right, rgba(0,0,0,0.2), rgba(0,0,0,0))",
+            zIndex: 1,
+          }}
+        ></div>
+
+        {/* Right Shadow */}
+        <div
+          style={{
+            position: "absolute",
+            // top: 0,
+            // right: 0,
+            // height: "100%",
+            width: "50px",
+            background:
+              "linear-gradient(to left, rgba(0,0,0,0.2), rgba(0,0,0,0))",
+            zIndex: 1,
+          }}
+        ></div>
+
+        {/* Swiper Component */}
+        <Swiper
+          className="swiper-container"
+          spaceBetween={12}
+          slidesPerView={4}
+          loop={true}
+          speed={3000}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          style={{ marginBottom: 26 }}
+          modules={[Autoplay]}
+          breakpoints={{
+            1024: {
+              slidesPerView: 4,
+            },
+            768: {
+              slidesPerView: 3,
+            },
+            480: {
+              slidesPerView: 1,
+            },
+          }}
+        >
+          {Array.isArray(testimonialsData?.testmonials) &&
+          testimonialsData.testmonials.length > 0 ? (
+            testimonialsData.testmonials.map((testimonial, index) => (
+              <SwiperSlide key={index}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
                 >
-                  {/* Image Section */}
-                  <div
+                  <Card
+                    hoverable
                     style={{
-                      position: "absolute",
-                      top: "50px",
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      borderRadius: "50%",
-                      overflow: "hidden",
-                      width: "90px",
-                      height: "90px",
-                      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                      width: "100%",
+                      maxWidth: "450px",
+                      margin: "auto",
+                      borderRadius: "36px",
+                      boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+                      paddingTop: "80px",
+                      background: "#fff",
                     }}
                   >
-                    <img
-                      src={Logo}
-                      alt={testimonial.Username}
+                    {/* Image Section */}
+                    <div
                       style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
+                        position: "absolute",
+                        top: "50px",
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        borderRadius: "50%",
+                        overflow: "hidden",
+                        width: "90px",
+                        height: "90px",
+                        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
                       }}
-                    />
-                  </div>
+                    >
+                      <img
+                        src={Logo}
+                        alt={testimonial.Username}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                        }}
+                      />
+                    </div>
 
-                  {/* User Name and Testimonial Text */}
-                  <Title
-                    level={5}
-                    style={{
-                      fontWeight: "600",
-                      fontSize: "18px",
-                      textAlign: "center",
-                      marginTop: "50px",
-                    }}
-                  >
-                    {testimonial.Username}
-                  </Title>
+                    {/* User Name and Testimonial Text */}
+                    <Title
+                      level={5}
+                      style={{
+                        fontWeight: "600",
+                        fontSize: "18px",
+                        textAlign: "center",
+                        marginTop: "50px",
+                      }}
+                    >
+                      {testimonial.Username}
+                    </Title>
 
-                  <Paragraph
-                    style={{
-                      fontSize: "14px",
-                      fontStyle: "italic",
-                      marginBottom: "20px",
-                      textAlign: "center",
-                      color: "#555",
-                    }}
-                  >
-                    <span style={{ fontSize: "24px", paddingRight: "8px" }}>
-                      “
-                    </span>
-                    {testimonial.content}
-                    <span style={{ fontSize: "24px", paddingLeft: "8px" }}>
-                      ”
-                    </span>
-                  </Paragraph>
-                </Card>
-              </motion.div>
-            </SwiperSlide>
-          ))
-        ) : (
-          <div style={{ textAlign: "center", padding: "20px" }}>
-            <p>No testimonials available.</p>
-          </div>
-        )}
-      </Swiper>
+                    <Paragraph
+                      style={{
+                        fontSize: "14px",
+                        fontStyle: "italic",
+                        marginBottom: "20px",
+                        textAlign: "center",
+                        color: "#555",
+                      }}
+                    >
+                      <span style={{ fontSize: "24px", paddingRight: "8px" }}>
+                        “
+                      </span>
+                      {testimonial.content}
+                      <span style={{ fontSize: "24px", paddingLeft: "8px" }}>
+                        ”
+                      </span>
+                    </Paragraph>
+                  </Card>
+                </motion.div>
+              </SwiperSlide>
+            ))
+          ) : (
+            <div style={{ textAlign: "center", padding: "20px" }}>
+              <p>No testimonials available.</p>
+            </div>
+          )}
+        </Swiper>
+      </div>
 
       <LetTalk />
     </>
