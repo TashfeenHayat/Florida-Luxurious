@@ -30,6 +30,11 @@ function Footer() {
       [name]: value,
     });
   };
+  const isValidEmail = (email) => {
+    // Basic regex pattern for email validation
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(email);
+  };
 
   const handleSubmit = () => {
     dispatch(contactUs(formData));
@@ -191,7 +196,10 @@ function Footer() {
           <Col lg={12} sm={24}>
             <Flex gap="25px">
               <Text className="f-bold f-24">Follow us</Text>
-              <a href="https://www.facebook.com/FloridaLuxuriousProperties/">
+              <a
+                target="_blank"
+                href="https://www.facebook.com/FloridaLuxuriousProperties/"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="35"
@@ -206,7 +214,10 @@ function Footer() {
                   />
                 </svg>
               </a>
-              <a href="https://www.instagram.com/florida_luxurious/?hl=en">
+              <a
+                target="_blank"
+                href="https://www.instagram.com/florida_luxurious/?hl=en"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="35"
@@ -233,7 +244,10 @@ function Footer() {
                   </defs>
                 </svg>
               </a>
-              <a href="https://www.linkedin.com/in/florida-luxurious-properties-585146a2">
+              <a
+                target="_blank"
+                href="https://www.linkedin.com/in/florida-luxurious-properties-585146a2"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="35"
@@ -299,7 +313,8 @@ function Footer() {
                         formData.email === "" ||
                         formData.firstName === "" ||
                         formData.lastName === "" ||
-                        loading
+                        loading ||
+                        !isValidEmail(formData.email)
                       }
                     >
                       {loading ? "Submitting" : "Submit my info"}

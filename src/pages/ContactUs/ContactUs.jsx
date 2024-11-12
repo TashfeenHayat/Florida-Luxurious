@@ -18,7 +18,12 @@ function ContactUs() {
     dispatch(contactUs(values));
     form.resetFields(); // This resets the form fields
   };
-
+  const handlePhoneInput = (e) => {
+    // Only allow numeric characters (0-9)
+    if (!/[0-9]/.test(e.key)) {
+      e.preventDefault();
+    }
+  };
   return (
     <>
       <div className="contact-us-banner"></div>
@@ -55,7 +60,7 @@ function ContactUs() {
                           rules={[
                             {
                               required: true,
-                              message: "Please input your first name!",
+                              message: "Please enter your first name!",
                             },
                           ]}
                         >
@@ -67,6 +72,12 @@ function ContactUs() {
                           name="lastName"
                           label="Last Name"
                           className="contact-us-form"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Please enter your first name!",
+                            },
+                          ]}
                         >
                           <Input />
                         </Form.Item>
@@ -95,8 +106,18 @@ function ContactUs() {
                           name="phoneNumber"
                           label="Phone"
                           className="contact-us-form"
+                          rules={[
+                            {
+                              required: true,
+                              message: "This field is required.",
+                            },
+                            {
+                              pattern: /^[0-9]+$/,
+                              message: "Please input a valid number",
+                            },
+                          ]}
                         >
-                          <Input />
+                          <Input onKeyPress={handlePhoneInput} />
                         </Form.Item>
                       </Col>
                       <Col lg={24} md={24} sm={24}>

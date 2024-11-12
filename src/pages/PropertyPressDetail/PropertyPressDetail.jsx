@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Typography, Row, Col, Spin, Button } from "antd";
+import { Typography, Row, Col, Spin, Button, Alert } from "antd";
 import { Container } from "react-bootstrap";
 import usePressDetail from "../../hooks/usePressDetail";
 import { useParams } from "react-router-dom";
@@ -22,18 +22,18 @@ const Flipbook = React.forwardRef(({ pages, onPageChange }, ref) => {
       minWidth={315}
       maxWidth={600}
       minHeight={400}
-      maxHeight={1533}
+      maxHeight={1100}
       drawShadow={true}
       flippingTime={1000}
       useMouseEvents={true}
       onFlip={onPageChange}
-      style={{
-        margin: "0 auto",
-        background: "#f5f5f5",
-        borderRadius: "20px",
-        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
-        maxWidth: "100%",
-      }}
+      // style={{
+      //   margin: "0 auto",
+      //   // background: "#f5f5f5",
+      //   borderRadius: "20px",
+      //   boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
+      //   // maxWidth: "1200px",
+      // }}
     >
       {pages.map((page, index) => (
         <div key={index} className="page" style={{ padding: "20px" }}>
@@ -87,7 +87,7 @@ function PropertyPressDetail() {
 
         const loadPage = async (pageNumber) => {
           const page = await pdf.getPage(pageNumber);
-          const scale = 1.5; // Adjust scale for better quality
+          const scale = 1; // Adjust scale for better quality
           const viewport = page.getViewport({ scale });
 
           const canvas = document.createElement("canvas");
@@ -174,7 +174,7 @@ function PropertyPressDetail() {
           {loadingPages ? (
             <Row
               style={{
-                minHeight: "50vh",
+                minHeight: "0vh",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -187,21 +187,24 @@ function PropertyPressDetail() {
           ) : (
             pages.length > 1 && (
               <>
-                <Flipbook pages={pages} flipbookRef={flipbookRef} />
+                <Flipbook pages={pages} ref={flipbookRef} />
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "center",
-                    marginTop: "20px",
+                    marginTop: "30px",
                   }}
                 >
                   <Button
+                    className="button-view"
                     onClick={handlePrevPage}
                     style={{ marginRight: "10px" }}
                   >
                     Previous Page
                   </Button>
-                  <Button onClick={handleNextPage}>Next Page</Button>
+                  <Button className="button-view" onClick={handleNextPage}>
+                    Next Page
+                  </Button>
                 </div>
               </>
             )

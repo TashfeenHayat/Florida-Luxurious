@@ -203,12 +203,15 @@ function AgentBlog() {
                   }}
                 >
                   <Button
+                    className="button-view"
                     onClick={handlePrevPage}
                     style={{ marginRight: "10px" }}
                   >
                     Previous Page
                   </Button>
-                  <Button onClick={handleNextPage}>Next Page</Button>
+                  <Button className="button-view" onClick={handleNextPage}>
+                    Next Page
+                  </Button>
                 </div>
               </>
             )

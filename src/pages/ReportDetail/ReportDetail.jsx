@@ -21,8 +21,8 @@ const Flipbook = React.forwardRef(({ pages }, ref) => {
       size="stretch"
       minWidth={400}
       maxWidth={500}
-      minHeight={500}
-      maxHeight={1000}
+      minHeight={600}
+      maxHeight={1200}
       drawShadow={true}
       flippingTime={1000}
       useMouseEvents={true}
@@ -32,7 +32,7 @@ const Flipbook = React.forwardRef(({ pages }, ref) => {
         background: "#f5f5f5",
         borderRadius: "20px",
         boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
-        overflow: "hidden", // Ensure that content doesn't overflow
+        // Ensure that content doesn't overflow
       }}
     >
       {pages.map((page, index) => (
@@ -184,17 +184,19 @@ function ReportDetail() {
                     style={{
                       display: "flex",
                       justifyContent: "center",
-                      marginTop: "20px",
+                      marginTop: "70px",
                     }}
                   >
                     <Button
-                      type="primary"
+                      className="button-view"
                       onClick={handlePrevPage}
-                      style={{ marginRight: "10px" }}
+                      style={{
+                        marginRight: "10px",
+                      }}
                     >
                       Previous Page
                     </Button>
-                    <Button type="primary" onClick={handleNextPage}>
+                    <Button className="button-view" onClick={handleNextPage}>
                       Next Page
                     </Button>
                   </div>

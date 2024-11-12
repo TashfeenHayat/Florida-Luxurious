@@ -290,31 +290,34 @@ function Report() {
         onCancel={handleCancel}
         width={1000}
       >
-        <Upload
-          listType="picture-card"
-          showUploadList={false}
-          customRequest={handleImageUpload}
-        >
-          {photo ? (
-            <img src={photo} alt="uploaded" style={{ width: "100%" }} />
-          ) : (
-            <div>
-              {photoUploading ? (
-                <LoadingOutlined />
-              ) : (
-                <CameraOutlined style={{ fontSize: "40px", color: "#ccc" }} />
-              )}
-              <div style={{ marginTop: 8 }}>Upload Image</div>
-            </div>
-          )}
-        </Upload>
-        <br />
-        <Input
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          style={{ marginBottom: 20 }}
-        />
+        <div>
+          <Upload
+            listType="picture-card"
+            showUploadList={false}
+            customRequest={handleImageUpload}
+          >
+            {photo ? (
+              <img src={photo} alt="uploaded" style={{ width: "100%" }} />
+            ) : (
+              <div>
+                {photoUploading ? (
+                  <LoadingOutlined />
+                ) : (
+                  <CameraOutlined style={{ fontSize: "40px", color: "#ccc" }} />
+                )}
+                <div style={{ marginTop: 8 }}>Upload Image</div>
+              </div>
+            )}
+          </Upload>
+        </div>
+        <div style={{ paddingTop: "20px" }}>
+          <Input
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            style={{ marginBottom: 20 }}
+          />
+        </div>
         <div style={{ marginBottom: "20px" }}>
           <Upload
             name="file"

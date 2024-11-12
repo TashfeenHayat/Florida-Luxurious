@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import {
-  LoadingOutlined,
   PlusOutlined,
   FilePdfOutlined,
+  FileImageOutlined,
   EyeOutlined,
+  LoadingOutlined,
 } from "@ant-design/icons";
 import {
   Avatar,
@@ -108,17 +108,13 @@ function Press() {
   };
 
   const showModal = (property) => {
-    console.log(property._id);
     if (property._id) {
       setTimeout(() => {
-        console.log("working if");
         setIsModalOpen(true);
-
         setSelectedProp(property);
         setTitle(property.title);
         setPhoto(property.cover);
         setPdf(property.file || "");
-        console.log(selectedProp, "dil dil");
 
         const parser = new DOMParser();
         const decodedHtml = parser.parseFromString(
@@ -128,20 +124,24 @@ function Press() {
         window.$("#summernote").summernote("code", decodedHtml);
       }, 1000);
     } else {
-      console.log(" else");
+      setIsModalOpen(true);
       setSelectedProp({});
       setTitle("");
       setPhoto("");
       setPdf("");
+      setTimeout(() => {
+        const parser = new DOMParser();
+        // Replace "" with actual HTML content
+        const decodedHtml = parser.parseFromString(
+          "<p>This is some <strong>sample</strong> content.</p>",
+          "text/html"
+        ).body.textContent;
 
-      const parser = new DOMParser();
-      const decodedHtml = parser.parseFromString("", "text/html").body
-        .textContent;
-      window.$("#summernote").summernote("code", decodedHtml);
+        window.$("#summernote").summernote("code", decodedHtml);
+      }, 1000);
     }
-
-    // Open the modal after setting the state
   };
+
   const beforeUpload = (file) => {
     if (file.type === "application/pdf") {
       setPdfUploading(true);
@@ -184,6 +184,11 @@ function Press() {
   const handleOk = async () => {
     try {
       const markupStr = $("#summernote").summernote("code");
+      if (!pdf && !markupStr.trim()) {
+        openNotification("error", "Please provide either a PDF or content.");
+        return;
+      }
+
       const postData = {
         title,
         cover: photo,
@@ -219,15 +224,23 @@ function Press() {
   const handleCancel = () => {
     setIsModalOpen(false);
     setSelectedProp({});
-    console.log("waja");
   };
 
-  const uploadButton = (uploading) => (
+  const uploadButton = (uploading, type) => (
     <div style={{ textAlign: "center" }}>
-      {uploading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
+      {uploading ? (
+        <LoadingOutlined />
+      ) : type === "image" ? (
+        <FileImageOutlined />
+      ) : (
+        <FilePdfOutlined />
+      )}
+      <div style={{ marginTop: 8 }}>
+        {type === "image" ? "Upload Image" : "Upload PDF"}
+      </div>
     </div>
   );
+
   const handlePreview = async (file) => {
     const fileURL =
       file.url || file.thumbUrl || URL.createObjectURL(file.originFileObj);
@@ -239,6 +252,7 @@ function Press() {
       // Handle other file previews if necessary
     }
   };
+
   return (
     <>
       {contextHolder}
@@ -264,62 +278,68 @@ function Press() {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <Upload
-          name="file"
-          listType="picture-card"
-          showUploadList={false}
-          action={`${api_base_URL}upload`}
-          beforeUpload={beforeUpload}
-          onChange={handleFileChange}
-          headers={{
-            Authorization: `Bearer ${localStorage.token}`,
-          }}
-        >
-          {photo ? (
-            <img src={photo} alt="avatar" style={{ width: "100%" }} />
-          ) : (
-            uploadButton(photoUploading)
-          )}
-        </Upload>
-
-        <Input
-          value={title}
-          placeholder="Enter title"
-          onChange={(e) => setTitle(e.target.value)}
-          style={{ margin: "20px 0" }}
-        />
-
-        <Upload
-          name="file"
-          listType="picture-card"
-          showUploadList={false}
-          action={`${api_base_URL}upload`}
-          beforeUpload={beforeUpload}
-          onChange={handleFileChange}
-          headers={{
-            Authorization: `Bearer ${localStorage.token}`,
-          }}
-        >
-          {pdf ? (
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <a href={pdf} target="_blank" rel="noopener noreferrer">
-                <FilePdfOutlined /> View PDF
-              </a>
-              {!pdfUploading && (
-                <EyeOutlined
-                  style={{ cursor: "pointer", color: "#1890ff" }}
-                  onClick={() =>
-                    handlePreview({ url: pdf, type: "application/pdf" })
-                  }
-                />
-              )}
-            </div>
-          ) : (
-            uploadButton(pdfUploading)
-          )}
-        </Upload>
-
-        <div id="summernote" style={{ minHeight: "200px" }}></div>
+        <div>
+          <Upload
+            name="file"
+            listType="picture-card"
+            showUploadList={false}
+            action={`${api_base_URL}upload`}
+            beforeUpload={beforeUpload}
+            onChange={handleFileChange}
+            headers={{
+              Authorization: `Bearer ${localStorage.token}`,
+            }}
+          >
+            {photo ? (
+              <img src={photo} alt="avatar" style={{ width: "100%" }} />
+            ) : (
+              uploadButton(photoUploading, "image")
+            )}
+          </Upload>
+        </div>
+        <div>
+          <Input
+            value={title}
+            placeholder="Enter title"
+            onChange={(e) => setTitle(e.target.value)}
+            style={{ margin: "20px 0" }}
+          />
+        </div>
+        <div>
+          <Upload
+            name="file"
+            listType="picture-card"
+            showUploadList={false}
+            action={`${api_base_URL}upload`}
+            beforeUpload={beforeUpload}
+            onChange={handleFileChange}
+            headers={{
+              Authorization: `Bearer ${localStorage.token}`,
+            }}
+            style={{ marginTop: "20px", paddingBottom: "20px !important" }} // Added space between content and PDF upload
+          >
+            {pdf ? (
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <a href={pdf} target="_blank" rel="noopener noreferrer">
+                  <FilePdfOutlined /> View PDF
+                </a>
+                {!pdfUploading && (
+                  <EyeOutlined
+                    style={{ cursor: "pointer", color: "#1890ff" }}
+                    onClick={() =>
+                      handlePreview({ url: pdf, type: "application/pdf" })
+                    }
+                  />
+                )}
+              </div>
+            ) : (
+              uploadButton(pdfUploading, "pdf")
+            )}
+          </Upload>
+        </div>
+        <div style={{ paddingTop: "20px" }}>
+          <div id="summernote" style={{ minHeight: "200px" }}></div>
+        </div>
       </Modal>
     </>
   );

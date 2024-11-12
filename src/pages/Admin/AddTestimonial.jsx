@@ -54,7 +54,7 @@ const AddTestimonial = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button  onClick={() => showModal(record)}>Edit</Button>
+          <Button onClick={() => showModal(record)}>Edit</Button>
           <Popconfirm
             title="Delete this testimonial?"
             onConfirm={() => handleDelete(record._id)}
@@ -254,7 +254,7 @@ const AddTestimonial = () => {
       >
         <Select
           showSearch
-          value={modalSearch}
+          value={modalSearch || "Select agent"}
           placeholder="Select agent"
           style={{ width: "100%", marginBottom: 20 }}
           filterOption={false}

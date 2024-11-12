@@ -354,27 +354,28 @@ function Blog() {
             )}
           </Upload>
         </div>
-
-        <Select
-          showSearch
-          value={modalSearch}
-          placeholder={"Select agent"}
-          style={{ width: "100%", marginBottom: 20 }}
-          filterOption={false}
-          onSearch={handleSearch}
-          onChange={handleChange}
-          notFoundContent={null}
-          options={(modalProps || []).map((d) => ({
-            value: d._id,
-            label: `${d.firstName} ${d.lastName}`,
-          }))}
-        />
-        <Input
-          value={title}
-          placeholder="Title"
-          onChange={(e) => setTitle(e.target.value)}
-          style={{ width: "100%", marginBottom: 20 }}
-        />
+        <div>
+          <Select
+            showSearch
+            value={modalSearch || "select Agents"}
+            style={{ width: "100%", marginBottom: 20 }}
+            filterOption={false}
+            onSearch={handleSearch}
+            onChange={handleChange}
+            // placeholder="Select agent"
+            notFoundContent={null}
+            options={(modalProps || []).map((d) => ({
+              value: d._id,
+              label: `${d.firstName} ${d.lastName}`,
+            }))}
+          />
+          <Input
+            value={title}
+            placeholder="Title"
+            onChange={(e) => setTitle(e.target.value)}
+            style={{ width: "100%", marginBottom: 20 }}
+          />
+        </div>
         <div style={{ marginBottom: "20px" }}>
           <Upload
             name="file"
