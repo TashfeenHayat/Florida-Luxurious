@@ -453,146 +453,118 @@ function AgentProfile() {
           </div>
         </Container>
       )}
-      <div className="boxshadow-section">
-        {" "}
-        {isLoading ? (
-          <Skeleton.Image
-            active
-            style={{ maxWidth: "400px", maxHeight: "400px" }}
-          />
-        ) : (
-          <Container>
-            <div className="pt-98 pb-98">
-              <Title className="text-upper f-100 text-center">
-                Testimonials
-              </Title>
-
-              <Row justify="center" gutter={[16, 16]}>
-                <Col lg={24} md={24} sm={24}>
-                  <Swiper
-                    className="swiper-container"
-                    spaceBetween={16} // Space between the cards
-                    slidesPerView={3} // Show 3 cards at once
-                    autoplay={{
-                      delay: 5000, // Auto-swipe every 3 seconds
-                      disableOnInteraction: true,
-                    }}
-                    modules={[Autoplay, Virtual]}
-                    virtual
-                    breakpoints={{
-                      1024: {
-                        slidesPerView: 3, // On large screens, show 3 slides
-                      },
-                      768: {
-                        slidesPerView: 2, // On tablets, show 2 slides
-                      },
-                      480: {
-                        slidesPerView: 1, // On small screens, show 1 slide
-                      },
+      <Swiper
+        className="swiper-container"
+        spaceBetween={12} // Space between the cards
+        slidesPerView={4} // Show 3 cards at once
+        loop={true} // Enable continuous looping
+        speed={3000} // Adjust the speed for smoother transition
+        autoplay={
+          {
+            // Keep autoplay running even when interacting
+          }
+        }
+        style={{marginBottom:26}}
+        modules={[Autoplay]}
+        breakpoints={{
+          1024: {
+            slidesPerView: 4, // On large screens, show 3 slides
+          },
+          768: {
+            slidesPerView: 3, // On tablets, show 2 slides
+          },
+          480: {
+            slidesPerView: 1, // On small screens, show 1 slide
+          },
+        }}
+      >
+        {Array.isArray(testimonialsData?.testmonials) &&
+        testimonialsData.testmonials.length > 0 ? (
+          testimonialsData.testmonials.map((testimonial, index) => (
+            <SwiperSlide key={index}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              >
+                <Card
+                  hoverable
+                  style={{
+                    width: "100%",
+                    maxWidth: "350px",
+                    margin: "auto",
+                    borderRadius: "16px",
+                    boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
+                    paddingTop: "80px",
+                    background: "#fff",
+                  }}
+                >
+                  {/* Image Section */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "50px",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      borderRadius: "50%",
+                      overflow: "hidden",
+                      width: "90px",
+                      height: "90px",
+                      boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
                     }}
                   >
-                    {Array.isArray(testimonialsData?.testmonials) &&
-                    testimonialsData.testmonials.length > 0 ? (
-                      testimonialsData.testmonials.map((testimonial, index) => (
-                        <SwiperSlide key={index}>
-                          <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
-                          >
-                            <Card
-                              hoverable
-                              style={{
-                                width: "100%",
-                                maxWidth: "350px",
-                                margin: "auto",
-                                borderRadius: "16px",
-                                boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
-                                paddingTop: "80px", // Adding space for the image above
-                                background: "#fff",
-                              }}
-                            >
-                              {/* Image Section */}
-                              <div
-                                style={{
-                                  position: "absolute",
-                                  top: "50px", // Move image upwards
-                                  left: "50%",
-                                  transform: "translateX(-50%)",
-                                  borderRadius: "50%",
-                                  overflow: "hidden",
-                                  width: "90px",
-                                  height: "90px",
-                                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)", // Soft shadow around the image
-                                }}
-                              >
-                                <img
-                                  src={Logo} // Image for user
-                                  alt={testimonial.Username}
-                                  style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    objectFit: "cover", // Ensures the image fully covers the circle
-                                  }}
-                                />
-                              </div>
+                    <img
+                      src={Logo}
+                      alt={testimonial.Username}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                    />
+                  </div>
 
-                              {/* User Name and Testimonial Text */}
-                              <Title
-                                level={5}
-                                style={{
-                                  fontWeight: "600",
-                                  fontSize: "18px",
-                                  textAlign: "center",
-                                  marginTop: "50px", // Adjust spacing after the image
-                                }}
-                              >
-                                {testimonial.Username}
-                              </Title>
+                  {/* User Name and Testimonial Text */}
+                  <Title
+                    level={5}
+                    style={{
+                      fontWeight: "600",
+                      fontSize: "18px",
+                      textAlign: "center",
+                      marginTop: "50px",
+                    }}
+                  >
+                    {testimonial.Username}
+                  </Title>
 
-                              <Paragraph
-                                style={{
-                                  fontSize: "14px",
-                                  fontStyle: "italic",
-                                  marginBottom: "20px",
-                                  textAlign: "center",
-                                  color: "#555",
-                                }}
-                              >
-                                <span
-                                  style={{
-                                    fontSize: "24px",
-                                    paddingRight: "8px",
-                                  }}
-                                >
-                                  “
-                                </span>
-                                {testimonial.content}
-                                <span
-                                  style={{
-                                    fontSize: "24px",
-                                    paddingLeft: "8px",
-                                  }}
-                                >
-                                  ”
-                                </span>
-                              </Paragraph>
-                            </Card>
-                          </motion.div>
-                        </SwiperSlide>
-                      ))
-                    ) : (
-                      <div style={{ textAlign: "center", padding: "20px" }}>
-                        <p>No testimonials available.</p>
-                      </div>
-                    )}
-                  </Swiper>
-                </Col>
-              </Row>
-            </div>
-          </Container>
+                  <Paragraph
+                    style={{
+                      fontSize: "14px",
+                      fontStyle: "italic",
+                      marginBottom: "20px",
+                      textAlign: "center",
+                      color: "#555",
+                    }}
+                  >
+                    <span style={{ fontSize: "24px", paddingRight: "8px" }}>
+                      “
+                    </span>
+                    {testimonial.content}
+                    <span style={{ fontSize: "24px", paddingLeft: "8px" }}>
+                      ”
+                    </span>
+                  </Paragraph>
+                </Card>
+              </motion.div>
+            </SwiperSlide>
+          ))
+        ) : (
+          <div style={{ textAlign: "center", padding: "20px" }}>
+            <p>No testimonials available.</p>
+          </div>
         )}
-      </div>
+      </Swiper>
+
       <LetTalk />
     </>
   );
