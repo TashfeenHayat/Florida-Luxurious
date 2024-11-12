@@ -206,7 +206,7 @@ function Comunities() {
                       src={property?.media[0]?.mdUrl}
                       width="100%"
                       fallback="https://placehold.co/618x489"
-                      style={{aspectRatio:5/3}}
+                      style={{ aspectRatio: 5 / 3 }}
                     />
                     <div className="more-info-property">
                       <Flex
@@ -251,7 +251,7 @@ function Comunities() {
                             {property?.addressLine1} {property?.addressLine2}{" "}
                             <br />
                             <IoPricetagOutline size={20} /> $
-                            {property?.salePrice}
+                            {property?.salePrice?.replace("$", "")}
                           </Text>
                         </Flex>
                       </Flex>
