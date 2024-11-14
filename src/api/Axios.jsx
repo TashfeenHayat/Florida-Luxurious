@@ -28,6 +28,7 @@ customAxios.interceptors.response.use(
     } else if (error.response.status === 500) {
       window.location.href = "/500";
     }
+    
   }
 );
 
