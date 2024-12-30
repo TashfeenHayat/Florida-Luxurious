@@ -100,8 +100,8 @@ const Header = () => {
                 </Menu.Item>
                 <Menu.Item>
                   <Link
-                    to="https://florida-luxurious-production.up.railway.app/global"
-                    target="_blank"
+                    to="/global"
+{/*                     target="_blank" */}
                     rel="noopener noreferrer"
                     className="f-10"
                   >
