@@ -101,7 +101,7 @@ const Header = () => {
                 <Menu.Item>
                   <Link
                     to="/global"
-{/*                     target="_blank" */}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="f-10"
                   >
