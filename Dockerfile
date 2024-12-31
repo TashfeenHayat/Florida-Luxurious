@@ -1,4 +1,4 @@
-# Use an official Node.js runtime as a parent image to build the app
+# Stage 1: Build the app
 FROM node:18 AS build
 
 # Set the working directory in the container
@@ -16,14 +16,21 @@ COPY . .
 # Build the React app using Vite
 RUN npm run build
 
-# Use Nginx to serve the app
-FROM nginx:alpine
+# Stage 2: Serve the app using Node.js with npx
+FROM node:18
 
-# Copy the build files from the previous stage into Nginx's default public directory
-COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
-# Expose port 80 (default HTTP port)
-EXPOSE 80
+# Copy the build artifacts from the previous build stage
+COPY --from=build /usr/src/app/dist /usr/src/app/dist
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Install `serve` package globally
+RUN npm install -g serve
+
+# Expose port 5000 (default for serve)
+EXPOSE 5000
+
+# Use npx serve to serve the production build
+CMD ["serve", "dist", "-l", "5000"]
+
