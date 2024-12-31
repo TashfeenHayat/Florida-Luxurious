@@ -1,11 +1,9 @@
-# Stage 1: Build the app
+# Stage 1: Build the React app
 FROM node:18 AS build
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Copy package.json and package-lock.json (or npm-shrinkwrap.json)
 COPY package*.json ./
 
@@ -18,21 +16,17 @@ COPY . .
 # Build the React app using Vite
 RUN npm run build
 
-# Stage 2: Serve the app using Node.js with npx
-FROM node:18
-
-# Set the working directory in the container
-WORKDIR /usr/src/app
+# Stage 2: Serve the app using Nginx
+FROM nginx:latest
 
 # Copy the build artifacts from the previous build stage
-COPY --from=build /usr/src/app/dist /usr/src/app/dist
+COPY --from=build /usr/src/app/dist /usr/share/nginx/html
 
-# Install `serve` package globally
-RUN npm install -g serve
+# Copy custom Nginx configuration file
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 5000 (default for serve)
-EXPOSE 5000
+# Expose port 80
+EXPOSE 80
 
-# Use npx serve to serve the production build
-CMD ["serve", "dist", "-l", "5000"]
-
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
