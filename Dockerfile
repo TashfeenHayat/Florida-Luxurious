@@ -22,7 +22,7 @@ FROM nginx:latest
 
 
 # Copy custom Nginx configuration file
-COPY nginx.conf ./
+COPY nginx.conf ./nginx.config
 
 # Expose port 80
 EXPOSE 80
