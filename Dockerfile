@@ -19,11 +19,10 @@ RUN npm run build
 # Stage 2: Serve the app using Nginx
 FROM nginx:latest
 
-# Copy the build artifacts from the previous build stage
-COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+
 
 # Copy custom Nginx configuration file
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf 
 
 # Expose port 80
 EXPOSE 80
