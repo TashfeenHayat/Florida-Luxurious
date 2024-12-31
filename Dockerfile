@@ -18,14 +18,14 @@ COPY . .
 # Build the React app using Vite
 RUN npm run build
 
-# Stage 2: Serve the app using Node.js with npx
-FROM node:18
+# # Stage 2: Serve the app using Node.js with npx
+# FROM node:18
 
-# Set the working directory in the container
-WORKDIR /usr/src/app
+# # Set the working directory in the container
+# WORKDIR /usr/src/app
 
-# Copy the build artifacts from the previous build stage
-COPY --from=build /usr/src/app/dist /usr/src/app/dist
+# # Copy the build artifacts from the previous build stage
+# COPY --from=build /usr/src/app/dist /usr/src/app/dist
 
 # Install `serve` package globally
 RUN npm install -g serve
