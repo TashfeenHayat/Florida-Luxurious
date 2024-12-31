@@ -45,9 +45,7 @@
     "scroll-carousel": "^1.2.7",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.1.14",
-    "turn.js": "^1.0.5",
-    
-  },
+    "turn.js": "^1.0.5"},
   "devDependencies": {
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
