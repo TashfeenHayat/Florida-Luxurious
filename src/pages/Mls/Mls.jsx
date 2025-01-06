@@ -302,25 +302,20 @@ function Mls() {
               </Dropdown>
             </Col>
 
-            <Col lg={18} xs={24} sm={18}>
-              <Flex justify={"start"} wrap>
-                <Flex
-                  justify={"space-around"}
-                  gap={10}
-                  style={{ flexWrap: "wrap" }}
-                >
-                  {data?.filters?.map((item, index) => (
+               <Col lg={18} xs={24} sm={18}>
+              <Row gutter={[16, 16]} justify="start">
+                {data?.filters?.map((item, index) => (
+                  <Col key={index} xs={24} sm={12} md={8} lg={6} xl={6}>
                     <Checkbox
                       className="text-white f-16 text-upper"
-                      key={index}
                       onChange={handleCities}
                       name={item.name}
                     >
                       {item.name}
                     </Checkbox>
-                  ))}
-                </Flex>
-              </Flex>
+                  </Col>
+                ))}
+              </Row>
             </Col>
             <Col lg={24} xs={24} sm={18} align="middle">
               <button
