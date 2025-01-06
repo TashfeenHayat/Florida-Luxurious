@@ -221,7 +221,7 @@ function Mls() {
                 tooltip={{ open: false }}
               />
             </Col> */}
-            <Col lg={12} xs={18} sm={18}>
+            <Col lg={12} xs={9} sm={18}>
               <Dropdown
                 menu={{
                   items,
@@ -285,7 +285,7 @@ function Mls() {
                 </a>
               </Dropdown>
             </Col>
-            <Col lg={12} xs={9} sm={18}>
+            <Col lg={12} xs={18} sm={18}>
               <Dropdown
                 menu={{
                   items: maxBedRoom,
