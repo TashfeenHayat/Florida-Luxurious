@@ -1234,120 +1234,35 @@ function BoatOwner() {
           >
             Boat owners
           </Title>
-          <Row>
-            <Col lg={4}></Col>
-            <Col lg={16}>
-              <Table
-                columns={columns}
-                dataSource={data}
-                className="box-shadow-table custom-table"
-                pagination={false}
-                rowHoverable={false}
-                align="center"
-                data-aos="fade-left"
-                data-aos-duration="1500"
-              />
-              <Table
-                columns={columns1}
-                dataSource={data1}
-                className="boxshadow-section custom-table"
-                pagination={false}
-                rowHoverable={false}
-                data-aos="fade-left"
-                data-aos-duration="1500"
-              />
-              <Table
-                columns={columns2}
-                dataSource={data2}
-                className="boxshadow-section custom-table"
-                pagination={false}
-                rowHoverable={false}
-                data-aos="fade-left"
-                data-aos-duration="1500"
-              />
-              <Table
-                columns={columns3}
-                dataSource={data3}
-                className="boxshadow-section custom-table"
-                pagination={false}
-                rowHoverable={false}
-                data-aos="fade-left"
-                data-aos-duration="1500"
-              />
-              <Table
-                columns={columns4}
-                dataSource={data4}
-                className="boxshadow-section custom-table"
-                pagination={false}
-                rowHoverable={false}
-                data-aos="fade-left"
-                data-aos-duration="1500"
-              />
-              <Table
-                columns={columns4}
-                dataSource={data4}
-                className="boxshadow-section custom-table"
-                pagination={false}
-                rowHoverable={false}
-                data-aos="fade-left"
-                data-aos-duration="1500"
-              />
-              <Table
-                columns={columns5}
-                dataSource={data5}
-                className="boxshadow-section custom-table"
-                pagination={false}
-                rowHoverable={false}
-                data-aos="fade-left"
-                data-aos-duration="1500"
-              />
-              <Table
-                columns={columns6}
-                dataSource={data6}
-                className="boxshadow-section custom-table"
-                pagination={false}
-                rowHoverable={false}
-                data-aos="fade-left"
-                data-aos-duration="1500"
-              />
-              <Table
-                columns={columns7}
-                dataSource={data7}
-                className="boxshadow-section custom-table"
-                pagination={false}
-                rowHoverable={false}
-                data-aos="fade-left"
-                data-aos-duration="1500"
-              />
-              <Table
-                columns={columns8}
-                dataSource={data8}
-                className="boxshadow-section custom-table"
-                pagination={false}
-                rowHoverable={false}
-                data-aos="fade-left"
-                data-aos-duration="1500"
-              />
-              <Table
-                columns={columns9}
-                dataSource={data9}
-                className="boxshadow-section custom-table"
-                pagination={false}
-                rowHoverable={false}
-                data-aos="fade-left"
-                data-aos-duration="1500"
-              />
-              <Table
-                columns={columns10}
-                dataSource={data10}
-                className="boxshadow-section custom-table"
-                pagination={false}
-                rowHoverable={false}
-                data-aos="fade-left"
-                data-aos-duration="1500"
-              />
+         <Row>
+            <Col xs={2} sm={2} md={2} lg={4}></Col>
+            <Col xs={20} sm={20} md={20} lg={16}>
+              {[
+                { columns: columns, data: data },
+                { columns: columns1, data: data1 },
+                { columns: columns2, data: data2 },
+                { columns: columns3, data: data3 },
+                { columns: columns4, data: data4 },
+                { columns: columns5, data: data5 },
+                { columns: columns6, data: data6 },
+                { columns: columns7, data: data7 },
+                { columns: columns8, data: data8 },
+                { columns: columns9, data: data9 },
+                { columns: columns10, data: data10 },
+              ].map((tableData, index) => (
+                <Table
+                  key={index}
+                  columns={tableData.columns}
+                  dataSource={tableData.data}
+                  className="boxshadow-section custom-table responsive-table"
+                  pagination={false}
+                  rowHoverable={false}
+                  data-aos="fade-left"
+                  data-aos-duration="1500"
+                />
+              ))}
             </Col>
-            <Col lg={4}></Col>
+            <Col xs={2} sm={2} md={2} lg={4}></Col>
           </Row>
         </div>
       </Container>
