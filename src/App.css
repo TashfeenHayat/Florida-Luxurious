@@ -2199,3 +2199,12 @@ body:focus-visible {
 .swiper-3d .swiper-slide-shadow {
   background-color: transparent !important;
 }
+.responsive-table .ant-table-cell {
+  text-align: left; /* Default for larger screens */
+}
+
+@media (max-width: 576px) {
+  .responsive-table .ant-table-cell {
+    text-align: right; /* Center text on small screens */
+  }
+}
