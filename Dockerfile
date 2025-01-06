@@ -4,6 +4,7 @@ FROM node:18 AS build
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
 # Install dependencies
@@ -30,5 +31,5 @@ RUN npm install -g serve
 # Expose port 5000 (default for serve)
 EXPOSE 5000
 
-# Use npx serve to serve the production build
-CMD ["serve", "dist", "-l", "5000"]
+# Use npx serve to serve the production build in SPA mode
+CMD ["serve", "-s", "dist", "-l", "5000"]
