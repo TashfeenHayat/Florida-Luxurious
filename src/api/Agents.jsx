@@ -11,7 +11,7 @@ export const getAgents = createAsyncThunk(
 
       return res.data;
     } catch ({ response }) {
-      console.log(response);
+      //console.log(response);
       const { status, message } = response;
       return rejectWithValue({ status, message });
     }
@@ -41,7 +41,7 @@ export const getAgent = createAsyncThunk(
 
       return res.data;
     } catch ({ response }) {
-      console.log(response.data);
+      //console.log(response.data);
       return rejectWithValue(response.data);
     }
   }
