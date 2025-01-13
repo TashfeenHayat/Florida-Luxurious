@@ -5,7 +5,7 @@ import { getReports } from "../api/Report";
 function useReport(limit, page) {
   const dispatch = useDispatch();
   const { isLoading, data } = useSelector((state) => state.getReportsReducer);
-  console.log(data?.Reports);
+  //console.log(data?.Reports);
   let reports = data?.Reports;
   useEffect(() => {
     // Always dispatch getPosts when limit or page changes
