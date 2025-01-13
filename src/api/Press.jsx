@@ -11,7 +11,7 @@ export const getPosts = createAsyncThunk(
 // console.log(res.data)
       return res.data;
     } catch ({ response }) {
-      console.log(response);
+      //console.log(response);
       const { status, message } = response;
       return rejectWithValue({ status, message });
     }
