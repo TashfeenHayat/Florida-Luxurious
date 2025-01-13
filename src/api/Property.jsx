@@ -42,7 +42,7 @@ export const getProperties = createAsyncThunk(
       });
       return res.data;
     } catch (e) {
-      console.log(e, "error");
+      //console.log(e, "error");
 
       return rejectWithValue(e.response.data.message);
     }
