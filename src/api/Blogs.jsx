@@ -11,7 +11,7 @@ export const getBlogs = createAsyncThunk(
 
       return res.data;
     } catch ({ response }) {
-      console.log(response);
+      //console.log(response);
       const { status, message } = response;
       return rejectWithValue({ status, message });
     }
