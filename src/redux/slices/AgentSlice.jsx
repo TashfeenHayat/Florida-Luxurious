@@ -54,13 +54,13 @@ export const addAgentSlice = createSlice({
       state.isLoading = false;
       state.isError = false;
       state.data = action.payload;
-      console.log(action.payload);
+      //console.log(action.payload);
     });
 
     builder.addCase(addAgent.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
-      console.log(action.payload);
+      //console.log(action.payload);
       notification.error({
         message: "Something went wrong",
         description: action.payload,
@@ -113,7 +113,7 @@ export const updateAgentSlice = createSlice({
       state.isLoading = false;
       state.isError = false;
       state.data = action.payload;
-      console.log(action.payload);
+      //console.log(action.payload);
     });
 
     builder.addCase(updateAgent.rejected, (state, action) => {
@@ -142,7 +142,7 @@ export const deleteAgentSlice = createSlice({
       state.isLoading = false;
       state.isError = false;
       state.data = action.payload;
-      console.log(action.payload);
+      //console.log(action.payload);
     });
 
     builder.addCase(deleteAgent.rejected, (state, action) => {
