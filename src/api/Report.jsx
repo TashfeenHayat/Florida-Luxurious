@@ -40,7 +40,7 @@ export const getReport = createAsyncThunk(
 
       return res.data;
     } catch ({ response }) {
-      console.log(response.data);
+      //console.log(response.data);
       return rejectWithValue(response.data);
     }
   }
