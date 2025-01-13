@@ -6,7 +6,7 @@ function useReportsDetails(id) {
   const dispatch = useDispatch();
   const { isLoading, data } = useSelector((s) => s.getReportReducer);
 
-  console.log(data, "Reports12");
+  //console.log(data, "Reports12");
   useEffect(() => {
     // Always dispatch getPosts when limit or page changes
     dispatch(getReport(id));
