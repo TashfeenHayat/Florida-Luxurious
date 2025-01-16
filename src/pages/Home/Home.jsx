@@ -96,7 +96,7 @@ function Home() {
       >
         unlock exclusive living <br />
         explore florida’s finest properties
-      </Text>
+      </Text>  */}
       <div
         style={{
           marginTop: "1rem",
@@ -130,7 +130,7 @@ function Home() {
           }}
         />
       </div>
-      */}
+    
           </motion.div>
         </div>
       </div>
