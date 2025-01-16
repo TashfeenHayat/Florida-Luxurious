@@ -127,14 +127,15 @@ function MeetTeam() {
                         key={index}
                         style={{ padding: "0 10px" }}
                       >
-                        <Flip
+                         <Flip
                           fImg={
                             <Image
                               src={
-                                agent.photo || "https://placehold.co/300x388"
+                                agent.photo ||
+                                "https://firebasestorage.googleapis.com/v0/b/florida-77f94.appspot.com/o/Untitled%20design%20(1).png?alt=media&token=b14e90ef-b51c-4baf-ae2a-ada87141ed52"
                               }
                               preview={false}
-                              fallback="https://placehold.co/300x388"
+                              fallback="https://firebasestorage.googleapis.com/v0/b/florida-77f94.appspot.com/o/Untitled%20design%20(1).png?alt=media&token=b14e90ef-b51c-4baf-ae2a-ada87141ed52"
                               style={{
                                 aspectRatio: "5/7.5",
                                 width: "100%",
@@ -146,11 +147,12 @@ function MeetTeam() {
                           bImg={
                             <Image
                               src={
-                                agent.photo || "https://placehold.co/300x388"
+                                agent.photo ||
+                                "https://firebasestorage.googleapis.com/v0/b/florida-77f94.appspot.com/o/Untitled%20design%20(1).png?alt=media&token=b14e90ef-b51c-4baf-ae2a-ada87141ed52"
                               }
                               className="img-op1"
                               preview={false}
-                              fallback="https://placehold.co/300x388"
+                              fallback="https://firebasestorage.googleapis.com/v0/b/florida-77f94.appspot.com/o/Untitled%20design%20(1).png?alt=media&token=b14e90ef-b51c-4baf-ae2a-ada87141ed52"
                               style={{
                                 aspectRatio: "5/7.5",
                                 width: "100%",
