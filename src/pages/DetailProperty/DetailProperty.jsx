@@ -262,7 +262,7 @@ export default function DetailProperty() {
                 </Text>
               </Flex>
             </Col>
-            <Col lg={8}>
+{/*             <Col lg={8}>
               <Flex justify={"flex-start"} align={"center"} gap={5}>
                 <div
                   className="circle-bg-white"
@@ -276,7 +276,7 @@ export default function DetailProperty() {
                 </div>
                 <Text className="text-white f-16 f-100">100± Waterfront</Text>
               </Flex>
-            </Col>
+            </Col> */}
             <Col lg={8}>
               <Flex justify={"flex-start"} align={"center"} gap={5}>
                 <div
@@ -314,7 +314,7 @@ export default function DetailProperty() {
               </Flex>
             </Col>
             <Col lg={8}>
-              <Flex justify={"flex-start"} align={"center"} gap={5}>
+{/*               <Flex justify={"flex-start"} align={"center"} gap={5}>
                 <div
                   className="circle-bg-white"
                   style={{
@@ -328,7 +328,7 @@ export default function DetailProperty() {
                 <Text className="text-white f-16 f-100">
                   {data?.property?.parking} Car garage
                 </Text>
-              </Flex>
+              </Flex> */}
             </Col>
             {/* <Col lg={8}>
               <Flex justify={"flex-start"} align={"center"} gap={5}>
