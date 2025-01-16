@@ -157,7 +157,7 @@ function AgentProfile() {
                 src={data?.photo}
                 style={{ marginTop: "-50px" }}
                 width="100%"
-                fallback="https://placehold.co/300x388"
+                fallback="https://firebasestorage.googleapis.com/v0/b/florida-77f94.appspot.com/o/Untitled%20design%20(1).png?alt=media&token=b14e90ef-b51c-4baf-ae2a-ada87141ed52"
               />
             )}
           </Col>
