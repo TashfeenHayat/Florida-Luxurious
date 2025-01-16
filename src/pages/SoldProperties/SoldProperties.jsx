@@ -22,7 +22,7 @@ function SoldProperties() {
   );
 
   const navigate = useNavigate();
-  console.log(data);
+  //console.log(data);
   // Dummy data for demonstration
   // const soldProperties = [
   //   { address: "2572 Mercedes Drive", price: "$15,000,000" },
@@ -42,6 +42,13 @@ function SoldProperties() {
   // Function to handle page change
   const handlePageChange = (page) => {
     setCurrentPage(page);
+  };
+   const formatPrice = (price) => {
+    // Check if price is valid and does not start with a dollar sign
+    if (price && !price.startsWith("$")) {
+      return `$${price}`; // Prepend dollar sign if not present
+    }
+    return price; // Return the price as is if it already contains a dollar sign
   };
   const sortedProperties = data?.properties?.slice().sort((a, b) => {
     const priceA = Number(a?.salePrice?.slice(1).replace(/,/g, "") || 0);
@@ -108,7 +115,8 @@ function SoldProperties() {
                           last list price
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          $ {property.salePrice}
+                        {formatPrice(property.salePrice)}
+
                         </Text>
                       </Flex>
                       {/* <Flex vertical>
@@ -158,7 +166,8 @@ function SoldProperties() {
                         <IoLocationOutline color="white" size={20} />
                         <Text className="f-14 f-bold text-white">
                           {property.addressLine1} {property.addressLine2} <br />
-                          <IoPricetagOutline size={20} /> ${property?.salePrice}
+                          <IoPricetagOutline size={20} />{formatPrice(property.salePrice)}
+
                         </Text>
                       </Flex>
                     </Flex>
