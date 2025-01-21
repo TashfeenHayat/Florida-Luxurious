@@ -8,10 +8,14 @@ import {
   Input,
   Select,
   Upload,
-  notification
+  notification,
 } from "antd";
 import { api_base_URL } from "../../api/Axios";
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  LoadingOutlined,
+  PlusOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons";
 import { useParams } from "react-router";
 import countryList from "react-select-country-list";
 import PhoneInput from "antd-phone-input";
@@ -67,7 +71,7 @@ function AddAgent() {
           phoneNumber:
             values.phoneNumber.countryCode +
             values.phoneNumber.areaCode +
-            values.phoneNumber.phoneNumber
+            values.phoneNumber.phoneNumber,
         })
       ).unwrap();
       setInitialValue({});
@@ -81,7 +85,7 @@ function AddAgent() {
           phoneNumber:
             values.phoneNumber.countryCode +
             values.phoneNumber.areaCode +
-            values.phoneNumber.phoneNumber
+            values.phoneNumber.phoneNumber,
         })
       ).unwrap();
       setInitialValue({});
@@ -107,6 +111,9 @@ function AddAgent() {
       setPhoto(info.file.response.url);
     }
   };
+  const removeImage = () => {
+    setPhoto(null); // Remove the selected photo
+  };
 
   const uploadButton = (
     <div>
@@ -128,15 +135,34 @@ function AddAgent() {
                 className="avatar-uploader"
                 loading={photoUplaoding}
                 showUploadList={false}
+                moveable="true"
                 headers={{
-                  Authorization: `Bearer ${localStorage.token}`
+                  Authorization: `Bearer ${localStorage.token}`,
                 }}
                 action={`${api_base_URL}upload`}
                 beforeUpload={beforeUpload}
                 onChange={handleChange}
               >
                 {photo ? (
-                  <img src={photo} alt="avatar" style={{ width: "100%" }} />
+                  <>
+                    <div style={{ position: "relative" }}>
+                      <img src={photo} alt="avatar" style={{ width: "100%" }} />
+                      <Button
+                        type="link"
+                        icon={<DeleteOutlined />}
+                        onClick={removeImage}
+                        style={{
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                          zIndex: 1,
+                          background: "rgba(255, 255, 255, 0.6)",
+                          borderRadius: "50%",
+                        }}
+                      />
+                    </div>
+                  </>
                 ) : photoUplaoding ? (
                   <LoadingOutlined />
                 ) : (
@@ -153,8 +179,8 @@ function AddAgent() {
               rules={[
                 {
                   required: true,
-                  message: "First Name is required"
-                }
+                  message: "First Name is required",
+                },
               ]}
             >
               <Input size="large" placeholder="First Name" />
@@ -166,8 +192,8 @@ function AddAgent() {
               rules={[
                 {
                   required: true,
-                  message: "Last Name is required"
-                }
+                  message: "Last Name is required",
+                },
               ]}
             >
               <Input size="large" placeholder="Last Name" />
@@ -180,8 +206,8 @@ function AddAgent() {
                 {
                   type: "email",
                   required: true,
-                  message: "Email is required"
-                }
+                  message: "Email is required",
+                },
               ]}
             >
               <Input size="large" placeholder="Email" />
@@ -213,8 +239,8 @@ function AddAgent() {
               rules={[
                 {
                   required: true,
-                  message: "Address Line 1 is required"
-                }
+                  message: "Address Line 1 is required",
+                },
               ]}
             >
               <Input size="large" placeholder="Address Line 1" />
@@ -231,8 +257,8 @@ function AddAgent() {
               rules={[
                 {
                   required: true,
-                  message: "State is required"
-                }
+                  message: "State is required",
+                },
               ]}
             >
               <Input size="large" placeholder="State" />
@@ -244,8 +270,8 @@ function AddAgent() {
               rules={[
                 {
                   required: true,
-                  message: "City is required"
-                }
+                  message: "City is required",
+                },
               ]}
             >
               <Input size="large" placeholder="City" />
@@ -257,8 +283,8 @@ function AddAgent() {
               rules={[
                 {
                   required: true,
-                  message: "Country is required"
-                }
+                  message: "Country is required",
+                },
               ]}
             >
               <Select
@@ -275,8 +301,8 @@ function AddAgent() {
               rules={[
                 {
                   required: true,
-                  message: "Zip Code is required"
-                }
+                  message: "Zip Code is required",
+                },
               ]}
             >
               <Input size="large" placeholder="Zip Code" />
