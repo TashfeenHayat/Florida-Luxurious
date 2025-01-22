@@ -29,6 +29,13 @@ function Agents() {
       title: "Phone No",
       dataIndex: "phoneNumber",
       key: "phone",
+      render: (_, { phoneNumber }) => {
+        if (phoneNumber) {
+          const { countryCode, areaCode, phoneNumber: number } = phoneNumber;
+          return `+${countryCode} (${areaCode}) ${number}`;
+        }
+        return "-"; // Return a dash if phoneNumber is not available
+      },
     },
     {
       title: "Code",
