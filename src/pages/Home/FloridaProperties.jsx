@@ -37,7 +37,13 @@ function FloridaProperties() {
       style={{ color: "#fff", padding: "0px 20px", backgroundColor: "#1c1c1c" }}
     >
       <Row>
-        <Col lg={12} md={24} className="relative cover_rectagle">
+        <Col
+          lg={12}
+          md={24}
+          sm={32}
+          xsm={9}
+          className="relative cover_rectagle"
+        >
           <Flex
             className="pt-90 pb-10"
             style={{ position: "sticky", top: "0" }}
