@@ -43,7 +43,7 @@ function MeetTeam() {
 
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
@@ -127,7 +127,7 @@ function MeetTeam() {
                         key={index}
                         style={{ padding: "0 10px" }}
                       >
-                         <Flip
+                        <Flip
                           fImg={
                             <Image
                               src={
