@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography, Row, Col, Spin, Grid } from "antd";
-import useCommunities from "../../hooks/useCommunities";
+import useallCommunities from "../../hooks/useallCommunites";
 import { useNavigate } from "react-router-dom";
 import BackgroundImage from "../../components/BackgroundImage";
 import BoatImage from "../../assets/Allcommunities.jpg";
@@ -9,7 +9,8 @@ const { Title, Text } = Typography;
 const { useBreakpoint } = Grid;
 
 function Allcommunities() {
-  const { data, isLoading } = useCommunities(20, 1);
+  const { data, isLoading } = useallCommunities();
+  console.log("data2", data);
   const sortingArr = [...(data?.filters ?? [])].sort((a, b) =>
     a?.name?.localeCompare(b?.name)
   );
