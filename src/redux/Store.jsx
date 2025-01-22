@@ -9,6 +9,7 @@ import {
   resetAgentSlice,
 } from "./slices/AgentSlice";
 import {
+  getAllFiltersSlice,
   getFiltersSlice,
   addFilterSlice,
   getFilterSlice,
@@ -65,6 +66,7 @@ export const store = configureStore({
     getFiltersReducer: getFiltersSlice,
     addFilterReducer: addFilterSlice,
     getFilterReducer: getFilterSlice,
+    getAllFiltersReducer: getAllFiltersSlice,
     updateFilterReducer: updateFilterSlice,
     deleteFilterReducer: deleteFilterSlice,
     getPropertiesReducer: getPropertiesSlice,
