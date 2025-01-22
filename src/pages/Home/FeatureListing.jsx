@@ -55,26 +55,66 @@ function FeatureListing() {
     nextArrow: <CustomNextArrow />,
     responsive: [
       {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        },
+        breakpoint: 1440, // For large screens (desktops)
+        settings: { slidesToShow: 3, slidesToScroll: 1 },
       },
       {
-        breakpoint: 768,
+        breakpoint: 1300, // For large tablets and smaller desktops
+        settings: { slidesToShow: 2, slidesToScroll: 1 },
+      },
+      {
+        breakpoint: 1024, // For tablets in landscape (iPad Air, iPad Mini)
+        settings: { slidesToShow: 2, slidesToScroll: 1 },
+      },
+      {
+        breakpoint: 850, // For smaller tablets in portrait mode
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: "0",
         },
       },
       {
-        breakpoint: 425,
+        breakpoint: 768, // For tablets in portrait mode (iPad Mini and others)
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: "0",
+        },
+      },
+      {
+        breakpoint: 570, // For mobile devices (larger phones)
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
           prevArrow: false,
           nextArrow: false,
+          centerMode: true,
+          centerPadding: "0",
+        },
+      },
+      {
+        breakpoint: 390, // For smaller mobile devices (like iPhone SE)
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          prevArrow: false,
+          nextArrow: false,
+          centerMode: true,
+          centerPadding: "0",
+        },
+      },
+      {
+        breakpoint: 350, // For very small devices (e.g., older phones)
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          prevArrow: false,
+          nextArrow: false,
+          centerMode: true,
+          centerPadding: "0",
         },
       },
     ],
@@ -132,9 +172,11 @@ function FeatureListing() {
                   style={{
                     position: "relative",
                     cursor: "pointer",
-                    maxWidth: "300px",
-                    flex: "1 1 auto",
                     margin: "10px",
+                    display: "flex",
+                    justifyContent: "center", // Center content horizontally
+                    alignItems: "center", // Center content vertically
+                    width: "100%", // Ensuring the div takes full width of the slider
                   }}
                 >
                   <Image
@@ -142,11 +184,17 @@ function FeatureListing() {
                       property?.media?.[0]?.mdUrl ||
                       "https://placehold.co/618x489"
                     }
-                    width="100%"
                     className="img-op"
                     fallback="https://placehold.co/618x489"
                     preview={false}
-                    style={{ borderRadius: "8px", objectFit: "cover" }}
+                    style={{
+                      borderRadius: "8px",
+                      objectFit: "cover",
+                      width: "100%", // Ensure the image fills the container width
+                      height: "auto", // Maintain aspect ratio
+                      maxHeight: "80vh", // Limit image height on smaller screens
+                      objectPosition: "center", // Center image within its container
+                    }}
                   />
                   <div className="info">
                     <Flex
