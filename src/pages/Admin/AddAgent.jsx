@@ -50,7 +50,7 @@ function AddAgent() {
     if (id) {
       setLoading(true);
       dispatch(getAgent(params.id)).then((agent) => {
-        console.log("agent url", agent);
+        //console.log("agent url", agent);
         setLoading(false);
         setPhoto(agent.payload?.photo);
         setInitialValue(agent.payload);
@@ -62,6 +62,7 @@ function AddAgent() {
 
   const onFinish = async (values) => {
     console.log("Received values of form: ", values);
+    console.log("Phone Number object: ", values.phoneNumber);
     if (id) {
       const res = await dispatch(
         updateAgent({
@@ -93,10 +94,99 @@ function AddAgent() {
       setTimeout(navigate("/admin/agent"), 1000);
     }
   };
+  // function validator(_, value) {
+  //   // value is the phone number object passed by Form.Item
+  //   console.log("Phone input value", value); // Add logging to inspect the structure
 
-  function validator(_, { valid }) {
-    if (valid()) return Promise.resolve(); // non-strict validation
-    return Promise.reject("Invalid phone number");
+  //   if (!value) {
+  //     return Promise.reject("Phone number is required");
+  //   }
+
+  //   const { countryCode, areaCode, phoneNumber } = value;
+
+  //   console.log("countryCode", countryCode);
+  //   console.log("areaCode", areaCode);
+  //   console.log("phoneNumber", phoneNumber);
+
+  //   // Check if any part of the phone number is missing
+  //   if (!countryCode || !areaCode || !phoneNumber) {
+  //     return Promise.reject("Phone number is incomplete");
+  //   }
+
+  //   // Combine all parts of the phone number into one string
+  //   const fullPhoneNumber = countryCode + areaCode + phoneNumber;
+
+  //   // Example regex to validate phone number (adjust as needed)
+  //   const phonePattern = /^[0-9]{10,15}$/; // Modify based on your expected format
+
+  //   // Validate phone number using the pattern
+  //   if (phonePattern.test(fullPhoneNumber)) {
+  //     return Promise.resolve();
+  //   } else {
+  //     return Promise.reject("Invalid phone number");
+  //   }
+  // }
+
+  // function validator(_, { valid }) {
+  //   console.log("valid", valid());
+  //   if (valid()) return Promise.resolve(); // non-strict validation
+  //   return Promise.reject("Invalid phone number");
+  // }
+  // function validator(_, { phoneNumber }) {
+  //   const phonePattern = /^[0-9]{10,15}$/; // Example pattern: validates numbers of 10-15 digits
+  //   if (phonePattern.test(phoneNumber)) {
+  //     return Promise.resolve();
+  //   } else {
+  //     return Promise.reject("Invalid phone number");
+  //   }
+  // }
+  function validator(_, value) {
+    // Log the value for debugging
+    console.log("Phone input value", value);
+
+    if (!value) {
+      return Promise.reject("Phone number is required");
+    }
+
+    // Check if the value is a single phone number string (like "17863541311")
+    if (typeof value === "string") {
+      // If the value is a plain string, assume it's the full phone number
+      const phoneNumber = value.trim();
+
+      // Set default values for countryCode and areaCode based on assumptions
+      const countryCode =
+        phoneNumber.length >= 11 ? phoneNumber.substring(0, 1) : ""; // Adjust based on actual format
+      const areaCode =
+        phoneNumber.length >= 11 ? phoneNumber.substring(1, 4) : ""; // Adjust based on actual format
+      const number = phoneNumber.substring(4); // The remaining part is the phone number
+
+      value = { countryCode, areaCode, phoneNumber: number }; // Set the value in the expected format
+      console.log("Updated value", value);
+    }
+
+    const { countryCode, areaCode, phoneNumber } = value;
+
+    console.log("countryCode", countryCode);
+    console.log("areaCode", areaCode);
+    console.log("phoneNumber", phoneNumber);
+
+    // Check if any part of the phone number is missing
+    if (!countryCode || !areaCode || !phoneNumber) {
+      return Promise.reject("Phone number is incomplete");
+    }
+
+    // Combine all parts of the phone number into one string
+    const fullPhoneNumber = countryCode + areaCode + phoneNumber;
+
+    // Example regex to validate phone number (adjust as needed)
+    const phonePattern = /^[0-9]{10,15}$/; // Modify based on your expected format
+
+    // Validate phone number using the pattern
+    if (phonePattern.test(fullPhoneNumber)) {
+      return Promise.resolve();
+    } else {
+      return Promise.reject("Invalid phone number");
+    }
   }
 
   const beforeUpload = (e) => {
@@ -217,6 +307,10 @@ function AddAgent() {
             <Form.Item name="phoneNumber" rules={[{ validator }]}>
               <PhoneInput size="large" enableSearch />
             </Form.Item>
+
+            {/* <Form.Item name="phoneNumber" rules={[{ validator }]}>
+              <PhoneInput size="large" enableSearch />
+            </Form.Item> */}
           </Col>
           <Col span={12} className="gutter-row">
             <Form.Item name="code">
