@@ -4,6 +4,7 @@ import {
   getFilter,
   updateFilter,
   deleteFilter,
+  getAllFilters,
 } from "../../api/Filters";
 import { createSlice } from "@reduxjs/toolkit";
 import { notification } from "antd";
@@ -151,6 +152,33 @@ export const deleteFilterSlice = createSlice({
       notification.error({
         message: "Something went wrong",
         description: action.payload,
+        duration: 2,
+      });
+    });
+  },
+}).reducer;
+export const getAllFiltersSlice = createSlice({
+  name: "getAllFiltersReducer",
+  initialState,
+  extraReducers: (builder) => {
+    builder.addCase(getAllFilters.pending, (state) => {
+      state.isLoading = true;
+      state.isError = false;
+    });
+
+    builder.addCase(getAllFilters.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.data = action.payload;
+    });
+
+    builder.addCase(getAllFilters.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.errorCode = action.payload.code;
+      notification.error({
+        message: "Something went wrong",
+        description: action.payload.message,
         duration: 2,
       });
     });
