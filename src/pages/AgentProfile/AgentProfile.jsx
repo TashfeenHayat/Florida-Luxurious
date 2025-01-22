@@ -106,27 +106,21 @@ function AgentProfile() {
   const { isLoading: isTestimonialsLoading, data: testimonialsData } =
     useTestimonials(10, 1, id);
   console.log("data", testimonialsData);
-  const formatPhoneNumber = (phoneNumber) => {
-    if (!phoneNumber) return "";
+  const formatPhoneNumber = (phoneNumberObj) => {
+    if (!phoneNumberObj) return "";
 
-    // Remove non-numeric characters
-    const cleaned = ("" + phoneNumber).replace(/\D/g, "");
+    const { areaCode, countryCode, isoCode, phoneNumber } = phoneNumberObj;
 
-    // Check if the number is 10 digits long (assume US number)
-    if (cleaned.length === 10) {
-      return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(
-        6
-      )}`;
-    }
+    // Check if all the parts exist
+    if (!areaCode || !phoneNumber || !countryCode) return phoneNumberObj;
 
-    // If the number is 11 digits long (potentially including country code)
-    if (cleaned.length === 11 && cleaned.startsWith("1")) {
-      const number = cleaned.slice(1); // Remove leading '1' (US country code)
-      return `(${number.slice(0, 3)}) ${number.slice(3, 6)}-${number.slice(6)}`;
-    }
+    // Format the phone number based on the fields
+    const formattedPhone = `+${countryCode} (${areaCode}) ${phoneNumber.slice(
+      0,
+      3
+    )}-${phoneNumber.slice(3)}`;
 
-    // Return the number as-is if it doesn't match expected patterns
-    return phoneNumber;
+    return formattedPhone;
   };
 
   return (
