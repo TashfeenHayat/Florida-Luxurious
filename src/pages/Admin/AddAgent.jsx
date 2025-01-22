@@ -140,28 +140,12 @@ function AddAgent() {
   //     return Promise.reject("Invalid phone number");
   //   }
   // }
-  function validator(_, value) {
-    // Log the value for debugging
-    console.log("Phone input value", value);
+   function validator(_, value) {
+    // value is the phone number object passed by Form.Item
+    console.log("Phone input value", value); // Add logging to inspect the structure
 
     if (!value) {
       return Promise.reject("Phone number is required");
-    }
-
-    // Check if the value is a single phone number string (like "17863541311")
-    if (typeof value === "string") {
-      // If the value is a plain string, assume it's the full phone number
-      const phoneNumber = value.trim();
-
-      // Set default values for countryCode and areaCode based on assumptions
-      const countryCode =
-        phoneNumber.length >= 11 ? phoneNumber.substring(0, 1) : ""; // Adjust based on actual format
-      const areaCode =
-        phoneNumber.length >= 11 ? phoneNumber.substring(1, 4) : ""; // Adjust based on actual format
-      const number = phoneNumber.substring(4); // The remaining part is the phone number
-
-      value = { countryCode, areaCode, phoneNumber: number }; // Set the value in the expected format
-      console.log("Updated value", value);
     }
 
     const { countryCode, areaCode, phoneNumber } = value;
@@ -188,7 +172,6 @@ function AddAgent() {
       return Promise.reject("Invalid phone number");
     }
   }
-
   const beforeUpload = (e) => {
     console.log(e);
     setPhotoUplaoding(true);
