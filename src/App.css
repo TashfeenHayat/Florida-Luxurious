@@ -2144,7 +2144,7 @@ body:focus-visible {
   content: "";
   position: absolute;
   top: 50%;
-  right: -65px; /* Adjusted left position */
+  left: 110px; /* Adjusted left position */
   width: 100px; /* Adjusted width to fill the container */
   height: 1px !important;
   transform: scaleY(1.1);
@@ -2206,5 +2206,9 @@ body:focus-visible {
 @media (max-width: 576px) {
   .responsive-table .ant-table-cell {
     text-align: right; /* Center text on small screens */
+  }
+  .search-button::after{
+    display:none;
+    overflow:hidden;
   }
 }
