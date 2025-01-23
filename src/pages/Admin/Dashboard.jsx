@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { Layout, Menu, Button, theme, Avatar, Dropdown } from "antd";
+import { Layout, Menu, Button, theme, Avatar, Dropdown,  notification } from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -31,14 +31,60 @@ function Dashboard() {
       label: <span style={{ color: "black" }}>Logout</span>,
     },
   ];
+  useEffect(() => {
+    // Check if the token exists in localStorage
+    const token = localStorage.getItem("token");
+    if (!token) {
+      // If token is not found, show logout notification
+      notification.warning({
+        message: "Session Expired",
+        description:
+          "You have been logged out due to inactivity or session expiration.",
+      });
 
-  const handleMenu = (e) => {
+      // Redirect user to login page
+      navigate("/admin/login");
+    }
+  }, [navigate]);
+ const handleMenu = async (e) => {
     switch (e.key) {
-      case "1":
-        return;
       case "2":
-        localStorage.removeItem("token");
-        navigate("/admin/login");
+        try {
+          const token = localStorage.getItem("token"); // Get token from localStorage
+          if (!token) {
+            notification.error({
+              message: "Logout Failed",
+              description: "Token not found. Unable to logout.",
+            });
+            return;
+          }
+
+          // Send the token to the backend API for logout
+          const response = await customAxios.post("user/logout", { token });
+
+          if (response.status === 200) {
+            localStorage.removeItem("token");
+
+            // Navigate to login page first
+            navigate("/admin/login", {
+              state: { fromLogout: true }, // Pass a state indicating logout
+            });
+          }
+        } catch (error) {
+          console.error(
+            "Logout Failed:",
+            error.response?.data?.message || error.message
+          );
+
+          // Show error notification if logout fails
+          notification.error({
+            message: "Logout Failed",
+            description: error.response?.data?.message || error.message,
+          });
+        }
+        break;
+      default:
+        return;
     }
   };
 
