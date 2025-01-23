@@ -49,31 +49,47 @@ export default function DetailProperty() {
     setImageLoading(false);
   };
   const dispatch = useDispatch();
-  const formatPhoneNumber = (phoneNumber) => {
-    if (!phoneNumber) return "";
+  // const formatPhoneNumber = (phoneNumber) => {
+  //   if (!phoneNumber) return "";
 
-    // Remove non-numeric characters
-    const cleaned = ("" + phoneNumber).replace(/\D/g, "");
+  //   // Remove non-numeric characters
+  //   const cleaned = ("" + phoneNumber).replace(/\D/g, "");
 
-    // Check if the number is 10 digits long (assume US number)
-    if (cleaned.length === 10) {
-      return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(
-        6
-      )}`;
-    }
+  //   // Check if the number is 10 digits long (assume US number)
+  //   if (cleaned.length === 10) {
+  //     return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(
+  //       6
+  //     )}`;
+  //   }
 
-    // If the number is 11 digits long (potentially including country code)
-    {
-      if (cleaned.length === 11 && cleaned.startsWith("1")) {
-        const number = cleaned.slice(1); // Remove leading '1' (US country code)
-        return `(${number.slice(0, 3)}) ${number.slice(3, 6)}-${number.slice(
-          6
-        )}`;
-      }
-    }
+  //   // If the number is 11 digits long (potentially including country code)
+  //   {
+  //     if (cleaned.length === 11 && cleaned.startsWith("1")) {
+  //       const number = cleaned.slice(1); // Remove leading '1' (US country code)
+  //       return `(${number.slice(0, 3)}) ${number.slice(3, 6)}-${number.slice(
+  //         6
+  //       )}`;
+  //     }
+  //   }
 
-    // Return the number as-is if it doesn't match expected patterns
-    return phoneNumber;
+  //   // Return the number as-is if it doesn't match expected patterns
+  //   return phoneNumber;
+  // };
+    const formatPhoneNumber = (phoneNumberObj) => {
+    if (!phoneNumberObj) return "";
+
+    const { areaCode, countryCode, isoCode, phoneNumber } = phoneNumberObj;
+
+    // Check if all the parts exist
+    if (!areaCode || !phoneNumber || !countryCode) return phoneNumberObj;
+
+    // Format the phone number based on the fields
+    const formattedPhone = `+${countryCode} (${areaCode}) ${phoneNumber.slice(
+      0,
+      3
+    )}-${phoneNumber.slice(3)}`;
+
+    return formattedPhone;
   };
   const mapRef = useRef(null);
 
