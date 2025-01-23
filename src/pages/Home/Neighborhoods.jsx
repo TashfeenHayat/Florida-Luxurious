@@ -14,7 +14,7 @@ function Neighborhoods() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ paddingTop: 98, paddingBottom: 98 }}>
+    <div style={{ paddingTop: 98, paddingBottom: 98, overflow: "hidden" }}>
       <Title className="florida-heading-feature-negibour" level={1}>
         Featured Communities
       </Title>
@@ -23,8 +23,8 @@ function Neighborhoods() {
           <Spin size="large" />
         </div>
       ) : (
-        <Row gutter={[16, 16]} className="px-4">
-          <Col lg={6} md={12} sm={12} xs={24}>
+        <Row gutter={[9, 9]} className="px-4">
+          <Col xl={6} lg={8} md={12} sm={12} xs={24}>
             <div className="displayy-teamimg-center show-btn-community-home">
               <div style={{ background: "black" }} className="communities-grid">
                 <div
@@ -54,7 +54,7 @@ function Neighborhoods() {
           </Col>
 
           {displayedCommunities.map((community, index) => (
-            <Col lg={6} md={12} sm={12} xs={24} key={index}>
+            <Col xl={6} lg={32} md={12} sm={12} xs={24} key={index}>
               <div className="displayy-teamimg-center show-btn-community-home">
                 <img
                   src={community?.photo}
