@@ -68,7 +68,7 @@ function Agents() {
                     onClick={() => navigate(`/agent/${item._id}`)}
                     style={{ cursor: "pointer" }}
                   >
-                      <FlipCard
+                    <FlipCard
                       fImg={
                         <Image
                           src={
@@ -91,11 +91,11 @@ function Agents() {
                           src={
                             item.photo
                               ? item.photo
-                              : "https://firebasestorage.googleapis.com/v0/b/florida-77f94.appspot.com/o/Untitled%20design.png?alt=media&token=2887f049-f06b-4325-92a7-731855675228"
+                              : "https://firebasestorage.googleapis.com/v0/b/florida-77f94.appspot.com/o/Untitled%20design%20(1).png?alt=media&token=b14e90ef-b51c-4baf-ae2a-ada87141ed52"
                           }
                           className="img-op1"
                           preview={false}
-                          fallback="https://firebasestorage.googleapis.com/v0/b/florida-77f94.appspot.com/o/Untitled%20design.png?alt=media&token=2887f049-f06b-4325-92a7-731855675228"
+                          fallback="https://firebasestorage.googleapis.com/v0/b/florida-77f94.appspot.com/o/Untitled%20design%20(1).png?alt=media&token=b14e90ef-b51c-4baf-ae2a-ada87141ed52"
                           style={{
                             aspectRatio: "5/7.6",
                             objectFit: "cover",
