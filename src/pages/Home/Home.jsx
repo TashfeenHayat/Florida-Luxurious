@@ -48,7 +48,7 @@ function Home() {
           }} // Responsive video
         >
           <source
-             src="https://firebasestorage.googleapis.com/v0/b/florida-lux-e66c2.firebasestorage.app/o/unbranded%20full2.mp4?alt=media&token=0194dada-c17a-46f2-88af-0ef89f61a2cd"
+             src="https://firebasestorage.googleapis.com/v0/b/florida-lux-e66c2.firebasestorage.app/o/HOMES.mp4?alt=media&token=4256bff0-c138-491c-b79a-2f6eb88744a9"
             //src="https://firebasestorage.googleapis.com/v0/b/florida-lux-e66c2.firebasestorage.app/o/full%20unbranded.mp4?alt=media&token=de893177-97d9-4798-aed8-8a0f1d4a8567"
             //src="https://firebasestorage.googleapis.com/v0/b/floridaluxrious.appspot.com/o/HOMES.mp4?alt=media&token=d1a0cf50-6483-47fa-9a55-40d6ad68e2a6"
             type="video/mp4"
