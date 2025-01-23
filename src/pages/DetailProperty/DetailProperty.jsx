@@ -575,7 +575,7 @@ export default function DetailProperty() {
                       cursor: "pointer",
                     }}
                     width="100%"
-                    // fallback="https://placehold.co/272x215"
+                    fallback={SkeletonImage}
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
@@ -593,7 +593,7 @@ export default function DetailProperty() {
                     }}
                     preview
                     width="100%"
-                    // fallback="https://placehold.co/272x215"
+                    fallback={SkeletonImage}
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
@@ -611,7 +611,7 @@ export default function DetailProperty() {
                     }}
                     preview
                     width="100%"
-                    // fallback="https://placehold.co/272x215"
+                    fallback={SkeletonImage}
                   />
                 </Col>
                 <Col lg={12} sm={24} md={24}>
@@ -659,7 +659,7 @@ export default function DetailProperty() {
                               }}
                               preview
                               width="100%"
-                              // fallback="https://placehold.co/272x215"
+                             fallback={SkeletonImage}
                             />
                           </Col>
                         ))}
