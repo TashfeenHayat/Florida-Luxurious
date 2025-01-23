@@ -56,15 +56,15 @@ function FeatureListing() {
     responsive: [
       {
         breakpoint: 1440, // For large screens (desktops)
-        settings: { slidesToShow: 3, slidesToScroll: 1 },
+        settings: { slidesToShow: 2, slidesToScroll: 1 },
       },
       {
         breakpoint: 1300, // For large tablets and smaller desktops
         settings: { slidesToShow: 2, slidesToScroll: 1 },
       },
       {
-        breakpoint: 1024, // For tablets in landscape (iPad Air, iPad Mini)
-        settings: { slidesToShow: 2, slidesToScroll: 1 },
+        breakpoint: 1100, // For tablets in landscape (iPad Air, iPad Mini)
+        settings: { slidesToShow: 1, slidesToScroll: 1 },
       },
       {
         breakpoint: 850, // For smaller tablets in portrait mode
