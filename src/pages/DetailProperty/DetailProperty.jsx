@@ -802,15 +802,15 @@ export default function DetailProperty() {
                 </Row>
               </form>
             </Col>
-            <Col lg={10} md={24} sm={24}>
-              <div className="pt-5">
-                <div
-                  ref={mapRef}
-                  style={{ height: "500px", width: "39rem", maxWidth: "82vw" }}
-                />
-                ;
-              </div>
-            </Col>
+             <Col
+              xl={10}
+              lg={10}
+              md={24}
+              sm={32}
+              xsm={32}
+              ref={mapRef}
+              style={{ height: "500px", width: "100%" }}
+            ></Col>
           </Row>
         </Container>
       </div>
