@@ -2219,6 +2219,8 @@ body:focus-visible {
   .communities-grid {
     width: 22.3rem !important;
   }
- 
+ .our-story-bg {
+    z-index: 0 !important;
+  }
 
 }
