@@ -158,6 +158,14 @@ export default function DetailProperty() {
     }
 
     dispatch(contactUs(contact));
+ setContact({
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+      email: "",
+      message: "",
+      requestShowing: false, // Reset the checkbox as well
+    });
   };
 
   const validateForm = () => {
@@ -723,13 +731,12 @@ export default function DetailProperty() {
                 Interested in {data?.property?.addressLine1}{" "}
                 {data?.property?.addressLine2}?
               </Title>
-              <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                 <Row gutter={[8, 40]} className="detail-property">
                   <Col lg={12} md={12} sm={24}>
                     <Input
                       placeholder="First Name"
                       type="text"
-                      className="child1"
                       name="firstName"
                       value={contact.firstName}
                       onChange={handleChange}
@@ -777,7 +784,6 @@ export default function DetailProperty() {
                   </Col>
                   <Col lg={24} md={24}>
                     <Checkbox
-                      style={{ color: "white" }}
                       name="requestShowing"
                       checked={contact.requestShowing}
                       onChange={handleChange}
