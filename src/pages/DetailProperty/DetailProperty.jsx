@@ -731,7 +731,7 @@ export default function DetailProperty() {
                 Interested in {data?.property?.addressLine1}{" "}
                 {data?.property?.addressLine2}?
               </Title>
-                <form onSubmit={handleSubmit}>
+               <form onSubmit={handleSubmit}>
                 <Row gutter={[8, 40]} className="detail-property">
                   <Col lg={12} md={12} sm={24}>
                     <Input
