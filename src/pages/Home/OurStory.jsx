@@ -10,7 +10,7 @@ function OurStory() {
   return (
     <div className="boxshadow-section">
       <Row align="middle">
-        <Col lg={8} md={12} sm={12} xsm={12}>
+        <Col xl={6} lg={8} md={18} sm={12} xsm={12}>
           <div className="d-flex-story-center">
             <div
               className="our-story-bg p-5"
