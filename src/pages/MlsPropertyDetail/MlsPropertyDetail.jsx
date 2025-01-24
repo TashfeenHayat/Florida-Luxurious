@@ -493,6 +493,10 @@ export default function DetailProperty() {
                   <Col lg={12} md={12} sm={24}>
                     <Input placeholder="Phone" type="text" />
                   </Col>
+
+                  <Col lg={24} md={24}>
+                    <Input placeholder="Message" type="text" />
+                  </Col>
                   <Col lg={24} md={24}>
                     <Flex gap={10}>
                       <Checkbox />
@@ -500,9 +504,6 @@ export default function DetailProperty() {
                         Request A showing
                       </Text>
                     </Flex>
-                  </Col>
-                  <Col lg={24} md={24}>
-                    <Input placeholder="Message" type="text" />
                   </Col>
                   <Col lg={24} md={24} align="middle">
                     <Button classNam="button-secondary-line-left">
