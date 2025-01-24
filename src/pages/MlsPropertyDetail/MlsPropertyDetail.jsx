@@ -476,7 +476,7 @@ export default function DetailProperty() {
               </Title>
               <form>
                 {" "}
-                <Row gutter={[8, 40]} className="detail-property">
+                   <Row gutter={[20, 40]} className="detail-property">
                   <Col lg={12} md={12} sm={24}>
                     <Input
                       placeholder="First Name"
@@ -511,18 +511,6 @@ export default function DetailProperty() {
                     </Button>
                   </Col>
                 </Row>
-              </form>
-            </Col>
-            <Col lg={10} md={24} sm={24}>
-              <div className="pt-5">
-                <div
-                  ref={mapRef}
-                  style={{ height: "500px", width: "50rem", maxWidth: "82vw" }}
-                />
-                ;
-              </div>
-            </Col>
-          </Row>
         </Container>
       </div>
       <Flex
