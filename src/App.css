@@ -2207,9 +2207,12 @@ body:focus-visible {
   .responsive-table .ant-table-cell {
     text-align: right; /* Center text on small screens */
   }
-  .search-button::after{
-    display:none;
-    overflow:hidden;
+  .search-button::after {
+    display: none;
+    overflow: hidden;
+  }
+  .communities-grid {
+    width: 22.3rem !important;
   }
 }
 @media (max-width: 768px) {
@@ -2219,8 +2222,7 @@ body:focus-visible {
   .communities-grid {
     width: 22.3rem !important;
   }
- .our-story-bg {
+  .our-story-bg {
     z-index: 0 !important;
   }
-
 }
