@@ -2212,3 +2212,13 @@ body:focus-visible {
     overflow:hidden;
   }
 }
+@media (max-width: 768px) {
+  .slick-track {
+    gap: 0 !important;
+  }
+  .communities-grid {
+    width: 22.3rem !important;
+  }
+ 
+
+}
