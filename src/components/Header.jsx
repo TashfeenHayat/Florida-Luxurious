@@ -40,7 +40,7 @@ const Header = () => {
   };
 
   return (
-    <nav ref={navbar} id="navbar_main">
+    <nav ref={navbar} id="navbar_main" style={{ overflow: "hidden" }}>
       <Flex justify={"space-between"} align="center" gap={0}>
         <Link to="/" style={{ borderRight: "none", padding: "0px" }}>
           <Image src={Logo} width={"85%"} preview={false} />
