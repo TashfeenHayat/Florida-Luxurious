@@ -6,24 +6,28 @@ import Logo from "../../assets/logoicon.png";
 import { CiMap, CiPhone, CiMail } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { contactUs } from "../../api/Inquiry";
-import bootomvideo from "../../assets/videos/contactus.mp4";
+
 const { Title, Text } = Typography;
 
 function ContactUs() {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const { loading } = useSelector((s) => s.contactUsReducer);
+
   // Form validation rules
   const onFinish = (values) => {
     dispatch(contactUs(values));
+    console.log("success", form.resetFields());
     form.resetFields(); // This resets the form fields
   };
+
   const handlePhoneInput = (e) => {
     // Only allow numeric characters (0-9)
     if (!/[0-9]/.test(e.key)) {
       e.preventDefault();
     }
   };
+
   return (
     <>
       <div className="contact-us-banner"></div>
@@ -41,7 +45,7 @@ function ContactUs() {
                       <Text className="contact-us-title">Contact</Text>
                       <br />
                       <Text className="contact-us-sub f-100">us</Text>
-                      <i class="title-line"></i>
+                      <i className="title-line"></i>
                     </Title>
                     <Flex>
                       <Text className="text-upper f-16 f-bold ">
@@ -50,7 +54,7 @@ function ContactUs() {
                       </Text>
                     </Flex>
                   </Flex>
-                  <Form layout="vertical" onFinish={onFinish}>
+                  <Form form={form} layout="vertical" onFinish={onFinish}>
                     <Row gutter={[8, 16]} className="py-4">
                       <Col lg={12} md={12} sm={24}>
                         <Form.Item
@@ -75,7 +79,7 @@ function ContactUs() {
                           rules={[
                             {
                               required: true,
-                              message: "Please enter your first name!",
+                              message: "Please enter your last name!",
                             },
                           ]}
                         >
@@ -207,8 +211,7 @@ function ContactUs() {
         <div className="background-video-container" style={{ height: "70vh" }}>
           <video autoPlay muted loop className="background-video">
             <source
-              src="https://firebasestorage.googleapis.com/v0/b/florida-lux-e66c2.firebasestorage.app/o/short2.mp4?alt=media&token=8b881d1d-dd33-4910-b460-f33c5ef3d688"
-              //src="https://firebasestorage.googleapis.com/v0/b/floridaluxrious.appspot.com/o/contactus.mp4?alt=media&token=e7a90eec-4b56-4882-b2b2-04697ad777f2"
+              src="https://firebasestorage.googleapis.com/v0/b/florida-lux-e66c2.firebasestorage.app/o/contactus.mp4?alt=media&token=77547d74-277e-4285-9725-561eb49e27d3"
               type="video/mp4"
             />
           </video>
