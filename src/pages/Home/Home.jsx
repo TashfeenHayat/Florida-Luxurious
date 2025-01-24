@@ -136,7 +136,7 @@ function Home() {
           </motion.div>
         </div>
       </div>
-
+<div style={{ overflow: "hidden" }}>
       <Icons />
       <FloridaProperties />
       <RecognitionSlide />
@@ -145,6 +145,7 @@ function Home() {
       <OurStory />
       <Team />
       <LetTalk />
+   </div>
     </>
   );
 }
