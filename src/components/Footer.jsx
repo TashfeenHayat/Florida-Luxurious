@@ -38,7 +38,11 @@ function Footer() {
 
   const handleSubmit = () => {
     dispatch(contactUs(formData));
-    setFormData({});
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+    });
   };
 
   return (
@@ -67,6 +71,7 @@ function Footer() {
                       <Link
                         className="text-upper f-14 text-black"
                         style={{ textDecoration: "none" }}
+                        to="/all-communities"
                       >
                         Featured Communities
                       </Link>
@@ -290,12 +295,14 @@ function Footer() {
                       name="firstName"
                       placeholder="Your First Name"
                       style={{ borderRadius: "0px" }}
+                      value={formData.firstName}
                       onChange={handleChange}
                     />
                     <Input
                       name="lastName"
                       placeholder="Your Last Name"
                       style={{ borderRadius: "0px" }}
+                      value={formData.lastName}
                       onChange={handleChange}
                     />
                   </Flex>
@@ -304,6 +311,7 @@ function Footer() {
                       name="email"
                       placeholder="Your Email Address"
                       style={{ borderRadius: "0px" }}
+                      value={formData.email}
                       onChange={handleChange}
                     />
                     <Button
