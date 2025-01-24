@@ -122,7 +122,7 @@ function Comunities() {
           </div>
           <div style={{ background: "black" }} className="py-5">
             <Container>
-              <Row gutter={[60, 60]}>
+                <Row gutter={[20, 40]}>
                 <Col lg={12} md={24} sm={24}>
                   <Title className="text-white f-32 f-bold text-upper">
                     Why choose {data?.name}?
@@ -131,12 +131,14 @@ function Comunities() {
                     {data?.other_description}
                   </Text>
                 </Col>
-                <Col lg={12} md={24} sm={24}>
-                  <div
-                    ref={mapRef}
-                    style={{ height: "300px", width: "100%" }}
-                  />
-                </Col>
+                <Col
+                  lg={12}
+                  md={38}
+                  sm={38}
+                  xsm={38}
+                  ref={mapRef}
+                  style={{ height: "300px", width: "100%" }}
+                ></Col>
               </Row>
             </Container>
           </div>
