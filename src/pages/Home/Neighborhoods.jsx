@@ -23,16 +23,26 @@ function Neighborhoods() {
           <Spin size="large" />
         </div>
       ) : (
-        <Row gutter={[9, 9]} className="px-4">
+        <Row gutter={[8, 8]} className="px-4" style={{ overflow: "hidden" }}>
           <Col xl={6} lg={8} md={12} sm={12} xs={24}>
-            <div className="displayy-teamimg-center show-btn-community-home">
-              <div style={{ background: "black" }} className="communities-grid">
+            <div
+              className="displayy-teamimg-center show-btn-community-home"
+              style={{ overflow: "hidden" }}
+            >
+              <div
+                style={{ background: "black", overflow: "hidden" }}
+                className="communities-grid"
+              >
                 <div
                   style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "0%",
+                    // position: "absolute",
+                    // top: "50%",
+                    // left: "0%",
                     width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    overflow: "hidden",
                   }}
                 >
                   <div
@@ -54,8 +64,19 @@ function Neighborhoods() {
           </Col>
 
           {displayedCommunities.map((community, index) => (
-            <Col xl={6} lg={32} md={12} sm={12} xs={24} key={index}>
-              <div className="displayy-teamimg-center show-btn-community-home">
+            <Col
+              xl={6}
+              lg={32}
+              md={12}
+              sm={12}
+              xs={24}
+              key={index}
+              style={{ overflow: "hidden" }}
+            >
+              <div
+                className="displayy-teamimg-center show-btn-community-home"
+                style={{ overflow: "hidden" }}
+              >
                 <img
                   src={community?.photo}
                   width="100%"
@@ -65,10 +86,15 @@ function Neighborhoods() {
                 <div
                   className="show-info"
                   style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "0%",
+                    // position: "absolute",
+                    // top: "50%",
+                    // left: "0%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    justifyItems: "center",
                     width: "100%",
+                    overflow: "hidden",
                   }}
                 >
                   <div
@@ -117,14 +143,24 @@ function Neighborhoods() {
             onClick={() => navigate("/all-communities")}
             style={{ cursor: "pointer" }}
           >
-            <div className="displayy-teamimg-center show-btn-community-home">
-              <div style={{ background: "black" }} className="communities-grid">
+            <div
+              className="displayy-teamimg-center show-btn-community-home"
+              style={{ overflow: "hidden" }}
+            >
+              <div
+                style={{ background: "black", overflow: "hidden" }}
+                className="communities-grid"
+              >
                 <div
                   style={{
-                    position: "relative",
-                    top: "50%",
-                    left: "0%",
+                    // position: "relative",
+                    // top: "50%",
+                    // left: "0%",
                     width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    justifyItems: "center",
                   }}
                 >
                   <div
@@ -147,6 +183,6 @@ function Neighborhoods() {
       )}
     </div>
   );
-} 
+}
 
 export default Neighborhoods;

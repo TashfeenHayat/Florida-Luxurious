@@ -24,6 +24,7 @@ function FeatureListing() {
           ...style,
           display: "block",
           zIndex: 10,
+          left: "20px", // Adjusted left position
         }}
         onClick={onClick}
       >

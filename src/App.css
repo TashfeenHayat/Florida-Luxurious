@@ -1109,7 +1109,7 @@ body:focus-visible {
     font-size: 9px;
   }
   .communities-grid {
-    width: 22rem !important;
+    width: 22.3rem !important;
   }
   .florida_info {
     display: flex !important;
@@ -1312,7 +1312,7 @@ body:focus-visible {
     display: none !important;
   }
   .f-64 {
-    font-size: 48px !important;
+    font-size: 42px !important;
   }
   .f-40 {
     font-size: 25px !important;
@@ -1345,6 +1345,19 @@ body:focus-visible {
   .detail-property .ant-input {
     width: 317px !important;
   }
+  .slick-track {
+    gap: 0 !important;
+  }
+  .communities-grid {
+    width: 22.3rem !important;
+  }
+  .our-story-bg {
+    z-index: 0 !important;
+  }
+  .footer-logo {
+    display: none;
+  }
+
   /*.ant-row {
     display: flex;
     flex-flow: column;
@@ -1538,7 +1551,7 @@ body:focus-visible {
   background-repeat: no-repeat;
   background-size: cover;
 }
-..button-view {
+.button-view {
   padding: 9px !important;
 }
 /* Property Deatil */
@@ -2109,6 +2122,10 @@ body:focus-visible {
   min-height: 240px;
 
   height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
 }
 .ant-input-group-addon .ant-btn {
   background-color: #000;
@@ -2181,10 +2198,14 @@ body:focus-visible {
 
 /* Style for the slider overlay */
 .slider-overlay {
-  position: absolute;
+  /* position: absolute; */
   bottom: 20px;
-  left: 20px;
+  /* left: 20px; */
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: center;
 }
 
 /* Make the 'See All Neighborhoods' button responsive */
@@ -2203,7 +2224,7 @@ body:focus-visible {
   text-align: left; /* Default for larger screens */
 }
 
-@media (max-width: 576px) {
+@media screen and (576px <= width) {
   .responsive-table .ant-table-cell {
     text-align: right; /* Center text on small screens */
   }
@@ -2211,18 +2232,12 @@ body:focus-visible {
     display: none;
     overflow: hidden;
   }
-  .communities-grid {
-    width: 22.3rem !important;
+  .f-24 {
+    font-size: 22px !important;
   }
+  /* .communities-grid {
+    width: 22.3rem !important;
+  } */
 }
 @media (max-width: 768px) {
-  .slick-track {
-    gap: 0 !important;
-  }
-  .communities-grid {
-    width: 22.3rem !important;
-  }
-  .our-story-bg {
-    z-index: 0 !important;
-  }
 }

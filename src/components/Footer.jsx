@@ -49,14 +49,17 @@ function Footer() {
     <div className="bg-footer">
       <div className="footer-bg-img-shadow">
         <Row align={""}>
-          <Col span={6} align="">
+          <Col span={6} md={6} sm={0} xsm={0} className="footer-logo" align="">
             <Image src={FooterLogo} width="60%" preview={false} />
           </Col>
           <Col span={18}>
             <Row>
               <Col lg={16}>
                 <Row gutter={[20, 40]}>
-                  <Col lg={12}>
+                  <Col lg={0} xlg={0} md={18} sm={32} xsm={32} align="">
+                    <Image src={FooterLogo} width="60%" preview={false} />
+                  </Col>
+                  <Col lg={12} xlg={6} md={18} sm={32} xsm={32}>
                     <Text className="text-upper f-24 f-bold">
                       our offerings
                     </Text>
