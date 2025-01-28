@@ -20,7 +20,12 @@ function MeetTeam() {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", zIndex: 10, right: "50rem" }} // Adjusted left position
+        style={{
+          ...style,
+          display: "block",
+          zIndex: 10,
+          left: "-2rem",
+        }} // Adjusted left position
         onClick={onClick}
       >
         <img src={BackArrow} alt="Previous" width="45px" />
@@ -33,7 +38,12 @@ function MeetTeam() {
     return (
       <div
         className={className}
-        style={{ ...style, display: "block", zIndex: 10, left: "82rem" }} // Adjusted right position
+        style={{
+          ...style,
+          display: "block",
+          zIndex: 10,
+          left: "81rem",
+        }} // Adjusted right position
         onClick={onClick}
       >
         <img src={NextArrow} alt="Next" width="45px" />
@@ -113,7 +123,7 @@ function MeetTeam() {
                   className="slider-container team-section"
                   style={{
                     marginTop: "65px",
-                    // marginBottom: "65px",
+                    marginBottom: "65px",
                     cursor: "pointer",
                     //backgroundColor: "hsl(0, 0%, 90%)",
                   }}

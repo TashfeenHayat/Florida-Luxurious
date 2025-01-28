@@ -21,8 +21,9 @@ export default function Login() {
     const res = await dispatch(signInAdmin(values)).unwrap();
     if (res.token) {
       navigate("/admin/dashboard");
+      window.location.reload();
     }
-  }
+  };
 
   const styles = {
     container: {

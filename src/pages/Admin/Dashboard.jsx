@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { Layout, Menu, Button, theme, Avatar, Dropdown,  notification } from "antd";
+import {
+  Layout,
+  Menu,
+  Button,
+  theme,
+  Avatar,
+  Dropdown,
+  notification,
+} from "antd";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -16,6 +24,7 @@ import {
   StarOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { customAxios } from "../../api/Axios";
 const { Header, Sider, Content } = Layout;
 
 function Dashboard() {
@@ -46,7 +55,7 @@ function Dashboard() {
       navigate("/admin/login");
     }
   }, [navigate]);
- const handleMenu = async (e) => {
+  const handleMenu = async (e) => {
     switch (e.key) {
       case "2":
         try {

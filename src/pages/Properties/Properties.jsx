@@ -15,12 +15,8 @@ const { Title, Text } = Typography;
 function Properties() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  const { data, isLoading } = useProperties(
-    null,
-    itemsPerPage,
-    currentPage,
-    "for_sale"
-  );
+  const { data, isLoading } = useProperties(null, null, null, "for_sale");
+  console.log("ser", data);
   // const pageVariants = {
   //   initial: { opacity: 0, x: 100 },
   //   animate: { opacity: 1, x: 0 },
@@ -50,11 +46,20 @@ function Properties() {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  //Sorted highest to lowest
   const sortedProperties = data?.properties?.slice().sort((a, b) => {
     const priceA = Number(a?.salePrice?.slice(1).replace(/,/g, "") || 0);
     const priceB = Number(b?.salePrice?.slice(1).replace(/,/g, "") || 0);
     return priceB - priceA;
   });
+  console.log("data sorted", sortedProperties);
+  // Slice the data based on current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentProperties = sortedProperties?.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
   return (
     <>
       <BackgroundImage Image={FeaturedPropertiesImage} style={"back"}>
@@ -75,7 +80,7 @@ function Properties() {
       ) : (
         <Container className="pt-98 pb-98">
           <Row gutter={[60, 60]}>
-            {sortedProperties?.map((property, index) => (
+            {currentProperties?.map((property, index) => (
               <Col
                 lg={12}
                 md={12}
@@ -131,7 +136,8 @@ function Properties() {
                           {property?.currency} */}
                           {Number(
                             property?.salePrice?.slice(1).replace(/,/g, "") || 0
-                          ).toLocaleString()}
+                          ).toLocaleString()}{" "}
+                          {property?.currency}
                         </Text>
                       </Flex>
                       {/* <Flex vertical>
@@ -167,18 +173,18 @@ function Properties() {
               </Col>
             ))}
           </Row>
-          {data?.properties.length === 0 ? null : (
-            <Flex justify={"center"} align="center" className="my-4">
-              <Pagination
-                defaultCurrent={1}
-                total={data?.totalCount}
-                pageSize={itemsPerPage}
-                onChange={handlePageChange}
-                responsive
-                current={currentPage}
-              />
-            </Flex>
-          )}
+
+          <Flex justify={"center"} align="center" className="my-4">
+            <Pagination
+              defaultCurrent={1}
+              current={currentPage}
+              total={data?.properties?.length || 0} // Total number of properties
+              pageSize={itemsPerPage} // Number of properties per page
+              onChange={handlePageChange} // Handle page change
+              responsive
+            />
+          </Flex>
+
           {!isLoading && data?.properties.length === 0 && (
             <Title>No Property Listed</Title>
           )}

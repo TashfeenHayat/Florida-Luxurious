@@ -1,9 +1,9 @@
 import axios from "axios";
 
-//export const api_base_URL = "http://localhost:3002/v1/";
+export const api_base_URL = "http://localhost:3002/v1/";
 
 //export const api_base_URL = "https://florida-lux-api.onrender.com/v1/";
-export const api_base_URL ="https://florida-lux-api-production.up.railway.app/v1/";
+//export const api_base_URL ="https://florida-lux-api-production.up.railway.app/v1/";
 // export const api_base_URL = "https://florida-lux-back.waveio.site/v1/";
 //export const api_base_URL = "https://florida-lux-nodejs.onrender.com/v1/";
 export const customAxios = axios.create({
@@ -27,7 +27,6 @@ customAxios.interceptors.response.use(
     } else if (error.response.status === 500) {
       window.location.href = "/500";
     }
-    
   }
 );
 

@@ -19,12 +19,13 @@ function FeatureListing() {
     const { className, style, onClick } = props;
     return (
       <div
-        className={className}
+        className={`${className} "prev-arrow"`}
         style={{
           ...style,
           display: "block",
           zIndex: 10,
-          left: "20px", // Adjusted left position
+
+          width: "35px", // Adjusted left position
         }}
         onClick={onClick}
       >
@@ -37,8 +38,14 @@ function FeatureListing() {
     const { className, style, onClick } = props;
     return (
       <div
-        className={className}
-        style={{ ...style, display: "block", zIndex: 10 }}
+        className={` ${className} "next-arrow"`}
+        style={{
+          ...style,
+          display: "block",
+          zIndex: 10,
+
+          width: "35px",
+        }}
         onClick={onClick}
       >
         <img src={NextArrow} alt="Next" width="45px" />
@@ -90,8 +97,9 @@ function FeatureListing() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          prevArrow: false,
-          nextArrow: false,
+
+          prevArrow: <CustomPrevArrow />,
+          nextArrow: <CustomNextArrow />,
           centerMode: true,
           centerPadding: "0",
         },
@@ -101,9 +109,10 @@ function FeatureListing() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          prevArrow: false,
-          nextArrow: false,
+
           centerMode: true,
+          prevArrow: <CustomPrevArrow />,
+          nextArrow: <CustomNextArrow />,
           centerPadding: "0",
         },
       },
@@ -112,8 +121,9 @@ function FeatureListing() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          prevArrow: false,
-          nextArrow: false,
+
+          prevArrow: <CustomPrevArrow />,
+          nextArrow: <CustomNextArrow />,
           centerMode: true,
           centerPadding: "0",
         },
