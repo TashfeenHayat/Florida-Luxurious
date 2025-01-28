@@ -47,16 +47,16 @@ function OurStory() {
               </Flex>
               <Flex vertical style={{ marginTop: "20px" }}>
                 <Text className="our-story-text f-100 f-16 text-white text-left">
-                  In alignment with private banking, wealth and other highly
-                  individualized services which provide a greater level of
-                  attention and customer satisfaction, we offer the same
-                  discreet approach to Buyers and Sellers of luxurious
-                  properties. As an assertive, entrepreneurial team with a broad
-                  expertise in servicing the needs of our clientele we
+                  In alignment with private banking, wealth management, and
+                  other highly individualized services that provide a greater
+                  level of attention and customer satisfaction, we offer the
+                  same discreet approach to buyers and sellers of luxurious
+                  properties. As an assertive, entrepreneurial team with broad
+                  expertise in servicing the needs of our clientele, we
                   consistently achieve top sales results in Broward’s luxury
                   market. To better facilitate the needs of our clients, we have
-                  Agents fluent in Italian, Portuguese, Russian, Spanish,
-                  Romanian,Polish,Hebrew and Turkish.
+                  agents fluent in Italian, Portuguese, Russian, Spanish,
+                  Romanian, Hebrew, Polish, and Turkish.
                 </Text>
                 <button
                   className="button-secondary text-upper mt-32"
