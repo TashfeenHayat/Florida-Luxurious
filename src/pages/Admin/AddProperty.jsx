@@ -505,7 +505,7 @@ function AddProperty() {
                 label="Name"
                 rules={[
                   {
-                    required: true,
+                    // required: true,
                     message: "Name is required",
                   },
                 ]}
@@ -733,7 +733,7 @@ function AddProperty() {
                   placeholder="Reduced Price"
                   rules={[
                     {
-                      required: true,
+                      // required: true,
                       message: "Price is required",
                     },
                   ]}
@@ -748,7 +748,7 @@ function AddProperty() {
                   showTime={false}
                   rules={[
                     {
-                      required: true,
+                      // required: true,
                       message: "Built Year is required",
                     },
                   ]}
@@ -765,7 +765,7 @@ function AddProperty() {
                   placeholder="Foundation"
                   rules={[
                     {
-                      required: true,
+                      // required: true,
                       message: "Foundation is required",
                     },
                   ]}
@@ -777,7 +777,7 @@ function AddProperty() {
                   label="Bedroom Count"
                   rules={[
                     {
-                      required: true,
+                      // required: true,
                       message: "Bedroom Count is required",
                     },
                   ]}
@@ -790,7 +790,7 @@ function AddProperty() {
                   placeholder="Bathroom Count"
                   rules={[
                     {
-                      required: true,
+                      // required: true,
                       message: "Bathroom Count is required",
                     },
                   ]}
@@ -803,7 +803,7 @@ function AddProperty() {
                   placeholder="Stories"
                   rules={[
                     {
-                      required: true,
+                      // required: true,
                       message: "Stories is required",
                     },
                   ]}
@@ -815,7 +815,7 @@ function AddProperty() {
                   label="Roof"
                   rules={[
                     {
-                      required: true,
+                      // required: true,
                       message: "Roof is required",
                     },
                   ]}
@@ -828,7 +828,7 @@ function AddProperty() {
                   placeholder="Flooring"
                   rules={[
                     {
-                      required: true,
+                      // required: true,
                       message: "Flooring is required",
                     },
                   ]}
@@ -841,7 +841,7 @@ function AddProperty() {
                   placeholder="Cooling"
                   rules={[
                     {
-                      required: true,
+                      // required: true,
                       message: "Cooling is required",
                     },
                   ]}
@@ -854,7 +854,7 @@ function AddProperty() {
                   placeholder="Heating"
                   rules={[
                     {
-                      required: true,
+                      // required: true,
                       message: "Heating is required",
                     },
                   ]}
@@ -867,7 +867,7 @@ function AddProperty() {
                   placeholder="Water Front"
                   rules={[
                     {
-                      required: true,
+                      // required: true,
                       message: "Water Front is required",
                     },
                   ]}
@@ -880,7 +880,7 @@ function AddProperty() {
                   placeholder="Style"
                   rules={[
                     {
-                      required: true,
+                      // required: true,
                       message: "Style is required",
                     },
                   ]}
@@ -893,7 +893,7 @@ function AddProperty() {
                   placeholder="Pool"
                   rules={[
                     {
-                      required: true,
+                      // required: true,
                       message: "Pool is required",
                     },
                   ]}
@@ -906,7 +906,7 @@ function AddProperty() {
                   placeholder="Parking"
                   rules={[
                     {
-                      required: true,
+                      // required: true,
                       message: "Parking is required",
                     },
                   ]}

@@ -9,11 +9,46 @@ import { Container } from "react-bootstrap";
 import useProperties from "../../hooks/useProperties";
 
 const { Text, Paragraph } = Typography;
-
+const status = "for_sale";
 function FeatureListing() {
-  const { data, isLoading } = useProperties(null, 30, 1, "for_sale");
+  const { data, isLoading } = useProperties(null, null, 1, status);
 
   const navigate = useNavigate();
+  const currencySymbols = {
+    usd: "$",
+    eur: "€",
+    pound: "£",
+    // Add more currencies as needed
+  };
+
+  // Function to format price (remove unwanted characters, add commas)
+  const formatPrice = (price) => {
+    // Remove all non-numeric characters except for dot
+    const numericPrice = parseFloat(price.replace(/[^0-9.]/g, ""));
+    if (isNaN(numericPrice)) return "N/A"; // Return "N/A" if price is invalid
+
+    // Return the formatted price with commas
+    return numericPrice.toLocaleString("en-US");
+  };
+
+  // Function to get the correct currency symbol
+  const getCurrencySymbol = (currencyCode) => {
+    return (
+      currencySymbols[currencyCode.toLowerCase()] || currencyCode.toUpperCase()
+    ); // Default to currency code if no symbol found
+  };
+
+  //Sorted highest to lowest
+  const sortedProperties = data?.properties
+    ?.slice() // Create a shallow copy of the properties array
+    .sort((a, b) => {
+      const priceA = Number(a?.salePrice?.slice(1).replace(/,/g, "") || 0);
+      const priceB = Number(b?.salePrice?.slice(1).replace(/,/g, "") || 0);
+      return priceB - priceA;
+    })
+    .slice(0, 30);
+
+  console.log("data sorted", sortedProperties);
 
   const CustomPrevArrow = (props) => {
     const { className, style, onClick } = props;
@@ -175,7 +210,7 @@ function FeatureListing() {
             data-aos-duration="2000"
           >
             <Slider {...settings}>
-              {data?.properties?.map((property, index) => (
+              {sortedProperties?.map((property, index) => (
                 <div
                   key={index}
                   className="displayy-teamimg-center"
@@ -235,7 +270,9 @@ function FeatureListing() {
                         >
                           {property?.addressLine1} {property?.addressLine2}
                           <br />
-                          <IoPricetagOutline size={20} /> {property.salePrice}
+                          <IoPricetagOutline size={20} />{" "}
+                          {getCurrencySymbol(property?.currency)}
+                          {formatPrice(property.salePrice)}
                         </Text>
                       </Flex>
                     </Flex>

@@ -3,7 +3,7 @@ import BackgroundImage from "../../components/BackgroundImage";
 import BoatImage from "../../assets/boatowner.png";
 import { Container } from "react-bootstrap";
 import { Col, Row, Typography, Flex, Spin, Pagination } from "antd";
-import Property from "../../assets/property.png";
+
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 import useProperties from "../../hooks/useProperties";
 import { useParams, useNavigate } from "react-router";
@@ -12,15 +12,45 @@ const { Title, Text, Paragraph } = Typography;
 function AgentSold() {
   const { id, name } = useParams();
   const [page, setPage] = useState(1);
-  const navigate = useNavigate();
+
   const itemsPerPage = 6;
   const status = "sold";
-  const { data, isLoading } = useProperties(id, itemsPerPage, page, status);
+  const { data, isLoading } = useProperties(id, null, null, status);
   console.log(data?.properties, "sold");
   const handlePageChange = (page) => {
     setPage(page);
   };
+  const currencySymbols = {
+    usd: "$",
+    eur: "€",
+    pound: "£",
+  };
 
+  const formatPrice = (price) => {
+    const numericPrice = parseFloat(price.replace(/[^0-9.]/g, ""));
+    if (isNaN(numericPrice)) return "N/A"; // Return "N/A" if price is invalid
+
+    // Return the formatted price with commas
+    return numericPrice.toLocaleString("en-US");
+  };
+
+  // Function to get the correct currency symbol
+  const getCurrencySymbol = (currencyCode) => {
+    return (
+      currencySymbols[currencyCode.toLowerCase()] || currencyCode.toUpperCase()
+    ); // Default to currency code if no symbol found
+  };
+  const sortedProperties = data?.properties?.slice().sort((a, b) => {
+    const priceA = Number(a?.salePrice?.slice(1).replace(/,/g, "") || 0);
+    const priceB = Number(b?.salePrice?.slice(1).replace(/,/g, "") || 0);
+    return priceB - priceA;
+  });
+  const startIndex = (page - 1) * itemsPerPage;
+
+  const currentProperties = sortedProperties?.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
   return (
     <div>
       {" "}
@@ -43,7 +73,7 @@ function AgentSold() {
           />
         ) : (
           <Row gutter={[60, 60]}>
-            {data?.properties.map((properties, index) => (
+            {currentProperties.map((properties, index) => (
               <Col lg={12} md={12} sm={24}>
                 <div className="displayy-teamimg-center">
                   <img
@@ -52,6 +82,7 @@ function AgentSold() {
                       "https://placehold.co/618x489"
                     }
                     width="100%"
+                    style={{ aspectRatio: "5/4" }}
                     className=""
                   />
                   <div className="more-info-property">
@@ -80,7 +111,8 @@ function AgentSold() {
                           last list price
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          $ {properties?.salePrice}
+                          {getCurrencySymbol(properties?.currency)}
+                          {formatPrice(properties?.salePrice)}
                         </Text>
                       </Flex>
                       <Flex vertical>
@@ -136,9 +168,11 @@ function AgentSold() {
                       <Flex>
                         <IoLocationOutline color="white" size={20} />
                         <Text className="f-14 f-bold text-white">
-                          {properties?.addressLine1} <br />
-                          <IoPricetagOutline size={20} /> ${" "}
-                          {properties?.salePrice}
+                          {properties?.addressLine1} {properties?.addressLine2}{" "}
+                          <br />
+                          <IoPricetagOutline size={20} />{" "}
+                          {getCurrencySymbol(properties?.currency)}
+                          {formatPrice(properties?.salePrice)}
                         </Text>
                       </Flex>
                     </Flex>

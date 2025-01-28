@@ -885,6 +885,7 @@ body:focus-visible {
 
   background-repeat: no-repeat;
   -webkit-filter: grayscale(1);
+
   opacity: 0.9;
 }
 .footer-bg-img-shadow {
@@ -1074,9 +1075,9 @@ body:focus-visible {
   border-radius: 0px;
   margin-top: -90px;
 }
-.global {
+/* .global {
   marginleft: 50;
-}
+} */
 .detail-container {
   display: none;
 }
@@ -2233,13 +2234,13 @@ body:focus-visible {
   background-color: transparent !important;
 }
 .responsive-table .ant-table-cell {
-  text-align: left; /* Default for larger screens */
+  text-align: left;
 }
 
 @media screen and (576px <= width) {
-  .responsive-table .ant-table-cell {
-    text-align: right; /* Center text on small screens */
-  }
+  /* .responsive-table .ant-table-cell {
+    text-align: right; /* Center text on small screens 
+  } */
   .search-button::after {
     display: none;
     overflow: hidden;

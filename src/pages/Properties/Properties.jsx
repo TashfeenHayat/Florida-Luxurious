@@ -46,6 +46,37 @@ function Properties() {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+  // const formatPrice = (price) => {
+  //   if (!price || isNaN(price.toString().replace(/[^0-9.]/g, ""))) return "N/A"; // Handle invalid cases
+
+  //   // Remove existing $ sign and convert to number
+  //   const numericPrice = Number(price.toString().replace(/[^0-9.]/g, ""));
+
+  //   return `${numericPrice.toLocaleString("en-US")}`;
+  // };
+  const currencySymbols = {
+    usd: "$",
+    eur: "€",
+    pound: "£",
+    // Add more currencies as needed
+  };
+
+  // Function to format price (remove unwanted characters, add commas)
+  const formatPrice = (price) => {
+    // Remove all non-numeric characters except for dot
+    const numericPrice = parseFloat(price.replace(/[^0-9.]/g, ""));
+    if (isNaN(numericPrice)) return "N/A"; // Return "N/A" if price is invalid
+
+    // Return the formatted price with commas
+    return numericPrice.toLocaleString("en-US");
+  };
+
+  // Function to get the correct currency symbol
+  const getCurrencySymbol = (currencyCode) => {
+    return (
+      currencySymbols[currencyCode.toLowerCase()] || currencyCode.toUpperCase()
+    ); // Default to currency code if no symbol found
+  };
 
   //Sorted highest to lowest
   const sortedProperties = data?.properties?.slice().sort((a, b) => {
@@ -127,17 +158,20 @@ function Properties() {
                           last list price
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                          $ {/*property?.salePrice.slice(1).replace(/,/g, "")*/}
+                          {/*property?.salePrice.slice(1).replace(/,/g, "")*/}
                           {/*                           
 
                           {/*                          
  
                           &nbsp;
                           {property?.currency} */}
-                          {Number(
+                          {/* {Number(
                             property?.salePrice?.slice(1).replace(/,/g, "") || 0
-                          ).toLocaleString()}{" "}
-                          {property?.currency}
+                          ).toLocaleString()}{" "} */}
+                          {/* {formatPrice(property?.salePrice)}
+                          {property?.currency} */}
+                          {getCurrencySymbol(property?.currency)}
+                          {formatPrice(property?.salePrice)}
                         </Text>
                       </Flex>
                       {/* <Flex vertical>
@@ -163,8 +197,10 @@ function Properties() {
                         >
                           {property?.addressLine1} {property?.addressLine2}{" "}
                           <br />
-                          <IoPricetagOutline size={20} /> $
-                          {property?.salePrice?.slice(1).replace(/,/g, "") || 0}
+                          <IoPricetagOutline size={20} />
+                          {getCurrencySymbol(property?.currency)}
+                          {formatPrice(property?.salePrice)}
+                          {/* {property?.salePrice?.slice(1).replace(/,/g, "") || 0} */}
                         </Text>
                       </Flex>
                     </Flex>

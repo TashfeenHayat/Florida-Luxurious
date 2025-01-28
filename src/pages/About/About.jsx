@@ -71,7 +71,7 @@ function OurStory() {
             of our clientele we consistently achieve top sales results in
             Broward’s luxury market. To better facilitate the needs of our
             clients, we have Agents fluent in Italian, Portuguese, Russian,
-            Spanish,Romanian,Hebrew,Polish and Turkish .
+            Spanish, Romanian, Hebrew, Polish and Turkish .
           </Paragraph>
         </Col>
         <Col lg={14} sm={24} md={24} style={{ background: "#000" }}>

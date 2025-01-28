@@ -12,14 +12,9 @@ const { Title, Text } = Typography;
 
 function SoldProperties() {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4; // Number of items to display per page
+  const itemsPerPage = 6;
 
-  const { data, isLoading } = useProperties(
-    null,
-    itemsPerPage,
-    currentPage,
-    "sold"
-  );
+  const { data, isLoading } = useProperties(null, null, currentPage, "sold");
 
   const navigate = useNavigate();
   //console.log(data);
@@ -43,18 +38,34 @@ function SoldProperties() {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-   const formatPrice = (price) => {
-    // Check if price is valid and does not start with a dollar sign
-    if (price && !price.startsWith("$")) {
-      return `$${price}`; // Prepend dollar sign if not present
-    }
-    return price; // Return the price as is if it already contains a dollar sign
+  const currencySymbols = {
+    usd: "$",
+    eur: "€",
+    pound: "£",
+  }
+  const formatPrice = (price) => {
+    if (!price || isNaN(price.toString().replace(/[^0-9.]/g, ""))) return "N/A"; 
+
+  
+    const numericPrice = Number(price.toString().replace(/[^0-9.]/g, ""));
+
+    return `${numericPrice.toLocaleString("en-US")}`;
+  };
+  const getCurrencySymbol = (currencyCode) => {
+    return (
+      currencySymbols[currencyCode.toLowerCase()] || currencyCode.toUpperCase()
+    ); 
   };
   const sortedProperties = data?.properties?.slice().sort((a, b) => {
     const priceA = Number(a?.salePrice?.slice(1).replace(/,/g, "") || 0);
     const priceB = Number(b?.salePrice?.slice(1).replace(/,/g, "") || 0);
     return priceB - priceA;
   });
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentProperties = sortedProperties?.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
   console.log(sortedProperties);
   return (
     <>
@@ -74,7 +85,7 @@ function SoldProperties() {
           />
         ) : (
           <Row gutter={[60, 60]}>
-            {sortedProperties?.map((property, index) => (
+            {currentProperties?.map((property, index) => (
               <Col lg={12} md={12} sm={24} key={index}>
                 <div className="displayy-teamimg-center">
                   <Image
@@ -87,7 +98,6 @@ function SoldProperties() {
                     className=""
                     fallback="https://placehold.co/618x489"
                     preview={false}
-                    style={{ aspectRatio: 5 / 4 }}
                   />
                   <div className="more-info-property">
                     <Flex
@@ -115,8 +125,11 @@ function SoldProperties() {
                           last list price
                         </Text>
                         <Text className="text-center text-upper f-24 f-100 text-gray">
-                        {formatPrice(property.salePrice)}
+                          {getCurrencySymbol(property.currency)}
+                          {formatPrice(property?.salePrice)}
 
+                          {/* {formatPrice(property.salePrice)}
+                          {property.currency} */}
                         </Text>
                       </Flex>
                       {/* <Flex vertical>
@@ -166,8 +179,9 @@ function SoldProperties() {
                         <IoLocationOutline color="white" size={20} />
                         <Text className="f-14 f-bold text-white">
                           {property.addressLine1} {property.addressLine2} <br />
-                          <IoPricetagOutline size={20} />{formatPrice(property.salePrice)}
-
+                          <IoPricetagOutline size={20} />
+                          {getCurrencySymbol(property.currency)}{" "}
+                          {formatPrice(property.salePrice)}
                         </Text>
                       </Flex>
                     </Flex>
@@ -181,7 +195,8 @@ function SoldProperties() {
           {data?.properties?.length === 0 ? null : (
             <Pagination
               defaultCurrent={1}
-              total={data?.totalCount}
+              current={currentPage}
+              total={data?.properties?.length || 0}
               pageSize={itemsPerPage}
               onChange={handlePageChange}
             />

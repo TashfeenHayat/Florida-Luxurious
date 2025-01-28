@@ -158,7 +158,7 @@ export default function DetailProperty() {
     }
 
     dispatch(contactUs(contact));
- setContact({
+    setContact({
       firstName: "",
       lastName: "",
       phoneNumber: "",
@@ -176,7 +176,31 @@ export default function DetailProperty() {
     }
     return true;
   };
+  const currencySymbols = {
+    usd: "$",
+    eur: "€",
+    pound: "£",
+    // Add more currencies as needed
+  };
 
+  const formatPrice = (price) => {
+    if (typeof price !== "string") {
+      return "N/A"; // Or handle it however you prefer
+    }
+    const numericPrice = parseFloat(price.replace(/[^0-9.]/g, ""));
+    if (isNaN(numericPrice)) return "N/A";
+
+    return numericPrice.toLocaleString("en-US");
+  };
+
+  const getCurrencySymbol = (currencyCode) => {
+    if (typeof currencyCode !== "string") {
+      return "N/A";
+    }
+
+    const symbol = currencySymbols[currencyCode.toLowerCase()];
+    return symbol || "N/A";
+  };
   return (
     <div className="single_property">
       <div style={{ position: "relative", overflowX: "hidden" }}>
@@ -237,7 +261,8 @@ export default function DetailProperty() {
               style={{ color: "white", marginTop: ".2em" }}
               level={2}
             >
-              {data?.property?.salePrice}
+              {getCurrencySymbol(data?.property?.currency)}
+              {formatPrice(data?.property?.salePrice)}
             </Title>
           </Flex>
           <Row gutter={[8, 16]}>
@@ -351,7 +376,7 @@ export default function DetailProperty() {
           </Flex>
           <Flex justify={"center"} align="center" vertical>
             <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-              Compensation Offered?{""} &nbsp;
+              Compensation Offered!{""} &nbsp;
               <Text
                 style={{ color: "#D4CFC9", cursor: "pointer" }}
                 className="my-4 f-16 f-100"
@@ -389,7 +414,7 @@ export default function DetailProperty() {
             className="f-20 f-100"
             style={{ lineHeight: "14px", color: "#D4CFC9" }}
           >
-            MLS® #: F10423862
+            MLS® #: {data?.property?.mlsId}
           </Text>
           <Title className="text-upper" style={{ color: "white" }} level={3}>
             {data?.property?.addressLine1} {data?.property?.addressLine2}
@@ -401,6 +426,14 @@ export default function DetailProperty() {
             {data?.property?.city}, {data?.property?.state},{" "}
             {data?.property?.zipCode}
           </Paragraph>
+          <Title
+            className="text-upper"
+            style={{ color: "white", marginTop: ".2em" }}
+            level={2}
+          >
+            {getCurrencySymbol(data?.property?.currency)}
+            {formatPrice(data?.property?.salePrice)}
+          </Title>
         </Flex>
 
         <Row gutter={[8, 16]} style={{ marginTop: "20px" }}>
@@ -421,21 +454,6 @@ export default function DetailProperty() {
               </Text>
             </Flex>
           </Col>
-          <Col xs={12} sm={8}>
-            <Flex gap={5}>
-              <div
-                className="circle-bg-white"
-                style={{
-                  width: "20px",
-                  height: "20px",
-                  marginBottom: "0px",
-                }}
-              >
-                <FaWater size={15} />
-              </div>
-              <Text className="text-white f-16 f-100">100± Waterfront</Text>
-            </Flex>
-          </Col>
           <Col xs={24} sm={12} md={8} lg={8}>
             <Flex gap={5}>
               <div
@@ -453,6 +471,22 @@ export default function DetailProperty() {
               </Text>
             </Flex>
           </Col>
+          <Col xs={24} sm={8}>
+            <Flex gap={5}>
+              <div
+                className="circle-bg-white"
+                style={{
+                  width: "20px",
+                  height: "20px",
+                  marginBottom: "0px",
+                }}
+              >
+                <FaWater size={15} />
+              </div>
+              <Text className="text-white f-16 f-100">100± Waterfront</Text>
+            </Flex>
+          </Col>
+
           <Col xs={24} sm={12} md={8} lg={8}>
             <Flex gap={5}>
               <div
@@ -475,8 +509,8 @@ export default function DetailProperty() {
               <div
                 className="circle-bg-white"
                 style={{
-                  width: "30px",
-                  height: "30px",
+                  width: "20px",
+                  height: "20px",
                   marginBottom: "0px",
                 }}
               >
@@ -510,7 +544,7 @@ export default function DetailProperty() {
 
         <Flex justify="center" align="center" vertical>
           <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-            Compensation Offered?
+            Compensation Offered!
             <Text
               style={{ color: "#D4CFC9", cursor: "pointer" }}
               className="my-4 f-16 f-100"
@@ -543,13 +577,23 @@ export default function DetailProperty() {
           <Col lg={12} xs={24} sm={24} className="p-3">
             <Card className="card-feature">
               <Title
-                style={{ textAlign: "center", lineHeight: 2 }}
-                className="text-upper"
+                style={{ textAlign: "center", lineHeight: 1 }}
+                className="text-upper f-30 "
               >
                 {data?.property?.addressLine1} {data?.property?.addressLine2}
               </Title>
+
               <Paragraph className="f-16 f-200" style={{ lineHeight: 1.5 }}>
-                {data?.property?.description
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: data?.property?.description.replace(
+                      /\n/g,
+                      "<br />"
+                    ),
+                  }}
+                />
+                {/* {data?.property?.description} */}
+                {/* {data?.property?.description
                   ?.split("\n")
                   .filter((txt) => txt.trim() !== "")
                   .slice(0, 3)
@@ -561,7 +605,7 @@ export default function DetailProperty() {
                   .slice(3)
                   .map((txt) => (
                     <p style={{ marginTop: 8, lineHeight: 1.5 }}>{txt}</p>
-                  ))}
+                  ))} */}
               </Paragraph>
             </Card>
           </Col>
@@ -667,7 +711,7 @@ export default function DetailProperty() {
                               }}
                               preview
                               width="100%"
-                             fallback={SkeletonImage}
+                              fallback={SkeletonImage}
                             />
                           </Col>
                         ))}
@@ -731,7 +775,7 @@ export default function DetailProperty() {
                 Interested in {data?.property?.addressLine1}{" "}
                 {data?.property?.addressLine2}?
               </Title>
-               <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit}>
                 <Row gutter={[8, 40]} className="detail-property">
                   <Col lg={12} md={12} sm={24}>
                     <Input
@@ -802,7 +846,7 @@ export default function DetailProperty() {
                 </Row>
               </form>
             </Col>
-             <Col
+            <Col
               xl={10}
               lg={10}
               md={24}

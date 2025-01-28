@@ -12,14 +12,47 @@ const { Title, Paragraph, Text } = Typography;
 function AgentListing() {
   const { id, name } = useParams();
   const [page, setPage] = useState(1);
+
   const navigate = useNavigate();
   const itemsPerPage = 6;
   const { data, isLoading } = useProperties(id, itemsPerPage, page);
 
+  console.log(data);
   const handlePageChange = (page) => {
     setPage(page);
   };
+  const currencySymbols = {
+    usd: "$",
+    eur: "€",
+    pound: "£",
+    
+  };
+  const formatPrice = (price) => {
+    if (!price || isNaN(price.toString().replace(/[^0-9.]/g, ""))) return "N/A"; // Handle invalid cases
 
+    // Remove existing $ sign and convert to number
+    const numericPrice = Number(price.toString().replace(/[^0-9.]/g, ""));
+
+    return `${numericPrice.toLocaleString("en-US")}`;
+  };
+  const getCurrencySymbol = (currencyCode) => {
+    return (
+      currencySymbols[currencyCode.toLowerCase()] || currencyCode.toUpperCase()
+    ); // Default to currency code if no symbol found
+  };
+  //Sorted highest to lowest
+  const sortedProperties = data?.properties?.slice().sort((a, b) => {
+    const priceA = Number(a?.salePrice?.slice(1).replace(/,/g, "") || 0);
+    const priceB = Number(b?.salePrice?.slice(1).replace(/,/g, "") || 0);
+    return priceB - priceA;
+  });
+  console.log("data sorted", sortedProperties);
+  // Slice the data based on current page
+  const startIndex = (page - 1) * itemsPerPage;
+  const currentProperties = sortedProperties?.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
   return (
     <div>
       <BackgroundImage Image={BoatImage}>
@@ -41,7 +74,7 @@ function AgentListing() {
           />
         ) : (
           <Row gutter={[60, 60]} className="pb-5">
-            {data?.properties?.map((item, index) => (
+            {currentProperties.map((item, index) => (
               <Col lg={12} md={12} sm={24}>
                 <div
                   className="displayy-teamimg-center"
@@ -65,7 +98,9 @@ function AgentListing() {
                         >
                           {item?.addressLine1} {item?.addressLine2}
                           <br />
-                          <IoPricetagOutline size={20} /> $ {item?.salePrice}
+                          <IoPricetagOutline size={20} />{" "}
+                          {getCurrencySymbol(item?.currency)}
+                          {formatPrice(item?.salePrice)}
                           {/* {Number(properties?.salePrice).toLocaleString()} */}
                         </Text>
                       </Flex>
