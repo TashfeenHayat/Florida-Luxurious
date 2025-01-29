@@ -746,12 +746,7 @@ function AddProperty() {
                   placeholder="Built Year"
                   format="YYYY"
                   showTime={false}
-{/*                   rules={[
-                    {
-                      // required: true,
-                      message: "Built Year is required",
-                    },
-                  ]} */}
+
                 >
                   <DatePicker
                     size="large"
