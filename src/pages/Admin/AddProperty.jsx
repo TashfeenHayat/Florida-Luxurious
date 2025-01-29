@@ -505,7 +505,7 @@ function AddProperty() {
                 label="Name"
                 rules={[
                   {
-                    // required: true,
+                     required: true,
                     message: "Name is required",
                   },
                 ]}
@@ -718,12 +718,12 @@ function AddProperty() {
                   name="visitHours"
                   label="Visiting Hours"
                   placeholder="Visiting Hours"
-                  rules={[
+{/*                   rules={[
                     {
                       required: true,
                       message: "Visiting Hours is required",
                     },
-                  ]}
+                  ]} */}
                 >
                   <Input size="large" placeholder="Visiting Hours" />
                 </Form.Item>
@@ -746,12 +746,12 @@ function AddProperty() {
                   placeholder="Built Year"
                   format="YYYY"
                   showTime={false}
-                  rules={[
+{/*                   rules={[
                     {
                       // required: true,
                       message: "Built Year is required",
                     },
-                  ]}
+                  ]} */}
                 >
                   <DatePicker
                     size="large"
