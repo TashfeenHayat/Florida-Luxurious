@@ -718,12 +718,7 @@ function AddProperty() {
                   name="visitHours"
                   label="Visiting Hours"
                   placeholder="Visiting Hours"
-{/*                   rules={[
-                    {
-                      required: true,
-                      message: "Visiting Hours is required",
-                    },
-                  ]} */}
+
                 >
                   <Input size="large" placeholder="Visiting Hours" />
                 </Form.Item>
