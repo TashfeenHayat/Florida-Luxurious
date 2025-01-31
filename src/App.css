@@ -1480,6 +1480,9 @@ body:focus-visible {
   .f-64 {
     font-size: 32px !important;
   }
+  .circles-container {
+    display: none;
+  }
   /* .next-arrow,
   .prev-arrow {
     top: 40% !important;

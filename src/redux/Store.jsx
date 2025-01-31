@@ -22,6 +22,7 @@ import {
   getPropertySlice,
   updatePropertySlice,
   deletePropertySlice,
+  searchSuggestionsSlice,
 } from "./slices/PropertySlice";
 import { contactUsSlice, getInquirySlice } from "./slices/ContactusSlice";
 import { getGlobalPropertiesSlice } from "./slices/GlobalPropertiesSlice";
@@ -74,6 +75,7 @@ export const store = configureStore({
     getPropertyReducer: getPropertySlice,
     updatePropertyReducer: updatePropertySlice,
     deletePropertyReducer: deletePropertySlice,
+    searchSuggestionsReducer: searchSuggestionsSlice,
     getInquiryReducer: getInquirySlice,
     getGlobalPropertiesReducer: getGlobalPropertiesSlice,
     getBlogsReducer: getBlogsSlice,

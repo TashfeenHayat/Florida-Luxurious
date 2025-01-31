@@ -4,11 +4,13 @@ import {
   getProperty,
   updateProperty,
   deleteProperty,
+  SearchSuggestion,
 } from "../../api/Properties";
 import { createSlice } from "@reduxjs/toolkit";
 import { notification } from "antd";
 
 let initialState = {
+  suggestions: [],
   isLoading: false,
   success: "",
   error: "",
@@ -161,3 +163,34 @@ export const deletePropertySlice = createSlice({
     });
   },
 }).reducer;
+export const searchSuggestionsSlice = createSlice({
+  name: "searchSuggestionsReducer",
+  initialState,
+  extraReducers: (builder) => {
+    builder.addCase(SearchSuggestion.pending, (state) => {
+      state.isLoading = true;
+      state.isError = false;
+      state.error = "";
+    });
+
+    builder.addCase(SearchSuggestion.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.suggestions = action.payload || []; // Ensure it's always an array
+    });
+
+    builder.addCase(SearchSuggestion.rejected, (state, action) => {
+      state.isLoading = false;
+      state.isError = true;
+      state.suggestions = []; // Clear suggestions on error
+      state.error = action.payload?.message || "Failed to fetch suggestions";
+
+      notification.error({
+        message: "Error fetching suggestions",
+        description: state.error,
+        duration: 2,
+      });
+    });
+  },
+}).reducer;
+

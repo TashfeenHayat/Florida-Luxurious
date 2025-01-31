@@ -1,30 +1,48 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
-
+import {
+  Typography,
+  Row,
+  Col,
+  Flex,
+  Pagination,
+  Spin,
+  Image,
+  Input,
+  AutoComplete,
+} from "antd";
 import BackgroundImage from "../../components/BackgroundImage";
-import { Typography, Row, Col, Flex, Pagination, Spin, Image } from "antd";
 import FeaturedPropertiesImage from "../../assets/Agent.png";
 import Icons from "../../components/Icons";
 import { Container } from "react-bootstrap";
 import useProperties from "../../hooks/useProperties";
-import { Input } from "antd";
+import useSearchSuggestions from "../../hooks/useSearchSuggestion";
 
 const { Title, Text } = Typography;
-const { Search } = Input;
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
+
 const formatPrice = (price) => {
-  if (price && !price.startsWith("$")) {
-    return `$${price}`; // Prepend dollar sign if not present
-  }
-  return price; // Return the price as is if it already contains a dollar sign
+  const numericPrice = parseFloat(price.replace(/[^0-9.]/g, ""));
+  if (isNaN(numericPrice)) return "N/A";
+  return numericPrice.toLocaleString("en-US");
 };
+
+const getCurrencySymbol = (currencyCode) => {
+  return (
+    currencySymbols[currencyCode.toLowerCase()] || currencyCode.toUpperCase()
+  );
+};
+
+const currencySymbols = { usd: "$", eur: "€", pound: "£" };
 
 function SearchCommunity() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchValue, setSearchValue] = useState("");
+  const [suggestionsList, setSuggestionsList] = useState([]);
   const itemsPerPage = 6;
   const query = useQuery();
   const navigate = useNavigate();
@@ -32,28 +50,61 @@ function SearchCommunity() {
   const { data, isLoading, isError } = useProperties(
     null,
     itemsPerPage,
-    currentPage,
+    null,
     "for_sale",
     null,
     searchQuery,
     query.get("name")
   );
-  const onSearch = (value) => navigate(`/searchcommunity?name=${value}`);
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
+  const { suggestions } = useSearchSuggestions(searchValue);
+
   useEffect(() => {
-    // Whenever the search query changes, trigger the property fetch
-    setCurrentPage(1); // Reset to first page on new search
+    if (searchValue) {
+   
+  
+      if (suggestions.properties) {
+        console.log(setSuggestionsList(suggestions.properties));
+        setSuggestionsList(suggestions.properties);
+      } else {
+        setSuggestionsList([]); // If suggestions is not valid, reset it to an empty array
+      }
+    } else {
+      setSuggestionsList([]); // Reset if there's no search value
+    }
+  }, [searchValue, suggestions]); // Dependencies are searchValue and suggestions
+
+  const onSearch = (value) => navigate(`/searchcommunity?name=${value}`);
+
+  const handlePageChange = (page) => setCurrentPage(page);
+
+  const sortedProperties = data?.properties?.slice().sort((a, b) => {
+    const priceA = Number(a?.salePrice?.slice(1).replace(/,/g, "") || 0);
+    const priceB = Number(b?.salePrice?.slice(1).replace(/,/g, "") || 0);
+    return priceB - priceA;
+  });
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentProperties = sortedProperties?.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
+  useEffect(() => {
+    setCurrentPage(1);
   }, [searchQuery]);
+
   if (isError) {
     return <div>Error loading properties. Please try again later.</div>;
   }
-
+  const handleSuggestionClick = (suggestion) => {
+    onSearch(suggestion);
+  };
+  const handleChange = (e) => {
+    setSearchText(e.target.value);
+  };
   return (
     <>
       <BackgroundImage Image={FeaturedPropertiesImage}>
-        {/* Title */}
         <Title
           className="text-white text-upper f-50 f-100"
           style={{
@@ -65,8 +116,6 @@ function SearchCommunity() {
         >
           Search
         </Title>
-        <br />
-        {/* Search Block */}
         <div
           style={{
             marginTop: "1rem",
@@ -81,43 +130,35 @@ function SearchCommunity() {
             transform: "translateX(-50%)",
           }}
         >
-          <Search
-            placeholder=""
-            allowClear
-            enterButton={
-              <span
-                className="search-button"
-                style={{
-                  width: "auto",
-                  padding: "0 1rem",
-                }}
-              >
-                Search
-              </span>
-            }
-            size="large"
-            onSearch={onSearch}
-            style={{
-              width: "100%",
-              maxWidth: "550px",
-              minWidth: "250px",
-              overflow: "hidden",
-            }}
-          />
+          <AutoComplete
+            options={suggestionsList?.map((suggestion) => ({
+              value: suggestion.name, // Ensure 'name' is the property you want to display
+            }))}
+            style={{ width: "100%", maxWidth: "550px", minWidth: "250px" }}
+            onSelect={handleSuggestionClick}
+            onSearch={setSearchValue}
+          >
+            <Input.Search
+              placeholder="Search communities..."
+              allowClear
+              enterButton="Search"
+              size="large"
+              onSearch={onSearch}
+            />
+          </AutoComplete>
         </div>
       </BackgroundImage>
 
       {isLoading ? (
-        <Flex justify={"center"} align="center" className="py-5">
+        <Flex justify="center" align="center" className="py-5">
           <Spin size="large" />
         </Flex>
       ) : (
         <Container className="pt-98 pb-98">
           <Title level={3}>Search Result = {data?.totalCount}</Title>
-
           <Row gutter={[60, 60]}>
             {data?.properties?.length ? (
-              data.properties.map((property, index) => (
+              currentProperties.map((property, index) => (
                 <Col
                   lg={12}
                   md={12}
@@ -141,7 +182,7 @@ function SearchCommunity() {
                     <div className="more-info-property">
                       <Flex
                         vertical
-                        align={"center"}
+                        align="center"
                         justify="center"
                         style={{ height: "100%" }}
                         gap={30}
@@ -159,6 +200,7 @@ function SearchCommunity() {
                             Last List Price
                           </Text>
                           <Text className="text-center text-upper f-24 f-100 text-gray">
+                            {getCurrencySymbol(property?.currency)}
                             {formatPrice(property?.salePrice)}
                           </Text>
                         </Flex>
@@ -172,23 +214,6 @@ function SearchCommunity() {
                         </Flex>
                       </Flex>
                     </div>
-
-                    <div className="info">
-                      <Flex justify={"end"} align={"center"}>
-                        <Flex>
-                          <IoLocationOutline color="white" size={20} />
-                          <Text
-                            className="f-14 f-bold text-white"
-                            style={{ textAlign: "right" }}
-                          >
-                            {property?.addressLine1} {property?.addressLine2}{" "}
-                            <br />
-                            <IoPricetagOutline size={20} /> $
-                            {formatPrice(property?.salePrice)}
-                          </Text>
-                        </Flex>
-                      </Flex>
-                    </div>
                   </div>
                 </Col>
               ))
@@ -196,12 +221,11 @@ function SearchCommunity() {
               <Title>No Properties Listed</Title>
             )}
           </Row>
-
           {data?.properties.length > 0 && (
-            <Flex justify={"center"} align="center" className="my-4">
+            <Flex justify="center" align="center" className="my-4">
               <Pagination
                 defaultCurrent={1}
-                total={data?.totalCount}
+                total={data?.properties?.length || 0}
                 pageSize={itemsPerPage}
                 onChange={handlePageChange}
                 responsive

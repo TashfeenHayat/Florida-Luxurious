@@ -58,7 +58,7 @@ function Properties() {
     usd: "$",
     eur: "€",
     pound: "£",
-    // Add more currencies as needed
+   
   };
 
   // Function to format price (remove unwanted characters, add commas)
