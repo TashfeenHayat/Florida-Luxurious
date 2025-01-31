@@ -1,6 +1,5 @@
 import React from "react";
 import Slider from "react-slick";
-// import Business from "../../assets/business.svg";
 import Zillow from "../../assets/ads/zillow.png";
 import Youtube from "../../assets/ads/youtube.png";
 import Washington from "../../assets/ads/washington.png";
@@ -15,6 +14,7 @@ import Homes from "../../assets/ads/homes.png";
 import Fort from "../../assets/ads/fort.png";
 
 import { Flex } from "antd";
+
 function RecognitionSlide() {
   const imgRecognition = [
     Zillow,
@@ -30,58 +30,77 @@ function RecognitionSlide() {
     Homes,
     Fort,
   ];
+
   const settings = {
-    loop: true,
     dots: false,
     infinite: true,
-    slidesToShow: 6, // Default number of slides to show
+    slidesToShow: 6,
     slidesToScroll: 1,
     autoplay: true,
-    speed: 4000,
+    speed: 3000,
     autoplaySpeed: 1000,
-    cssEase: "linear", // Enable autoplay
+    cssEase: "linear",
     responsive: [
-      {
-        breakpoint: 1200, // Adjust the number of slides for screens less than 1200px wide
-        settings: {
-          slidesToShow: 4,
-        },
-      },
-      {
-        breakpoint: 992, // Adjust the number of slides for screens less than 992px wide
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 768, // Adjust the number of slides for screens less than 768px wide
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 576, // Adjust the number of slides for screens less than 576px wide
-        settings: {
-          slidesToShow: 1,
-        },
-      },
+      { breakpoint: 1200, settings: { slidesToShow: 4 } },
+      { breakpoint: 992, settings: { slidesToShow: 3 } },
+      { breakpoint: 768, settings: { slidesToShow: 2 } },
+      { breakpoint: 576, settings: { slidesToShow: 1 } },
     ],
   };
 
   return (
-    <Flex
-      justify={"center"}
-      align={"center"}
-      style={{ height: "250px", width: "98%" }}
-      className="rec-slide"
-    >
+    <Flex justify="center" align="center" className="rec-slide">
       <Slider {...settings}>
         {imgRecognition.map((img, index) => (
-          <div>
-            <img src={img} width="60%" />
+          <div key={index} className="slide-item">
+            <img src={img} alt={`Recognition ${index}`} />
           </div>
         ))}
       </Slider>
+
+      {/* Internal CSS */}
+      <style>
+        {`
+          .rec-slide {
+            width: 100%;
+       
+            padding: 20px 0;
+            overflow: hidden;
+          }
+
+          .slide-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+          }
+
+          .slide-item img {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
+          }
+
+          @media (max-width: 992px) {
+            .slide-item img {
+              max-width: 150px;
+            }
+          }
+
+          @media (max-width: 768px) {
+            .slide-item img {
+              max-width: 150px;
+            }
+          }
+
+          @media (max-width: 576px) {
+            .slide-item img {
+              max-width: 150px;
+            }
+          }
+        `}
+      </style>
     </Flex>
   );
 }

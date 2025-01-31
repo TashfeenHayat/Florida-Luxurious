@@ -7,6 +7,7 @@ import Slider from "react-slick";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
 import { Container } from "react-bootstrap";
 import useProperties from "../../hooks/useProperties";
+import "slick-carousel/slick/slick.css";
 
 const { Text, Paragraph } = Typography;
 const status = "for_sale";
@@ -18,10 +19,8 @@ function FeatureListing() {
     usd: "$",
     eur: "€",
     pound: "£",
-    // Add more currencies as needed
   };
 
-  // Function to format price (remove unwanted characters, add commas)
   const formatPrice = (price) => {
     // Remove all non-numeric characters except for dot
     const numericPrice = parseFloat(price.replace(/[^0-9.]/g, ""));
@@ -48,23 +47,20 @@ function FeatureListing() {
     })
     .slice(0, 30);
 
-  console.log("data sorted", sortedProperties);
-
   const CustomPrevArrow = (props) => {
-    const { className, style, onClick } = props;
+    const { className,prev, style, onClick } = props;
     return (
       <div
-        className={`${className} "prev-arrow"`}
+        className={className}
+        prev={prev}
         style={{
           ...style,
           display: "block",
           zIndex: 10,
-
-          width: "35px", // Adjusted left position
         }}
         onClick={onClick}
       >
-        <img src={BackArrow} alt="Previous" width="45px" />
+        <img src={BackArrow} alt="Previous" width="45px" className="next" />
       </div>
     );
   };
@@ -73,17 +69,15 @@ function FeatureListing() {
     const { className, style, onClick } = props;
     return (
       <div
-        className={` ${className} "next-arrow"`}
+        className={className}
         style={{
           ...style,
           display: "block",
           zIndex: 10,
-
-          width: "35px",
         }}
         onClick={onClick}
       >
-        <img src={NextArrow} alt="Next" width="45px" />
+        <img src={NextArrow} alt="Next" width="45px" className="next" />
       </div>
     );
   };
@@ -114,7 +108,7 @@ function FeatureListing() {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          centerMode: true,
+
           centerPadding: "0",
         },
       },
@@ -133,9 +127,6 @@ function FeatureListing() {
           slidesToShow: 1,
           slidesToScroll: 1,
 
-          prevArrow: <CustomPrevArrow />,
-          nextArrow: <CustomNextArrow />,
-          centerMode: true,
           centerPadding: "0",
         },
       },
@@ -145,9 +136,6 @@ function FeatureListing() {
           slidesToShow: 1,
           slidesToScroll: 1,
 
-          centerMode: true,
-          prevArrow: <CustomPrevArrow />,
-          nextArrow: <CustomNextArrow />,
           centerPadding: "0",
         },
       },
@@ -157,8 +145,6 @@ function FeatureListing() {
           slidesToShow: 1,
           slidesToScroll: 1,
 
-          prevArrow: <CustomPrevArrow />,
-          nextArrow: <CustomNextArrow />,
           centerMode: true,
           centerPadding: "0",
         },
@@ -197,13 +183,20 @@ function FeatureListing() {
         </Flex>
       ) : (
         <Container>
-          <Flex
+          <div
             justify={"center"}
             align={"center"}
             style={{
               marginTop: "65px",
               marginBottom: "65px",
+              display: "flex",
               flexWrap: "wrap",
+              alignitems: "center",
+              aligncontent: "center",
+
+              justifycontent: " space-between",
+              position: "relative",
+              right: "2rem",
             }}
             className="features_section_slider"
             data-aos="fade-down-left"
@@ -307,7 +300,7 @@ function FeatureListing() {
                 </div>
               ))}
             </Slider>
-          </Flex>
+          </div>
 
           <Flex
             justify="center"

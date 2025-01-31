@@ -49,7 +49,7 @@ function Footer() {
     <div className="bg-footer">
       <div className="footer-bg-img-shadow">
         <Row align={""}>
-          <Col span={6} md={6} sm={0} xsm={0} className="footer-logo" align="">
+          <Col span={6} lg={6} sm={0} xsm={0} className="footer-logo" align="">
             <Image src={FooterLogo} width="60%" preview={false} />
           </Col>
           <Col span={18}>
@@ -87,7 +87,7 @@ function Footer() {
                       </Link>
                     </Flex>
                   </Col>
-                  <Col lg={12}>
+                  <Col lg={12} xlg={6} md={18} sm={32} xsm={32}>
                     <Text className="text-upper f-24 f-bold">
                       search by location
                     </Text>
@@ -114,7 +114,7 @@ function Footer() {
                       </Link>
                     </Flex>
                   </Col>
-                  <Col lg={12}>
+                  <Col lg={12} xlg={6} md={18} sm={32} xsm={32}>
                     <Text className="text-upper f-24 f-bold">about</Text>
                     <Flex className="pt-2" vertical gap={10}>
                       <Link

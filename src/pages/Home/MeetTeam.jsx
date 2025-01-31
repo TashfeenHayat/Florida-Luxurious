@@ -24,11 +24,11 @@ function MeetTeam() {
           ...style,
           display: "block",
           zIndex: 10,
-          left: "-2rem",
+       
         }} // Adjusted left position
         onClick={onClick}
       >
-        <img src={BackArrow} alt="Previous" width="45px" />
+        <img src={BackArrow} alt="Previous" width="45px" className="next" />
       </div>
     );
   };
@@ -42,11 +42,11 @@ function MeetTeam() {
           ...style,
           display: "block",
           zIndex: 10,
-          left: "81rem",
+        
         }} // Adjusted right position
         onClick={onClick}
       >
-        <img src={NextArrow} alt="Next" width="45px" />
+        <img src={NextArrow} alt="Next" width="45px"  className="next"/>
       </div>
     );
   };
@@ -165,7 +165,7 @@ function MeetTeam() {
                               fallback="https://firebasestorage.googleapis.com/v0/b/florida-77f94.appspot.com/o/Untitled%20design%20(1).png?alt=media&token=b14e90ef-b51c-4baf-ae2a-ada87141ed52"
                               style={{
                                 aspectRatio: "5/7.5",
-                                width: "100%",
+                                // width: "100%",
                                 objectFit: "cover",
                               }}
                             />

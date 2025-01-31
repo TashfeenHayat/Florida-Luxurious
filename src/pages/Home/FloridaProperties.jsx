@@ -36,23 +36,20 @@ function FloridaProperties() {
       className="bg-img-logo"
       style={{ color: "#fff", padding: "0px 20px", backgroundColor: "#1c1c1c" }}
     >
-      <Row>
-        <Col
-          lg={12}
-          md={24}
-          sm={32}
-          xsm={9}
-          className="relative cover_rectagle"
-        >
+      <Row gutter={[32, 32]}>
+        <Col lg={12} sm={24} xsm={24} className="relative cover_rectagle">
           <Flex
             className="pt-90 pb-10"
             style={{ position: "sticky", top: "0" }}
           >
             <div>
-              <Title level={1} className="text-white" data-aos="fade-right">
-                Florida Luxurious Properties
-              </Title>
-              <Flex gap={20} justify="center" wrap="wrap" overflow="hidden">
+              <div className="text-center">
+                <Title level={1} className="text-white" data-aos="fade-right">
+                  Florida Luxurious Properties
+                </Title>
+              </div>
+
+              <Flex gap={16} justify="center" wrap="wrap" overflow="hidden">
                 <img
                   style={{ width: "90px" }}
                   src={Bagde}
@@ -92,7 +89,7 @@ function FloridaProperties() {
             </div>
           </Flex>
         </Col>
-        <Col lg={12} md={24}>
+        <Col lg={12} sm={24} xsm={24}>
           <Col lg={19} offset={1}>
             <Flex justify="center" align={"center"}>
               <img src={DownArrow} className="Downarrow" height="250px" />

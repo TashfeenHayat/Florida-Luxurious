@@ -11,6 +11,7 @@ import {
   Modal,
   Form,
   Skeleton,
+  Alert,
 } from "antd";
 import { Container } from "react-bootstrap";
 import Button from "../../components/Buttons";
@@ -295,9 +296,11 @@ export default function DetailProperty() {
                     marginBottom: "0px",
                   }}
                 >
-                  <FaWater size={15} />
+                  <LuBath size={15} />
                 </div>
-                <Text className="text-white f-16 f-100">100± Waterfront</Text>
+                <Text className="text-white f-16">
+                  {data?.property?.bathCount} Baths
+                </Text>
               </Flex>
             </Col>
             <Col lg={8}>
@@ -310,13 +313,12 @@ export default function DetailProperty() {
                     marginBottom: "0px",
                   }}
                 >
-                  <LuBath size={15} />
+                  <FaWater size={15} />
                 </div>
-                <Text className="text-white f-16">
-                  {data?.property?.bathCount} Baths
-                </Text>
+                <Text className="text-white f-16 f-100">100± Waterfront</Text>
               </Flex>
             </Col>
+
             <Col lg={8}>
               <Flex justify={"flex-start"} align={"center"} gap={5}>
                 <Flex>
@@ -369,11 +371,11 @@ export default function DetailProperty() {
               </Flex>
             </Col> */}
           </Row>
-          <Flex justify={"center"} align="center" vertical>
+          {/* <Flex justify={"center"} align="center" vertical>
             <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
               New construction- single family residence
             </Text>
-          </Flex>
+          </Flex> */}
           <Flex justify={"center"} align="center" vertical>
             <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
               Compensation Offered!{""} &nbsp;
@@ -536,11 +538,11 @@ export default function DetailProperty() {
           </Col>
         </Row>
 
-        <Flex justify="center" align="center" vertical>
+        {/* <Flex justify="center" align="center" vertical>
           <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
             New construction - single family residence
           </Text>
-        </Flex>
+        </Flex> */}
 
         <Flex justify="center" align="center" vertical>
           <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
@@ -609,6 +611,7 @@ export default function DetailProperty() {
               </Paragraph>
             </Card>
           </Col>
+
           <Col lg={12} xs={24} sm={24} className="p-5">
             <div>
               <Row gutter={[8, 16]}>
@@ -682,26 +685,35 @@ export default function DetailProperty() {
                     <Modal
                       open={openModal}
                       footer={null}
+                      width="500px"
+                      closeIcon={
+                        <IoMdClose
+                          size={20}
+                          color="#FFFFFF"
+                          style={{ cursor: "pointer" }}
+                        />
+                      }
                       styles={{
                         content: {
                           backgroundColor: "black",
                           borderRadius: "0px",
-                          height: "400px",
+                          height: "300px",
                           overflowY: "auto",
                           padding: "3rem",
                         },
+                        onCancel: { hideModal },
                       }}
-                      width={"700px"}
-                      closeIcon={<IoMdClose size={20} color={"#FFFFFF"} />}
                     >
                       <Row gutter={[8, 16]}>
                         {data?.property?.media?.map((item, index) => (
-                          <Col lg={8} md={12} sm={24}>
+                          <Col lg={8} md={12} sm={24} key={index}>
+                            {/* Skeleton Loading State */}
                             {imageLoading && (
                               <Skeleton.Image
                                 style={{ width: "100%", height: "100px" }}
                               />
                             )}
+                            {/* Image */}
                             <Image
                               src={item?.mdUrl || SkeletonImage}
                               onLoad={handleImageLoad}
@@ -709,9 +721,14 @@ export default function DetailProperty() {
                                 display: imageLoading ? "none" : "block",
                                 cursor: "pointer",
                               }}
-                              preview
                               width="100%"
                               fallback={SkeletonImage}
+                              preview={{
+                                onChange: (current, prev) =>
+                                  console.log(
+                                    `current index: ${current}, prev index: ${prev}`
+                                  ),
+                              }}
                             />
                           </Col>
                         ))}
@@ -727,16 +744,16 @@ export default function DetailProperty() {
               align="center"
               style={{ marginTop: 40 }}
             >
-              {/* <div style={{ marginBottom: 40 }}>
+              <div style={{ marginBottom: 40 }}>
                 <Button classNam="button-view1" width="300px">
                   Watch Videos
                 </Button>
-              </div> */}
-              {/* <div style={{ marginBottom: 40 }}>
+              </div>
+              {/*<div style={{ marginBottom: 40 }}>
                 <Button classNam="button-view1" width="300px">
                   Request details
                 </Button>
-              </div> */}
+            </div>*/}
               <div style={{ marginBottom: 40 }}>
                 <Button
                   classNam="button-view1"
@@ -759,6 +776,16 @@ export default function DetailProperty() {
           </Col>
         </Row>
       </Container>
+      {/* <div className="boxshadow-section p-5">
+        <Container className="p-5">
+          <Title className="text-upper" style={{ letterSpacing: "1px" }}>
+            Features
+          </Title>
+          <Row gutter={[8, 40]}>
+            <Col lg={24} md={24} sm={24}></Col>
+          </Row>
+        </Container>
+      </div> */}
       <div style={{ backgroundColor: "#000" }} ref={requestRef}>
         <Container>
           <Row>
@@ -880,16 +907,7 @@ export default function DetailProperty() {
           Search Mls
         </Button>
       </Flex>
-      {/*<div className="boxshadow-section p-5">
-        <Container className="p-5">
-          <Title className="text-upper" style={{ letterSpacing: "1px" }}>
-            Features
-          </Title>
-          <Row gutter={[8, 40]}>
-            <Col lg={24} md={24} sm={24}></Col>
-          </Row>
-        </Container>
-      </div>*/}
+
       <div style={{ backgroundColor: "#000", padding: "20px" }}>
         <Row gutter={16}>
           {data?.property?.Secondary_agentId ? (

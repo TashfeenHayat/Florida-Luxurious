@@ -74,3 +74,18 @@ export const deleteProperty = createAsyncThunk(
     }
   }
 );
+export const SearchSuggestion = createAsyncThunk(
+  "searchSuggestions",
+  async (query, { rejectWithValue }) => {
+    try {
+      const response = await customAxios.get(`property/search`, {
+        params: { key: query }, // Correct parameter name
+      });
+      return response.data; // Return the list of suggestions
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data || { error: "Unknown error" }
+      );
+    }
+  }
+);

@@ -505,7 +505,7 @@ function AddProperty() {
                 label="Name"
                 rules={[
                   {
-                     required: true,
+                    required: true,
                     message: "Name is required",
                   },
                 ]}
@@ -538,7 +538,16 @@ function AddProperty() {
               </Form.Item>
             </Col>{" "}
             <Col span={12} className="gutter-row">
-              <Form.Item name="status" label="Status">
+              <Form.Item
+                name="status"
+                label="Status"
+                rules={[
+                  {
+                    required: true,
+                    message: "Status is required",
+                  },
+                ]}
+              >
                 <Select
                   size="large"
                   options={statusList}
@@ -588,7 +597,16 @@ function AddProperty() {
             <Row>
               {" "}
               <Col span={12} className="gutter-row">
-                <Form.Item name="filters" label="Commuities">
+                <Form.Item
+                  name="filters"
+                  label="Communities"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Communities  is required",
+                    },
+                  ]}
+                >
                   <Select
                     mode="multiple"
                     showSearch
@@ -601,7 +619,16 @@ function AddProperty() {
                     placeholder="Search filters"
                   />
                 </Form.Item>
-                <Form.Item name="neighborhood" label="Neighborhood">
+                <Form.Item
+                  name="neighborhood"
+                  label="Neighborhood"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Neighborhood is required",
+                    },
+                  ]}
+                >
                   <Input size="large" placeholder="Neighborhood" />
                 </Form.Item>
               </Col>
@@ -718,7 +745,6 @@ function AddProperty() {
                   name="visitHours"
                   label="Visiting Hours"
                   placeholder="Visiting Hours"
-
                 >
                   <Input size="large" placeholder="Visiting Hours" />
                 </Form.Item>
@@ -741,7 +767,6 @@ function AddProperty() {
                   placeholder="Built Year"
                   format="YYYY"
                   showTime={false}
-
                 >
                   <DatePicker
                     size="large"

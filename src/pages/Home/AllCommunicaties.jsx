@@ -39,7 +39,7 @@ function Allcommunities() {
       </BackgroundImage>
 
       {/* Communities Section */}
-      <div style={{ padding: "40px 20px", overflow: "hidden" }}>
+      <div style={{ padding: "40px 20px" }}>
         {" "}
         {/* Reduced padding */}
         <Row gutter={[16, 16]} className="px-2">
@@ -53,13 +53,16 @@ function Allcommunities() {
           ) : (
             sortingArr.map((community, index) => (
               <Col
+                xxl={6}
+                xl={6}
                 lg={8}
                 md={12}
                 sm={24}
+                xs={24}
                 key={index}
                 className="displayy-teamimg-center show-btn-community-home"
               >
-                <div style={{ position: "relative" }}>
+                <div style={{ position: "relative", overflow: "hidden" }}>
                   <img
                     src={community?.photo}
                     width="100%"

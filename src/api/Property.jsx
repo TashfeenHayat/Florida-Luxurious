@@ -66,3 +66,6 @@ export const getProperty = createAsyncThunk(
 );
 
 export const resetProperty = createAsyncThunk("resetPropertyReducer", () => {});
+
+
+

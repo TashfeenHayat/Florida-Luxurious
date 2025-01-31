@@ -66,7 +66,7 @@ function Neighborhoods() {
           {displayedCommunities.map((community, index) => (
             <Col
               xl={6}
-              lg={32}
+              lg={8}
               md={12}
               sm={12}
               xs={24}
@@ -136,8 +136,9 @@ function Neighborhoods() {
             </Col>
           ))}
           <Col
-            lg={6}
-            md={8}
+            xl={6}
+            lg={8}
+            md={12}
             sm={12}
             xs={24}
             onClick={() => navigate("/all-communities")}
@@ -171,7 +172,7 @@ function Neighborhoods() {
                       width: "95%",
                     }}
                   >
-                    <Text className="text-upper text-white f-24 f-100">
+                    <Text className="text-upper text-white f-24 f-100 text-center"> 
                       View All
                     </Text>
                   </div>
