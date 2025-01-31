@@ -139,7 +139,7 @@ function SearchCommunity() {
             onSearch={setSearchValue}
           >
             <Input.Search
-              placeholder="Search communities..."
+              placeholder="Search properties..."
               allowClear
               enterButton="Search"
               size="large"
