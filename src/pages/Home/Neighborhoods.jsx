@@ -99,19 +99,14 @@ function Neighborhoods() {
                 >
                   <div
                     style={{
-                      display: "flex",
+                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
                       flexDirection: "column",
                       textAlign: "center",
-                      overflow: "hidden",
-                      position: "absolute",
-                      bottom: "10px",
-                      left: "10px",
-                      right: "10px",
                       background: "rgba(0, 0, 0, 0.5)",
-                      padding: "10px",
-                      borderRadius: "5px",
+                      padding: "8px", // Reduced padding
+                      borderRadius: "4px", // Reduced border radius
                     }}
                   >
                     <Text
