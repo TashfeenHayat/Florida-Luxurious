@@ -86,14 +86,14 @@ function Neighborhoods() {
                 <div
                   className="show-info"
                   style={{
-                    // position: "absolute",
-                    // top: "50%",
-                    // left: "0%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    justifyItems: "center",
-                    width: "100%",
+                    position: "absolute",
+                    top: "50%",
+                    left: "0%",
+                    // display: "flex",
+                    // justifyContent: "center",
+                    // alignItems: "center",
+                    // justifyItems: "center",
+                    // width: "100%",
                     overflow: "hidden",
                   }}
                 >
