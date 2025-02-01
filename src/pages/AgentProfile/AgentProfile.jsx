@@ -44,7 +44,7 @@ const CustomPrevArrow = (props) => {
       style={{ ...style, display: "block", zIndex: 10 }}
       onClick={onClick}
     >
-      <img src={BackArrow} alt="Previous" width="45px" />
+      <img src={BackArrow} alt="Previous" width="45px" className="next" />
     </div>
   );
 };
@@ -57,7 +57,7 @@ const CustomNextArrow = (props) => {
       style={{ ...style, display: "block", zIndex: 10 }}
       onClick={onClick}
     >
-      <img src={NextArrow} alt="Next" width="45px" />
+      <img src={NextArrow} alt="Next" width="45px" className="next" />
     </div>
   );
 };
@@ -80,6 +80,8 @@ const settings = {
     },
     {
       breakpoint: 768,
+      prevArrow: <CustomPrevArrow />,
+      nextArrow: <CustomNextArrow />,
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -87,11 +89,11 @@ const settings = {
     },
     {
       breakpoint: 425,
+      prevArrow: <CustomPrevArrow />,
+      nextArrow: <CustomNextArrow />,
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
-        prevArrow: false,
-        nextArrow: false,
       },
     },
   ],
@@ -139,7 +141,7 @@ function AgentProfile() {
 
       <Container>
         <Row gutter={[80, 20]}>
-          <Col lg={8}>
+          <Col xl={8} lg={8} md={12} xs={32} sm={32}>
             {isLoading ? (
               <Skeleton.Image
                 active
@@ -155,7 +157,7 @@ function AgentProfile() {
               />
             )}
           </Col>
-          <Col lg={16} className="py-5">
+          <Col lg={16} md={12} xs={32} className="py-5">
             {isLoading ? (
               <Skeleton
                 active
@@ -180,7 +182,7 @@ function AgentProfile() {
                     <span className="agent-estate">Estate Agent</span>
                   </Paragraph>
                 </Flex>
-                <Paragraph className="agent-description">
+                <Paragraph className="text-justify, agent-description">
                   {data?.description}
                 </Paragraph>
               </>
@@ -198,9 +200,19 @@ function AgentProfile() {
             filter: "none",
           }}
         >
-          <Row gutter={[8, 16]} align="middle" style={{ height: "100%" }}>
-            <Col lg={12} xl={8} md={12} sm={24} xsm={24}></Col>
+          <Row
+            gutter={[8, 16]}
+            align="middle"
+            style={{ height: "100%" }}
+            display="flex"
+          >
+            <Col lg={8} xl={8} md={4}></Col>
             <Col
+              lg={12}
+              xl={8}
+              md={12}
+              sm={24}
+              xsm={24}
               align={"center"}
               style={{ backgroundBlendMode: "normal", filter: "none" }}
             >
@@ -226,7 +238,7 @@ function AgentProfile() {
                       </Title>
                     </div>
 
-                    <Flex gap={20} lg={12} xl={8} md={12} sm={24} xsm={24}>
+                    <Flex gap={10}>
                       <Flex
                         vertical
                         justify={"center"}
@@ -277,13 +289,51 @@ function AgentProfile() {
                             {data?.email}
                           </span>
                         </Flex>
+                        <Row
+                          style={{ display: "flex", justifyContent: "center" }}
+                          gutter={[10, 10]}
+                          claskkName="social-media-adents"
+                        >
+                          <Col sx={24} gap={10} align="center" md={0} lg={0}>
+                            <a
+                              className="bg-social-media"
+                              style={{ cursor: "pointer" }}
+                              href={data?.social?.facebook}
+                              target="_blank"
+                            >
+                              <FaFacebookF color="black" size={24} />
+                            </a>
+                          </Col>
+                          <Col sx={24} md={0} lg={0}>
+                            {" "}
+                            <a
+                              className="bg-social-media"
+                              style={{ cursor: "pointer" }}
+                              href={data?.social?.linkedin}
+                              target="_blank"
+                            >
+                              <FaLinkedinIn color="black" size={24} />
+                            </a>
+                          </Col>
+                          <Col sx={24} md={0} lg={0}>
+                            {" "}
+                            <a
+                              className="bg-social-media"
+                              style={{ cursor: "pointer" }}
+                              href={data?.social?.insta}
+                              target="_blank"
+                            >
+                              <FaInstagram color="black" size={24} />
+                            </a>
+                          </Col>
+                        </Row>
                       </Flex>
                     </Flex>
                   </Flex>
                 )}
               </Flex>
             </Col>
-            <Col lg={12} xl={8} md={12} sm={24} xsm={24}>
+            <Col lg={24} xl={8} md={18} sm={24} xsm={24}>
               {isLoading ? (
                 <Skeleton
                   active
@@ -298,11 +348,6 @@ function AgentProfile() {
                   align="center"
                   style={{ height: "100%" }}
                   gap={10}
-                  xl={8}
-                  lg={12}
-                  md={12}
-                  sm={24}
-                  xsm={24}
                 >
                   <Button
                     classNam="button-secondary-line-left"
@@ -346,9 +391,9 @@ function AgentProfile() {
                 <div key={index} style={{ padding: "0 10px" }}>
                   <Card
                     style={{
-                      width: "90%", // Responsive width
+                      width: "auto", // Responsive width
                       maxWidth: "400px", // Max width for larger screens
-                      background: "#E8E8E8",
+                      background: "#d9d9d93b",
                       margin: "0 auto",
                       padding: "20px",
                       borderRadius: "10px",
@@ -401,7 +446,7 @@ function AgentProfile() {
                   <Card
                     style={{
                       width: "100%",
-                      maxWidth: 400,
+                      maxWidth: "400px",
                       background: "#E8E8E8",
                       margin: "0 auto",
                       padding: "20px",

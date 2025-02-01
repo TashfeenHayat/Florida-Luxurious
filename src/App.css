@@ -493,7 +493,12 @@ body:focus-visible {
   -webkit-transform: scale(1);
   cursor: pointer;
 }
-
+.button-preview:hover {
+  border: 1px solid black !important;
+  background-color: transparent !important;
+  transition: background-color 1s ease; /* added 's' after 0.8 for seconds */
+  color: black !important;
+}
 .button-view {
   background-color: #000; /* Green */
   border: none;
@@ -509,7 +514,8 @@ body:focus-visible {
   letter-spacing: 1.5px;
   cursor: pointer;
 }
-.button-view1 {
+.button-view1,
+.button-preview {
   position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
   background-color: #000; /* Green */
   border: none;
@@ -581,6 +587,32 @@ body:focus-visible {
   pointer-events: none;
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
+}
+.button-next {
+  position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
+  background-color: #000; /* Green */
+  border: none;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 52px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 14px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  width: 250px;
+  height: 75px;
+}
+.button-next:hover {
+  border: 1px solid black !important;
+  background-color: transparent !important;
+  transition: background-color 1s ease; /* added 's' after 0.8 for seconds */
+  color: black !important;
 }
 .button-view1:hover {
   border: 1px solid black !important;
@@ -656,8 +688,34 @@ body:focus-visible {
   content: "";
   position: absolute;
   top: 50%;
-  left: -65px; /* Adjusted left position */
-  width: 110px; /* Adjusted width to fill the container */
+  left: -26px; /* Adjusted left position */
+  width: 80px; /* Adjusted width to fill the container */
+  height: 1px !important;
+  transform: scaleY(1.1);
+  background: gray;
+  pointer-events: none;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+.button-preview::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -26px; /* Adjusted left position */
+  width: 80px; /* Adjusted width to fill the container */
+  height: 1px !important;
+  transform: scaleY(1.1);
+  background: gray;
+  pointer-events: none;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+.button-next::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -25px; /* Adjusted left position */
+  width: 80px; /* Adjusted width to fill the container */
   height: 1px !important;
   transform: scaleY(1.1);
   background: gray;
@@ -1192,6 +1250,21 @@ body:focus-visible {
   .f-64 {
     font-size: 40px !important;
   }
+  .box-award {
+    background: black;
+    color: white;
+    padding: 0px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    min-height: 250px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .social-media-adents {
+    display: none;
+  }
 }
 
 @media screen and (768px >= width) {
@@ -1240,9 +1313,9 @@ body:focus-visible {
   .button-view {
     padding: 8px 16px !important;
   }
-  .button-view1 {
+  /* .button-view1 {
     padding: 8px 16px !important;
-  }
+  } */
   .ant-input-search {
     width: 90%;
   }
@@ -1293,6 +1366,13 @@ body:focus-visible {
   }
   .search-input {
     width: 40ch;
+  }
+  .title-line-agent {
+    width: 100% !important;
+    left: 15rem !important;
+  }
+  .agent-last-name {
+    font-size: 30px !important;
   }
 
   /* .slick-arrow {
@@ -1345,7 +1425,7 @@ body:focus-visible {
   }
   .f-24 {
     font-size: 18px !important;
-    margin-right: 2rem;
+    /* margin-right: 2rem; */
   }
 
   body .p-5 {
@@ -1366,17 +1446,19 @@ body:focus-visible {
     margin-left: 33px;
   }
   .agent-description {
-    font-size: 21px !important;
+    font-size: 16px !important;
+    text-align: justify;
   }
-  body .agent-first-name {
+  .agent-first-name {
     font-size: 58px !important;
   }
   body .agent-last-name {
-    font-size: 40px !important;
+    font-size: 25px !important;
     margin-left: 97px;
   }
   .agent-estate {
-    margin-left: 25px;
+    margin-left: 79px;
+    line-height: 1.2;
   }
 
   .heading-florida-lux-listing {
@@ -1482,6 +1564,39 @@ body:focus-visible {
   }
   .circles-container {
     display: none;
+  }
+  .button-secondary {
+    width: 71%;
+  }
+  .f-24 {
+    font-size: 16px !important;
+  }
+  .box-award {
+    background: black;
+    color: white;
+    padding: 13px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    min-height: 250px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .button-view1 {
+    width: 180px !important;
+  }
+  .button-view1::after {
+    width: 110px !important;
+  }
+  .button-next,
+  .button-preview {
+    padding: 0 !important;
+    font-size: 10px;
+  }
+  .press-market {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    align-items: flex-start; /* Align items to the left */
   }
   /* .next-arrow,
   .prev-arrow {
@@ -2060,8 +2175,9 @@ body:focus-visible {
 /* Agent Profile */
 
 .title-line-agent {
-  width: 195%;
-  right: -185% !important ;
+  width: 17%;
+  left: 65rem;
+  /* right: -185% !important ; */
   height: 5px;
   bottom: auto;
   top: 12%;
@@ -2103,7 +2219,7 @@ body:focus-visible {
   color: #838383;
   font-weight: 100;
   font-size: 20px;
-  letter-spacing: -5%;
+
   line-height: 1.2;
   display: flex;
   width: 100%;
@@ -2113,8 +2229,8 @@ body:focus-visible {
   color: black;
   font-weight: 100;
   font-size: 24px;
-  letter-spacing: -5%;
-  line-height: 1.4;
+
+  line-height: 1.2;
   text-align: justify;
 }
 .agent-info-bg {
@@ -2236,7 +2352,7 @@ body:focus-visible {
 
 .custom-dropdown .ant-space {
   justify-content: space-between;
-  width: 60%;
+  width: 80%;
   color: #838383;
   text-transform: uppercase;
   font-size: 20px;
@@ -2365,7 +2481,33 @@ body:focus-visible {
 .slick-prev {
   left: -15px;
 }
+.box-award {
+  background: black;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  min-height: 250px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.press-market {
+  display: flex; /* Enable Flexbox */
 
+  flex-wrap: wrap; /* Allow items to wrap if necessary */
+  gap: 15px; /* Optional: space between items */
+}
+
+/* Ensure iframe and video elements are responsive inside .press-market */
+.press-market iframe,
+.press-market video {
+  max-width: 100%; /* Prevent iframe/video from overflowing */
+  /* Ensure video scales with width */
+  flex: 1 1 100%; /* Allow iframe/video to grow and shrink with available space */
+  box-sizing: border-box; /* Prevent padding or margin from affecting size */
+}
 /* .responsive-table .ant-table-cell {
     text-align: right; /* Center text on small screens 
   } */

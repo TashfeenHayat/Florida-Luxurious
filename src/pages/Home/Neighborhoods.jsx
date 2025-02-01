@@ -86,14 +86,14 @@ function Neighborhoods() {
                 <div
                   className="show-info"
                   style={{
-                    // position: "absolute",
-                    // top: "50%",
-                    // left: "0%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    justifyItems: "center",
-                    width: "100%",
+                    position: "absolute",
+                    top: "50%",
+                    left: "0%",
+                    // display: "flex",
+                    // justifyContent: "center",
+                    // alignItems: "center",
+                    // justifyItems: "center",
+                    // width: "100%",
                     overflow: "hidden",
                   }}
                 >
@@ -104,14 +104,9 @@ function Neighborhoods() {
                       alignItems: "center",
                       flexDirection: "column",
                       textAlign: "center",
-                      overflow: "hidden",
-                      position: "absolute",
-                      bottom: "10px",
-                      left: "10px",
-                      right: "10px",
                       background: "rgba(0, 0, 0, 0.5)",
-                      padding: "10px",
-                      borderRadius: "5px",
+                      padding: "8px", // Reduced padding
+                      borderRadius: "4px", // Reduced border radius
                     }}
                   >
                     <Text
@@ -172,7 +167,7 @@ function Neighborhoods() {
                       width: "95%",
                     }}
                   >
-                    <Text className="text-upper text-white f-24 f-100 text-center"> 
+                    <Text className="text-upper text-white f-24 f-100 text-center">
                       View All
                     </Text>
                   </div>

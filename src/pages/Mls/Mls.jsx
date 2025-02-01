@@ -183,8 +183,13 @@ function Mls() {
           <Title className="text-center text-white f-40 f-100 text-upper">
             search active LISTINGS
           </Title>
-          <Row gutter={[60, 60]} align="middle">
-            <Col xs={24} sm={12} lg={12}>
+          <Row
+            gutter={[80, 80]}
+            align="middle"
+            display="flex"
+            justify={"center"}
+          >
+            <Col xs={24} sm={24} md={10} lg={12}>
               <Text className="text-white f-bold f-14">Price</Text>
               <Slider
                 className="custom-slider"
@@ -221,7 +226,7 @@ function Mls() {
                 tooltip={{ open: false }}
               />
             </Col> */}
-            <Col lg={12} xs={9} sm={18}>
+            <Col xs={24} sm={24} md={10} lg={12}>
               <Dropdown
                 menu={{
                   items,
@@ -237,7 +242,7 @@ function Mls() {
                 </a>
               </Dropdown>
             </Col>
-            <Col lg={12} xs={9} sm={18}>
+            <Col xs={24} sm={24} md={10} lg={12}>
               <Dropdown
                 menu={{
                   items: minBathRoom,
@@ -253,7 +258,7 @@ function Mls() {
                 </a>
               </Dropdown>
             </Col>
-            <Col lg={12} xs={9} sm={18}>
+            <Col xs={24} sm={24} md={10} lg={12}>
               <Dropdown
                 menu={{
                   items: maxBathRoom,
@@ -269,7 +274,7 @@ function Mls() {
                 </a>
               </Dropdown>
             </Col>
-            <Col lg={12} xs={9} sm={18}>
+            <Col xs={24} sm={24} md={10} lg={12}>
               <Dropdown
                 menu={{
                   items: minBedRoom,
@@ -285,7 +290,7 @@ function Mls() {
                 </a>
               </Dropdown>
             </Col>
-            <Col lg={12} xs={18} sm={18}>
+            <Col xs={24} sm={24} md={10} lg={12}>
               <Dropdown
                 menu={{
                   items: maxBedRoom,
@@ -302,7 +307,7 @@ function Mls() {
               </Dropdown>
             </Col>
 
-               <Col lg={18} xs={24} sm={18}>
+            <Col lg={24} md={24} xs={24} sm={18}>
               <Row gutter={[16, 16]} justify="start">
                 {data?.filters?.map((item, index) => (
                   <Col key={index} xs={24} sm={12} md={8} lg={6} xl={6}>
@@ -317,10 +322,9 @@ function Mls() {
                 ))}
               </Row>
             </Col>
-            <Col lg={24} xs={24} sm={18} align="middle">
+            <Col lg={24} md={24} xs={24} sm={18} align="middle">
               <button
                 className="button-secondary text-upper mt-32"
-                style={{ width: "20%" }}
                 onClick={handleSearchButton}
               >
                 Search
