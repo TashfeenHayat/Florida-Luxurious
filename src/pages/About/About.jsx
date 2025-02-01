@@ -74,83 +74,144 @@ function OurStory() {
             Russian, Spanish, Romanian, Hebrew, Polish, and Turkish.
           </Paragraph>
         </Col>
-        <Col lg={14} sm={24} md={24} style={{ background: "#000" }}>
+        <Col lg={14} sm={32} sx={32} md={24} style={{ background: "#000" }}>
           <div className="p-5">
             <Title className="text-white text-center text-upper f-40">
               <span style={{ fontWeight: 100 }}>Florida</span> Luxurious{" "}
               <span style={{ fontWeight: 100 }}>Properties</span>
             </Title>
           </div>
-          <Flex
-            xl={8}
-            lg={12}
-            md={18}
-            sm={24}
-            justify={"center"}
-            align="center"
-            wrap="wrap"
-            className="bagde"
-            gap={20}
-          >
-            <Image style={{ width: "95px" }} preview={false} src={Bagde} />
-            <Image style={{ width: "95px" }} preview={false} src={Bagde2} />
-            <Image style={{ width: "95px" }} preview={false} src={Bagde1} />
-            <Image style={{ width: "95px" }} preview={false} src={Bagde3} />
-            <Image style={{ width: "95px" }} preview={false} src={Bagde4} />
-          </Flex>
+          <Row gutter={[20, 20]} justify="center" style={{ display: "flex" }}>
+            <Col xs={18} sm={16} md={24} lg={32} xl={14}>
+              <Row justify="center" gutter={[20, 20]} wrap="true">
+                <Col
+                  xs={12}
+                  sm={12}
+                  md={4}
+                  lg={4}
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <Image
+                    style={{ width: "95px" }}
+                    preview={false}
+                    src={Bagde}
+                  />
+                </Col>
+                <Col
+                  xs={12}
+                  sm={12}
+                  md={4}
+                  lg={4}
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <Image
+                    style={{ width: "95px" }}
+                    preview={false}
+                    src={Bagde2}
+                  />
+                </Col>
+                <Col
+                  xs={12}
+                  sm={12}
+                  md={4}
+                  lg={4}
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <Image
+                    style={{ width: "95px" }}
+                    preview={false}
+                    src={Bagde1}
+                  />
+                </Col>
+                <Col
+                  xs={12}
+                  sm={12}
+                  md={4}
+                  lg={4}
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <Image
+                    style={{ width: "95px" }}
+                    preview={false}
+                    src={Bagde3}
+                  />
+                </Col>
+                <Col
+                  xs={12}
+                  sm={12}
+                  md={4}
+                  lg={4}
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <Image
+                    style={{ width: "95px" }}
+                    preview={false}
+                    src={Bagde4}
+                  />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+
           <Row gutter={[20, 20]} className="my-124 px-3">
-            <Col xl={8} lg={18} md={24} sm={24}>
+            <Col xl={8} lg={12} md={12} sm={12} xs={24}>
               <div
-                style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}
+                style={{
+                  borderLeft: "3px solid white",
+                  paddingLeft: "20px",
+                }}
               >
                 <Text
-                  className="text-white f-18 text-upper "
-                  style={{ fontWeight: "bold" }}
+                  className="text-white f-18 text-upper"
+                  style={{ fontWeight: "bold", display: "block" }}
                 >
                   Ranked Private Brokerage
                 </Text>
-                <br />
                 <Text
-                  className="text-white text-upper "
-                  style={{ fontSize: "30px" }}
+                  className="text-white text-upper"
+                  style={{ fontSize: "30px", display: "block" }}
                 >
                   #1
                 </Text>
               </div>
             </Col>
-            <Col xl={8} lg={18} md={24} sm={32}>
+            <Col xl={8} lg={12} md={12} sm={12} xs={24}>
               <div
-                style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}
+                style={{
+                  borderLeft: "3px solid white",
+                  paddingLeft: "20px",
+                }}
               >
                 <Text
-                  className="text-white f-18  text-upper"
-                  style={{ fontWeight: "bold" }}
+                  className="text-white f-18 text-upper"
+                  style={{ fontWeight: "bold", display: "block" }}
                 >
                   Has exceeded the mark
                 </Text>
-                <br />
                 <Text
-                  className="text-white text-upper "
-                  style={{ fontSize: "30px" }}
+                  className="text-white text-upper"
+                  style={{ fontSize: "30px", display: "block" }}
                 >
                   $3.26 BILLION
                 </Text>
               </div>
             </Col>
-            <Col xl={8} lg={12} md={12} sm={12}>
+            <Col xl={8} lg={12} md={12} sm={12} xs={24}>
               <div
-                style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}
+                style={{
+                  borderLeft: "3px solid white",
+                  paddingLeft: "20px",
+                }}
               >
                 <Text
                   className="text-white f-18 text-upper"
-                  style={{ fontWeight: "bold" }}
+                  style={{ fontWeight: "bold", display: "block" }}
                 >
                   Total Sales
                 </Text>
-                <br />
                 <Text
-                  className="text-white text-upper "
-                  style={{ fontSize: "30px" }}
+                  className="text-white text-upper"
+                  style={{ fontSize: "30px", display: "block" }}
                 >
                   ${Math.floor(counter).toLocaleString()}
                 </Text>

@@ -167,7 +167,7 @@ function Neighborhoods() {
                       width: "95%",
                     }}
                   >
-                    <Text className="text-upper text-white f-24 f-100 text-center"> 
+                    <Text className="text-upper text-white f-24 f-100 text-center">
                       View All
                     </Text>
                   </div>

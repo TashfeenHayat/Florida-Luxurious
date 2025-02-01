@@ -423,7 +423,7 @@ export default function DetailProperty() {
           </Title>
           <Paragraph
             className="text-upper f-20 f-100"
-            style={{ lineHeight: "10px", color: "#D4CFC9" }}
+            style={{ lineHeight: "22px", color: "#D4CFC9" }}
           >
             {data?.property?.city}, {data?.property?.state},{" "}
             {data?.property?.zipCode}

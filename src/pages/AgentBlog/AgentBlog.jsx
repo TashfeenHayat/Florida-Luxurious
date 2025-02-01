@@ -136,9 +136,7 @@ function AgentBlog() {
   };
 
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
-    >
+    <div>
       <BackgroundImage Image={Agent}>
         <Row justify="center" align="middle">
           <Col xs={24}>
@@ -177,7 +175,11 @@ function AgentBlog() {
         </Row>
       ) : (
         <Container style={{ padding: "15px", flex: "1" }} justify="center">
-          <div ref={refHtml} />
+          <div
+            ref={refHtml}
+            className="press-market"
+            style={{ flexDirection: "column" }}
+          />
           {loadingPages ? (
             <Row
               style={{
@@ -203,13 +205,13 @@ function AgentBlog() {
                   }}
                 >
                   <Button
-                    className="button-view"
+                    className="button-preview"
                     onClick={handlePrevPage}
                     style={{ marginRight: "10px" }}
                   >
                     Previous Page
                   </Button>
-                  <Button className="button-view" onClick={handleNextPage}>
+                  <Button className="button-next" onClick={handleNextPage}>
                     Next Page
                   </Button>
                 </div>

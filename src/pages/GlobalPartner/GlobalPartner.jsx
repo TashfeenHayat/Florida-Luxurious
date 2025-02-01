@@ -77,9 +77,9 @@ function GlobalPartner() {
         </Text>{" "}
         Properties GLOBAL
       </Paragraph>
-      <Row gutter={[60, 60]} className="py-2">
-        <Col lg={12} md={18} sm={24}>
-          <div style={{ marginLeft: 50, height: "100%" }}>
+      <Row gutter={[60, 60]} className="py-2" display="flex" justify="center">
+        <Col xl={12} lg={14} md={24} sm={24} xs={24}>
+          <div style={{ height: "100%" }}>
             <Flex vertical justify={"center"} align="center">
               <Text className="text-black f-24" style={{ overflow: "hidden" }}>
                 Florida Luxurious Properties has a longstanding affiliation with
@@ -98,12 +98,12 @@ function GlobalPartner() {
             </Flex>
           </div>
         </Col>
-        <Col lg={12} md={24} sm={24}>
-          <Flex justify="center" align="center" style={{ height: "100%" }}>
+        <Col xlg={2} lg={4} md={24} xsm={0} sm={0}>
+          <Flex justify="center" align="center">
             <Image
               src={Globalpartnerimg}
               preview={false}
-              style={{ maxHeight: "480px", objectFit: "contain" }} // Adjust the maxHeight as needed
+              style={{ maxHeight: "480px" }} // Adjust the maxHeight as needed
             />
           </Flex>
         </Col>
@@ -125,21 +125,8 @@ function GlobalPartner() {
           </Text>
         </Flex>
         <Row justify="center" gutter={[16, 16]} className="mt-5">
-          <Col xs={24} sm={12} md={10} lg={8}>
-            <div
-              style={{
-                background: "black",
-                color: "white",
-                padding: "32px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                textAlign: "center",
-                minHeight: "250px", // Ensure boxes are of equal height
-                borderRadius: "8px", // Optional: Add rounded corners for a nicer look
-                boxShadow: "0 4px 8px rgba(0,0,0,0.1)", // Optional: Add shadow for depth
-              }}
-            >
+          <Col xs={24} sm={12} md={12} lg={8}>
+            <div className="box-award">
               <Text
                 className="f-bold f-24 text-upper"
                 style={{ color: "white" }}
@@ -163,20 +150,7 @@ function GlobalPartner() {
           </Col>
 
           <Col xs={24} sm={12} md={10} lg={8}>
-            <div
-              style={{
-                background: "black",
-                color: "white",
-                padding: "20px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                textAlign: "center",
-                minHeight: "250px", // Ensure boxes are of equal height
-                borderRadius: "8px", // Optional: Add rounded corners for a nicer look
-                boxShadow: "0 4px 8px rgba(0,0,0,0.1)", // Optional: Add shadow for depth
-              }}
-            >
+            <div className="box-award">
               <Text className="f-bold f-24 " style={{ color: "white" }}>
                 WINNER
               </Text>

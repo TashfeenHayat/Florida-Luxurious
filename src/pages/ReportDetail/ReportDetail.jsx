@@ -19,17 +19,17 @@ const Flipbook = React.forwardRef(({ pages }, ref) => {
       width={window.innerWidth > 768 ? 500 : 300} // Adjust based on screen size
       height={window.innerWidth > 768 ? 700 : 420}
       size="stretch"
-      minWidth={400}
-      maxWidth={500}
-      minHeight={600}
-      maxHeight={1200}
+      minWidth={315}
+      maxWidth={600}
+      minHeight={200}
+      maxHeight={1100}
       drawShadow={true}
       flippingTime={1000}
       useMouseEvents={true}
       ref={ref} // Pass ref to HTMLFlipBook
       style={{
         margin: "0 auto",
-        background: "#f5f5f5",
+
         borderRadius: "20px",
         boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
         // Ensure that content doesn't overflow
@@ -95,7 +95,7 @@ function ReportDetail() {
 
         const loadPage = async (pageNumber) => {
           const page = await pdf.getPage(pageNumber);
-          const scale = window.innerWidth > 768 ? 1.5 : 1; // Adjust scaling based on screen size
+          const scale = 1.5; // Adjust scaling based on screen size
           const viewport = page.getViewport({ scale });
 
           const canvas = document.createElement("canvas");
@@ -188,7 +188,7 @@ function ReportDetail() {
                     }}
                   >
                     <Button
-                      className="button-view"
+                      className="button-preview"
                       onClick={handlePrevPage}
                       style={{
                         marginRight: "10px",
@@ -196,7 +196,7 @@ function ReportDetail() {
                     >
                       Previous Page
                     </Button>
-                    <Button className="button-view" onClick={handleNextPage}>
+                    <Button className="button-next" onClick={handleNextPage}>
                       Next Page
                     </Button>
                   </div>

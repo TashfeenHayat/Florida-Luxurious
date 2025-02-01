@@ -9,7 +9,6 @@ import * as pdfjsLib from "pdfjs-dist/build/pdf";
 
 const { Title } = Typography;
 
-// Set the workerSrc for PDF.js
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
 
 const Flipbook = React.forwardRef(({ pages, onPageChange }, ref) => {
@@ -27,13 +26,6 @@ const Flipbook = React.forwardRef(({ pages, onPageChange }, ref) => {
       flippingTime={1000}
       useMouseEvents={true}
       onFlip={onPageChange}
-      // style={{
-      //   margin: "0 auto",
-      //   // background: "#f5f5f5",
-      //   borderRadius: "20px",
-      //   boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
-      //   // maxWidth: "1200px",
-      // }}
     >
       {pages.map((page, index) => (
         <div key={index} className="page" style={{ padding: "20px" }}>
@@ -87,7 +79,7 @@ function PropertyPressDetail() {
 
         const loadPage = async (pageNumber) => {
           const page = await pdf.getPage(pageNumber);
-          const scale = 1; // Adjust scale for better quality
+          const scale = 1;
           const viewport = page.getViewport({ scale });
 
           const canvas = document.createElement("canvas");
@@ -97,13 +89,12 @@ function PropertyPressDetail() {
 
           await page.render({ canvasContext: context, viewport }).promise;
 
-          // Convert canvas to image URL
           const imgData = canvas.toDataURL("image/png");
           pageImages.push(imgData);
 
           if (pageImages.length === totalPages) {
             setPages(pageImages);
-            setLoadingPages(false); // Set loadingPages to false when all pages are loaded
+            setLoadingPages(false);
           }
         };
 
@@ -114,16 +105,15 @@ function PropertyPressDetail() {
     }
   }, [data?.file]);
 
-  // Handlers for flip actions
   const handlePrevPage = () => {
     if (flipbookRef.current) {
-      flipbookRef.current.pageFlip().flipPrev(); // Use pageFlip().flipPrev() correctly
+      flipbookRef.current.pageFlip().flipPrev();
     }
   };
 
   const handleNextPage = () => {
     if (flipbookRef.current) {
-      flipbookRef.current.pageFlip().flipNext(); // Use pageFlip().flipNext() correctly
+      flipbookRef.current.pageFlip().flipNext();
     }
   };
 
@@ -170,7 +160,7 @@ function PropertyPressDetail() {
         </Row>
       ) : (
         <Container style={{ padding: "15px", flex: "1" }} justify="center">
-          <div ref={refHtml} />
+          <div ref={refHtml} className="press-market" />
           {loadingPages ? (
             <Row
               style={{
@@ -193,16 +183,22 @@ function PropertyPressDetail() {
                     display: "flex",
                     justifyContent: "center",
                     marginTop: "30px",
+                    flexDirection: "row",
+                    gap: "10px",
                   }}
                 >
                   <Button
-                    className="button-view"
+                    className="button-preview"
                     onClick={handlePrevPage}
-                    style={{ marginRight: "10px" }}
+                    // style={{ marginRight: "10px", width: "120px"  }}
                   >
                     Previous Page
                   </Button>
-                  <Button className="button-view" onClick={handleNextPage}>
+                  <Button
+                    className="button-next"
+                    onClick={handleNextPage}
+                    // style={{ width: "120px" }}
+                  >
                     Next Page
                   </Button>
                 </div>
