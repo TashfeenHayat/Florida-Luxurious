@@ -53,12 +53,16 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 const statusList = [
-  { value: "for_sale", label: "For Sale" },
+  { value: "for_sale", label: "For Sale(featured)" },
   { value: "for_rent", label: "For Rent" },
   { value: "unavailable", label: "Unavailable" },
   { value: "sold", label: "Sold" },
   { value: "upcoming", label: "Upcoming" },
-  { value: "featured", label: "Featured" },
+  // { value: "featured", label: "Featured" },
+];
+const Compensation = [
+  { value: "yes", label: "Yes" },
+  { value: "no", label: "No" },
 ];
 
 function AddProperty() {
@@ -400,8 +404,10 @@ function AddProperty() {
     }
   };
 
-  const filterOption = (input, option) =>
-    (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
+  const filterOption = (input, option) => {
+    const value = option?.label?.toLowerCase() || "";
+    return value.includes(input.toLowerCase());
+  };
 
   const selectAfter = (
     <Select defaultValue="SqFt" onChange={(e) => setAreaUnit(e)}>
@@ -607,14 +613,15 @@ function AddProperty() {
                     },
                   ]}
                 >
-                  <Select
+                   <Select
                     mode="multiple"
                     showSearch
                     size="large"
                     loading={getFiltersReducer.isLoading}
+                    filterOption={filterOption}
                     options={getFiltersReducer.data?.filters.map((i) => ({
                       value: i._id,
-                      label: i.name + " - " + i.code,
+                      label: `${i.name} - ${i.code}`, // Label combining name and code
                     }))}
                     placeholder="Search filters"
                   />
@@ -739,7 +746,11 @@ function AddProperty() {
                   />
                 </Form.Item>
                 <Form.Item name="compensation" label="Compensation">
-                  <Input size="large" placeholder="Compensation" />
+                  <Select
+                    size="large"
+                    options={Compensation}
+                    placeholder={"Compensation"}
+                  ></Select>
                 </Form.Item>
                 <Form.Item
                   name="visitHours"
