@@ -94,31 +94,23 @@ function Filters() {
     <Card
       title="Filters"
       extra={
-        <Space
-          direction="vertical"
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            marginBottom: "16px",
-          }}
-        >
+        <Space style={{ flexWrap: "wrap" }}>
+          {/* // <Search
+          //   placeholder="Search filters"
+          //   onSearch={onSearch}
+          //   enterButton
+          //   allowClear
+          //   style={{ width: "100%", maxWidth: "400px" }}
+          // /> */}
           <Search
-            placeholder="Search filters"
+            placeholder="input search text"
             onSearch={onSearch}
             enterButton
             allowClear
-            style={{ width: "100%", maxWidth: "400px" }}
+            style={{ width: "100%", maxWidth: "300px", marginBottom: "10px" }}
           />
-          <Button type="primary" style={{ width: "100%", maxWidth: "200px" }}>
-            <Link
-              to="/admin/community/add"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                textDecoration: "none",
-                color: "inherit",
-              }}
-            >
+          <Button type="primary" style={{ marginBottom: "10px" }}>
+            <Link to="/admin/community/add">
               <PlusOutlined style={{ marginRight: "8px" }} />
               Add
             </Link>
