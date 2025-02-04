@@ -13,7 +13,7 @@ import {
   Skeleton,
   Alert,
 } from "antd";
-import { EyeOutlined } from "@ant-design/icons";
+import { EyeOutlined, PlayCircleOutlined } from "@ant-design/icons";
 import { Container } from "react-bootstrap";
 import Button from "../../components/Buttons";
 import { IoBedOutline } from "react-icons/io5";
@@ -47,6 +47,9 @@ export default function DetailProperty() {
     email: "",
     message: "",
   });
+
+  const [currentVideo, setCurrentVideo] = useState(null);
+
   const [imageLoading, setImageLoading] = useState(true);
   const [previewOpen, setPreviewOpen] = useState(false);
   const handleImageLoad = () => {
@@ -74,10 +77,26 @@ export default function DetailProperty() {
   const { id } = useParams();
 
   const { data, isLoading } = useProperty(id);
-
+  console.log(data?.property);
   const [backgroundImage, setBackGroundImage] = useState(null);
   const [errors, setErrors] = useState({});
   const [currentImage, setCurrentImage] = useState(null);
+  const [firstModalVisible, setFirstModalVisible] = useState(false);
+  const [secondModalVisible, setSecondModalVisible] = useState(false);
+  const [videoModalVisible, setVideoModalVisible] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const showVideoModal = (url) => {
+    setVideoModalVisible(true);
+    setVideoUrl(url); // Store the video URL in the state
+  };
+
+  const hideVideoModal = () => {
+    setVideoModalVisible(false);
+    setVideoUrl(null); // Reset the video URL when the modal is closed
+  };
+
+  const [videoUrl, setVideoUrl] = useState(null);
+
   useEffect(() => {
     return;
   }, [backgroundImage]);
@@ -87,10 +106,7 @@ export default function DetailProperty() {
   const showModal = () => {
     setOpenModal(!openModal);
   };
-  const handlePreviewClose = () => {
-    console.log("clicked");
-    setPreviewOpen(false); // Close the preview by setting state to false
-  };
+
   const hideModal = () => {
     console.log("clicked");
 
@@ -108,14 +124,16 @@ export default function DetailProperty() {
     const targetElement = document.getElementById("requestSection");
     if (targetElement) {
       const rect = targetElement.getBoundingClientRect();
-      const offset = 5; // Adjust this value to control the offset (distance from top)
+      const offset = 80; // Adjust this value to control the offset (distance from top)
 
+      // Ensure the target element is within the visible viewport, adjusting the scroll to stay within the screen
       window.scrollTo({
-        top: rect.top + window.scrollY - offset, // Scroll to the top of the element minus the offset
+        top: window.scrollY + rect.top - offset, // Adjust scroll to the correct position
         behavior: "smooth",
       });
     }
   };
+
   useEffect(() => {
     const loader = new Loader({
       apiKey: google_api_key,
@@ -274,6 +292,29 @@ export default function DetailProperty() {
   const handleImageClick = (src) => {
     setCurrentImage(src); // Set the clicked image as the one to preview
     setPreviewOpen(true); // Open the modal
+  };
+  const handleModalClose = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0; // Reset video time to 0
+    }
+    setVideoModalVisible(false); // Close the second modal
+  };
+  const videoRef = useRef(null);
+  const handleSecondModalClose = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0; // Reset video time to 0
+    }
+    setSecondModalVisible(false); // Close the second modal
+  };
+  const handleVideoClick = (video) => {
+    const videoUrl = video.mdUrl || video.xlUrl || video.smUrl; // Use available URL (prefer mdUrl > xlUrl > smUrl)
+
+    if (videoUrl) {
+      setSelectedVideo(videoUrl); // Set the selected video URL
+      setSecondModalVisible(true); // Open the second modal with the video player
+    }
   };
   return (
     <div className="single_property">
@@ -695,13 +736,35 @@ export default function DetailProperty() {
                     />
                   )}
                   <Image
-                    src={data?.property?.media[0]?.mdUrl || SkeletonImage}
+                    src={data?.property?.media[0]?.mdUrl}
                     preview
                     onLoad={handleImageLoad}
                     style={{
                       display: imageLoading ? "none" : "block",
                       cursor: "pointer",
+                      aspectRatio: "5/4",
                     }}
+                    width="100%"
+                    aspectRatio="5/7"
+                    fallback={SkeletonImage}
+                  />
+                </Col>
+                <Col lg={12} sm={24} md={24}>
+                  {imageLoading && (
+                    <Skeleton.Image
+                      style={{ width: "100%", height: "100px" }}
+                    />
+                  )}
+                  <Image
+                    src={data?.property?.media[1]?.mdUrl}
+                    onLoad={handleImageLoad}
+                    style={{
+                      display: imageLoading ? "none" : "block",
+                      cursor: "pointer",
+                      aspectRatio: "5/4",
+                    }}
+                    aspectRatio="5/7"
+                    preview
                     width="100%"
                     fallback={SkeletonImage}
                   />
@@ -713,29 +776,12 @@ export default function DetailProperty() {
                     />
                   )}
                   <Image
-                    src={data?.property?.media[1]?.mdUrl || SkeletonImage}
+                    src={data?.property?.media[2]?.mdUrl}
                     onLoad={handleImageLoad}
                     style={{
                       display: imageLoading ? "none" : "block",
                       cursor: "pointer",
-                    }}
-                    preview
-                    width="100%"
-                    fallback={SkeletonImage}
-                  />
-                </Col>
-                <Col lg={12} sm={24} md={24}>
-                  {imageLoading && (
-                    <Skeleton.Image
-                      style={{ width: "100%", height: "100px" }}
-                    />
-                  )}
-                  <Image
-                    src={data?.property?.media[2]?.mdUrl || SkeletonImage}
-                    onLoad={handleImageLoad}
-                    style={{
-                      display: imageLoading ? "none" : "block",
-                      cursor: "pointer",
+                      aspectRatio: "5/4",
                     }}
                     preview
                     width="100%"
@@ -790,11 +836,12 @@ export default function DetailProperty() {
                             )}
                             {/* Image */}{" "}
                             <Image
-                              src={item?.mdUrl || SkeletonImage}
+                              src={item?.mdUrl}
                               onLoad={handleImageLoad}
                               style={{
                                 display: imageLoading ? "none" : "block",
                                 cursor: "pointer",
+                                aspectRatio: "5/4",
                               }}
                               preview={false}
                               onClick={() => handleImageClick(item?.mdUrl)}
@@ -832,8 +879,9 @@ export default function DetailProperty() {
                 visible={previewOpen}
                 onCancel={() => setPreviewOpen(false)} // Close modal when cancel button or background is clicked
                 footer={null} // Remove footer if not needed
-                width={800}
-                height={500}
+                width={1000}
+                height={800}
+                centered
                 styles={{
                   content: {
                     backgroundColor: "transparent",
@@ -857,10 +905,106 @@ export default function DetailProperty() {
               style={{ marginTop: 40 }}
             >
               <div style={{ marginBottom: 40 }}>
-                <Button classNam="button-view1" width="300px">
+                {/* Button to open the first modal */}
+                <div
+                  className="button-view1"
+                  style={{ width: "300px" }}
+                  onClick={() => setFirstModalVisible(true)} // Show the first modal
+                >
                   Watch Videos
-                </Button>
+                </div>
+
+                {/* First Modal to show video previews */}
+                <Modal
+                  open={firstModalVisible} // Control the visibility of the first modal
+                  visible={firstModalVisible}
+                  onCancel={() => setFirstModalVisible(false)} // Close the first modal when canceled
+                  footer={null}
+                  width={800}
+                  centered
+                  styles={{
+                    content: {
+                      backgroundColor: "black",
+                      borderRadius: "0px",
+                      height: "500px",
+                      padding: "3rem",
+                    },
+                  }}
+                >
+                  <Row gutter={[8, 16]}>
+                    {data?.property?.video &&
+                    data?.property?.video.length > 0 ? (
+                      data.property.video.map((video, index) => (
+                        <Col
+                          lg={9}
+                          md={12}
+                          sm={24}
+                          key={index}
+                          onClick={() => handleVideoClick(video)}
+                          style={{
+                            width: "calc(50% - 16px)",
+                            height: "100px",
+                            backgroundColor: "transparent",
+                            borderRadius: "10px",
+                            cursor: "pointer",
+                            position: "relative",
+                            overflow: "hidden",
+                            boxShadow: "0 4px 8px rgba(244, 238, 238, 0.2)",
+                            transition: "transform 0.3s ease",
+                            border: "3px solid white",
+                            margin: "4px",
+                          }}
+                        >
+                          <div
+                            style={{
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              transform: "translate(-50%, -50%)",
+                              fontSize: "30px", // Adjust size for the icon
+                              color: "white",
+                              textShadow: "2px 2px 5px rgba(0,0,0,0.7)",
+                              cursor: "pointer", // Make the icon clickable
+                            }}
+                          >
+                            <PlayCircleOutlined />
+                          </div>
+                        </Col>
+                      ))
+                    ) : (
+                      <h6 className="text-white">No video</h6>
+                    )}
+                  </Row>
+                </Modal>
+
+                {/* Second Modal to play selected video */}
+                <Modal
+                  open={secondModalVisible} // Control the visibility of the second modal
+                  visible={secondModalVisible}
+                  onCancel={handleSecondModalClose} // Close the second modal when canceled
+                  footer={null}
+                  width={800}
+                  centered
+                  styles={{
+                    content: {
+                      backgroundColor: "transparent",
+                      borderRadius: "0px",
+                      height: "500px",
+                      padding: "3rem",
+                    },
+                  }}
+                >
+                  <div>
+                    {selectedVideo && (
+                      <video ref={videoRef} width="100%" height="auto" controls>
+                        <source src={selectedVideo} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    )}
+                  </div>
+                </Modal>
               </div>
+
               {/*<div style={{ marginBottom: 40 }}>
                 <Button classNam="button-view1" width="300px">
                   Request details
@@ -888,7 +1032,7 @@ export default function DetailProperty() {
           </Col>
         </Row>
       </Container>
-      <div>
+      <div id="requestSection">
         {/* <div className="boxshadow-section p-5">
         <Container className="p-5">
           <Title className="text-upper" style={{ letterSpacing: "1px" }}>
@@ -900,11 +1044,7 @@ export default function DetailProperty() {
         </Container>
       </div> */}
       </div>
-      <div
-        style={{ backgroundColor: "#000" }}
-        id="requestSection"
-        ref={requestRef}
-      >
+      <div style={{ backgroundColor: "#000" }} ref={requestRef}>
         <Container>
           <Row>
             <Col lg={14} sm={24} md={24} xsm={24} className="p-5">

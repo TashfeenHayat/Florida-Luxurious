@@ -57,13 +57,13 @@ export const addPropertySlice = createSlice({
       state.isLoading = false;
       state.isError = false;
       state.data = action.payload;
-      console.log(action.payload);
+     
     });
 
     builder.addCase(addProperty.rejected, (state, action) => {
       state.isLoading = false;
       state.isError = true;
-      console.log(action.payload);
+      
       notification.error({
         message: "Something went wrong",
         description: action.payload,
