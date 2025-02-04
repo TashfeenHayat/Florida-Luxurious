@@ -13,6 +13,7 @@ import {
   Skeleton,
   Alert,
 } from "antd";
+import { EyeOutlined } from "@ant-design/icons";
 import { Container } from "react-bootstrap";
 import Button from "../../components/Buttons";
 import { IoBedOutline } from "react-icons/io5";
@@ -31,6 +32,7 @@ import { useDispatch } from "react-redux";
 import { google_api_key } from "../../api/Axios";
 import { contactUs } from "../../api/Inquiry";
 import SkeletonImage from "antd/es/skeleton/Image";
+
 const { Title, Paragraph, Text } = Typography;
 
 export default function DetailProperty() {
@@ -46,6 +48,7 @@ export default function DetailProperty() {
     message: "",
   });
   const [imageLoading, setImageLoading] = useState(true);
+  const [previewOpen, setPreviewOpen] = useState(false);
   const handleImageLoad = () => {
     setImageLoading(false);
   };
@@ -71,9 +74,10 @@ export default function DetailProperty() {
   const { id } = useParams();
 
   const { data, isLoading } = useProperty(id);
-  console.log("data", data?.property);
-  const [backgroundImage, setBackGroundImage] = useState(null);
 
+  const [backgroundImage, setBackGroundImage] = useState(null);
+  const [errors, setErrors] = useState({});
+  const [currentImage, setCurrentImage] = useState(null);
   useEffect(() => {
     return;
   }, [backgroundImage]);
@@ -83,17 +87,35 @@ export default function DetailProperty() {
   const showModal = () => {
     setOpenModal(!openModal);
   };
-
+  const handlePreviewClose = () => {
+    console.log("clicked");
+    setPreviewOpen(false); // Close the preview by setting state to false
+  };
   const hideModal = () => {
-    setOpenModal(!openModal);
+    console.log("clicked");
+
+    setOpenModal(openModal);
   };
 
+  // const scrollToRequest = () => {
+  //   if (requestRef.current) {
+  //     requestRef.current.scrollIntoView({
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // };
   const scrollToRequest = () => {
-    if (requestRef.current) {
-      requestRef.current.scrollIntoView({ behavior: "smooth" });
+    const targetElement = document.getElementById("requestSection");
+    if (targetElement) {
+      const rect = targetElement.getBoundingClientRect();
+      const offset = 5; // Adjust this value to control the offset (distance from top)
+
+      window.scrollTo({
+        top: rect.top + window.scrollY - offset, // Scroll to the top of the element minus the offset
+        behavior: "smooth",
+      });
     }
   };
-
   useEffect(() => {
     const loader = new Loader({
       apiKey: google_api_key,
@@ -144,11 +166,66 @@ export default function DetailProperty() {
   }, [google_api_key, data?.property?.latitude, data?.property?.longitude]);
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setContact((prevContact) => ({
-      ...prevContact,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    const { name, value } = e.target;
+
+    // Restrict phone number to digits only
+    if (name === "phoneNumber" && /[^0-9]/.test(value)) {
+      return; // Ignore non-numeric input
+    }
+
+    setContact({
+      ...contact,
+      [name]: value,
+    });
+  };
+
+  // Validate the form before submission
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = {};
+
+    // Validate firstName
+    if (!contact.firstName) {
+      newErrors.firstName = "First name is required.";
+      isValid = false;
+    }
+
+    // Validate lastName
+    if (!contact.lastName) {
+      newErrors.lastName = "Last name is required.";
+      isValid = false;
+    }
+
+    // Validate email
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!contact.email) {
+      newErrors.email = "Email is required.";
+      isValid = false;
+    } else if (!emailPattern.test(contact.email)) {
+      newErrors.email = "Please enter a valid email address.";
+      isValid = false;
+    }
+
+    // Validate phoneNumber (must be exactly 10 digits)
+    const phonePattern = /^[0-9]{10}$/;
+    if (!contact.phoneNumber) {
+      newErrors.phoneNumber = "Phone number is required.";
+      isValid = false;
+    } else if (!phonePattern.test(contact.phoneNumber)) {
+      newErrors.phoneNumber = "Phone number must be exactly 10 digits.";
+      isValid = false;
+    }
+
+    // Validate message
+    if (!contact.message) {
+      newErrors.message = "Message is required.";
+      isValid = false;
+    }
+
+    // If validation fails, set error messages
+    setErrors(newErrors);
+
+    return isValid;
   };
 
   const handleSubmit = async (e) => {
@@ -169,14 +246,6 @@ export default function DetailProperty() {
     });
   };
 
-  const validateForm = () => {
-    const { firstName, lastName, email, message } = contact;
-    if (!firstName || !lastName || !email || !message) {
-      message.error("Please fill out all required fields.");
-      return false;
-    }
-    return true;
-  };
   const currencySymbols = {
     usd: "$",
     eur: "€",
@@ -201,6 +270,10 @@ export default function DetailProperty() {
 
     const symbol = currencySymbols[currencyCode.toLowerCase()];
     return symbol || "N/A";
+  };
+  const handleImageClick = (src) => {
+    setCurrentImage(src); // Set the clicked image as the one to preview
+    setPreviewOpen(true); // Open the modal
   };
   return (
     <div className="single_property">
@@ -685,24 +758,26 @@ export default function DetailProperty() {
                     <Modal
                       open={openModal}
                       footer={null}
-                      width="500px"
+                      width={800}
                       closeIcon={
                         <IoMdClose
                           size={20}
                           color="#FFFFFF"
                           style={{ cursor: "pointer" }}
+                          onClick={hideModal}
                         />
                       }
+                      centered
                       styles={{
                         content: {
                           backgroundColor: "black",
                           borderRadius: "0px",
-                          height: "300px",
+                          height: "500px",
                           overflowY: "auto",
                           padding: "3rem",
                         },
-                        onCancel: { hideModal },
                       }}
+                      onCancel={hideModal}
                     >
                       <Row gutter={[8, 16]}>
                         {data?.property?.media?.map((item, index) => (
@@ -713,7 +788,7 @@ export default function DetailProperty() {
                                 style={{ width: "100%", height: "100px" }}
                               />
                             )}
-                            {/* Image */}
+                            {/* Image */}{" "}
                             <Image
                               src={item?.mdUrl || SkeletonImage}
                               onLoad={handleImageLoad}
@@ -721,15 +796,31 @@ export default function DetailProperty() {
                                 display: imageLoading ? "none" : "block",
                                 cursor: "pointer",
                               }}
+                              preview={false}
+                              onClick={() => handleImageClick(item?.mdUrl)}
                               width="100%"
                               fallback={SkeletonImage}
-                              preview={{
-                                onChange: (current, prev) =>
-                                  console.log(
-                                    `current index: ${current}, prev index: ${prev}`
-                                  ),
-                              }}
                             />
+                            <div
+                              style={{
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                                background: "rgba(0, 0, 0, 0.5)",
+                                padding: "8px",
+                                borderRadius: "50%",
+                                cursor: "pointer",
+                              }}
+                              onClick={(e) => {
+                                e.stopPropagation(); // Prevent image click from also triggering
+                                handleImageClick(item?.mdUrl);
+                              }}
+                            >
+                              <EyeOutlined
+                                style={{ color: "white", fontSize: "24px" }}
+                              />
+                            </div>
                           </Col>
                         ))}
                       </Row>
@@ -737,6 +828,27 @@ export default function DetailProperty() {
                   </div>
                 </Col>
               </Row>
+              <Modal
+                visible={previewOpen}
+                onCancel={() => setPreviewOpen(false)} // Close modal when cancel button or background is clicked
+                footer={null} // Remove footer if not needed
+                width={800}
+                height={500}
+                styles={{
+                  content: {
+                    backgroundColor: "transparent",
+                    borderRadius: "0px",
+
+                    overflowY: "auto",
+                  },
+                }}
+              >
+                <Image
+                  alt="zoom"
+                  src={currentImage}
+                  style={{ width: "100%" }}
+                />
+              </Modal>
             </div>
             <Flex
               vertical
@@ -776,7 +888,8 @@ export default function DetailProperty() {
           </Col>
         </Row>
       </Container>
-      {/* <div className="boxshadow-section p-5">
+      <div>
+        {/* <div className="boxshadow-section p-5">
         <Container className="p-5">
           <Title className="text-upper" style={{ letterSpacing: "1px" }}>
             Features
@@ -786,7 +899,12 @@ export default function DetailProperty() {
           </Row>
         </Container>
       </div> */}
-      <div style={{ backgroundColor: "#000" }} ref={requestRef}>
+      </div>
+      <div
+        style={{ backgroundColor: "#000" }}
+        id="requestSection"
+        ref={requestRef}
+      >
         <Container>
           <Row>
             <Col lg={14} sm={24} md={24} xsm={24} className="p-5">
@@ -813,6 +931,9 @@ export default function DetailProperty() {
                       onChange={handleChange}
                       required
                     />
+                    {errors.firstName && (
+                      <div style={{ color: "red" }}>{errors.firstName}</div>
+                    )}
                   </Col>
                   <Col lg={12} md={12} sm={24}>
                     <Input
@@ -823,6 +944,9 @@ export default function DetailProperty() {
                       onChange={handleChange}
                       required
                     />
+                    {errors.lastName && (
+                      <div style={{ color: "red" }}>{errors.lastName}</div>
+                    )}
                   </Col>
                   <Col lg={12} md={12} sm={24}>
                     <Input
@@ -833,6 +957,9 @@ export default function DetailProperty() {
                       onChange={handleChange}
                       required
                     />
+                    {errors.email && (
+                      <div style={{ color: "red" }}>{errors.email}</div>
+                    )}
                   </Col>
                   <Col lg={12} md={12} sm={24}>
                     <Input
@@ -842,6 +969,9 @@ export default function DetailProperty() {
                       value={contact.phoneNumber}
                       onChange={handleChange}
                     />
+                    {errors.phoneNumber && (
+                      <div style={{ color: "red" }}>{errors.phoneNumber}</div>
+                    )}
                   </Col>
                   <Col lg={24} md={24}>
                     <Input
@@ -849,18 +979,24 @@ export default function DetailProperty() {
                       type="text"
                       name="message"
                       value={contact.message}
+                      style={{ color: "white" }}
                       onChange={handleChange}
                       required
                     />
+                    {errors.message && (
+                      <div style={{ color: "red" }}>{errors.message}</div>
+                    )}
                   </Col>
                   <Col lg={24} md={24}>
-                    <Checkbox
+                    {/* <Checkbox
                       name="requestShowing"
                       checked={contact.requestShowing}
                       onChange={handleChange}
+                      style={{ color: "white" }}
                     >
+                      {" "}
                       Request a showing
-                    </Checkbox>
+                    </Checkbox> */}
                   </Col>
                   <Col lg={24} md={24} align="middle">
                     <button
