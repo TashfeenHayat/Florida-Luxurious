@@ -2549,3 +2549,6 @@ body:focus-visible {
 .slick-prev {
   left: 0rem !important;
 } */
+.ant-modal-close {
+  color: white !important;
+}
