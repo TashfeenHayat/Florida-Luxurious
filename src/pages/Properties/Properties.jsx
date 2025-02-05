@@ -58,24 +58,20 @@ function Properties() {
     usd: "$",
     eur: "€",
     pound: "£",
-   
   };
 
   // Function to format price (remove unwanted characters, add commas)
-  const formatPrice = (price) => {
-    // Remove all non-numeric characters except for dot
-    const numericPrice = parseFloat(price.replace(/[^0-9.]/g, ""));
-    if (isNaN(numericPrice)) return "N/A"; // Return "N/A" if price is invalid
-
-    // Return the formatted price with commas
-    return numericPrice.toLocaleString("en-US");
-  };
-
-  // Function to get the correct currency symbol
   const getCurrencySymbol = (currencyCode) => {
+    if (!currencyCode) return currencyCode; // Avoid calling toLowerCase on undefined or null
     return (
       currencySymbols[currencyCode.toLowerCase()] || currencyCode.toUpperCase()
-    ); // Default to currency code if no symbol found
+    );
+  };
+
+  const formatPrice = (price) => {
+    if (!price || isNaN(price.replace(/[^0-9.]/g, ""))) return "N/A"; // Handle invalid or empty price
+    const numericPrice = parseFloat(price.replace(/[^0-9.]/g, ""));
+    return numericPrice.toLocaleString("en-US");
   };
 
   //Sorted highest to lowest
@@ -84,7 +80,7 @@ function Properties() {
     const priceB = Number(b?.salePrice?.slice(1).replace(/,/g, "") || 0);
     return priceB - priceA;
   });
-  console.log("data sorted", sortedProperties);
+
   // Slice the data based on current page
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentProperties = sortedProperties?.slice(

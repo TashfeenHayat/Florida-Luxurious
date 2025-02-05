@@ -1234,9 +1234,9 @@ function BoatOwner() {
           >
             Boat owners
           </Title>
-         <Row>
+          <Row gutter={{6:6}}>
             <Col xs={2} sm={2} md={2} lg={4}></Col>
-            <Col xs={20} sm={20} md={20} lg={16}>
+            <Col xs={24} sm={24} md={20} lg={16} xlg={16}>
               {[
                 { columns: columns, data: data },
                 { columns: columns1, data: data1 },
