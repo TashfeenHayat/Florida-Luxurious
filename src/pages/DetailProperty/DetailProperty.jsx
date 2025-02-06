@@ -1157,7 +1157,7 @@ export default function DetailProperty() {
               sm={32}
               xsm={32}
               ref={mapRef}
-              style={{ height: "500px", width: "100%" }}
+              style={{ height: "500px", width: "100%", marginTop: "20px" }}
             ></Col>
           </Row>
         </Container>

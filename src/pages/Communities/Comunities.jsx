@@ -167,12 +167,12 @@ function Comunities() {
                   </Text>
                 </Col>
                 <Col
-                  lg={12}
+                  lg={20}
                   md={38}
                   sm={38}
                   xsm={38}
                   ref={mapRef}
-                  style={{ height: "300px", width: "100%" }}
+                  style={{ height: "300px", width: "100%",}}
                 ></Col>
               </Row>
             </Container>
@@ -300,7 +300,7 @@ function Comunities() {
               ))}
             </Row>
             <Flex justify={"center"} align="center" className="my-4">
-              {property.properties.length === 0 ? null : (
+              {property?.properties?.length === 0 ? null : (
                 <Pagination
                   defaultCurrent={1}
                   total={property?.properties?.length || 0}
