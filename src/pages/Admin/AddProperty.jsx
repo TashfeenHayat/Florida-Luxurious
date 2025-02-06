@@ -54,7 +54,6 @@ const { Option } = Select;
 
 const statusList = [
   { value: "for_sale", label: "For Sale(featured)" },
-
   { value: "for_rent", label: "For Rent" },
   { value: "unavailable", label: "Unavailable" },
   { value: "sold", label: "Sold" },
@@ -65,7 +64,6 @@ const Compensation = [
   { value: "yes", label: "Yes" },
   { value: "no", label: "No" },
 ];
-
 function AddProperty() {
   const inputRef = useRef(null);
   const mapRef = useRef(null);
@@ -553,6 +551,7 @@ const loadMap = (loader, coordinates) => {
               </Form.Item>
             </Col>
           </Row>
+
           <Row>
             <Col span={12} className="gutter-row">
               <Form.Item
@@ -610,14 +609,16 @@ const loadMap = (loader, coordinates) => {
                 />
               </Form.Item>
             </Col>
-            <Form.Item label="Add Secondary Agent">
-              <Radio.Group
-                onChange={handleSecondaryAgentChange}
-                value={addSecondaryAgent ? "yes" : "no"}
-              >
-                <Radio value="yes">Yes</Radio>
-                <Radio value="no">No</Radio>
-              </Radio.Group>
+            <Col span={12} className="gutter-row">
+              <Form.Item label="Add Secondary Agent">
+                <Radio.Group
+                  onChange={handleSecondaryAgentChange}
+                  value={addSecondaryAgent ? "yes" : "no"}
+                >
+                  <Radio value="yes">Yes</Radio>
+                  <Radio value="no">No</Radio>
+                </Radio.Group>
+              </Form.Item>
               {addSecondaryAgent && (
                 <Form.Item
                   name="Secondary_agentId"
@@ -642,7 +643,9 @@ const loadMap = (loader, coordinates) => {
                   />
                 </Form.Item>
               )}
-            </Form.Item>{" "}
+            </Col>
+          </Row>
+          <Row>
             <Col span={12} className="gutter-row">
               <Form.Item
                 name="filters"
@@ -682,18 +685,17 @@ const loadMap = (loader, coordinates) => {
               </Form.Item>
             </Col>
             <Col span={12} className="gutter-row">
-              <Form.Item name="description" label="Description">
-                <TextArea
-                  size="large"
-                  rows={4}
-                  placeholder="Description"
-                  rules={[
-                    {
-                      required: true,
-                      message: "description is required",
-                    },
-                  ]}
-                />
+              <Form.Item
+                name="description"
+                label="Description"
+                rules={[
+                  {
+                    required: true,
+                    message: "Description is required",
+                  },
+                ]}
+              >
+                <TextArea size="large" rows={4} placeholder="Description" />
               </Form.Item>
             </Col>
             <Col span={12} className="gutter-row">
@@ -763,7 +765,13 @@ const loadMap = (loader, coordinates) => {
                   },
                 ]}
               >
-                <Input size="large" placeholder="Zip Code" />
+                <Input
+                  size="large"
+                  value={value}
+                  placeholder="Zip Code"
+                  style={{ width: "100%" }}
+                  onChange={handleNumericInput}
+                />
               </Form.Item>
               <Form.Item
                 name="area"
@@ -779,6 +787,7 @@ const loadMap = (loader, coordinates) => {
                   size="large"
                   addonAfter={selectAfter}
                   placeholder="Area"
+                  style={{ width: "100%" }}
                 />
               </Form.Item>
               <Form.Item
@@ -795,6 +804,9 @@ const loadMap = (loader, coordinates) => {
                   size="large"
                   addonAfter={curencyAfter}
                   placeholder="Sale Price"
+                  style={{ width: "100%" }}
+                  value={value}
+                  onChange={handleNumericInput}
                 />
               </Form.Item>
               <Form.Item name="compensation" label="Compensation">
@@ -822,7 +834,11 @@ const loadMap = (loader, coordinates) => {
                   },
                 ]}
               >
-                <Input size="large" placeholder="Reduced Price" />
+                <Input
+                  size="large"
+                  placeholder="Reduced Price"
+                  style={{ width: "100%" }}
+                />
               </Form.Item>
               <Form.Item
                 name="yearBuilt"
@@ -1073,24 +1089,41 @@ const loadMap = (loader, coordinates) => {
               </Card>
             </Col>
           </Row>
-
-          <Col span={24} className="gutter-row">
-            <Form.Item style={{ marginBottom: "0px" }}>
-              <Button
-                size="large"
-                block="true"
-                type="primary"
-                htmlType="submit"
-                loading={
-                  getAgentsReducer.isLoading ||
-                  getPropertiesReducer.isLoading ||
-                  loading
-                }
-              >
-                Save
-              </Button>
-            </Form.Item>
-          </Col>
+          <Row
+            gutter={{ 40: 40 }}
+            style={{ display: "flex", justifyContent: "center" }}
+          >
+            <Col span={24} lg={10} className="gutter-row">
+              <Form.Item style={{ marginBottom: "0px" }}>
+                <Button
+                  size="large"
+                  block="true"
+                  type="primary"
+                  htmlType="submit"
+                  loading={
+                    getAgentsReducer.isLoading ||
+                    getPropertiesReducer.isLoading ||
+                    loading
+                  }
+                >
+                  Save
+                </Button>
+              </Form.Item>{" "}
+            </Col>
+            <Col span={24} lg={10} className="gutter-row">
+              {" "}
+              <Form.Item>
+                <Button
+                  size="large"
+                  block="true"
+                  type="primary"
+                  onClick={handleExit} // Trigger navigate on click
+                >
+                  Exit
+                </Button>
+              </Form.Item>
+            </Col>
+          </Row>
         </Form>
       </Card>
     </>
