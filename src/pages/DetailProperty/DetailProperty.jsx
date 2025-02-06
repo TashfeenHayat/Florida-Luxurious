@@ -124,16 +124,14 @@ export default function DetailProperty() {
     const targetElement = document.getElementById("requestSection");
     if (targetElement) {
       const rect = targetElement.getBoundingClientRect();
-      const offset = 80; // Adjust this value to control the offset (distance from top)
+      const offset = 5; // Adjust this value to control the offset (distance from top)
 
-      // Ensure the target element is within the visible viewport, adjusting the scroll to stay within the screen
       window.scrollTo({
-        top: window.scrollY + rect.top - offset, // Adjust scroll to the correct position
+        top: rect.top + window.scrollY - offset, // Scroll to the top of the element minus the offset
         behavior: "smooth",
       });
     }
   };
-
   useEffect(() => {
     const loader = new Loader({
       apiKey: google_api_key,
@@ -745,10 +743,8 @@ export default function DetailProperty() {
                     style={{
                       display: imageLoading ? "none" : "block",
                       cursor: "pointer",
-                      aspectRatio: "5/4",
                     }}
                     width="100%"
-                    aspectRatio="5/7"
                     fallback={SkeletonImage}
                   />
                 </Col>
@@ -764,9 +760,7 @@ export default function DetailProperty() {
                     style={{
                       display: imageLoading ? "none" : "block",
                       cursor: "pointer",
-                      aspectRatio: "5/4",
                     }}
-                    aspectRatio="5/7"
                     preview
                     width="100%"
                     fallback={SkeletonImage}
@@ -784,7 +778,6 @@ export default function DetailProperty() {
                     style={{
                       display: imageLoading ? "none" : "block",
                       cursor: "pointer",
-                      aspectRatio: "5/4",
                     }}
                     preview
                     width="100%"
@@ -844,7 +837,6 @@ export default function DetailProperty() {
                               style={{
                                 display: imageLoading ? "none" : "block",
                                 cursor: "pointer",
-                                aspectRatio: "5/4",
                               }}
                               preview={false}
                               onClick={() => handleImageClick(item?.mdUrl)}
@@ -934,50 +926,43 @@ export default function DetailProperty() {
                     },
                   }}
                 >
-                  <Row gutter={[8, 16]}>
-                    {data?.property?.video &&
-                    data?.property?.video.length > 0 ? (
-                      data.property.video.map((video, index) => (
-                        <Col
-                          lg={9}
-                          md={12}
-                          sm={24}
-                          key={index}
-                          onClick={() => handleVideoClick(video)}
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    {/* Display the video previews */}
+                    {data?.property?.video.map((video, index) => (
+                      <div
+                        key={index}
+                        onClick={() => handleVideoClick(video)}
+                        style={{
+                          width: "180px",
+                          height: "100px",
+                          backgroundColor: "transparent",
+                          borderRadius: "10px",
+                          cursor: "pointer",
+                          position: "relative",
+                          overflow: "hidden",
+                          boxShadow: "0 4px 8px rgba(244, 238, 238, 0.2)",
+                          transition: "transform 0.3s ease",
+                          border: "3px solid white", // Added solid black border with 30px thickness
+                        }}
+                      >
+                        <div
                           style={{
-                            width: "calc(50% - 16px)",
-                            height: "100px",
-                            backgroundColor: "transparent",
-                            borderRadius: "10px",
-                            cursor: "pointer",
-                            position: "relative",
-                            overflow: "hidden",
-                            boxShadow: "0 4px 8px rgba(244, 238, 238, 0.2)",
-                            transition: "transform 0.3s ease",
-                            border: "3px solid white",
-                            margin: "4px",
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            fontSize: "30px", // Adjust size for the icon
+                            color: "white",
+                            textShadow: "2px 2px 5px rgba(0,0,0,0.7)",
+                            cursor: "pointer", // Make the icon clickable
                           }}
                         >
-                          <div
-                            style={{
-                              position: "absolute",
-                              top: "50%",
-                              left: "50%",
-                              transform: "translate(-50%, -50%)",
-                              fontSize: "30px", // Adjust size for the icon
-                              color: "white",
-                              textShadow: "2px 2px 5px rgba(0,0,0,0.7)",
-                              cursor: "pointer", // Make the icon clickable
-                            }}
-                          >
-                            <PlayCircleOutlined />
-                          </div>
-                        </Col>
-                      ))
-                    ) : (
-                      <h6 className="text-white">No video</h6>
-                    )}
-                  </Row>
+                          <PlayCircleOutlined />
+                        </div>
+                      </div>
+                    ))}
+                    ||<h6 className="text-white"> No video </h6>
+                  </div>
                 </Modal>
 
                 {/* Second Modal to play selected video */}
@@ -1035,19 +1020,32 @@ export default function DetailProperty() {
           </Col>
         </Row>
       </Container>
-      <div id="requestSection">
-        {/* <div className="boxshadow-section p-5">
-        <Container className="p-5">
-          <Title className="text-upper" style={{ letterSpacing: "1px" }}>
-            Features
-          </Title>
-          <Row gutter={[8, 40]}>
-            <Col lg={24} md={24} sm={24}></Col>
-          </Row>
-        </Container>
-      </div> */}
+      <div>
+        <div className="boxshadow-section p-5 mt-5">
+          <Container>
+            <Title className="text-upper" style={{ letterSpacing: "1px" }}>
+              Features
+            </Title>
+            <Row gutter={[16, 40]}>
+              {data?.property?.features.map((property, index) => (
+                <Col lg={8} md={12} sm={24} key={index}>
+                  <Title className="" level={2}>
+                    {property?.name} {/* Corrected item to property */}
+                  </Title>
+                  <Paragraph className="f-16 f-100">
+                    {property?.description} {/* Corrected item to property */}
+                  </Paragraph>
+                </Col>
+              ))}
+            </Row>
+          </Container>
+        </div>
       </div>
-      <div style={{ backgroundColor: "#000" }} ref={requestRef}>
+      <div
+        style={{ backgroundColor: "#000" }}
+        id="requestSection"
+        ref={requestRef}
+      >
         <Container>
           <Row>
             <Col lg={14} sm={24} md={24} xsm={24} className="p-5">
@@ -1159,7 +1157,7 @@ export default function DetailProperty() {
               sm={32}
               xsm={32}
               ref={mapRef}
-              style={{ height: "500px", width: "100%", marginTop: "20px"  }}
+              style={{ height: "500px", width: "100%", marginTop: "20px" }}
             ></Col>
           </Row>
         </Container>
