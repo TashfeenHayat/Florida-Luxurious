@@ -293,13 +293,7 @@ export default function DetailProperty() {
     setCurrentImage(src); // Set the clicked image as the one to preview
     setPreviewOpen(true); // Open the modal
   };
-  const handleModalClose = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0; // Reset video time to 0
-    }
-    setVideoModalVisible(false); // Close the second modal
-  };
+
   const videoRef = useRef(null);
   const handleSecondModalClose = () => {
     if (videoRef.current) {
@@ -429,7 +423,12 @@ export default function DetailProperty() {
                 >
                   <FaWater size={15} />
                 </div>
-                <Text className="text-white f-16 f-100">100± Waterfront</Text>
+
+                <Text className="text-white f-14 f-100">
+                  {data?.property?.waterfront
+                    ? `${data.property.waterfront}  Waterfront`
+                    : "100 ± Waterfront"}
+                </Text>
               </Flex>
             </Col>
 
@@ -599,7 +598,11 @@ export default function DetailProperty() {
               >
                 <FaWater size={15} />
               </div>
-              <Text className="text-white f-16 f-100">100± Waterfront</Text>
+              <Text className="text-white f-16 f-100">
+                {data?.property?.waterfront
+                  ? `${data.property.waterfront}Waterfront`
+                  : "100 ± Waterfront"}
+              </Text>
             </Flex>
           </Col>
 
@@ -693,8 +696,8 @@ export default function DetailProperty() {
           <Col lg={12} xs={24} sm={24} className="p-3">
             <Card className="card-feature">
               <Title
-                style={{ textAlign: "center", lineHeight: 1 }}
-                className="text-upper f-30 "
+                style={{ textAlign: "center", lineHeight: 1, fontSize: "28px" }}
+                className="text-upper"
               >
                 {data?.property?.addressLine1} {data?.property?.addressLine2}
               </Title>
@@ -1032,6 +1035,7 @@ export default function DetailProperty() {
           </Col>
         </Row>
       </Container>
+<<<<<<< HEAD
       <div id="requestSection">
         {/* <div className="boxshadow-section p-5">
         <Container className="p-5">
@@ -1043,6 +1047,28 @@ export default function DetailProperty() {
           </Row>
         </Container>
       </div> */}
+=======
+      <div>
+        <div className="boxshadow-section p-5 mt-5">
+          <Container>
+            <Title className="text-upper" style={{ letterSpacing: "1px" }}>
+              Features
+            </Title>
+            <Row gutter={[16, 40]}>
+              {data?.property?.features.map((property, index) => (
+                <Col lg={8} md={12} sm={24} key={index}>
+                  <Title className="" level={2}>
+                    {property?.name} {/* Corrected item to property */}
+                  </Title>
+                  <Paragraph className="f-16 f-100">
+                    {property?.description} {/* Corrected item to property */}
+                  </Paragraph>
+                </Col>
+              ))}
+            </Row>
+          </Container>
+        </div>
+>>>>>>> origin/properties/feateared
       </div>
       <div style={{ backgroundColor: "#000" }} ref={requestRef}>
         <Container>
@@ -1161,6 +1187,7 @@ export default function DetailProperty() {
           </Row>
         </Container>
       </div>
+
       <Flex
         gap={30}
         className="mt-5 mb-5"

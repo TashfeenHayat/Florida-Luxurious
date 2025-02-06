@@ -153,69 +153,12 @@ function AddProperty() {
   const openNotification = (type, description) => {
     api[type]({ description });
   };
-  // Inside the AddProperty component, where you are fetching data and setting form values
+  const [marker, setMarker] = useState(null);
 
-  {
-    /* useEffect(() => {
-    const loader = new Loader({
-      apiKey: google_api_key,
-      libraries: ["places"],
-    });
-    loadMap(loader, coordinates);
-    dispatch(getAgents({ page: 1, limit: 50 }));
-    dispatch(getFilters({ page: 1, limit: 50 }));
-    dispatch(getProperties({ mlsOnly: true }));
-
-    if (id) {
-      setLoading(true);
-      dispatch(getProperty(params.id)).then(({ payload }) => {
-        const { property } = payload;
-        setLoading(false);
-
-        // Decode HTML for summernote editor
-        const parser = new DOMParser();
-        const decodedHtml = parser.parseFromString(property.press, "text/html")
-          .body.textContent;
-        window.$("#summernote").summernote("code", decodedHtml);
-
-        // Set initial fileList from property media
-        setFileList(property?.media?.map((media) => ({ url: media.mdUrl })));
-
-        // Set coordinates
-        const coords = {
-          lat: parseFloat(property.latitude),
-          lng: parseFloat(property.longitude),
-        };
-        setCoordinates(coords);
-
-        // Load the map with coordinates
-        loadMap(loader, coords);
-
-        // Populate form fields with property data
-        form.setFieldsValue({
-          ...property,
-          mlsId: parseInt(property?.mlsId),
-          Primary_agentId: property.agentId?._id,
-          Secondary_agentId: property.agentId?._id,
-          filters: property.filters?.map((i) => i._id),
-          yearBuilt: dayJs(property.yearBuilt),
-          addressLine1: property.addressLine1,
-        });
-
-        // Set the search location input with the address
-        if (inputRef.current) {
-          inputRef.current.value = property?.addressLine1;
-        }
-      });
-    } else {
-      window.$("#summernote").summernote();
-    }
-
-    return () => {
-      window.$("#summernote").summernote("destroy");
-    };
-  }, [id, dispatch, form]);*/
-  }
+  const handleExit = () => {
+    navigate("/admin/property"); // Navigate to the /admin/property page
+  };
+ 
 
   useEffect(() => {
     const loader = new Loader({
@@ -240,6 +183,10 @@ function AddProperty() {
           .body.textContent;
         window.$("#summernote").summernote("code", decodedHtml);
         setFileList(property?.media?.map((media) => ({ url: media.mdUrl })));
+        console.log(property.video);
+        setFileListVideo(
+          property?.video?.map((video) => ({ url: video.mdUrl }))
+        );
         //console.log(fileList);
         const coords = {
           lat: parseFloat(property.latitude),
@@ -250,6 +197,7 @@ function AddProperty() {
         form.resetFields();
         form.setFieldsValue({
           ...property,
+
           mlsId: property.mlsId,
           Primary_agentId: property.Primary_agentId?._id,
           Secondary_agentId: property.Secondary_agentId?._id,
@@ -276,94 +224,109 @@ function AddProperty() {
     };
   }, [dispatch, id]);
 
-  const loadMap = (loader, coordinates) => {
-    loader.load().then(() => {
-      if (inputRef.current && mapRef.current) {
-        const mapInstance = new window.google.maps.Map(mapRef.current, {
-          center: coordinates,
-          zoom: 9,
+const loadMap = (loader, coordinates) => {
+  loader.load().then(() => {
+    if (inputRef.current && mapRef.current) {
+      const mapInstance = new window.google.maps.Map(mapRef.current, {
+        center: coordinates,
+        zoom: 9,
+      });
+      setMap(mapInstance);
+
+      // Check if a marker already exists, if so, update its position
+      if (!marker) {
+        const newMarker = new window.google.maps.Marker({
+          position: coordinates,
+          map: mapInstance,
         });
-        setMap(mapInstance);
+        setMarker(newMarker); // Save the marker reference in state
+      } else {
+        marker.setPosition(coordinates); // Update the existing marker position
+      }
 
-        const autocomplete = new window.google.maps.places.Autocomplete(
-          inputRef.current,
-          {
-            componentRestrictions: { country: "us" },
-          }
-        );
-        const addressComponets = {
-          street_number: "short_name",
-          route: "long_name",
-          locality: "long_name",
-          administrative_area_level_1: "short_name",
-          country: "long_name",
-          postal_code: "short_name",
-        };
-        autocomplete.addListener("place_changed", () => {
-          const place = autocomplete.getPlace();
-          if (place.geometry) {
-            const location = place.geometry.location;
-            setCoordinates({
-              lat: location.lat(),
-              lng: location.lng(),
-            });
-            console.log(place);
-            for (var i = 0; i < place.address_components.length; i++) {
-              var addressType = place.address_components[i].types[0];
-              if (addressComponets[addressType]) {
-                var val =
-                  place.address_components[i][addressComponets[addressType]];
+      const autocomplete = new window.google.maps.places.Autocomplete(
+        inputRef.current,
+        {
+          componentRestrictions: { country: "us" },
+        }
+      );
+      const addressComponets = {
+        street_number: "short_name",
+        route: "long_name",
+        locality: "long_name",
+        administrative_area_level_1: "short_name",
+        country: "long_name",
+        postal_code: "short_name",
+      };
+      autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        if (place.geometry) {
+          const location = place.geometry.location;
+          setCoordinates({
+            lat: location.lat(),
+            lng: location.lng(),
+          });
+          mapInstance.setCenter(location);
 
-                switch (addressType) {
-                  case "street_number":
-                    form.setFieldsValue({
-                      addressLine1: val,
-                    });
-                    break;
-                  case "administrative_area_level_1":
-                    form.setFieldsValue({
-                      state: val,
-                    });
-                    break;
-                  case "locality":
-                    form.setFieldsValue({
-                      city: val,
-                    });
-                    break;
-                  case "country":
-                    form.setFieldsValue({
-                      country: val,
-                    });
-                    break;
-                  case "postal_code":
-                    form.setFieldsValue({
-                      zipCode: val,
-                    });
-                    break;
-                  case "street_number":
-                  case "route":
-                    form.setFieldsValue({
-                      addressLine2: val,
-                    });
-                    break;
-                }
-              }
-            }
-            mapInstance.setCenter(location);
+          // Update the marker position if it exists
+          if (marker) {
+            marker.setPosition(location);
+          } else {
             new window.google.maps.Marker({
               position: location,
               map: mapInstance,
             });
           }
-        });
-      }
-    });
-  };
+
+          for (var i = 0; i < place.address_components.length; i++) {
+            var addressType = place.address_components[i].types[0];
+            if (addressComponets[addressType]) {
+              var val =
+                place.address_components[i][addressComponets[addressType]];
+
+              switch (addressType) {
+                case "street_number":
+                  form.setFieldsValue({
+                    addressLine1: val,
+                  });
+                  break;
+                case "administrative_area_level_1":
+                  form.setFieldsValue({
+                    state: val,
+                  });
+                  break;
+                case "locality":
+                  form.setFieldsValue({
+                    city: val,
+                  });
+                  break;
+                case "country":
+                  form.setFieldsValue({
+                    country: val,
+                  });
+                  break;
+                case "postal_code":
+                  form.setFieldsValue({
+                    zipCode: val,
+                  });
+                  break;
+                case "street_number":
+                case "route":
+                  form.setFieldsValue({
+                    addressLine2: val,
+                  });
+                  break;
+              }
+            }
+          }
+        }
+      });
+    }
+  });
+};
+
 
   const onFinish = async (values) => {
-    console.log(fileList);
-    console.log(fileListVideo);
-
     values.media = fileList.map((media) => ({
       mdUrl: media.response ? media.response.url : media.url,
     }));
@@ -371,7 +334,6 @@ function AddProperty() {
       mdUrl: video.response ? video.response.url : video.url,
     }));
 
-    console.log("Received values of form: ", values);
     if (id) {
       const res = await dispatch(
         updateProperty({
@@ -384,9 +346,13 @@ function AddProperty() {
           ...values,
         })
       ).unwrap();
-      setInitialValue({});
+      setInitialValue({
+        ...values,
+        id: res.propertyId,
+      });
       openNotification("success", res);
-      setTimeout(navigate("/admin/property"), 1000);
+
+      navigate(`/admin/property/edit/${res.updatedProperty._id}`);
     } else {
       const res = await dispatch(
         addProperty({
@@ -394,16 +360,26 @@ function AddProperty() {
           areaUnit,
           longitude: String(coordinates.lng),
           latitude: String(coordinates.lat),
-
           ...values,
         })
       ).unwrap();
-      setInitialValue({});
+      setInitialValue({
+        ...values,
+        id: res.propertyId,
+      });
       openNotification("success", res);
-      setTimeout(navigate("/admin/property"), 1000);
+
+      navigate(`/admin/property/edit/${res.propertyId}`);
     }
   };
+  const [value, setValue] = useState("");
+  const handleNumericInput = (e) => {
+    let inputValue = e.target.value;
 
+    if (/^\d*\.?\d*$/.test(inputValue)) {
+      setValue(inputValue);
+    }
+  };
   const selectAfter = (
     <Select defaultValue="SqFt" onChange={(e) => setAreaUnit(e)}>
       <Option value="SqFt">SqFt</Option>
@@ -424,11 +400,13 @@ function AddProperty() {
     const value = option?.label?.toLowerCase() || "";
     return value.includes(input.toLowerCase());
   };
-  // const handlevalueChange = (value) => {
-  //   // Ensure only numeric values (0-9) are allowed
-  //   const filteredValue = value.replace(/[^0-9]/g, "");
-  //   setValue(filteredValue);
-  // };
+
+  const sortedFilters = getFiltersReducer.data?.filters
+    .map((i) => ({
+      value: i._id,
+      label: `${i.name} - ${i.code}`, // Label combining name and code
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label)); // Sorting from A to Z by label
 
   return (
     <>
@@ -682,10 +660,11 @@ function AddProperty() {
                   size="large"
                   loading={getFiltersReducer.isLoading}
                   filterOption={filterOption}
-                  options={getFiltersReducer.data?.filters.map((i) => ({
-                    value: i._id,
-                    label: `${i.name} - ${i.code}`, // Label combining name and code
-                  }))}
+                  options={sortedFilters}
+                  // options={getFiltersReducer.data?.filters.map((i) => ({
+                  //   value: i._id,
+                  //   label: `${i.name} - ${i.code}`, // Label combining name and code
+                  // }))}
                   placeholder="Search filters"
                 />
               </Form.Item>
@@ -1093,7 +1072,8 @@ function AddProperty() {
                 </Form.List>
               </Card>
             </Col>
-          </Row>{" "}
+          </Row>
+
           <Col span={24} className="gutter-row">
             <Form.Item style={{ marginBottom: "0px" }}>
               <Button
