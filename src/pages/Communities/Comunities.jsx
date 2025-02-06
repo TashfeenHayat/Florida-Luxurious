@@ -172,7 +172,7 @@ function Comunities() {
                   sm={38}
                   xsm={38}
                   ref={mapRef}
-                  style={{ height: "300px", width: "100%" }}
+                  style={{ height: "300px", width: "100%" , marginTop: "20px" }}
                 ></Col>
               </Row>
             </Container>
