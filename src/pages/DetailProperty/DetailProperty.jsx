@@ -1035,7 +1035,6 @@ export default function DetailProperty() {
           </Col>
         </Row>
       </Container>
-<<<<<<< HEAD
       <div id="requestSection">
         {/* <div className="boxshadow-section p-5">
         <Container className="p-5">
@@ -1047,28 +1046,6 @@ export default function DetailProperty() {
           </Row>
         </Container>
       </div> */}
-=======
-      <div>
-        <div className="boxshadow-section p-5 mt-5">
-          <Container>
-            <Title className="text-upper" style={{ letterSpacing: "1px" }}>
-              Features
-            </Title>
-            <Row gutter={[16, 40]}>
-              {data?.property?.features.map((property, index) => (
-                <Col lg={8} md={12} sm={24} key={index}>
-                  <Title className="" level={2}>
-                    {property?.name} {/* Corrected item to property */}
-                  </Title>
-                  <Paragraph className="f-16 f-100">
-                    {property?.description} {/* Corrected item to property */}
-                  </Paragraph>
-                </Col>
-              ))}
-            </Row>
-          </Container>
-        </div>
->>>>>>> origin/properties/feateared
       </div>
       <div style={{ backgroundColor: "#000" }} ref={requestRef}>
         <Container>
