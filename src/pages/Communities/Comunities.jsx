@@ -68,7 +68,42 @@ function Comunities() {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+  const currencySymbols = {
+    usd: "$",
+    eur: "€",
+    pound: "£",
+  };
 
+  // Function to format price (remove unwanted characters, add commas)
+  const formatPrice = (price) => {
+    // Remove all non-numeric characters except for dot
+    const numericPrice = parseFloat(price.replace(/[^0-9.]/g, ""));
+    if (isNaN(numericPrice)) return "N/A"; // Return "N/A" if price is invalid
+
+    // Return the formatted price with commas
+    return numericPrice.toLocaleString("en-US");
+  };
+
+  // Function to get the correct currency symbol
+  const getCurrencySymbol = (currencyCode) => {
+    return (
+      currencySymbols[currencyCode.toLowerCase()] || currencyCode.toUpperCase()
+    ); // Default to currency code if no symbol found
+  };
+
+  //Sorted highest to lowest
+  const sortedProperties = property?.properties?.slice().sort((a, b) => {
+    const priceA = Number(a?.salePrice?.slice(1).replace(/,/g, "") || 0);
+    const priceB = Number(b?.salePrice?.slice(1).replace(/,/g, "") || 0);
+    return priceB - priceA;
+  });
+  console.log("data sorted", sortedProperties);
+  // Slice the data based on current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentProperties = sortedProperties?.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
   return (
     <div style={{ overflow: "hidden" }}>
       <BackgroundImage Image={data?.photo}>
@@ -122,7 +157,7 @@ function Comunities() {
           </div>
           <div style={{ background: "black" }} className="py-5">
             <Container>
-                <Row gutter={[20, 40]}>
+              <Row gutter={[20, 40]}>
                 <Col lg={12} md={24} sm={24}>
                   <Title className="text-white f-32 f-bold text-upper">
                     Why choose {data?.name}?
@@ -194,7 +229,7 @@ function Comunities() {
               Search {data?.name} Luxury Homes For Sale
             </Title>
             <Row gutter={[16, 60]}>
-              {property?.properties.map((property, index) => (
+              {currentProperties?.map((property, index) => (
                 <Col
                   lg={12}
                   md={12}
@@ -231,7 +266,8 @@ function Comunities() {
                             last list price
                           </Text>
                           <Text className="text-center text-upper f-24 f-100 text-gray">
-                            {property?.salePrice}
+                            {getCurrencySymbol(property?.currency)}
+                            {formatPrice(property?.salePrice)}
                           </Text>
                         </Flex>
                         <Flex vertical>
@@ -252,8 +288,9 @@ function Comunities() {
                           >
                             {property?.addressLine1} {property?.addressLine2}{" "}
                             <br />
-                            <IoPricetagOutline size={20} /> $
-                            {property?.salePrice?.replace("$", "")}
+                            <IoPricetagOutline size={20} />{" "}
+                            {getCurrencySymbol(property?.currency)}
+                            {formatPrice(property?.salePrice)}
                           </Text>
                         </Flex>
                       </Flex>
@@ -263,10 +300,10 @@ function Comunities() {
               ))}
             </Row>
             <Flex justify={"center"} align="center" className="my-4">
-              {property?.properties.length === 0 ? null : (
+              {property.properties.length === 0 ? null : (
                 <Pagination
                   defaultCurrent={1}
-                  total={data?.totalCount}
+                  total={property?.properties?.length || 0}
                   pageSize={itemsPerPage}
                   onChange={handlePageChange}
                   responsive
