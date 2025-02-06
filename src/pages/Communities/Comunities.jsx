@@ -300,7 +300,7 @@ function Comunities() {
               ))}
             </Row>
             <Flex justify={"center"} align="center" className="my-4">
-              {property.properties.length === 0 ? null : (
+              {property?.properties?.length === 0 ? null : (
                 <Pagination
                   defaultCurrent={1}
                   total={property?.properties?.length || 0}
