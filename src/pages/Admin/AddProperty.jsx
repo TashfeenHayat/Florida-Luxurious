@@ -678,12 +678,7 @@ function AddProperty() {
               <Form.Item
                 name="neighborhood"
                 label="Neighborhood"
-{/*                 rules={[
-                  {
-                    required: true,
-                    message: "Neighborhood is required",
-                  },
-                ]} */}
+
               >
                 <Input size="large" placeholder="Neighborhood" />
               </Form.Item>
