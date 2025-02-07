@@ -797,7 +797,7 @@ export default function DetailProperty() {
                       <FaPlus size={60} color="#D4CFC9" />
                     </Flex>
 
-                    <Modal
+                       <Modal
                       open={openModal}
                       footer={null}
                       width={800}
@@ -809,6 +809,7 @@ export default function DetailProperty() {
                           onClick={hideModal}
                         />
                       }
+                      maskClosable={false}
                       centered
                       styles={{
                         content: {
@@ -822,76 +823,44 @@ export default function DetailProperty() {
                       onCancel={hideModal}
                     >
                       <Row gutter={[8, 16]}>
-                        {data?.property?.media?.map((item, index) => (
-                          <Col lg={8} md={12} sm={24} key={index}>
-                            {/* Skeleton Loading State */}
-                            {imageLoading && (
-                              <Skeleton.Image
-                                style={{ width: "100%", height: "100px" }}
+                        <Image.PreviewGroup
+                          preview={{
+                            visible: previewOpen,
+                            onVisibleChange: (visible) =>
+                              setPreviewOpen(visible),
+                          }}
+                        >
+                          {data?.property?.media?.map((item, index) => (
+                            <Col lg={8} md={12} sm={24}>
+                              {imageLoading && (
+                                <Skeleton.Image
+                                  style={{ width: "100%", height: "100px" }}
+                                />
+                              )}
+                              <Image
+                                src={item?.mdUrl}
+                                onLoad={handleImageLoad}
+                                preview={true}
+                                style={{
+                                  display: imageLoading ? "none" : "block",
+                                  cursor: "pointer",
+                                }}
+                                onClick={(e) => {
+                                  e.stopPropagation(); // Prevent image click from also triggering
+                                  setPreviewOpen(true); // Open the preview modal
+                                }}
+                                width="100%"
+                                fallback={SkeletonImage}
                               />
-                            )}
-                            {/* Image */}{" "}
-                            <Image
-                              src={item?.mdUrl}
-                              onLoad={handleImageLoad}
-                              style={{
-                                display: imageLoading ? "none" : "block",
-                                cursor: "pointer",
-                              }}
-                              preview={false}
-                              onClick={() => handleImageClick(item?.mdUrl)}
-                              width="100%"
-                              fallback={SkeletonImage}
-                            />
-                            <div
-                              style={{
-                                position: "absolute",
-                                top: "50%",
-                                left: "50%",
-                                transform: "translate(-50%, -50%)",
-                                background: "rgba(0, 0, 0, 0.5)",
-                                padding: "8px",
-                                borderRadius: "50%",
-                                cursor: "pointer",
-                              }}
-                              onClick={(e) => {
-                                e.stopPropagation(); // Prevent image click from also triggering
-                                handleImageClick(item?.mdUrl);
-                              }}
-                            >
-                              <EyeOutlined
-                                style={{ color: "white", fontSize: "24px" }}
-                              />
-                            </div>
-                          </Col>
-                        ))}
+                            </Col>
+                          ))}
+                        </Image.PreviewGroup>
                       </Row>
                     </Modal>
                   </div>
                 </Col>
               </Row>
-              <Modal
-                visible={previewOpen}
-                onCancel={() => setPreviewOpen(false)} // Close modal when cancel button or background is clicked
-                footer={null} // Remove footer if not needed
-                width={1000}
-                height={800}
-                centered
-                styles={{
-                  content: {
-                    backgroundColor: "transparent",
-                    borderRadius: "0px",
-
-                    overflowY: "auto",
-                  },
-                }}
-              >
-                <Image
-                  alt="zoom"
-                  src={currentImage}
-                  style={{ width: "100%" }}
-                />
-              </Modal>
+            
             </div>
             <Flex
               vertical
