@@ -23,7 +23,11 @@ import {
 import dayJs from "dayjs";
 import { api_base_URL, google_api_key } from "../../api/Axios";
 import { Loader } from "@googlemaps/js-api-loader";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  MinusCircleOutlined,
+  PlusOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import { useParams } from "react-router";
 import countryList from "react-select-country-list";
 // import {
@@ -88,16 +92,27 @@ function AddProperty() {
   const [loading, setLoading] = useState(false);
   // const [showSecondaryAgent, setShowSecondaryAgent] = useState(false);
   const [addSecondaryAgent, setAddSecondaryAgent] = useState(false);
-
+  const [isUploading, setIsUploading] = useState(false);
   const handleSecondaryAgentChange = (e) => {
     setAddSecondaryAgent(e.target.value === "yes");
   };
 
-  const handleChange = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
+  const handleChange = ({ file, fileList }) => {
+    setFileList(fileList);
+    if (file.status === "uploading") {
+      setIsUploading(true); // Mark as uploading
+    } else if (file.status === "done" || file.status === "error") {
+      setIsUploading(false); // Mark as done or error
+    }
   };
-  const handleChangeVideo = ({ fileList: newFileList }) => {
-    setFileListVideo(newFileList || []); // Safeguard against undefined
+
+  const handleChangeVideo = ({ file, fileList }) => {
+    setFileListVideo(fileList);
+    if (file.status === "uploading") {
+      setIsUploading(true); // Mark as uploading
+    } else if (file.status === "done" || file.status === "error") {
+      setIsUploading(false); // Mark as done or error
+    }
   };
 
   const handlePreview = async (file) => {
@@ -122,22 +137,10 @@ function AddProperty() {
     e.preventDefault();
   };
   const uploadButton = (
-    <button
-      style={{
-        border: 0,
-        background: "none",
-      }}
-      type="button"
-    >
-      <PlusOutlined />
-      <div
-        style={{
-          marginTop: 8,
-        }}
-      >
-        Upload
-      </div>
-    </button>
+    <div>
+      {isUploading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
   );
 
   const options = useMemo(() => countryList().getData(), []);
@@ -156,7 +159,6 @@ function AddProperty() {
   const handleExit = () => {
     navigate("/admin/property"); // Navigate to the /admin/property page
   };
- 
 
   useEffect(() => {
     const loader = new Loader({
@@ -222,107 +224,106 @@ function AddProperty() {
     };
   }, [dispatch, id]);
 
-const loadMap = (loader, coordinates) => {
-  loader.load().then(() => {
-    if (inputRef.current && mapRef.current) {
-      const mapInstance = new window.google.maps.Map(mapRef.current, {
-        center: coordinates,
-        zoom: 9,
-      });
-      setMap(mapInstance);
-
-      // Check if a marker already exists, if so, update its position
-      if (!marker) {
-        const newMarker = new window.google.maps.Marker({
-          position: coordinates,
-          map: mapInstance,
+  const loadMap = (loader, coordinates) => {
+    loader.load().then(() => {
+      if (inputRef.current && mapRef.current) {
+        const mapInstance = new window.google.maps.Map(mapRef.current, {
+          center: coordinates,
+          zoom: 9,
         });
-        setMarker(newMarker); // Save the marker reference in state
-      } else {
-        marker.setPosition(coordinates); // Update the existing marker position
-      }
+        setMap(mapInstance);
 
-      const autocomplete = new window.google.maps.places.Autocomplete(
-        inputRef.current,
-        {
-          componentRestrictions: { country: "us" },
-        }
-      );
-      const addressComponets = {
-        street_number: "short_name",
-        route: "long_name",
-        locality: "long_name",
-        administrative_area_level_1: "short_name",
-        country: "long_name",
-        postal_code: "short_name",
-      };
-      autocomplete.addListener("place_changed", () => {
-        const place = autocomplete.getPlace();
-        if (place.geometry) {
-          const location = place.geometry.location;
-          setCoordinates({
-            lat: location.lat(),
-            lng: location.lng(),
+        // Check if a marker already exists, if so, update its position
+        if (!marker) {
+          const newMarker = new window.google.maps.Marker({
+            position: coordinates,
+            map: mapInstance,
           });
-          mapInstance.setCenter(location);
+          setMarker(newMarker); // Save the marker reference in state
+        } else {
+          marker.setPosition(coordinates); // Update the existing marker position
+        }
 
-          // Update the marker position if it exists
-          if (marker) {
-            marker.setPosition(location);
-          } else {
-            new window.google.maps.Marker({
-              position: location,
-              map: mapInstance,
-            });
+        const autocomplete = new window.google.maps.places.Autocomplete(
+          inputRef.current,
+          {
+            componentRestrictions: { country: "us" },
           }
+        );
+        const addressComponets = {
+          street_number: "short_name",
+          route: "long_name",
+          locality: "long_name",
+          administrative_area_level_1: "short_name",
+          country: "long_name",
+          postal_code: "short_name",
+        };
+        autocomplete.addListener("place_changed", () => {
+          const place = autocomplete.getPlace();
+          if (place.geometry) {
+            const location = place.geometry.location;
+            setCoordinates({
+              lat: location.lat(),
+              lng: location.lng(),
+            });
+            mapInstance.setCenter(location);
 
-          for (var i = 0; i < place.address_components.length; i++) {
-            var addressType = place.address_components[i].types[0];
-            if (addressComponets[addressType]) {
-              var val =
-                place.address_components[i][addressComponets[addressType]];
+            // Update the marker position if it exists
+            if (marker) {
+              marker.setPosition(location);
+            } else {
+              new window.google.maps.Marker({
+                position: location,
+                map: mapInstance,
+              });
+            }
 
-              switch (addressType) {
-                case "street_number":
-                  form.setFieldsValue({
-                    addressLine1: val,
-                  });
-                  break;
-                case "administrative_area_level_1":
-                  form.setFieldsValue({
-                    state: val,
-                  });
-                  break;
-                case "locality":
-                  form.setFieldsValue({
-                    city: val,
-                  });
-                  break;
-                case "country":
-                  form.setFieldsValue({
-                    country: val,
-                  });
-                  break;
-                case "postal_code":
-                  form.setFieldsValue({
-                    zipCode: val,
-                  });
-                  break;
-                case "street_number":
-                case "route":
-                  form.setFieldsValue({
-                    addressLine2: val,
-                  });
-                  break;
+            for (var i = 0; i < place.address_components.length; i++) {
+              var addressType = place.address_components[i].types[0];
+              if (addressComponets[addressType]) {
+                var val =
+                  place.address_components[i][addressComponets[addressType]];
+
+                switch (addressType) {
+                  case "street_number":
+                    form.setFieldsValue({
+                      addressLine1: val,
+                    });
+                    break;
+                  case "administrative_area_level_1":
+                    form.setFieldsValue({
+                      state: val,
+                    });
+                    break;
+                  case "locality":
+                    form.setFieldsValue({
+                      city: val,
+                    });
+                    break;
+                  case "country":
+                    form.setFieldsValue({
+                      country: val,
+                    });
+                    break;
+                  case "postal_code":
+                    form.setFieldsValue({
+                      zipCode: val,
+                    });
+                    break;
+                  case "street_number":
+                  case "route":
+                    form.setFieldsValue({
+                      addressLine2: val,
+                    });
+                    break;
+                }
               }
             }
           }
-        }
-      });
-    }
-  });
-};
-
+        });
+      }
+    });
+  };
 
   const onFinish = async (values) => {
     values.media = fileList.map((media) => ({
@@ -426,6 +427,8 @@ const loadMap = (loader, coordinates) => {
                   name="file"
                   listType="picture-card"
                   fileList={fileList}
+                  multiple
+                  webkitdirectory
                   onPreview={handlePreview}
                   onChange={handleChange}
                   moveable="true"
@@ -435,7 +438,7 @@ const loadMap = (loader, coordinates) => {
                   action={`${api_base_URL}upload`}
                   accept="image/*"
                 >
-                  {fileList.length >= 100 ? null : uploadButton}
+                  {fileList.length >= 500 ? null : uploadButton}
                 </Upload>
                 <div>
                   <h5>Reorder the images </h5>
@@ -490,6 +493,7 @@ const loadMap = (loader, coordinates) => {
               <Form.Item name="videos">
                 <Upload
                   name="file"
+                  multiple
                   listType="picture-card"
                   fileList={fileListVideo}
                   onPreview={handlePreview}
@@ -1103,7 +1107,8 @@ const loadMap = (loader, coordinates) => {
                   loading={
                     getAgentsReducer.isLoading ||
                     getPropertiesReducer.isLoading ||
-                    loading
+                    loading ||
+                    isUploading
                   }
                 >
                   Save
