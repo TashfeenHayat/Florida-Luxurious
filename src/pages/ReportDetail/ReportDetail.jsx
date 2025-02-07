@@ -176,16 +176,15 @@ function ReportDetail() {
           style={{
             maxWidth: "100%",
             padding: "0 15px",
-          
+
             borderRadius: "15px", // Soft rounded container corners
-           
           }}
         >
           <Row justify="center" style={{ paddingBottom: "40px" }}>
             <Col xs={24} md={20} lg={16}>
               <div ref={refHtml} style={{ marginBottom: "20px" }} />
 
-              {pages.length > 0 && (
+              {pages.length > 1 && (
                 <>
                   <Flipbook ref={flipbookRef} pages={pages} />
                   <div
