@@ -166,15 +166,12 @@ function Comunities() {
                     {data?.other_description}
                   </Text>
                 </Col>
-                <Col
-                  lg={20}
-                  md={38}
-                  sm={38}
-                  xsm={38}
-                  ref={mapRef}
-                
-                  style={{ height: "300px", width: "100%"  }}
-                ></Col>
+                <Col lg={12} md={24} sm={24}>
+                  <div
+                    ref={mapRef}
+                    style={{ height: "300px", width: "100%" }}
+                  />
+                </Col>
               </Row>
             </Container>
           </div>
