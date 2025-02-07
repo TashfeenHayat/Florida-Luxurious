@@ -13,26 +13,24 @@ const { Title } = Typography;
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
 
 // Flipbook component using react-pageflip
-const Flipbook = React.forwardRef(({ pages }, ref) => {
+const Flipbook = React.forwardRef(({ pages, onPageChange }, ref) => {
   return (
     <HTMLFlipBook
-      width={window.innerWidth > 768 ? 500 : 300} // Adjust based on screen size
-      height={window.innerWidth > 768 ? 700 : 420}
+      width={500}
+      height={700}
       size="stretch"
       minWidth={315}
       maxWidth={600}
-      minHeight={200}
+      minHeight={400}
       maxHeight={1100}
       drawShadow={true}
       flippingTime={1000}
       useMouseEvents={true}
+      onFlip={onPageChange}
       ref={ref} // Pass ref to HTMLFlipBook
       style={{
         margin: "0 auto",
-
-        borderRadius: "20px",
-        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
-        // Ensure that content doesn't overflow
+        borderRadius: "12px", // Rounded corners for a soft feel
       }}
     >
       {pages.map((page, index) => (
@@ -43,7 +41,7 @@ const Flipbook = React.forwardRef(({ pages }, ref) => {
             style={{
               width: "100%", // Make the image responsive
               height: "auto",
-              borderRadius: "20px",
+              borderRadius: "10px", // Rounded corners for pages
             }}
           />
         </div>
@@ -150,7 +148,11 @@ function ReportDetail() {
           >
             <Title
               className="text-upper text-white f-50 f-100"
-              style={{ fontSize: window.innerWidth > 768 ? "50px" : "30px" }} // Responsive font size
+              style={{
+                fontSize: window.innerWidth > 768 ? "50px" : "30px", // Responsive font size
+                wordBreak: "break-word", // Prevents text overflow
+                textShadow: "2px 2px 8px rgba(0, 0, 0, 0.1)", // Soft text shadow for readability
+              }}
             >
               {data?.title}
             </Title>
@@ -171,7 +173,13 @@ function ReportDetail() {
       ) : (
         <Container
           className="mt-4"
-          style={{ maxWidth: "100%", padding: "0 15px" }}
+          style={{
+            maxWidth: "100%",
+            padding: "0 15px",
+          
+            borderRadius: "15px", // Soft rounded container corners
+           
+          }}
         >
           <Row justify="center" style={{ paddingBottom: "40px" }}>
             <Col xs={24} md={20} lg={16}>
@@ -192,11 +200,26 @@ function ReportDetail() {
                       onClick={handlePrevPage}
                       style={{
                         marginRight: "10px",
+                        borderRadius: "8px",
+                        padding: "12px 24px",
+
+                        borderColor: "#a2a2a2",
+                        boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
                       }}
                     >
                       Previous Page
                     </Button>
-                    <Button className="button-next" onClick={handleNextPage}>
+                    <Button
+                      className="button-next"
+                      onClick={handleNextPage}
+                      style={{
+                        borderRadius: "8px",
+                        padding: "12px 24px",
+
+                        color: "white",
+                        boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
+                      }}
+                    >
                       Next Page
                     </Button>
                   </div>
