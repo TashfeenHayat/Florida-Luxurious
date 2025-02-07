@@ -349,7 +349,7 @@ function AddProperty() {
         ...values,
         id: res.propertyId,
       });
-      openNotification("success", res);
+      openNotification("success",res.message);
 
       navigate(`/admin/property/edit/${res.updatedProperty._id}`);
     } else {
@@ -366,7 +366,7 @@ function AddProperty() {
         ...values,
         id: res.propertyId,
       });
-      openNotification("success", res);
+      openNotification("success", res.message);
 
       navigate(`/admin/property/edit/${res.propertyId}`);
     }
@@ -678,12 +678,12 @@ function AddProperty() {
               <Form.Item
                 name="neighborhood"
                 label="Neighborhood"
-                rules={[
+{/*                 rules={[
                   {
                     required: true,
                     message: "Neighborhood is required",
                   },
-                ]}
+                ]} */}
               >
                 <Input size="large" placeholder="Neighborhood" />
               </Form.Item>
