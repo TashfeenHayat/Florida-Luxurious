@@ -291,29 +291,44 @@ function Footer() {
                 <Text className="f-bold f-20"> Fort Lauderdale Luxury</Text>
                 &nbsp;Properties for Sale
               </Paragraph>
-              <Flex gap={5} align="center" justify={"center"} vertical>
-                <form className="footer-form-display">
-                  <Flex gap={10}>
+              <Flex
+                gap={5}
+                align="center"
+                justify={"center"}
+                direction="column"
+                style={{ width: "100%" }}
+              >
+                <form className="footer-form-display" style={{ width: "100%" }}>
+                  <Flex
+                    gap={10}
+                    direction={["column", "row"]}
+                    style={{ width: "100%" }}
+                  >
                     <Input
                       name="firstName"
                       placeholder="Your First Name"
-                      style={{ borderRadius: "0px" }}
+                      style={{ borderRadius: "0px", width: "100%" }}
                       value={formData.firstName}
                       onChange={handleChange}
                     />
                     <Input
                       name="lastName"
                       placeholder="Your Last Name"
-                      style={{ borderRadius: "0px" }}
+                      style={{ borderRadius: "0px", width: "100%" }}
                       value={formData.lastName}
                       onChange={handleChange}
                     />
                   </Flex>
-                  <Flex gap={10} style={{ marginTop: 10 }}>
+
+                  <Flex
+                    gap={10}
+                    direction={["column", "row"]}
+                    style={{ marginTop: 10, width: "100%" }}
+                  >
                     <Input
                       name="email"
                       placeholder="Your Email Address"
-                      style={{ borderRadius: "0px" }}
+                      style={{ borderRadius: "0px", width: "100%" }}
                       value={formData.email}
                       onChange={handleChange}
                     />
@@ -327,6 +342,7 @@ function Footer() {
                         loading ||
                         !isValidEmail(formData.email)
                       }
+                      style={{ width: "100%", maxWidth: "200px" }} // Adjust button width for mobile responsiveness
                     >
                       {loading ? "Submitting" : "Submit my info"}
                     </Button>

@@ -1147,7 +1147,7 @@ function BoatOwner() {
             >
               <Title
                 style={{ textAlign: "center", lineHeight: 2 }}
-                className="text-upper"
+                className="text-upper f-30"
               >
                 FOR BOAT OWNERS
               </Title>
@@ -1234,7 +1234,7 @@ function BoatOwner() {
           >
             Boat owners
           </Title>
-          <Row gutter={{6:6}}>
+          <Row gutter={{ 6: 6 }}>
             <Col xs={2} sm={2} md={2} lg={4}></Col>
             <Col xs={24} sm={24} md={20} lg={16} xlg={16}>
               {[
