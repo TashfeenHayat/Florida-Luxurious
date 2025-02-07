@@ -190,7 +190,7 @@ function AddProperty() {
         //console.log(fileList);
         const coords = {
           lat: parseFloat(property.latitude),
-          lng: parseFloat(property.longitude),
+          lng: parseFloat(property.longitude), 
         };
         setCoordinates(coords);
         loadMap(loader, coords);
