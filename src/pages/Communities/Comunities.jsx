@@ -167,11 +167,12 @@ function Comunities() {
                   </Text>
                 </Col>
                 <Col
-                  lg={12}
+                  lg={20}
                   md={38}
                   sm={38}
                   xsm={38}
                   ref={mapRef}
+                
                   style={{ height: "300px", width: "100%" , marginTop: "20px" }}
                 ></Col>
               </Row>

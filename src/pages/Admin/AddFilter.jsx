@@ -19,7 +19,7 @@ import {
   MinusCircleOutlined,
 } from "@ant-design/icons";
 import { useParams } from "react-router";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getFilter, updateFilter, addFilter } from "../../api/Filters";
 
@@ -28,10 +28,9 @@ const { TextArea } = Input;
 function AddFilter() {
   const addAgentReducer = useSelector((s) => s.addAgentReducer);
   const getAgentReducer = useSelector((s) => s.getAgentReducer);
-
   const inputRef = useRef(null);
   const mapRef = useRef(null);
-
+ 
   const [coordinates, setCoordinates] = useState({
     lat: 47.7511,
     lng: 120.7401,
@@ -39,6 +38,7 @@ function AddFilter() {
   const [initialVlues, setInitialValue] = useState({});
   const [photo, setPhoto] = useState("");
   const [geo, setGeo] = useState({});
+   const [fileList, setFileList] = useState([]);
   const [photoUplaoding, setPhotoUplaoding] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -48,7 +48,9 @@ function AddFilter() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [api, contextHolder] = notification.useNotification();
-
+  const handleExit = () => {
+    navigate("/admin/community"); // Navigate to the /admin/property page
+  };
   const openNotification = (type, description) => {
     api[type]({ description });
   };
@@ -59,139 +61,146 @@ function AddFilter() {
       libraries: ["places"],
     });
 
-    if (!mapRef.current) {
-      console.error("mapRef is not yet set");
-      return;
-    }
-
     const loadMap = async () => {
-      await loader.load();
-      const google = window.google;
-
-      const map = new google.maps.Map(mapRef.current, {
-        center: coordinates,
-        zoom: 9,
-      });
-
-      const marker = new google.maps.Marker({
-        map,
-        position: coordinates,
-        draggable: false,
-      });
-
-      const autocomplete = new google.maps.places.Autocomplete(
-        inputRef.current,
-        {
-          componentRestrictions: { country: "us" },
-        }
-      );
-
-      autocomplete.addListener("place_changed", () => {
-        const selectedPlace = autocomplete.getPlace();
-        if (!selectedPlace.geometry) {
-          console.error("Place not found");
-          return;
-        }
-
-        const location = selectedPlace.geometry.location;
-        const bounds = new google.maps.LatLngBounds();
-
-        if (selectedPlace.geometry.viewport) {
-          bounds.union(selectedPlace.geometry.viewport);
-        } else {
-          bounds.extend(location);
-        }
-
-        map.fitBounds(bounds);
-        marker.setPosition(location);
-
-        // **Set geo with the selected location's lat, lng, and formatted address**
-        setGeo({
-          location: {
-            lat: location.lat(),
-            lng: location.lng(),
-          },
-          address: selectedPlace.formatted_address,
+      try {
+        await loader.load();
+        const google = window.google;
+        const map = new google.maps.Map(mapRef.current, {
+          center: coordinates,
+          zoom: 9,
         });
-      });
+
+        const marker = new google.maps.Marker({
+          map,
+          position: coordinates,
+          draggable: false,
+        });
+
+        const autocomplete = new google.maps.places.Autocomplete(
+          inputRef.current,
+          {
+            componentRestrictions: { country: "us" },
+          }
+        );
+
+        autocomplete.addListener("place_changed", () => {
+          const selectedPlace = autocomplete.getPlace();
+          if (!selectedPlace.geometry) {
+            console.error("Place not found");
+            return;
+          }
+
+          const location = selectedPlace.geometry.location;
+          const bounds = new google.maps.LatLngBounds();
+
+          if (selectedPlace.geometry.viewport) {
+            bounds.union(selectedPlace.geometry.viewport);
+          } else {
+            bounds.extend(location);
+          }
+
+          map.fitBounds(bounds);
+          marker.setPosition(location);
+
+          setGeo({
+            location: { lat: location.lat(), lng: location.lng() },
+            address: selectedPlace.formatted_address,
+          });
+
+          setCoordinates({ lat: location.lat(), lng: location.lng() });
+        });
+
+        if (coordinates) {
+          map.setCenter(coordinates);
+          marker.setPosition(coordinates);
+        }
+      } catch (error) {
+        console.error("Error loading map:", error);
+      }
     };
 
+    loadMap();
+
+    return () => {
+      // Cleanup if necessary
+    };
+  }, [coordinates]);
+
+  useEffect(() => {
     const fetchData = async () => {
       if (id) {
         setLoading(true);
-        const filter = await dispatch(getFilter(id));
-        setLoading(false);
-        setPhoto(filter.payload?.photo);
-        setInitialValue(filter.payload);
-        const geo = filter.payload?.geo;
-
-        if (geo) {
+        try {
+          const filter = await dispatch(getFilter(id));
+          console.log(filter);
+          setLoading(false);
+          setPhoto(filter.payload?.photo);
+          setInitialValue(filter.payload);
+          const geo = filter.payload?.geo;
           setCoordinates(geo.location);
+          setGeo(geo);
+        } catch (error) {
+          setLoading(false);
+          console.error("Error fetching filter data:", error);
         }
       }
-
-      const intervalId = setInterval(async () => {
-        try {
-          await loadMap();
-          clearInterval(intervalId);
-        } catch (error) {
-          console.error("Error loading map:", error);
-        }
-      }, 1000);
-
-      return () => clearInterval(intervalId);
     };
 
     fetchData();
-  }, [dispatch, id, google_api_key]);
+  }, [dispatch, id]);
+  // Add coordinates in the dependency array to re-trigger on change
 
   const onFinish = async (values) => {
-    console.log("Received values of form: ", values);
-    console.log("Photo data: ", photo);
-    console.log("Geo data: ", geo);
+    if (photoUplaoding) {
+      // Optionally, you can add a notification to inform the user to wait for the image upload
+      notification.warning({
+        message: "Please wait for the image to finish uploading.",
+      });
+      return; // Prevent form submission
+    }
+
+   
+    // Ensure geo and photo are included
+    const finalValues = {
+      ...values,
+      photo,
+      geo: geo ? geo : null, // Include full geo object
+    };
 
     if (id) {
-      const res = await dispatch(
-        updateFilter({
-          id,
-          ...values,
-
-          photo,
-          geo,
-        })
-      ).unwrap();
-
-      console.log("Update result: ", res);
-      openNotification("success", res);
-      setTimeout(() => navigate("/admin/community"), 1000);
+      const res = await dispatch(updateFilter({ id, ...finalValues })).unwrap();
+      console.log("Update result: ", res.filter._id);
+      openNotification("success", res.message);
+      navigate(`/admin/community/edit/${res.filter._id}`);
     } else {
-      const res = await dispatch(
-        addFilter({
-          ...values,
-
-          photo,
-          geo: geo ? geo : null,
-        })
-      ).unwrap();
-
-      console.log("Add result: ", res);
-      openNotification("success", res);
-      setTimeout(() => navigate("/admin/community"), 1000);
+      const res = await dispatch(addFilter(finalValues)).unwrap();
+      console.log("Add result: ", res.filter._id);
+      openNotification("success", res.message);
+      setTimeout(
+        () => navigate(`/admin/community/edit/${res.filter._id}`),
+        1000
+      );
     }
   };
 
-  const beforeUpload = (e) => {
-    console.log(e);
+const handleChange = ({ file, fileList }) => {
+  setFileList(fileList); // Update file list with the new one
+
+  if (file.status === "uploading") {
     setPhotoUplaoding(true);
-  };
+  } else if (file.status === "done") {
+    setPhotoUplaoding(false);
+    setPhoto(file.response.url); // Assuming the response contains the file URL
+    notification.success({ message: "Upload successful" });
+  } else if (file.status === "error") {
+    setPhotoUplaoding(false);
+    notification.error({ message: "Upload failed" });
+  }
+};
 
-  const handleChange = (info) => {
-    if (info.file.status === "done") {
-      console.log(info.file.response.url);
-      setPhotoUplaoding(false);
-      setPhoto(info.file.response.url);
-    }
-  };
+const beforeUpload = (e) => {
+  setPhotoUplaoding(true); // Set uploading state to true
+};;
 
   const uploadButton = (
     <div>
@@ -203,7 +212,7 @@ function AddFilter() {
   return (
     <Card title={id ? "Edit Community" : "Add Community"} loading={loading}>
       {contextHolder}
-      <Form initialValues={initialVlues} name="add_agent" onFinish={onFinish}>
+      <Form initialValues={initialVlues} name="filter" onFinish={onFinish}>
         <Row justify="center">
           <Col span={4} className="gutter-row">
             <Form.Item name="1">
@@ -219,6 +228,7 @@ function AddFilter() {
                 action={`${api_base_URL}upload`}
                 beforeUpload={beforeUpload}
                 onChange={handleChange}
+                accept="image/*"
               >
                 {photo ? (
                   <img src={photo} alt="avatar" style={{ width: "100%" }} />
@@ -267,6 +277,10 @@ function AddFilter() {
                 <div className="ant-form-item-control-input-content">
                   <input
                     ref={inputRef}
+                    value={geo?.address || ""}
+                    onChange={(e) =>
+                      setGeo({ ...geo, address: e.target.value })
+                    }
                     type="text"
                     placeholder="Search a community"
                     className="ant-input ant-input-lg ant-input-outlined css-dev-only-do-not-override-1kuana8"
@@ -337,25 +351,42 @@ function AddFilter() {
             </Card>
           </Col>
         </Row>
-
-        <Col span={24} className="gutter-row">
-          <Form.Item style={{ marginBottom: "0px" }}>
-            <Button
-              size="large"
-              block="true"
-              type="primary"
-              htmlType="submit"
-              loading={
-                addAgentReducer.isLoading ||
-                getAgentReducer.isLoading ||
-                photoUplaoding ||
-                loading
-              }
-            >
-              Save
-            </Button>
-          </Form.Item>
-        </Col>
+        <Row
+          gutter={{ 40: 40 }}
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <Col span={24} lg={10} className="gutter-row">
+            <Form.Item style={{ marginBottom: "0px" }}>
+              <Button
+                size="large"
+                block="true"
+                type="primary"
+                htmlType="submit"
+                loading={
+                  addAgentReducer.isLoading ||
+                  getAgentReducer.isLoading ||
+                  photoUplaoding ||
+                  loading
+                }
+              >
+                Save
+              </Button>
+            </Form.Item>
+          </Col>
+          <Col span={24} lg={10} className="gutter-row">
+            {" "}
+            <Form.Item>
+              <Button
+                size="large"
+                block="true"
+                type="primary"
+                onClick={handleExit} // Trigger navigate on click
+              >
+                Exit
+              </Button>
+            </Form.Item>
+          </Col>
+        </Row>
       </Form>
     </Card>
   );
