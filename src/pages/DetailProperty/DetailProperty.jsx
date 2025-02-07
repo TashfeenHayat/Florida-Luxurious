@@ -489,7 +489,7 @@ export default function DetailProperty() {
           </Flex> */}
           <Flex justify={"center"} align="center" vertical>
             <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-              Compensation Offered!{""} &nbsp;
+              Compensation Offered{""} &nbsp;
               <Text
                 style={{ color: "#D4CFC9", cursor: "pointer" }}
                 className="my-4 f-16 f-100"
@@ -661,7 +661,7 @@ export default function DetailProperty() {
 
         <Flex justify="center" align="center" vertical>
           <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-            Compensation Offered!
+            Compensation Offered
             <Text
               style={{ color: "#D4CFC9", cursor: "pointer" }}
               className="my-4 f-16 f-100"
