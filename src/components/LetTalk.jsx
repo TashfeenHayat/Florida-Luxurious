@@ -40,15 +40,7 @@ function LetTalk() {
               }}
             ></div>
             <Text
-              style={{
-                color: "white",
-                lineHeight: "25.6px",
-                letterSpacing: "1px",
-                fontSize: "24px",
-                textAlign: "center",
-                maxWidth: "550px",
-                fontWeight: 100,
-              }}
+              className="text-talk"
               data-aos="fade-left"
               data-aos-duration="1500"
             >

@@ -29,35 +29,15 @@ function Neighborhoods() {
               className="displayy-teamimg-center show-btn-community-home"
               style={{ overflow: "hidden" }}
             >
-              <div
-                style={{ background: "black", overflow: "hidden" }}
-                className="communities-grid"
-              >
+              <div style={{ background: "black" }} className="communities-grid">
                 <div
-                  style={{
-                    // position: "absolute",
-                    // top: "50%",
-                    // left: "0%",
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    overflow: "hidden",
-                  }}
+                // style={{
+                //   overflow: "hidden",
+                // }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      width: "95%",
-                      flexDirection: "column",
-                    }}
-                  >
-                    <Text className="text-upper text-white f-24 f-100">
-                      Communities
-                    </Text>
-                  </div>
+                  <Text className="text-upper text-white f-24 f-100">
+                    Communities
+                  </Text>
                 </div>
               </div>
             </div>
@@ -71,11 +51,11 @@ function Neighborhoods() {
               sm={12}
               xs={24}
               key={index}
-              style={{ overflow: "hidden" }}
+              // style={{ overflow: "hidden" }}
             >
               <div
                 className="displayy-teamimg-center show-btn-community-home"
-                style={{ overflow: "hidden" }}
+                // style={{ overflow: "hidden" }}
               >
                 <img
                   src={community?.photo}
@@ -94,12 +74,12 @@ function Neighborhoods() {
                     // alignItems: "center",
                     // justifyItems: "center",
                     // width: "100%",
-                    overflow: "hidden",
+                    // overflow: "hidden",
                   }}
                 >
                   <div
                     style={{
-                       display: "flex",
+                      display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
                       flexDirection: "column",
@@ -141,31 +121,31 @@ function Neighborhoods() {
           >
             <div
               className="displayy-teamimg-center show-btn-community-home"
-              style={{ overflow: "hidden" }}
+              // style={{ overflow: "hidden" }}
             >
               <div
                 style={{ background: "black", overflow: "hidden" }}
                 className="communities-grid"
               >
                 <div
-                  style={{
-                    // position: "relative",
-                    // top: "50%",
-                    // left: "0%",
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    justifyItems: "center",
-                  }}
+                // style={{
+                //   // position: "relative",
+                //   // top: "50%",
+                //   // left: "0%",
+                //   width: "100%",
+                //   display: "flex",
+                //   justifyContent: "center",
+                //   alignItems: "center",
+                //   justifyItems: "center",
+                // }}
                 >
                   <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      width: "95%",
-                    }}
+                  // style={{
+                  //   display: "flex",
+                  //   justifyContent: "center",
+                  //   alignItems: "center",
+                  //   width: "95%",
+                  // }}
                   >
                     <Text className="text-upper text-white f-24 f-100 text-center">
                       View All

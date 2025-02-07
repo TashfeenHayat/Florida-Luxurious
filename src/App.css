@@ -1598,6 +1598,9 @@ body:focus-visible {
     flex-direction: column; /* Stack items vertically on smaller screens */
     align-items: flex-start; /* Align items to the left */
   }
+  .text-talk {
+    font-size: 16px !important;
+  }
   /* .next-arrow,
   .prev-arrow {
     top: 40% !important;
@@ -1693,6 +1696,15 @@ body:focus-visible {
   .ant-form-item-control-input {
     width: 19rem !important;
   }
+}
+.text-talk {
+  color: white;
+  line-height: 25.6px;
+  letter-spacing: 1px;
+  font-size: 24px;
+  text-align: center;
+  max-width: 550px;
+  font-weight: 100;
 }
 .text-1024 {
   font-size: 11px;
@@ -2375,7 +2387,7 @@ body:focus-visible {
 .communities-grid {
   position: relative;
   min-height: 240px;
-
+  width: 100% !important;
   height: 280px;
   display: flex;
   justify-content: center;
