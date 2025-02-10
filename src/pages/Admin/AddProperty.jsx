@@ -326,51 +326,62 @@ function AddProperty() {
   };
 
   const onFinish = async (values) => {
-    values.media = fileList.map((media) => ({
-      mdUrl: media.response ? media.response.url : media.url,
-    }));
-    values.video = (fileListVideo || []).map((video) => ({
-      mdUrl: video.response ? video.response.url : video.url,
-    }));
+   values.media = fileList.map((media) => ({
+     mdUrl: media.response ? media.response.url : media.url,
+   }));
+   values.video = (fileListVideo || []).map((video) => ({
+     mdUrl: video.response ? video.response.url : video.url,
+   }));
 
-    if (id) {
-      const res = await dispatch(
-        updateProperty({
-          id,
-          currency,
-          areaUnit,
-          longitude: String(coordinates.lng),
-          latitude: String(coordinates.lat),
+   try {
+     let res;
+     if (id) {
+       res = await dispatch(
+         updateProperty({
+           id,
+           currency,
+           areaUnit,
+           longitude: String(coordinates.lng),
+           latitude: String(coordinates.lat),
+           ...values,
+         })
+       ).unwrap();
+       setInitialValue({
+         ...values,
+         id: res.propertyId,
+       });
+       openNotification("success", res.message);
 
-          ...values,
-        })
-      ).unwrap();
-      setInitialValue({
-        ...values,
-        id: res.propertyId,
-      });
-      openNotification("success",res.message);
+       navigate(`/admin/property/edit/${res.updatedProperty._id}`);
+     } else {
+       res = await dispatch(
+         addProperty({
+           currency,
+           areaUnit,
+           longitude: String(coordinates.lng),
+           latitude: String(coordinates.lat),
+           ...values,
+         })
+       ).unwrap();
+       setInitialValue({
+         ...values,
+         id: res.propertyId,
+       });
+       openNotification("success", res.message);
 
-      navigate(`/admin/property/edit/${res.updatedProperty._id}`);
-    } else {
-      const res = await dispatch(
-        addProperty({
-          currency,
-          areaUnit,
-          longitude: String(coordinates.lng),
-          latitude: String(coordinates.lat),
-          ...values,
-        })
-      ).unwrap();
-      setInitialValue({
-        ...values,
-        id: res.propertyId,
-      });
-      openNotification("success", res.message);
+       navigate(`/admin/property/edit/${res.propertyId}`);
+     }
 
-      navigate(`/admin/property/edit/${res.propertyId}`);
-    }
-  };
+     // Scroll to the top after the operation completes successfully
+     window.scrollTo({
+       top: 0,
+       behavior: "smooth", // Smooth scrolling
+     });
+   } catch (error) {
+     console.error("Error:", error);
+     // Optionally handle errors here
+   }
+ };
   const [value, setValue] = useState("");
   const handleNumericInput = (e) => {
     let inputValue = e.target.value;
@@ -428,7 +439,7 @@ function AddProperty() {
                   listType="picture-card"
                   fileList={fileList}
                   multiple
-                  webkitdirectory
+                  //webkitdirectory
                   onPreview={handlePreview}
                   onChange={handleChange}
                   moveable="true"
