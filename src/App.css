@@ -421,6 +421,12 @@ body:focus-visible {
 .displayy-teamimg-center {
   position: relative;
 }
+.slick-next , .slick-prev{
+
+  width: auto !important;
+height: fit-content !important;
+
+}
 .slick-prev:before {
   content: "" !important;
 }
@@ -1526,12 +1532,14 @@ body:focus-visible {
     left: 0 !important;
   }
   .next {
-    width: 20px;
+    width: 25px;
   }
   .slick-next {
+    top:40% !important;
     right: 2px !important;
   }
   .slick-prev {
+     top:40% !important;
     left: 1px !important;
   }
   .img-op1 {
