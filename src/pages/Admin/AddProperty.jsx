@@ -98,6 +98,7 @@ function AddProperty() {
   };
 
   const handleChange = ({ file, fileList }) => {
+    console.log(fileList);
     setFileList(fileList);
     if (file.status === "uploading") {
       setIsUploading(true); // Mark as uploading
@@ -183,14 +184,14 @@ function AddProperty() {
           .body.textContent;
         window.$("#summernote").summernote("code", decodedHtml);
         setFileList(property?.media?.map((media) => ({ url: media.mdUrl })));
-        console.log(property.video);
+        console.log(property?.media);
         setFileListVideo(
           property?.video?.map((video) => ({ url: video.mdUrl }))
         );
         //console.log(fileList);
         const coords = {
           lat: parseFloat(property.latitude),
-          lng: parseFloat(property.longitude), 
+          lng: parseFloat(property.longitude),
         };
         setCoordinates(coords);
         loadMap(loader, coords);
@@ -326,62 +327,70 @@ function AddProperty() {
   };
 
   const onFinish = async (values) => {
-   values.media = fileList.map((media) => ({
-     mdUrl: media.response ? media.response.url : media.url,
-   }));
-   values.video = (fileListVideo || []).map((video) => ({
-     mdUrl: video.response ? video.response.url : video.url,
-   }));
+    console.log("media", fileList);
+    values.media = fileList.map((media) => ({
+      mdUrl:
+        media.response && media.response.urls
+          ? media.response.urls[0]
+          : media.urls,
+    }));
 
-   try {
-     let res;
-     if (id) {
-       res = await dispatch(
-         updateProperty({
-           id,
-           currency,
-           areaUnit,
-           longitude: String(coordinates.lng),
-           latitude: String(coordinates.lat),
-           ...values,
-         })
-       ).unwrap();
-       setInitialValue({
-         ...values,
-         id: res.propertyId,
-       });
-       openNotification("success", res.message);
+    values.video = (fileListVideo || []).map((video) => ({
+      mdUrl:
+        video.response && video.response.url ? video.response.url : video.url,
+    }));
 
-       navigate(`/admin/property/edit/${res.updatedProperty._id}`);
-     } else {
-       res = await dispatch(
-         addProperty({
-           currency,
-           areaUnit,
-           longitude: String(coordinates.lng),
-           latitude: String(coordinates.lat),
-           ...values,
-         })
-       ).unwrap();
-       setInitialValue({
-         ...values,
-         id: res.propertyId,
-       });
-       openNotification("success", res.message);
 
-       navigate(`/admin/property/edit/${res.propertyId}`);
-     }
+    try {
+      let res;
+      if (id) {
+        res = await dispatch(
+          updateProperty({
+            id,
+            currency,
+            areaUnit,
+            longitude: String(coordinates.lng),
+            latitude: String(coordinates.lat),
+            ...values,
+          })
+        ).unwrap();
+        setInitialValue({
+          ...values,
+          id: res.propertyId,
+        });
+        openNotification("success", res.message);
 
-     // Scroll to the top after the operation completes successfully
-     window.scrollTo({
-       top: 0,
-       behavior: "smooth", // Smooth scrolling
-     });
-   } catch (error) {
-     console.error("Error:", error);
-     // Optionally handle errors here
-   }
- };
+        navigate(`/admin/property/edit/${res.updatedProperty._id}`);
+      } else {
+        res = await dispatch(
+          addProperty({
+            currency,
+            areaUnit,
+            longitude: String(coordinates.lng),
+            latitude: String(coordinates.lat),
+            ...values,
+          })
+        ).unwrap();
+        setInitialValue({
+          ...values,
+          id: res.propertyId,
+        });
+        openNotification("success", res.message);
+
+        navigate(`/admin/property/edit/${res.propertyId}`);
+      }
+
+      // Scroll to the top after the operation completes successfully
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // Smooth scrolling
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      // Optionally handle errors here
+    }
+  };
+
   const [value, setValue] = useState("");
   const handleNumericInput = (e) => {
     let inputValue = e.target.value;
@@ -435,18 +444,18 @@ function AddProperty() {
             <Col span={24} className="gutter-row">
               <Form.Item name="media">
                 <Upload
-                  name="file"
+                  name="files"
                   listType="picture-card"
                   fileList={fileList}
                   multiple
-                  //webkitdirectory
+                  webkitdirectory
                   onPreview={handlePreview}
                   onChange={handleChange}
                   moveable="true"
                   headers={{
                     Authorization: `Bearer ${localStorage.token}`,
                   }}
-                  action={`${api_base_URL}upload`}
+                  action={`${api_base_URL}upload/bulk`}
                   accept="image/*"
                 >
                   {fileList.length >= 500 ? null : uploadButton}
@@ -513,7 +522,7 @@ function AddProperty() {
                   headers={{
                     Authorization: `Bearer ${localStorage.token}`,
                   }}
-                  action={`${api_base_URL}upload`}
+                  action={`${api_base_URL}upload/bulk`}
                   accept="video/*" // This will restrict the files to video types
                 >
                   {fileListVideo.length >= 4 ? null : uploadButton}
@@ -686,11 +695,7 @@ function AddProperty() {
                   placeholder="Search filters"
                 />
               </Form.Item>
-              <Form.Item
-                name="neighborhood"
-                label="Neighborhood"
-
-              >
+              <Form.Item name="neighborhood" label="Neighborhood">
                 <Input size="large" placeholder="Neighborhood" />
               </Form.Item>
             </Col>
@@ -1142,11 +1147,3 @@ function AddProperty() {
 }
 
 export default AddProperty;
-
-const getBase64 = (file) =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
