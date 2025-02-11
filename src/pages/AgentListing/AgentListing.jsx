@@ -15,9 +15,8 @@ function AgentListing() {
 
   const navigate = useNavigate();
   const itemsPerPage = 6;
-  const { data, isLoading } = useProperties(id, itemsPerPage, page);
+  const { data, isLoading } = useProperties(id, itemsPerPage, page, "for_sale");
 
-  console.log(data);
   const handlePageChange = (page) => {
     setPage(page);
   };
@@ -25,7 +24,6 @@ function AgentListing() {
     usd: "$",
     eur: "€",
     pound: "£",
-    
   };
   const formatPrice = (price) => {
     if (!price || isNaN(price.toString().replace(/[^0-9.]/g, ""))) return "N/A"; // Handle invalid cases
@@ -46,7 +44,7 @@ function AgentListing() {
     const priceB = Number(b?.salePrice?.slice(1).replace(/,/g, "") || 0);
     return priceB - priceA;
   });
-  console.log("data sorted", sortedProperties);
+
   // Slice the data based on current page
   const startIndex = (page - 1) * itemsPerPage;
   const currentProperties = sortedProperties?.slice(
@@ -74,7 +72,7 @@ function AgentListing() {
           />
         ) : (
           <Row gutter={[60, 60]} className="pb-5">
-            {currentProperties.map((item, index) => (
+            {currentProperties?.map((item, index) => (
               <Col lg={12} md={12} sm={24}>
                 <div
                   className="displayy-teamimg-center"

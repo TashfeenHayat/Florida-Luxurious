@@ -12,7 +12,7 @@ function PropertyPress() {
   // console.log("press", data);
   // Check if data is an object with a posts array
   const pressData = data?.posts || [];
-  console.log("press", pressData);
+
   const navigate = useNavigate();
 
   // Use a media query to detect if the screen width is less than or equal to 768px (mobile/tablet)
@@ -63,12 +63,12 @@ function PropertyPress() {
                 <Text type="danger">Failed to load data.</Text>
               </div>
             </Col>
-          ) : pressData.length > 0 ? (
-            pressData.map((item, index) => (
+          ) : pressData?.length > 0 ? (
+            pressData?.map((item, index) => (
               <React.Fragment key={index}>
                 <Col xs={24} sm={24} md={12} lg={12}>
                   <Image
-                    src={item.cover}
+                    src={item?.cover}
                     preview={false}
                     style={{ width: "100%" }}
                   />
@@ -76,9 +76,9 @@ function PropertyPress() {
                 <Col xs={24} sm={24} md={12} lg={12}>
                   <div>
                     <Title className="text-upper f-30 f-100">
-                      {item.title}
+                      {item?.title}
                     </Title>
-                    <Text>{item.date}</Text>
+                    <Text>{item?.date}</Text>
                   </div>
                   <div
                     style={{

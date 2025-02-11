@@ -77,7 +77,7 @@ export default function DetailProperty() {
   const { id } = useParams();
 
   const { data, isLoading } = useProperty(id);
-  console.log(data?.property);
+
   const [backgroundImage, setBackGroundImage] = useState(null);
   const [errors, setErrors] = useState({});
   const [currentImage, setCurrentImage] = useState(null);
@@ -90,10 +90,10 @@ export default function DetailProperty() {
     setVideoUrl(url); // Store the video URL in the state
   };
 
-  const hideVideoModal = () => {
-    setVideoModalVisible(false);
-    setVideoUrl(null); // Reset the video URL when the modal is closed
-  };
+  // const hideVideoModal = () => {
+  //   setVideoModalVisible(false);
+  //   setVideoUrl(null); // Reset the video URL when the modal is closed
+  // };
 
   const [videoUrl, setVideoUrl] = useState(null);
 
@@ -108,8 +108,6 @@ export default function DetailProperty() {
   };
 
   const hideModal = () => {
-    console.log("clicked");
-
     setOpenModal(openModal);
   };
 
@@ -124,10 +122,10 @@ export default function DetailProperty() {
     const targetElement = document.getElementById("requestSection");
     if (targetElement) {
       const rect = targetElement.getBoundingClientRect();
-      const offset = 5; // Adjust this value to control the offset (distance from top)
+      const offset = 60;
 
       window.scrollTo({
-        top: rect.top + window.scrollY - offset, // Scroll to the top of the element minus the offset
+        top: rect.top + window.scrollY - offset,
         behavior: "smooth",
       });
     }
@@ -157,7 +155,7 @@ export default function DetailProperty() {
           },
           map: map,
         });
-        console.log(data?.property?.latitude);
+
         const buildingsLayer = new google.maps.ImageMapType({
           getTileUrl: (coord, zoom) => {
             return (
@@ -287,10 +285,10 @@ export default function DetailProperty() {
     const symbol = currencySymbols[currencyCode.toLowerCase()];
     return symbol || "N/A";
   };
-  const handleImageClick = (src) => {
-    setCurrentImage(src); // Set the clicked image as the one to preview
-    setPreviewOpen(true); // Open the modal
-  };
+  // const handleImageClick = (src) => {
+  //   setCurrentImage(src); // Set the clicked image as the one to preview
+  //   setPreviewOpen(true); // Open the modal
+  // };
 
   const videoRef = useRef(null);
   const handleSecondModalClose = () => {
@@ -424,7 +422,7 @@ export default function DetailProperty() {
 
                 <Text className="text-white f-14 f-100">
                   {data?.property?.waterfront
-                    ? `${data.property.waterfront}  Waterfront`
+                    ? `${data?.property?.waterfront}  Waterfront`
                     : "100 ± Waterfront"}
                 </Text>
               </Flex>
@@ -598,7 +596,7 @@ export default function DetailProperty() {
               </div>
               <Text className="text-white f-16 f-100">
                 {data?.property?.waterfront
-                  ? `${data.property.waterfront}Waterfront`
+                  ? `${data?.property?.waterfront}Waterfront`
                   : "100 ± Waterfront"}
               </Text>
             </Flex>
@@ -703,7 +701,7 @@ export default function DetailProperty() {
               <Paragraph className="f-16 f-200" style={{ lineHeight: 1.5 }}>
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: data?.property?.description.replace(
+                    __html: data?.property?.description?.replace(
                       /\n/g,
                       "<br />"
                     ),
@@ -797,7 +795,7 @@ export default function DetailProperty() {
                       <FaPlus size={60} color="#D4CFC9" />
                     </Flex>
 
-                       <Modal
+                    <Modal
                       open={openModal}
                       footer={null}
                       width={800}
@@ -860,7 +858,6 @@ export default function DetailProperty() {
                   </div>
                 </Col>
               </Row>
-            
             </div>
             <Flex
               vertical

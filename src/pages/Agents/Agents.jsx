@@ -19,10 +19,10 @@ function Agents() {
   const { reports } = useReport();
   // console.log(reports, "DataReports");
   const navigate = useNavigate();
-  // Sort filters alphabetically by name
-  const sortingArr = [...(data?.filters ?? [])].sort((a, b) =>
-    a?.name?.localeCompare(b?.name)
-  );
+  // // Sort filters alphabetically by name
+  // const sortingArr = [...(data?.filters ?? [])].sort((a, b) =>
+  //   a?.name?.localeCompare(b?.name)
+  // );
 
   // Sort agents alphabetically by full name (firstName + lastName)
   const sortedAgents = [...(data?.agents ?? [])].sort((a, b) =>
@@ -58,7 +58,7 @@ function Agents() {
               </Flex>
             ) : (
               <>
-                {sortedAgents.map((item, index) => (
+                {sortedAgents?.map((item, index) => (
                   <Col
                     lg={6}
                     md={12}
@@ -112,8 +112,8 @@ function Agents() {
                     </FlipCard>
                     <Flex justify={"center"} align="center">
                       <Text className="text-center f-24 f-100">
-                        {item.firstName}
-                        &nbsp;{item.lastName}
+                        {item?.firstName}
+                        &nbsp;{item?.lastName}
                       </Text>
                     </Flex>
                     <Flex justify={"center"} align="center">
@@ -217,14 +217,14 @@ function Agents() {
                     className="text-upper f-100"
                     level={2}
                   >
-                    {reportItem.title || "FLP ANNUAL REPORT 2023"}
+                    {reportItem?.title || "FLP ANNUAL REPORT 2023"}
                   </Title>
                   <div>
                     <Text
                       style={{ color: "#838383" }}
                       className="text-upper f-24 f-100"
                     >
-                      {reportItem.date || "February 2024"}
+                      {reportItem?.date || "February 2024"}
                     </Text>
                   </div>
                   <Flex justify={"center"} className="mt-3">

@@ -10,7 +10,7 @@ const { useBreakpoint } = Grid;
 
 function Allcommunities() {
   const { data, isLoading } = useallCommunities();
-  console.log("data2", data);
+
   const sortingArr = [...(data?.filters ?? [])].sort((a, b) =>
     a?.name?.localeCompare(b?.name)
   );

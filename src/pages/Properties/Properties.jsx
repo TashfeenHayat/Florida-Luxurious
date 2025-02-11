@@ -16,7 +16,7 @@ function Properties() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const { data, isLoading } = useProperties(null, null, null, "for_sale");
-  console.log("ser", data);
+
   // const pageVariants = {
   //   initial: { opacity: 0, x: 100 },
   //   animate: { opacity: 1, x: 0 },

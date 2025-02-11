@@ -88,7 +88,7 @@ function Mls() {
   useMls(true, itemsPerPage, currentPage, null, null, null, null, 600000);
 
   const { isLoading, data: MLS } = useSelector((s) => s.getPropertiesReducer);
-  console.log({ isLoading, data: MLS });
+
   const [minprice, setPrice] = useState(600000);
   const [propertyType, setPropertyType] = useState("Select property type");
   const [minBathCount, setMinBathCount] = useState("min Bathrooms");
@@ -101,7 +101,7 @@ function Mls() {
   const navigate = useNavigate();
 
   const { data } = useSelector((s) => s.getFiltersReducer);
-  console.log("data", data);
+
   const handlePrice = (price) => {
     setPrice(price);
   };

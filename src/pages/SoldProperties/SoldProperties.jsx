@@ -42,11 +42,10 @@ function SoldProperties() {
     usd: "$",
     eur: "€",
     pound: "£",
-  }
+  };
   const formatPrice = (price) => {
-    if (!price || isNaN(price.toString().replace(/[^0-9.]/g, ""))) return "N/A"; 
+    if (!price || isNaN(price.toString().replace(/[^0-9.]/g, ""))) return "N/A";
 
-  
     const numericPrice = Number(price.toString().replace(/[^0-9.]/g, ""));
 
     return `${numericPrice.toLocaleString("en-US")}`;
@@ -54,7 +53,7 @@ function SoldProperties() {
   const getCurrencySymbol = (currencyCode) => {
     return (
       currencySymbols[currencyCode.toLowerCase()] || currencyCode.toUpperCase()
-    ); 
+    );
   };
   const sortedProperties = data?.properties?.slice().sort((a, b) => {
     const priceA = Number(a?.salePrice?.slice(1).replace(/,/g, "") || 0);
@@ -66,7 +65,7 @@ function SoldProperties() {
     startIndex,
     startIndex + itemsPerPage
   );
-  console.log(sortedProperties);
+
   return (
     <>
       <BackgroundImage

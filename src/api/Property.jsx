@@ -22,7 +22,6 @@ export const getProperties = createAsyncThunk(
     { rejectWithValue }
   ) {
     try {
-      console.log(minprice, "in api");
       const res = await customAxios.get(`property`, {
         params: {
           key,
@@ -66,6 +65,3 @@ export const getProperty = createAsyncThunk(
 );
 
 export const resetProperty = createAsyncThunk("resetPropertyReducer", () => {});
-
-
-

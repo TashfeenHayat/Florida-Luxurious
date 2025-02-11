@@ -37,7 +37,7 @@ function Comunities() {
 
   const mapRef = useRef(null);
   const { data, isLoading, isError } = useCommunity(id);
-  console.log("data", data);
+
   useEffect(() => {
     const loader = new Loader({
       apiKey: google_api_key,
@@ -97,7 +97,7 @@ function Comunities() {
     const priceB = Number(b?.salePrice?.slice(1).replace(/,/g, "") || 0);
     return priceB - priceA;
   });
-  console.log("data sorted", sortedProperties);
+
   // Slice the data based on current page
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentProperties = sortedProperties?.slice(

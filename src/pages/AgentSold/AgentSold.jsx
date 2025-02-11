@@ -16,7 +16,7 @@ function AgentSold() {
   const itemsPerPage = 6;
   const status = "sold";
   const { data, isLoading } = useProperties(id, null, null, status);
-  console.log(data?.properties, "sold");
+
   const handlePageChange = (page) => {
     setPage(page);
   };
@@ -28,8 +28,7 @@ function AgentSold() {
 
   const formatPrice = (price) => {
     const numericPrice = parseFloat(price.replace(/[^0-9.]/g, ""));
-    if (isNaN(numericPrice)) return "N/A"; // Return "N/A" if price is invalid
-
+    if (isNaN(numericPrice)) return "N/A";
     // Return the formatted price with commas
     return numericPrice.toLocaleString("en-US");
   };
@@ -37,7 +36,8 @@ function AgentSold() {
   // Function to get the correct currency symbol
   const getCurrencySymbol = (currencyCode) => {
     return (
-      currencySymbols[currencyCode.toLowerCase()] || currencyCode.toUpperCase()
+      currencySymbols[currencyCode?.toLowerCase()] ||
+      currencyCode?.toUpperCase()
     ); // Default to currency code if no symbol found
   };
   const sortedProperties = data?.properties?.slice().sort((a, b) => {
@@ -73,7 +73,7 @@ function AgentSold() {
           />
         ) : (
           <Row gutter={[60, 60]}>
-            {currentProperties.map((properties, index) => (
+            {currentProperties?.map((properties, index) => (
               <Col lg={12} md={12} sm={24}>
                 <div className="displayy-teamimg-center">
                   <img

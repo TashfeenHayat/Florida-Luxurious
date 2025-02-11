@@ -17,7 +17,7 @@ function ContactUs() {
   // Form validation rules
   const onFinish = (values) => {
     dispatch(contactUs(values));
-    console.log("success", form.resetFields());
+
     form.resetFields(); // This resets the form fields
   };
 
