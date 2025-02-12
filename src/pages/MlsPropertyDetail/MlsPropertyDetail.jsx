@@ -36,7 +36,16 @@ export default function DetailProperty() {
   const [details, setDetails] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [backgroundImage, setBackGroundImage] = useState(null);
+  const [errors, setErrors] = useState({});
   const [imageLoading, setImageLoading] = useState(true);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [contact, setContact] = useState({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    email: "",
+    message: "",
+  });
   const handleImageLoad = () => {
     setImageLoading(false);
   };
@@ -138,6 +147,86 @@ export default function DetailProperty() {
   useEffect(() => {
     return;
   }, [backgroundImage]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    // Restrict phone number to digits only
+    if (name === "phoneNumber" && /[^0-9]/.test(value)) {
+      return; // Ignore non-numeric input
+    }
+
+    setContact({
+      ...contact,
+      [name]: value,
+    });
+  };
+
+  // Validate the form before submission
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = {};
+
+    // Validate firstName
+    if (!contact.firstName) {
+      newErrors.firstName = "First name is required.";
+      isValid = false;
+    }
+
+    // Validate lastName
+    if (!contact.lastName) {
+      newErrors.lastName = "Last name is required.";
+      isValid = false;
+    }
+
+    // Validate email
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!contact.email) {
+      newErrors.email = "Email is required.";
+      isValid = false;
+    } else if (!emailPattern.test(contact.email)) {
+      newErrors.email = "Please enter a valid email address.";
+      isValid = false;
+    }
+
+    // Validate phoneNumber (must be exactly 10 digits)
+    const phonePattern = /^[0-9]{10}$/;
+    if (!contact.phoneNumber) {
+      newErrors.phoneNumber = "Phone number is required.";
+      isValid = false;
+    } else if (!phonePattern.test(contact.phoneNumber)) {
+      newErrors.phoneNumber = "Phone number must be exactly 10 digits.";
+      isValid = false;
+    }
+
+    // Validate message
+    if (!contact.message) {
+      newErrors.message = "Message is required.";
+      isValid = false;
+    }
+
+    // If validation fails, set error messages
+    setErrors(newErrors);
+
+    return isValid;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    dispatch(contactUs(contact));
+    setContact({
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+      email: "",
+      message: "",
+      requestShowing: false, // Reset the checkbox as well
+    });
+  };
 
   return (
     <>
@@ -301,7 +390,7 @@ export default function DetailProperty() {
                 >
                   <LuSofa size={15} />
                 </div>
-                <Text className="text-white f-16">SF Living</Text>
+                <Text className="text-white f-14">SF Living</Text>
               </Flex>
             </Col>
           </Row>
@@ -312,9 +401,170 @@ export default function DetailProperty() {
           </Flex>
         </div>
       </div>
+      {/* mobie view */}
+      <div
+        className="detail-container"
+        style={{
+          backgroundColor: "black",
+          padding: "20px",
+        }}
+      >
+        <Flex className="pt-5" vertical>
+          <Text
+            className="f-20 f-100"
+            style={{ lineHeight: "14px", color: "#D4CFC9" }}
+          >
+            MLS® #: {data?.mls?.mlsId}
+          </Text>
+          <Title className="text-upper" style={{ color: "white" }} level={3}>
+            {data?.mls?.address?.streetNumberText +
+              " " +
+              data?.mls?.address?.streetName}
+          </Title>
+          <Paragraph
+            className="text-upper f-20 f-100"
+            style={{ lineHeight: "22px", color: "#D4CFC9" }}
+          >
+            {data?.mls?.address?.city}, {data?.mls?.address?.state},{" "}
+            {data?.mls?.address?.postalCode}
+          </Paragraph>
+          <Title
+            className="text-upper"
+            style={{ color: "white", marginTop: ".2em" }}
+            level={2}
+          >
+            {/* {getCurrencySymbol(data?.mls?.property?.currency)} */}$
+            {data?.mls?.listPrice}
+          </Title>
+        </Flex>
+
+        <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
+          <Col xs={24} sm={12}>
+            <Flex justify={"flex-start"} align={"center"} gap={5}>
+              <div
+                className="circle-bg-white"
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  marginBottom: "0px",
+                }}
+              >
+                <FaWater size={15} />
+              </div>
+              <Text className="text-white f-14 f-100">
+                {data?.mls?.property?.water}
+              </Text>
+            </Flex>
+          </Col>
+          <Col xs={24} sm={6} md={12} lg={8}>
+            <Flex justify={"flex-start"} align={"center"} gap={5}>
+              <div
+                className="circle-bg-white"
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  marginBottom: "0px",
+                }}
+              >
+                <LuBath size={15} />
+              </div>
+              <Text className="text-white f-14">
+                {data?.mls?.property?.bathsFull} Baths
+              </Text>
+            </Flex>
+          </Col>
+          <Col xs={24} sm={6} md={12} lg={8}>
+            <Flex justify={"flex-start"} align={"center"} gap={5}>
+              <Flex>
+                <div
+                  className="circle-bg-white"
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    marginBottom: "0px",
+                  }}
+                >
+                  <FaVectorSquare size={15} />
+                </div>
+              </Flex>
+              <Text className="text-white f-14 f-100">
+                {data?.mls?.property?.area}
+              </Text>
+            </Flex>
+          </Col>
+          <Col xs={24} sm={6} md={12} lg={8}>
+            <Flex justify={"flex-start"} align={"center"} gap={5}>
+              <div
+                className="circle-bg-white"
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  marginBottom: "0px",
+                }}
+              >
+                <TbCarGarage size={15} />
+              </div>
+              <Text className="text-white f-14 f-100">
+                {data?.mls?.property?.garageSpaces} garage
+              </Text>
+            </Flex>
+          </Col>
+          <Col xs={24} sm={6} md={12} lg={8}>
+            <Flex justify={"flex-start"} align={"center"} gap={5}>
+              <div
+                className="circle-bg-white"
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  marginBottom: "0px",
+                }}
+              >
+                <LuSofa size={15} />
+              </div>
+              <Text className="text-white f-14">SF Living</Text>
+            </Flex>
+          </Col>
+        </Row>
+
+        {/* <Flex justify="center" align="center" vertical>
+                <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
+                  New construction - single family residence
+                </Text>
+              </Flex> */}
+
+        <Flex justify="center" align="center" vertical>
+          <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
+            Compensation Offered
+            <Text
+              style={{ color: "#D4CFC9", cursor: "pointer" }}
+              className="my-4 f-16 f-100"
+            >
+              {data?.mls?.property?.compensation}
+            </Text>
+          </Text>
+          {/* <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
+                  Compensation Offered?{" "}
+                  <Text
+                    style={{ color: "#D4CFC9", cursor: "pointer" }}
+                    className="my-4 f-16 f-100"
+                    onClick={() => setCompensation(true)}
+                  >
+                    Yes
+                  </Text>
+                  &nbsp; &nbsp;
+                  <Text
+                    style={{ color: "#D4CFC9", cursor: "pointer" }}
+                    className="my-4 f-16 f-100"
+                    onClick={() => setCompensation(false)}
+                  >
+                    No
+                  </Text>
+                </Text>*/}
+        </Flex>
+      </div>
       <Container>
         <Row>
-          <Col lg={12} xs={24} sm={24} className="p-3">
+          <Col lg={12} xs={32} sm={24} className="p-3">
             <Card className="card-feature">
               <Title
                 style={{ textAlign: "center", lineHeight: 2 }}
@@ -378,6 +628,8 @@ export default function DetailProperty() {
                     <Modal
                       open={openModal}
                       footer={null}
+                      maskClosable={false}
+                      centered
                       styles={{
                         content: {
                           backgroundColor: "black",
@@ -389,28 +641,44 @@ export default function DetailProperty() {
                       }}
                       width={"700px"}
                       closeIcon={<IoMdClose size={20} color={"#FFFFFF"} />}
-                      onCancel={() => {}}
+                      onCancel={hideModal}
                     >
                       <Row gutter={[8, 16]}>
-                        {data?.mls?.photos?.map((item, index) => (
-                          <Col key={index} xs={12} sm={8} md={6} lg={6} xl={6}>
-                            {imageLoading && (
-                              <Skeleton.Image
-                                style={{ width: "100%", height: "200px" }}
+                        <Image.PreviewGroup
+                          preview={{
+                            visible: previewOpen,
+                            onVisibleChange: (visible) =>
+                              setPreviewOpen(visible),
+                          }}
+                        >
+                          {data?.mls?.photos?.map((item, index) => (
+                            <Col
+                              key={index}
+                              xs={12}
+                              sm={8}
+                              md={6}
+                              lg={6}
+                              xl={6}
+                            >
+                              {imageLoading && (
+                                <Skeleton.Image
+                                  style={{ width: "100%", height: "200px" }}
+                                />
+                              )}
+                              <Image
+                                src={item}
+                                width="100%"
+                                style={{ cursor: "pointer" }}
+                                onClick={(e) => {
+                                  e.stopPropagation(); // Prevent image click from also triggering
+                                  setPreviewOpen(true); // Open the preview modal
+                                }}
+                                preview
+                                onLoad={handleImageLoad}
                               />
-                            )}
-                            <Image
-                              src={item}
-                              width="100%"
-                              onClick={(e) =>
-                                setBackGroundImage(e.target.getAttribute("src"))
-                              }
-                              style={{ cursor: "pointer" }}
-                              preview
-                              onLoad={handleImageLoad}
-                            />
-                          </Col>
-                        ))}
+                            </Col>
+                          ))}
+                        </Image.PreviewGroup>
                       </Row>
                     </Modal>
                   </div>
@@ -458,7 +726,7 @@ export default function DetailProperty() {
       <div style={{ backgroundColor: "#000" }} ref={requestRef}>
         <Container>
           <Row>
-            <Col lg={14} sm={24} md={24} className="p-5">
+            <Col lg={14} sm={24} md={24} xsm={24} className="p-5">
               <Title
                 level={2}
                 style={{
@@ -474,41 +742,92 @@ export default function DetailProperty() {
                   data?.mls?.address?.streetName}
                 ?
               </Title>
-              <form>
-                {" "}
-                <Row gutter={[20, 40]} className="detail-property">
+              <form onSubmit={handleSubmit}>
+                <Row gutter={[40, 40]} className="detail-property">
                   <Col lg={12} md={12} sm={24}>
                     <Input
+              style={{"width":"50%"}}
                       placeholder="First Name"
                       type="text"
-                      className="child1"
+                      name="firstName"
+                      value={contact.firstName}
+                      onChange={handleChange}
+                      required
                     />
+                    {errors.firstName && (
+                      <div style={{ color: "red" }}>{errors.firstName}</div>
+                    )}
                   </Col>
                   <Col lg={12} md={12} sm={24}>
-                    <Input placeholder="Last Name" type="text" />
+                    <Input
+                      placeholder="Last Name"
+                      type="text"
+                      name="lastName"
+                      value={contact.lastName}
+                      onChange={handleChange}
+                      required
+                    />
+                    {errors.lastName && (
+                      <div style={{ color: "red" }}>{errors.lastName}</div>
+                    )}
                   </Col>
                   <Col lg={12} md={12} sm={24}>
-                    <Input placeholder="Email" type="email" />
+                    <Input
+                      placeholder="Email"
+                      type="email"
+                      name="email"
+                      value={contact.email}
+                      onChange={handleChange}
+                      required
+                    />
+                    {errors.email && (
+                      <div style={{ color: "red" }}>{errors.email}</div>
+                    )}
                   </Col>
                   <Col lg={12} md={12} sm={24}>
-                    <Input placeholder="Phone" type="text" />
+                    <Input
+                      placeholder="Phone"
+                      type="text"
+                      name="phoneNumber"
+                      value={contact.phoneNumber}
+                      onChange={handleChange}
+                    />
+                    {errors.phoneNumber && (
+                      <div style={{ color: "red" }}>{errors.phoneNumber}</div>
+                    )}
                   </Col>
-
                   <Col lg={24} md={24}>
-                    <Input placeholder="Message" type="text" />
+                    <Input
+                      placeholder="Message"
+                      type="text"
+                      name="message"
+                      value={contact.message}
+                      style={{ color: "white" }}
+                      onChange={handleChange}
+                      required
+                    />
+                    {errors.message && (
+                      <div style={{ color: "red" }}>{errors.message}</div>
+                    )}
                   </Col>
                   <Col lg={24} md={24}>
-                    <Flex gap={10}>
-                      <Checkbox />
-                      <Text style={{ lineHeight: 2, color: "white" }}>
-                        Request A showing
-                      </Text>
-                    </Flex>
+                    {/* <Checkbox
+                                   name="requestShowing"
+                                   checked={contact.requestShowing}
+                                   onChange={handleChange}
+                                   style={{ color: "white" }}
+                                 >
+                                   {" "}
+                                   Request a showing
+                                 </Checkbox> */}
                   </Col>
                   <Col lg={24} md={24} align="middle">
-                    <Button classNam="button-secondary-line-left">
+                    <button
+                      className="button-secondary-line-left"
+                      htmlType="submit"
+                    >
                       Submit info
-                    </Button>
+                    </button>
                   </Col>
                 </Row>
               </form>
