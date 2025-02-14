@@ -1609,6 +1609,12 @@ height: fit-content !important;
   .text-talk {
     font-size: 16px !important;
   }
+ .ant-image-preview-switch-right,
+  .ant-image-preview-switch-left {
+    width: 43px !important;
+    height: 43px !important;
+    background-color: transparent !important;
+  }
   /* .next-arrow,
   .prev-arrow {
     top: 40% !important;
@@ -2576,4 +2582,5 @@ height: fit-content !important;
 .ant-image-preview-switch-left {
   width: 73px !important;
   height: 73px !important;
+  background-color: #000 ;
 }
