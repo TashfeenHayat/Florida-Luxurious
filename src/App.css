@@ -2572,3 +2572,8 @@ height: fit-content !important;
 .ant-modal-close {
   color: white !important;
 }
+.ant-image-preview-switch-right,
+.ant-image-preview-switch-left {
+  width: 73px !important;
+  height: 73px !important;
+}
