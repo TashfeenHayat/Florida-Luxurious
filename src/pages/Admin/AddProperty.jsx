@@ -51,7 +51,7 @@ import {
 } from "../../api/Properties";
 import { getAgents } from "../../api/Agents";
 import { getFilters } from "../../api/Filters";
-
+import { debounce } from "lodash";
 const { TextArea } = Input;
 
 const { Option } = Select;
@@ -97,7 +97,7 @@ function AddProperty() {
     setAddSecondaryAgent(e.target.value === "yes");
   };
 
-  const handleChange = ({ file, fileList }) => {
+  const handleChange = debounce(({ file, fileList }) => {
     console.log(fileList);
     setFileList(fileList);
     if (file.status === "uploading") {
@@ -105,16 +105,16 @@ function AddProperty() {
     } else if (file.status === "done" || file.status === "error") {
       setIsUploading(false); // Mark as done or error
     }
-  };
+  }, 500);
 
-  const handleChangeVideo = ({ file, fileList }) => {
+  const handleChangeVideo = debounce(({ file, fileList }) => {
     setFileListVideo(fileList);
     if (file.status === "uploading") {
       setIsUploading(true); // Mark as uploading
     } else if (file.status === "done" || file.status === "error") {
       setIsUploading(false); // Mark as done or error
     }
-  };
+  }, 500);
 
   const handlePreview = async (file) => {
     setPreviewImage(file.url || file.preview);
@@ -340,7 +340,6 @@ function AddProperty() {
         video.response && video.response.url ? video.response.url : video.url,
     }));
 
-
     try {
       let res;
       if (id) {
@@ -446,6 +445,7 @@ function AddProperty() {
                 <Upload
                   name="files"
                   listType="picture-card"
+                  showUploadList={"removeIcon"}
                   fileList={fileList}
                   multiple
                   webkitdirectory
