@@ -65,8 +65,8 @@ const statusList = [
   // { value: "featured", label: "Featured" },
 ];
 const Compensation = [
-  { value: "yes", label: "Yes" },
-  { value: "no", label: "No" },
+  { value: "Yes", label: "Yes" },
+  { value: "No", label: "No" },
 ];
 function AddProperty() {
   const inputRef = useRef(null);
@@ -971,7 +971,7 @@ function AddProperty() {
                 <Input size="large" placeholder="Heating" />
               </Form.Item>
               <Form.Item
-                name="fireplace"
+                name="waterfront"
                 label="Water Front"
                 placeholder="Water Front"
                 rules={[
