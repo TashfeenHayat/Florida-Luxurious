@@ -65,8 +65,8 @@ const statusList = [
   // { value: "featured", label: "Featured" },
 ];
 const Compensation = [
-  { value: "yes", label: "Yes" },
-  { value: "no", label: "No" },
+  { value: "Yes", label: "Yes" },
+  { value: "No", label: "No" },
 ];
 function AddProperty() {
   const inputRef = useRef(null);
@@ -97,7 +97,11 @@ function AddProperty() {
     setAddSecondaryAgent(e.target.value === "yes");
   };
 
+<<<<<<< HEAD
   const handleChange = debounce(({ file, fileList }) => {
+=======
+   const handleChange = debounce(({ file, fileList }) => {
+>>>>>>> 70da3b8202fda5f1d9425052f96fd7c75b85641a
     console.log(fileList);
     setFileList(fileList);
     if (file.status === "uploading") {
@@ -971,7 +975,7 @@ function AddProperty() {
                 <Input size="large" placeholder="Heating" />
               </Form.Item>
               <Form.Item
-                name="fireplace"
+                name="waterfront"
                 label="Water Front"
                 placeholder="Water Front"
                 rules={[
