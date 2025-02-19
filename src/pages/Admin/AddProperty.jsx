@@ -27,6 +27,7 @@ import {
   MinusCircleOutlined,
   PlusOutlined,
   LoadingOutlined,
+  InboxOutlined,
 } from "@ant-design/icons";
 import { useParams } from "react-router";
 import countryList from "react-select-country-list";
@@ -53,7 +54,7 @@ import { getAgents } from "../../api/Agents";
 import { getFilters } from "../../api/Filters";
 import { debounce } from "lodash";
 const { TextArea } = Input;
-
+const { Dragger } = Upload;
 const { Option } = Select;
 
 const statusList = [
@@ -97,11 +98,7 @@ function AddProperty() {
     setAddSecondaryAgent(e.target.value === "yes");
   };
 
-<<<<<<< HEAD
-  const handleChange = debounce(({ file, fileList }) => {
-=======
-   const handleChange = debounce(({ file, fileList }) => {
->>>>>>> 70da3b8202fda5f1d9425052f96fd7c75b85641a
+  const handleChange = ({ file, fileList }) => {
     console.log(fileList);
     setFileList(fileList);
     if (file.status === "uploading") {
@@ -109,7 +106,7 @@ function AddProperty() {
     } else if (file.status === "done" || file.status === "error") {
       setIsUploading(false); // Mark as done or error
     }
-  }, 500);
+  };
 
   const handleChangeVideo = debounce(({ file, fileList }) => {
     setFileListVideo(fileList);
@@ -143,7 +140,13 @@ function AddProperty() {
   };
   const uploadButton = (
     <div>
-      {isUploading ? <LoadingOutlined /> : <PlusOutlined />}
+      {isUploading ? (
+        <LoadingOutlined />
+      ) : (
+        <p className="ant-upload-drag-icon">
+          <InboxOutlined />
+        </p>
+      )}
       <div style={{ marginTop: 8 }}>Upload</div>
     </div>
   );
@@ -187,7 +190,14 @@ function AddProperty() {
         var decodedHtml = parser.parseFromString(property.press, "text/html")
           .body.textContent;
         window.$("#summernote").summernote("code", decodedHtml);
-        setFileList(property?.media?.map((media) => ({ url: media.mdUrl })));
+        setFileList(
+          property?.media?.map((media) => ({
+            url: media.mdUrl,
+            name: media.name || media.mdUrl.split("/").pop(), // Fallback name if missing
+            uid: media._id || media.mdUrl, // Unique identifier
+          }))
+        );
+
         console.log(property?.media);
         setFileListVideo(
           property?.video?.map((video) => ({ url: video.mdUrl }))
@@ -331,13 +341,19 @@ function AddProperty() {
   };
 
   const onFinish = async (values) => {
-    console.log("media", fileList);
-    values.media = fileList.map((media) => ({
-      mdUrl:
-        media.response && media.response.urls
-          ? media.response.urls[0]
-          : media.urls,
-    }));
+    console.log("media", values.media);
+    values.media = fileList?.map((media) => {
+      const mediaUrl = media?.url || media?.mdUrl || media?.response.urls[0]; // Correct URL assignment
+      const mediaName =
+        media?.name || `Unnamed Media for ${mediaUrl.split("/").pop()}`; // Default name if missing
+
+      console.log(mediaUrl, mediaName); // Debugging output
+
+      return {
+        mdUrl: mediaUrl, // Save the URL
+        name: mediaName, // Save the name
+      };
+    });
 
     values.video = (fileListVideo || []).map((video) => ({
       mdUrl:
@@ -347,6 +363,8 @@ function AddProperty() {
     try {
       let res;
       if (id) {
+        console.log("hello", values.media);
+
         res = await dispatch(
           updateProperty({
             id,
@@ -446,13 +464,12 @@ function AddProperty() {
           <Row justify="center">
             <Col span={24} className="gutter-row">
               <Form.Item name="media">
-                <Upload
+                <Dragger
                   name="files"
-                  listType="picture-card"
+                  listType="file"
                   showUploadList={"removeIcon"}
                   fileList={fileList}
                   multiple
-                  webkitdirectory
                   onPreview={handlePreview}
                   onChange={handleChange}
                   moveable="true"
@@ -463,7 +480,7 @@ function AddProperty() {
                   accept="image/*"
                 >
                   {fileList.length >= 500 ? null : uploadButton}
-                </Upload>
+                </Dragger>
                 <div>
                   <h5>Reorder the images </h5>
                   {fileList.map((file, index) => (
@@ -910,7 +927,7 @@ function AddProperty() {
               >
                 <Input size="large" placeholder="Bathroom Count" />
               </Form.Item>
-              <Form.Item
+              {/*<Form.Item
                 name="stories"
                 label="Stories"
                 placeholder="Stories"
@@ -934,19 +951,6 @@ function AddProperty() {
                 ]}
               >
                 <Input size="large" placeholder="Roof" />
-              </Form.Item>
-              <Form.Item
-                name="flooring"
-                label="Flooring"
-                placeholder="Flooring"
-                rules={[
-                  {
-                    // required: true,
-                    message: "Flooring is required",
-                  },
-                ]}
-              >
-                <Input size="large" placeholder="Flooring" />
               </Form.Item>
               <Form.Item
                 name="cooling"
@@ -973,7 +977,20 @@ function AddProperty() {
                 ]}
               >
                 <Input size="large" placeholder="Heating" />
+              </Form.Item> <Form.Item
+                name="flooring"
+                label="Flooring"
+                placeholder="Flooring"
+                rules={[
+                  {
+                    // required: true,
+                    message: "Flooring is required",
+                  },
+                ]}
+              >
+                <Input size="large" placeholder="Flooring" />
               </Form.Item>
+             */}
               <Form.Item
                 name="waterfront"
                 label="Water Front"
@@ -985,7 +1002,7 @@ function AddProperty() {
                   },
                 ]}
               >
-                <Input size="large" placeholder="Fire Place" />
+                <Input size="large" placeholder="waterfront" />
               </Form.Item>
               <Form.Item
                 name="style"
@@ -1125,6 +1142,7 @@ function AddProperty() {
                     loading ||
                     isUploading
                   }
+                  disabled={isUploading}
                 >
                   Save
                 </Button>

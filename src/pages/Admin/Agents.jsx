@@ -66,6 +66,7 @@ function Agents() {
             okText="Yes"
             cancelText="No"
             onConfirm={() => onDelete(record._id)}
+            placement="bottomLeft"
           >
             <Button type="link">Delete</Button>
           </Popconfirm>

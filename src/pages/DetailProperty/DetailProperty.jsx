@@ -18,6 +18,7 @@ import { Container } from "react-bootstrap";
 import Button from "../../components/Buttons";
 import { IoBedOutline } from "react-icons/io5";
 import { FaWater } from "react-icons/fa6";
+import { PiSwimmingPoolThin } from "react-icons/pi";
 import { LuBath, LuSofa } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
 import { CiPhone, CiMail } from "react-icons/ci";
@@ -457,10 +458,28 @@ export default function DetailProperty() {
                     marginBottom: "0px",
                   }}
                 >
+                  {" "}
+                  <PiSwimmingPoolThin size={15} />
+                </div>
+                <Text className="text-white f-16 f-100">
+                  {data?.property?.pool} Pools
+                </Text>
+              </Flex>
+            </Col>
+            <Col lg={8}>
+              <Flex justify={"flex-start"} align={"center"} gap={5}>
+                <div
+                  className="circle-bg-white"
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    marginBottom: "0px",
+                  }}
+                >
                   <TbCarGarage size={15} />
                 </div>
                 <Text className="text-white f-16 f-100">
-                  {data?.property?.parking} Car garage
+                  {data?.property?.parking} Car Garage
                 </Text>
               </Flex>
             </Col>
@@ -480,14 +499,14 @@ export default function DetailProperty() {
               </Flex>
             </Col> */}
           </Row>
-          {/* <Flex justify={"center"} align="center" vertical>
-            <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-              New construction- single family residence
-            </Text>
-          </Flex> */}
           <Flex justify={"center"} align="center" vertical>
             <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-              Compensation Offered{""} &nbsp;
+              New construction- {data?.property?.style} residence
+            </Text>
+          </Flex>
+          <Flex justify={"center"} align="center" vertical>
+            <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
+              Compensation Offered :{""} &nbsp;
               <Text
                 style={{ color: "#D4CFC9", cursor: "pointer" }}
                 className="my-4 f-16 f-100"
@@ -631,7 +650,10 @@ export default function DetailProperty() {
               >
                 <TbCarGarage size={15} />
               </div>
-              <Text className="text-white f-16 f-100">Car garage</Text>
+
+              <Text className="text-white f-16 f-100">
+                {data?.property?.parking}Car garage
+              </Text>
             </Flex>
           </Col>
           <Col xs={24} sm={12} md={8} lg={8}>
@@ -644,18 +666,20 @@ export default function DetailProperty() {
                   marginBottom: "0px",
                 }}
               >
-                <LuSofa size={15} />
+                <PiSwimmingPoolThin size={15} />
               </div>
-              <Text className="text-white f-16">SF Living</Text>
+              <Text className="text-white f-16 f-100">
+                {data?.property?.pool} Pools
+              </Text>
             </Flex>
           </Col>
         </Row>
 
-        {/* <Flex justify="center" align="center" vertical>
+        <Flex justify="center" align="center" vertical>
           <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-            New construction - single family residence
+            New construction - {data?.property?.style} residence
           </Text>
-        </Flex> */}
+        </Flex>
 
         <Flex justify="center" align="center" vertical>
           <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
