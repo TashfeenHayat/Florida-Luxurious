@@ -386,7 +386,7 @@ export default function DetailProperty() {
                     <IoBedOutline size={15} />
                   </div>
                 </Flex>
-                <Text className="text-white f-16 f-100">
+                <Text className="text-white f-14 f-100">
                   {data?.property?.bedroomCount} Bedrooms
                 </Text>
               </Flex>
@@ -403,7 +403,7 @@ export default function DetailProperty() {
                 >
                   <LuBath size={15} />
                 </div>
-                <Text className="text-white f-16">
+                <Text className="text-white f-14">
                   {data?.property?.bathCount} Baths
                 </Text>
               </Flex>
@@ -443,8 +443,9 @@ export default function DetailProperty() {
                     <FaVectorSquare size={15} />
                   </div>
                 </Flex>
-                <Text className="text-white f-16 f-100">
-                  {data?.property?.area} {data?.property?.areaUnit}
+                <Text className="text-white f-14 f-100">
+                  {data?.property?.area} SF Living
+                  {/* {data?.property?.areaUnit} */}
                 </Text>
               </Flex>
             </Col>
@@ -461,8 +462,8 @@ export default function DetailProperty() {
                   {" "}
                   <PiSwimmingPoolThin size={15} />
                 </div>
-                <Text className="text-white f-16 f-100">
-                  {data?.property?.pool} Pools
+                <Text className="text-white f-14 f-100">
+                  {data?.property?.pool}
                 </Text>
               </Flex>
             </Col>
@@ -478,7 +479,7 @@ export default function DetailProperty() {
                 >
                   <TbCarGarage size={15} />
                 </div>
-                <Text className="text-white f-16 f-100">
+                <Text className="text-white f-14 f-100">
                   {data?.property?.parking} Car Garage
                 </Text>
               </Flex>
@@ -500,12 +501,13 @@ export default function DetailProperty() {
             </Col> */}
           </Row>
           <Flex justify={"center"} align="center" vertical>
-            <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-              New construction- {data?.property?.style} residence
+            <Text style={{ color: "#D4CFC9" }} className="my-4 f-14 f-100">
+              {data?.property?.style}
+              {/* New construction-  residence */}
             </Text>
           </Flex>
           <Flex justify={"center"} align="center" vertical>
-            <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
+            <Text style={{ color: "#D4CFC9" }} className="my-4 f-14 f-100">
               Compensation Offered :{""} &nbsp;
               <Text
                 style={{ color: "#D4CFC9", cursor: "pointer" }}
@@ -601,7 +603,7 @@ export default function DetailProperty() {
               </Text>
             </Flex>
           </Col>
-          <Col xs={24} sm={8}>
+          <Col xs={24} sm={8} md={12}>
             <Flex gap={5}>
               <div
                 className="circle-bg-white"
@@ -615,13 +617,13 @@ export default function DetailProperty() {
               </div>
               <Text className="text-white f-16 f-100">
                 {data?.property?.waterfront
-                  ? `${data?.property?.waterfront}Waterfront`
+                  ? `${data?.property?.waterfront} Waterfront`
                   : "100 ± Waterfront"}
               </Text>
             </Flex>
           </Col>
 
-          <Col xs={24} sm={12} md={8} lg={8}>
+          <Col xs={24} sm={12} md={12} lg={8}>
             <Flex gap={5}>
               <div
                 className="circle-bg-white"
@@ -634,11 +636,12 @@ export default function DetailProperty() {
                 <FaVectorSquare size={15} />
               </div>
               <Text className="text-white f-16 f-100">
-                {data?.property?.area} {data?.property?.areaUnit}
+                {data?.property?.area} SF Living
+                {/* {data?.property?.areaUnit} */}
               </Text>
             </Flex>
           </Col>
-          <Col xs={24} sm={12} md={8} lg={8}>
+          <Col xs={24} sm={12} md={12} lg={8}>
             <Flex gap={5}>
               <div
                 className="circle-bg-white"
@@ -652,11 +655,11 @@ export default function DetailProperty() {
               </div>
 
               <Text className="text-white f-16 f-100">
-                {data?.property?.parking}Car garage
+                {data?.property?.parking} Car Garage
               </Text>
             </Flex>
           </Col>
-          <Col xs={24} sm={12} md={8} lg={8}>
+          <Col xs={24} sm={12} md={12} lg={8}>
             <Flex gap={5}>
               <div
                 className="circle-bg-white"
@@ -669,7 +672,7 @@ export default function DetailProperty() {
                 <PiSwimmingPoolThin size={15} />
               </div>
               <Text className="text-white f-16 f-100">
-                {data?.property?.pool} Pools
+                {data?.property?.pool}
               </Text>
             </Flex>
           </Col>
@@ -677,13 +680,13 @@ export default function DetailProperty() {
 
         <Flex justify="center" align="center" vertical>
           <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-            New construction - {data?.property?.style} residence
+            {data?.property?.style}
           </Text>
         </Flex>
 
         <Flex justify="center" align="center" vertical>
           <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-            Compensation Offered
+            Compensation Offered :
             <Text
               style={{ color: "#D4CFC9", cursor: "pointer" }}
               className="my-4 f-16 f-100"
