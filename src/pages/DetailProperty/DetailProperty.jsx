@@ -462,7 +462,7 @@ export default function DetailProperty() {
                   <PiSwimmingPoolThin size={15} />
                 </div>
                 <Text className="text-white f-16 f-100">
-                  {data?.property?.pool} Pools
+                  {data?.property?.pool} Pool
                 </Text>
               </Flex>
             </Col>
@@ -501,7 +501,7 @@ export default function DetailProperty() {
           </Row>
           <Flex justify={"center"} align="center" vertical>
             <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-              New construction- {data?.property?.style} residence
+              {data?.property?.style} 
             </Text>
           </Flex>
           <Flex justify={"center"} align="center" vertical>
@@ -669,7 +669,7 @@ export default function DetailProperty() {
                 <PiSwimmingPoolThin size={15} />
               </div>
               <Text className="text-white f-16 f-100">
-                {data?.property?.pool} Pools
+                {data?.property?.pool} Pool
               </Text>
             </Flex>
           </Col>
@@ -677,7 +677,7 @@ export default function DetailProperty() {
 
         <Flex justify="center" align="center" vertical>
           <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-            New construction - {data?.property?.style} residence
+            {data?.property?.style} 
           </Text>
         </Flex>
 
