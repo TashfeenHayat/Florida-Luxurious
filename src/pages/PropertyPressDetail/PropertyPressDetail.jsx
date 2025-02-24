@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { decode } from "html-entities";
 import HTMLFlipBook from "react-pageflip";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
-
+import Flogo from "../../assets/flipbook.png";
 const { Title } = Typography;
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
@@ -52,7 +52,7 @@ function PropertyPressDetail() {
 
   const [pages, setPages] = useState([]);
   const [loadingPages, setLoadingPages] = useState(true);
-
+  const [isCoverPage, setIsCoverPage] = useState(true);
   useEffect(() => {
     if (refHtml.current && data?.content) {
       const decodedContent = decode(data.content);
@@ -93,12 +93,12 @@ function PropertyPressDetail() {
           pageImages.push(imgData);
 
           if (pageImages.length === totalPages) {
-            setPages(pageImages);
+            setPages([Flogo,...pageImages]);
             setLoadingPages(false);
           }
         };
 
-        for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+        for (let pageNumber = 0; pageNumber <= totalPages; pageNumber++) {
           loadPage(pageNumber);
         }
       });
@@ -113,7 +113,12 @@ function PropertyPressDetail() {
 
   const handleNextPage = () => {
     if (flipbookRef.current) {
-      flipbookRef.current.pageFlip().flipNext();
+      if (isCoverPage) {
+        setIsCoverPage(false);
+        flipbookRef.current.pageFlip().flipNext();
+      } else {
+        flipbookRef.current.pageFlip().flipNext();
+      }
     }
   };
 

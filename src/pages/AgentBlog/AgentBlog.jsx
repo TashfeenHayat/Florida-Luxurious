@@ -7,7 +7,9 @@ import { decode } from "html-entities";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
 import HTMLFlipBook from "react-pageflip"; // Import the react-pageflip package
 import Agent from "../../assets/Agent_profile.jpg";
+import Flogo from "../../assets/flipbook.png";
 import { Container } from "react-bootstrap";
+
 // Set the workerSrc for PDF.js
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
 
@@ -15,7 +17,6 @@ const { Title } = Typography;
 
 // Flipbook component using react-pageflip
 const Flipbook = ({ pages, flipbookRef }) => {
-  // Calculate width and height based on window size
   const isMobile = window.innerWidth < 600;
   const flipbookWidth = isMobile ? window.innerWidth * 0.9 : 500; // 90% of screen width on mobile
   const flipbookHeight = isMobile ? flipbookWidth * 1.4 : 700; // Maintain aspect ratio
@@ -28,24 +29,32 @@ const Flipbook = ({ pages, flipbookRef }) => {
       minWidth={300}
       maxWidth={600}
       minHeight={400}
-      maxHeight={800}
+      maxHeight={500}
       drawShadow={true}
       flippingTime={1000}
       useMouseEvents={true}
       ref={flipbookRef}
       style={{
         margin: "0 auto",
-        background: "#f5f5f5",
-        borderRadius: "20px",
+        background: "transparent",
+        borderRadius: "10px",
         boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
         maxWidth: "100%", // Ensure flipbook is responsive
       }}
     >
       {pages.map((page, index) => (
-        <div key={index} className="page" style={{ padding: "10px" }}>
+        <div
+          key={index}
+          className="page"
+          style={{
+            padding: "10px",
+            display: index === 0 ? "none" : "block",
+          }}
+        >
           <img
             src={page}
             alt={`Page ${index + 1}`}
+            className="flipbook"
             style={{
               width: "100%", // Make images responsive
               height: "auto",
@@ -65,9 +74,10 @@ function AgentBlog() {
   const refHtml = useRef(null);
   const flipbookRef = useRef(null); // Create a ref for the flipbook
   const [pages, setPages] = useState([]);
-  const [loadingPages, setLoadingPages] = useState(true); // Track loading of flipbook pages
+  const [loadingPages, setLoadingPages] = useState(true);
+  const [isCoverPage, setIsCoverPage] = useState(true);
 
-  // Decode HTML content and adjust images for better rendering
+  // Decode HTML content
   useEffect(() => {
     if (refHtml.current && data?.content) {
       const decodedContent = decode(data.content);
@@ -81,7 +91,7 @@ function AgentBlog() {
     }
   }, [data?.content]);
 
-  // Load PDF and convert pages to images
+  // Handle PDF pages loading
   useEffect(() => {
     if (!data?.file) {
       setLoadingPages(false);
@@ -95,7 +105,7 @@ function AgentBlog() {
 
         const loadPage = async (pageNumber) => {
           const page = await pdf.getPage(pageNumber);
-          const scale = 1.5; // Adjust scale for better quality
+          const scale = 1.5;
           const viewport = page.getViewport({ scale });
 
           const canvas = document.createElement("canvas");
@@ -110,8 +120,12 @@ function AgentBlog() {
           pageImages.push(imgData);
 
           if (pageImages.length === totalPages) {
-            setPages(pageImages);
-            setLoadingPages(false); // Set loadingPages to false when all pages are loaded
+            if (window.innerWidth >= 600) {
+              setPages([Flogo, ...pageImages]); // Include cover for desktop
+            } else {
+              setPages(pageImages); // For mobile, only show pages
+            }
+            setLoadingPages(false);
           }
         };
 
@@ -122,16 +136,20 @@ function AgentBlog() {
     }
   }, [data?.file]);
 
-  // Handlers for flip actions
   const handlePrevPage = () => {
     if (flipbookRef.current) {
-      flipbookRef.current.pageFlip().flipPrev(); // Use pageFlip().flipPrev() correctly
+      flipbookRef.current.pageFlip().flipPrev();
     }
   };
 
   const handleNextPage = () => {
     if (flipbookRef.current) {
-      flipbookRef.current.pageFlip().flipNext(); // Use pageFlip().flipNext() correctly
+      if (isCoverPage) {
+        setIsCoverPage(false);
+        flipbookRef.current.pageFlip().flipNext();
+      } else {
+        flipbookRef.current.pageFlip().flipNext();
+      }
     }
   };
 
@@ -155,14 +173,7 @@ function AgentBlog() {
         </Row>
       </BackgroundImage>
       {isLoading ? (
-        <Row
-          style={{
-            minHeight: "50vh",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <Row style={{ minHeight: "50vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
           <Col>
             <Spin size="large" />
           </Col>
@@ -174,21 +185,10 @@ function AgentBlog() {
           </Col>
         </Row>
       ) : (
-        <Container style={{ padding: "15px", flex: "1" }} justify="center">
-          <div
-            ref={refHtml}
-            className="press-market"
-            style={{ flexDirection: "column" }}
-          />
+        <Container style={{ padding: "15px", flex: "1", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <div ref={refHtml} className="press-market" style={{ flexDirection: "column", width: "100%" }} />
           {loadingPages ? (
-            <Row
-              style={{
-                minHeight: "50vh",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            <Row style={{ minHeight: "50vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
               <Col>
                 <Spin size="large" />
               </Col>
@@ -197,21 +197,26 @@ function AgentBlog() {
             pages.length > 1 && (
               <>
                 <Flipbook pages={pages} flipbookRef={flipbookRef} />
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "20px",
-                  }}
-                >
+                <div style={{ display: "flex", justifyContent: "center", marginTop: "20px", width: "100%" }}>
                   <Button
                     className="button-preview"
                     onClick={handlePrevPage}
-                    style={{ marginRight: "10px" }}
+                    style={{
+                      marginRight: "10px",
+                      padding: "10px 20px",
+                      fontSize: "16px",
+                    }}
                   >
                     Previous Page
                   </Button>
-                  <Button className="button-next" onClick={handleNextPage}>
+                  <Button
+                    className="button-next"
+                    onClick={handleNextPage}
+                    style={{
+                      padding: "10px 20px",
+                      fontSize: "16px",
+                    }}
+                  >
                     Next Page
                   </Button>
                 </div>
