@@ -120,11 +120,9 @@ function AgentBlog() {
           pageImages.push(imgData);
 
           if (pageImages.length === totalPages) {
-            if (window.innerWidth >= 600) {
-              setPages([Flogo, ...pageImages]); // Include cover for desktop
-            } else {
-              setPages(pageImages); // For mobile, only show pages
-            }
+        
+              setPages([Flogo,...pageImages]); 
+            
             setLoadingPages(false);
           }
         };
