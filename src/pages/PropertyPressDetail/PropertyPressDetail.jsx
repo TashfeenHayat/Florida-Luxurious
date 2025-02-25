@@ -11,38 +11,83 @@ const { Title } = Typography;
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
 
-const Flipbook = React.forwardRef(({ pages, onPageChange }, ref) => {
-  return (
-    <HTMLFlipBook
-      ref={ref}
-      width={500}
-      height={700}
-      size="stretch"
-      minWidth={315}
-      maxWidth={600}
-      minHeight={400}
-      maxHeight={1100}
-      drawShadow={true}
-      flippingTime={1000}
-      useMouseEvents={true}
-      onFlip={onPageChange}
-    >
-      {pages.map((page, index) => (
-        <div key={index} className="page" style={{ padding: "20px" }}>
-          <img
-            src={page}
-            alt={`Page ${index + 1}`}
+const Flipbook = React.forwardRef(
+  ({ pages, onPageChange, flipbookRef }, ref) => {
+    const isMobile = window.innerWidth < 600;
+    const flipbookWidth = isMobile ? window.innerWidth * 0.9 : 500;
+    const flipbookHeight = isMobile ? flipbookWidth * 1.4 : 700;
+    return (
+      <HTMLFlipBook
+        width={flipbookWidth}
+        height={flipbookHeight}
+        size="stretch"
+        minWidth={300}
+        maxWidth={600}
+        minHeight={400}
+        maxHeight={500}
+        drawShadow={true}
+        flippingTime={1000}
+        useMouseEvents={true}
+        ref={flipbookRef}
+        style={{
+          margin: "0 auto",
+          maxWidth: "100%",
+        }}
+        onFlip={onPageChange}
+      >
+        {pages?.length > 0 && (
+          <div
+            className="pageblank"
+            key="blank"
             style={{
+              display: "none",
               width: "100%",
               height: "auto",
-              borderRadius: "20px",
             }}
-          />
-        </div>
-      ))}
-    </HTMLFlipBook>
-  );
-});
+          >
+            <img
+              src={pages[0] || ""}
+              alt="Cover Page"
+              style={{
+                width: "100%",
+                height: "auto",
+                borderRadius: "20px",
+              }}
+            />
+          </div>
+        )}
+
+        {pages?.length > 0 && (
+          <div className="page cover" key="cover">
+            <img
+              src={pages[0] || ""}
+              alt="Cover Page"
+              style={{
+                width: "100%",
+                height: "auto",
+                borderRadius: "20px",
+              }}
+            />
+          </div>
+        )}
+
+        {pages.slice(1)?.map((page, index) => (
+          <div className="page" key={index + 1}>
+            <img
+              src={page}
+              alt={`Page ${index + 2}`}
+              style={{
+                width: "100%",
+                height: "auto",
+                borderRadius: "20px",
+              }}
+            />
+          </div>
+        ))}
+      </HTMLFlipBook>
+    );
+  }
+);
 
 function PropertyPressDetail() {
   const { id } = useParams();
@@ -79,7 +124,7 @@ function PropertyPressDetail() {
 
         const loadPage = async (pageNumber) => {
           const page = await pdf.getPage(pageNumber);
-          const scale = 1;
+          const scale = 1.5;
           const viewport = page.getViewport({ scale });
 
           const canvas = document.createElement("canvas");
@@ -90,15 +135,18 @@ function PropertyPressDetail() {
           await page.render({ canvasContext: context, viewport }).promise;
 
           const imgData = canvas.toDataURL("image/png");
-          pageImages.push(imgData);
+          if (imgData) {
+            pageImages.push(imgData);
+          }
+          console.log(pages); // Add this before returning Flipbook component
 
           if (pageImages.length === totalPages) {
-            setPages([Flogo,...pageImages]);
+            setPages([...pageImages]);
             setLoadingPages(false);
           }
         };
 
-        for (let pageNumber = 0; pageNumber <= totalPages; pageNumber++) {
+        for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
           loadPage(pageNumber);
         }
       });
@@ -169,7 +217,7 @@ function PropertyPressDetail() {
           {loadingPages ? (
             <Row
               style={{
-                minHeight: "0vh",
+                minHeight: "50vh",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -180,29 +228,35 @@ function PropertyPressDetail() {
               </Col>
             </Row>
           ) : (
-            pages.length > 1 && (
+            pages?.length > 1 && (
               <>
-                <Flipbook pages={pages} ref={flipbookRef} />
+                <Flipbook pages={pages} flipbookRef={flipbookRef} />
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "center",
-                    marginTop: "30px",
-                    flexDirection: "row",
-                    gap: "10px",
+                    marginTop: "20px",
+                    width: "100%",
                   }}
                 >
                   <Button
                     className="button-preview"
                     onClick={handlePrevPage}
-                    // style={{ marginRight: "10px", width: "120px"  }}
+                    style={{
+                      marginRight: "10px",
+                      padding: "10px 20px",
+                      fontSize: "16px",
+                    }}
                   >
                     Previous Page
                   </Button>
                   <Button
                     className="button-next"
                     onClick={handleNextPage}
-                    // style={{ width: "120px" }}
+                    style={{
+                      padding: "10px 20px",
+                      fontSize: "16px",
+                    }}
                   >
                     Next Page
                   </Button>
