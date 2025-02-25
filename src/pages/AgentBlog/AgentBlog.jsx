@@ -8,6 +8,7 @@ import * as pdfjsLib from "pdfjs-dist/build/pdf";
 import HTMLFlipBook from "react-pageflip"; // Import the react-pageflip package
 import Agent from "../../assets/Agent_profile.jpg";
 import { Container } from "react-bootstrap";
+
 // Set the workerSrc for PDF.js
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
 
@@ -15,10 +16,9 @@ const { Title } = Typography;
 
 // Flipbook component using react-pageflip
 const Flipbook = ({ pages, flipbookRef }) => {
-  // Calculate width and height based on window size
   const isMobile = window.innerWidth < 600;
-  const flipbookWidth = isMobile ? window.innerWidth * 0.9 : 500; // 90% of screen width on mobile
-  const flipbookHeight = isMobile ? flipbookWidth * 1.4 : 700; // Maintain aspect ratio
+  const flipbookWidth = isMobile ? window.innerWidth * 0.9 : 500;
+  const flipbookHeight = isMobile ? flipbookWidth * 1.4 : 700;
 
   return (
     <HTMLFlipBook
@@ -28,26 +28,63 @@ const Flipbook = ({ pages, flipbookRef }) => {
       minWidth={300}
       maxWidth={600}
       minHeight={400}
-      maxHeight={800}
+      maxHeight={500}
       drawShadow={true}
       flippingTime={1000}
       useMouseEvents={true}
       ref={flipbookRef}
       style={{
         margin: "0 auto",
-        background: "#f5f5f5",
-        borderRadius: "20px",
-        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.3)",
-        maxWidth: "100%", // Ensure flipbook is responsive
+        maxWidth: "100%",
       }}
     >
-      {pages.map((page, index) => (
-        <div key={index} className="page" style={{ padding: "10px" }}>
+      {/* Remove .pageblank if on mobile */}
+        {pages?.length > 0 && (
+
+      <div
+        className="pageblank"
+        key="blank"
+        style={{
+          display: "none",
+          width: "100%",
+          height: "auto",
+        }}
+      >
+        
+            <img
+              src={pages[0] || ""}
+              alt="Cover Page"
+              style={{
+                width: "100%",
+                height: "auto",
+                borderRadius: "20px",
+              }}
+            />
+         
+      </div>        )}
+
+
+      {pages?.length > 0 && (
+        <div className="page cover" key="cover">
+          <img
+            src={pages[0] || ""}
+            alt="Cover Page"
+            style={{
+              width: "100%",
+              height: "auto",
+              borderRadius: "20px",
+            }}
+          />
+        </div>
+      )}
+
+      {pages.slice(1)?.map((page, index) => (
+        <div className="page" key={index + 1}>
           <img
             src={page}
-            alt={`Page ${index + 1}`}
+            alt={`Page ${index + 2}`}
             style={{
-              width: "100%", // Make images responsive
+              width: "100%",
               height: "auto",
               borderRadius: "20px",
             }}
@@ -63,11 +100,11 @@ function AgentBlog() {
   const { data, isLoading, isError } = useBlog(id);
 
   const refHtml = useRef(null);
-  const flipbookRef = useRef(null); // Create a ref for the flipbook
+  const flipbookRef = useRef(null);
   const [pages, setPages] = useState([]);
-  const [loadingPages, setLoadingPages] = useState(true); // Track loading of flipbook pages
+  const [loadingPages, setLoadingPages] = useState(true);
+  const [isCoverPage, setIsCoverPage] = useState(true);
 
-  // Decode HTML content and adjust images for better rendering
   useEffect(() => {
     if (refHtml.current && data?.content) {
       const decodedContent = decode(data.content);
@@ -81,7 +118,6 @@ function AgentBlog() {
     }
   }, [data?.content]);
 
-  // Load PDF and convert pages to images
   useEffect(() => {
     if (!data?.file) {
       setLoadingPages(false);
@@ -95,7 +131,7 @@ function AgentBlog() {
 
         const loadPage = async (pageNumber) => {
           const page = await pdf.getPage(pageNumber);
-          const scale = 1.5; // Adjust scale for better quality
+          const scale = 1.5;
           const viewport = page.getViewport({ scale });
 
           const canvas = document.createElement("canvas");
@@ -105,13 +141,15 @@ function AgentBlog() {
 
           await page.render({ canvasContext: context, viewport }).promise;
 
-          // Convert canvas to image URL
           const imgData = canvas.toDataURL("image/png");
-          pageImages.push(imgData);
+          if (imgData) {
+            pageImages.push(imgData);
+          }
+          console.log(pages); // Add this before returning Flipbook component
 
           if (pageImages.length === totalPages) {
-            setPages(pageImages);
-            setLoadingPages(false); // Set loadingPages to false when all pages are loaded
+            setPages([...pageImages]);
+            setLoadingPages(false);
           }
         };
 
@@ -122,16 +160,20 @@ function AgentBlog() {
     }
   }, [data?.file]);
 
-  // Handlers for flip actions
   const handlePrevPage = () => {
     if (flipbookRef.current) {
-      flipbookRef.current.pageFlip().flipPrev(); // Use pageFlip().flipPrev() correctly
+      flipbookRef.current.pageFlip().flipPrev();
     }
   };
 
   const handleNextPage = () => {
     if (flipbookRef.current) {
-      flipbookRef.current.pageFlip().flipNext(); // Use pageFlip().flipNext() correctly
+      if (isCoverPage) {
+        setIsCoverPage(false);
+        flipbookRef.current.pageFlip().flipNext();
+      } else {
+        flipbookRef.current.pageFlip().flipNext();
+      }
     }
   };
 
@@ -144,7 +186,7 @@ function AgentBlog() {
               style={{
                 color: "white",
                 textTransform: "uppercase",
-                fontSize: "clamp(24px, 5vw, 50px)", // Responsive font size
+                fontSize: "clamp(24px, 5vw, 50px)",
                 fontWeight: "bold",
                 textAlign: "center",
               }}
@@ -174,11 +216,19 @@ function AgentBlog() {
           </Col>
         </Row>
       ) : (
-        <Container style={{ padding: "15px", flex: "1" }} justify="center">
+        <Container
+          style={{
+            padding: "15px",
+            flex: "1",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <div
             ref={refHtml}
             className="press-market"
-            style={{ flexDirection: "column" }}
+            style={{ flexDirection: "column", width: "100%" }}
           />
           {loadingPages ? (
             <Row
@@ -194,7 +244,7 @@ function AgentBlog() {
               </Col>
             </Row>
           ) : (
-            pages.length > 1 && (
+            pages?.length > 1 && (
               <>
                 <Flipbook pages={pages} flipbookRef={flipbookRef} />
                 <div
@@ -202,16 +252,28 @@ function AgentBlog() {
                     display: "flex",
                     justifyContent: "center",
                     marginTop: "20px",
+                    width: "100%",
                   }}
                 >
                   <Button
                     className="button-preview"
                     onClick={handlePrevPage}
-                    style={{ marginRight: "10px" }}
+                    style={{
+                      marginRight: "10px",
+                      padding: "10px 20px",
+                      fontSize: "16px",
+                    }}
                   >
                     Previous Page
                   </Button>
-                  <Button className="button-next" onClick={handleNextPage}>
+                  <Button
+                    className="button-next"
+                    onClick={handleNextPage}
+                    style={{
+                      padding: "10px 20px",
+                      fontSize: "16px",
+                    }}
+                  >
                     Next Page
                   </Button>
                 </div>
