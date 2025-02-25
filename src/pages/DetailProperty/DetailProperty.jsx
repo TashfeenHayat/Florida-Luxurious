@@ -443,9 +443,7 @@ export default function DetailProperty() {
                     <FaVectorSquare size={15} />
                   </div>
                 </Flex>
-                <Text className="text-white f-16 f-100">
-                  {data?.property?.area} SF Living
-{/*                    {data?.property?.areaUnit} */}
+           
                 <Text className="text-white f-14 f-100">
                   {data?.property?.area} SF Living
                   {/* {data?.property?.areaUnit} */}
