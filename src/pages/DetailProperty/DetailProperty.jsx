@@ -443,6 +443,9 @@ export default function DetailProperty() {
                     <FaVectorSquare size={15} />
                   </div>
                 </Flex>
+                <Text className="text-white f-16 f-100">
+                  {data?.property?.area} SF Living
+{/*                    {data?.property?.areaUnit} */}
                 <Text className="text-white f-14 f-100">
                   {data?.property?.area} SF Living
                   {/* {data?.property?.areaUnit} */}
@@ -462,8 +465,8 @@ export default function DetailProperty() {
                   {" "}
                   <PiSwimmingPoolThin size={15} />
                 </div>
-                <Text className="text-white f-14 f-100">
-                  {data?.property?.pool}
+                <Text className="text-white f-16 f-100">
+                  {data?.property?.pool} Pool
                 </Text>
               </Flex>
             </Col>
@@ -501,9 +504,8 @@ export default function DetailProperty() {
             </Col> */}
           </Row>
           <Flex justify={"center"} align="center" vertical>
-            <Text style={{ color: "#D4CFC9" }} className="my-4 f-14 f-100">
-              {data?.property?.style}
-              {/* New construction-  residence */}
+            <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
+              {data?.property?.style} 
             </Text>
           </Flex>
           <Flex justify={"center"} align="center" vertical>
@@ -636,8 +638,7 @@ export default function DetailProperty() {
                 <FaVectorSquare size={15} />
               </div>
               <Text className="text-white f-16 f-100">
-                {data?.property?.area} SF Living
-                {/* {data?.property?.areaUnit} */}
+                {data?.property?.area} {data?.property?.areaUnit}
               </Text>
             </Flex>
           </Col>
