@@ -676,7 +676,7 @@ export default function DetailProperty() {
               </div>
               <Text className="text-white f-16 f-100">
                 {data?.property?.pool}
-                {data?.property?.pool} {/*Pool */}
+                 {/*Pool */}
               </Text>
             </Flex>
           </Col>
@@ -690,14 +690,7 @@ export default function DetailProperty() {
 
         <Flex justify="center" align="center" vertical>
           <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
-            Compensation Offered :
-            <Text
-              style={{ color: "#D4CFC9", cursor: "pointer" }}
-              className="my-4 f-16 f-100"
-            >
-              {data?.property?.compensation}
-            </Text>
-          </Text>
+            Compensation Offered :{data?.property?.compensation} </Text>
           {/* <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
             Compensation Offered?{" "}
             <Text
