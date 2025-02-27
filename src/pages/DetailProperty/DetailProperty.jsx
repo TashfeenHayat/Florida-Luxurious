@@ -359,7 +359,7 @@ export default function DetailProperty() {
               className="text-upper f-20 f-100"
               style={{ lineHeight: "10px", color: "#D4CFC9" }}
             >
-              {data?.property?.city}  {data?.property?.state}{" "}
+              {data?.property?.city} , {data?.property?.state}{" "}
               {data?.property?.zipCode}
             </Paragraph>
             <Title
@@ -557,7 +557,7 @@ export default function DetailProperty() {
             className="text-upper f-20 f-100"
             style={{ lineHeight: "22px", color: "#D4CFC9" }}
           >
-            {data?.property?.city}  {data?.property?.state}{" "}
+            {data?.property?.city} , {data?.property?.state}{" "}
             {data?.property?.zipCode}
           </Paragraph>
           <Title
@@ -617,8 +617,9 @@ export default function DetailProperty() {
                 }}
               >
                 <FaWater size={15} />
-              </div>
+              </div>  
               <Text className="text-white f-12 f-100">
+                  
                 {data?.property?.waterfront
                   ? `${data?.property?.waterfront} Waterfront`
                   : "100 ± Waterfront"}
