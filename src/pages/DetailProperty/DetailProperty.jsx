@@ -505,7 +505,7 @@ export default function DetailProperty() {
           <Flex justify={"center"} align="center" vertical>
             <Text style={{ color: "#D4CFC9" }} className="my-4 f-16 f-100">
               {data?.property?.style} 
-              {data?.property?.style}
+    
             </Text>
           </Flex>
           <Flex justify={"center"} align="center" vertical>
