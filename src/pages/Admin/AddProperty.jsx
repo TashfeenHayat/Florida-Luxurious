@@ -534,7 +534,7 @@ function AddProperty() {
               <Form.Item name="videos">
                 <Upload
                   name="file"
-                  multiple
+                  
                   listType="picture-card"
                   fileList={fileListVideo}
                   onPreview={handlePreview}
@@ -543,7 +543,7 @@ function AddProperty() {
                   headers={{
                     Authorization: `Bearer ${localStorage.token}`,
                   }}
-                  action={`${api_base_URL}upload/bulk`}
+                  action={`${api_base_URL}upload`}
                   accept="video/*" // This will restrict the files to video types
                 >
                   {fileListVideo.length >= 4 ? null : uploadButton}
