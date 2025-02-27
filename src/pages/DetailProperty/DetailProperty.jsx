@@ -359,7 +359,7 @@ export default function DetailProperty() {
               className="text-upper f-20 f-100"
               style={{ lineHeight: "10px", color: "#D4CFC9" }}
             >
-              {data?.property?.city}, {data?.property?.state},{" "}
+              {data?.property?.city}, {data?.property?.state}{" "}
               {data?.property?.zipCode}
             </Paragraph>
             <Title
@@ -386,7 +386,7 @@ export default function DetailProperty() {
                     <IoBedOutline size={15} />
                   </div>
                 </Flex>
-                <Text className="text-white f-14 f-100">
+                <Text className="text-white f-12 f-100">
                   {data?.property?.bedroomCount} Bedrooms
                 </Text>
               </Flex>
@@ -403,7 +403,7 @@ export default function DetailProperty() {
                 >
                   <LuBath size={15} />
                 </div>
-                <Text className="text-white f-14">
+                <Text className="text-white f-12">
                   {data?.property?.bathCount} Baths
                 </Text>
               </Flex>
@@ -557,7 +557,7 @@ export default function DetailProperty() {
             className="text-upper f-20 f-100"
             style={{ lineHeight: "22px", color: "#D4CFC9" }}
           >
-            {data?.property?.city}, {data?.property?.state},{" "}
+            {data?.property?.city}, {data?.property?.state}{" "}
             {data?.property?.zipCode}
           </Paragraph>
           <Title
@@ -618,7 +618,7 @@ export default function DetailProperty() {
               >
                 <FaWater size={15} />
               </div>
-              <Text className="text-white f-16 f-100">
+              <Text className="text-white f-12 f-100">
                 {data?.property?.waterfront
                   ? `${data?.property?.waterfront} Waterfront`
                   : "100 ± Waterfront"}
