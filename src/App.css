@@ -1611,11 +1611,11 @@ body:focus-visible {
   .text-talk {
     font-size: 16px !important;
   }
-  .ant-image-preview-switch-right,
+   .ant-image-preview-switch-right,
   .ant-image-preview-switch-left {
     width: 43px !important;
     height: 43px !important;
-    background-color: transparent !important;
+    background-color: #00000080 !important;
   }
   body .pageblank {
     display: block !important;
@@ -2585,8 +2585,8 @@ body:focus-visible {
 }
 .ant-image-preview-switch-right,
 .ant-image-preview-switch-left {
-  width: 73px !important;
-  height: 73px !important;
+  width: 73px ;
+  height: 73px ;
   background-color: #000;
 }
 
