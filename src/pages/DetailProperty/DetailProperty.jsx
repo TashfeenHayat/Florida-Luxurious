@@ -952,7 +952,7 @@ export default function DetailProperty() {
                         </div>
                       </div>
                     ))}
-                    ||<h6 className="text-white"> No video </h6>
+                  
                   </div>
                 </Modal>
 
