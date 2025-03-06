@@ -198,9 +198,13 @@ function AddProperty() {
           }))
         );
 
-        console.log(property?.media);
-        setFileListVideo(
-          property?.video?.map((video) => ({ url: video.mdUrl }))
+      
+         setFileListVideo(
+          property?.video?.map((video) => ({
+            url: video.mdUrl,
+            name: video.name || video.mdUrl.split("/").pop(), // Fallback name if missing
+            uid: video._id || video.mdUrl, // Unique identifier
+          }))
         );
         //console.log(fileList);
         const coords = {
@@ -341,24 +345,38 @@ function AddProperty() {
   };
 
   const onFinish = async (values) => {
-    console.log("media", values.media);
-    values.media = fileList?.map((media) => {
-      const mediaUrl = media?.url || media?.mdUrl || media?.response.urls[0]; // Correct URL assignment
+     values.media = fileList?.reduce((acc, media) => {
+      const mediaUrl = media?.url || media?.mdUrl || media?.response?.urls[0]; // Correct URL assignment
       const mediaName =
-        media?.name || `Unnamed Media for ${mediaUrl.split("/").pop()}`; // Default name if missing
+        media?.name || `Unnamed Media for ${mediaUrl?.split("/").pop()}`; // Default name if missing
 
       console.log(mediaUrl, mediaName); // Debugging output
 
-      return {
-        mdUrl: mediaUrl, // Save the URL
-        name: mediaName, // Save the name
-      };
-    });
+      if (mediaUrl) {
+        // Only add if a valid media URL exists
+        acc.push({
+          mdUrl: mediaUrl, // Save the URL
+          name: mediaName, // Save the name
+        });
+      }
 
-    values.video = (fileListVideo || []).map((video) => ({
-      mdUrl:
-        video.response && video.response.url ? video.response.url : video.url,
-    }));
+      return acc;
+    }, []); // Initialize as an empty array
+
+    values.video = (fileListVideo || [])?.reduce((acc, video) => {
+      const videoUrl = video?.response?.url || video?.url;
+      const videoName =
+        video?.name || `Unnamed video for ${videoUrl?.split("/").pop()}`;
+      if (videoUrl) {
+        // Only add if a valid video URL exists
+        acc.push({
+          mdUrl: videoUrl,
+          name: videoName,
+        });
+      }
+
+      return acc;
+    }, []); 
 
     try {
       let res;
@@ -532,10 +550,10 @@ function AddProperty() {
             <Col span={24} className="gutter-row">
               <h5>Video upload</h5>
               <Form.Item name="videos">
-                <Upload
+                <Dragger
                   name="file"
                   
-                  listType="picture-card"
+                  listType="file"
                   fileList={fileListVideo}
                   onPreview={handlePreview}
                   onChange={handleChangeVideo}
@@ -547,7 +565,7 @@ function AddProperty() {
                   accept="video/*" // This will restrict the files to video types
                 >
                   {fileListVideo.length >= 4 ? null : uploadButton}
-                </Upload>
+                </Dragger>
                 <div>
                   <h5>Reorder the videos </h5>
                   {fileListVideo.map((file, index) => (
