@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BackgroundImage from "../../components/BackgroundImage";
-import BoatImage from "../../assets/boatowner.png";
+import BoatImage from "../../assets/listing.jpg";
 import { Container } from "react-bootstrap";
 import { Col, Row, Typography, Flex, Spin, Pagination } from "antd";
 import { IoLocationOutline, IoPricetagOutline } from "react-icons/io5";
