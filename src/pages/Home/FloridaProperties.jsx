@@ -13,7 +13,7 @@ function FloridaProperties() {
   const [counter, setCounter] = useState(3000000);
 
   useEffect(() => {
-    const target = 3625844000;
+    const target = 3,823,776,248;
 
     const duration = 500;
     const intervalTime = 30;
@@ -124,7 +124,7 @@ function FloridaProperties() {
                 data-aos="fade-left"
                 data-aos-duration="1500"
               >
-                $3.26 BILLION <br />
+                $3.82 BILLION <br />
                 <Text className="text-white text-upper f-24">
                   Has exceeded the mark
                 </Text>
