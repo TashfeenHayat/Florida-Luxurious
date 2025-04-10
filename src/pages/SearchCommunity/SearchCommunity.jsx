@@ -13,7 +13,7 @@ import {
   AutoComplete,
 } from "antd";
 import BackgroundImage from "../../components/BackgroundImage";
-import FeaturedPropertiesImage from "../../assets/Agent.png";
+import FeaturedPropertiesImage from "../../assets/search.jpg";
 import Icons from "../../components/Icons";
 import { Container } from "react-bootstrap";
 import useProperties from "../../hooks/useProperties";
