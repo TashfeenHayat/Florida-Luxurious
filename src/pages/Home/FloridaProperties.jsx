@@ -13,7 +13,7 @@ function FloridaProperties() {
   const [counter, setCounter] = useState(3000000);
 
   useEffect(() => {
-    const target = 3,823,776,248;
+    const target = 3823776248;
 
     const duration = 500;
     const intervalTime = 30;
