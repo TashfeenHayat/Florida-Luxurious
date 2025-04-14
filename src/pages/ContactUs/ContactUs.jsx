@@ -160,15 +160,15 @@ function ContactUs() {
                     <Flex justify={"center"} align="center" className="py-3">
                       <img src={Logo} width={"30%"} preview={false} />
                     </Flex>
-                    <Text className="text-upper text-white text-center f-16 f-200">
+                   <Text className="text-upper text-white text-center f-16 f-200 logotext1">
                       {" "}
                       Florida
                     </Text>
-                    <Text className="text-upper text-white text-center f-24 f-bold">
+                    <Text className="text-upper text-white text-center f-24 f-bold logotext2">
                       {" "}
                       LUXURIOUS
                     </Text>
-                    <Text className="text-upper text-white text-center f-16  f-200">
+                    <Text className="text-upper text-white text-center f-16  f-200 logotext3">
                       {" "}
                       properties
                     </Text>
