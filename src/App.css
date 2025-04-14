@@ -1455,14 +1455,12 @@ body:focus-visible {
   }
   .agent-description {
     font-size: 16px !important;
-    text-align: justify;
   }
-    body .agent-first-name {
-    font-size: 40px !important;
+  body .agent-first-name {
+    font-size: 35px !important;
   }
   body .agent-last-name {
     font-size: 25px !important;
-    margin-left: 97px;
   }
   .agent-estate {
     margin-left: 79px;
@@ -1556,13 +1554,7 @@ body:focus-visible {
     height: auto;
     object-fit: cover;
   }
-.logotext1 {
-    margin-right: 37px !important;
-  }
-  .logotext2{margin-left: 20px;}
-  .logotext3 {
-    margin-right: 25px !important;
-  }
+
   .team-section {
     display: flex;
     gap: 4rem;
@@ -1617,7 +1609,7 @@ body:focus-visible {
   .text-talk {
     font-size: 16px !important;
   }
-   .ant-image-preview-switch-right,
+  .ant-image-preview-switch-right,
   .ant-image-preview-switch-left {
     width: 43px !important;
     height: 43px !important;
@@ -1626,6 +1618,18 @@ body:focus-visible {
   body .pageblank {
     display: block !important;
   }
+  .resposnive-banner{
+    display: block !important;
+  }
+  /* .logotext1 {
+    margin-right: 37px !important;
+  }
+  .logotext2 {
+    margin-left: 20px;
+  }
+  .logotext3 {
+    margin-right: 25px !important;
+  } */
   /* .next-arrow,
   .prev-arrow {
     top: 40% !important;
@@ -1716,7 +1720,7 @@ body:focus-visible {
   }*/
   .f-16 {
     font-size: 13px !important;
-    margin-left: 38px;
+   
   }
   .ant-form-item-control-input {
     width: 19rem !important;
@@ -2268,7 +2272,7 @@ body:focus-visible {
   font-size: 24px;
 
   line-height: 1.2;
-  text-align: justify;
+
 }
 .agent-info-bg {
   background-image: url("./assets/agentcontact.jpg");
@@ -2512,9 +2516,9 @@ body:focus-visible {
 .swiper-3d .swiper-slide-shadow {
   background-color: transparent !important;
 }
-.responsive-table .ant-table-cell {
+/* .responsive-table .ant-table-cell {
   text-align: left;
-}
+} */
 .slick-prev {
   left: -15px;
 }
@@ -2591,12 +2595,48 @@ body:focus-visible {
 }
 .ant-image-preview-switch-right,
 .ant-image-preview-switch-left {
-  width: 73px ;
-  height: 73px ;
+  width: 73px;
+  height: 73px;
   background-color: #000;
 }
 
 .pageblank,
 .--soft .--right {
   display: none !important;
+}
+.logotext1, .logotext2, .logotext3 {
+  text-align: center;
+  color: white;
+  text-transform: uppercase;
+}
+
+/* Default font sizes */
+.logotext1 {
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.logotext2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.logotext3 {
+  font-size: 16px;
+  font-weight: 200;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 600px) {
+  .logotext1,
+  .logotext3 {
+    font-size: 12px;
+  }
+
+  .logotext2 {
+    font-size: 18px;
+  }
+}
+.slick-next {
+right: -47px;
 }
