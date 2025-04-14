@@ -17,7 +17,7 @@ function OurStory() {
   const [counter, setCounter] = useState(1831197188); // Starting value
 
   useEffect(() => {
-    const target = 3625843999; // total value
+    const target = 3823776248; // total value
     const duration = 500;
     const intervalTime = 30;
     const increment = (target - counter) / (duration / intervalTime);
@@ -82,7 +82,7 @@ function OurStory() {
             </Title>
           </div>
           <Row gutter={[20, 20]} justify="center" style={{ display: "flex" }}>
-            <Col xs={18} sm={16} md={24} lg={32} xl={14}>
+            <Col xs={18} sm={16} md={24} lg={34} xl={32}>
               <Row justify="center" gutter={[20, 20]} wrap="true">
                 <Col
                   xs={12}
@@ -192,7 +192,7 @@ function OurStory() {
                   className="text-white text-upper"
                   style={{ fontSize: "30px", display: "block" }}
                 >
-                  $3.26 BILLION
+                  $3.82 BILLION
                 </Text>
               </div>
             </Col>
