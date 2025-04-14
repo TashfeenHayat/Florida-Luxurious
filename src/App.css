@@ -1457,8 +1457,8 @@ body:focus-visible {
     font-size: 16px !important;
     text-align: justify;
   }
-  .agent-first-name {
-    font-size: 58px !important;
+    body .agent-first-name {
+    font-size: 40px !important;
   }
   body .agent-last-name {
     font-size: 25px !important;
