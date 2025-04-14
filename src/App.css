@@ -1556,7 +1556,13 @@ body:focus-visible {
     height: auto;
     object-fit: cover;
   }
-
+.logotext1 {
+    margin-right: 37px !important;
+  }
+  .logotext2{margin-left: 20px;}
+  .logotext3 {
+    margin-right: 25px !important;
+  }
   .team-section {
     display: flex;
     gap: 4rem;
