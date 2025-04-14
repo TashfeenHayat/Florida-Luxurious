@@ -150,7 +150,7 @@ function ContactUs() {
                   </Form>
                 </div>
               </Col>
-              <Col lg={10} md={10} sm={24} align="middle">
+              <Col lg={10} md={10} sm={24} xsm={24}>
                 <Card
                   bordered={false}
                   style={{ backgroundColor: "black" }}
@@ -160,18 +160,16 @@ function ContactUs() {
                     <Flex justify={"center"} align="center" className="py-3">
                       <img src={Logo} width={"30%"} preview={false} />
                     </Flex>
-                   <Text className="text-upper text-white text-center f-16 f-200 logotext1">
-                      {" "}
-                      Florida
-                    </Text>
-                    <Text className="text-upper text-white text-center f-24 f-bold logotext2">
-                      {" "}
-                      LUXURIOUS
-                    </Text>
-                    <Text className="text-upper text-white text-center f-16  f-200 logotext3">
-                      {" "}
-                      properties
-                    </Text>
+                    <Flex
+                      vertical
+                      align="center"
+                      justify="center"
+                      style={{ padding: "16px", textAlign: "center" }}
+                    >
+                      <Text className="logotext1">Florida</Text>
+                      <Text className="logotext2">LUXURIOUS</Text>
+                      <Text className="logotext3">properties</Text>
+                    </Flex>
 
                     <Flex
                       justify={"flex-start"}
@@ -180,19 +178,19 @@ function ContactUs() {
                       className="py-4"
                       gap={10}
                     >
-                      <Flex align={"center"} gap={5}>
+                      <Flex align={"start"} gap={5}>
                         <CiMap color="#838383" size={15} />
                         <Text className="text-white text-upper">
                           2438 East Las Olas Boulevard Fort Lauderdale, FL 33301
                         </Text>
                       </Flex>
-                      <Flex align={"center"} gap={5}>
+                      <Flex align={"start"} gap={5}>
                         <CiMail color="#838383" size={15} />
                         <Text className="text-white text-upper">
                           info@floridaluxurious.com
                         </Text>
                       </Flex>
-                      <Flex align={"center"} gap={5}>
+                      <Flex align={"start"} gap={5}>
                         <CiPhone color="#838383" size={15} />
                         <Text className="text-white text-upper">
                           954.870.4080
