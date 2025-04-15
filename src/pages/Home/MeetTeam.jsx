@@ -174,7 +174,7 @@ function MeetTeam() {
                           <div className="p-absoulte p-b-30-left-0 w-100">
                             <Flex justify="center" align="center">
                               <Text className="text-white text-upper f-24">
-                                {agent.firstName}{" "}
+                                {agent.firstName}{" "}{agent.lastName}
                               </Text>
                             </Flex>
                           </div>
