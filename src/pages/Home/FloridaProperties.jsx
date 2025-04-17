@@ -85,12 +85,19 @@ function FloridaProperties() {
                   data-aos-easing="ease-in-sine"
                   data-aos-duration="2500"
                 />
+                <img
+                  style={{ width: "90px" }}
+                  src={Bagde4}
+                  data-aos="fade-right"
+                  data-aos-easing="ease-in-sine"
+                  data-aos-duration="2500"
+                />
               </Flex>
             </div>
           </Flex>
         </Col>
         <Col lg={12} sm={24} xsm={24}>
-          <Col lg={19} offset={1}>
+          <Col lg={19} >
             <Flex justify="center" align={"center"}>
               <img src={DownArrow} className="Downarrow" height="250px" />
             </Flex>
