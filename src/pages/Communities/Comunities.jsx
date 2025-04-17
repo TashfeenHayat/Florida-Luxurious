@@ -125,7 +125,7 @@ function Comunities() {
             <Col lg={12} md={16} sm={24}>
               <Card className="card-feature boxshadow-section">
                 <Title
-                  style={{ textAlign: "center", lineHeight: 2 }}
+                  style={{ textAlign: "center", lineHeight: 1.2 }}
                   className="text-upper"
                 >
                   {data?.name}
