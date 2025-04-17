@@ -1382,7 +1382,9 @@ body:focus-visible {
   .agent-last-name {
     font-size: 30px !important;
   }
-
+  .responsive-social-icons{
+    flex-direction: row !important; /* make icons stack vertically on larger screens */
+  }
   /* .slick-arrow {
     display: none;
     /* z-index: 10;
@@ -1450,9 +1452,9 @@ body:focus-visible {
   .f-32 {
     font-size: 25px !important;
   }
-  .button-secondary-line-left {
+  /* .button-secondary-line-left {
     margin-left: 33px;
-  }
+  } */
   .agent-description {
     font-size: 16px !important;
   }
@@ -1819,7 +1821,7 @@ body:focus-visible {
   line-height: 14px;
   letter-spacing: 1.5px;
   cursor: pointer;
-  min-width: 250px;
+  min-width: 190px;
   max-width: 200px;
   align-items: center;
   justify-content: center;
