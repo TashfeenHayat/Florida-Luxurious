@@ -2626,7 +2626,6 @@ body:focus-visible {
   font-weight: 200;
 }
 
-/* Responsive adjustments for mobile */
 @media (max-width: 600px) {
   .logotext1,
   .logotext3 {
@@ -2636,8 +2635,10 @@ body:focus-visible {
   .logotext2 {
     font-size: 18px;
   }
+  .drawerfont{
+    font-size: 20px !important;
+  }
 }
 .slick-next {
-right: -47px !important
-  ;
+right: -47px;
 }
