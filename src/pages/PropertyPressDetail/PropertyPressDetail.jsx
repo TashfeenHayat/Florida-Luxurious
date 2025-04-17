@@ -184,7 +184,7 @@ function PropertyPressDetail() {
             }}
           >
             <Title
-              className="text-upper text-white f-50 f-100"
+              className="text-upper text-white f-50 f-100 press-title"
               style={{ fontSize: "clamp(24px, 5vw, 50px)" }}
             >
               {data?.title}
@@ -245,7 +245,7 @@ function PropertyPressDetail() {
                     style={{
                       marginRight: "10px",
                       padding: "10px 20px",
-                      fontSize: "16px",
+                      
                     }}
                   >
                     Previous Page
@@ -255,7 +255,7 @@ function PropertyPressDetail() {
                     onClick={handleNextPage}
                     style={{
                       padding: "10px 20px",
-                      fontSize: "16px",
+                      
                     }}
                   >
                     Next Page
