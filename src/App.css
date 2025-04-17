@@ -1595,7 +1595,7 @@ body:focus-visible {
     width: 180px !important;
   }
   .button-view1::after {
-    width: 110px !important;
+    width: 57px !important;
   }
   .button-next,
   .button-preview {
@@ -1618,8 +1618,28 @@ body:focus-visible {
   body .pageblank {
     display: block !important;
   }
-  .resposnive-banner{
+  .resposnive-banner {
     display: block !important;
+  }
+  .agentfont {
+    display: flex !important ;
+    font-size: 20px !important ;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+  .agentcontfont {
+    font-size: 36px !important ;
+  }
+  .button-preview::after {
+    width: 41px !important;
+    font-size: 14px !important;
+  }
+  .button-next::after {
+    width: 41px !important;
+    font-size: 14px !important;
+  }
+  .press-title {
+    font-size: 30px !important;
   }
   /* .logotext1 {
     margin-right: 37px !important;
@@ -1720,7 +1740,6 @@ body:focus-visible {
   }*/
   .f-16 {
     font-size: 13px !important;
-   
   }
   .ant-form-item-control-input {
     width: 19rem !important;
@@ -2272,7 +2291,6 @@ body:focus-visible {
   font-size: 24px;
 
   line-height: 1.2;
-
 }
 .agent-info-bg {
   background-image: url("./assets/agentcontact.jpg");
@@ -2604,7 +2622,9 @@ body:focus-visible {
 .--soft .--right {
   display: none !important;
 }
-.logotext1, .logotext2, .logotext3 {
+.logotext1,
+.logotext2,
+.logotext3 {
   text-align: center;
   color: white;
   text-transform: uppercase;
@@ -2626,6 +2646,7 @@ body:focus-visible {
   font-weight: 200;
 }
 
+/* Responsive adjustments for mobile */
 @media (max-width: 600px) {
   .logotext1,
   .logotext3 {
@@ -2635,10 +2656,10 @@ body:focus-visible {
   .logotext2 {
     font-size: 18px;
   }
-  .drawerfont{
+  .drawerfont {
     font-size: 20px !important;
   }
 }
 .slick-next {
-right: -47px;
+  right: -47px;
 }
