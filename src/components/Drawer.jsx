@@ -31,10 +31,10 @@ function Drawers({ setOpenDrawer, openDrawer }) {
         </div>
         <div className="drawer-option">
           <Row gutter={[60, 40]}>
-            <Col lg={16} md={16} sm={24}>
+            <Col lg={16} md={16} sm={24} xs={48}>
               <Row gutter={[8, 20]}>
-                <Col lg={12} md={12} sm={24}>
-                  <Title className="text-white text-upper" level={3}>
+                <Col lg={12} md={12} sm={24} xs={32}>
+                  <Title className="text-white text-upper drawerfont" level={3}>
                     our offerings
                   </Title>
                   <Flex className="pt-2" vertical gap={10}>
@@ -62,7 +62,7 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                   </Flex>
                 </Col>
                 <Col lg={12} md={12} sm={24}>
-                  <Title className="text-white text-upper" level={3}>
+                  <Title className="text-white text-upper drawerfont" level={3}>
                     Other Offering
                   </Title>
                   <Flex className="pt-2" vertical gap={10}>
@@ -74,7 +74,7 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                       MLS
                     </Link>
                     <Link
-                      className="text-upper f-14 text-white"
+                      className="text-upper f-14 text-white "
                       style={{ textDecoration: "none" }}
                       to="global"
                     >
@@ -119,7 +119,7 @@ function Drawers({ setOpenDrawer, openDrawer }) {
                 <Col lg={12} md={12} sm={24}>
                   <Link to="/boat-owner" style={{ textDecoration: "none" }}>
                     <Title
-                      className="text-white text-upper"
+                      className="text-white text-upper drawerfont"
                       to="boat-owner"
                       level={3}
                     >
@@ -130,8 +130,8 @@ function Drawers({ setOpenDrawer, openDrawer }) {
               </Row>
             </Col>
 
-            <Col lg={8} md={8} sm={24}>
-              <Title className="text-white text-upper" level={3}>
+            <Col lg={8} md={8} sm={24} xs={32}>
+              <Title className="text-white text-upper drawerfont" level={3}>
                 Communities
               </Title>
               <Flex className="pt-2" vertical gap={10}>
@@ -166,10 +166,17 @@ function Drawers({ setOpenDrawer, openDrawer }) {
           </Row>
         </div>
       </div>
-      <div className="set">
+      <div className="set px-4 sm:px-6 md:px-12 py-6">
         <Flex justify="flex-start" vertical align="flex-start">
-          <Flex justify="space-between" align="center" className="w-100">
-            <Paragraph className="f-24 text-white" style={{ fontWeight: 100 }}>
+          <Flex
+            justify="space-between"
+            align="center"
+            className="w-100 flex-col md:flex-row gap-8 md:gap-4 drawerfont"
+          >
+            <Paragraph
+              className="f-24 text-white  "
+              style={{ fontWeight: 100 }}
+            >
               BROWARD COUNTY'S <br />
               <Text className="f-bold f-24 text-white">#1 RANKED PRIVATE</Text>
               <br />
@@ -177,25 +184,44 @@ function Drawers({ setOpenDrawer, openDrawer }) {
             </Paragraph>
 
             <Flex vertical>
-              <Title className="text-white f-24 f-bold text-upper text-center">
+              {/* Title */}
+              <Title className="text-white f-bold text-base sm:text-lg md:text-xl lg:text-2xl text-upper mb-4 drawerfont">
                 Contact Us
               </Title>
-              <Flex justify={"space-around"} align="center" gap={30}>
-                <Flex vertical>
-                  <Text style={{ color: "#838383" }} className="f-14">
+
+              {/* Content Boxes */}
+              <Flex
+                wrap="wrap"
+                justify="center"
+                align="start"
+                className="gap-x-[30px] gap-y-6 w-full"
+              >
+                {/* Address Box */}
+                <Flex vertical className="min-w-[220px] max-w-[300px]">
+                  <Text
+                    style={{ color: "#838383" }}
+                    className="text-xs sm:text-[10px] md:text-base mb-1"
+                  >
                     Address
                   </Text>
-                  <Text className="text-white f-bold">
+                  <Text className="text-white f-bold text-sm sm:text-[10px] md:text-lg leading-snug">
                     2438 East Las Olas
                     <br /> Boulevard <br />
                     Fort Lauderdale, FL 33301
                   </Text>
                 </Flex>
-                <Flex vertical>
-                  <Text style={{ color: "#838383" }} className="f-14">
+
+                {/* Phone Box */}
+                <Flex vertical className="min-w-[220px] max-w-[300px]">
+                  <Text
+                    style={{ color: "#838383" }}
+                    className="text-xs sm:text-sm md:text-base mb-1"
+                  >
                     Schedule an appointment
                   </Text>
-                  <Text className="text-white f-bold">954.870.4080</Text>
+                  <Text className="text-white f-bold text-sm sm:text-base md:text-lg leading-snug">
+                    954.870.4080
+                  </Text>
                 </Flex>
               </Flex>
             </Flex>
