@@ -103,11 +103,11 @@ function AgentProfile() {
   const navigate = useNavigate();
   const { isLoading, data, isError } = useAgent(id);
   const { isLoading: isBlogLoading, data: blogData } = useBlogs(10, 1, id);
-  
+
   const { isLoading: isReportLoading, reports } = useReport();
   const { isLoading: isTestimonialsLoading, data: testimonialsData } =
     useTestimonials(10, 1, id);
- 
+
   const formatPhoneNumber = (phoneNumberObj) => {
     if (!phoneNumberObj) return "";
 
@@ -168,7 +168,7 @@ function AgentProfile() {
               />
             ) : (
               <>
-                <Flex justify={"flex-start"} align="center" className="w-75">
+                <Flex justify={"flex-start"} align="center" className="w-100">
                   <Paragraph>
                     <span className="about-agent">About</span>
                     <i className="title-line-agent"></i>
@@ -182,7 +182,10 @@ function AgentProfile() {
                     <span className="agent-estate">Estate Agent</span>
                   </Paragraph>
                 </Flex>
-                <Paragraph className="text-justify, agent-description">
+                <Paragraph
+                  className="agent-description"
+                  style={{ display: "flex", textAlign: "start" }}
+                >
                   {data?.description}
                 </Paragraph>
               </>
@@ -201,10 +204,11 @@ function AgentProfile() {
           }}
         >
           <Row
-            gutter={[8, 16]}
+            gutter={[0, 0]}
             align="middle"
-            style={{ height: "100%" }}
+            style={{ height: "100%", margin:"auto" }}
             display="flex"
+          
           >
             <Col lg={8} xl={8} md={4}></Col>
             <Col
@@ -212,7 +216,7 @@ function AgentProfile() {
               xl={8}
               md={12}
               sm={24}
-              xsm={24}
+              xsm={34}
               align={"center"}
               style={{ backgroundBlendMode: "normal", filter: "none" }}
             >
@@ -233,7 +237,7 @@ function AgentProfile() {
                 ) : (
                   <Flex vertical gap={10} wrap="nowrap">
                     <div>
-                      <Title className="text-white text-upper">
+                      <Title className="text-white text-upper agentcontfont">
                         Contact {data?.firstName}
                       </Title>
                     </div>
@@ -279,13 +283,13 @@ function AgentProfile() {
                       >
                         <Flex align={"center"} gap={10}>
                           <MdOutlinePhone color="#838383" size={25} />{" "}
-                          <span className="text-white f-32">
+                          <span className="text-white f-32 agentfont ">
                             {formatPhoneNumber(data?.phoneNumber)}
                           </span>
                         </Flex>
                         <Flex align={"center"} gap={10}>
                           <MdOutlineMailOutline color="#838383" size={25} />{" "}
-                          <span className="text-white f-32 text-lower">
+                          <span className="text-white f-32 agentfont">
                             {data?.email}
                           </span>
                         </Flex>
@@ -333,7 +337,7 @@ function AgentProfile() {
                 )}
               </Flex>
             </Col>
-            <Col lg={24} xl={8} md={18} sm={24} xsm={24}>
+            <Col lg={24} xl={8} md={18} sm={26} xsm={32}>
               {isLoading ? (
                 <Skeleton
                   active
@@ -342,11 +346,12 @@ function AgentProfile() {
                   loading={isLoading}
                 />
               ) : (
+                
                 <Flex
                   vertical
                   justify={"center"}
                   align="center"
-                  style={{ height: "100%" }}
+                  style={{ height: "100%",marginLeft:"33px"}}
                   gap={10}
                 >
                   <Button
