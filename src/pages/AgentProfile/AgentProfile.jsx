@@ -206,138 +206,116 @@ function AgentProfile() {
           <Row
             gutter={[0, 0]}
             align="middle"
-            style={{ height: "100%", margin:"auto" }}
+            style={{ height: "100%", margin: "auto" }}
             display="flex"
-          
           >
             <Col lg={8} xl={8} md={4}></Col>
             <Col
+              xs={24}
+              sm={24}
+              md={12}
               lg={12}
               xl={8}
-              md={12}
-              sm={24}
-              xsm={34}
-              align={"center"}
               style={{ backgroundBlendMode: "normal", filter: "none" }}
             >
-              <Flex
-                justify={"center"}
-                align="center"
-                style={{ height: "100%" }}
-                wrap="wrap"
-              >
+              <Flex justify="center" align="center" style={{ height: "100%" }}>
                 {isLoading ? (
-                  <Skeleton
-                    active
-                    round
-                    paragraph={{ rows: 4 }}
-                    title
-                    loading={isLoading}
-                  />
+                  <Skeleton active round paragraph={{ rows: 4 }} title />
                 ) : (
-                  <Flex vertical gap={10} wrap="nowrap">
-                    <div>
+                  <Flex
+                    vertical
+                    gap={16}
+                    align="center"
+                    style={{ width: "100%" }}
+                  >
+                    <div style={{ width: "100%", textAlign: "center" }}>
                       <Title className="text-white text-upper agentcontfont">
-                        Contact {data?.firstName}
+                        Contact {data?.firstName || "Agent"}
                       </Title>
                     </div>
 
-                    <Flex gap={10}>
-                      <Flex
-                        vertical
-                        justify={"center"}
-                        align={"center"}
-                        style={{ marginLeft: "-50px" }}
-                        gap={10}
+                    {/* Social + Contact side by side on desktop, stacked on mobile */}
+                    <Row
+                      gutter={[16, 16]}
+                      justify="center"
+                      align="top"
+                      style={{ width: "100%" }}
+                      claskkName="social-media-adents"
+                    >
+                      {/* Social Icons (Left Column) */}
+                      <Col
+                        xs={24}
+                        md={8}
+                        style={{ display: "flex", justifyContent: "center" }}
                       >
-                        <a
-                          className="bg-social-media"
-                          style={{ cursor: "pointer" }}
-                          href={data?.social?.facebook}
-                          target="_blank"
+                        <Flex
+                          className="responsive-social-icons"
+                          style={{
+                            display: "flex",
+                            flexDirection: "column", // horizontal on mobile
+                            gap: "12px",
+                          }}
                         >
-                          <FaFacebookF color="black" size={24} />
-                        </a>
-                        <a
-                          className="bg-social-media"
-                          style={{ cursor: "pointer" }}
-                          href={data?.social?.linkedin}
-                          target="_blank"
-                        >
-                          <FaLinkedinIn color="black" size={24} />
-                        </a>
-                        <a
-                          className="bg-social-media"
-                          style={{ cursor: "pointer" }}
-                          href={data?.social?.insta}
-                          target="_blank"
-                        >
-                          <FaInstagram color="black" size={24} />
-                        </a>
-                      </Flex>
-                      <Flex
-                        vertical
-                        justify="center"
-                        gap={10}
-                        className="contact"
-                      >
-                        <Flex align={"center"} gap={10}>
-                          <MdOutlinePhone color="#838383" size={25} />{" "}
-                          <span className="text-white f-32 agentfont ">
-                            {formatPhoneNumber(data?.phoneNumber)}
-                          </span>
-                        </Flex>
-                        <Flex align={"center"} gap={10}>
-                          <MdOutlineMailOutline color="#838383" size={25} />{" "}
-                          <span className="text-white f-32 agentfont">
-                            {data?.email}
-                          </span>
-                        </Flex>
-                        <Row
-                          style={{ display: "flex", justifyContent: "center" }}
-                          gutter={[10, 10]}
-                          claskkName="social-media-adents"
-                        >
-                          <Col sx={24} gap={10} align="center" md={0} lg={0}>
+                          {data?.social?.facebook && (
                             <a
                               className="bg-social-media"
                               style={{ cursor: "pointer" }}
-                              href={data?.social?.facebook}
+                              href={data.social.facebook}
                               target="_blank"
+                              rel="noopener noreferrer"
                             >
                               <FaFacebookF color="black" size={24} />
                             </a>
-                          </Col>
-                          <Col sx={24} md={0} lg={0}>
-                            {" "}
+                          )}
+                          {data?.social?.linkedin && (
                             <a
                               className="bg-social-media"
                               style={{ cursor: "pointer" }}
-                              href={data?.social?.linkedin}
+                              href={data.social.linkedin}
                               target="_blank"
+                              rel="noopener noreferrer"
                             >
                               <FaLinkedinIn color="black" size={24} />
                             </a>
-                          </Col>
-                          <Col sx={24} md={0} lg={0}>
-                            {" "}
+                          )}
+                          {data?.social?.insta && (
                             <a
                               className="bg-social-media"
                               style={{ cursor: "pointer" }}
-                              href={data?.social?.insta}
+                              href={data.social.insta}
                               target="_blank"
+                              rel="noopener noreferrer"
                             >
                               <FaInstagram color="black" size={24} />
                             </a>
-                          </Col>
-                        </Row>
-                      </Flex>
-                    </Flex>
+                          )}
+                        </Flex>
+                      </Col>
+
+                      {/* Contact Info (Right Column) */}
+                      <Col xs={20} md={16} lg={16}>
+                        <Flex vertical gap={12} align="start">
+                          <Flex align="center" gap={10}>
+                            <MdOutlinePhone color="#838383" size={25} />
+                            <span className="text-white f-32 agentfont">
+                              {formatPhoneNumber(data?.phoneNumber || "")}
+                            </span>
+                          </Flex>
+                          <Flex align="center" gap={10}>
+                            <MdOutlineMailOutline color="#838383" size={25} />
+                            <span className="text-white f-32 agentfont">
+                              {data?.email || "No Email"}
+                            </span>
+                          </Flex>
+                        </Flex>
+                      </Col>
+                    </Row>
                   </Flex>
                 )}
               </Flex>
             </Col>
-            <Col lg={24} xl={8} md={18} sm={26} xsm={32}>
+
+            <Col xs={24} sm={24} md={18} lg={24} xl={8}>
               {isLoading ? (
                 <Skeleton
                   active
@@ -346,12 +324,11 @@ function AgentProfile() {
                   loading={isLoading}
                 />
               ) : (
-                
                 <Flex
                   vertical
                   justify={"center"}
                   align="center"
-                  style={{ height: "100%",marginLeft:"33px"}}
+                  style={{ height: "100%" }}
                   gap={10}
                 >
                   <Button
