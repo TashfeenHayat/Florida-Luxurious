@@ -56,7 +56,7 @@ function ContactUs() {
                   </Flex>
                   <Form form={form} layout="vertical" onFinish={onFinish}>
                     <Row gutter={[16, 16]} className="py-4">
-                      <Col xs={24} sm={24} md={12} lg={12}>
+                      <Col xs={24} sm={24} md={22} lg={12}>
                         <Form.Item
                           name="firstName"
                           label="First Name"
@@ -71,7 +71,7 @@ function ContactUs() {
                           <Input />
                         </Form.Item>
                       </Col>
-                      <Col xs={24} sm={24} md={12} lg={12}>
+                      <Col xs={24} sm={24} md={22} lg={12}>
                         <Form.Item
                           name="lastName"
                           label="Last Name"
@@ -86,7 +86,7 @@ function ContactUs() {
                           <Input />
                         </Form.Item>
                       </Col>
-                      <Col xs={24}>
+                      <Col xs={18} sm={32} md={22} lg={24}>
                         <Form.Item
                           name="email"
                           label="Email Address"
@@ -105,7 +105,7 @@ function ContactUs() {
                           <Input />
                         </Form.Item>
                       </Col>
-                      <Col xs={24}>
+                      <Col xs={24} md={22}>
                         <Form.Item
                           name="phoneNumber"
                           label="Phone"
@@ -124,7 +124,7 @@ function ContactUs() {
                           <Input onKeyPress={handlePhoneInput} />
                         </Form.Item>
                       </Col>
-                      <Col xs={24}>
+                      <Col xs={24} md={22}>
                         <Form.Item
                           name="message"
                           label="Message"
