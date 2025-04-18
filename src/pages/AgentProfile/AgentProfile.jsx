@@ -303,13 +303,13 @@ function AgentProfile() {
                         <Flex vertical gap={12} align="start">
                           <Flex align="center" gap={10}>
                             <MdOutlinePhone color="#838383" size={25} />
-                            <span className="text-white f-32 agentfont">
+                            <span className="text-white f-24 agentfont">
                               {formatPhoneNumber(data?.phoneNumber || "")}
                             </span>
                           </Flex>
                           <Flex align="center" gap={10}>
                             <MdOutlineMailOutline color="#838383" size={25} />
-                            <span className="text-white f-32 agentfont">
+                            <span className="text-white f-24 agentfont">
                               {data?.email || "No Email"}
                             </span>
                           </Flex>
@@ -338,7 +338,7 @@ function AgentProfile() {
                   gap={10}
                 >
                   <Button
-                    classNam="button-secondary-line-left "
+                    classNam="button-secondary-line-left"
                     width="300px"
                     Click={() =>
                       navigate(
