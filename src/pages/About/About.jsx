@@ -154,7 +154,8 @@ function OurStory() {
           </Row>
 
           <Row gutter={[20, 20]} className="my-124 px-3">
-            <Col xl={8} lg={12} md={12} sm={12} xs={24}>
+            {/* Box 1 */}
+            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
               <div
                 style={{
                   borderLeft: "3px solid white",
@@ -162,7 +163,7 @@ function OurStory() {
                 }}
               >
                 <Text
-                  className="text-white f-18 text-upper"
+                  className="text-white f-16 text-upper storytitle"
                   style={{ fontWeight: "bold", display: "block" }}
                 >
                   Ranked Private Brokerage
@@ -175,7 +176,9 @@ function OurStory() {
                 </Text>
               </div>
             </Col>
-            <Col xl={8} lg={12} md={12} sm={12} xs={24}>
+
+            {/* Box 2 */}
+            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
               <div
                 style={{
                   borderLeft: "3px solid white",
@@ -183,7 +186,7 @@ function OurStory() {
                 }}
               >
                 <Text
-                  className="text-white f-18 text-upper"
+                  className="text-white f-16 text-upper storytitle"
                   style={{ fontWeight: "bold", display: "block" }}
                 >
                   Has exceeded the mark
@@ -196,7 +199,9 @@ function OurStory() {
                 </Text>
               </div>
             </Col>
-            <Col xl={8} lg={12} md={12} sm={12} xs={24}>
+
+            {/* Box 3 */}
+            <Col xs={24} sm={24} md={8} lg={8} xl={8}>
               <div
                 style={{
                   borderLeft: "3px solid white",
@@ -204,7 +209,7 @@ function OurStory() {
                 }}
               >
                 <Text
-                  className="text-white f-18 text-upper"
+                  className="text-white f-16 text-upper storytitle"
                   style={{ fontWeight: "bold", display: "block" }}
                 >
                   Total Sales
@@ -218,6 +223,7 @@ function OurStory() {
               </div>
             </Col>
           </Row>
+
           {/* <Flex justify={"space-around"} className="my-124 px-3" wrap="wrap">
             <div style={{ borderLeft: "3px solid white", paddingLeft: "20px" }}>
               <Text className="text-gray f-16 text-upper">
