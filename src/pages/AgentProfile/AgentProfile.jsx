@@ -299,7 +299,7 @@ function AgentProfile() {
                       </Col>
 
                       {/* Contact Info (Right Column) */}
-                      <Col xs={20} md={16} lg={16}>
+                      <Col xs={24} sm={24} md={16} lg={16}>
                         <Flex vertical gap={12} align="start">
                           <Flex align="center" gap={10}>
                             <MdOutlinePhone color="#838383" size={25} />
