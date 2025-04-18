@@ -338,7 +338,7 @@ function AgentProfile() {
                   gap={10}
                 >
                   <Button
-                    classNam="button-secondary-line-left"
+                    classNam="button-secondary-line-left "
                     width="300px"
                     Click={() =>
                       navigate(
