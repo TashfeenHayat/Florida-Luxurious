@@ -182,9 +182,14 @@ function AgentProfile() {
                     <span className="agent-estate">Estate Agent</span>
                   </Paragraph>
                 </Flex>
-                <Paragraph
+            <Paragraph
                   className="agent-description"
-                  style={{ display: "flex", textAlign: "start" }}
+                  style={{
+                    display: "flex",
+                    textAlign: "start",
+                    lineHeight: 1.2,
+                    whiteSpace: "pre-line",
+                  }}
                 >
                   {data?.description}
                 </Paragraph>
