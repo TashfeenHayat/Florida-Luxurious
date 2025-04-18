@@ -34,8 +34,8 @@ function ContactUs() {
       <div className="contact-us-form-bg">
         <div className="contact-us-shadow-gray">
           <Container>
-            <Row align={"middle"}>
-              <Col lg={14} md={14} sm={24}>
+            <Row gutter={[16, 32]} align={"middle"}>
+              <Col xs={24} sm={24} md={14} lg={14} xl={14}>
                 <div className="contact-us-content">
                   <Flex justify={"center"} align="center" vertical>
                     <Title
@@ -55,8 +55,8 @@ function ContactUs() {
                     </Flex>
                   </Flex>
                   <Form form={form} layout="vertical" onFinish={onFinish}>
-                    <Row gutter={[8, 16]} className="py-4">
-                      <Col lg={12} md={12} sm={24}>
+                    <Row gutter={[16, 16]} className="py-4">
+                      <Col xs={24} sm={24} md={12} lg={12}>
                         <Form.Item
                           name="firstName"
                           label="First Name"
@@ -71,7 +71,7 @@ function ContactUs() {
                           <Input />
                         </Form.Item>
                       </Col>
-                      <Col lg={12} md={12} sm={24}>
+                      <Col xs={24} sm={24} md={12} lg={12}>
                         <Form.Item
                           name="lastName"
                           label="Last Name"
@@ -86,7 +86,7 @@ function ContactUs() {
                           <Input />
                         </Form.Item>
                       </Col>
-                      <Col lg={24} md={24} sm={24}>
+                      <Col xs={24}>
                         <Form.Item
                           name="email"
                           label="Email Address"
@@ -105,7 +105,7 @@ function ContactUs() {
                           <Input />
                         </Form.Item>
                       </Col>
-                      <Col lg={24} md={24} sm={24}>
+                      <Col xs={24}>
                         <Form.Item
                           name="phoneNumber"
                           label="Phone"
@@ -124,7 +124,7 @@ function ContactUs() {
                           <Input onKeyPress={handlePhoneInput} />
                         </Form.Item>
                       </Col>
-                      <Col lg={24} md={24} sm={24}>
+                      <Col xs={24}>
                         <Form.Item
                           name="message"
                           label="Message"
@@ -150,7 +150,7 @@ function ContactUs() {
                   </Form>
                 </div>
               </Col>
-              <Col lg={10} md={10} sm={24} xsm={24}>
+              <Col xs={24} sm={24} md={10} lg={10} xl={10}>
                 <Card
                   bordered={false}
                   style={{ backgroundColor: "black" }}
