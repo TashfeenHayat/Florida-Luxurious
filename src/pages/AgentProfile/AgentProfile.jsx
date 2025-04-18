@@ -102,6 +102,7 @@ function AgentProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isLoading, data, isError } = useAgent(id);
+  console.log(data);
   const { isLoading: isBlogLoading, data: blogData } = useBlogs(10, 1, id);
 
   const { isLoading: isReportLoading, reports } = useReport();
@@ -182,7 +183,7 @@ function AgentProfile() {
                     <span className="agent-estate">Estate Agent</span>
                   </Paragraph>
                 </Flex>
-            <Paragraph
+                <Paragraph
                   className="agent-description"
                   style={{
                     display: "flex",
@@ -209,18 +210,18 @@ function AgentProfile() {
           }}
         >
           <Row
-            gutter={[0, 0]}
+            gutter={[16, 16]}
             align="middle"
             style={{ height: "100%", margin: "auto" }}
             display="flex"
           >
-            <Col lg={8} xl={8} md={4}></Col>
+            <Col xs={0} sm={0} md={6} lg={6} xl={4}></Col>
             <Col
               xs={24}
               sm={24}
-              md={12}
-              lg={12}
-              xl={8}
+              md={20}
+              lg={16}
+              xl={12}
               style={{ backgroundBlendMode: "normal", filter: "none" }}
             >
               <Flex justify="center" align="center" style={{ height: "100%" }}>
@@ -368,7 +369,6 @@ function AgentProfile() {
           </Row>
         </div>
       </div>
-
       {blogData?.blogs.length > 0 ? (
         <Container>
           <div className="pt-98 pb-98">
