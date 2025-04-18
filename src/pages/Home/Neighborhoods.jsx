@@ -23,11 +23,11 @@ function Neighborhoods() {
           <Spin size="large" />
         </div>
       ) : (
-        <Row gutter={[8, 8]} className="px-4" style={{ overflow: "hidden" }}>
+        <Row gutter={[18, 18]} className="px-4" style={{ overflow: "" }}>
           <Col xl={6} lg={8} md={12} sm={12} xs={24}>
             <div
               className="displayy-teamimg-center show-btn-community-home"
-              style={{ overflow: "hidden" }}
+              // style={{ overflow: "hidden" }}
             >
               <div style={{ background: "black" }} className="communities-grid">
                 <div
