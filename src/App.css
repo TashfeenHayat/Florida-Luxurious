@@ -1211,9 +1211,9 @@ body:focus-visible {
   .text-1024 {
     font-size: 9px;
   }
-  .communities-grid {
+  /* .communities-grid {
     width: 22.3rem !important;
-  }
+  } */
   .florida_info {
     display: flex !important;
     flex-direction: column !important;
@@ -1294,7 +1294,7 @@ body:focus-visible {
   }
 }
 
-@media screen and (769px >= width) {
+@media screen and (768px >= width) {
   .search-button::after {
     display: none;
     overflow: hidden;
@@ -1532,9 +1532,9 @@ body:focus-visible {
   .slick-track {
     gap: 0 !important;
   }
-  .communities-grid {
+  /* .communities-grid {
     width: 22.3rem !important;
-  }
+  } */
   .our-story-bg {
     z-index: 0 !important;
   }
@@ -1770,6 +1770,9 @@ body:focus-visible {
   }
   .ant-form-item-control-input {
     width: 19rem !important;
+  }
+  .storytitle {
+    font-size: 14px !important;
   }
 }
 .text-talk {
@@ -2686,6 +2689,12 @@ body:focus-visible {
   .drawerfont {
     font-size: 20px !important;
   }
+  
+ 
+
+  .button-view2 {
+    font-size: 14px;
+  }
 }
 .slick-next {
   right: -47px;
@@ -2928,9 +2937,9 @@ body:focus-visible {
   .slick-track {
     gap: 0 !important;
   }
-  .communities-grid {
+  /* .communities-grid {
     width: 22.3rem !important;
-  }
+  } */
   .our-story-bg {
     z-index: 0 !important;
   }
@@ -3174,7 +3183,7 @@ body:focus-visible {
     width: 70% !important;
     font-size: 14px !important;
   }
-  .propert-title{
+  .propert-title {
     font-size: 24px !important;
   }
 }
