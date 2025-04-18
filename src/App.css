@@ -1642,12 +1642,7 @@ body:focus-visible {
   .resposnive-banner {
     display: block !important;
   }
-  .agentfont {
-    display: flex !important ;
-    font-size: 20px !important ;
-    justify-content: center !important;
-    text-align: center !important;
-  }
+
   .agentcontfont {
     font-size: 36px !important ;
   }
@@ -3045,12 +3040,7 @@ body:focus-visible {
   .resposnive-banner {
     display: block !important;
   }
-  .agentfont {
-    display: flex !important ;
-    font-size: 20px !important ;
-    justify-content: center !important;
-    text-align: center !important;
-  }
+
   .agentcontfont {
     font-size: 36px !important ;
   }
