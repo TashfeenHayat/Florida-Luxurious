@@ -85,13 +85,13 @@ function FloridaProperties() {
                   data-aos-easing="ease-in-sine"
                   data-aos-duration="2500"
                 />
-                <img
+{/*                 <img
                   style={{ width: "90px" }}
                   src={Bagde4}
                   data-aos="fade-right"
                   data-aos-easing="ease-in-sine"
                   data-aos-duration="2500"
-                />
+                /> */}
               </Flex>
             </div>
           </Flex>
