@@ -1553,12 +1553,12 @@ body:focus-visible {
     left: 0 !important;
   }
   .next {
-    width: 25px;
+    width: 5px !important;
   }
-  .slick-next {
+  /* .slick-next {
     top: 40% !important;
     right: 2px !important;
-  }
+  } */
   .slick-prev {
     top: 40% !important;
     left: 1px !important;
@@ -2689,8 +2689,6 @@ body:focus-visible {
   .drawerfont {
     font-size: 20px !important;
   }
-  
- 
 
   .button-view2 {
     font-size: 14px;
@@ -2958,7 +2956,7 @@ body:focus-visible {
     left: 0 !important;
   }
   .next {
-    width: 25px;
+    width: 25px !important;
   }
   .slick-next {
     top: 40% !important;
@@ -2966,7 +2964,7 @@ body:focus-visible {
   }
   .slick-prev {
     top: 40% !important;
-    left: 1px !important;
+    left: 3px !important;
   }
   .img-op1 {
     width: 50%;
