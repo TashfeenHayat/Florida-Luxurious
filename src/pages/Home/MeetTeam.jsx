@@ -13,7 +13,10 @@ const { Title, Text } = Typography;
 
 function MeetTeam() {
   const navigate = useNavigate();
-  const { data, isLoading } = useAgents(15, 1);
+  const { data, isLoading } = useAgents(300, 1);
+  const sortedAgents = [...(data?.agents ?? [])].sort((a, b) =>
+    `${a.firstName} ${a.lastName}`.localeCompare(`${b.firstName} ${b.lastName}`)
+  );
 
   const CustomPrevArrow = (props) => {
     const { className, style, onClick } = props;
@@ -131,7 +134,7 @@ function MeetTeam() {
                   data-aos-duration="2000"
                 >
                   <Slider {...settings}>
-                    {data?.agents?.map((agent, index) => (
+                    {sortedAgents?.map((agent, index) => (
                       <div
                         onClick={() => navigate(`/agent/${agent._id}`)}
                         key={index}
