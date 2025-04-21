@@ -3175,3 +3175,6 @@ body:focus-visible {
     font-size: 24px !important;
   }
 }
+.slick-next{
+      right: -61px !important;
+}
