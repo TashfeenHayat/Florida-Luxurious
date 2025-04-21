@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import FooterLogo from "../assets/footerlogo.png";
-import { Row, Col, Flex, Typography, Input, Button, Image } from "antd";
+import {
+  Row,
+  Col,
+  Flex,
+  Typography,
+  Input,
+  Button,
+  Image,
+  Form,
+  Layout,
+} from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { contactUs } from "../api/Inquiry";
 import useCommunities from "../hooks/useCommunities";
-
+import DisclaimerFooter  from "./DisclaimerFooter";
 const { Text, Title, Paragraph } = Typography;
+
 function Footer() {
   const dispatch = useDispatch();
   const { loading } = useSelector((s) => s.contactUsReducer);
@@ -48,15 +59,24 @@ function Footer() {
   return (
     <div className="bg-footer">
       <div className="footer-bg-img-shadow">
-        <Row align={""}>
-          <Col span={6} lg={6} sm={0} xsm={0} className="footer-logo" align="">
+        <Row align={""} gutter={[16, 16]}>
+          <Col
+            span={6}
+            xs={24}
+            lg={6}
+            sm={0}
+            xsm={0}
+            md={12}
+            className="footer-logo"
+            align=""
+          >
             <Image src={FooterLogo} width="60%" preview={false} />
           </Col>
           <Col span={18}>
             <Row>
               <Col lg={16}>
                 <Row gutter={[20, 40]}>
-                  <Col lg={0} xlg={0} md={18} sm={32} xsm={32} align="">
+                  <Col lg={0} xlg={0} md={0} sm={32} xsm={32} align="">
                     <Image src={FooterLogo} width="60%" preview={false} />
                   </Col>
                   <Col lg={12} xlg={6} md={18} sm={32} xsm={32}>
@@ -115,7 +135,9 @@ function Footer() {
                     </Flex>
                   </Col>
                   <Col lg={12} xlg={6} md={18} sm={32} xsm={32}>
-                    <Text className="text-upper f-24 f-bold">about</Text>
+                    <Text className="text-upper f-24 f-bold footertext">
+                      about
+                    </Text>
                     <Flex className="pt-2" vertical gap={10}>
                       <Link
                         className="text-upper f-14 text-black"
@@ -140,7 +162,7 @@ function Footer() {
                       </Link>
                     </Flex>
                   </Col>
-                  <Col lg={12}>
+                  <Col lg={12} xlg={6} md={18} sm={32} xsm={32}>
                     <Link
                       to="/boat-owner"
                       className="text-upper f-14 text-black"
@@ -153,38 +175,38 @@ function Footer() {
                   </Col>
                 </Row>
               </Col>
-              <Col lg={8}>
-                <Col lg={12}>
-                  <Text className="text-upper f-24 f-bold">Communities</Text>
-                  <Flex className="pt-2" vertical gap={10}>
-                    {community6.map((item, index) => (
-                      <Link
-                        key={index}
-                        className="text-upper f-14 text-black"
-                        style={{ textDecoration: "none" }}
-                        to={`/community/${item?._id}`}
-                      >
-                        {item?.name}
-                      </Link>
-                    ))}
-                    <Text
+              <Col lg={8} xlg={6} md={18} sm={32} xsm={32}>
+                <Text className="text-upper f-24 f-bold footertext">
+                  Communities
+                </Text>
+                <Flex className="pt-2" vertical gap={10}>
+                  {community6.map((item, index) => (
+                    <Link
+                      key={index}
                       className="text-upper f-14 text-black"
-                      style={{ cursor: "pointer" }}
-                      onClick={() => navigate("/all-communities")}
+                      style={{ textDecoration: "none" }}
+                      to={`/community/${item?._id}`}
                     >
-                      View All
-                      <span
-                        style={{
-                          marginLeft: "5px",
-                          fontWeight: "bold",
-                          fontSize: "20px",
-                        }}
-                      >
-                        &rarr;
-                      </span>
-                    </Text>
-                  </Flex>
-                </Col>
+                      {item?.name}
+                    </Link>
+                  ))}
+                  <Text
+                    className="text-upper f-14 text-black"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => navigate("/all-communities")}
+                  >
+                    View All
+                    <span
+                      style={{
+                        marginLeft: "5px",
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                      }}
+                    >
+                      &rarr;
+                    </span>
+                  </Text>
+                </Flex>
               </Col>
             </Row>
           </Col>
@@ -288,71 +310,78 @@ function Footer() {
             <div>
               <Paragraph className="f-20 text-center">
                 Yes, I am interested in receiving updates on{" "}
-                <Text className="f-bold f-20"> Fort Lauderdale Luxury</Text>
+                <Text className="f-bold f-20">Fort Lauderdale Luxury</Text>
                 &nbsp;Properties for Sale
               </Paragraph>
-              <Flex
-                gap={5}
-                align="center"
-                justify={"center"}
-                direction="column"
-                style={{ width: "100%" }}
-              >
-                <form className="footer-form-display" style={{ width: "100%" }}>
-                  <Flex
-                    gap={10}
-                    direction={["column", "row"]}
-                    style={{ width: "100%" }}
-                  >
-                    <Input
-                      name="firstName"
-                      placeholder="Your First Name"
-                      style={{ borderRadius: "0px", width: "100%" }}
-                      value={formData.firstName}
-                      onChange={handleChange}
-                    />
-                    <Input
-                      name="lastName"
-                      placeholder="Your Last Name"
-                      style={{ borderRadius: "0px", width: "100%" }}
-                      value={formData.lastName}
-                      onChange={handleChange}
-                    />
-                  </Flex>
 
-                  <Flex
-                    gap={10}
-                    direction={["column", "row"]}
-                    style={{ marginTop: 10, width: "100%" }}
-                  >
-                    <Input
-                      name="email"
-                      placeholder="Your Email Address"
-                      style={{ borderRadius: "0px", width: "100%" }}
-                      value={formData.email}
-                      onChange={handleChange}
-                    />
-                    <Button
-                      className="btn-sub-footer"
-                      onClick={handleSubmit}
-                      disabled={
-                        formData.email === "" ||
-                        formData.firstName === "" ||
-                        formData.lastName === "" ||
-                        loading ||
-                        !isValidEmail(formData.email)
-                      }
-                      style={{ width: "100%", maxWidth: "200px" }} // Adjust button width for mobile responsiveness
-                    >
-                      {loading ? "Submitting" : "Submit my info"}
-                    </Button>
-                  </Flex>
-                </form>
-              </Flex>
+              <Form
+                layout="vertical"
+                className="footer-form-display"
+                onFinish={handleSubmit}
+              >
+                <Row gutter={[16, 16]}>
+                  <Col xs={24} sm={12}>
+                    <Form.Item>
+                      <Input
+                        name="firstName"
+                        placeholder="Your First Name"
+                        style={{ borderRadius: "0px" }}
+                        value={formData.firstName}
+                        onChange={handleChange}
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} sm={12}>
+                    <Form.Item>
+                      <Input
+                        name="lastName"
+                        placeholder="Your Last Name"
+                        style={{ borderRadius: "0px" }}
+                        value={formData.lastName}
+                        onChange={handleChange}
+                      />
+                    </Form.Item>
+                  </Col>
+                </Row>
+
+                <Row gutter={[16, 16]} align="middle">
+                  <Col xs={24} sm={16}>
+                    <Form.Item>
+                      <Input
+                        name="email"
+                        placeholder="Your Email Address"
+                        style={{ borderRadius: "0px" }}
+                        value={formData.email}
+                        onChange={handleChange}
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col xs={24} sm={8}>
+                    <Form.Item>
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="btn-sub-footer"
+                        block
+                        disabled={
+                          formData.email === "" ||
+                          formData.firstName === "" ||
+                          formData.lastName === "" ||
+                          loading ||
+                          !isValidEmail(formData.email)
+                        }
+                      >
+                        {loading ? "Submitting" : "Submit my info"}
+                      </Button>
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </Form>
             </div>
           </Col>
         </Row>
       </div>
+      <DisclaimerFooter />
     </div>
   );
 }
