@@ -7,6 +7,7 @@ import Bagde1 from "../../assets/2021.svg";
 import Bagde2 from "../../assets/2020.svg";
 import Bagde3 from "../../assets/2022.svg";
 import Bagde4 from "../../assets/2023.svg";
+import Bagde5 from "../../assets/2024.svg";
 import CustomAffixIO from "./CustomAffixIo";
 
 const { Title, Text } = Typography;
@@ -94,13 +95,13 @@ function FloridaProperties() {
                     data-aos-easing="ease-in-sine"
                     data-aos-duration="2500"
                   />
-                  {/*                 <img
+                                  <img
                   style={{ width: "90px" }}
-                  src={Bagde4}
+                  src={Bagde5}
                   data-aos="fade-right"
                   data-aos-easing="ease-in-sine"
                   data-aos-duration="2500"
-                /> */}
+                />
                 </Flex>
               </div>
             </Flex>
