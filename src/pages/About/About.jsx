@@ -10,7 +10,7 @@ import Bagde1 from "../../assets/2021.svg";
 import Bagde2 from "../../assets/2020.svg";
 import Bagde3 from "../../assets/2022.svg";
 import Bagde4 from "../../assets/2023.svg";
-
+import Bagde5 from "../../assets/2024.svg";
 import { useState, useEffect } from "react";
 const { Title, Text, Paragraph } = Typography;
 function OurStory() {
@@ -87,67 +87,56 @@ function OurStory() {
                 <Col
                   xs={12}
                   sm={12}
-                  md={4}
-                  lg={4}
+                  md={12}
+                  lg={3}
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-                  <Image
-                    style={{ width: "95px" }}
-                    preview={false}
-                    src={Bagde}
-                  />
+                  <Image className="badge2" preview={false} src={Bagde} />
                 </Col>
                 <Col
                   xs={12}
                   sm={12}
-                  md={4}
-                  lg={4}
+                  md={12}
+                  lg={3}
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-                  <Image
-                    style={{ width: "95px" }}
-                    preview={false}
-                    src={Bagde2}
-                  />
+                  <Image className="badge2" preview={false} src={Bagde2} />
                 </Col>
                 <Col
                   xs={12}
                   sm={12}
-                  md={4}
-                  lg={4}
+                  md={12}
+                  lg={3}
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-                  <Image
-                    style={{ width: "95px" }}
-                    preview={false}
-                    src={Bagde1}
-                  />
+                  <Image className="badge2" preview={false} src={Bagde1} />
                 </Col>
                 <Col
                   xs={12}
                   sm={12}
-                  md={4}
-                  lg={4}
+                  md={12}
+                  lg={3}
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-                  <Image
-                    style={{ width: "95px" }}
-                    preview={false}
-                    src={Bagde3}
-                  />
+                  <Image className="badge2" preview={false} src={Bagde3} />
                 </Col>
                 <Col
                   xs={12}
                   sm={12}
-                  md={4}
-                  lg={4}
+                  md={12}
+                  lg={3}
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-                  <Image
-                    style={{ width: "95px" }}
-                    preview={false}
-                    src={Bagde4}
-                  />
+                  <Image className="badge2" preview={false} src={Bagde4} />
+                </Col>
+                <Col
+                  xs={12}
+                  sm={12}
+                  md={12}
+                  lg={3}
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <Image className="badge2" preview={false} src={Bagde5} />
                 </Col>
               </Row>
             </Col>
