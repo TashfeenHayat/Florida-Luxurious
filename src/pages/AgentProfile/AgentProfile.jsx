@@ -373,46 +373,68 @@ function AgentProfile() {
         <Container>
           <div className="pt-98 pb-98">
             <Title className="text-upper f-100 text-center">My Blog</Title>
+
             <Slider {...settings}>
               {blogData.blogs.map((item, index) => (
                 <div key={index} style={{ padding: "0 10px" }}>
                   <Card
                     style={{
-                      width: "auto", // Responsive width
-                      maxWidth: "400px", // Max width for larger screens
+                      width: "auto",
+                      maxWidth: "400px",
+                      height: "500px", // Fixed card height
                       background: "#d9d9d93b",
                       margin: "0 auto",
                       padding: "20px",
                       borderRadius: "10px",
                       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                     }}
                   >
-                    <Flex justify="center" align="center" vertical>
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "220px", // Fixed image container height
+                        overflow: "hidden",
+                        borderRadius: "5%",
+                        marginBottom: "10px",
+                      }}
+                    >
                       <Image
                         src={item?.cover || item?.agentId?.photo}
                         preview={false}
                         style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover", // Important: keep filling the box properly
                           borderRadius: "5%",
-                          marginBottom: "10px",
-                          width: "100%", // Ensure the image is responsive
-                          height: "auto", // Maintain aspect ratio
                         }}
                       />
-                      <Title className="f-16 pt-4 text-upper">
+                    </div>
+
+                    <Flex justify="center" align="center" vertical>
+                      <Title
+                        className="f-16 pt-4 text-upper"
+                        style={{
+                          textAlign: "center",
+                          minHeight: "48px", // Ensure title area has enough height
+                        }}
+                      >
                         {item?.title}
                       </Title>
+
                       <button
                         className="button-view1"
                         onClick={() => navigate(`/agent/blog/${item?._id}`)}
-                        // style={{
-                        // //   marginTop: "10px",
-                        // //   padding: "10px 15px",
-                        // // // Example button color
-
-                        //   border: "none",
-                        //   borderRadius: "5px",
-                        //   cursor: "pointer",
-                        // }}
+                        style={{
+                          marginTop: "10px",
+                          padding: "10px 20px",
+                          border: "none",
+                          borderRadius: "5px",
+                          cursor: "pointer",
+                        }}
                       >
                         Read More
                       </button>
@@ -491,6 +513,7 @@ function AgentProfile() {
             background:
               "linear-gradient(to right, rgba(0,0,0,0.2), rgba(0,0,0,0))",
             zIndex: 1,
+            pointerEvents: "none",
           }}
         ></div>
 
@@ -498,23 +521,23 @@ function AgentProfile() {
         <div
           style={{
             position: "absolute",
-            // top: 0,
-            // right: 0,
-            // height: "100%",
+            top: 0,
+            right: 0,
+            height: "100%",
             width: "50px",
             background:
               "linear-gradient(to left, rgba(0,0,0,0.2), rgba(0,0,0,0))",
             zIndex: 1,
+            pointerEvents: "none",
           }}
         ></div>
 
-        {/* Swiper Component */}
+        {/* Swiper */}
         <Swiper
           className="swiper-container"
-          spaceBetween={12}
-          slidesPerView={4}
+          spaceBetween={16}
           loop={true}
-          speed={3000}
+          speed={1000}
           autoplay={{
             delay: 3000,
             disableOnInteraction: false,
@@ -522,15 +545,10 @@ function AgentProfile() {
           style={{ marginBottom: 26 }}
           modules={[Autoplay]}
           breakpoints={{
-            1024: {
-              slidesPerView: 4,
-            },
-            768: {
-              slidesPerView: 3,
-            },
-            480: {
-              slidesPerView: 1,
-            },
+            1200: { slidesPerView: 4 },
+            992: { slidesPerView: 3 },
+            768: { slidesPerView: 2 },
+            480: { slidesPerView: 1 },
           }}
         >
           {Array.isArray(testimonialsData?.testmonials) &&
@@ -546,15 +564,21 @@ function AgentProfile() {
                     hoverable
                     style={{
                       width: "100%",
-                      maxWidth: "450px",
+                      maxWidth: "400px",
                       margin: "auto",
-                      borderRadius: "36px",
+                      borderRadius: "24px",
                       boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
                       paddingTop: "80px",
                       background: "#fff",
+                      minHeight: "440px", // ✅ Equal height
+                      maxHeight: "440px", // ✅ Equal height
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "flex-start",
+                      position: "relative",
                     }}
                   >
-                    {/* Image Section */}
+                    {/* Avatar Image */}
                     <div
                       style={{
                         position: "absolute",
@@ -579,12 +603,11 @@ function AgentProfile() {
                       />
                     </div>
 
-                    {/* User Name and Testimonial Text */}
                     <Title
                       level={5}
                       style={{
                         fontWeight: "600",
-                        fontSize: "18px",
+                        fontSize: "16px",
                         textAlign: "center",
                         marginTop: "50px",
                       }}
@@ -596,16 +619,21 @@ function AgentProfile() {
                       style={{
                         fontSize: "14px",
                         fontStyle: "italic",
-                        marginBottom: "20px",
+                        margin: "10px 20px 20px",
                         textAlign: "center",
                         color: "#555",
+                        overflowWrap: "break-word",
+                        lineHeight: "1.6",
+                        flexGrow: 1, // fill remaining space
+                        display: "flex",
+                        alignItems: "center", // center text vertically if short
                       }}
                     >
-                      <span style={{ fontSize: "24px", paddingRight: "8px" }}>
+                      <span style={{ fontSize: "24px", paddingRight: "4px" }}>
                         “
                       </span>
                       {testimonial.content}
-                      <span style={{ fontSize: "24px", paddingLeft: "8px" }}>
+                      <span style={{ fontSize: "24px", paddingLeft: "4px" }}>
                         ”
                       </span>
                     </Paragraph>
