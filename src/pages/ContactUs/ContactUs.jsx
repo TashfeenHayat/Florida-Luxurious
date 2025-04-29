@@ -173,7 +173,7 @@ function ContactUs() {
 
                     <Flex vertical className="py-4" gap={10}>
                       <Flex align="center" gap={5}>
-                        <CiMap color="#838383" size={18} />
+                        <CiMap color="#838383" size={20} />
                         <Text
                           className="text-white text-upper"
                           style={{ fontSize: "14px" }}
