@@ -171,28 +171,33 @@ function ContactUs() {
                       <Text className="logotext3">properties</Text>
                     </Flex>
 
-                    <Flex
-                      justify={"flex-start"}
-                      align="flex-start"
-                      vertical
-                      className="py-4"
-                      gap={10}
-                    >
-                      <Flex align={"start"} gap={5}>
-                        <CiMap color="#838383" size={15} />
-                        <Text className="text-white text-upper">
+                    <Flex vertical className="py-4" gap={10}>
+                      <Flex align="center" gap={5}>
+                        <CiMap color="#838383" size={18} />
+                        <Text
+                          className="text-white text-upper"
+                          style={{ fontSize: "14px" }}
+                        >
                           2438 East Las Olas Boulevard Fort Lauderdale, FL 33301
                         </Text>
                       </Flex>
-                      <Flex align={"start"} gap={5}>
-                        <CiMail color="#838383" size={15} />
-                        <Text className="text-white text-upper">
+
+                      <Flex align="center" gap={5}>
+                        <CiMail color="#838383" size={18} />
+                        <Text
+                          className="text-white text-upper"
+                          style={{ fontSize: "14px" }}
+                        >
                           info@floridaluxurious.com
                         </Text>
                       </Flex>
-                      <Flex align={"start"} gap={5}>
-                        <CiPhone color="#838383" size={15} />
-                        <Text className="text-white text-upper">
+
+                      <Flex align="center" gap={5}>
+                        <CiPhone color="#838383" size={18} />
+                        <Text
+                          className="text-white text-upper"
+                          style={{ fontSize: "14px" }}
+                        >
                           954.870.4080
                         </Text>
                       </Flex>
