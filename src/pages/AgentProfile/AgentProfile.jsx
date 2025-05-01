@@ -276,7 +276,7 @@ function AgentProfile() {
                           style={{
                             display: "flex",
                             flexDirection: "column",
-                            gap: "12px",
+                            gap: "4px",
                           }}
                         >
                           {data?.social?.facebook && (
