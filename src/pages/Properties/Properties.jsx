@@ -87,6 +87,11 @@ function Properties() {
     startIndex,
     startIndex + itemsPerPage
   );
+  // Scroll to top on page change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
   return (
     <>
       <BackgroundImage Image={FeaturedPropertiesImage} style={"back"}>
