@@ -47,29 +47,38 @@ function Home() {
           width: "100%",
         }}
       >
-        <motion.video
-          autoPlay
-          muted
-          loop
-          className="background-video"
-          initial={{ opacity: 0 }} // Animation initial state
-          animate={{ opacity: 1 }} // Animation final state
-          transition={{ duration: 1.5 }} // Animation duration
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
           style={{
             position: "absolute",
-            top: "50%",
-            left: "50%",
+            top: 0,
+            left: 0,
             width: "100%",
             height: "100%",
-            objectFit: "cover",
-            transform: "translate(-50%, -50%)",
-          }} // Responsive video
+            zIndex: 0,
+          }}
         >
-          <source
-            src="https://firebasestorage.googleapis.com/v0/b/florida-lux-e66c2.firebasestorage.app/o/HOMES.mp4?alt=media&token=4256bff0-c138-491c-b79a-2f6eb88744a9"
-            type="video/mp4"
-          />
-        </motion.video>
+          <video
+            autoPlay
+            muted
+            playsInline
+            loop
+            preload="auto"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              pointerEvents: "none", // Prevent mobile tapping issue
+            }}
+          >
+            <source
+              src="https://firebasestorage.googleapis.com/v0/b/florida-lux-e66c2.firebasestorage.app/o/HOMES.mp4?alt=media&token=4256bff0-c138-491c-b79a-2f6eb88744a9"
+              type="video/mp4"
+            />{" "}
+          </video>
+        </motion.div>
 
         <div
           className="content-hero"
@@ -138,7 +147,7 @@ function Home() {
         </div>
       </div>
 
-      <div style={{ overflow: "hidden" }}>
+      <div >
         <Icons />
         <FloridaProperties />
         <RecognitionSlide />
