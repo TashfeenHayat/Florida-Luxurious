@@ -29,7 +29,7 @@ function MeetTeam() {
         style={{ ...style, display: "block", zIndex: 10 }}
         onClick={onClick}
       >
-        <img src={BackArrow} alt="Previous" width="45px" className="next" />
+        <img src={BackArrow} alt="Previous" width="45px" />
       </div>
     );
   };
@@ -42,7 +42,7 @@ function MeetTeam() {
         style={{ ...style, display: "block", zIndex: 10 }}
         onClick={onClick}
       >
-        <img src={NextArrow} alt="Next" width="45px" className="next" />
+        <img src={NextArrow} alt="Next" width="45px"  />
       </div>
     );
   };
@@ -94,7 +94,7 @@ function MeetTeam() {
   return (
     <div style={{ background: "black" }}>
       <div style={{ padding: "98px 0" }}>
-        <Container>
+        <Container style={{ marginLeft: "0px !important" }}>
           <Title
             level={1}
             className="meet-team-heading f-40"
