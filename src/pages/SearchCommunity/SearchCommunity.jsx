@@ -102,6 +102,12 @@ function SearchCommunity() {
   const handleChange = (e) => {
     setSearchText(e.target.value);
   };
+  
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
   return (
     <>
       <BackgroundImage Image={FeaturedPropertiesImage}>
