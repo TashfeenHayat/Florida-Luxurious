@@ -204,18 +204,38 @@ function AgentProfile() {
         <div
           className="agent-info-bg-shadow"
           style={{
+            position: "relative",
             overflow: "hidden",
             backgroundBlendMode: "normal",
             filter: "none",
           }}
         >
+          {/* 🔥 Dark Overlay */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              height: "100%",
+              width: "100%",
+              backgroundColor: "rgba(0, 0, 0, 0.5)", // dark transparent overlay
+              zIndex: 1,
+            }}
+          ></div>
+
           <Row
             gutter={[16, 16]}
             align="middle"
-            style={{ height: "100%", margin: "auto" }}
+            style={{
+              height: "100%",
+              margin: "auto",
+              position: "relative", // ensure it's above the overlay
+              zIndex: 2,
+            }}
             display="flex"
           >
             <Col xs={0} sm={0} md={6} lg={6} xl={4}></Col>
+
             <Col
               xs={24}
               sm={24}
@@ -240,15 +260,12 @@ function AgentProfile() {
                       </Title>
                     </div>
 
-                    {/* Social + Contact side by side on desktop, stacked on mobile */}
                     <Row
                       gutter={[16, 16]}
                       justify="center"
                       align="top"
                       style={{ width: "100%" }}
-                      claskkName="social-media-adents"
                     >
-                      {/* Social Icons (Left Column) */}
                       <Col
                         xs={24}
                         md={8}
@@ -258,7 +275,7 @@ function AgentProfile() {
                           className="responsive-social-icons"
                           style={{
                             display: "flex",
-                            flexDirection: "column", // horizontal on mobile
+                            flexDirection: "column",
                             gap: "12px",
                           }}
                         >
@@ -298,7 +315,6 @@ function AgentProfile() {
                         </Flex>
                       </Col>
 
-                      {/* Contact Info (Right Column) */}
                       <Col xs={24} sm={24} md={16} lg={16}>
                         <Flex vertical gap={12} align="start">
                           <Flex align="center" gap={10}>
@@ -332,7 +348,7 @@ function AgentProfile() {
               ) : (
                 <Flex
                   vertical
-                  justify={"center"}
+                  justify="center"
                   align="center"
                   style={{ height: "100%" }}
                   gap={10}
@@ -348,7 +364,7 @@ function AgentProfile() {
                       )
                     }
                   >
-                    Sold Properties{" "}
+                    Sold Properties
                   </Button>
                   <Button
                     classNam="button-secondary-line-left"
@@ -361,7 +377,7 @@ function AgentProfile() {
                       )
                     }
                   >
-                    View my listings{" "}
+                    View my listings
                   </Button>
                 </Flex>
               )}
@@ -369,6 +385,7 @@ function AgentProfile() {
           </Row>
         </div>
       </div>
+
       {blogData?.blogs.length > 0 ? (
         <Container>
           <div className="pt-98 pb-98">
@@ -539,7 +556,7 @@ function AgentProfile() {
           loop={true}
           speed={1000}
           autoplay={{
-            delay: 3000,
+            delay: 2000,
             disableOnInteraction: false,
           }}
           style={{ marginBottom: 26 }}
@@ -570,8 +587,8 @@ function AgentProfile() {
                       boxShadow: "0 6px 12px rgba(0, 0, 0, 0.1)",
                       paddingTop: "80px",
                       background: "#fff",
-                      minHeight: "440px", // ✅ Equal height
-                      maxHeight: "440px", // ✅ Equal height
+                      minHeight: "440px", 
+                      maxHeight: "440px", 
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "flex-start",
