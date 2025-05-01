@@ -421,11 +421,11 @@ body:focus-visible {
 .displayy-teamimg-center {
   position: relative;
 }
-.slick-next,
+/* .slick-next,
 .slick-prev {
   width: auto !important;
   height: fit-content !important;
-}
+} */
 .slick-prev:before {
   content: "" !important;
 }
@@ -1032,8 +1032,8 @@ body:focus-visible {
   max-height: 300px; /* Set the maximum height as per your requirement */
 }
 .team-view-btn {
-  position: relative; /* Adding relative positioning for absolute positioning of pseudo-element */
-  background-color: #000; /* Green */
+  position: relative;
+  background-color: #000; 
   border: none;
   color: white;
   padding: 15px 52px;
@@ -1262,7 +1262,7 @@ body:focus-visible {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-    .story-title {
+  .story-title {
     color: #000;
     font-weight: 700;
     font-size: 50px !important;
@@ -1389,7 +1389,7 @@ body:focus-visible {
     padding-right: calc(var(--bs-gutter-x) * 0.5);
     padding-left: calc(var(--bs-gutter-x) * 0.5);
     margin-right: auto;
-    margin-left: 1rem;
+    margin-left: 0rem !important;
     padding: 2rem;
     overflow: hidden;
   }
@@ -1561,29 +1561,29 @@ body:focus-visible {
     top: 40% !important;
     right: 2px !important;
   } */
-  .slick-prev {
+  /* .slick-prev {
     top: 40% !important;
     left: 1px !important;
-  }
+  } */
   .img-op1 {
     width: 50%;
   }
-  .slick-slide > div {
-    padding: 10px; /* ✅ Adds spacing between slides */
+  /* .slick-slide > div {
+    padding: 10px; /* ✅ Adds spacing between slides
   }
-
-  .slick-slide img {
+ */
+  /* .slick-slide img {
     width: 100%;
     height: auto;
     object-fit: cover;
-  }
+  } */
 
-  .team-section {
+  /* .team-section {
     display: flex;
     gap: 4rem;
     justify-content: center;
     align-items: center;
-  }
+  } */
   .bg-img-logo {
     background-image: url(/src/assets/bg2.png);
     background-size: 50%;
@@ -2544,10 +2544,10 @@ body:focus-visible {
 }
 
 /* Style for the slider container */
-.slider-container {
+/* .slider-container {
   width: 100%;
   margin-top: 40px;
-}
+} */
 
 /* Style for the slider overlay */
 .slider-overlay {
@@ -2576,9 +2576,9 @@ body:focus-visible {
 .responsive-table {
   border-radius: 20px !important;
 }
-.slick-prev {
+/* .slick-prev {
   left: -15px;
-}
+} */
 .box-award {
   background: black;
   color: white;
@@ -2967,33 +2967,36 @@ body:focus-visible {
   .next {
     width: 25px !important;
   }
-  .slick-next {
+  /* .slick-next {
     top: 40% !important;
     right: 2px !important;
   }
   .slick-prev {
     top: 40% !important;
     left: 3px !important;
-  }
+  } */
   .img-op1 {
     width: 50%;
   }
-  .slick-slide > div {
+  /* .slick-slide > div {
     padding: 10px; /* ✅ Adds spacing between slides */
-  }
+  /* }
 
   .slick-slide img {
     width: 100%;
     height: auto;
     object-fit: cover;
+  } */
+  .custom-arrow {
+    display: none !important;
   }
 
-  .team-section {
+  /* .team-section {
     display: flex;
     gap: 4rem;
     justify-content: center;
     align-items: center;
-  }
+  } */
   .bg-img-logo {
     background-image: url(/src/assets/bg2.png);
     background-size: 50%;
@@ -3306,5 +3309,241 @@ body:focus-visible {
 
   .down-arrow {
     height: 100px;
+  }
+}
+@media (max-width: 576px) {
+  .custom-arrow {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .custom-arrow img {
+    width: 20px;
+  }
+
+  .slick-prev {
+    left: -10px !important;
+  }
+
+  .slick-next {
+    right: -10px !important;
+  }
+  .team-section .slick-slide {
+    padding: 0 5px;
+  }
+
+  .meet-team-heading.f-40 {
+    font-size: 28px !important;
+    line-height: 36px;
+  }
+
+  .let-talk-btn {
+    font-size: 16px;
+    padding: 10px 18px;
+  }
+}
+/* Make arrows responsive */
+
+/* Wrapper to center cards */
+
+/* Flipcard wrapper spacing */
+.slider-container .slick-slide > div {
+  padding: 0 10px;
+}
+
+/* Flipcard image responsiveness */
+.slider-container img {
+  width: 100%;
+  height: auto;
+
+  object-fit: cover;
+}
+
+/* View All Button Styling 
+.let-talk-btn {
+  background-color: #fff;
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: 600;
+
+  transition: all 0.3s ease;
+  margin-top: 30px;
+}*/
+
+/* Fixing Slider Arrow Overlap */
+.slick-prev,
+.slick-next {
+  top: 45% !important;
+  transform: translateY(-50%);
+  z-index: 11;
+}
+
+.slick-prev {
+  left: -35px;
+}
+
+.slick-next {
+  right: -35px;
+}
+
+@media (max-width: 768px) {
+  .slick-prev {
+    left: -20px;
+  }
+
+  .slick-next {
+    right: -20px;
+  }
+}
+/* Fixing Slider Arrow Overlap */
+/* Responsive Image */
+.features_section_slider .slick-slide > div {
+  padding: 0 10px;
+}
+
+/* Fix arrows overlap and make them more visible */
+.slick-prev,
+.slick-next {
+  top: 50% !important;
+  transform: translateY(-50%);
+  z-index: 11;
+}
+
+.slick-prev {
+  left: -35px;
+}
+
+.slick-next {
+  right: -35px;
+}
+
+@media (max-width: 768px) {
+  .slick-prev {
+    left: -20px;
+  }
+
+  .slick-next {
+    right: -20px;
+  }
+}
+
+/* Responsive container alignment */
+.features_section_slider {
+  padding: 0 1rem;
+}
+
+/* Make Info Overlay Responsive */
+.features_section_slider .info {
+  font-size: 14px;
+  backdrop-filter: blur(4px);
+}
+
+.features_section_slider .button-view {
+  background-color: #fff;
+  color: #000;
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.features_section_slider .button-view:hover {
+  background-color: #e0e0e0;
+}
+
+/* Show-info hover effect container */
+
+.button-view1:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Text adjustments for mobile */
+@media (max-width: 576px) {
+  .heading-florida-lux-listing {
+    font-size: 24px !important;
+    line-height: 32px;
+  }
+
+  .button-view1 {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+  .features_section_slider .info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .features_section_slider .info .button-view {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .features_section_slider .show-info {
+    padding: 6px 8px;
+  }
+
+  .features_section_slider .show-info .f-16 {
+    font-size: 13px;
+  }
+.set-communities{
+  display: none;
+}
+}
+@media (max-width: 320px) {
+  /* Make sure parent containers don't overflow */
+  .features_section_slider {
+    padding: 0 5px;
+  }
+
+  /* Image fits screen */
+  .features_section_slider img {
+    max-height: 60vh;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  /* .info section layout */
+  .features_section_slider .info {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 6px;
+    gap: 6px;
+  }
+
+  .features_section_slider .info .ant-typography {
+    font-size: 12px;
+    line-height: 1.3;
+    word-break: break-word;
+    white-space: normal;
+  }
+
+  .features_section_slider .info .button-view {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  /* .show-info */
+  .features_section_slider .show-info {
+    padding: 6px;
+  }
+
+  .features_section_slider .show-info .f-16 {
+    font-size: 12px;
+    word-break: break-word;
+    white-space: normal;
+  }
+
+  .features_section_slider .show-info .prop-info .text-upper {
+    font-size: 11px;
+  }
+
+  .button-view1 {
+    font-size: 14px;
+    padding: 8px 16px;
   }
 }
