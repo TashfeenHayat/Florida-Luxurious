@@ -870,13 +870,13 @@ function AddProperty() {
                   placeholder={"Compensation"}
                 ></Select>
               </Form.Item>
-              <Form.Item
+              {/* <Form.Item
                 name="visitHours"
                 label="Visiting Hours"
                 placeholder="Visiting Hours"
               >
                 <Input size="large" placeholder="Visiting Hours" />
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item
                 name="reducedPrice"
                 label="Reduced Price"
