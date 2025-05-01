@@ -232,7 +232,7 @@ function Report() {
 
       if (selectedProp._id) {
         await dispatch(
-          updatePost({
+          updateReport({
             id: selectedProp._id,
             ...postData,
           })
@@ -241,14 +241,14 @@ function Report() {
         setSelectedProp({});
         setIsModalOpen(false);
       } else {
-        await dispatch(addPost(postData)).unwrap();
+        await dispatch(addReport(postData)).unwrap();
         openNotification("success", "Post added successfully.");
         setIsModalOpen(false);
       }
 
       // Refresh the posts list
       dispatch(
-        getPosts({
+        getReports({
           page: tableParams.current,
           limit: tableParams.pageSize,
         })
@@ -258,7 +258,13 @@ function Report() {
       openNotification("error", "Failed to save the post.");
     }
   };
-
+const beforeUpload2 = (file) => {
+  const isImage = file.type.startsWith("image/");
+  if (!isImage) {
+    message.error("You can only upload image files (JPG/PNG/JPEG etc.)!");
+  }
+  return isImage || Upload.LIST_IGNORE;
+};
   const handleCancel = () => {
     setIsModalOpen(false);
     setSelectedProp({});
@@ -295,6 +301,7 @@ function Report() {
             listType="picture-card"
             showUploadList={false}
             customRequest={handleImageUpload}
+            beforeUpload={beforeUpload2}
           >
             {photo ? (
               <img src={photo} alt="uploaded" style={{ width: "100%" }} />
