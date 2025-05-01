@@ -1,5 +1,5 @@
 import { Typography, Row, Col, Flex, Pagination, Spin, Image } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BackgroundImage from "../../components/BackgroundImage";
 import FeaturedPropertiesImage from "../../assets/soldproperties.jpg";
 import { Container } from "react-bootstrap";
@@ -65,7 +65,9 @@ function SoldProperties() {
     startIndex,
     startIndex + itemsPerPage
   );
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
   return (
     <>
       <BackgroundImage
