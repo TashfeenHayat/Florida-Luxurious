@@ -8,7 +8,24 @@ function LetTalk() {
   const navigate = useNavigate();
   return (
     <div className="background-video-container" style={{ height: "70vh" }}>
-      <video autoPlay muted loop className="background-video">
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="background-video"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+      >
         <source
           src="https://firebasestorage.googleapis.com/v0/b/florida-lux-e66c2.firebasestorage.app/o/contactus.mp4?alt=media&token=77547d74-277e-4285-9725-561eb49e27d3"
           //src="https://firebasestorage.googleapis.com/v0/b/floridaluxrious.appspot.com/o/talk.mp4?alt=media&token=859b58a0-8029-4b2c-8059-69a25f3ccd95"
