@@ -33,7 +33,7 @@ function FeatureListing() {
   // Function to get the correct currency symbol
   const getCurrencySymbol = (currencyCode) => {
     return (
-      currencySymbols[currencyCode.toLowerCase()] || currencyCode.toUpperCase()
+      currencySymbols[currencyCode?.toLowerCase()] || currencyCode?.toUpperCase()
     ); // Default to currency code if no symbol found
   };
 
@@ -91,65 +91,70 @@ function FeatureListing() {
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
     responsive: [
-      {
-        breakpoint: 1440, // For large screens (desktops)
-        settings: { slidesToShow: 2, slidesToScroll: 1 },
+    {
+      breakpoint: 1440, // below 1440px
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
       },
-      {
-        breakpoint: 1300, // For large tablets and smaller desktops
-        settings: { slidesToShow: 2, slidesToScroll: 1 },
+    },
+    {
+      breakpoint: 1300, // below 1300px
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
       },
-      {
-        breakpoint: 1100, // For tablets in landscape (iPad Air, iPad Mini)
-        settings: { slidesToShow: 1, slidesToScroll: 1 },
+    },
+    {
+      breakpoint: 1100, // below 1100px
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
       },
-      {
-        breakpoint: 850, // For smaller tablets in portrait mode
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-
-          centerPadding: "0",
-        },
+    },
+    {
+      breakpoint: 850, // below 850px
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerPadding: "0",
       },
-      {
-        breakpoint: 768, // For tablets in portrait mode (iPad Mini and others)
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          centerMode: true,
-          centerPadding: "0",
-        },
+    },
+    {
+      breakpoint: 768, // below 768px
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerMode: true,
+        centerPadding: "0",
       },
-      {
-        breakpoint: 570, // For mobile devices (larger phones)
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-
-          centerPadding: "0",
-        },
+    },
+    {
+      breakpoint: 570, // below 570px
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerPadding: "0",
       },
-      {
-        breakpoint: 390, // For smaller mobile devices (like iPhone SE)
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-
-          centerPadding: "0",
-        },
+    },
+    {
+      breakpoint: 390, // below 390px
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerPadding: "0",
       },
-      {
-        breakpoint: 350, // For very small devices (e.g., older phones)
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-
-          centerMode: true,
-          centerPadding: "0",
-        },
+    },
+    {
+      breakpoint: 350, // below 350px
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerMode: true,
+        centerPadding: "0",
       },
-    ],
+    },
+  ],
   };
 
   return (
