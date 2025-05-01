@@ -29,13 +29,13 @@ function Neighborhoods() {
               className="displayy-teamimg-center show-btn-community-home"
               // style={{ overflow: "hidden" }}
             >
-              <div style={{ background: "black" }} className="communities-grid">
+              <div style={{ background: "black" }} className="communities-grid set-communities">
                 <div
                 // style={{
                 //   overflow: "hidden",
                 // }}
                 >
-                  <Text className="text-upper text-white f-24 f-100">
+                  <Text className="text-upper text-white f-24 f-100 ">
                     Communities
                   </Text>
                 </div>
