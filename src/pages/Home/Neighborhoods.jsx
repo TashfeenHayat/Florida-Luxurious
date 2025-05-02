@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Typography, Row, Col, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import useCommunities from "../../hooks/useCommunities";
@@ -7,12 +7,46 @@ const { Title, Text } = Typography;
 
 function Neighborhoods() {
   const { data, isLoading } = useCommunities(20, 1);
+    const [isMobile, setIsMobile] = useState(false);
   const sortingArr = [...(data?.filters ?? [])].sort((a, b) =>
     a?.name?.localeCompare(b?.name)
   );
   const displayedCommunities = sortingArr.slice(0, 6);
   const navigate = useNavigate();
+useEffect(() => {
+  const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
+  return () => window.removeEventListener("resize", checkMobile);
+}, []);
+const imgRefs = useRef([]);
 
+useEffect(() => {
+  if (!isMobile) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("mobile-hover-visible");
+        }
+      });
+    },
+    {
+      threshold: 0.4, // 40% of image is visible
+    }
+  );
+
+  imgRefs.current.forEach((img) => {
+    if (img) observer.observe(img);
+  });
+
+  return () => {
+    imgRefs.current.forEach((img) => {
+      if (img) observer.unobserve(img);
+    });
+  };
+}, [isMobile]);
   return (
     <div style={{ paddingTop: 98, paddingBottom: 98, overflow: "hidden" }}>
       <Title className="florida-heading-feature-negibour" level={1}>
@@ -29,7 +63,10 @@ function Neighborhoods() {
               className="displayy-teamimg-center show-btn-community-home"
               // style={{ overflow: "hidden" }}
             >
-              <div style={{ background: "black" }} className="communities-grid set-communities">
+              <div
+                style={{ background: "black" }}
+                className="communities-grid set-communities"
+              >
                 <div
                 // style={{
                 //   overflow: "hidden",
@@ -54,13 +91,16 @@ function Neighborhoods() {
               // style={{ overflow: "hidden" }}
             >
               <div
-                className="displayy-teamimg-center show-btn-community-home"
+                className={`displayy-teamimg-center show-btn-community-home ${
+                  isMobile ? "always-show-info" : ""
+                }`}
                 // style={{ overflow: "hidden" }}
               >
                 <img
                   src={community?.photo}
                   width="100%"
-                  className="img-op communities-grid"
+                  ref={(el) => (imgRefs.current[index] = el)}
+                  className={`img-op communities-grid `}
                   alt="community"
                 />
                 <div
