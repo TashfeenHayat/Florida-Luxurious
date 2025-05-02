@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Typography, Flex, Button, Spin, Image } from "antd";
 import { useNavigate } from "react-router-dom";
 import BackArrow from "../../assets/backArrow.svg";
@@ -33,7 +33,8 @@ function FeatureListing() {
   // Function to get the correct currency symbol
   const getCurrencySymbol = (currencyCode) => {
     return (
-      currencySymbols[currencyCode?.toLowerCase()] || currencyCode?.toUpperCase()
+      currencySymbols[currencyCode?.toLowerCase()] ||
+      currencyCode?.toUpperCase()
     ); // Default to currency code if no symbol found
   };
 
@@ -48,7 +49,7 @@ function FeatureListing() {
     .slice(0, 30);
 
   const CustomPrevArrow = (props) => {
-    const { className,prev, style, onClick } = props;
+    const { className, prev, style, onClick } = props;
     return (
       <div
         className={className}
@@ -91,72 +92,105 @@ function FeatureListing() {
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
     responsive: [
-    {
-      breakpoint: 1440, // below 1440px
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
+      {
+        breakpoint: 1440, // below 1440px
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
       },
-    },
-    {
-      breakpoint: 1300, // below 1300px
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
+      {
+        breakpoint: 1300, // below 1300px
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
       },
-    },
-    {
-      breakpoint: 1100, // below 1100px
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
+      {
+        breakpoint: 1100, // below 1100px
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
       },
-    },
-    {
-      breakpoint: 850, // below 850px
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        centerPadding: "0",
+      {
+        breakpoint: 850, // below 850px
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerPadding: "0",
+        },
       },
-    },
-    {
-      breakpoint: 768, // below 768px
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        centerMode: true,
-        centerPadding: "0",
+      {
+        breakpoint: 768, // below 768px
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: "0",
+        },
       },
-    },
-    {
-      breakpoint: 570, // below 570px
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        centerPadding: "0",
+      {
+        breakpoint: 570, // below 570px
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerPadding: "0",
+        },
       },
-    },
-    {
-      breakpoint: 390, // below 390px
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        centerPadding: "0",
+      {
+        breakpoint: 390, // below 390px
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerPadding: "0",
+        },
       },
-    },
-    {
-      breakpoint: 350, // below 350px
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        centerMode: true,
-        centerPadding: "0",
+      {
+        breakpoint: 350, // below 350px
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: "0",
+        },
       },
-    },
-  ],
+    ],
   };
+const cardRefs = useRef([]);
+const [isMobile, setIsMobile] = useState(false);
 
+useEffect(() => {
+  const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
+  return () => window.removeEventListener("resize", checkMobile);
+}, []);
+
+useEffect(() => {
+  if (!isMobile) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("mobile-hover-visible");
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+
+  cardRefs.current.forEach((card) => {
+    if (card) observer.observe(card);
+  });
+
+  return () => {
+    cardRefs.current.forEach((card) => {
+      if (card) observer.unobserve(card);
+    });
+  };
+}, [isMobile]);
   return (
     <div
       className="boxshadow-section"
@@ -210,6 +244,7 @@ function FeatureListing() {
             <Slider {...settings}>
               {sortedProperties?.map((property, index) => (
                 <div
+                  ref={(el) => (cardRefs.current[index] = el)}
                   key={index}
                   className="displayy-teamimg-center"
                   onClick={() => navigate(`/features/${property._id}`)}
