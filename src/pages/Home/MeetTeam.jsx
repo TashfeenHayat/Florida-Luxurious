@@ -42,7 +42,7 @@ function MeetTeam() {
         style={{ ...style, display: "block", zIndex: 10 }}
         onClick={onClick}
       >
-        <img src={NextArrow} alt="Next" width="45px"  />
+        <img src={NextArrow} alt="Next" width="45px" />
       </div>
     );
   };
