@@ -1033,7 +1033,7 @@ body:focus-visible {
 }
 .team-view-btn {
   position: relative;
-  background-color: #000; 
+  background-color: #000;
   border: none;
   color: white;
   padding: 15px 52px;
@@ -3427,7 +3427,34 @@ body:focus-visible {
   .slick-next {
     right: -20px;
   }
+  /* .always-show-info .show-info {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0%) !important;
+  transition: none !important;
+} */
+.show-btn-community-home .show-info {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
 }
+
+.show-btn-community-home:hover .show-info {
+  opacity: 1;
+  visibility: visible;
+}
+.mobile-hover-img {
+filter: grayscale(0) !important;
+  transform: scale(1.01) !important;
+}
+}
+/* .flipper {
+    animation: autoFlip 6s linear infinite;
+  } */
+
+
+
+
 
 /* Responsive container alignment */
 .features_section_slider {
@@ -3489,9 +3516,23 @@ body:focus-visible {
   .features_section_slider .show-info .f-16 {
     font-size: 13px;
   }
-.set-communities{
-  display: none;
-}
+  .set-communities {
+    display: none;
+  }
+  /* Default hover behavior for desktop */
+/* .displayy-teamimg-center .show-info {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+} */
+
+/* .displayy-teamimg-center:hover .show-info {
+  opacity: 1;
+} */
+
+/* Always show info on mobile */
+/* Show info box by default on mobile devices */
+
+
 }
 @media (max-width: 320px) {
   /* Make sure parent containers don't overflow */
