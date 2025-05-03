@@ -13,40 +13,9 @@ function Neighborhoods() {
   );
   const displayedCommunities = sortingArr.slice(0, 6);
   const navigate = useNavigate();
-useEffect(() => {
-  const checkMobile = () => setIsMobile(window.innerWidth <= 768);
-  checkMobile();
-  window.addEventListener("resize", checkMobile);
-  return () => window.removeEventListener("resize", checkMobile);
-}, []);
-const imgRefs = useRef([]);
 
-useEffect(() => {
-  if (!isMobile) return;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("mobile-hover-visible");
-        }
-      });
-    },
-    {
-      threshold: 0.4, // 40% of image is visible
-    }
-  );
 
-  imgRefs.current.forEach((img) => {
-    if (img) observer.observe(img);
-  });
-
-  return () => {
-    imgRefs.current.forEach((img) => {
-      if (img) observer.unobserve(img);
-    });
-  };
-}, [isMobile]);
   return (
     <div style={{ paddingTop: 98, paddingBottom: 98, overflow: "hidden" }}>
       <Title className="florida-heading-feature-negibour" level={1}>
@@ -91,15 +60,13 @@ useEffect(() => {
               // style={{ overflow: "hidden" }}
             >
               <div
-                className={`displayy-teamimg-center show-btn-community-home ${
-                  isMobile ? "always-show-info" : ""
-                }`}
+                className={`displayy-teamimg-center show-btn-community-home `}
                 // style={{ overflow: "hidden" }}
               >
                 <img
                   src={community?.photo}
                   width="100%"
-                  ref={(el) => (imgRefs.current[index] = el)}
+                
                   className={`img-op communities-grid `}
                   alt="community"
                 />
