@@ -157,40 +157,48 @@ function FeatureListing() {
       },
     ],
   };
-const cardRefs = useRef([]);
-const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-useEffect(() => {
-  const checkMobile = () => setIsMobile(window.innerWidth <= 768);
-  checkMobile();
-  window.addEventListener("resize", checkMobile);
-  return () => window.removeEventListener("resize", checkMobile);
-}, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
 
-useEffect(() => {
-  if (!isMobile) return;
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("mobile-hover-visible");
-        }
-      });
-    },
-    { threshold: 0.4 }
-  );
+  useEffect(() => {
+    if (!isMobile) return; // Only for mobile
+console.log("Mobile view detected", isMobile); // ✅ Console message
+    const items = document.querySelectorAll(".displayy-teamimg-center");
 
-  cardRefs.current.forEach((card) => {
-    if (card) observer.observe(card);
-  });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            console.log("IN VIEW:", entry.target); // ✅ Console message
+            entry.target.classList.add("mobile-visible");
+          } else {
+            console.log("OUT OF VIEW:", entry.target); // ✅ Console message
+            entry.target.classList.remove("mobile-visible");
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.5,
+      }
+    );
 
-  return () => {
-    cardRefs.current.forEach((card) => {
-      if (card) observer.unobserve(card);
-    });
-  };
-}, [isMobile]);
+    items.forEach((item) => observer.observe(item));
+
+    return () => {
+      items.forEach((item) => observer.unobserve(item));
+    };
+  }, [isMobile]);
+
   return (
     <div
       className="boxshadow-section"
@@ -244,9 +252,10 @@ useEffect(() => {
             <Slider {...settings}>
               {sortedProperties?.map((property, index) => (
                 <div
-                  ref={(el) => (cardRefs.current[index] = el)}
                   key={index}
-                  className="displayy-teamimg-center"
+                  className={`displayy-teamimg-center ${
+                    isMobile ? "always-show-info" : ""
+                  }`}
                   onClick={() => navigate(`/features/${property._id}`)}
                   style={{
                     position: "relative",
@@ -287,6 +296,9 @@ useEffect(() => {
                         background: "rgba(0, 0, 0, 0.5)",
                         padding: "10px",
                         borderRadius: "5px",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "normal", // allow multi-line wrapping
+                        wordBreak: "break-word", // break long words
                       }}
                     >
                       <Button
@@ -316,6 +328,8 @@ useEffect(() => {
                         background: "#fff",
                         height: "50px",
                         borderRadius: "5px",
+                        boxSizing: "border-box",
+                        wordBreak: "break-word",
                       }}
                     >
                       <Flex
@@ -323,7 +337,15 @@ useEffect(() => {
                         align={"center"}
                         style={{ height: "100%", padding: "0 10px" }}
                       >
-                        <Text className="mx-4 f-16 f-bold">
+                        <Text
+                          className="mx-4 f-16 f-bold"
+                          style={{
+                            fontSize: "14px",
+                            lineHeight: "1.2",
+                            wordBreak: "break-word",
+                            maxWidth: "100%",
+                          }}
+                        >
                           {property?.addressLine1} {property?.addressLine2}
                         </Text>
                         <div className="prop-info">
