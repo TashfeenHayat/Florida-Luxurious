@@ -13,7 +13,46 @@ function Neighborhoods() {
   );
   const displayedCommunities = sortingArr.slice(0, 6);
   const navigate = useNavigate();
+ useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
 
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("mobile-visible");
+          } else {
+            entry.target.classList.remove("mobile-visible");
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.5,
+      }
+    );
+
+    // Delay observer setup to allow DOM to fully render after Slider
+    const timeoutId = setTimeout(() => {
+      const items = document.querySelectorAll(".displayy-teamimg-center");
+      items.forEach((item) => observer.observe(item));
+    }, 500); // can tweak to 300-800ms based on render delay
+
+    return () => {
+      clearTimeout(timeoutId);
+      observer.disconnect();
+    };
+  }, [isMobile]);
 
 
   return (
@@ -60,7 +99,9 @@ function Neighborhoods() {
               // style={{ overflow: "hidden" }}
             >
               <div
-                className={`displayy-teamimg-center show-btn-community-home `}
+                className={`displayy-teamimg-center show-btn-community-home ${
+                  isMobile ? "always-show-info" : ""
+                } `}
                 // style={{ overflow: "hidden" }}
               >
                 <img
