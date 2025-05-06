@@ -68,6 +68,48 @@ function SoldProperties() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
+   const [isMobile, setIsMobile] = useState(false);
+  
+    useEffect(() => {
+      const handleResize = () => {
+        setIsMobile(window.innerWidth <= 768);
+      };
+  
+      handleResize(); // Initial check
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+  
+    useEffect(() => {
+      if (!isMobile) return;
+  
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("mobile-visible");
+            } else {
+              entry.target.classList.remove("mobile-visible");
+            }
+          });
+        },
+        {
+          root: null,
+          threshold: 0.5,
+        }
+      );
+  
+      // Delay observer setup to allow DOM to fully render after Slider
+      const timeoutId = setTimeout(() => {
+        const items = document.querySelectorAll(".displayy-teamimg-center");
+        items.forEach((item) => observer.observe(item));
+      }, 500); // can tweak to 300-800ms based on render delay
+  
+      return () => {
+        clearTimeout(timeoutId);
+        observer.disconnect();
+      };
+    }, [isMobile]);
   return (
     <>
       <BackgroundImage
@@ -88,7 +130,9 @@ function SoldProperties() {
           <Row gutter={[60, 60]}>
             {currentProperties?.map((property, index) => (
               <Col lg={12} md={12} sm={24} key={index}>
-                <div className="displayy-teamimg-center">
+                <div className={`displayy-teamimg-center ${
+                    isMobile ? "always-show-info" : ""
+                  }`}>
                   <Image
                     src={
                       property?.media?.[0]?.mdUrl ||
