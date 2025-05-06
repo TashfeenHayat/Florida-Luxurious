@@ -170,18 +170,14 @@ function FeatureListing() {
   }, []);
 
   useEffect(() => {
-    if (!isMobile) return; // Only for mobile
-console.log("Mobile view detected", isMobile); // ✅ Console message
-    const items = document.querySelectorAll(".displayy-teamimg-center");
+    if (!isMobile) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            console.log("IN VIEW:", entry.target); // ✅ Console message
             entry.target.classList.add("mobile-visible");
           } else {
-            console.log("OUT OF VIEW:", entry.target); // ✅ Console message
             entry.target.classList.remove("mobile-visible");
           }
         });
@@ -192,12 +188,18 @@ console.log("Mobile view detected", isMobile); // ✅ Console message
       }
     );
 
-    items.forEach((item) => observer.observe(item));
+    // Delay observer setup to allow DOM to fully render after Slider
+    const timeoutId = setTimeout(() => {
+      const items = document.querySelectorAll(".displayy-teamimg-center");
+      items.forEach((item) => observer.observe(item));
+    }, 500); // can tweak to 300-800ms based on render delay
 
     return () => {
-      items.forEach((item) => observer.unobserve(item));
+      clearTimeout(timeoutId);
+      observer.disconnect();
     };
   }, [isMobile]);
+
 
   return (
     <div
