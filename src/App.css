@@ -3474,7 +3474,23 @@ body:focus-visible {
     font-size: 12px !important;
     padding: 8px;
   }
-
+.displayy-teamimg-center:hover .always-show-info .more-info-property {
+    height: 100% !important;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: block !important;
+    opacity: 1;
+    will-change: opacity, transform;
+    transform: none;
+  }
+  .more-info-property.mobile-visible {
+    display: none;
+  }
+  .displayy-teamimg-center:hover .for-sale-more {
+    display: none;
+  }
 }
 /* .flipper {
     animation: autoFlip 6s linear infinite;
