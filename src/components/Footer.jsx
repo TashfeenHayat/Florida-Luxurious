@@ -47,8 +47,31 @@ function Footer() {
     return emailPattern.test(email);
   };
 
-  const handleSubmit = () => {
-    dispatch(contactUs(formData));
+ const handleSubmit = () => {
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px;">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <img src="https://firebasestorage.googleapis.com/v0/b/florida-lux-e66c2.firebasestorage.app/o/footerlogo.png?alt=media&token=5a4dc8bb-7f7e-4272-953a-4ca28c57e4b6" alt="Florida Luxurious Logo" style="max-height: 60px;" />
+      </div>
+
+      <h2 style="color: #2c3e50;">📝 New Newsletter Interest Submission</h2>
+      <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
+      <p><strong>Email:</strong> <a href="mailto:${formData.email}">${formData.email}</a></p>
+      <p><strong>Message:</strong> Yes, I am interested in receiving updates on Fort Lauderdale Luxury Properties for Sale.</p>
+
+      <hr style="margin: 30px 0; border: none; border-top: 1px solid #ccc;" />
+      <p style="font-size: 13px; color: #888;">This lead was captured via the footer subscription form.</p>
+    </div>
+  `;
+
+  const payload = {
+    ...formData,
+    message:
+      "Yes, I am interested in receiving updates on Fort Lauderdale Luxury Properties for Sale.",
+    html,
+  };
+
+  dispatch(contactUs(payload));
     setFormData({
       firstName: "",
       lastName: "",
