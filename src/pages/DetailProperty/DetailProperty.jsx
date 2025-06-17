@@ -243,24 +243,132 @@ export default function DetailProperty() {
     return isValid;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!validateForm()) return;
 
-    if (!validateForm()) {
-      return;
+  const { firstName, lastName, email, phoneNumber, message } = contact;
+
+  const fullAddress = `${data?.property?.addressLine1 || ""} ${data?.property?.addressLine2 || ""}`.trim();
+  const propertyImage = data?.property?.media[0]?.mdUrl || "";
+  const propertyLink = `https://floridaluxurious.com/features/${data?.property?.slug || data?.property?._id}`;
+
+  // ✅ HTML Template for email
+const messageHtml = `
+  <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background: #ffffff; color: #333; padding: 20px; border-radius: 10px; border: 1px solid #ddd;">
+    
+    <!-- Logo Centered -->
+    <div style="text-align: center; margin-bottom: 20px;">
+      <img src="https://firebasestorage.googleapis.com/v0/b/florida-lux-e66c2.firebasestorage.app/o/footerlogo.png?alt=media&token=5a4dc8bb-7f7e-4272-953a-4ca28c57e4b6" alt="Florida Luxurious Logo" style="height: 60px;" />
+    </div>
+
+    <!-- Property Image -->
+    ${propertyImage ? `
+      <div style="text-align: center;">
+        <img src="${propertyImage}" alt="Property" style="width: 100%; border-radius: 12px; border: 1px solid #ccc;" />
+      </div>` : ''
     }
 
-    dispatch(contactUs(contact));
-    setContact({
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
-      email: "",
-      message: "",
-      requestShowing: false, // Reset the checkbox as well
-    });
-  };
+    <!-- Property Info -->
+    <div style="padding: 20px 0; border-bottom: 1px solid #ccc;">
+      <p style="font-size: 14px; color: #777;">MLS® #: ${data?.property?.mlsId || ''}</p>
+      <h2 style="margin: 5px 0;">${data?.property?.addressLine1 || ''} ${data?.property?.addressLine2 || ''}</h2>
+      <p style="margin: 0 0 12px;">${data?.property?.city}, ${data?.property?.state} ${data?.property?.zipCode}</p>
+      <h3 style="color: #0e3d64; margin: 10px 0;">
+        ${getCurrencySymbol(data?.property?.currency)}${formatPrice(data?.property?.salePrice)}
+      </h3>
 
+      <table style="width: 100%; font-size: 14px; margin-top: 12px;">
+        <tr>
+          <td>🛏 ${data?.property?.bedroomCount} Bedrooms</td>
+          <td>🛁 ${data?.property?.bathCount} Baths</td>
+          <td>📐 ${data?.property?.area} SF Living</td>
+        </tr>
+        <tr>
+          <td>🌊 ${data?.property?.waterfront || '100 ± Waterfront'}</td>
+          <td>🏊 ${data?.property?.pool || 'No Pool'}</td>
+          <td>🚗 ${data?.property?.parking} Car Garage</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Inquiry Info -->
+    <div style="margin: 30px 0;">
+      <h3>📩 Message From</h3>
+      <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+      <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+      <p><strong>Phone:</strong> ${phoneNumber}</p>
+      <div style="margin-top: 12px; padding: 15px; background: #f6f6f6; border-left: 4px solid #1a73e8;">
+        ${message.replace(/\n/g, '<br/>')}
+      </div>
+    </div>
+
+    <!-- User Photo & Name -->
+    <div style="text-align: center; margin-top: 30px;">
+      <img src="https://firebasestorage.googleapis.com/v0/b/florida-lux-e66c2.firebasestorage.app/o/footerlogo.png?alt=media&token=5a4dc8bb-7f7e-4272-953a-4ca28c57e4b6" alt="User" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;" />
+      <p style="margin-top: 10px;"><strong>${firstName} ${lastName}</strong></p>
+    </div>
+
+    <!-- View All Info Button -->
+    <div style="text-align: center; margin-top: 30px;">
+      <a 
+        href="${propertyLink}" 
+        target="_blank" 
+        style="
+          background-color: #004c97;
+          color: #ffffff;
+          padding: 12px 24px;
+          text-decoration: none;
+          border-radius: 6px;
+          display: inline-block;
+          font-size: 16px;
+          font-weight: bold;
+        ">
+        View All Info
+      </a>
+    </div>
+
+    <p style="text-align: center; font-size: 12px; color: #aaa; margin-top: 40px;">
+      Sent from Florida Luxurious Properties Website
+    </p>
+  </div>
+`;
+
+
+
+
+
+
+  // ✅ Plain Text (for DB and fallback)
+  const messageText = `Interested in ${fullAddress}
+
+Name: ${firstName} ${lastName}
+Email: ${email}
+Phone: ${phoneNumber}
+
+Message:
+${message}
+`;
+
+  // ✅ Final object to send to backend
+  const finalContact = {
+    ...contact,
+    message: messageText,         
+    html: messageHtml,          
+    propertyId: data?.property?._id,
+  };
+console.log("Message Text:", messageHtml);
+  dispatch(contactUs(finalContact)); 
+
+  setContact({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    email: "",
+    message: "",
+    requestVisit: false,
+  });
+};
   const currencySymbols = {
     usd: "$",
     eur: "€",
