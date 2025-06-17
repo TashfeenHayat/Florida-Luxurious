@@ -14,11 +14,67 @@ function ContactUs() {
   const [form] = Form.useForm();
   const { loading } = useSelector((s) => s.contactUsReducer);
 
-  // Form validation rules
-  const onFinish = (values) => {
-    dispatch(contactUs(values));
+  const generateHtmlTemplate = (values) => {
+    const {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      message,
+      submittedAt = new Date().toLocaleString(),
+    } = values;
 
-    form.resetFields(); // This resets the form fields
+    return `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; color: #333; border: 1px solid #eee;">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <img src="https://firebasestorage.googleapis.com/v0/b/florida-lux-e66c2.firebasestorage.app/o/footerlogo.png?alt=media&token=5a4dc8bb-7f7e-4272-953a-4ca28c57e4b6" alt="Company Logo" style="max-height: 60px;" />
+        </div>
+
+        <h2 style="text-align: center; color: #2c3e50;">📩 New Client Inquiry Received</h2>
+
+        <p style="margin-bottom: 20px;">You’ve received a new message from the contact form:</p>
+
+        <table style="width: 100%; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 8px;"><strong>👤 Name:</strong></td>
+            <td style="padding: 8px;">${firstName} ${lastName}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px;"><strong>📧 Email:</strong></td>
+            <td style="padding: 8px;"><a href="mailto:${email}" style="color: #3498db;">${email}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 8px;"><strong>📞 Phone:</strong></td>
+            <td style="padding: 8px;">${phoneNumber}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px; vertical-align: top;"><strong>💬 Message:</strong></td>
+            <td style="padding: 8px;">${message}</td>
+          </tr>
+          <tr>
+            <td style="padding: 8px;"><strong>🕒 Submitted At:</strong></td>
+            <td style="padding: 8px;">${submittedAt}</td>
+          </tr>
+        </table>
+
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid #ccc;" />
+
+        <p style="font-size: 13px; color: #888;">This message was sent from your website.</p>
+      </div>
+    `;
+  };
+
+  // ✅ Form Submission
+  const onFinish = (values) => {
+    const html = generateHtmlTemplate(values);
+
+    const payload = {
+      ...values,
+      html,
+    };
+
+    dispatch(contactUs(payload));
+    form.resetFields();
   };
 
   const handlePhoneInput = (e) => {
