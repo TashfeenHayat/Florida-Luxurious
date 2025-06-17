@@ -251,7 +251,7 @@ export default function DetailProperty() {
 
   const fullAddress = `${data?.property?.addressLine1 || ""} ${data?.property?.addressLine2 || ""}`.trim();
   const propertyImage = data?.property?.media[0]?.mdUrl || "";
-  const propertyLink = `https://floridaluxurious.com/features/${data?.property?.slug || data?.property?._id}`;
+  const propertyLink = `https://www.floridaluxurious.com/features/${data?.property?.slug || data?.property?._id}`;
 
   // ✅ HTML Template for email
 const messageHtml = `
