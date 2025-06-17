@@ -222,7 +222,7 @@ export default function DetailProperty() {
     }
 
     // Validate phoneNumber (must be exactly 10 digits)
-    const phonePattern = /^[0-9]{10}$/;
+    const phonePattern = /^[0-9]+$/;
     if (!contact.phoneNumber) {
       newErrors.phoneNumber = "Phone number is required.";
       isValid = false;
