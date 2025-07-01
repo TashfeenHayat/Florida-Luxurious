@@ -111,9 +111,9 @@ export default function Login() {
             <Form.Item name="remember" valuePropName="checked" noStyle>
               <Checkbox>Remember me</Checkbox>
             </Form.Item>
-            <a style={styles.forgotPassword} href="">
+{/*             <a style={styles.forgotPassword} href="">
               Forgot password?
-            </a>
+            </a> */}
           </Form.Item>
           <Form.Item style={{ marginBottom: "0px" }}>
             <Button
