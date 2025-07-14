@@ -35,6 +35,7 @@ import { contactUs } from "../../api/Inquiry";
 import SkeletonImage from "antd/es/skeleton/Image";
 
 const { Title, Paragraph, Text } = Typography;
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function DetailProperty() {
   const requestRef = useRef(null);
@@ -48,6 +49,8 @@ export default function DetailProperty() {
     email: "",
     message: "",
   });
+const [captchaToken, setCaptchaToken] = useState(null);
+const RECAPTCHA_SITE_KEY = "6Lfo0oIrAAAAAASYr7BEI9Hxeq1Y7aC7AU8iON54";
 
   const [currentVideo, setCurrentVideo] = useState(null);
 
@@ -245,6 +248,10 @@ export default function DetailProperty() {
 
  const handleSubmit = async (e) => {
   e.preventDefault();
+    if (!captchaToken) {
+    alert("Please complete the captcha to proceed.");
+    return;
+  }
   if (!validateForm()) return;
 
   const { firstName, lastName, email, phoneNumber, message } = contact;
@@ -368,6 +375,8 @@ console.log("Message Text:", messageHtml);
     message: "",
     requestVisit: false,
   });
+   setCaptchaToken(null);
+
 };
   const currencySymbols = {
     usd: "$",
@@ -1238,6 +1247,14 @@ console.log("Message Text:", messageHtml);
                       Request a showing
                     </Checkbox> */}
                   </Col>
+                  <Col lg={24} md={24}>
+  <ReCAPTCHA
+    sitekey={RECAPTCHA_SITE_KEY}
+    onChange={(token) => setCaptchaToken(token)}
+    onExpired={() => setCaptchaToken(null)}
+  />
+</Col>
+
                   <Col lg={24} md={24} align="middle">
                     <button
                       className="button-secondary-line-left"
