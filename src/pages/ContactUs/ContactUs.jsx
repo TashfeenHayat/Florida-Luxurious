@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { Flex, Col, Row, Typography, Form, Input, Card } from "antd";
 import { Container } from "react-bootstrap";
 import Icons from "../../components/Icons";
@@ -6,13 +6,14 @@ import Logo from "../../assets/logoicon.png";
 import { CiMap, CiPhone, CiMail } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { contactUs } from "../../api/Inquiry";
-
+import ReCAPTCHA from "react-google-recaptcha";
 const { Title, Text } = Typography;
-
+const RECAPTCHA_SITE_KEY = "6Lfo0oIrAAAAAASYr7BEI9Hxeq1Y7aC7AU8iON54";
 function ContactUs() {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const { loading } = useSelector((s) => s.contactUsReducer);
+const [captchaToken, setCaptchaToken] = useState(null);
 
   const generateHtmlTemplate = (values) => {
     const {
@@ -66,6 +67,10 @@ function ContactUs() {
 
   // ✅ Form Submission
   const onFinish = (values) => {
+     if (!captchaToken) {
+      alert("Please complete the captcha to continue.");
+      return;
+    }
     const html = generateHtmlTemplate(values);
 
     const payload = {
@@ -75,6 +80,7 @@ function ContactUs() {
 
     dispatch(contactUs(payload));
     form.resetFields();
+      setCaptchaToken(null);
   };
 
   const handlePhoneInput = (e) => {
@@ -193,6 +199,15 @@ function ContactUs() {
                           ]}
                         >
                           <Input.TextArea />
+                        </Form.Item>
+                      </Col>
+                         <Col xs={24} md={22}>
+                        <Form.Item>
+                          <ReCAPTCHA
+                            sitekey={RECAPTCHA_SITE_KEY}
+                            onChange={(token) => setCaptchaToken(token)}
+                            onExpired={() => setCaptchaToken(null)}
+                          />
                         </Form.Item>
                       </Col>
                     </Row>
