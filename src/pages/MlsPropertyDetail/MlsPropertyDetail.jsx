@@ -30,7 +30,7 @@ import { google_api_key } from "../../api/Axios";
 import SkeletonImage from "antd/es/skeleton/Image";
 
 const { Title, Paragraph, Text } = Typography;
-
+import ReCAPTCHA from "react-google-recaptcha";
 export default function DetailProperty() {
   const requestRef = useRef(null);
   const [details, setDetails] = useState(false);
@@ -39,6 +39,9 @@ export default function DetailProperty() {
   const [errors, setErrors] = useState({});
   const [imageLoading, setImageLoading] = useState(true);
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState(null);
+const RECAPTCHA_SITE_KEY = "6Lfo0oIrAAAAAASYr7BEI9Hxeq1Y7aC7AU8iON54";
+
   const [contact, setContact] = useState({
     firstName: "",
     lastName: "",
@@ -213,6 +216,10 @@ export default function DetailProperty() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+  if (!captchaToken) {
+    alert("Please complete the captcha to proceed.");
+    return;
+  }
     if (!validateForm()) {
       return;
     }
@@ -226,6 +233,8 @@ export default function DetailProperty() {
       message: "",
       requestShowing: false, // Reset the checkbox as well
     });
+    setCaptchaToken(null);
+
   };
 
   return (
@@ -821,6 +830,14 @@ export default function DetailProperty() {
                                    Request a showing
                                  </Checkbox> */}
                   </Col>
+                  <Col lg={24} md={24}>
+  <ReCAPTCHA
+    sitekey={RECAPTCHA_SITE_KEY}
+    onChange={(token) => setCaptchaToken(token)}
+    onExpired={() => setCaptchaToken(null)}
+  />
+</Col>
+
                   <Col lg={24} md={24} align="middle">
                     <button
                       className="button-secondary-line-left"
