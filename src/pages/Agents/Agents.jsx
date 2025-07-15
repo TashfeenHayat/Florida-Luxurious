@@ -25,10 +25,14 @@ function Agents() {
   // );
 
   // Sort agents alphabetically by full name (firstName + lastName)
-  const sortedAgents = [...(data?.agents ?? [])].sort((a, b) =>
-    `${a.firstName} ${a.lastName}`.localeCompare(`${b.firstName} ${b.lastName}`)
-  );
-
+  // const sortedAgents = [...(data?.agents ?? [])].sort((a, b) =>
+  //   `${a.firstName} ${a.lastName}`.localeCompare(`${b.firstName} ${b.lastName}`)
+  // );
+const sortedAgents = [...(data?.agents ?? [])].sort((a, b) => {
+  const lastNameCompare = a.lastName.localeCompare(b.lastName);
+  if (lastNameCompare !== 0) return lastNameCompare;
+  return a.firstName.localeCompare(b.firstName);
+});
   return (
     <>
       <div className="team-banner">
