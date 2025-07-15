@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import useReport from "../../hooks/useReport";
 
 const { Title, Text } = Typography;
-
+ 
 function Agents() {
   const { isLoading, data } = useAgents(30, 1);
 
