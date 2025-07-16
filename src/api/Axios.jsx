@@ -30,7 +30,7 @@ customAxios.interceptors.response.use(
   }
 );
 
-export const google_api_key = AIzaSyDj5Sh-1sAhXGKUjO6M0AcTLhYrFNKjVj4;
+export const google_api_key = "AIzaSyDj5Sh-1sAhXGKUjO6M0AcTLhYrFNKjVj4";
 // "AIzaSyDOaYKraClwvK1D2MuvzRZZ2drrRWVTni0";
 
 export default customAxios;
