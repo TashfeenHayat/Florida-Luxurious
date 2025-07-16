@@ -33,6 +33,7 @@ const sortedAgents = [...(data?.agents ?? [])].sort((a, b) => {
   if (lastNameCompare !== 0) return lastNameCompare;
   return a.firstName.localeCompare(b.firstName);
 });
+ console.log(sortedAgents)
   return (
     <>
       <div className="team-banner">
