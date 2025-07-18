@@ -14,9 +14,15 @@ function MeetTeam() {
   const navigate = useNavigate();
   const { data, isLoading } = useAgents(300, 1);
 
-  const sortedAgents = [...(data?.agents ?? [])].sort((a, b) =>
-    `${a.firstName} ${a.lastName}`.localeCompare(`${b.firstName} ${b.lastName}`)
-  );
+  const sortedAgents = [...(data?.agents ?? [])].sort((a, b) => {
+  const lastNameCompare = a.lastName.localeCompare(b.lastName);
+  if (lastNameCompare !== 0) return lastNameCompare;
+  return a.firstName.localeCompare(b.firstName);
+});
+
+// [...(data?.agents ?? [])].sort((a, b) =>
+//     `${a.firstName} ${a.lastName}`.localeCompare(`${b.firstName} ${b.lastName}`)
+//   );
 
   const defaultImage =
     "https://firebasestorage.googleapis.com/v0/b/florida-77f94.appspot.com/o/Untitled%20design%20(1).png?alt=media&token=b14e90ef-b51c-4baf-ae2a-ada87141ed52";
