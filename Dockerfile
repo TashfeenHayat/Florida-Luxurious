@@ -13,6 +13,10 @@ RUN npm install
 # Copy the rest of the application files
 COPY . .
 
+# Vite replaces client-side environment variables while building.
+ARG VITE_GOOGLE_MAPS_API_KEY
+ENV VITE_GOOGLE_MAPS_API_KEY=${VITE_GOOGLE_MAPS_API_KEY}
+
 # Build the React app using Vite
 RUN npm run build
 
