@@ -30,7 +30,6 @@ customAxios.interceptors.response.use(
   }
 );
 
-export const google_api_key = "AIzaSyDj5Sh-1sAhXGKUjO6M0AcTLhYrFNKjVj4";
-// "AIzaSyDOaYKraClwvK1D2MuvzRZZ2drrRWVTni0";
+export const google_api_key = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 export default customAxios;

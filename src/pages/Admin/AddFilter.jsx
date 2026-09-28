@@ -80,6 +80,7 @@ function AddFilter() {
           inputRef.current,
           {
             componentRestrictions: { country: "us" },
+            fields: ["formatted_address", "geometry"],
           }
         );
 

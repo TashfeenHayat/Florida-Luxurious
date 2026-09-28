@@ -267,6 +267,7 @@ function AddProperty() {
           inputRef.current,
           {
             componentRestrictions: { country: "us" },
+            fields: ["address_components", "formatted_address", "geometry"],
           }
         );
         const addressComponets = {
